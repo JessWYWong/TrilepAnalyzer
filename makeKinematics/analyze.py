@@ -36,13 +36,13 @@ def analyze(tTree,process,cutList,isotrig,doAllSys,discriminantName,discriminant
 	cut += ' && (theJetPt_JetSubCalc_PtOrdered[0] > '+str(cutList['leadJetPtCut'])+')'
 	cut += ' && (theJetPt_JetSubCalc_PtOrdered[1] > '+str(cutList['subLeadJetPtCut'])+')'
 	cut += ' && (theJetPt_JetSubCalc_PtOrdered[2] > '+str(cutList['thirdJetPtCut'])+')'
-	cut += ' && (NJetsHtagged == 0)'
+# 	cut += ' && (NJetsHtagged == 0)'
 #	cut += ' && ('+wtagvar+' == 0)'
-	cut += ' && (deltaR_lepClosestJet > 0.4 || PtRelLepClosestJet > 40)'
+# 	cut += ' && (deltaR_lepClosestJet > 0.4 || PtRelLepClosestJet > 40)'
 	cut += ' && (NJets_JetSubCalc >= '+str(cutList['njetsCut'])+')'
 #	cut += ' && (('+wtagvar+' > 0 && NJets_JetSubCalc >= '+str(cutList['njetsCut'])+') || ('+wtagvar+' == 0 && NJets_JetSubCalc >= '+str(cutList['njetsCut']+1)+'))'
 	cut += ' && (NJetsCSVwithSF_JetSubCalc >= '+str(cutList['nbjetsCut'])+')'
-	cut += ' && (deltaR_lepJets[1] >= '+str(cutList['drCut'])+')'
+# 	cut += ' && (deltaR_lepJets[1] >= '+str(cutList['drCut'])+')'
 
 	if 'PrunedSmearedNm1' in discriminantName: cut += ' && (theJetAK8NjettinessTau2_JetSubCalc_PtOrdered/theJetAK8NjettinessTau1_JetSubCalc_PtOrdered < 0.6)'
 
@@ -101,6 +101,7 @@ def analyze(tTree,process,cutList,isotrig,doAllSys,discriminantName,discriminant
 	for key in hists.keys(): hists[key].Sumw2()
 		
 	if 'Data' in process: 
+		if 'DataDrivenBkg' in process: weightStr   ='ddBkgWeights[0]'
 		weightStr           = '1'
 		weightPileupUpStr   = '1'
 		weightPileupDownStr = '1'
@@ -169,6 +170,9 @@ def analyze(tTree,process,cutList,isotrig,doAllSys,discriminantName,discriminant
 			#discriminantLJMETName = 'theJetAK8PrunedMass_JetSubCalc_new'
 		if origname != discriminantLJMETName:
 			print 'NEW LJMET NAME:',discriminantLJMETName
+	
+	if 'DataDrivenBkg' in process:
+		cut+=' && (AllLeptonIsTight_PtOrdered[0]==0 || AllLeptonIsTight_PtOrdered[1]==0 || AllLeptonIsTight_PtOrdered[2]==0)'
 
 	if 'Bjet1' in discriminantName or 'Mlb' in discriminantName or 'b1' in discriminantName:
 		cut += ' && (NJetsCSVwithSF_JetSubCalc > 0)'
@@ -176,7 +180,7 @@ def analyze(tTree,process,cutList,isotrig,doAllSys,discriminantName,discriminant
 		cut += ' && (NJetsCSVwithSF_JetSubCalc > 1)'
 
 	if 'Mlj' in discriminantName: cut += ' && (NJetsCSVwithSF_JetSubCalc == 0)'
-
+	
 	isEMCut=''
 	if category=='E': isEMCut+=' && isElectron==1'
 	elif category=='M': isEMCut+=' && isMuon==1'

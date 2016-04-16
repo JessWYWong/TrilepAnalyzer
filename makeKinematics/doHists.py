@@ -173,6 +173,7 @@ bkgList = [
 	'WJetsMG1200',
 	'WJetsMG2500',
 	'WW','WZ','ZZ',
+	'WWZ','WZZ','ZZZ',
 #	'TTJetsPH',
 	'TTJetsPH0to700inc',
 	'TTJetsPH700to1000inc',
@@ -184,6 +185,9 @@ bkgList = [
 	'Tt','Ts',
 	'TtW','TbtW',
 	'QCDht100','QCDht200','QCDht300','QCDht500','QCDht700','QCDht1000','QCDht1500','QCDht2000',
+	'DataDrivenBkgEEPRD','DataDrivenBkgEERRD','DataDrivenBkgEERRC',
+	'DataDrivenBkgMMPRD','DataDrivenBkgMMRRD','DataDrivenBkgMMRRC',
+	'DataDrivenBkgMEPRD','DataDrivenBkgMERRD','DataDrivenBkgMERRC',
 	]
 
 whichSignal = 'TT' #TT, BB, or T53T53

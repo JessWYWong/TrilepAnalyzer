@@ -1,12 +1,40 @@
 #!/usr/bin/python
 
 samples = {
-'DataERRC':'SingleElectron_RRC',
-'DataERRD':'SingleElectron_RRD',
-'DataEPRD':'SingleElectron_PRD_xrd',
-'DataMRRC':'SingleMuon_RRC',
-'DataMRRD':'SingleMuon_RRD',
-'DataMPRD':'SingleMuon_PRD_xrd',
+# 'DataERRC':'SingleElectron_RRC',
+# 'DataERRD':'SingleElectron_RRD',
+# 'DataEPRD':'SingleElectron_PRD_xrd',
+# 'DataMRRC':'SingleMuon_RRC',
+# 'DataMRRD':'SingleMuon_RRD',
+# 'DataMPRD':'SingleMuon_PRD_xrd',
+# 
+# 'DataDrivenERRC':'SingleElectron_RRC',
+# 'DataDrivenERRD':'SingleElectron_RRD',
+# 'DataDrivenEPRD':'SingleElectron_PRD_xrd',
+# 'DataDrivenMRRC':'SingleMuon_RRC',
+# 'DataDrivenMRRD':'SingleMuon_RRD',
+# 'DataDrivenMPRD':'SingleMuon_PRD_xrd’,
+
+'DataEEPRD':'DoubleEG_PRD_25ns',
+'DataEERRC':'DoubleEG_RRC_25ns',
+'DataEERRD':'DoubleEG_RRD_25ns',
+'DataMMPRD':'DoubleMuon_PRD_25ns',
+'DataMMRRC':'DoubleMuon_RRC_25ns',
+'DataMMRRD':'DoubleMuon_RRD_25ns',
+'DataMEPRD':'MuonEG_PRD_25ns',
+'DataMERRC':'MuonEG_RRC_25ns',
+'DataMERRD':'MuonEG_RRD_25ns',
+
+'DataDrivenBkgEEPRD':'DoubleEG_PRD_25ns',
+'DataDrivenBkgEERRC':'DoubleEG_RRC_25ns',
+'DataDrivenBkgEERRD':'DoubleEG_RRD_25ns',
+'DataDrivenBkgMMPRD':'DoubleMuon_PRD_25ns',
+'DataDrivenBkgMMRRC':'DoubleMuon_RRC_25ns',
+'DataDrivenBkgMMRRD':'DoubleMuon_RRD_25ns',
+'DataDrivenBkgMEPRD':'MuonEG_PRD_25ns',
+'DataDrivenBkgMERRC':'MuonEG_RRC_25ns',
+'DataDrivenBkgMERRD':'MuonEG_RRD_25ns',
+
 
 'TTM700BWBW':'TprimeTprime_M-700_TuneCUETP8M1_13TeV-madgraph-pythia8_25ns_BWBW',
 'TTM800BWBW':'TprimeTprime_M-800_TuneCUETP8M1_13TeV-madgraph-pythia8_25ns_BWBW',
@@ -99,6 +127,10 @@ samples = {
 'WW':'WW_TuneCUETP8M1_13TeV-pythia8_25ns',
 'WZ':'WZ_TuneCUETP8M1_13TeV-pythia8_25ns',
 'ZZ':'ZZ_TuneCUETP8M1_13TeV-pythia8_25ns',
+
+'WWZ':'WWZ_TuneCUETP8M1_13TeV-amcatnlo-pythia8',
+'WZZ':'WZZ_TuneCUETP8M1_13TeV-amcatnlo-pythia8',
+'ZZZ':'ZZZ_TuneCUETP8M1_13TeV-amcatnlo-pythia8_LOCALCOPY',
 
 'TTJets':'TTJets_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8_25ns',
 'WJets':'WJetsToLNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8_25ns',
