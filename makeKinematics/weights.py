@@ -27,6 +27,9 @@ nRun['TTJetsPH1000mtt'] = nRun['TTJetsPH']*0.02474 + 2360497.
 nRun['WW'] = 993640. 
 nRun['WZ'] = 978512.
 nRun['ZZ'] = 996944.
+nRun['WWZ'] = 250000*(1-2*0.0571) #cs = 0.1651 pb at NLO, frac_negW = 0.0571 (from CMS AN-2015/148)	// N_eff=N_gen(1-2*frac_negW)? 
+nRun['WZZ'] = 250000*(1-2*0.0617)#cs = 0.05565 pb at NLO, frac_negW = 0.0617 (from CMS AN-2015/148) 	// N_eff=N_gen(1-2*frac_negW)?
+nRun['ZZZ'] = 250000*(1-2*0.0723) #cs = 0.01398 pb at NLO, frac_negW = 0.0723 (from CMS AN-2015/148)	// N_eff=N_gen(1-2*frac_negW)?
 nRun['TTWl'] = 129850. #from 252908
 nRun['TTWq'] = 430330. #from 833964
 nRun['TTZl'] = 184990. #from 398000
@@ -152,6 +155,9 @@ xsec['WJetsMG2500'] = 0.03216*1.21 # https://twiki.cern.ch/twiki/bin/view/CMS/Su
 xsec['WW'] = 118.7 # https://twiki.cern.ch/twiki/bin/viewauth/CMS/StandardModelCrossSectionsat13TeVInclusive
 xsec['WZ'] = 47.13 # https://twiki.cern.ch/twiki/bin/viewauth/CMS/SummaryTable1G25ns#Diboson
 xsec['ZZ'] = 16.523 # https://twiki.cern.ch/twiki/bin/viewauth/CMS/SummaryTable1G25ns#Diboson
+xsec['WWZ'] = 0.1651 #cs = 0.1651 pb at NLO, frac_negW = 0.0571 (from CMS AN-2015/148)	 
+xsec['WZZ'] = 0.05565 #cs = 0.05565 pb at NLO, frac_negW = 0.0617 (from CMS AN-2015/148) 	
+xsec['ZZZ'] = 0.01398 #cs = 0.01398 pb at NLO, frac_negW = 0.0723 (from CMS AN-2015/148)	
 xsec['TTZl'] = 0.2529 # from McM
 xsec['TTZq'] = 0.5297 # from McM
 xsec['TTWl'] = 0.2043 # from McM
@@ -213,6 +219,9 @@ weight['WJetsMG2500'] = (targetlumi*xsec['WJetsMG2500']) / (nRun['WJetsMG2500'])
 weight['WW'] = (targetlumi*xsec['WW']) / (nRun['WW'])
 weight['WZ'] = (targetlumi*xsec['WZ']) / (nRun['WZ'])
 weight['ZZ'] = (targetlumi*xsec['ZZ']) / (nRun['ZZ'])
+weight['WWZ'] = (targetlumi*xsec['WWZ']) / (nRun['WWZ'])
+weight['WZZ'] = (targetlumi*xsec['WZZ']) / (nRun['WZZ'])
+weight['ZZZ'] = (targetlumi*xsec['ZZZ']) / (nRun['ZZZ'])
 weight['TTWl'] = (targetlumi*xsec['TTWl']) / (nRun['TTWl'])
 weight['TTWq'] = (targetlumi*xsec['TTWq']) / (nRun['TTWq'])
 weight['TTZl'] = (targetlumi*xsec['TTZl']) / (nRun['TTZl'])
