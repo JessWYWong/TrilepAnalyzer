@@ -9,8 +9,8 @@ start_time = time.time()
 
 lumi=2.3 #for plots
 
-templateDir=os.getcwd()+'/kinematics_substructure'
-lumiInTemplates='2p263'
+templateDir=os.getcwd()+'/templates/lep0_MET0_leadJet0_subLeadJet0_thirdJet0_NJets0_NBJets0_DR0'
+lumiInTemplates='2p318'
 
 sig='ttm800' # choose the 1st signal to plot
 sigleg='TT(0.8 TeV)'
@@ -20,8 +20,8 @@ scaleFact1 = 400
 if 'Final' in templateDir: scaleFact1 = 40
 
 systematicList = ['pileup','jec','jer','jsf','jmr','jms','btag','tau21','pdfNew','muRFcorrdNew','toppt']
-doAllSys = True
-doQ2sys = True
+doAllSys = False
+doQ2sys  = True
 if not doAllSys: doQ2sys = False # I assume you don't want Q^2 as well if you are not doing the other shape systematics! (this is just to change one bool)
 
 isRebinned=''#post fix for file names if the name changed b/c of rebinning or some other process
@@ -122,14 +122,27 @@ def getNormUnc(hist,ibin,modelingUnc):
 	if 'qcd' in hist.GetName(): error += qcdXsecSys*qcdXsecSys*contentsquared # cross section
 	return error	
 		
-CRuncert = {# for finalselection with no DR or minMlb cut
-	'topE':0.112, #212, #0.12,#0.129, #
-	'topM':0.087, #0.133, #0.077,#0.163,#
-	'topAll':0.098, #0.168, #0.096,#0.14,#
-	'ewkE':0.260, #0.43, #0.25,#0.207,#
-	'ewkM':0.104, #0.026, #0.045,#0.257,#
-	'ewkAll':0.172, #0.202, #0.13,#0.24,#
-	}
+CRuncert = {# averaged from CRs, could depend on the selection, but the difference found to be negligible!
+			'topE':0,#,0.112,
+			'topM':0,#0.087,
+			'topAll':0,#0.098,
+			'ewkE':0,#0.260,
+			'ewkM':0,#0.104,
+			'ewkAll':0,#0.172,
+			
+			'topEEE':0,#,0.112,
+			'topEEM':0,#0.087,
+			'topEMM':0,#,0.112,
+			'topMMM':0,#0.087,
+			'topAll':0,#0.098,
+
+			'ewkEEE':0,#0.260,
+			'ewkEEM':0,#0.104,
+			'ewkEMM':0,#0.260,
+			'ewkMMM':0,#0.104,
+			'ewkAll':0,#0.172,
+
+			}
 
 plotList = [#distribution name as defined in "doHists.py"
 #	'deltaRb1Nonb',
@@ -155,21 +168,21 @@ plotList = [#distribution name as defined in "doHists.py"
 #	'Jet3Pt',
 #	'Jet4Pt',
 #	'HT',
-#	'ST',
+    'ST',
 #	'MET',
 #	'METwJetSF',
 #	'METwJetSFraw',
 #	'NJets' ,
 #	'NBJets',
-	'NWJetsSmeared',
-	'NWJetsSmeared0p55SF',
-	'NWJetsSmeared0p55noSF',
+# 	'NWJetsSmeared',
+# 	'NWJetsSmeared0p55SF',
+# 	'NWJetsSmeared0p55noSF',
 #	'NJetsAK8',
 #	'JetPtAK8',
 #	'JetEtaAK8',
-	'Tau21',
-	'Tau21Nm1',
-	'PrunedSmeared',
+# 	'Tau21',
+# 	'Tau21Nm1',
+# 	'PrunedSmeared',
 #	'mindeltaR',
 #	'deltaRjet1',
 #	'deltaRjet2',
@@ -211,7 +224,7 @@ plotList = [#distribution name as defined in "doHists.py"
 #	'deltaPhiWb1',
 #	'deltaPhiWb2',
 #	'WjetPt',
-	'PtRel',
+# 	'PtRel',
 
 #	'JetPt',
 #	'JetPtCSF',
@@ -257,7 +270,7 @@ fit  = False
 fit2 = False
 fit3 = False
 fit4 = False
-isEMlist=['E','M','All']
+isEMlist=['EEE','EEM','EMM','MMM','All']
 for discriminant in plotList:	
 	fileTemp='templates_'+discriminant+'_'+lumiInTemplates+'fb'+isRebinned+'.root'
 	print templateDir+'/'+fileTemp
@@ -281,10 +294,17 @@ for discriminant in plotList:
 			print "There is no QCD!!!!!!!!"
 			print "Skipping QCD....."
 			pass
-		
+		try: hDDBKG = RFile.Get(histPrefix+'_ddbkg').Clone()
+		except: 
+			print "There is no DDBKG!!!!!!!!"
+			print "Skipping DDBKG....."
+			pass
+					
 		print discriminant,isEM, "TOP", hTOP.Integral()
 		print discriminant,isEM, "EWK", hEWK.Integral()
 		try: print discriminant,isEM, "QCD", hQCD.Integral()
+		except: pass
+		try: print discriminant,isEM, "DDBKG", hDDBKG.Integral()
 		except: pass
 		
 		hData = RFile.Get(histPrefix+'__DATA').Clone()
@@ -334,11 +354,15 @@ for discriminant in plotList:
 		except: pass
 		try: hQCDstatOnly = hQCD.Clone(hQCD.GetName()+'statOnly')
 		except: pass
+		try: hDDBKGstatOnly = hDDBKG.Clone(hDDBKG.GetName()+'statOnly')
+		except: pass
 
 		bkgHT = hTOP.Clone()
 		try: bkgHT.Add(hEWK)
 		except: pass
 		try: bkgHT.Add(hQCD)
+		except: pass
+		try: bkgHT.Add(hDDBKG)
 		except: pass
 
 		totBkgTemp1[isEM] = TGraphAsymmErrors(bkgHT.Clone(bkgHT.GetName()+'shapeOnly'))
@@ -434,6 +458,8 @@ for discriminant in plotList:
 		try: 
 			if hQCD.Integral()/bkgHT.Integral()>.005: stackbkgHT.Add(hQCD) #don't plot QCD if it is less than 0.5%
 		except: pass
+		try: stackbkgHT.Add(hDDBKG)
+		except: pass
 
 		hTOP.SetLineColor(kAzure-6)
 		hTOP.SetFillColor(kAzure-6)
@@ -447,6 +473,11 @@ for discriminant in plotList:
 			hQCD.SetLineColor(kOrange+5)
 			hQCD.SetFillColor(kOrange+5)
 			hQCD.SetLineWidth(2)
+		except: pass
+		try:
+			hDDBKG.SetLineColor(15)
+			hDDBKG.SetFillColor(15)
+			hDDBKG.SetLineWidth(2)
 		except: pass
 		
 		hsig.SetLineColor(kBlack)
@@ -547,6 +578,8 @@ for discriminant in plotList:
 		try: leg.AddEntry(hEWK,"EWK","f")
 		except: pass
 		try: leg.AddEntry(hTOP,"TOP","f")
+		except: pass
+		try: leg.AddEntry(hDDBKG,"DD BKG","f")
 		except: pass
 		leg.AddEntry(bkgHTgerr,"Bkg uncert. (stat. #oplus syst.)","f")
 		leg.Draw("same")
@@ -769,8 +802,9 @@ for discriminant in plotList:
 			pull.Draw("HIST")
 
 		#c1.Write()
-		savePrefix = templateDir.split('/')[-1]+'/plots/'
-		if not os.path.exists(os.getcwd()+'/'+savePrefix): os.system('mkdir '+savePrefix)
+		#savePrefix = templateDir.split('/')[-1]+'/plots/'
+		savePrefix = templateDir+'/plots/'
+		if not os.path.exists(savePrefix): os.system('mkdir '+savePrefix)
 		savePrefix+=histPrefix+isRebinned
 		if doRealPull: savePrefix+='_pull'
 		if yLog: savePrefix+='_logy'
