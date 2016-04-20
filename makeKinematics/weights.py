@@ -15,6 +15,7 @@ BR['TTTHTH'] = BR['TH']*BR['TH']
 
 # Number of processed MC events (before selections)
 nRun={}
+nRun['DY10to50'] = 22217467 # from ???
 nRun['DY'] = 19259107. # from 28747969
 nRun['TTJets'] = 14188545. # from 42784971
 nRun['WJets'] = 16541248. # from 24184766
@@ -136,6 +137,7 @@ nRun['TbtWQ2D'] = 497600.
 
 # Cross sections for MC samples (in pb)
 xsec={}
+xsec['DY10to50'] = 18610 # https://twiki.cern.ch/twiki/bin/view/CMS/SummaryTable1G25ns
 xsec['DY'] = 6025.2 # https://twiki.cern.ch/twiki/bin/view/CMS/SummaryTable1G25ns
 xsec['TTJets'] = 831.76
 xsec['WJets'] = 61526.7
@@ -200,6 +202,7 @@ xsec['TbtWQ2D'] = xsec['TbtW']
 
 # Calculate lumi normalization weights
 weight = {}
+weight['DY10to50'] = (targetlumi*xsec['DY10to50']) / (nRun['DY10to50'])
 weight['DY50'] = (targetlumi*xsec['DY']) / (nRun['DY'])
 weight['TTJets'] = (targetlumi*xsec['TTJets']) / (nRun['TTJets'])
 weight['WJets'] = (targetlumi*xsec['WJets']) / (nRun['WJets'])

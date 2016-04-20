@@ -114,6 +114,7 @@ samples = {
 'TTM1700THTH':'TprimeTprime_M-1700_TuneCUETP8M1_13TeV-madgraph-pythia8_25ns_THTH',
 'TTM1800THTH':'TprimeTprime_M-1800_TuneCUETP8M1_13TeV-madgraph-pythia8_25ns_THTH',
 
+'DY10to50':'DYJetsToLL_M-10to50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8_25ns',
 'DY50':'DYJetsToLL_M-50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8_25ns',
 
 'WJetsMG100':'WJetsToLNu_HT-100To200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8_25ns',
