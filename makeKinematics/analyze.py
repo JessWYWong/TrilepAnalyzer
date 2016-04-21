@@ -187,8 +187,11 @@ def analyze(tTree,process,cutList,isotrig,doAllSys,discriminantName,discriminant
 		if origname != discriminantLJMETName:
 			print 'NEW LJMET NAME:',discriminantLJMETName
 	
-	if 'DataDrivenBkg' in process:
-		cut+=' && (AllLeptonIsTight_PtOrdered[0]==0 || AllLeptonIsTight_PtOrdered[1]==0 || AllLeptonIsTight_PtOrdered[2]==0)'
+# 	if 'DataDrivenBkg' in process:
+# 		cut+=' && (AllLeptonIsTight_PtOrdered[0]==0 || AllLeptonIsTight_PtOrdered[1]==0 || AllLeptonIsTight_PtOrdered[2]==0)'
+	if 'DataDrivenBkg' not in process:
+		cut+=' && (AllLeptonIsTight_PtOrdered[0]==1 && AllLeptonIsTight_PtOrdered[1]==1 && AllLeptonIsTight_PtOrdered[2]==1)'
+
 
 	if 'Bjet1' in discriminantName or 'Mlb' in discriminantName or 'b1' in discriminantName:
 		cut += ' && (NJetsCSVwithSF_JetSubCalc > 0)'
