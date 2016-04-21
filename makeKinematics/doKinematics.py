@@ -61,9 +61,11 @@ tList     = ['Tt','Ts','TtW','TbtW']
 dataList = ['DataEERRC','DataEERRD','DataEEPRD','DataMMRRC','DataMMRRD','DataMMPRD','DataMERRC','DataMERRD','DataMEPRD']
 # dataList = ['DataERRC','DataERRD','DataEPRD','DataMRRC','DataMRRD','DataMPRD']
 signalList = [signal+decay for signal in signals for decay in decays]
-topList = ['TTJetsPH0to700inc','TTJetsPH700to1000inc','TTJetsPH1000toINFinc','TTJetsPH700mtt','TTJetsPH1000mtt','TTWl','TTZl','TTWq','TTZq','Tt','Ts','TtW','TbtW']
+topList = ['TTWl','TTZl','TTWq','TTZq','TtW','TbtW'] #NoTTJets, No singleT
+# topList = ['TTJetsPH0to700inc','TTJetsPH700to1000inc','TTJetsPH1000toINFinc','TTJetsPH700mtt','TTJetsPH1000mtt','TTWl','TTZl','TTWq','TTZq','Tt','Ts','TtW','TbtW']
 #topList = ['TTJetsPH','TTWl','TTZl','TTWq','TTZq','Tt','Ts','TtW','TbtW']
-ewkList = ['DY50','WJetsMG100','WJetsMG200','WJetsMG400','WJetsMG600','WJetsMG800','WJetsMG1200','WJetsMG2500','WW','WZ','ZZ','WWZ','WZZ','ZZZ']
+ewkList = ['WZ','ZZ','WWZ','WZZ','ZZZ'] #No DY, WJets, WW
+# ewkList = ['DY50','WJetsMG100','WJetsMG200','WJetsMG400','WJetsMG600','WJetsMG800','WJetsMG1200','WJetsMG2500','WW','WZ','ZZ','WWZ','WZZ','ZZZ']
 qcdList = ['QCDht100','QCDht200','QCDht300','QCDht500','QCDht700','QCDht1000','QCDht1500','QCDht2000']
 ddbkgList = ['DataDrivenBkgEEPRD','DataDrivenBkgEERRD','DataDrivenBkgEERRC','DataDrivenBkgMMPRD','DataDrivenBkgMMRRD','DataDrivenBkgMMRRC','DataDrivenBkgMEPRD','DataDrivenBkgMERRD','DataDrivenBkgMERRC']
 
