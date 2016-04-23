@@ -57,7 +57,7 @@ systematicList = ['pileup','jec','jer','jmr','jms','btag','tau21','muR','muF','m
 normalizeRENORM_PDF = False #normalize the renormalization/pdf uncertainties to nominal templates --> normalizes both the background and signal processes !!!!
 
 cutString  = 'lep0_MET0_1jet0_2jet0_NJets0_NBJets0_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST0_minMlb0'
-pfix='templates_ST_2016_4_22'
+pfix='templates_ST_2016_4_23'
 iPlot='ST'
 
 normSystematics = {
@@ -65,6 +65,10 @@ normSystematics = {
 					'muIdSys':{'EEE':1.00,'EEM':1.01,'EMM':1.02,'MMM':1.03},
 					'elIsoSys':{'EEE':1.03,'EEM':1.02,'EMM':1.01,'MMM':1.00},
 					'muIsoSys':{'EEE':1.00,'EEM':1.01,'EMM':1.02,'MMM':1.03},
+					'elelelTrigSys':{'EEE':1.03,'EEM':1.00,'EMM':1.00,'MMM':1.00},
+					'elelmuTrigSys':{'EEE':1.00,'EEM':1.03,'EMM':1.00,'MMM':1.00},
+					'elmumuTrigSys':{'EEE':1.00,'EEM':1.00,'EMM':1.03,'MMM':1.00},
+					'mumumuTrigSys':{'EEE':1.00,'EEM':1.00,'EMM':1.00,'MMM':1.03},
 					}
 
 isEMlist =['EEE','EEM','EMM','MMM']
@@ -141,7 +145,7 @@ def makeThetaCats(datahists,sighists,bkghists,discriminant):
 			
 			#systematics
 			if doAllSys:
-				for systematic in systematicList+['pdfNew','muRFcorrdNew','elIdSys','muIdSys','elIsoSys','muIsoSys']:
+				for systematic in systematicList+['pdfNew','muRFcorrdNew']+normSystematics.keys():
 					for ud in ['Up','Down']:
 						if systematic!='toppt' and systematic!='PR' and systematic!='FR':
 							hqcdY[signal+systematic+ud] = R.TH1F('triLep__qcd__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'),'',len(catList),0,len(catList))
@@ -393,12 +397,15 @@ def makeThetaCats(datahists,sighists,bkghists,discriminant):
 								htopY[signal+systematic+ud].SetBinContent(catInd,yieldTable[histoPrefix+systematic+ud]['top'])
 							if systematic=='PR' or systematic=='FR': # PR and FR is only on the ddbkg sample, so it needs special treatment!
 								hddbkgY[signal+systematic+ud].SetBinContent(catInd,yieldTable[histoPrefix+systematic+ud]['ddbkg'])
-					for systematic in ['elIdSys','muIdSys','elIsoSys','muIsoSys']:
-						for ud in ['Up','Down']:
-							hqcdY[signal+systematic+ud].SetBinContent(catInd,yieldTable[histoPrefix]['qcd']*normSystematics[systematic][cat[0]])
-							hewkY[signal+systematic+ud].SetBinContent(catInd,yieldTable[histoPrefix]['ewk']*normSystematics[systematic][cat[0]])
-							htopY[signal+systematic+ud].SetBinContent(catInd,yieldTable[histoPrefix]['top']*normSystematics[systematic][cat[0]])
-							hsigY[signal+systematic+ud].SetBinContent(catInd,yieldTable[histoPrefix][signal]*normSystematics[systematic][cat[0]])
+					for systematic in normSystematics.keys():
+						hqcdY[signal+systematic+'Up'].SetBinContent(catInd,yieldTable[histoPrefix]['qcd']*normSystematics[systematic][cat[0]])
+						hewkY[signal+systematic+'Up'].SetBinContent(catInd,yieldTable[histoPrefix]['ewk']*normSystematics[systematic][cat[0]])
+						htopY[signal+systematic+'Up'].SetBinContent(catInd,yieldTable[histoPrefix]['top']*normSystematics[systematic][cat[0]])
+						hsigY[signal+systematic+'Up'].SetBinContent(catInd,yieldTable[histoPrefix][signal]*normSystematics[systematic][cat[0]])
+						hqcdY[signal+systematic+'Down'].SetBinContent(catInd,yieldTable[histoPrefix]['qcd']*(2.-normSystematics[systematic][cat[0]]))
+						hewkY[signal+systematic+'Down'].SetBinContent(catInd,yieldTable[histoPrefix]['ewk']*(2.-normSystematics[systematic][cat[0]]))
+						htopY[signal+systematic+'Down'].SetBinContent(catInd,yieldTable[histoPrefix]['top']*(2.-normSystematics[systematic][cat[0]]))
+						hsigY[signal+systematic+'Down'].SetBinContent(catInd,yieldTable[histoPrefix][signal]*(2.-normSystematics[systematic][cat[0]]))
 				catInd+=1
 
 				#scale signal cross section to 1pb
@@ -470,7 +477,7 @@ def makeThetaCats(datahists,sighists,bkghists,discriminant):
 			if hddbkgY[signal].Integral() > 0: hddbkgY[signal].Write()
 			#systematics
 			if doAllSys:
-				for systematic in systematicList+['pdfNew','muRFcorrdNew','elIdSys','muIdSys','elIsoSys','muIsoSys']:
+				for systematic in systematicList+['pdfNew','muRFcorrdNew']+normSystematics.keys():
 					for ud in ['Up','Down']:
 						if systematic!='toppt' and systematic!='PR' and systematic!='FR':
 							if hqcdY[signal+systematic+ud].Integral() > 0: hqcdY[signal+systematic+ud].Write()
