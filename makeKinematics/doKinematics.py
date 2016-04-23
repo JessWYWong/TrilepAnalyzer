@@ -25,8 +25,6 @@ cutList = {'lepPtCut':0, #40, #0, #
 		   }
 
 doAllSys= True
-doQ2sys = True
-isotrig = 1
 
 cutString = 'lep'+str(int(cutList['lepPtCut']))+'_MET'+str(int(cutList['metCut']))+'_leadJet'+str(int(cutList['leadJetPtCut']))+'_subLeadJet'+str(int(cutList['subLeadJetPtCut']))+'_thirdJet'+str(int(cutList['thirdJetPtCut']))+'_NJets'+str(int(cutList['njetsCut']))+'_NBJets'+str(int(cutList['nbjetsCut']))+'_DR'+str(int(cutList['drCut']))
 pfix='kinematics_testingSystematics'
@@ -48,7 +46,7 @@ if whichSignal=='BB': decays = ['TWTW','BHBH','BZBZ','BZTW','BHTW','BZBH'] #B' d
 if whichSignal=='T53T53': decays = [''] #decays to tWtW 100% of the time
 sigList = {signal+decay:(signal+decay).lower() for signal in signals for decay in decays}
 
-bkgStackList = ['WJets','VV','TTV','TTJets','T','QCD']
+bkgStackList = ['WJets','VV','TTV','TTJets','T','QCD','ddbkg']
 wjetList  = ['WJetsMG100','WJetsMG200','WJetsMG400','WJetsMG600','WJetsMG800','WJetsMG1200','WJetsMG2500']
 zjetList  = ['DY50']
 # vvList    = ['WW','WZ','ZZ']
@@ -71,10 +69,7 @@ qcdList = ['QCDht100','QCDht200','QCDht300','QCDht500','QCDht700','QCDht1000','Q
 ddbkgList = ['DataDrivenBkgEEPRD','DataDrivenBkgEERRD','DataDrivenBkgEERRC','DataDrivenBkgMMPRD','DataDrivenBkgMMRRD','DataDrivenBkgMMRRC','DataDrivenBkgMEPRD','DataDrivenBkgMERRD','DataDrivenBkgMERRC']
 
 systematicList = ['pileup','jec','jer','jsf','jmr','jms','btag','tau21','pdfNew','muR','muF',
-				  'muRFcorrd','toppt','muRFcorrdNew','muRFdecorrdNew']#,'PR','FR']
-
-q2UpList   = ['TTWl','TTZl','TTWq','TTZq','TTJetsPHQ2U','Tt','TtW','TtWQ2U','TbtWQ2U']
-q2DownList = ['TTWl','TTZl','TTWq','TTZq','TTJetsPHQ2D','Tt','TtW','TtWQ2D','TbtWQ2D']
+				  'muRFcorrd','toppt','muRFcorrdNew','muRFdecorrdNew','PR','FR']
 
 ###########################################################
 #################### NORMALIZATIONS #######################
@@ -88,43 +83,6 @@ topXsecSys = 0.0 #55 #5.5% top x-sec uncertainty
 ewkXsecSys = 0.0 #5 #5% ewk x-sec uncertainty
 qcdXsecSys = 0.0 #50 #50% qcd x-sec uncertainty
 corrdSys = math.sqrt(lumiSys**2+trigSys**2+lepIdSys**2+lepIsoSys**2)
-
-CRuncert = {# averaged from CRs, could depend on the selection, but the difference found to be negligible!
-			'topE':0,#,0.112,
-			'topM':0,#0.087,
-			'topAll':0,#0.098,
-			'ewkE':0,#0.260,
-			'ewkM':0,#0.104,
-			'ewkAll':0,#0.172,
-			
-			'topEEE':0,#,0.112,
-			'topEEM':0,#0.087,
-			'topEMM':0,#,0.112,
-			'topMMM':0,#0.087,
-			'topAll':0,#0.098,
-
-			'ewkEEE':0,#0.260,
-			'ewkEEM':0,#0.104,
-			'ewkEMM':0,#0.260,
-			'ewkMMM':0,#0.104,
-			'ewkAll':0,#0.172,
-
-			}
-
-def negBinCorrection(hist): #set negative bin contents to zero and adjust the normalization
-	norm0=hist.Integral()
-	for iBin in range(0,hist.GetNbinsX()+2):
-		if hist.GetBinContent(iBin)<0: hist.SetBinContent(iBin,0)
-		if hist.Integral()!=0 and norm0>0: hist.Scale(norm0/hist.Integral())
-		
-def overflow(hist):
-	nBinsX=hist.GetXaxis().GetNbins()
-	content=hist.GetBinContent(nBinsX)+hist.GetBinContent(nBinsX+1)
-	error=math.sqrt(hist.GetBinError(nBinsX)**2+hist.GetBinError(nBinsX+1)**2)
-	hist.SetBinContent(nBinsX,content)
-	hist.SetBinError(nBinsX,error)
-	hist.SetBinContent(nBinsX+1,0)
-	hist.SetBinError(nBinsX+1,0)
 
 def round_sig(x,sig=2):
 	try:
@@ -149,10 +107,6 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 			for systematic in systematicList:
 				for ud in ['Up','Down']:
 					yieldTable[histoPrefix+systematic+ud]={}
-					
-		if doQ2sys:
-			yieldTable[histoPrefix+'q2Up']={}
-			yieldTable[histoPrefix+'q2Down']={}
 	
 	## WRITING HISTOGRAMS IN ROOT FILE ##
 	outputRfile = R.TFile(outDir+'/templates_'+discriminant+'_'+lumiStr+'fb.root','RECREATE')
@@ -217,9 +171,9 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 				if systematic=='pdfNew' or systematic=='muRFcorrdNew' or systematic=='muRFdecorrdNew': continue
 				for ud in ['Up','Down']:
 					if systematic!='toppt' and systematic!='PR' and systematic!='FR':
-						hqcd[isEM+systematic+ud] = bkghists[histoPrefix.replace(discriminant,discriminant+systematic+ud)+'_'+qcdList[0]].Clone(histoPrefix+'__qcd'+'__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'))
-						hewk[isEM+systematic+ud] = bkghists[histoPrefix.replace(discriminant,discriminant+systematic+ud)+'_'+ewkList[0]].Clone(histoPrefix+'__ewk'+'__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'))
-						htop[isEM+systematic+ud] = bkghists[histoPrefix.replace(discriminant,discriminant+systematic+ud)+'_'+topList[0]].Clone(histoPrefix+'__top'+'__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'))
+						hqcd[isEM+systematic+ud] = bkghists[histoPrefix.replace(discriminant,discriminant+systematic+ud)+'_'+qcdList[0]].Clone(histoPrefix+'__qcd__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'))
+						hewk[isEM+systematic+ud] = bkghists[histoPrefix.replace(discriminant,discriminant+systematic+ud)+'_'+ewkList[0]].Clone(histoPrefix+'__ewk__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'))
+						htop[isEM+systematic+ud] = bkghists[histoPrefix.replace(discriminant,discriminant+systematic+ud)+'_'+topList[0]].Clone(histoPrefix+'__top__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'))
 						for signal in sigList.keys(): hsig[isEM+signal+systematic+ud] = sighists[histoPrefix.replace(discriminant,discriminant+systematic+ud)+'_'+signal].Clone(histoPrefix+'__'+sigList[signal]+'__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'))
 						for signal in signals: 
 							hsig[isEM+signal+systematic+ud] = sighists[histoPrefix.replace(discriminant,discriminant+systematic+ud)+'_'+signal+decays[0]].Clone(histoPrefix+'__'+signal+'__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'))
@@ -232,13 +186,13 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 						for bkg in topList: 
 							if bkg!=topList[0]: htop[isEM+systematic+ud].Add(bkghists[histoPrefix.replace(discriminant,discriminant+systematic+ud)+'_'+bkg])
 					if systematic=='toppt': # top pt is only on the ttbar sample, so it needs special treatment!
-						htop[isEM+systematic+ud] = bkghists[histoPrefix.replace(discriminant,discriminant+systematic+ud)+'_'+ttjetList[0]].Clone(histoPrefix+'__top'+'__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'))
+						htop[isEM+systematic+ud] = bkghists[histoPrefix.replace(discriminant,discriminant+systematic+ud)+'_'+ttjetList[0]].Clone(histoPrefix+'__top__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'))
 						for bkg in ttjetList: 
 							if bkg!=ttjetList[0]: htop[isEM+systematic+ud].Add(bkghists[histoPrefix.replace(discriminant,discriminant+systematic+ud)+'_'+bkg])
 						for bkg in topList: 
 							if bkg not in ttjetList: htop[isEM+systematic+ud].Add(bkghists[histoPrefix+'_'+bkg])
 					if systematic=='PR' or systematic=='FR': # PR and FR is only on the ddbkg sample, so it needs special treatment!
-						hddbkg[isEM+systematic+ud] = bkghists[histoPrefix.replace(discriminant,discriminant+systematic+ud)+'_'+ddbkgList[0]].Clone(histoPrefix+'__ddbkg'+'__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'))
+						hddbkg[isEM+systematic+ud] = bkghists[histoPrefix.replace(discriminant,discriminant+systematic+ud)+'_'+ddbkgList[0]].Clone(histoPrefix+'__ddbkg__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'))
 						for bkg in ddbkgList: 
 							if bkg!=ddbkgList[0]: hddbkg[isEM+systematic+ud].Add(bkghists[histoPrefix.replace(discriminant,discriminant+systematic+ud)+'_'+bkg])
 
@@ -399,13 +353,6 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 				for signal in sigList.keys()+signals: 
 					hsig[isEM+signal+'pdfNewUp'].SetBinError(ibin,hsig[isEM+signal+'pdf'+str(indSigPDFUp[signal])].GetBinError(ibin))
 					hsig[isEM+signal+'pdfNewDown'].SetBinError(ibin,hsig[isEM+signal+'pdf'+str(indSigPDFDn[signal])].GetBinError(ibin))
-					
-		if doQ2sys: #Q^2 systematic exists for certain backgrounds, so we do it separately
-			htop[isEM+'q2Up'] = bkghists[histoPrefix+'_'+q2UpList[0]].Clone(histoPrefix+'__top__q2__plus')
-			htop[isEM+'q2Down'] = bkghists[histoPrefix+'_'+q2DownList[0]].Clone(histoPrefix+'__top__q2__minus')
-			for ind in range(1,len(q2UpList)):
-				htop[isEM+'q2Up'].Add(bkghists[histoPrefix+'_'+q2UpList[ind]])
-				htop[isEM+'q2Down'].Add(bkghists[histoPrefix+'_'+q2DownList[ind]])
 		
 		#Group data processes
 		hdata[isEM] = datahists[histoPrefix+'_'+dataList[0]].Clone(histoPrefix+'__DATA')
@@ -417,18 +364,18 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 		yieldTable[histoPrefix]['top']    = htop[isEM].Integral()
 		yieldTable[histoPrefix]['ewk']    = hewk[isEM].Integral()
 		yieldTable[histoPrefix]['qcd']    = hqcd[isEM].Integral()
-		yieldTable[histoPrefix]['totBkg'] = htop[isEM].Integral()+hewk[isEM].Integral()+hqcd[isEM].Integral()
+		yieldTable[histoPrefix]['totBkg'] = htop[isEM].Integral()+hewk[isEM].Integral()+hqcd[isEM].Integral()+hddbkg[isEM].Integral()
 		yieldTable[histoPrefix]['data']   = hdata[isEM].Integral()
 		yieldTable[histoPrefix]['dataOverBkg']= yieldTable[histoPrefix]['data']/yieldTable[histoPrefix]['totBkg']
 		yieldTable[histoPrefix]['WJets']  = hwjets[isEM].Integral()
 # 		yieldTable[histoPrefix]['ZJets']  = hzjets[isEM].Integral()
 		yieldTable[histoPrefix]['VV']     = hvv[isEM].Integral()
-		yieldTable[histoPrefix]['VVV']     = hvvv[isEM].Integral()
+		yieldTable[histoPrefix]['VVV']    = hvvv[isEM].Integral()
 		yieldTable[histoPrefix]['TTV']    = httv[isEM].Integral()
 		yieldTable[histoPrefix]['TTJets'] = httjets[isEM].Integral()
 		yieldTable[histoPrefix]['T']      = ht[isEM].Integral()
 		yieldTable[histoPrefix]['QCD']    = hqcd[isEM].Integral()
-		yieldTable[histoPrefix]['ddbkg']    = hddbkg[isEM].Integral()
+		yieldTable[histoPrefix]['ddbkg']  = hddbkg[isEM].Integral()
 		for signal in sigList.keys(): yieldTable[histoPrefix][signal] = hsig[isEM+signal].Integral()
 		for signal in signals: yieldTable[histoPrefix][signal] = hsig[isEM+signal].Integral()
 		
@@ -436,20 +383,15 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 		if doAllSys:
 			for systematic in systematicList:
 				for ud in ['Up','Down']:
-					if systematic=='PR' or systematic=='FR': continue
-					yieldTable[histoPrefix+systematic+ud]['top']    = htop[isEM+systematic+ud].Integral()
-					if systematic!='toppt':
-						yieldTable[histoPrefix+systematic+ud]['ewk']    = hewk[isEM+systematic+ud].Integral()
-						yieldTable[histoPrefix+systematic+ud]['qcd']    = hqcd[isEM+systematic+ud].Integral()
-						yieldTable[histoPrefix+systematic+ud]['totBkg'] = htop[isEM+systematic+ud].Integral()+hewk[isEM+systematic+ud].Integral()+hqcd[isEM+systematic+ud].Integral()
-						for signal in sigList.keys(): yieldTable[histoPrefix+systematic+ud][signal] = hsig[isEM+signal+systematic+ud].Integral()
-						for signal in signals: yieldTable[histoPrefix+systematic+ud][signal] = hsig[isEM+signal+systematic+ud].Integral()
-# 					if systematic=='PR' or systematic=='FR':
-# 						yieldTable[histoPrefix+systematic+ud]['ewk']    = hewk[isEM+systematic+ud].Integral()
-					
-		if doQ2sys:
-			yieldTable[histoPrefix+'q2Up']['top']    = htop[isEM+'q2Up'].Integral()
-			yieldTable[histoPrefix+'q2Down']['top']    = htop[isEM+'q2Up'].Integral()
+					if systematic!='PR' and systematic!='FR':
+						yieldTable[histoPrefix+systematic+ud]['top'] = htop[isEM+systematic+ud].Integral()
+						if systematic!='toppt':
+							yieldTable[histoPrefix+systematic+ud]['ewk'] = hewk[isEM+systematic+ud].Integral()
+							yieldTable[histoPrefix+systematic+ud]['qcd'] = hqcd[isEM+systematic+ud].Integral()
+							for signal in sigList.keys(): yieldTable[histoPrefix+systematic+ud][signal] = hsig[isEM+signal+systematic+ud].Integral()
+							for signal in signals: yieldTable[histoPrefix+systematic+ud][signal] = hsig[isEM+signal+systematic+ud].Integral()
+					if systematic=='PR' or systematic=='FR':
+						yieldTable[histoPrefix+systematic+ud]['ddbkg'] = hddbkg[isEM+systematic+ud].Integral()
 
 		#prepare MC yield error table
 		yieldErrTable[histoPrefix]['top']    = 0.
@@ -461,12 +403,12 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 		yieldErrTable[histoPrefix]['WJets']  = 0.
 # 		yieldErrTable[histoPrefix]['ZJets']  = 0.
 		yieldErrTable[histoPrefix]['VV']     = 0.
-		yieldErrTable[histoPrefix]['VVV']     = 0.
+		yieldErrTable[histoPrefix]['VVV']    = 0.
 		yieldErrTable[histoPrefix]['TTV']    = 0.
 		yieldErrTable[histoPrefix]['TTJets'] = 0.
 		yieldErrTable[histoPrefix]['T']      = 0.
 		yieldErrTable[histoPrefix]['QCD']    = 0.
-		yieldErrTable[histoPrefix]['ddbkg']    = 0.
+		yieldErrTable[histoPrefix]['ddbkg']  = 0.
 		for signal in sigList.keys(): yieldErrTable[histoPrefix][signal] = 0.
 		for signal in signals: yieldErrTable[histoPrefix][signal] = 0.
 
@@ -474,33 +416,32 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 			yieldErrTable[histoPrefix]['top']    += htop[isEM].GetBinError(ibin)**2
 			yieldErrTable[histoPrefix]['ewk']    += hewk[isEM].GetBinError(ibin)**2
 			yieldErrTable[histoPrefix]['qcd']    += hqcd[isEM].GetBinError(ibin)**2
-			yieldErrTable[histoPrefix]['totBkg'] += htop[isEM].GetBinError(ibin)**2+hewk[isEM].GetBinError(ibin)**2+hqcd[isEM].GetBinError(ibin)**2
+			yieldErrTable[histoPrefix]['totBkg'] += htop[isEM].GetBinError(ibin)**2+hewk[isEM].GetBinError(ibin)**2+hqcd[isEM].GetBinError(ibin)**2+hddbkg[isEM].GetBinError(ibin)**2
 			yieldErrTable[histoPrefix]['data']   += hdata[isEM].GetBinError(ibin)**2
 			yieldErrTable[histoPrefix]['WJets']  += hwjets[isEM].GetBinError(ibin)**2
 # 			yieldErrTable[histoPrefix]['ZJets']  += hzjets[isEM].GetBinError(ibin)**2
 			yieldErrTable[histoPrefix]['VV']     += hvv[isEM].GetBinError(ibin)**2
-			yieldErrTable[histoPrefix]['VVV']     += hvvv[isEM].GetBinError(ibin)**2
+			yieldErrTable[histoPrefix]['VVV']    += hvvv[isEM].GetBinError(ibin)**2
 			yieldErrTable[histoPrefix]['TTV']    += httv[isEM].GetBinError(ibin)**2
 			yieldErrTable[histoPrefix]['TTJets'] += httjets[isEM].GetBinError(ibin)**2
 			yieldErrTable[histoPrefix]['T']      += ht[isEM].GetBinError(ibin)**2
 			yieldErrTable[histoPrefix]['QCD']    += hqcd[isEM].GetBinError(ibin)**2
-			yieldErrTable[histoPrefix]['ddbkg']    += hddbkg[isEM].GetBinError(ibin)**2
+			yieldErrTable[histoPrefix]['ddbkg']  += hddbkg[isEM].GetBinError(ibin)**2
 			for signal in sigList.keys(): yieldErrTable[histoPrefix][signal] += hsig[isEM+signal].GetBinError(ibin)**2
 			for signal in signals: yieldErrTable[histoPrefix][signal] += hsig[isEM+signal].GetBinError(ibin)**2
 			
-		yieldErrTable[histoPrefix]['top']    += (corrdSys*yieldTable[histoPrefix]['top'])**2+(topXsecSys*yieldTable[histoPrefix]['top'])**2+(CRuncert['top'+isEM]*yieldTable[histoPrefix]['top'])**2
-		yieldErrTable[histoPrefix]['ewk']    += (corrdSys*yieldTable[histoPrefix]['ewk'])**2+(ewkXsecSys*yieldTable[histoPrefix]['ewk'])**2+(CRuncert['ewk'+isEM]*yieldTable[histoPrefix]['ewk'])**2
+		yieldErrTable[histoPrefix]['top']    += (corrdSys*yieldTable[histoPrefix]['top'])**2+(topXsecSys*yieldTable[histoPrefix]['top'])**2
+		yieldErrTable[histoPrefix]['ewk']    += (corrdSys*yieldTable[histoPrefix]['ewk'])**2+(ewkXsecSys*yieldTable[histoPrefix]['ewk'])**2
 		yieldErrTable[histoPrefix]['qcd']    += (corrdSys*yieldTable[histoPrefix]['qcd'])**2+(qcdXsecSys*yieldTable[histoPrefix]['qcd'])**2
-		yieldErrTable[histoPrefix]['totBkg'] += (corrdSys*yieldTable[histoPrefix]['totBkg'])**2+(topXsecSys*yieldTable[histoPrefix]['top'])**2+(CRuncert['top'+isEM]*yieldTable[histoPrefix]['top'])**2+(ewkXsecSys*yieldTable[histoPrefix]['ewk'])**2+(CRuncert['ewk'+isEM]*yieldTable[histoPrefix]['ewk'])**2+(qcdXsecSys*yieldTable[histoPrefix]['qcd'])**2
-		yieldErrTable[histoPrefix]['WJets']  += (corrdSys*yieldTable[histoPrefix]['WJets'])**2+(ewkXsecSys*yieldTable[histoPrefix]['WJets'])**2+(CRuncert['ewk'+isEM]*yieldTable[histoPrefix]['WJets'])**2
-# 		yieldErrTable[histoPrefix]['ZJets']  += (corrdSys*yieldTable[histoPrefix]['ZJets'])**2+(ewkXsecSys*yieldTable[histoPrefix]['ZJets'])**2+(CRuncert['ewk'+isEM]*yieldTable[histoPrefix]['ZJets'])**2
-		yieldErrTable[histoPrefix]['VV']     += (corrdSys*yieldTable[histoPrefix]['VV'])**2+(ewkXsecSys*yieldTable[histoPrefix]['VV'])**2+(CRuncert['ewk'+isEM]*yieldTable[histoPrefix]['VV'])**2
-		yieldErrTable[histoPrefix]['VVV']     += (corrdSys*yieldTable[histoPrefix]['VVV'])**2+(ewkXsecSys*yieldTable[histoPrefix]['VVV'])**2+(CRuncert['ewk'+isEM]*yieldTable[histoPrefix]['VVV'])**2		
-		yieldErrTable[histoPrefix]['TTV']    += (corrdSys*yieldTable[histoPrefix]['TTV'])**2+(topXsecSys*yieldTable[histoPrefix]['TTV'])**2+(CRuncert['top'+isEM]*yieldTable[histoPrefix]['TTV'])**2
-		yieldErrTable[histoPrefix]['TTJets'] += (corrdSys*yieldTable[histoPrefix]['TTJets'])**2+(topXsecSys*yieldTable[histoPrefix]['TTJets'])**2+(CRuncert['top'+isEM]*yieldTable[histoPrefix]['TTJets'])**2
-		yieldErrTable[histoPrefix]['T']      += (corrdSys*yieldTable[histoPrefix]['T'])**2+(topXsecSys*yieldTable[histoPrefix]['T'])**2+(CRuncert['top'+isEM]*yieldTable[histoPrefix]['T'])**2
+		yieldErrTable[histoPrefix]['totBkg'] += (corrdSys*yieldTable[histoPrefix]['totBkg'])**2+(topXsecSys*yieldTable[histoPrefix]['top'])**2+(ewkXsecSys*yieldTable[histoPrefix]['ewk'])**2+(qcdXsecSys*yieldTable[histoPrefix]['qcd'])**2
+		yieldErrTable[histoPrefix]['WJets']  += (corrdSys*yieldTable[histoPrefix]['WJets'])**2+(ewkXsecSys*yieldTable[histoPrefix]['WJets'])**2
+# 		yieldErrTable[histoPrefix]['ZJets']  += (corrdSys*yieldTable[histoPrefix]['ZJets'])**2+(ewkXsecSys*yieldTable[histoPrefix]['ZJets'])**2
+		yieldErrTable[histoPrefix]['VV']     += (corrdSys*yieldTable[histoPrefix]['VV'])**2+(ewkXsecSys*yieldTable[histoPrefix]['VV'])**2
+		yieldErrTable[histoPrefix]['VVV']    += (corrdSys*yieldTable[histoPrefix]['VVV'])**2+(ewkXsecSys*yieldTable[histoPrefix]['VVV'])**2	
+		yieldErrTable[histoPrefix]['TTV']    += (corrdSys*yieldTable[histoPrefix]['TTV'])**2+(topXsecSys*yieldTable[histoPrefix]['TTV'])**2
+		yieldErrTable[histoPrefix]['TTJets'] += (corrdSys*yieldTable[histoPrefix]['TTJets'])**2+(topXsecSys*yieldTable[histoPrefix]['TTJets'])**2
+		yieldErrTable[histoPrefix]['T']      += (corrdSys*yieldTable[histoPrefix]['T'])**2+(topXsecSys*yieldTable[histoPrefix]['T'])**2
 		yieldErrTable[histoPrefix]['QCD']    += (corrdSys*yieldTable[histoPrefix]['QCD'])**2+(qcdXsecSys*yieldTable[histoPrefix]['qcd'])**2
-		yieldErrTable[histoPrefix]['ddbkg']    += (corrdSys*yieldTable[histoPrefix]['ddbkg'])**2+(yieldTable[histoPrefix]['ddbkg'])**2		
 		for signal in sigList.keys(): yieldErrTable[histoPrefix][signal] += (corrdSys*yieldTable[histoPrefix][signal])**2
 		for signal in signals: yieldErrTable[histoPrefix][signal] += (corrdSys*yieldTable[histoPrefix][signal])**2
 
@@ -514,37 +455,30 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 				hsig[isEM+signal].Write()
 				if doAllSys:
 					for systematic in systematicList:
-						if systematic=='toppt': continue
+						if systematic=='toppt' or systematic=='PR' or systematic=='FR': continue
 						hsig[isEM+signal+systematic+'Up'].Write()
 						hsig[isEM+signal+systematic+'Down'].Write()
-					#for pdfInd in range(100): hsig[isEM+signal+'pdf'+str(pdfInd)].Write()
 		if htop[isEM].Integral() > 0:  
 			htop[isEM].Write()
 			if doAllSys:
 				for systematic in systematicList:
+					if systematic=='PR' or systematic=='FR': continue
 					htop[isEM+systematic+'Up'].Write()
 					htop[isEM+systematic+'Down'].Write()
-				#for pdfInd in range(100): htop[isEM+'pdf'+str(pdfInd)].Write()
-			if doQ2sys:
-				htop[isEM+'q2Up'].Write()
-				htop[isEM+'q2Down'].Write()
 		if hewk[isEM].Integral() > 0:  
 			hewk[isEM].Write()
 			if doAllSys:
 				for systematic in systematicList:
-					if systematic=='toppt': continue
+					if systematic=='toppt' or systematic=='PR' or systematic=='FR': continue
 					hewk[isEM+systematic+'Up'].Write()
 					hewk[isEM+systematic+'Down'].Write()
-				#for pdfInd in range(100): hewk[isEM+'pdf'+str(pdfInd)].Write()
 		if hqcd[isEM].Integral() > 0:  
 			hqcd[isEM].Write()
 			if doAllSys:
 				for systematic in systematicList:
-#					if systematic=='toppt' or systematic == 'pdf' or systematic == 'pdfNew' or systematic == 'muR' or systematic == 'muF' or systematic == 'muRFcorrd' or systematic == 'muRFcorrdNew' or systematic == 'muRFdecorrdNew': continue
-					if systematic=='toppt': continue
+					if systematic=='toppt' or systematic=='PR' or systematic=='FR': continue
 					hqcd[isEM+systematic+'Up'].Write()
 					hqcd[isEM+systematic+'Down'].Write()
-				#for pdfInd in range(100): hqcd[isEM+'pdf'+str(pdfInd)].Write()
 		if hwjets[isEM].Integral() > 0: hwjets[isEM].Write()
 # 		if hzjets[isEM].Integral() > 0: hzjets[isEM].Write()
 		if httjets[isEM].Integral()> 0: httjets[isEM].Write()
@@ -552,7 +486,13 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 		if httv[isEM].Integral() > 0  : httv[isEM].Write()
 		if hvv[isEM].Integral() > 0   : hvv[isEM].Write()
 		if hvvv[isEM].Integral() > 0  : hvvv[isEM].Write()
-		if hddbkg[isEM].Integral() > 0: hddbkg[isEM].Write()
+		if hddbkg[isEM].Integral() > 0: 
+			hddbkg[isEM].Write()
+			if doAllSys:
+				for systematic in systematicList:
+					if systematic!='PR' and systematic!='FR': continue
+					hddbkg[isEM+systematic+'Up'].Write()
+					hddbkg[isEM+systematic+'Down'].Write()
 	outputRfile.Close()
 
 	stdout_old = sys.stdout
@@ -591,6 +531,7 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 	print 'ewk'.ljust(ljust_i),
 	print 'top'.ljust(ljust_i),
 	print 'qcd'.ljust(ljust_i),
+	print 'ddbkg'.ljust(ljust_i),
 	print 'data'.ljust(ljust_i),
 	print
 	for isEM in isEMlist:
@@ -599,6 +540,7 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 		print str(yieldTable[histoPrefix]['ewk']).ljust(ljust_i),
 		print str(yieldTable[histoPrefix]['top']).ljust(ljust_i),
 		print str(yieldTable[histoPrefix]['qcd']).ljust(ljust_i),
+		print str(yieldTable[histoPrefix]['ddbkg']).ljust(ljust_i),
 		print str(yieldTable[histoPrefix]['data']).ljust(ljust_i),
 		print
 
@@ -609,6 +551,7 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 		print str(math.sqrt(yieldErrTable[histoPrefix]['ewk'])).ljust(ljust_i),
 		print str(math.sqrt(yieldErrTable[histoPrefix]['top'])).ljust(ljust_i),
 		print str(math.sqrt(yieldErrTable[histoPrefix]['qcd'])).ljust(ljust_i),
+		print str(math.sqrt(yieldErrTable[histoPrefix]['ddbkg'])).ljust(ljust_i),
 		print str(math.sqrt(yieldErrTable[histoPrefix]['data'])).ljust(ljust_i),
 		print
 
@@ -659,7 +602,7 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 		histoPrefix=discriminant+'_'+lumiStr+'fb_'+isEM
 		print histoPrefix.ljust(ljust_i),
 	print
-	for process in bkgStackList+['ewk','top','qcd','totBkg','data','dataOverBkg','ddbkg']+signals+signalList:
+	for process in bkgStackList+['ewk','top','qcd','ddbkg','totBkg','data','dataOverBkg']+signals+signalList:
 		print process.ljust(ljust_i),
 		for isEM in isEMlist:
 			histoPrefix=discriminant+'_'+lumiStr+'fb_'+isEM

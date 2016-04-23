@@ -1,12 +1,11 @@
 #!/usr/bin/python
 
-import os,sys,time,math,datetime
+import os,sys,time,math,datetime,pickle
 from numpy import linspace
 from weights import *
 from analyze import *
 from samples import *
 import ROOT as R
-import pickle
 
 R.gROOT.SetBatch(1)
 start_time = time.time()
@@ -41,8 +40,6 @@ else: catList=['EEE','EEM','EMM','MMM','All']
 
 scaleSignalXsecTo1pb = False # this has to be "True" if you are making templates for limit calculation!!!!!!!!
 doAllSys= True
-doQ2sys = True
-isotrig = 1
 
 cutString = 'lep'+str(int(cutList['lepPtCut']))+'_MET'+str(int(cutList['metCut']))+'_leadJet'+str(int(cutList['leadJetPtCut']))+'_subLeadJet'+str(int(cutList['subLeadJetPtCut']))+'_thirdJet'+str(int(cutList['thirdJetPtCut']))+'_NJets'+str(int(cutList['njetsCut']))+'_NBJets'+str(int(cutList['nbjetsCut']))+'_DR'+str(int(cutList['drCut']))
 
@@ -50,7 +47,6 @@ cTime=datetime.datetime.now()
 datestr='%i_%i_%i'%(cTime.year,cTime.month,cTime.day)
 timestr='%i_%i_%i'%(cTime.hour,cTime.minute,cTime.second)
 pfix='templates'
-# pfix='kinamatics_testingSys_interactive'
 #pfix+=datestr+'_'+timestr
 
 ###########################################################
@@ -205,14 +201,7 @@ if whichSignal=='TT': decays = ['BWBW','THTH','TZTZ','TZBW','THBW','TZTH'] #T' d
 if whichSignal=='BB': decays = ['TWTW','BHBH','BZBZ','BZTW','BHTW','BZBH'] #B' decays
 if whichSignal=='T53T53': decays = [''] #decays to tWtW 100% of the time
 
-#dataList = ['DataERRC','DataERRD','DataEPRD','DataMRRC','DataMRRD','DataMPRD']
 dataList = ['DataEERRC','DataEERRD','DataEEPRD','DataMMRRC','DataMMRRD','DataMMPRD','DataMERRC','DataMERRD','DataMEPRD']
-
-q2List  = [#energy scale sample to be processed
-		   'TTJetsPHQ2U','TTJetsPHQ2D',
-		   'TtWQ2U','TbtWQ2U',
-		   'TtWQ2D','TbtWQ2D',
-		   ]
 
 ###########################################################
 #################### NORMALIZATIONS #######################
@@ -268,16 +257,14 @@ for sig in sigList:
 
 tTreeBkg = {}
 tFileBkg = {}
-for bkg in bkgList+q2List:
+for bkg in bkgList:
 	print "READING:",bkg
 	print "        nominal"
 	tFileBkg[bkg],tTreeBkg[bkg]=readTree(step1Dir+'/'+samples[bkg]+'_hadd.root')
 	if doAllSys:
 		for syst in shapesFiles:
 			for ud in ['Up','Down']:
-				if bkg in q2List:
-					tFileBkg[bkg+syst+ud],tTreeBkg[bkg+syst+ud]=None,None
-				elif 'DataDriven' in bkg: continue
+				if 'DataDriven' in bkg: continue
 				else:
 					print "        "+syst+ud
 					tFileBkg[bkg+syst+ud],tTreeBkg[bkg+syst+ud]=readTree(step1Dir.replace('nominal',syst.upper()+ud.lower())+'/'+samples[bkg]+'_hadd.root')
@@ -312,10 +299,10 @@ for category in catList:
 		if not os.path.exists(outDir+'/'+category): os.system('mkdir '+outDir+'/'+category)
 		outDir+='/'+category
 	for data in dataList: 
-		datahists.update(analyze(tTreeData,data,cutList,isotrig,False,iPlot,plotList[iPlot],category))
+		datahists.update(analyze(tTreeData,data,cutList,False,iPlot,plotList[iPlot],category))
 		if catInd==nCats: del tFileData[data]
 	for bkg in bkgList: 
-		bkghists.update(analyze(tTreeBkg,bkg,cutList,isotrig,doAllSys,iPlot,plotList[iPlot],category))
+		bkghists.update(analyze(tTreeBkg,bkg,cutList,doAllSys,iPlot,plotList[iPlot],category))
 		if catInd==nCats: del tFileBkg[bkg]
 		if doAllSys and catInd==nCats:
 			for syst in shapesFiles:
@@ -323,15 +310,11 @@ for category in catList:
 				for ud in ['Up','Down']: del tFileBkg[bkg+syst+ud]
 	for sig in sigList: 
 		for decay in decays: 
-			sighists.update(analyze(tTreeSig,sig+decay,cutList,isotrig,doAllSys,iPlot,plotList[iPlot],category))
+			sighists.update(analyze(tTreeSig,sig+decay,cutList,doAllSys,iPlot,plotList[iPlot],category))
 			if catInd==nCats: del tFileSig[sig+decay]
 			if doAllSys and catInd==nCats:
 				for syst in shapesFiles:
 					for ud in ['Up','Down']: del tFileSig[sig+decay+syst+ud]
-	if doQ2sys: 
-		for q2 in q2List: 
-			bkghists.update(analyze(tTreeBkg,q2,cutList,isotrig,False,iPlot,plotList[iPlot],category))
-			if catInd==nCats: del tFileBkg[q2]
 
 	#Negative Bin Correction
 	for bkg in bkghists.keys(): negBinCorrection(bkghists[bkg])

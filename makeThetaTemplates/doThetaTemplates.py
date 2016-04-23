@@ -351,7 +351,7 @@ def makeThetaCats(datahists,sighists,bkghists,discriminant):
 					yieldStatErrTable[histoPrefix]['top']    += htop[i].GetBinError(ibin)**2
 					yieldStatErrTable[histoPrefix]['ewk']    += hewk[i].GetBinError(ibin)**2
 					yieldStatErrTable[histoPrefix]['qcd']    += hqcd[i].GetBinError(ibin)**2
-					yieldStatErrTable[histoPrefix]['totBkg'] += htop[i].GetBinError(ibin)**2+hewk[i].GetBinError(ibin)**2+hqcd[i].GetBinError(ibin)**2
+					yieldStatErrTable[histoPrefix]['totBkg'] += htop[i].GetBinError(ibin)**2+hewk[i].GetBinError(ibin)**2+hqcd[i].GetBinError(ibin)**2+hddbkg[i].GetBinError(ibin)**2
 					yieldStatErrTable[histoPrefix]['data']   += hdata[i].GetBinError(ibin)**2
 # 					yieldStatErrTable[histoPrefix]['WJets']  += hwjets[i].GetBinError(ibin)**2
 # 					yieldStatErrTable[histoPrefix]['ZJets']  += hzjets[i].GetBinError(ibin)**2

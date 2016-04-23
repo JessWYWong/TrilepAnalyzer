@@ -19,10 +19,8 @@ scaleSignals = True
 scaleFact1 = 400
 if 'Final' in templateDir: scaleFact1 = 40
 
-systematicList = ['pileup','jec','jer','jsf','jmr','jms','btag','tau21','pdfNew','muRFcorrdNew','toppt']
+systematicList = ['pileup','jec','jer','jsf','jmr','jms','btag','tau21','pdfNew','muRFcorrdNew','toppt','PR','FR']
 doAllSys = True
-doQ2sys  = True
-if not doAllSys: doQ2sys = False # I assume you don't want Q^2 as well if you are not doing the other shape systematics! (this is just to change one bool)
 
 isRebinned=''#post fix for file names if the name changed b/c of rebinning or some other process
 doNormByBinWidth=False # not tested, may not work out of the box
@@ -95,7 +93,7 @@ def normByBinWidth(result):
 		result.SetBinError(bin, error/width)
 
 lumiSys = 0.027 #0.046 #4.6% lumi uncertainty #updated 18april2016 cehck twiki!!
-trigSys = 0.03 #3% trigger uncertainty
+trigSys = math.sqrt(3.*0.03**2) #3% trigger uncertainty ## NEED to add in quadrature for EE, EM, and MM triggers!
 lepIdSys = math.sqrt(3.*0.01**2) #1% lepton id uncertainty ## NEED to add in quadrature for 3 leptons!
 lepIsoSys = math.sqrt(3.*0.01**2) #1% lepton isolation uncertainty ## NEED to add in quadrature for 3 leptons!
 topXsecSys = 0.0 #55 #5.5% top x-sec uncertainty
@@ -103,46 +101,13 @@ ewkXsecSys = 0.0 #5 #5% ewk x-sec uncertainty
 qcdXsecSys = 0.0 #50 #50% qcd x-sec uncertainty
 corrdSys = math.sqrt(lumiSys**2+trigSys**2+lepIdSys**2+lepIsoSys**2)
 
-def addSystematicUncertainties(hist,modelingUnc):
-	for ibin in range(1,hist.GetNbinsX()+1):
-		contentsquared = hist.GetBinContent(ibin)**2
-		error = hist.GetBinError(ibin)**2 #statistical uncertainty
-		error += corrdSys*corrdSys*contentsquared  #correlated uncertainties
-		error += modelingUnc*modelingUnc*contentsquared #background modeling uncertainty from CRs
-		if 'top' in hist.GetName(): error += topXsecSys*topXsecSys*contentsquared # cross section
-		if 'ewk' in hist.GetName(): error += ewkXsecSys*ewkXsecSys*contentsquared # cross section
-		if 'qcd' in hist.GetName(): error += qcdXsecSys*qcdXsecSys*contentsquared # cross section
-
-def getNormUnc(hist,ibin,modelingUnc):
+def getNormUnc(hist,ibin):
 	contentsquared = hist.GetBinContent(ibin)**2
 	error = corrdSys*corrdSys*contentsquared  #correlated uncertainties
-	error += modelingUnc*modelingUnc*contentsquared #background modeling uncertainty from CRs
 	if 'top' in hist.GetName(): error += topXsecSys*topXsecSys*contentsquared # cross section
 	if 'ewk' in hist.GetName(): error += ewkXsecSys*ewkXsecSys*contentsquared # cross section
 	if 'qcd' in hist.GetName(): error += qcdXsecSys*qcdXsecSys*contentsquared # cross section
-	return error	
-		
-CRuncert = {# averaged from CRs, could depend on the selection, but the difference found to be negligible!
-			'topE':0,#,0.112,
-			'topM':0,#0.087,
-			'topAll':0,#0.098,
-			'ewkE':0,#0.260,
-			'ewkM':0,#0.104,
-			'ewkAll':0,#0.172,
-			
-			'topEEE':0,#,0.112,
-			'topEEM':0,#0.087,
-			'topEMM':0,#,0.112,
-			'topMMM':0,#0.087,
-			'topAll':0,#0.098,
-
-			'ewkEEE':0,#0.260,
-			'ewkEEM':0,#0.104,
-			'ewkEMM':0,#0.260,
-			'ewkMMM':0,#0.104,
-			'ewkAll':0,#0.172,
-
-			}
+	return error
 
 plotList = [#distribution name as defined in "doHists.py"
 #	'deltaRb1Nonb',
@@ -333,21 +298,22 @@ for discriminant in plotList:
 		if doAllSys:
 			for sys in systematicList:
 				for ud in ['minus','plus']:
-					systHists['top'+sys+ud] = RFile.Get(histPrefix+'__top__'+sys+'__'+ud).Clone()
+					try: systHists['top'+sys+ud] = RFile.Get(histPrefix+'__top__'+sys+'__'+ud).Clone()
+					except: 
+						print "Skipping",sys,"for TOP"
+						pass
 					try: systHists['ewk'+sys+ud] = RFile.Get(histPrefix+'__ewk__'+sys+'__'+ud).Clone()
-					except: pass
+					except: 
+						print "Skipping",sys,"for EWK"
+						pass
 					try: systHists['qcd'+sys+ud] = RFile.Get(histPrefix+'__qcd__'+sys+'__'+ud).Clone()
-					except: pass
-		if doQ2sys:
-			for ud in ['minus','plus']:
-				systHists['topq2'+ud] = RFile.Get(histPrefix+'__top__q2__'+ud).Clone()
-				systHists['q2'+ud] = systHists['topq2'+ud].Clone()
-				systHists['ewkq2'+ud] = RFile.Get(histPrefix+'__ewk').Clone()
-				systHists['q2'+ud].Add(systHists['ewkq2'+ud])
-				try:
-					systHists['qcdq2'+ud] = RFile.Get(histPrefix+'__qcd').Clone()
-					systHists['q2'+ud].Add(systHists['qcdq2'+ud])
-				except: pass
+					except: 
+						print "Skipping",sys,"for QCD"
+						pass
+					try: systHists['ddbkg'+sys+ud] = RFile.Get(histPrefix+'__ddbkg__'+sys+'__'+ud).Clone()
+					except: 
+						print "Skipping",sys,"for DDBKG"
+						pass
 
 		hTOPstatOnly = hTOP.Clone(hTOP.GetName()+'statOnly')
 		try: hEWKstatOnly= hEWK.Clone(hEWK.GetName()+'statOnly')
@@ -375,57 +341,50 @@ for discriminant in plotList:
 			errorSym = 0.
 
 			errorStatOnly = bkgHT.GetBinError(ibin)**2
-			errorCheck = hTOP.GetBinError(ibin)**2 + hEWK.GetBinError(ibin)**2
-			try: errorCheck += hQCD.GetBinError(ibin)**2
+			errorNorm = getNormUnc(hTOPstatOnly,ibin)
+			try: errorNorm += getNormUnc(hEWKstatOnly,ibin)
+			except: pass
+			try: errorNorm += getNormUnc(hQCDstatOnly,ibin)
 			except: pass
 
-			errorStatCheck = hTOPstatOnly.GetBinError(ibin)**2 + hEWKstatOnly.GetBinError(ibin)**2
-			try: errorStatCheck += hQCDstatOnly.GetBinError(ibin)**2
-			except: pass
-
-			errorNorm = getNormUnc(hTOPstatOnly,ibin,CRuncert['top'+isEM])
-			try: errorNorm += getNormUnc(hEWKstatOnly,ibin,CRuncert['ewk'+isEM])
-			except: pass
-			try: errorNorm += getNormUnc(hQCDstatOnly,ibin,0.0)
-			except: pass
-
-			for sys in systematicList:
-				if doAllSys:	
-					errorSym += (0.5*abs(systHists['top'+sys+'plus'].GetBinContent(ibin)-systHists['top'+sys+'minus'].GetBinContent(ibin)))**2				
-					errorPlus = systHists['top'+sys+'plus'].GetBinContent(ibin)-hTOP.GetBinContent(ibin)
-					errorMinus = hTOP.GetBinContent(ibin)-systHists['top'+sys+'minus'].GetBinContent(ibin)
-					if errorPlus > 0: errorUp += errorPlus**2
-					else: errorDn += errorPlus**2
-					if errorMinus > 0: errorDn += errorMinus**2
-					else: errorUp += errorMinus**2
-					if sys!='toppt':
-						try:
-							errorSym += (0.5*abs(systHists['ewk'+sys+'plus'].GetBinContent(ibin)-systHists['ewk'+sys+'minus'].GetBinContent(ibin)))**2				
-							errorPlus = systHists['ewk'+sys+'plus'].GetBinContent(ibin)-hEWK.GetBinContent(ibin)
-							errorMinus = hEWK.GetBinContent(ibin)-systHists['ewk'+sys+'minus'].GetBinContent(ibin)
-							if errorPlus > 0: errorUp += errorPlus**2
-							else: errorDn += errorPlus**2
-							if errorMinus > 0: errorDn += errorMinus**2
-							else: errorUp += errorMinus**2
-						except: pass
-						try:
-							errorSym += (0.5*abs(systHists['qcd'+sys+'plus'].GetBinContent(ibin)-systHists['qcd'+sys+'minus'].GetBinContent(ibin)))**2				
-							errorPlus = systHists['qcd'+sys+'plus'].GetBinContent(ibin)-hQCD.GetBinContent(ibin)
-							errorMinus = hQCD.GetBinContent(ibin)-systHists['qcd'+sys+'minus'].GetBinContent(ibin)
-							if errorPlus > 0: errorUp += errorPlus**2
-							else: errorDn += errorPlus**2
-							if errorMinus > 0: errorDn += errorMinus**2
-							else: errorUp += errorMinus**2
-						except: pass													
-			if doQ2sys: 
-				errorSym += (0.5*abs(systHists['topq2plus'].GetBinContent(ibin)-systHists['topq2minus'].GetBinContent(ibin)))**2				
-				errorPlus = systHists['topq2plus'].GetBinContent(ibin)-hTOP.GetBinContent(ibin)
-				errorMinus = hTOP.GetBinContent(ibin)-systHists['topq2minus'].GetBinContent(ibin)
-				if errorPlus > 0: errorUp += errorPlus**2
-				else: errorDn += errorPlus**2
-				if errorMinus > 0: errorDn += errorMinus**2
-				else: errorUp += errorMinus**2
-
+			if doAllSys:
+				for sys in systematicList:
+					if not (sys=='PR' or sys=='FR'):
+						errorSym += (0.5*abs(systHists['top'+sys+'plus'].GetBinContent(ibin)-systHists['top'+sys+'minus'].GetBinContent(ibin)))**2				
+						errorPlus = systHists['top'+sys+'plus'].GetBinContent(ibin)-hTOP.GetBinContent(ibin)
+						errorMinus = hTOP.GetBinContent(ibin)-systHists['top'+sys+'minus'].GetBinContent(ibin)
+						if errorPlus > 0: errorUp += errorPlus**2
+						else: errorDn += errorPlus**2
+						if errorMinus > 0: errorDn += errorMinus**2
+						else: errorUp += errorMinus**2
+						if sys!='toppt':
+							try:
+								errorSym += (0.5*abs(systHists['ewk'+sys+'plus'].GetBinContent(ibin)-systHists['ewk'+sys+'minus'].GetBinContent(ibin)))**2				
+								errorPlus = systHists['ewk'+sys+'plus'].GetBinContent(ibin)-hEWK.GetBinContent(ibin)
+								errorMinus = hEWK.GetBinContent(ibin)-systHists['ewk'+sys+'minus'].GetBinContent(ibin)
+								if errorPlus > 0: errorUp += errorPlus**2
+								else: errorDn += errorPlus**2
+								if errorMinus > 0: errorDn += errorMinus**2
+								else: errorUp += errorMinus**2
+							except: pass
+							try:
+								errorSym += (0.5*abs(systHists['qcd'+sys+'plus'].GetBinContent(ibin)-systHists['qcd'+sys+'minus'].GetBinContent(ibin)))**2				
+								errorPlus = systHists['qcd'+sys+'plus'].GetBinContent(ibin)-hQCD.GetBinContent(ibin)
+								errorMinus = hQCD.GetBinContent(ibin)-systHists['qcd'+sys+'minus'].GetBinContent(ibin)
+								if errorPlus > 0: errorUp += errorPlus**2
+								else: errorDn += errorPlus**2
+								if errorMinus > 0: errorDn += errorMinus**2
+								else: errorUp += errorMinus**2
+							except: pass
+					if sys=='PR' or sys=='FR':
+						errorSym += (0.5*abs(systHists['ddbkg'+sys+'plus'].GetBinContent(ibin)-systHists['ddbkg'+sys+'minus'].GetBinContent(ibin)))**2				
+						errorPlus = systHists['ddbkg'+sys+'plus'].GetBinContent(ibin)-hDDBKG.GetBinContent(ibin)
+						errorMinus = hDDBKG.GetBinContent(ibin)-systHists['ddbkg'+sys+'minus'].GetBinContent(ibin)
+						if errorPlus > 0: errorUp += errorPlus**2
+						else: errorDn += errorPlus**2
+						if errorMinus > 0: errorDn += errorMinus**2
+						else: errorUp += errorMinus**2
+							
 			totBkgTemp1[isEM].SetPointEYhigh(ibin-1,math.sqrt(errorUp))
 			totBkgTemp1[isEM].SetPointEYlow(ibin-1,math.sqrt(errorDn))
 			totBkgTemp2[isEM].SetPointEYhigh(ibin-1,math.sqrt(errorUp+errorNorm))
@@ -743,22 +702,6 @@ for discriminant in plotList:
 			pullUncBandStat.SetMarkerSize(0)
 			gStyle.SetHatchesLineWidth(1)
 			if not doOneBand: pullUncBandStat.Draw("SAME E2")
-		
-			if doQ2sys:
-				pullQ2up=systHists['q2plus'].Clone("pullQ2Up")
-				pullQ2up.Divide(systHists['q2plus'], bkgHT)
-				pullQ2up.SetFillColor(0)
-				pullQ2up.SetLineColor(6)#kGreen+1)
-				pullQ2up.SetLineWidth(3)
-				#pullQ2up.Draw("SAME HIST")
-		
-				pullQ2dn=systHists['q2minus'].Clone("pullQ2Dn")
-				pullQ2dn.Divide(systHists['q2minus'], bkgHT)
-				pullQ2dn.SetFillColor(0)
-				pullQ2dn.SetLineColor(6)#kGreen+1)
-				pullQ2dn.SetLineWidth(3)
-				pullQ2dn.SetLineStyle(5)
-				#pullQ2dn.Draw("SAME HIST")
 
 			pullLegend=TLegend(0.14,0.87,0.85,0.96)
 			SetOwnership( pullLegend, 0 )   # 0 = release (not keep), 1 = keep
@@ -778,8 +721,6 @@ for discriminant in plotList:
 				pullLegend.AddEntry(pullUncBandTot , "Bkg stat." , "f")
 			#	pullLegend.AddEntry(jsf, "Fit","l")
 			#	pullLegend.AddEntry(jsfup, "#pm 1#sigma","l")
-			#pullLegend.AddEntry(pullQ2up , "Q^{2} Up" , "l")
-			#pullLegend.AddEntry(pullQ2dn , "Q^{2} Down" , "l")
 			pullLegend.Draw("SAME")
 			pull.Draw("SAME")
 			lPad.RedrawAxis()
@@ -801,8 +742,6 @@ for discriminant in plotList:
 			pull.GetYaxis().SetTitle('Pull')
 			pull.Draw("HIST")
 
-		#c1.Write()
-		#savePrefix = templateDir.split('/')[-1]+'/plots/'
 		savePrefix = templateDir+'/plots/'
 		if not os.path.exists(savePrefix): os.system('mkdir '+savePrefix)
 		savePrefix+=histPrefix+isRebinned

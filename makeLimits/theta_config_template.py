@@ -17,17 +17,17 @@ def get_model():
     obsvs = model.observables.keys()
 
     for obs in obsvs:
-		if 'isEEE' in obs: ### CHECK TRIGGER SYST!!!!!!!!!!!!!!!!
-			try: model.add_lognormal_uncertainty('elTrigSys', math.log(1.03), '*', obs)
+		if 'isEEE' in obs:
+			try: model.add_lognormal_uncertainty('elelTrigSys', math.log(1.03), '*', obs)
 			except: pass
 		elif 'isEEM' in obs:
-			try: model.add_lognormal_uncertainty('elTrigSys', math.log(1.03), '*', obs)
+			try: model.add_lognormal_uncertainty('elmuTrigSys', math.log(1.03), '*', obs)
 			except: pass
 		elif 'isEMM' in obs:
-			try: model.add_lognormal_uncertainty('muTrigSys', math.log(1.03), '*', obs)
+			try: model.add_lognormal_uncertainty('elmuTrigSys', math.log(1.03), '*', obs)
 			except: pass
 		elif 'isMMM' in obs:
-			try: model.add_lognormal_uncertainty('muTrigSys', math.log(1.03), '*', obs)
+			try: model.add_lognormal_uncertainty('mumuTrigSys', math.log(1.03), '*', obs)
 			except: pass
     try: model.add_lognormal_uncertainty('lumiSys', math.log(1.027), '*', '*')
     except: pass

@@ -13,7 +13,7 @@ negative MC weights, ets) applied below should be checked!
 
 lumiStr = str(targetlumi/1000).replace('.','p') # 1/fb
 
-def analyze(tTree,process,cutList,isotrig,doAllSys,discriminantName,discriminantDetails,category):
+def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,category):
 	print "*****"*20
 	print "*****"*20
 	print "DISTRIBUTION:", discriminantName
@@ -42,6 +42,7 @@ def analyze(tTree,process,cutList,isotrig,doAllSys,discriminantName,discriminant
 	cut += ' (NJets_JetSubCalc >= '+str(cutList['njetsCut'])+')'
 #	cut += ' && (('+wtagvar+' > 0 && NJets_JetSubCalc >= '+str(cutList['njetsCut'])+') || ('+wtagvar+' == 0 && NJets_JetSubCalc >= '+str(cutList['njetsCut']+1)+'))'
 	cut += ' && (NJetsCSVwithSF_JetSubCalc >= '+str(cutList['nbjetsCut'])+')'
+	cut += ' && DataPastTrigger == 1 && MCPastTrigger == 1'
 # 	cut += ' && (deltaR_lepJets[1] >= '+str(cutList['drCut'])+')'
 
 	if 'PrunedSmearedNm1' in discriminantName: cut += ' && (theJetAK8NjettinessTau2_JetSubCalc_PtOrdered/theJetAK8NjettinessTau1_JetSubCalc_PtOrdered < 0.6)'
@@ -51,15 +52,7 @@ def analyze(tTree,process,cutList,isotrig,doAllSys,discriminantName,discriminant
 
 	if 'Tau21Nm1' in discriminantName:  cut += ' && ('+massvar+' > 65 && '+massvar+' < 105)'
 
-	
-	doTopRwt = False
-
 	TrigEff = 'TrigEffWeight'
-	if isotrig == 1:
-		cut += ' && DataPastTrigger == 1 && MCPastTrigger == 1'
-	else:
-		TrigEff = 'TrigEffAltWeight'
-		cut += ' && DataPastTriggerAlt == 1 && MCPastTriggerAlt == 1'
 		
 	print "Applying Cuts: ", cut
 	

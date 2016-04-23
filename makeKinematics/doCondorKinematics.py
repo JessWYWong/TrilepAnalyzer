@@ -125,7 +125,6 @@ Executable = %(dir)s/doCondorKinematics.sh
 Should_Transfer_Files = YES
 transfer_input_files = %(dir)s/doHists.py,%(dir)s/samples.py,%(dir)s/weights.py,%(dir)s/analyze.py
 WhenToTransferOutput = ON_EXIT
-notify_user = rizki_syarif@brown.edu
 
 arguments      = ""
 
