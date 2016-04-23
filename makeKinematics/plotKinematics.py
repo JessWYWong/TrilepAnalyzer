@@ -9,8 +9,8 @@ start_time = time.time()
 
 lumi=2.3 #for plots
 
-templateDir=os.getcwd()+'/templates/lep0_MET0_leadJet0_subLeadJet0_thirdJet0_NJets0_NBJets0_DR0'
-lumiInTemplates='2p318'
+templateDir=os.getcwd()+'/kinematics_testingSystematics'#'/templates/lep0_MET0_leadJet0_subLeadJet0_thirdJet0_NJets0_NBJets0_DR0'
+lumiInTemplates='2p215'
 
 sig='ttm800' # choose the 1st signal to plot
 sigleg='TT(0.8 TeV)'
@@ -20,7 +20,7 @@ scaleFact1 = 400
 if 'Final' in templateDir: scaleFact1 = 40
 
 systematicList = ['pileup','jec','jer','jsf','jmr','jms','btag','tau21','pdfNew','muRFcorrdNew','toppt']
-doAllSys = False
+doAllSys = True
 doQ2sys  = True
 if not doAllSys: doQ2sys = False # I assume you don't want Q^2 as well if you are not doing the other shape systematics! (this is just to change one bool)
 
@@ -29,7 +29,7 @@ doNormByBinWidth=False # not tested, may not work out of the box
 doOneBand = False
 if not doAllSys: doOneBand = True # Don't change this!
 blind = False
-yLog = True
+yLog = False
 
 doRealPull = False
 if doRealPull: doOneBand=False
@@ -94,10 +94,10 @@ def normByBinWidth(result):
 		result.SetBinContent(bin, content/width)
 		result.SetBinError(bin, error/width)
 
-lumiSys = 0.046 #4.6% lumi uncertainty
+lumiSys = 0.027 #0.046 #4.6% lumi uncertainty #updated 18april2016 cehck twiki!!
 trigSys = 0.03 #3% trigger uncertainty
-lepIdSys = 0.01 #1% lepton id uncertainty
-lepIsoSys = 0.01 #1% lepton isolation uncertainty
+lepIdSys = math.sqrt(3.*0.01**2) #1% lepton id uncertainty ## NEED to add in quadrature for 3 leptons!
+lepIsoSys = math.sqrt(3.*0.01**2) #1% lepton isolation uncertainty ## NEED to add in quadrature for 3 leptons!
 topXsecSys = 0.0 #55 #5.5% top x-sec uncertainty
 ewkXsecSys = 0.0 #5 #5% ewk x-sec uncertainty
 qcdXsecSys = 0.0 #50 #50% qcd x-sec uncertainty

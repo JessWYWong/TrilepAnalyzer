@@ -17,19 +17,17 @@ def get_model():
     obsvs = model.observables.keys()
 
     for obs in obsvs:
-		if 'isE' in obs:
+		if 'isEEE' in obs: ### CHECK TRIGGER SYST!!!!!!!!!!!!!!!!
 			try: model.add_lognormal_uncertainty('elTrigSys', math.log(1.03), '*', obs)
 			except: pass
-			try: model.add_lognormal_uncertainty('elIdSys', math.log(1.01), '*', obs)
+		elif 'isEEM' in obs:
+			try: model.add_lognormal_uncertainty('elTrigSys', math.log(1.03), '*', obs)
 			except: pass
-			try: model.add_lognormal_uncertainty('elIsoSys', math.log(1.01), '*', obs)
-			except: pass
-		elif 'isM' in obs:
+		elif 'isEMM' in obs:
 			try: model.add_lognormal_uncertainty('muTrigSys', math.log(1.03), '*', obs)
 			except: pass
-			try: model.add_lognormal_uncertainty('muIdSys', math.log(1.01), '*', obs)
-			except: pass
-			try: model.add_lognormal_uncertainty('muIsoSys', math.log(1.01), '*', obs)
+		elif 'isMMM' in obs:
+			try: model.add_lognormal_uncertainty('muTrigSys', math.log(1.03), '*', obs)
 			except: pass
     try: model.add_lognormal_uncertainty('lumiSys', math.log(1.027), '*', '*')
     except: pass
@@ -38,120 +36,6 @@ def get_model():
 #     try: model.add_lognormal_uncertainty('MC', math.log(1.055), 'top', '*')
 #     except: pass
 #     try: model.add_lognormal_uncertainty('MC', math.log(1.05), 'ewk', '*')
-#     except: pass
-
-    #modeling uncertainties -- TOP
-    for obs in obsvs:
-		if 'nW0_nB0' in obs:
-			try: model.add_lognormal_uncertainty('top0W0BSys',  math.log(1.15), 'top', obs) # from ttbar CR
-			except: pass
-		if 'nW0_nB1' in obs:
-			try: model.add_lognormal_uncertainty('top0W1BSys',  math.log(1.11), 'top', obs) # from ttbar CR
-			except: pass
-		if 'nW0_nB2' in obs:
-			try: model.add_lognormal_uncertainty('top0W2BSys',  math.log(1.02), 'top', obs) # from ttbar CR
-			except: pass
-		if 'nW0_nB3p' in obs:
-			try: model.add_lognormal_uncertainty('top0W3pBSys', math.log(1.02), 'top', obs) # from ttbar CR
-			except: pass
-		if 'nW1p_nB0' in obs:
-			try: model.add_lognormal_uncertainty('top1pW0BSys', math.log(1.15), 'top', obs) # from ttbar CR
-			except: pass
-		if 'nW1p_nB1' in obs:
-			try: model.add_lognormal_uncertainty('top1pW1BSys', math.log(1.11), 'top', obs) # from ttbar CR
-			except: pass
-		if 'nW1p_nB2' in obs:
-			try: model.add_lognormal_uncertainty('top1pW2BSys', math.log(1.02), 'top', obs) # from ttbar CR
-			except: pass
-		if 'nW1p_nB3p' in obs:
-			try: model.add_lognormal_uncertainty('top1pW3pBSys',math.log(1.02), 'top', obs) # from ttbar CR
-			except: pass
-
-	#modeling uncertainties -- EWK
-    for obs in obsvs:
-		if 'nW0_nB0' in obs:
-			try: model.add_lognormal_uncertainty('ewk0W0BSys',  math.log(1.22), 'ewk', obs) # from Wjets CR
-			except: pass
-		if 'nW0_nB1' in obs:
-			try: model.add_lognormal_uncertainty('ewk0W1BSys',  math.log(1.22), 'ewk', obs) # from Wjets CR
-			except: pass
-		if 'nW0_nB2' in obs:
-			try: model.add_lognormal_uncertainty('ewk0W2BSys',  math.log(1.22), 'ewk', obs) # from Wjets CR
-			except: pass
-		if 'nW0_nB3p' in obs:
-			try: model.add_lognormal_uncertainty('ewk0W3pBSys', math.log(1.22), 'ewk', obs) # from Wjets CR
-			except: pass
-		if 'nW1p_nB0' in obs:
-			try: model.add_lognormal_uncertainty('ewk1pW0BSys', math.log(1.03), 'ewk', obs) # from Wjets CR
-			except: pass
-		if 'nW1p_nB1' in obs:
-			try: model.add_lognormal_uncertainty('ewk1pW1BSys', math.log(1.03), 'ewk', obs) # from Wjets CR
-			except: pass
-		if 'nW1p_nB2' in obs:
-			try: model.add_lognormal_uncertainty('ewk1pW2BSys', math.log(1.03), 'ewk', obs) # from Wjets CR
-			except: pass
-		if 'nW1p_nB3p' in obs:
-			try: model.add_lognormal_uncertainty('ewk1pW3pBSys',math.log(1.03), 'ewk', obs) # from Wjets CR
-			except: pass
-
-    #modeling uncertainties -- TOP -- CORRELATED
-#     for obs in obsvs:
-# 		if 'nW0_nB0' in obs:
-# 			try: model.add_lognormal_uncertainty('topCRSys', math.log(1.15), 'top', obs) # from ttbar CR
-# 			except: pass
-# 		if 'nW0_nB1' in obs:
-# 			try: model.add_lognormal_uncertainty('topCRSys', math.log(1.12), 'top', obs) # from ttbar CR
-# 			except: pass
-# 		if 'nW0_nB2' in obs:
-# 			try: model.add_lognormal_uncertainty('topCRSys', math.log(1.02), 'top', obs) # from ttbar CR
-# 			except: pass
-# 		if 'nW0_nB3p' in obs:
-# 			try: model.add_lognormal_uncertainty('topCRSys', math.log(1.02), 'top', obs) # from ttbar CR
-# 			except: pass
-# 		if 'nW1p_nB0' in obs:
-# 			try: model.add_lognormal_uncertainty('topCRSys', math.log(1.15), 'top', obs) # from ttbar CR
-# 			except: pass
-# 		if 'nW1p_nB1' in obs:
-# 			try: model.add_lognormal_uncertainty('topCRSys', math.log(1.12), 'top', obs) # from ttbar CR
-# 			except: pass
-# 		if 'nW1p_nB2' in obs:
-# 			try: model.add_lognormal_uncertainty('topCRSys', math.log(1.02), 'top', obs) # from ttbar CR
-# 			except: pass
-# 		if 'nW1p_nB3p' in obs:
-# 			try: model.add_lognormal_uncertainty('topCRSys', math.log(1.02), 'top', obs) # from ttbar CR
-# 			except: pass
-
-	#modeling uncertainties -- EWK -- CORRELATED
-#     for obs in obsvs:
-# 		if 'nW0_nB0' in obs:
-# 			try: model.add_lognormal_uncertainty('ewkCRSys', math.log(1.22), 'ewk', obs) # from Wjets CR
-# 			except: pass
-# 		if 'nW0_nB1' in obs:
-# 			try: model.add_lognormal_uncertainty('ewkCRSys', math.log(1.22), 'ewk', obs) # from Wjets CR
-# 			except: pass
-# 		if 'nW0_nB2' in obs:
-# 			try: model.add_lognormal_uncertainty('ewkCRSys', math.log(1.22), 'ewk', obs) # from Wjets CR
-# 			except: pass
-# 		if 'nW0_nB3p' in obs:
-# 			try: model.add_lognormal_uncertainty('ewkCRSys', math.log(1.22), 'ewk', obs) # from Wjets CR
-# 			except: pass
-# 		if 'nW1p_nB0' in obs:
-# 			try: model.add_lognormal_uncertainty('ewkCRSys', math.log(1.02), 'ewk', obs) # from Wjets CR
-# 			except: pass
-# 		if 'nW1p_nB1' in obs:
-# 			try: model.add_lognormal_uncertainty('ewkCRSys', math.log(1.02), 'ewk', obs) # from Wjets CR
-# 			except: pass
-# 		if 'nW1p_nB2' in obs:
-# 			try: model.add_lognormal_uncertainty('ewkCRSys', math.log(1.02), 'ewk', obs) # from Wjets CR
-# 			except: pass
-# 		if 'nW1p_nB3p' in obs:
-# 			try: model.add_lognormal_uncertainty('ewkCRSys', math.log(1.02), 'ewk', obs) # from Wjets CR
-# 			except: pass
-   
-    #flat uncertainties for optimization
-#     try: model.add_lognormal_uncertainty('topSys', math.log(1.50), 'top', '*')
-#     except: pass
-#     try: model.add_lognormal_uncertainty('ewkSys', math.log(1.50), 'ewk', '*')
 #     except: pass
 
     return model

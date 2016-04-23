@@ -40,8 +40,8 @@ if len(sys.argv)>3: catList=[str(sys.argv[3])]
 else: catList=['EEE','EEM','EMM','MMM','All']
 
 scaleSignalXsecTo1pb = False # this has to be "True" if you are making templates for limit calculation!!!!!!!!
-doAllSys= False #True
-doQ2sys = False #True
+doAllSys= True
+doQ2sys = True
 isotrig = 1
 
 cutString = 'lep'+str(int(cutList['lepPtCut']))+'_MET'+str(int(cutList['metCut']))+'_leadJet'+str(int(cutList['leadJetPtCut']))+'_subLeadJet'+str(int(cutList['subLeadJetPtCut']))+'_thirdJet'+str(int(cutList['thirdJetPtCut']))+'_NJets'+str(int(cutList['njetsCut']))+'_NBJets'+str(int(cutList['nbjetsCut']))+'_DR'+str(int(cutList['drCut']))
@@ -50,6 +50,7 @@ cTime=datetime.datetime.now()
 datestr='%i_%i_%i'%(cTime.year,cTime.month,cTime.day)
 timestr='%i_%i_%i'%(cTime.hour,cTime.minute,cTime.second)
 pfix='templates'
+# pfix='kinamatics_testingSys_interactive'
 #pfix+=datestr+'_'+timestr
 
 ###########################################################
@@ -170,7 +171,7 @@ plotList = {#discriminantName:(discriminantLJMETName, binning, xAxisLabel)
 ###########################################################
 
 bkgList = [
-	'DY50',
+# 	'DY50',
 	'WJetsMG100',
 	'WJetsMG200',
 	'WJetsMG400',
@@ -276,6 +277,7 @@ for bkg in bkgList+q2List:
 			for ud in ['Up','Down']:
 				if bkg in q2List:
 					tFileBkg[bkg+syst+ud],tTreeBkg[bkg+syst+ud]=None,None
+				elif 'DataDriven' in bkg: continue
 				else:
 					print "        "+syst+ud
 					tFileBkg[bkg+syst+ud],tTreeBkg[bkg+syst+ud]=readTree(step1Dir.replace('nominal',syst.upper()+ud.lower())+'/'+samples[bkg]+'_hadd.root')
@@ -317,6 +319,7 @@ for category in catList:
 		if catInd==nCats: del tFileBkg[bkg]
 		if doAllSys and catInd==nCats:
 			for syst in shapesFiles:
+				if 'DataDriven' in bkg: continue
 				for ud in ['Up','Down']: del tFileBkg[bkg+syst+ud]
 	for sig in sigList: 
 		for decay in decays: 

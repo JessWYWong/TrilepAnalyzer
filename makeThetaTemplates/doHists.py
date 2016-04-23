@@ -11,7 +11,7 @@ R.gROOT.SetBatch(1)
 start_time = time.time()
 
 lumiStr = str(targetlumi/1000).replace('.','p') # 1/fb
-step1Dir = '/user_data/jhogan/LJMet_1lepTT_030416_step2AllNewSFs/nominal/' #new tau21 cuts
+step1Dir = '/user_data/rsyarif/LJMet_3lep_122115_step1hadds/nominal/'
 #step1Dir = '/user_data/ssagir/LJMet_1lepX53_021216hadds/nominal/' #x53
 """
 Note: 
@@ -24,33 +24,33 @@ where <shape> is for example "JECUp". hadder.py can be used to prepare input fil
 """
 
 bkgList = [
-		   'DY50',
-# 		   'WJets',
-# 		   'WJetsMG',
-		   'WJetsMG100',
-		   'WJetsMG200',
-		   'WJetsMG400',
-		   'WJetsMG600',
-		   'WJetsMG800',
-		   'WJetsMG1200',
-		   'WJetsMG2500',
-		   'WW','WZ','ZZ',
-# 		   'TTJets',
-#  		   'TTJetsMG',
-#  		   'TTJetsPH',
- 		   'TTJetsPH0to700inc',
- 		   'TTJetsPH700to1000inc',
- 		   'TTJetsPH1000toINFinc',
- 		   'TTJetsPH700mtt',
- 		   'TTJetsPH1000mtt',
-		   'TTWl','TTWq',
-		   'TTZl','TTZq',
-		   'Tt','Ts',
-		   'TtW','TbtW',
- 		   'QCDht100','QCDht200','QCDht300','QCDht500','QCDht700','QCDht1000','QCDht1500','QCDht2000',
-		   ]
+# 	'DY50',
+# 	'WJetsMG100',
+# 	'WJetsMG200',
+# 	'WJetsMG400',
+# 	'WJetsMG600',
+# 	'WJetsMG800',
+# 	'WJetsMG1200',
+# 	'WJetsMG2500',
+	'WW','WZ','ZZ',
+	'WWZ','WZZ','ZZZ',
+##	'TTJetsPH',
+# 	'TTJetsPH0to700inc',
+# 	'TTJetsPH700to1000inc',
+# 	'TTJetsPH1000toINFinc',
+# 	'TTJetsPH700mtt',
+# 	'TTJetsPH1000mtt',
+	'TTWl','TTWq',
+	'TTZl','TTZq',
+	'Tt','Ts',
+	'TtW','TbtW',
+	'QCDht100','QCDht200','QCDht300','QCDht500','QCDht700','QCDht1000','QCDht1500','QCDht2000',
+	'DataDrivenBkgEEPRD','DataDrivenBkgEERRD','DataDrivenBkgEERRC',
+	'DataDrivenBkgMMPRD','DataDrivenBkgMMRRD','DataDrivenBkgMMRRC',
+	'DataDrivenBkgMEPRD','DataDrivenBkgMERRD','DataDrivenBkgMERRC',
+	]
 
-dataList = ['DataERRC','DataERRD','DataEPRD','DataMRRC','DataMRRD','DataMPRD']
+dataList = ['DataEERRC','DataEERRD','DataEEPRD','DataMMRRC','DataMMRRD','DataMMPRD','DataMERRC','DataMERRD','DataMEPRD']
 
 whichSignal = 'TT' #TT, BB, or X53X53
 signalMassRange = [700,1800]
@@ -61,12 +61,6 @@ if whichSignal=='BB': decays = ['TWTW','BHBH','BZBZ','BZTW','BHTW','BZBH'] #B' d
 if whichSignal=='X53X53': decays = [''] #decays to tWtW 100% of the time
 
 doAllSys= True
-doQ2sys = True
-q2List  = [#energy scale sample to be processed
-	      'TTJetsPHQ2U','TTJetsPHQ2D',
-	      'TtWQ2U','TbtWQ2U',
-	      'TtWQ2D','TbtWQ2D',
-	      ]
 
 try: 
 	opts, args = getopt.getopt(sys.argv[2:], "", ["lepPtCut=",
@@ -94,25 +88,25 @@ except getopt.GetoptError as err:
 	print str(err)
 	sys.exit(1)
 
-lepPtCut=40
-jet1PtCut=300
-jet2PtCut=150
-metCut=75
-njetsCut=3
+lepPtCut=0#40
+jet1PtCut=0#300
+jet2PtCut=0#150
+metCut=0#75
+njetsCut=0#3
 nbjetsCut=0
-jet3PtCut=100
+jet3PtCut=0#100
 jet4PtCut=0
 jet5PtCut=0
-drCut=1
+drCut=0#1
 Wjet1PtCut=0
 bjet1PtCut=0
 htCut=0
 stCut=0
 minMlbCut=0
-isEMlist =['E','M']
+catList =['EEE','EEM','EMM','MMM']
 nttaglist=['0p']
-nWtaglist=['0','1p']
-nbtaglist=['0','1','2','3p']
+nWtaglist=['0p']#,'1p']
+nbtaglist=['0p']#,'1','2','3p']
 
 for o, a in opts:
 	print o, a
@@ -131,7 +125,7 @@ for o, a in opts:
 	if o == '--htCut': htCut = float(a)
 	if o == '--stCut': stCut = float(a)
 	if o == '--minMlbCut': minMlbCut = float(a)
-	if o == '--isEM': isEMlist = [str(a)]
+	if o == '--isEM': catList = [str(a)]
 	if o == '--nttag': nttaglist = [str(a)]
 	if o == '--nWtag': nWtaglist = [str(a)]
 	if o == '--nbtag': nbtaglist = [str(a)]
@@ -164,7 +158,7 @@ cutString += '_HT'+str(cutList['htCut'])+'_ST'+str(cutList['stCut'])+'_minMlb'+s
 cTime=datetime.datetime.now()
 datestr='%i_%i_%i'%(cTime.year,cTime.month,cTime.day)
 timestr='%i_%i_%i'%(cTime.hour,cTime.minute,cTime.second)
-pfix='templates_minMlb_'
+pfix='templates_ST'
 pfix+=datestr+'_'+timestr
 
 def negBinCorrection(hist): #set negative bin contents to zero and adjust the normalization
@@ -213,16 +207,14 @@ for sig in sigList:
 
 tTreeBkg = {}
 tFileBkg = {}
-for bkg in bkgList+q2List:
-	if bkg in q2List and not doQ2sys: continue
+for bkg in bkgList:
 	print "READING:",bkg
 	print "        nominal"
 	tFileBkg[bkg],tTreeBkg[bkg]=readTree(step1Dir+'/'+samples[bkg]+'_hadd.root')
 	if doAllSys:
 		for syst in shapesFiles:
 			for ud in ['Up','Down']:
-				if bkg in q2List:
-					tFileBkg[bkg+syst+ud],tTreeBkg[bkg+syst+ud]=None,None
+				if 'DataDriven' in bkg: continue
 				else:
 					print "        "+syst+ud
 					tFileBkg[bkg+syst+ud],tTreeBkg[bkg+syst+ud]=readTree(step1Dir.replace('nominal',syst.upper()+ud.lower())+'/'+samples[bkg]+'_hadd.root')
@@ -236,15 +228,15 @@ plotList = {#discriminantName:(discriminantLJMETName, binning, xAxisLabel)
 			'x53Mass':('xftMass',linspace(0, 5000, 51).tolist(),';M (X_{5/3}) (GeV);'),
 			}
 
-iPlot='minMlb' #choose a discriminant from plotList!
+iPlot='ST' #choose a discriminant from plotList!
 print "PLOTTING:",iPlot
 print "         LJMET Variable:",plotList[iPlot][0]
 print "         X-AXIS TITLE  :",plotList[iPlot][2]
 print "         BINNING USED  :",plotList[iPlot][1]
 
-nCats  = len(isEMlist)*len(nttaglist)*len(nWtaglist)*len(nbtaglist)
+nCats  = len(catList)*len(nttaglist)*len(nWtaglist)*len(nbtaglist)
 catInd = 1
-for cat in list(itertools.product(isEMlist,nttaglist,nWtaglist,nbtaglist)):
+for cat in list(itertools.product(catList,nttaglist,nWtaglist,nbtaglist)):
 	catDir = cat[0]+'_nT'+cat[1]+'_nW'+cat[2]+'_nB'+cat[3]
 	datahists = {}
 	bkghists  = {}
@@ -267,6 +259,7 @@ for cat in list(itertools.product(isEMlist,nttaglist,nWtaglist,nbtaglist)):
 		if catInd==nCats: del tFileBkg[bkg]
 		if doAllSys and catInd==nCats:
 			for syst in shapesFiles:
+				if 'DataDriven' in bkg: continue
 				for ud in ['Up','Down']: del tFileBkg[bkg+syst+ud]
 	for sig in sigList: 
 		for decay in decays: 
@@ -274,11 +267,8 @@ for cat in list(itertools.product(isEMlist,nttaglist,nWtaglist,nbtaglist)):
 			if catInd==nCats: del tFileSig[sig+decay]
 			if doAllSys and catInd==nCats:
 				for syst in shapesFiles:
+					if 'DataDriven' in bkg: continue			
 					for ud in ['Up','Down']: del tFileSig[sig+decay+syst+ud]
-	if doQ2sys: 
-		for q2 in q2List: 
-			bkghists.update(analyze(tTreeBkg,q2,cutList,False,iPlot,plotList[iPlot],category))
-			if catInd==nCats: del tFileBkg[q2]
 
 	#Negative Bin Correction
 	for bkg in bkghists.keys(): negBinCorrection(bkghists[bkg])

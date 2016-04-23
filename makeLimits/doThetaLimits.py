@@ -1,20 +1,18 @@
 import os,sys,fnmatch
 
-templateDir='/home/ssagir/CMSSW_7_3_0/src/singleLepAnalyzer/makeThetaTemplates/templates_minMlb_tau21LT0p6_bpbp_2016_3_5'
+templateDir='/home/rsyarif/LJMet/TprimeAnalysis/CMSSW_7_6_3/src/TrilepAnalyzer/makeThetaTemplates/templates_ST_2016_4_22'
 thetaConfigTemp = os.getcwd()+'/theta_config_template.py'
 
-systematicsInFile = ['pileup','q2','jec','jer','jmr','jms','btag','tau21','pdf','pdfNew','muR','muF','muRFcorrd','muRFcorrdNew','muRFdecorrdNew','toppt','jsf','muRFenv']
-btagChannels = ['nB0','nB1','nB2','nB3p']
 #toFilter = [syst for syst in systematicsInFile if syst!='muRFenv']
-toFilter = ['pdf','muR','muF','muRFcorrd','muRFdecorrdNew','muRFenv']
+toFilter = ['pdf','muR','muF','muRFcorrd','muRFdecorrdNew','muRFenv','tau21','jmr','jms']
 toFilter = ['__'+item+'__' for item in toFilter]
 #toFilter+= [chan for chan in btagChannels if chan!='nB3p']
 #toFilter+= ['nW1p']
 #toFilter+= ['qcd__pdfNew','qcd__muRFcorrdNew']
 print toFilter
 
-if not os.path.exists('/user_data/ssagir/limits/'+templateDir.split('/')[-1]): os.system('mkdir /user_data/ssagir/limits/'+templateDir.split('/')[-1]) #prevent writing these (they are large) to brux6 common area
-outputDir = '/user_data/ssagir/limits/'+templateDir.split('/')[-1]+'/'
+if not os.path.exists('/user_data/rsyarif/limits/'+templateDir.split('/')[-1]): os.system('mkdir /user_data/rsyarif/limits/'+templateDir.split('/')[-1]) #prevent writing these (they are large) to brux6 common area
+outputDir = '/user_data/rsyarif/limits/'+templateDir.split('/')[-1]+'/'
 limitType = 'all'#'pdf_RF_'+'decorrelated/'
 
 def findfiles(path, filtre):
@@ -25,7 +23,7 @@ def findfiles(path, filtre):
 rootfilelist = []
 i=0
 for rootfile in findfiles(templateDir, '*.root'):
-    if '00_2p318fb_rebinned.root' not in rootfile: continue
+    #if '00_2p318fb_rebinned.root' not in rootfile: continue
     if 'TTM1800' in rootfile: continue
     if 'TTM1700' in rootfile: continue
     if 'TTM1600' in rootfile: continue
@@ -55,7 +53,7 @@ def makeThetaConfig(rFile,outDir):
 			else: fout.write(line)
 	with open(outDir+'/'+rFileDir+'/'+rFile.split('/')[-1][:-5]+'.sh','w') as fout:
 		fout.write('#!/bin/sh \n')
-		fout.write('cd /home/ssagir/CMSSW_7_3_0/src/\n')
+		fout.write('cd /home/rsyarif/LJMet/TprimeAnalysis/CMSSW_7_6_3/src/\n')
 		fout.write('source /cvmfs/cms.cern.ch/cmsset_default.sh\n')
 		fout.write('cmsenv\n')
 		fout.write('cd '+outDir+'/'+rFileDir+'\n')
@@ -64,7 +62,7 @@ def makeThetaConfig(rFile,outDir):
 count=0
 for file in rootfilelist:
 	signal = file.split('/')[-1].split('_')[2]
-	BRStr = file.split('/')[-1][file.split('/')[-1].find(signal)+len(signal):file.split('/')[-1].find('_2p318fb')]
+	BRStr = file.split('/')[-1][file.split('/')[-1].find(signal)+len(signal):file.split('/')[-1].find('_2p215fb')]
 	outDir = outputDir+limitType+BRStr+'/'
 	print signal,BRStr
 	if not os.path.exists(outDir): os.system('mkdir '+outDir)
@@ -84,7 +82,7 @@ Executable = %(configfile)s.sh
 Should_Transfer_Files = YES
 WhenToTransferOutput = ON_EXIT
 Notification = Error
-notify_user = Sinan_Sagir@brown.edu
+notify_user = rizki_syarif@brown.edu
 
 arguments      = ""
 

@@ -6,7 +6,7 @@ outputDir = thisDir+'/'
 cTime=datetime.datetime.now()
 date='%i_%i_%i'%(cTime.year,cTime.month,cTime.day)
 time='%i_%i_%i'%(cTime.hour,cTime.minute,cTime.second)
-pfix='kinematics_substructure'
+pfix='kinematics_testingSystematics'
 #pfix+='_'+date+'_'+time
 
 plotList = [#distribution name as defined in "doHists.py"
@@ -33,20 +33,20 @@ plotList = [#distribution name as defined in "doHists.py"
 #	'Jet3Pt',
 #	'Jet4Pt',
 #	'HT',
-#	'ST',
+'ST',
 #	'MET',
 #	'NJets' ,
 #	'NBJets',
-	'NWJetsSmeared',
-	'NWJetsSmeared0p55SF',
-	'NWJetsSmeared0p55noSF',
+# 	'NWJetsSmeared',
+# 	'NWJetsSmeared0p55SF',
+# 	'NWJetsSmeared0p55noSF',
 #	'NJetsAK8',
 #	'JetPtAK8',
 #	'JetEtaAK8',
- 	'Tau21',
- 	'Tau21Nm1',
- 	'PrunedSmeared',
- 	'PrunedSmearedNm1',
+#  	'Tau21',
+#  	'Tau21Nm1',
+#  	'PrunedSmeared',
+#  	'PrunedSmearedNm1',
 # 	'mindeltaR',
 #	'deltaRjet1',
 #	'deltaRjet2',
@@ -103,7 +103,7 @@ plotList = [#distribution name as defined in "doHists.py"
 #	'nLepGen',
 	]
 
-catList = ['E','M','All']
+catList = ['EEE','EEM','EMM','MMM','All']
 
 outDir = outputDir+pfix
 if not os.path.exists(outDir): os.system('mkdir '+outDir)
@@ -125,7 +125,7 @@ Executable = %(dir)s/doCondorKinematics.sh
 Should_Transfer_Files = YES
 transfer_input_files = %(dir)s/doHists.py,%(dir)s/samples.py,%(dir)s/weights.py,%(dir)s/analyze.py
 WhenToTransferOutput = ON_EXIT
-notify_user = Sinan_Sagir@brown.edu
+notify_user = rizki_syarif@brown.edu
 
 arguments      = ""
 

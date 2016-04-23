@@ -1,6 +1,8 @@
 #!/usr/bin/python
 
-targetlumi = 2318. # 1/pb
+#targetlumi = 2318. # 1/pb
+targetlumi = 2215. #1/pb --> Anthony
+#targetlumi = 2269. #1/pb --> Julie
 
 BR={}
 BR['BW'] = 0.5
