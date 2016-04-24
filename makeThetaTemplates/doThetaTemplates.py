@@ -140,7 +140,7 @@ def makeThetaCats(datahists,sighists,bkghists,discriminant):
 			hewkY[signal]  = R.TH1F('triLep__ewk','',len(catList),0,len(catList))
 			htopY[signal]  = R.TH1F('triLep__top','',len(catList),0,len(catList))
 			hddbkgY[signal]= R.TH1F('triLep__ddbkg','',len(catList),0,len(catList))
-			hdataY[signal] = R.TH1F('triLep__data','',len(catList),0,len(catList))
+			hdataY[signal] = R.TH1F('triLep__DATA','',len(catList),0,len(catList))
 			hsigY[signal]  = R.TH1F('triLep__sig','',len(catList),0,len(catList))
 			
 			#systematics
