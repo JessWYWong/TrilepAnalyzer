@@ -9,7 +9,7 @@ start_time = time.time()
 
 lumi=2.3 #for plots
 
-templateDir=os.getcwd()+'/kinematics_testingSystematics'#'/templates/lep0_MET0_leadJet0_subLeadJet0_thirdJet0_NJets0_NBJets0_DR0'
+templateDir=os.getcwd()+'/kinematics_testingSystematics_2016_4_23'#'/templates/lep0_MET0_leadJet0_subLeadJet0_thirdJet0_NJets0_NBJets0_DR0'
 lumiInTemplates='2p215'
 
 sig='ttm800' # choose the 1st signal to plot
@@ -27,7 +27,7 @@ doNormByBinWidth=False # not tested, may not work out of the box
 doOneBand = False
 if not doAllSys: doOneBand = True # Don't change this!
 blind = False
-yLog = False
+yLog = True
 
 doRealPull = False
 if doRealPull: doOneBand=False
@@ -123,22 +123,26 @@ plotList = [#distribution name as defined in "doHists.py"
 
 #	'JetPtBins',
 #	'deltaRAK8',
-#	'NPV',
-#	'lepPt',
-#	'lepEta',
-#	'JetEta',
-#	'JetPt' ,
+	'NPV',
+	'lep1Pt',
+	'lep2Pt',
+#	'lep3Pt',
+	'lep1Eta',
+	'lep2Eta',
+#	'lep3Eta',
+	'JetEta',
+	'JetPt' ,
 #	'Jet1Pt',
 #	'Jet2Pt',
 #	'Jet3Pt',
 #	'Jet4Pt',
-#	'HT',
-    'ST',
+	'HT',
+	'ST',
 #	'MET',
 #	'METwJetSF',
 #	'METwJetSFraw',
-#	'NJets' ,
-#	'NBJets',
+	'NJets' ,
+	'NBJets',
 # 	'NWJetsSmeared',
 # 	'NWJetsSmeared0p55SF',
 # 	'NWJetsSmeared0p55noSF',
@@ -148,7 +152,9 @@ plotList = [#distribution name as defined in "doHists.py"
 # 	'Tau21',
 # 	'Tau21Nm1',
 # 	'PrunedSmeared',
-#	'mindeltaR',
+	'mindeltaR1',
+	'mindeltaR2',
+	'mindeltaR3',
 #	'deltaRjet1',
 #	'deltaRjet2',
 #	'deltaRjet3',
@@ -189,7 +195,9 @@ plotList = [#distribution name as defined in "doHists.py"
 #	'deltaPhiWb1',
 #	'deltaPhiWb2',
 #	'WjetPt',
-# 	'PtRel',
+#	'PtRel1',
+#	'PtRel2',
+#	'PtRel3',
 
 #	'JetPt',
 #	'JetPtCSF',
