@@ -12,9 +12,13 @@ def get_model():
 
     model.fill_histogram_zerobins()
     model.set_signal_processes('sig')
-
-    try: model.add_lognormal_uncertainty('lumiSys', math.log(1.027), '*', '*')
-    except: pass
+    
+    procs = model.processes
+    
+    for proc in procs:
+		if(proc!="ddbkg"):
+			try: model.add_lognormal_uncertainty('lumiSys', math.log(1.027), '*', '*')
+			except: pass
 
     return model
 
