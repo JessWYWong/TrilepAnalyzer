@@ -27,17 +27,27 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 	print "/////"*5
 	print "PROCESSING: ", process
 	print "/////"*5
-	cut  = '1'#'(leptonPt_singleLepCalc[0] > '+str(cutList['lepPtCut'])+')'
-# 	cut += ' && (corr_met_singleLepCalc > '+str(cutList['metCut'])+')'
-# 	cut += ' && (theJetPt_JetSubCalc_PtOrdered[0] > '+str(cutList['jet1PtCut'])+')'
-# 	cut += ' && (theJetPt_JetSubCalc_PtOrdered[1] > '+str(cutList['jet2PtCut'])+')'
-# 	cut += ' && (theJetPt_JetSubCalc_PtOrdered[2] > '+str(cutList['jet3PtCut'])+')'
-# 	cut += ' && (deltaR_lepClosestJet > 0.4 || PtRelLepClosestJet > 40)' # 2D cut
-# 	cut += ' && (deltaR_lepJets[1] > '+str(cutList['drCut'])+')'
+        cut = '1'
+#       cut += '(leptonPt_singleLepCalc > '+str(cutList['lepPtCut'])+')'                                                                                                                                                             
+#       cut += ' && (corr_met_singleLepCalc > '+str(cutList['metCut'])+')'                                                                                                                                                           
+#       cut += ' && (theJetPt_JetSubCalc_PtOrdered[0] > '+str(cutList['leadJetPtCut'])+')'                                                                                                                                            
+#       cut += ' && (theJetPt_JetSubCalc_PtOrdered[1] > '+str(cutList['subLeadJetPtCut'])+')'                                                                                                                                         
+#       cut += ' && (theJetPt_JetSubCalc_PtOrdered[2] > '+str(cutList['thirdJetPtCut'])+')'                                                                                                                                           
+#       cut += ' && (NJetsHtagged == 0)'                                                                                                                                                                                              
+#       cut += ' && ('+wtagvar+' == 0)'                                                                                                                                                                                               
+        cut += ' && (deltaR_lepClosestJet[0] > 0.4 || PtRelLepClosestJet[0] > 40)'
+        cut += ' && (deltaR_lepClosestJet[1] > 0.4 || PtRelLepClosestJet[1] > 40)'
+        cut += ' && (deltaR_lepClosestJet[2] > 0.4 || PtRelLepClosestJet[2] > 40)'
+        cut += ' && (NJets_JetSubCalc >= '+str(cutList['njetsCut'])+')'
+#       cut += ' && (('+wtagvar+' > 0 && NJets_JetSubCalc >= '+str(cutList['njetsCut'])+') || ('+wtagvar+' == 0 && NJets_JetSubCalc >= '+str(cutList['njetsCut']+1)+'))'                                                              
+        cut += ' && (NJetsCSVwithSF_JetSubCalc >= '+str(cutList['nbjetsCut'])+')'
+#       cut += ' && DataPastTrigger == 1 && MCPastTrigger == 1'                                                                                                                                                                       
+        if 'Data' in process: cut += ' && DataPastTrigger == 1'
+        else: cut += ' && MCPastTrigger == 1'
+#       cut += ' && (deltaR_lepJets[1] >= '+str(cutList['drCut'])+')'                                                                                                                                                                 
 # 	cut += ' && (AK4HT > '+str(cutList['htCut'])+')'
-# 	cut += ' && (AK4HTpMETpLepPt > '+str(cutList['stCut'])+')'
-	cut += ' && DataPastTrigger == 1 && MCPastTrigger == 1' #standard triggers
-# 	cut += ' && NJetsHtagged == 0'
+ 	cut += ' && (AK4HTpMETpLepPt > '+str(cutList['stCut'])+')'
+
 	if 'DataDrivenBkg' not in process:
 		cut+=' && (AllLeptonIsTight_PtOrdered[0]==1 && AllLeptonIsTight_PtOrdered[1]==1 && AllLeptonIsTight_PtOrdered[2]==1)'
 	print "Applying Cuts: ", cut
@@ -87,7 +97,8 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 			for i in range(100): hists[discriminantName+'pdf'+str(i)+'_'+lumiStr+'fb_is'+catStr+'_'+process] = R.TH1D(discriminantName+'pdf'+str(i)+'_'+lumiStr+'fb_is'+catStr+'_'+process,xAxisLabel,len(xbins)-1,xbins)				
 	for key in hists.keys(): hists[key].Sumw2()
 	
-	jetSFstr = 'JetSF_pTNbwflat'
+#	jetSFstr = 'JetSF_pTNbwflat'
+	jetSFstr = '1'
 		
 	if 'Data' in process: 
 		if 'DataDrivenBkg' in process: 

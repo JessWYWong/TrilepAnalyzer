@@ -7,11 +7,13 @@ from weights import *
 gROOT.SetBatch(1)
 start_time = time.time()
 
-lumi=2.3 #for plots
+lumi=2.2 #for plots
 lumiInTemplates=str(targetlumi/1000).replace('.','p') # 1/fb
 
 discriminant = 'ST'
-cutString  = 'lep0_MET0_1jet0_2jet0_NJets0_NBJets0_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST0_minMlb0'
+#cutString  = 'lep0_MET0_1jet0_2jet0_NJets0_NBJets0_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST0_minMlb0'
+#cutString  = 'lep0_MET0_1jet0_2jet0_NJets3_NBJets1_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST800_minMlb0'
+cutString  = 'lep0_MET0_1jet0_2jet0_NJets3_NBJets1_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST1100_minMlb0'
 saveKey = ''#'_topPtSystOnly'
 
 # m1 = '800'
@@ -29,7 +31,7 @@ sig2leg='TT (1.0 TeV)'
 scaleSignals = False
 
 systematicList = ['pileup','jec','jer','jmr','jms','btag','tau21','muR','muF','muRFcorrd','toppt','jsf','PR','FR']
-doAllSys = False
+doAllSys = True
 
 isRebinned=''#'_rebinned'#post fix for file names if the name changed b/c of rebinning or some other process
 doNormByBinWidth=False # not tested, may not work out of the box
@@ -40,7 +42,7 @@ yLog  = True
 doRealPull = True
 if doRealPull: doOneBand=False
 
-templateDir=os.getcwd()+'/templates_ST2016_4_22_15_29_7/'+cutString+'/'
+templateDir=os.getcwd()+'/templates_ST_2016_4_26/'+cutString+'/'
 tempsig='templates_'+discriminant+'_'+sig1+'_'+lumiInTemplates+'fb'+isRebinned+'.root'	
 
 isEMlist =['EEE','EEM','EMM','MMM']
@@ -50,10 +52,10 @@ nbtaglist=['0p']
 catList = list(itertools.product(isEMlist,nttaglist,nWtaglist,nbtaglist))
 tagList = list(itertools.product(nttaglist,nWtaglist,nbtaglist))
 
-lumiSys = 0.027 #2.7% lumi uncertainty
-trigSys = 0.03 #3% trigger uncertainty
-lepIdSys = 0.01 #1% lepton id uncertainty
-lepIsoSys = 0.01 #1% lepton isolation uncertainty
+lumiSys = 0.027 #0.046 #4.6% lumi uncertainty #updated 18april2016 cehck twiki!!
+trigSys = math.sqrt(3.*0.03**2) #3% trigger uncertainty ## NEED to add in quadrature for EE, EM, and MM triggers!
+lepIdSys = math.sqrt(3.*0.01**2) #1% lepton id uncertainty ## NEED to add in quadrature for 3 leptons!
+lepIsoSys = math.sqrt(3.*0.01**2) #1% lepton isolation uncertainty ## NEED to add in quadrature for 3 leptons!
 topXsecSys = 0.#0.055 #5.5% top x-sec uncertainty
 ewkXsecSys = 0.#0.05 #5% ewk x-sec uncertainty
 qcdXsecSys = 0.#0.50 #50% qcd x-sec uncertainty
@@ -141,6 +143,7 @@ for cat in catList:
 	isEM=cat[0]
 	histPrefix+=catStr
 	print histPrefix
+	histPrefix='triLep'
 	hTOP = RFile1.Get(histPrefix+'__top').Clone()
 	try: hEWK = RFile1.Get(histPrefix+'__ewk').Clone()
 	except:
@@ -215,9 +218,11 @@ for cat in catList:
 
 		if doAllSys:
 			for sys in systematicList:
-				if systematic=='PR' or systematic=='FR': continue	
-				errorPlus = systHists['top'+catStr+sys+'plus'].GetBinContent(ibin)-hTOP.GetBinContent(ibin)
-				errorMinus = hTOP.GetBinContent(ibin)-systHists['top'+catStr+sys+'minus'].GetBinContent(ibin)
+				if sys=='PR' or sys=='FR': continue	
+				try: errorPlus = systHists['top'+catStr+sys+'plus'].GetBinContent(ibin)-hTOP.GetBinContent(ibin)
+				except: pass
+				try: errorMinus = hTOP.GetBinContent(ibin)-systHists['top'+catStr+sys+'minus'].GetBinContent(ibin)
+				except: pass
 				if errorPlus > 0: errorUp += errorPlus**2
 				else: errorDn += errorPlus**2
 				if errorMinus > 0: errorDn += errorMinus**2
@@ -365,16 +370,16 @@ for cat in catList:
 	uPad.RedrawAxis()
 	bkgHTgerr.Draw("SAME E2")
 	
-	chLatex = TLatex()
-	chLatex.SetNDC()
-	chLatex.SetTextSize(0.06)
-	chLatex.SetTextAlign(11) # align right
-	chString = ''
-	if isEM=='EEE': chString+='eee'
-	if isEM=='EEM': chString+='ee#mu'
-	if isEM=='EMM': chString+='e#mu#mu'
-	if isEM=='MMM': chString+='#mu#mu#mu'
-	chLatex.DrawLatex(0.16, 0.82, chString)
+	# chLatex = TLatex()
+	# chLatex.SetNDC()
+	# chLatex.SetTextSize(0.06)
+	# chLatex.SetTextAlign(11) # align right
+	# chString = ''
+	# if isEM=='EEE': chString+='eee'
+	# if isEM=='EEM': chString+='ee#mu'
+	# if isEM=='EMM': chString+='e#mu#mu'
+	# if isEM=='MMM': chString+='#mu#mu#mu'
+	# chLatex.DrawLatex(0.16, 0.82, chString)
 
 	leg = TLegend(0.65,0.53,0.95,0.90)
 	leg.SetShadowColor(0)

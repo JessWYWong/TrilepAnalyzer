@@ -11,15 +11,20 @@ setTDRStyle()
 
 blind=False
 saveKey=''
-signal = 'B'
-lumiPlot = '2.3'
-lumiStr = '2p318'
+signal = 'T'#'B'
+lumiPlot = '2.2'
+lumiStr = '2p215'
 chiral=''#'right'
-discriminant='minMlb'
+discriminant='ST'
 histPrefix=discriminant+'_'+str(lumiStr)+'fb'+chiral
 stat=''#0.75
-isRebinned='_rebinned'+str(stat).replace('.','p')
-cutString='lep40_MET75_1jet300_2jet150_NJets3_NBJets0_3jet100_4jet0_5jet0_DR1_1Wjet0_1bjet0_HT0_ST0_minMlb0'
+isRebinned=''
+#cutString='lep0_MET0_1jet0_2jet0_NJets3_NBJets1_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST1100_minMlb0'
+#cutString='lep0_MET0_1jet0_2jet0_NJets3_NBJets1_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST800_minMlb0'
+#cutString='lep0_MET0_1jet0_2jet0_NJets3_NBJets1_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST600_minMlb0'
+#cutString='lep0_MET0_1jet0_2jet0_NJets3_NBJets1_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST500_minMlb0'
+cutString='lep0_MET0_1jet0_2jet0_NJets0_NBJets0_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST0_minMlb0'
+
 
 mass = array('d', [700,800,900,1000,1100,1200,1300])#,1400,1500,1600])
 masserr = array('d', [0,0,0,0,0,0,0])#,0,0,0])
@@ -212,10 +217,10 @@ def PlotLimits(limitDir,limitFile,tempKey):
     folder = '.'
     outDir=folder+'/'+limitDir.split('/')[-3]+'plots'
     if not os.path.exists(outDir): os.system('mkdir '+outDir)
-    c4.SaveAs(outDir+'/LimitPlot_'+histPrefix+isRebinned+saveKey+'_'+tempKey+'.root')
-    c4.SaveAs(outDir+'/LimitPlot_'+histPrefix+isRebinned+saveKey+'_'+tempKey+'.pdf')
-    c4.SaveAs(outDir+'/LimitPlot_'+histPrefix+isRebinned+saveKey+'_'+tempKey+'.png')
-    c4.SaveAs(outDir+'/LimitPlot_'+histPrefix+isRebinned+saveKey+'_'+tempKey+'.C')
+    c4.SaveAs(outDir+'/LimitPlot_'+histPrefix+isRebinned+saveKey+'_'+tempKey+'_'+cutString+'.root')
+    c4.SaveAs(outDir+'/LimitPlot_'+histPrefix+isRebinned+saveKey+'_'+tempKey+'_'+cutString+'.pdf')
+    c4.SaveAs(outDir+'/LimitPlot_'+histPrefix+isRebinned+saveKey+'_'+tempKey+'_'+cutString+'.png')
+    c4.SaveAs(outDir+'/LimitPlot_'+histPrefix+isRebinned+saveKey+'_'+tempKey+'_'+cutString+'.C')
     return int(round(limExpected)), int(round(limObserved))
 
 doBRScan = False
@@ -226,7 +231,10 @@ BRs['TZ']=[0.25,1.0,0.8,0.6,0.4,0.2,0.0,0.8,0.6,0.4,0.2,0.0,0.6,0.4,0.2,0.0,0.4,
 nBRconf=len(BRs['BW'])
 if not doBRScan: nBRconf=1
 
-tempKeys = ['all']#,'isE','isM','nW0','nW1p','nB0','nB1','nB2','nB3p']
+#tempKeys = ['all']#,'isE','isM','nW0','nW1p','nB0','nB1','nB2','nB3p']
+#tempKeys = ['all_no_jsf']
+#tempKeys = ['all_no_muRF_PDF_onSignal']
+tempKeys = ['all_no_muRF_PDF_onSignal_jsf']
 
 expLims = []
 obsLims = []
@@ -234,7 +242,8 @@ for tempKey in tempKeys:
 	for BRind in range(nBRconf):
 		BRconfStr=''
 		if doBRScan: BRconfStr='_bW'+str(BRs['BW'][BRind]).replace('.','p')+'_tZ'+str(BRs['TZ'][BRind]).replace('.','p')+'_tH'+str(BRs['TH'][BRind]).replace('.','p')
-		limitDir='/user_data/ssagir/limits/templates_minMlb_tau21LT0p6_bpbp_2016_3_5/'+tempKey+BRconfStr+'/'
+		limitDir='/user_data/rsyarif/limits/templates_ST_2016_4_26_no_jsf/'+tempKey+BRconfStr+'/'
+		#limitDir='/user_data/ssagir/limits/templates_minMlb_tau21LT0p6_bpbp_2016_3_5/'+tempKey+BRconfStr+'/'
 		limitFile='/limits_templates_'+discriminant+'_'+signal+signal+'M700'+chiral+BRconfStr+'_'+str(lumiStr)+'fb'+isRebinned+'_expected.txt'	
 		expTemp,obsTemp = PlotLimits(limitDir,limitFile,tempKey+BRconfStr)
 		expLims.append(expTemp)

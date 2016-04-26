@@ -1,19 +1,25 @@
 import os,sys,fnmatch
 
-templateDir='/home/rsyarif/LJMet/TprimeAnalysis/CMSSW_7_6_3/src/TrilepAnalyzer/makeThetaTemplates/templates_ST_2016_4_22'
+templateDir='/home/rsyarif/LJMet/TprimeAnalysis/CMSSW_7_6_3/src/TrilepAnalyzer/makeThetaTemplates/templates_ST_2016_4_26_no_jsf'
 thetaConfigTemp = os.getcwd()+'/theta_config_template.py'
 
 #toFilter = [syst for syst in systematicsInFile if syst!='muRFenv']
-toFilter = ['pdf','muR','muF','muRFcorrd','muRFdecorrdNew','muRFenv','tau21','jmr','jms']
+#toFilter = ['pdf','muR','muF','muRFcorrd','muRFdecorrdNew','muRFenv','tau21','jmr','jms']
+toFilter = ['pdf','muR','muF','muRFcorrd','muRFdecorrdNew','muRFenv','tau21','jmr','jms','jsf']
 toFilter = ['__'+item+'__' for item in toFilter]
 #toFilter+= [chan for chan in btagChannels if chan!='nB3p']
 #toFilter+= ['nW1p']
 #toFilter+= ['qcd__pdfNew','qcd__muRFcorrdNew']
+toFilter += ['sig__pdfNew','sig__muRFcorrdNew']
 print toFilter
 
 if not os.path.exists('/user_data/rsyarif/limits/'+templateDir.split('/')[-1]): os.system('mkdir /user_data/rsyarif/limits/'+templateDir.split('/')[-1]) #prevent writing these (they are large) to brux6 common area
 outputDir = '/user_data/rsyarif/limits/'+templateDir.split('/')[-1]+'/'
-limitType = 'all'#'pdf_RF_'+'decorrelated/'
+#limitType = 'all'#'pdf_RF_'+'decorrelated/'
+#limitType = 'all_TEST'
+#limitType = 'all_no_jsf'
+#limitType = 'all_no_muRF_PDF_onSignal'
+limitType = 'all_no_muRF_PDF_onSignal_jsf'
 
 def findfiles(path, filtre):
     for root, dirs, files in os.walk(path):
@@ -57,7 +63,7 @@ def makeThetaConfig(rFile,outDir):
 		fout.write('source /cvmfs/cms.cern.ch/cmsset_default.sh\n')
 		fout.write('cmsenv\n')
 		fout.write('cd '+outDir+'/'+rFileDir+'\n')
-		fout.write('/home/ssagir/CMSSW_7_3_0/src/theta/utils2/theta-auto.py ' + outDir+'/'+rFileDir+'/'+rFile.split('/')[-1][:-5]+'.py')
+		fout.write('/home/rsyarif/LJMet/TprimeAnalysis/CMSSW_7_6_3/src/theta/utils2/theta-auto.py ' + outDir+'/'+rFileDir+'/'+rFile.split('/')[-1][:-5]+'.py')
 
 count=0
 for file in rootfilelist:

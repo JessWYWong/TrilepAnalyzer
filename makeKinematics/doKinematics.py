@@ -19,7 +19,7 @@ cutList = {'lepPtCut':0, #40, #0, #
 		   'subLeadJetPtCut':0, #150, #0, #
 		   'thirdJetPtCut':0, #100, #0, #
 		   'metCut':0, #75, #0, #
-		   'njetsCut':0, #3, #0, #
+		   'njetsCut':3, #3, #0, #
 		   'nbjetsCut':0, #3, #
 		   'drCut':0, #1.0, #
 		   }
@@ -27,7 +27,8 @@ cutList = {'lepPtCut':0, #40, #0, #
 doAllSys= True
 
 cutString = 'lep'+str(int(cutList['lepPtCut']))+'_MET'+str(int(cutList['metCut']))+'_leadJet'+str(int(cutList['leadJetPtCut']))+'_subLeadJet'+str(int(cutList['subLeadJetPtCut']))+'_thirdJet'+str(int(cutList['thirdJetPtCut']))+'_NJets'+str(int(cutList['njetsCut']))+'_NBJets'+str(int(cutList['nbjetsCut']))+'_DR'+str(int(cutList['drCut']))
-pfix='kinematics_testingSystematics'
+#pfix='kinematics_testingSystematics_2016_4_25_14_28_21'
+pfix='kinematics_testingSystematics_2016_4_26_13_56_40_no_jsf'
 outDir = os.getcwd()+'/'
 outDir+=pfix+'/'#+cutString
 
@@ -451,7 +452,7 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 		hdata[isEM].Write()
 		#write theta histograms in root file, avoid having processes with no event yield (to make theta happy) 
 		for signal in sigList.keys()+signals: 
-			if hsig[isEM+signal].Integral() > 0:  
+			#if hsig[isEM+signal].Integral() > 0:  
 				hsig[isEM+signal].Write()
 				if doAllSys:
 					for systematic in systematicList:

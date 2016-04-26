@@ -30,7 +30,7 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 	print "/////"*5
 	print "PROCESSING: ", process
 	print "/////"*5
-	cut = ''
+	cut = '1'
 # 	cut += '(leptonPt_singleLepCalc > '+str(cutList['lepPtCut'])+')'
 # 	cut += ' && (corr_met_singleLepCalc > '+str(cutList['metCut'])+')'
 # 	cut += ' && (theJetPt_JetSubCalc_PtOrdered[0] > '+str(cutList['leadJetPtCut'])+')'
@@ -38,11 +38,15 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 # 	cut += ' && (theJetPt_JetSubCalc_PtOrdered[2] > '+str(cutList['thirdJetPtCut'])+')'
 # 	cut += ' && (NJetsHtagged == 0)'
 #	cut += ' && ('+wtagvar+' == 0)'
-# 	cut += ' && (deltaR_lepClosestJet > 0.4 || PtRelLepClosestJet > 40)'
-	cut += ' (NJets_JetSubCalc >= '+str(cutList['njetsCut'])+')'
+ 	cut += ' && (deltaR_lepClosestJet[0] > 0.4 || PtRelLepClosestJet[0] > 40)'
+ 	cut += ' && (deltaR_lepClosestJet[1] > 0.4 || PtRelLepClosestJet[1] > 40)'
+ 	cut += ' && (deltaR_lepClosestJet[2] > 0.4 || PtRelLepClosestJet[2] > 40)'
+	cut += ' && (NJets_JetSubCalc >= '+str(cutList['njetsCut'])+')'
 #	cut += ' && (('+wtagvar+' > 0 && NJets_JetSubCalc >= '+str(cutList['njetsCut'])+') || ('+wtagvar+' == 0 && NJets_JetSubCalc >= '+str(cutList['njetsCut']+1)+'))'
 	cut += ' && (NJetsCSVwithSF_JetSubCalc >= '+str(cutList['nbjetsCut'])+')'
-	cut += ' && DataPastTrigger == 1 && MCPastTrigger == 1'
+#	cut += ' && DataPastTrigger == 1 && MCPastTrigger == 1'
+	if 'Data' in process: cut += ' && DataPastTrigger == 1'
+	else: cut += ' && MCPastTrigger == 1'
 # 	cut += ' && (deltaR_lepJets[1] >= '+str(cutList['drCut'])+')'
 
 	if 'PrunedSmearedNm1' in discriminantName: cut += ' && (theJetAK8NjettinessTau2_JetSubCalc_PtOrdered/theJetAK8NjettinessTau1_JetSubCalc_PtOrdered < 0.6)'
@@ -124,6 +128,7 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 		weightjsfDownStr  = '1'
 
 	else: 
+#		weightStr           = TrigEff+' * pileupWeight * 1 * isoSF * lepIdSF * MCWeight_singleLepCalc/abs(MCWeight_singleLepCalc) * '+str(weight[process])
 		weightStr           = TrigEff+' * pileupWeight * JetSF_pTNbwflat * isoSF * lepIdSF * MCWeight_singleLepCalc/abs(MCWeight_singleLepCalc) * '+str(weight[process])
 		weightPileupUpStr   = weightStr.replace('pileupWeight','pileupWeightUp')
 		weightPileupDownStr = weightStr.replace('pileupWeight','pileupWeightDown')

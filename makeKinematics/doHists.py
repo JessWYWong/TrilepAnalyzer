@@ -30,7 +30,7 @@ cutList = {'lepPtCut': 0, #40, #0, #
 		   'subLeadJetPtCut':0, #75, #150, #0, #
 		   'thirdJetPtCut':0, #30, #100, #0, #
 		   'metCut': 0,#60, #75, #0, #
-		   'njetsCut': 0, #3, #
+		   'njetsCut': 3, #3, #
 		   'nbjetsCut':0, #3, #
 		   'drCut':0, #1.0, #
 		   }
@@ -71,13 +71,21 @@ plotList = {#discriminantName:(discriminantLJMETName, binning, xAxisLabel)
 	'MTlmet':('MT_lepMet',linspace(0,250,51).tolist(),';M_{T}(l,#slash{E}_{T}) (GeV)'),
 	'NPV'   :('nPV_singleLepCalc',linspace(0, 30, 31).tolist(),';PV multiplicity;'),
 
-	'lep1Pt' :('TightLeptonPt_PtOrdered[0]',linspace(0, 1000, 51).tolist(),';Lepton 1 p_{T} (GeV);'),
-	'lep2Pt' :('TightLeptonPt_PtOrdered[1]',linspace(0, 1000, 51).tolist(),';Lepton 2 p_{T} (GeV);'),
-	'lep3Pt' :('TightLeptonPt_PtOrdered[2]',linspace(0, 1000, 51).tolist(),';Lepton 3 p_{T} (GeV);'),
+	# 'lep1Pt' :('TightLeptonPt_PtOrdered[0]',linspace(0, 1000, 51).tolist(),';Lepton 1 p_{T} (GeV);'),
+	# 'lep2Pt' :('TightLeptonPt_PtOrdered[1]',linspace(0, 1000, 51).tolist(),';Lepton 2 p_{T} (GeV);'),
+	# 'lep3Pt' :('TightLeptonPt_PtOrdered[2]',linspace(0, 1000, 51).tolist(),';Lepton 3 p_{T} (GeV);'),
 
-	'lep1Eta':('TightLeptonEta_PtOrdered[0]',linspace(-4, 4, 41).tolist(),';Lepton 1 #eta;'),
-	'lep2Eta':('TightLeptonEta_PtOrdered[1]',linspace(-4, 4, 41).tolist(),';Lepton 2 #eta;'),
-	'lep3Eta':('TightLeptonEta_PtOrdered[2]',linspace(-4, 4, 41).tolist(),';Lepton 3 #eta;'),
+	'lep1Pt' :('AllLeptonPt_PtOrdered[0]',linspace(0, 1000, 51).tolist(),';Lepton 1 p_{T} (GeV);'),
+	'lep2Pt' :('AllLeptonPt_PtOrdered[1]',linspace(0, 1000, 51).tolist(),';Lepton 2 p_{T} (GeV);'),
+	'lep3Pt' :('AllLeptonPt_PtOrdered[2]',linspace(0, 1000, 51).tolist(),';Lepton 3 p_{T} (GeV);'),
+
+	# 'lep1Eta':('TightLeptonEta_PtOrdered[0]',linspace(-4, 4, 41).tolist(),';Lepton 1 #eta;'),
+	# 'lep2Eta':('TightLeptonEta_PtOrdered[1]',linspace(-4, 4, 41).tolist(),';Lepton 2 #eta;'),
+	# 'lep3Eta':('TightLeptonEta_PtOrdered[2]',linspace(-4, 4, 41).tolist(),';Lepton 3 #eta;'),
+
+	'lep1Eta':('AllLeptonEta_PtOrdered[0]',linspace(-4, 4, 41).tolist(),';Lepton 1 #eta;'),
+	'lep2Eta':('AllLeptonEta_PtOrdered[1]',linspace(-4, 4, 41).tolist(),';Lepton 2 #eta;'),
+	'lep3Eta':('AllLeptonEta_PtOrdered[2]',linspace(-4, 4, 41).tolist(),';Lepton 3 #eta;'),
 
 	'JetEta':('theJetEta_JetSubCalc_PtOrdered',linspace(-4, 4, 41).tolist(),';AK4 Jet #eta;'),
 	'JetPt' :('theJetPt_JetSubCalc_PtOrdered',linspace(0, 1500, 51).tolist(),';AK4 Jet p_{T} (GeV);'),

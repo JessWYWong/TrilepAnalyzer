@@ -4,8 +4,8 @@ lepPtCutList  = [0]
 jet1PtCutList = [0]
 jet2PtCutList = [0]
 metCutList    = [0]
-njetsCutList  = [0]#,1,2,3]
-nbjetsCutList = [0]#,1,2]
+njetsCutList  = [3]#1,2]
+nbjetsCutList = [1]#,2,3]
 jet3PtCutList = [0]
 jet4PtCutList = [0]
 jet5PtCutList = [0]
@@ -13,7 +13,7 @@ drCutList     = [0]
 Wjet1PtCutList= [0]
 bjet1PtCutList= [0]
 htCutList     = [0]
-stCutList     = [0]#500,600,700,800,900,1000,1100]
+stCutList     = [500,600]#,700,800,900,1000,1100]
 minMlbCutList = [0]
 
 cutConfigs = list(itertools.product(lepPtCutList,jet1PtCutList,jet2PtCutList,metCutList,njetsCutList,nbjetsCutList,jet3PtCutList,jet4PtCutList,jet5PtCutList,drCutList,Wjet1PtCutList,bjet1PtCutList,htCutList,stCutList,minMlbCutList))
@@ -31,6 +31,7 @@ date='%i_%i_%i'%(cTime.year,cTime.month,cTime.day)
 time='%i_%i_%i'%(cTime.hour,cTime.minute,cTime.second)
 pfix='templates_ST'
 pfix+='_'+date#+'_'+time
+pfix+='_no_jsf'
 
 outDir = outputDir+pfix
 if not os.path.exists(outDir): os.system('mkdir '+outDir)

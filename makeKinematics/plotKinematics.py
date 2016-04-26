@@ -7,16 +7,17 @@ from weights import *
 gROOT.SetBatch(1)
 start_time = time.time()
 
-lumi=2.3 #for plots
+lumi=2.2 #for plots
 
-templateDir=os.getcwd()+'/kinematics_testingSystematics_2016_4_23'#'/templates/lep0_MET0_leadJet0_subLeadJet0_thirdJet0_NJets0_NBJets0_DR0'
+#templateDir=os.getcwd()+'/kinematics_testingSystematics_2016_4_23'#'/templates/lep0_MET0_leadJet0_subLeadJet0_thirdJet0_NJets0_NBJets0_DR0'
+templateDir=os.getcwd()+'/kinematics_testingSystematics_2016_4_25_14_28_21'#'/templates/lep0_MET0_leadJet0_subLeadJet0_thirdJet0_NJets0_NBJets0_DR0'
 lumiInTemplates='2p215'
 
 sig='ttm800' # choose the 1st signal to plot
 sigleg='TT(0.8 TeV)'
 scaleSignals = True
 
-scaleFact1 = 400
+scaleFact1 = 300
 if 'Final' in templateDir: scaleFact1 = 40
 
 systematicList = ['pileup','jec','jer','jsf','jmr','jms','btag','tau21','pdfNew','muRFcorrdNew','toppt','PR','FR']
@@ -126,10 +127,10 @@ plotList = [#distribution name as defined in "doHists.py"
 	'NPV',
 	'lep1Pt',
 	'lep2Pt',
-#	'lep3Pt',
+	'lep3Pt',
 	'lep1Eta',
 	'lep2Eta',
-#	'lep3Eta',
+	'lep3Eta',
 	'JetEta',
 	'JetPt' ,
 #	'Jet1Pt',
@@ -195,9 +196,9 @@ plotList = [#distribution name as defined in "doHists.py"
 #	'deltaPhiWb1',
 #	'deltaPhiWb2',
 #	'WjetPt',
-#	'PtRel1',
-#	'PtRel2',
-#	'PtRel3',
+	'PtRel1',
+	'PtRel2',
+	'PtRel3',
 
 #	'JetPt',
 #	'JetPtCSF',
@@ -385,9 +386,12 @@ for discriminant in plotList:
 								else: errorUp += errorMinus**2
 							except: pass
 					if sys=='PR' or sys=='FR':
-						errorSym += (0.5*abs(systHists['ddbkg'+sys+'plus'].GetBinContent(ibin)-systHists['ddbkg'+sys+'minus'].GetBinContent(ibin)))**2				
-						errorPlus = systHists['ddbkg'+sys+'plus'].GetBinContent(ibin)-hDDBKG.GetBinContent(ibin)
-						errorMinus = hDDBKG.GetBinContent(ibin)-systHists['ddbkg'+sys+'minus'].GetBinContent(ibin)
+						try: errorSym += (0.5*abs(systHists['ddbkg'+sys+'plus'].GetBinContent(ibin)-systHists['ddbkg'+sys+'minus'].GetBinContent(ibin)))**2				
+						except: pass
+						try: errorPlus = systHists['ddbkg'+sys+'plus'].GetBinContent(ibin)-hDDBKG.GetBinContent(ibin)
+						except: pass
+						try: errorMinus = hDDBKG.GetBinContent(ibin)-systHists['ddbkg'+sys+'minus'].GetBinContent(ibin)
+						except: pass
 						if errorPlus > 0: errorUp += errorPlus**2
 						else: errorDn += errorPlus**2
 						if errorMinus > 0: errorDn += errorMinus**2
@@ -574,6 +578,17 @@ for discriminant in plotList:
 		prelimTex3.SetLineWidth(2)
 		if not blind: prelimTex3.DrawLatex(0.24,0.975,"Preliminary")
 		if blind: prelimTex3.DrawLatex(0.29175,0.9364,"Preliminary")
+
+		chLatex = TLatex()
+		chLatex.SetNDC()
+		chLatex.SetTextSize(0.06)
+		chLatex.SetTextAlign(11) # align right                                                                                                                                                                                         
+		chString = ''
+		if isEM=='EEE': chString+='eee'
+		if isEM=='EEM': chString+='ee#mu'
+		if isEM=='EMM': chString+='e#mu#mu'
+		if isEM=='MMM': chString+='#mu#mu#mu'
+		chLatex.DrawLatex(0.16, 0.82, chString)
 
 		flat = TF1("flat","pol1",30,250);
 
