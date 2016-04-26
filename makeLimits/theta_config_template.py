@@ -17,7 +17,7 @@ def get_model():
     
     for proc in procs:
 		if(proc!="ddbkg"):
-			try: model.add_lognormal_uncertainty('lumiSys', math.log(1.027), '*', '*')
+			try: model.add_lognormal_uncertainty('lumiSys', math.log(1.027), proc)
 			except: pass
 
     return model
