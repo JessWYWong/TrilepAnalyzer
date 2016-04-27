@@ -56,12 +56,13 @@ doAllSys = True
 systematicList = ['pileup','jec','jer','jmr','jms','btag','tau21','muR','muF','muRFcorrd','jsf','PR','FR']
 normalizeRENORM_PDF = False #normalize the renormalization/pdf uncertainties to nominal templates --> normalizes both the background and signal processes !!!!
 
-#cutString  = 'lep0_MET0_1jet0_2jet0_NJets0_NBJets0_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST0_minMlb0'
+#cutString  = 'lep0_MET0_1jet0_2jet0_NJets3_NBJets1_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST0_minMlb0'
 #cutString  = 'lep0_MET0_1jet0_2jet0_NJets3_NBJets1_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST1100_minMlb0/'
-#cutString  = 'lep0_MET0_1jet0_2jet0_NJets3_NBJets1_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST800_minMlb0/'
-cutString  = 'lep0_MET0_1jet0_2jet0_NJets3_NBJets1_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST600_minMlb0/'
+cutString  = 'lep0_MET0_1jet0_2jet0_NJets3_NBJets1_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST800_minMlb0/'
+#cutString  = 'lep0_MET0_1jet0_2jet0_NJets3_NBJets1_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST600_minMlb0/'
 #cutString  = 'lep0_MET0_1jet0_2jet0_NJets3_NBJets1_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST500_minMlb0/'
-pfix='templates_ST_2016_4_26_no_jsf'
+pfix='templates_ST_2016_4_26'
+pfix+='_no_jsf_noLumiOnDDbkg'
 iPlot='ST'
 
 normSystematics = {
@@ -88,10 +89,10 @@ if not os.path.exists(outDir): os.system('mkdir '+outDir)
 if not os.path.exists(outDir+'/'+cutString): os.system('mkdir '+outDir+'/'+cutString)
 outDir+='/'+cutString
 
-lumiSys = 0.027 #2.7% lumi uncertainty
+lumiSys = 0.027 #0.046 #4.6% lumi uncertainty #updated 18april2016 cehck twiki!!
 trigSys = 0.03 #3% trigger uncertainty
-lepIdSys = 0.01 #1% lepton id uncertainty
-lepIsoSys = 0.01 #1% lepton isolation uncertainty
+lepIdSys = math.sqrt(3.*0.01**2) #1% lepton id uncertainty ## NEED to add in quadrature for 3 leptons!
+lepIsoSys = math.sqrt(3.*0.01**2) #1% lepton isolation uncertainty ## NEED to add in quadrature for 3 leptons!
 topXsecSys = 0.#0.055 #5.5% top x-sec uncertainty
 ewkXsecSys = 0.#0.05 #5% ewk x-sec uncertainty
 qcdXsecSys = 0.#0.50 #50% qcd x-sec uncertainty
