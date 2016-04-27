@@ -48,6 +48,7 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 	if 'Data' in process: cut += ' && DataPastTrigger == 1'
 	else: cut += ' && MCPastTrigger == 1'
 # 	cut += ' && (deltaR_lepJets[1] >= '+str(cutList['drCut'])+')'
+ 	cut += ' && (AK4HTpMETpLepPt > '+str(cutList['stCut'])+')'
 
 	if 'PrunedSmearedNm1' in discriminantName: cut += ' && (theJetAK8NjettinessTau2_JetSubCalc_PtOrdered/theJetAK8NjettinessTau1_JetSubCalc_PtOrdered < 0.6)'
 
