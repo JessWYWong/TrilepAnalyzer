@@ -38,15 +38,35 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 # 	cut += ' && (theJetPt_JetSubCalc_PtOrdered[2] > '+str(cutList['thirdJetPtCut'])+')'
 # 	cut += ' && (NJetsHtagged == 0)'
 #	cut += ' && ('+wtagvar+' == 0)'
- 	cut += ' && (deltaR_lepClosestJet[0] > 0.4 || PtRelLepClosestJet[0] > 40)'
- 	cut += ' && (deltaR_lepClosestJet[1] > 0.4 || PtRelLepClosestJet[1] > 40)'
- 	cut += ' && (deltaR_lepClosestJet[2] > 0.4 || PtRelLepClosestJet[2] > 40)'
+
+#  	cut += ' && (deltaR_lepClosestJet[0] > 0.4 || PtRelLepClosestJet[0] > 40)'
+#  	cut += ' && (deltaR_lepClosestJet[1] > 0.4 || PtRelLepClosestJet[1] > 40)'
+#  	cut += ' && (deltaR_lepClosestJet[2] > 0.4 || PtRelLepClosestJet[2] > 40)'
+
 	cut += ' && (NJets_JetSubCalc >= '+str(cutList['njetsCut'])+')'
 #	cut += ' && (('+wtagvar+' > 0 && NJets_JetSubCalc >= '+str(cutList['njetsCut'])+') || ('+wtagvar+' == 0 && NJets_JetSubCalc >= '+str(cutList['njetsCut']+1)+'))'
 	cut += ' && (NJetsCSVwithSF_JetSubCalc >= '+str(cutList['nbjetsCut'])+')'
 #	cut += ' && DataPastTrigger == 1 && MCPastTrigger == 1'
-	if 'Data' in process: cut += ' && DataPastTrigger == 1'
-	else: cut += ' && MCPastTrigger == 1'
+# 	if 'Data' in process: cut += ' && DataPastTrigger == 1'
+# 	else: cut += ' && MCPastTrigger == 1'
+	if ('Data' in process and 'Bkg' not in process): 
+		if cutList['isPassTrig']==1:        cut += ' && DataPastTrigger == 1'
+		if cutList['isPassTrig_dilep']==1:  cut += ' && DataPastTrigger_dilep == 1'
+		if cutList['isPassTrig_dilepHT']==1:cut += ' && DataPastTrigger_dilepHT == 1'
+		if cutList['isPassTrig_trilep']==1: cut += ' && DataPastTrigger_trilep == 1'
+		if cutList['isPassTrilepton']==1 :  cut += ' && isPassTrilepton == 1'
+	elif ('Data' in process and 'Bkg' in process): 
+		if cutList['isPassTrig']==1:        cut += ' && DataPastTrigger == 1'
+		if cutList['isPassTrig_dilep']==1:  cut += ' && DataPastTrigger_dilep == 1'
+		if cutList['isPassTrig_dilepHT']==1:cut += ' && DataPastTrigger_dilepHT == 1'
+		if cutList['isPassTrig_trilep']==1: cut += ' && DataPastTrigger_trilep == 1'
+	elif ('Data' not in process and 'Bkg' not in process): 
+		if cutList['isPassTrig']==1:        cut += ' && MCPastTrigger == 1'
+		if cutList['isPassTrig_dilep']==1:  cut += ' && MCPastTrigger_dilep == 1'
+		if cutList['isPassTrig_dilepHT']==1:cut += ' && MCPastTrigger_dilepHT == 1'
+		if cutList['isPassTrig_trilep']==1: cut += ' && MCPastTrigger_trilep == 1'
+		if cutList['isPassTrilepton']==1 :  cut += ' && isPassTrilepton == 1'
+# 	cut += ' && isPassTrilepton == '+str(cutList['isPassTrilepton'])
 # 	cut += ' && (deltaR_lepJets[1] >= '+str(cutList['drCut'])+')'
  	cut += ' && (AK4HTpMETpLepPt > '+str(cutList['stCut'])+')'
 

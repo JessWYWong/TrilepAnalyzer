@@ -14,23 +14,41 @@ start_time = time.time()
 #################### CUTS & OUTPUT ########################
 ###########################################################
 
-cutList = {'lepPtCut':0, #40, #0, #
-		   'leadJetPtCut':0, #300, #0, #
-		   'subLeadJetPtCut':0, #150, #0, #
-		   'thirdJetPtCut':0, #100, #0, #
-		   'metCut':0, #75, #0, #
-		   'njetsCut':3, #3, #0, #
-		   'nbjetsCut':0, #3, #
+# cutList = {'lepPtCut':0, #40, #0, #
+# 		   'leadJetPtCut':0, #300, #0, #
+# 		   'subLeadJetPtCut':0, #150, #0, #
+# 		   'thirdJetPtCut':0, #100, #0, #
+# 		   'metCut':0, #75, #0, #
+# 		   'njetsCut': 0, #
+# 		   'nbjetsCut':0, #1, 
+# 		   'drCut':0, #1.0, 
+# 	   	   'stCut':0, #1100,
+# 		   }
+cutList = {'isPassTrig': 0, 
+		   'isPassTrig_dilep': 0,
+		   'isPassTrig_dilepHT': 0,
+		   'isPassTrig_trilep': 0, 
+		   'isPassTrilepton': 0,
+		   'lepPtCut': 0, #40, #0, #
+		   'leadJetPtCut':0, #150, #300, #0, #
+		   'subLeadJetPtCut':0, #75, #150, #0, #
+		   'thirdJetPtCut':0, #30, #100, #0, #
+		   'metCut': 0,#60, #75, #0, #
+		   'njetsCut': 0,#3, 
+		   'nbjetsCut':0, #1,
 		   'drCut':0, #1.0, #
+	   	   'stCut':0,#1100,
 		   }
 
-doAllSys= True
 
-cutString = 'lep'+str(int(cutList['lepPtCut']))+'_MET'+str(int(cutList['metCut']))+'_leadJet'+str(int(cutList['leadJetPtCut']))+'_subLeadJet'+str(int(cutList['subLeadJetPtCut']))+'_thirdJet'+str(int(cutList['thirdJetPtCut']))+'_NJets'+str(int(cutList['njetsCut']))+'_NBJets'+str(int(cutList['nbjetsCut']))+'_DR'+str(int(cutList['drCut']))
-#pfix='kinematics_testingSystematics_2016_4_25_14_28_21'
-pfix='kinematics_testingSystematics_2016_4_26_13_56_40_no_jsf'
+doAllSys= False
+
+cutString = 'isPassTrig'+str(int(cutList['isPassTrig']))+'_'+'isPassTrig_dilep'+str(int(cutList['isPassTrig_dilep']))+'_'+'isPassTrig_dilepHT'+str(int(cutList['isPassTrig_dilepHT']))+'_'+'isPassTrig_trilep'+str(int(cutList['isPassTrig_trilep']))+'_'+'isPassTrilepton'+str(int(cutList['isPassTrilepton']))+'_'+'lep'+str(int(cutList['lepPtCut']))+'_NJets'+str(int(cutList['njetsCut']))+'_NBJets'+str(int(cutList['nbjetsCut']))+'_DR'+str(int(cutList['drCut']))+'_ST'+str(int(cutList['stCut']))
+# cutString = 'lep'+str(int(cutList['lepPtCut']))+'_MET'+str(int(cutList['metCut']))+'_leadJet'+str(int(cutList['leadJetPtCut']))+'_subLeadJet'+str(int(cutList['subLeadJetPtCut']))+'_thirdJet'+str(int(cutList['thirdJetPtCut']))+'_NJets'+str(int(cutList['njetsCut']))+'_NBJets'+str(int(cutList['nbjetsCut']))+'_DR'+str(int(cutList['drCut']))+'_ST'+str(int(cutList['stCut']))
+# pfix='testing_76x'+'_nbjets'+str(int(cutList['nbjetsCut']))+'_ST'+str(int(cutList['stCut']))
+pfix='templates_74xSelection'
 outDir = os.getcwd()+'/'
-outDir+=pfix+'/'#+cutString
+outDir+=pfix+'/'+cutString
 
 isEMlist = ['EEE','EEM','EMM','MMM','All']
 
@@ -47,18 +65,20 @@ if whichSignal=='BB': decays = ['TWTW','BHBH','BZBZ','BZTW','BHTW','BZBH'] #B' d
 if whichSignal=='T53T53': decays = [''] #decays to tWtW 100% of the time
 sigList = {signal+decay:(signal+decay).lower() for signal in signals for decay in decays}
 
-bkgStackList = ['WJets','VV','TTV','TTJets','T','QCD','ddbkg']
-wjetList  = ['WJetsMG100','WJetsMG200','WJetsMG400','WJetsMG600','WJetsMG800','WJetsMG1200','WJetsMG2500']
+# bkgStackList = ['WJets','VV','TTV','TTJets','T','QCD','ddbkg']
+bkgStackList = ['WJets','VV','TTV','QCD','ddbkg']
+# wjetList  = ['WJetsMG100','WJetsMG200','WJetsMG400','WJetsMG600','WJetsMG800','WJetsMG1200','WJetsMG2500']
+wjetList  = ['WJetsMG']
 zjetList  = ['DY50']
 # vvList    = ['WW','WZ','ZZ']
 vvList    = ['WZ','ZZ']
 vvvList   = ['WWZ','WZZ','ZZZ']
 ttvList   = ['TTWl','TTWq','TTZl','TTZq']
-ttjetList = ['TTJetsPH0to700inc','TTJetsPH700to1000inc','TTJetsPH1000toINFinc','TTJetsPH700mtt','TTJetsPH1000mtt']
+# ttjetList = ['TTJetsPH0to700inc','TTJetsPH700to1000inc','TTJetsPH1000toINFinc','TTJetsPH700mtt','TTJetsPH1000mtt']
 #ttjetList = ['TTJetsPH']
 tList     = ['Tt','Ts','TtW','TbtW']
 
-dataList = ['DataEERRC','DataEERRD','DataEEPRD','DataMMRRC','DataMMRRD','DataMMPRD','DataMERRC','DataMERRD','DataMEPRD']
+dataList = ['DataEEC','DataEED','DataMMC','DataMMD','DataMEC','DataMED']
 # dataList = ['DataERRC','DataERRD','DataEPRD','DataMRRC','DataMRRD','DataMPRD']
 signalList = [signal+decay for signal in signals for decay in decays]
 topList = ['TTWl','TTZl','TTWq','TTZq'] #NoTTJets, No singleT
@@ -67,7 +87,7 @@ topList = ['TTWl','TTZl','TTWq','TTZq'] #NoTTJets, No singleT
 ewkList = ['WZ','ZZ','WWZ','WZZ','ZZZ'] #No DY, WJets, WW
 # ewkList = ['DY50','WJetsMG100','WJetsMG200','WJetsMG400','WJetsMG600','WJetsMG800','WJetsMG1200','WJetsMG2500','WW','WZ','ZZ','WWZ','WZZ','ZZZ']
 qcdList = ['QCDht100','QCDht200','QCDht300','QCDht500','QCDht700','QCDht1000','QCDht1500','QCDht2000']
-ddbkgList = ['DataDrivenBkgEEPRD','DataDrivenBkgEERRD','DataDrivenBkgEERRC','DataDrivenBkgMMPRD','DataDrivenBkgMMRRD','DataDrivenBkgMMRRC','DataDrivenBkgMEPRD','DataDrivenBkgMERRD','DataDrivenBkgMERRC']
+ddbkgList = ['DataDrivenBkgEEC','DataDrivenBkgEED','DataDrivenBkgMMC','DataDrivenBkgMMD','DataDrivenBkgMEC','DataDrivenBkgMED']
 
 systematicList = ['pileup','jec','jer','jsf','jmr','jms','btag','tau21','pdfNew','muR','muF',
 				  'muRFcorrd','toppt','muRFcorrdNew','muRFdecorrdNew','PR','FR']
@@ -119,21 +139,21 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 		#Group processes
 		hwjets[isEM] = bkghists[histoPrefix+'_'+wjetList[0]].Clone(histoPrefix+'_WJets')
 # 		hzjets[isEM] = bkghists[histoPrefix+'_'+zjetList[0]].Clone(histoPrefix+'_ZJets')
-		httjets[isEM] = bkghists[histoPrefix+'_'+ttjetList[0]].Clone(histoPrefix+'_TTJets')
-		ht[isEM] = bkghists[histoPrefix+'_'+tList[0]].Clone(histoPrefix+'_T')
+# 		httjets[isEM] = bkghists[histoPrefix+'_'+ttjetList[0]].Clone(histoPrefix+'_TTJets')
+# 		ht[isEM] = bkghists[histoPrefix+'_'+tList[0]].Clone(histoPrefix+'_T')
 		httv[isEM] = bkghists[histoPrefix+'_'+ttvList[0]].Clone(histoPrefix+'_TTV')
 		hvv[isEM] = bkghists[histoPrefix+'_'+vvList[0]].Clone(histoPrefix+'_VV')
 		hvvv[isEM] = bkghists[histoPrefix+'_'+vvvList[0]].Clone(histoPrefix+'_VVV')
 		hddbkg[isEM] = bkghists[histoPrefix+'_'+ddbkgList[0]].Clone(histoPrefix+'_ddbkg')
 
-		for bkg in ttjetList:
-			if bkg!=ttjetList[0]: httjets[isEM].Add(bkghists[histoPrefix+'_'+bkg])
+# 		for bkg in ttjetList:
+# 			if bkg!=ttjetList[0]: httjets[isEM].Add(bkghists[histoPrefix+'_'+bkg])
 		for bkg in wjetList:
 			if bkg!=wjetList[0]: hwjets[isEM].Add(bkghists[histoPrefix+'_'+bkg])
 		for bkg in ttvList:
 			if bkg!=ttvList[0]: httv[isEM].Add(bkghists[histoPrefix+'_'+bkg])
-		for bkg in tList:
-			if bkg!=tList[0]: ht[isEM].Add(bkghists[histoPrefix+'_'+bkg])
+# 		for bkg in tList:
+# 			if bkg!=tList[0]: ht[isEM].Add(bkghists[histoPrefix+'_'+bkg])
 # 		for bkg in zjetList:
 # 			if bkg!=zjetList[0]: hzjets[isEM].Add(bkghists[histoPrefix+'_'+bkg])
 		for bkg in vvList:
@@ -188,8 +208,8 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 							if bkg!=topList[0]: htop[isEM+systematic+ud].Add(bkghists[histoPrefix.replace(discriminant,discriminant+systematic+ud)+'_'+bkg])
 					if systematic=='toppt': # top pt is only on the ttbar sample, so it needs special treatment!
 						htop[isEM+systematic+ud] = bkghists[histoPrefix.replace(discriminant,discriminant+systematic+ud)+'_'+ttjetList[0]].Clone(histoPrefix+'__top__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'))
-						for bkg in ttjetList: 
-							if bkg!=ttjetList[0]: htop[isEM+systematic+ud].Add(bkghists[histoPrefix.replace(discriminant,discriminant+systematic+ud)+'_'+bkg])
+# 						for bkg in ttjetList: 
+# 							if bkg!=ttjetList[0]: htop[isEM+systematic+ud].Add(bkghists[histoPrefix.replace(discriminant,discriminant+systematic+ud)+'_'+bkg])
 						for bkg in topList: 
 							if bkg not in ttjetList: htop[isEM+systematic+ud].Add(bkghists[histoPrefix+'_'+bkg])
 					if systematic=='PR' or systematic=='FR': # PR and FR is only on the ddbkg sample, so it needs special treatment!
@@ -373,8 +393,8 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 		yieldTable[histoPrefix]['VV']     = hvv[isEM].Integral()
 		yieldTable[histoPrefix]['VVV']    = hvvv[isEM].Integral()
 		yieldTable[histoPrefix]['TTV']    = httv[isEM].Integral()
-		yieldTable[histoPrefix]['TTJets'] = httjets[isEM].Integral()
-		yieldTable[histoPrefix]['T']      = ht[isEM].Integral()
+# 		yieldTable[histoPrefix]['TTJets'] = httjets[isEM].Integral()
+# 		yieldTable[histoPrefix]['T']      = ht[isEM].Integral()
 		yieldTable[histoPrefix]['QCD']    = hqcd[isEM].Integral()
 		yieldTable[histoPrefix]['ddbkg']  = hddbkg[isEM].Integral()
 		for signal in sigList.keys(): yieldTable[histoPrefix][signal] = hsig[isEM+signal].Integral()
@@ -406,8 +426,8 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 		yieldErrTable[histoPrefix]['VV']     = 0.
 		yieldErrTable[histoPrefix]['VVV']    = 0.
 		yieldErrTable[histoPrefix]['TTV']    = 0.
-		yieldErrTable[histoPrefix]['TTJets'] = 0.
-		yieldErrTable[histoPrefix]['T']      = 0.
+# 		yieldErrTable[histoPrefix]['TTJets'] = 0.
+# 		yieldErrTable[histoPrefix]['T']      = 0.
 		yieldErrTable[histoPrefix]['QCD']    = 0.
 		yieldErrTable[histoPrefix]['ddbkg']  = 0.
 		for signal in sigList.keys(): yieldErrTable[histoPrefix][signal] = 0.
@@ -424,8 +444,8 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 			yieldErrTable[histoPrefix]['VV']     += hvv[isEM].GetBinError(ibin)**2
 			yieldErrTable[histoPrefix]['VVV']    += hvvv[isEM].GetBinError(ibin)**2
 			yieldErrTable[histoPrefix]['TTV']    += httv[isEM].GetBinError(ibin)**2
-			yieldErrTable[histoPrefix]['TTJets'] += httjets[isEM].GetBinError(ibin)**2
-			yieldErrTable[histoPrefix]['T']      += ht[isEM].GetBinError(ibin)**2
+# 			yieldErrTable[histoPrefix]['TTJets'] += httjets[isEM].GetBinError(ibin)**2
+# 			yieldErrTable[histoPrefix]['T']      += ht[isEM].GetBinError(ibin)**2
 			yieldErrTable[histoPrefix]['QCD']    += hqcd[isEM].GetBinError(ibin)**2
 			yieldErrTable[histoPrefix]['ddbkg']  += hddbkg[isEM].GetBinError(ibin)**2
 			for signal in sigList.keys(): yieldErrTable[histoPrefix][signal] += hsig[isEM+signal].GetBinError(ibin)**2
@@ -440,8 +460,8 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 		yieldErrTable[histoPrefix]['VV']     += (corrdSys*yieldTable[histoPrefix]['VV'])**2+(ewkXsecSys*yieldTable[histoPrefix]['VV'])**2
 		yieldErrTable[histoPrefix]['VVV']    += (corrdSys*yieldTable[histoPrefix]['VVV'])**2+(ewkXsecSys*yieldTable[histoPrefix]['VVV'])**2	
 		yieldErrTable[histoPrefix]['TTV']    += (corrdSys*yieldTable[histoPrefix]['TTV'])**2+(topXsecSys*yieldTable[histoPrefix]['TTV'])**2
-		yieldErrTable[histoPrefix]['TTJets'] += (corrdSys*yieldTable[histoPrefix]['TTJets'])**2+(topXsecSys*yieldTable[histoPrefix]['TTJets'])**2
-		yieldErrTable[histoPrefix]['T']      += (corrdSys*yieldTable[histoPrefix]['T'])**2+(topXsecSys*yieldTable[histoPrefix]['T'])**2
+# 		yieldErrTable[histoPrefix]['TTJets'] += (corrdSys*yieldTable[histoPrefix]['TTJets'])**2+(topXsecSys*yieldTable[histoPrefix]['TTJets'])**2
+# 		yieldErrTable[histoPrefix]['T']      += (corrdSys*yieldTable[histoPrefix]['T'])**2+(topXsecSys*yieldTable[histoPrefix]['T'])**2
 		yieldErrTable[histoPrefix]['QCD']    += (corrdSys*yieldTable[histoPrefix]['QCD'])**2+(qcdXsecSys*yieldTable[histoPrefix]['qcd'])**2
 		for signal in sigList.keys(): yieldErrTable[histoPrefix][signal] += (corrdSys*yieldTable[histoPrefix][signal])**2
 		for signal in signals: yieldErrTable[histoPrefix][signal] += (corrdSys*yieldTable[histoPrefix][signal])**2
@@ -482,8 +502,8 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 					hqcd[isEM+systematic+'Down'].Write()
 		if hwjets[isEM].Integral() > 0: hwjets[isEM].Write()
 # 		if hzjets[isEM].Integral() > 0: hzjets[isEM].Write()
-		if httjets[isEM].Integral()> 0: httjets[isEM].Write()
-		if ht[isEM].Integral() > 0    : ht[isEM].Write()
+# 		if httjets[isEM].Integral()> 0: httjets[isEM].Write()
+# 		if ht[isEM].Integral() > 0    : ht[isEM].Write()
 		if httv[isEM].Integral() > 0  : httv[isEM].Write()
 		if hvv[isEM].Integral() > 0   : hvv[isEM].Write()
 		if hvvv[isEM].Integral() > 0  : hvvv[isEM].Write()

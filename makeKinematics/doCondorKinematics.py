@@ -6,10 +6,8 @@ outputDir = thisDir+'/'
 cTime=datetime.datetime.now()
 date='%i_%i_%i'%(cTime.year,cTime.month,cTime.day)
 time='%i_%i_%i'%(cTime.hour,cTime.minute,cTime.second)
-pfix='kinematics_testingSystematics'
-#pfix+='_'+date
+pfix='testing_76x'
 pfix+='_'+date+'_'+time
-#pfix+='_no_jsf'
 
 plotList = [#distribution name as defined in "doHists.py"
 #	'deltaRb1Nonb',

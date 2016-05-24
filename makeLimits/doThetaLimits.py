@@ -1,25 +1,30 @@
 import os,sys,fnmatch
 
-templateDir='/home/rsyarif/LJMet/TprimeAnalysis/CMSSW_7_6_3/src/TrilepAnalyzer/makeThetaTemplates/templates_ST_2016_4_26_no_jsf'
+templateDir='/home/rsyarif/LJMet/TprimeAnalysis/CMSSW_7_6_3/src/TrilepAnalyzer/makeThetaTemplates/templates_ST_2016_4_26_no_jsf_noLumiOnDDbkg'
 thetaConfigTemp = os.getcwd()+'/theta_config_template.py'
 
 #toFilter = [syst for syst in systematicsInFile if syst!='muRFenv']
+toFilter = ['pdf','muR','muF','muRFcorrd','muRFdecorrdNew','muRFenv','tau21','jmr','jms']
+#toFilter = ['pdf','muR','muF','muRFcorrd','muRFdecorrdNew','muRFenv','tau21','jmr','jms','jsf']
+#toFilter = ['pdf','muR','muF','muRFcorrd','muRFdecorrdNew','muRFenv','tau21','jmr','jms','jec','jer','muRF']
 #toFilter = ['pdf','muR','muF','muRFcorrd','muRFdecorrdNew','muRFenv','tau21','jmr','jms']
-toFilter = ['pdf','muR','muF','muRFcorrd','muRFdecorrdNew','muRFenv','tau21','jmr','jms','jsf']
+#toFilter+= ['sig__muRFcorrdNew','sig__pdfNew','jsf']
+#toFilter+= ['jec','jer']
 toFilter = ['__'+item+'__' for item in toFilter]
 #toFilter+= [chan for chan in btagChannels if chan!='nB3p']
 #toFilter+= ['nW1p']
 #toFilter+= ['qcd__pdfNew','qcd__muRFcorrdNew']
-toFilter += ['sig__pdfNew','sig__muRFcorrdNew']
+#toFilter += ['sig__pdfNew','sig__muRFcorrdNew']
 print toFilter
 
 if not os.path.exists('/user_data/rsyarif/limits/'+templateDir.split('/')[-1]): os.system('mkdir /user_data/rsyarif/limits/'+templateDir.split('/')[-1]) #prevent writing these (they are large) to brux6 common area
 outputDir = '/user_data/rsyarif/limits/'+templateDir.split('/')[-1]+'/'
-#limitType = 'all'#'pdf_RF_'+'decorrelated/'
+limitType = 'all'#'pdf_RF_'+'decorrelated/'
 #limitType = 'all_TEST'
 #limitType = 'all_no_jsf'
 #limitType = 'all_no_muRF_PDF_onSignal'
-limitType = 'all_no_muRF_PDF_onSignal_jsf'
+#limitType = 'all_no_muRF_PDF_onSignal_jsf'
+#limitType = 'all_no_jec_jer_jsf_sig__muRFcorrdNew_sig__pdfNew'
 
 def findfiles(path, filtre):
     for root, dirs, files in os.walk(path):

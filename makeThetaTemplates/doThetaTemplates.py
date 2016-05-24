@@ -56,9 +56,9 @@ doAllSys = True
 systematicList = ['pileup','jec','jer','jmr','jms','btag','tau21','muR','muF','muRFcorrd','jsf','PR','FR']
 normalizeRENORM_PDF = False #normalize the renormalization/pdf uncertainties to nominal templates --> normalizes both the background and signal processes !!!!
 
-#cutString  = 'lep0_MET0_1jet0_2jet0_NJets3_NBJets1_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST0_minMlb0'
+cutString  = 'lep0_MET0_1jet0_2jet0_NJets3_NBJets1_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST0_minMlb0'
 #cutString  = 'lep0_MET0_1jet0_2jet0_NJets3_NBJets1_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST1100_minMlb0/'
-cutString  = 'lep0_MET0_1jet0_2jet0_NJets3_NBJets1_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST800_minMlb0/'
+#cutString  = 'lep0_MET0_1jet0_2jet0_NJets3_NBJets1_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST800_minMlb0/'
 #cutString  = 'lep0_MET0_1jet0_2jet0_NJets3_NBJets1_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST600_minMlb0/'
 #cutString  = 'lep0_MET0_1jet0_2jet0_NJets3_NBJets1_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST500_minMlb0/'
 pfix='templates_ST_2016_4_26'

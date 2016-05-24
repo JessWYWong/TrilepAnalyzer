@@ -11,7 +11,7 @@ R.gROOT.SetBatch(1)
 start_time = time.time()
 
 lumiStr = str(targetlumi/1000).replace('.','p') # 1/fb
-step1Dir = '/user_data/rsyarif/LJMet_3lep_122115_step1hadds/nominal/'
+step1Dir = '/user_data/rsyarif/LJMet_3lepTT_051316_step1_preliminary_hadds/nominal/'
 """
 Note: 
 --Each process in step1 (or step2) directories should have the root files hadded! 
@@ -25,29 +25,47 @@ where <shape> is for example "JECUp". hadder.py can be used to prepare input fil
 #################### CUTS & OUTPUT ########################
 ###########################################################
 
-cutList = {'lepPtCut': 0, #40, #0, #
+# cutList = {'lepPtCut': 0, #40, #0, #
+# 		   'leadJetPtCut':0, #150, #300, #0, #
+# 		   'subLeadJetPtCut':0, #75, #150, #0, #
+# 		   'thirdJetPtCut':0, #30, #100, #0, #
+# 		   'metCut': 0,#60, #75, #0, #
+# 		   'njetsCut': 0,#3, 
+# 		   'nbjetsCut':0, #1,
+# 		   'drCut':0, #1.0, #
+# 	   	   'stCut':0,#1100,
+# 		   }
+
+cutList = {'isPassTrig': 0, 
+		   'isPassTrig_dilep': 0,
+		   'isPassTrig_dilepHT': 0,
+		   'isPassTrig_trilep': 0, 
+		   'isPassTrilepton': 0,
+		   'lepPtCut': 0, #40, #0, #
 		   'leadJetPtCut':0, #150, #300, #0, #
 		   'subLeadJetPtCut':0, #75, #150, #0, #
 		   'thirdJetPtCut':0, #30, #100, #0, #
 		   'metCut': 0,#60, #75, #0, #
-		   'njetsCut': 3, #3, #
-		   'nbjetsCut':0, #3, #
+		   'njetsCut': 0,#3, 
+		   'nbjetsCut':0, #1,
 		   'drCut':0, #1.0, #
-	   	   'stCut':0,
+	   	   'stCut':0,#1100,
 		   }
+
 
 if len(sys.argv)>3: catList=[str(sys.argv[3])]
 else: catList=['EEE','EEM','EMM','MMM','All']
 
 scaleSignalXsecTo1pb = False # this has to be "True" if you are making templates for limit calculation!!!!!!!!
-doAllSys= True
+doAllSys= False
 
-cutString = 'lep'+str(int(cutList['lepPtCut']))+'_MET'+str(int(cutList['metCut']))+'_leadJet'+str(int(cutList['leadJetPtCut']))+'_subLeadJet'+str(int(cutList['subLeadJetPtCut']))+'_thirdJet'+str(int(cutList['thirdJetPtCut']))+'_NJets'+str(int(cutList['njetsCut']))+'_NBJets'+str(int(cutList['nbjetsCut']))+'_DR'+str(int(cutList['drCut']))+'_ST'+str(int(cutList['stCut']))
+cutString = 'isPassTrig'+str(int(cutList['isPassTrig']))+'_'+'isPassTrig_dilep'+str(int(cutList['isPassTrig_dilep']))+'_'+'isPassTrig_dilepHT'+str(int(cutList['isPassTrig_dilepHT']))+'_'+'isPassTrig_trilep'+str(int(cutList['isPassTrig_trilep']))+'_'+'isPassTrilepton'+str(int(cutList['isPassTrilepton']))+'_'+'lep'+str(int(cutList['lepPtCut']))+'_NJets'+str(int(cutList['njetsCut']))+'_NBJets'+str(int(cutList['nbjetsCut']))+'_DR'+str(int(cutList['drCut']))+'_ST'+str(int(cutList['stCut']))
+# cutString = 'lep'+str(int(cutList['lepPtCut']))+'_MET'+str(int(cutList['metCut']))+'_leadJet'+str(int(cutList['leadJetPtCut']))+'_subLeadJet'+str(int(cutList['subLeadJetPtCut']))+'_thirdJet'+str(int(cutList['thirdJetPtCut']))+'_NJets'+str(int(cutList['njetsCut']))+'_NBJets'+str(int(cutList['nbjetsCut']))+'_DR'+str(int(cutList['drCut']))+'_ST'+str(int(cutList['stCut']))
 
 cTime=datetime.datetime.now()
 datestr='%i_%i_%i'%(cTime.year,cTime.month,cTime.day)
 timestr='%i_%i_%i'%(cTime.hour,cTime.minute,cTime.second)
-pfix='templates'
+pfix='templates_74xSelection'
 #pfix+=datestr+'_'+timestr
 
 ###########################################################
@@ -181,29 +199,31 @@ plotList = {#discriminantName:(discriminantLJMETName, binning, xAxisLabel)
 
 bkgList = [
 # 	'DY50',
-	'WJetsMG100',
-	'WJetsMG200',
-	'WJetsMG400',
-	'WJetsMG600',
-	'WJetsMG800',
-	'WJetsMG1200',
-	'WJetsMG2500',
-	'WW','WZ','ZZ',
-	'WWZ','WZZ','ZZZ',
+	'WJetsMG',
+# 	'WJetsMG100',
+# 	'WJetsMG200',
+# 	'WJetsMG400',
+# 	'WJetsMG600',
+# 	'WJetsMG800',
+# 	'WJetsMG1200',
+# 	'WJetsMG2500',
+# 	'WW','WZ','ZZ',
+	'WZ','ZZ',
+	'WWZ','WZZ','ZZZ','WWW',
 #	'TTJetsPH',
-	'TTJetsPH0to700inc',
-	'TTJetsPH700to1000inc',
-	'TTJetsPH1000toINFinc',
-	'TTJetsPH700mtt',
-	'TTJetsPH1000mtt',
+# 	'TTJetsPH0to700inc',
+# 	'TTJetsPH700to1000inc',
+# 	'TTJetsPH1000toINFinc',
+# 	'TTJetsPH700mtt',
+# 	'TTJetsPH1000mtt',
 	'TTWl','TTWq',
 	'TTZl','TTZq',
-	'Tt','Ts',
-	'TtW','TbtW',
+# 	'Tt','Ts',
+# 	'TtW','TbtW',
 	'QCDht100','QCDht200','QCDht300','QCDht500','QCDht700','QCDht1000','QCDht1500','QCDht2000',
-	'DataDrivenBkgEEPRD','DataDrivenBkgEERRD','DataDrivenBkgEERRC',
-	'DataDrivenBkgMMPRD','DataDrivenBkgMMRRD','DataDrivenBkgMMRRC',
-	'DataDrivenBkgMEPRD','DataDrivenBkgMERRD','DataDrivenBkgMERRC',
+	'DataDrivenBkgEEC','DataDrivenBkgEED',
+	'DataDrivenBkgMMC','DataDrivenBkgMMD',
+	'DataDrivenBkgMEC','DataDrivenBkgMED',
 	]
 
 whichSignal = 'TT' #TT, BB, or T53T53
@@ -214,7 +234,7 @@ if whichSignal=='TT': decays = ['BWBW','THTH','TZTZ','TZBW','THBW','TZTH'] #T' d
 if whichSignal=='BB': decays = ['TWTW','BHBH','BZBZ','BZTW','BHTW','BZBH'] #B' decays
 if whichSignal=='T53T53': decays = [''] #decays to tWtW 100% of the time
 
-dataList = ['DataEERRC','DataEERRD','DataEEPRD','DataMMRRC','DataMMRRD','DataMMPRD','DataMERRC','DataMERRD','DataMEPRD']
+dataList = ['DataEEC','DataEED','DataMMC','DataMMD','DataMEC','DataMED']
 
 ###########################################################
 #################### NORMALIZATIONS #######################
