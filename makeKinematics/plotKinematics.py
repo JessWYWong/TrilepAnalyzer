@@ -7,11 +7,52 @@ from weights import *
 gROOT.SetBatch(1)
 start_time = time.time()
 
-lumi=2.2 #for plots
+# lumi=2.2 #for plots
+lumi=2.3 #for plots
 
-#templateDir=os.getcwd()+'/kinematics_testingSystematics_2016_4_23'#'/templates/lep0_MET0_leadJet0_subLeadJet0_thirdJet0_NJets0_NBJets0_DR0'
-templateDir=os.getcwd()+'/kinematics_testingSystematics_2016_4_25_14_28_21'#'/templates/lep0_MET0_leadJet0_subLeadJet0_thirdJet0_NJets0_NBJets0_DR0'
-lumiInTemplates='2p215'
+# templateDir='/user_data/rsyarif/kinematics_76in74x/isPassTrig_All0_dilep1_dilepAnth0_trilep0_isPassTrilepton1_lep20_NJets0_NBJets0_DR0_ST0'
+# templateDir='/user_data/rsyarif/kinematics_76in74x/isPassTrig_All0_dilep0_dilepAnth0_trilep1_isPassTrilepton1_lep20_NJets0_NBJets0_DR0_ST0'
+
+# templateDir='/user_data/rsyarif/kinematics_76in74x_condor_trilep_correctLumi_2016_6_3/'
+# templateDir='/user_data/rsyarif/kinematics_76in74x_condor_dilep_correctLumi_2016_6_3/'
+# templateDir='/user_data/rsyarif/kinematics_76in74x_condor_trilep_2Dcut_correctLumi_2016_6_3/'
+# templateDir='/user_data/rsyarif/kinematics_76in74x_condor_dilep_2Dcut_correctLumi_2016_6_3/'
+
+# templateDir='/user_data/rsyarif/kinematics_76in74x_condor_trilep_correctLumi_noJetSF_pTNbwflat_2016_6_3/'
+# templateDir='/user_data/rsyarif/kinematics_76in74x_condor_dilep_correctLumi_noJetSF_pTNbwflat_2016_6_3/'
+# templateDir='/user_data/rsyarif/kinematics_76in74x_condor_trilep_2Dcut_correctLumi_noJetSF_pTNbwflat_2016_6_3/'
+# templateDir='/user_data/rsyarif/kinematics_76in74x_condor_dilep_2Dcut_correctLumi_noJetSF_pTNbwflat_2016_6_3/'
+
+# templateDir='/user_data/rsyarif/kinematics_76in74x_condor_trilep_2Dcut_correctLumi_noJetSF_pTNbwflat_rebinned_2016_6_6/'
+# templateDir='/user_data/rsyarif/kinematics_76in74x_condor_dilep_2Dcut_correctLumi_noJetSF_pTNbwflat_rebinned_2016_6_6/'
+
+# templateDir='/user_data/rsyarif/kinematics_76in74x_condor_trilep_2Dcut_correctLumi_noJetSF_pTNbwflat_rebinned_OSsfl_2016_6_6/'
+
+# templateDir='/user_data/rsyarif/kinematics_76in74x_condor_trilep_2Dcut_correctLumi_noJetSF_pTNbwflat_rebinned_mllOS20_2016_6_7/'
+# templateDir='/user_data/rsyarif/kinematics_76in74x_condor_dilep_2Dcut_correctLumi_noJetSF_pTNbwflat_rebinned_mllOS20_2016_6_7/'
+
+# templateDir='/user_data/rsyarif/kinematics_76in74x_condor_trilep_2Dcut_correctLumi_noJetSF_pTNbwflat_rebinned_mllOS0_2016_6_7/'
+# templateDir='/user_data/rsyarif/kinematics_76in74x_condor_dilep_2Dcut_correctLumi_noJetSF_pTNbwflat_rebinned_mllOS0_2016_6_7/'
+
+# templateDir='/user_data/rsyarif/kinematics_76in74x_condor_trilep_2Dcut_correctLumi_noJetSF_pTNbwflat_rebinned_OSsfl_TEST_2016_6_7/'
+# templateDir='/user_data/rsyarif/kinematics_76in74x_DEBUG_Mlll/isPassTrig_All0_dilep0_dilepAnth0_trilep1_isPassTrilepton1_lep1Pt0_NJets0_NBJets0_DR0_ST0_MllOS20/'
+
+# templateDir='/user_data/rsyarif/kinematics_76in74x_condor_DEBUG_newMll_BJetCorr_2016_6_9//'
+
+# templateDir='/user_data/rsyarif/kinematics_76in74x_condor_DEBUG_newMll_BJetCorr_2016_6_13//'
+
+# templateDir='/user_data/rsyarif/kinematics_76in74x_DEBUG_newMll_BJetCorr_lepIso/isPassTrig_All0_dilep0_dilepAnth0_trilep1_isPassTrilepton1_lep1Pt0_NJets0_NBJets0_DR0_ST0_MllOS20/'
+
+# templateDir='/user_data/rsyarif/kinematics_76in74x_DEBUG_fixLooseLeps/isPassTrig_All0_dilep0_dilepAnth0_trilep1_isPassTrilepton1_lep1Pt0_NJets0_NBJets0_DR0_ST0_MllOS20/'
+
+# templateDir='/user_data/rsyarif/kinematics_76in74x_DEBUG_fixLooseEl/isPassTrig_All0_dilep0_dilepAnth0_trilep1_isPassTrilepton1_lep1Pt0_NJets0_NBJets0_DR0_ST0_MllOS20/'
+
+templateDir='/user_data/rsyarif/kinematics_76in74x_condor_DEBUG_fixLooseEl_2016_6_14/'
+
+
+# lumiInTemplates='2p215'
+# lumiInTemplates='2p269'
+lumiInTemplates='2p318'
 
 sig='ttm800' # choose the 1st signal to plot
 sigleg='TT(0.8 TeV)'
@@ -20,8 +61,52 @@ scaleSignals = True
 scaleFact1 = 300
 if 'Final' in templateDir: scaleFact1 = 40
 
-systematicList = ['pileup','jec','jer','jsf','jmr','jms','btag','tau21','pdfNew','muRFcorrdNew','toppt','PR','FR']
-doAllSys = True
+# systematicList = ['pileup','jec','jer','jsf','jmr','jms','btag','tau21','pdfNew','muRFcorrdNew','toppt','PR','FR']
+# systematicList = ['pileup','jec','jer','jsf','btag','pdfNew','muRFcorrdNew','PR','FR']
+
+systematicList = ['pileup','jec','jer','btag','pdfNew','muRFcorrdNew','PR','FR'] # no jsf
+
+# systematicList = ['pileup','jec','jer','btag','muRFcorrdNew','PR','FR'] # no jsf nopdfNew
+# systematicList = ['pileup','jer','btag','muRFcorrdNew','PR','FR'] # no jsf nopdfNew no jec
+# systematicList = ['pileup','jec','btag','muRFcorrdNew','PR','FR'] # no jsf nopdfNew no jer
+# systematicList = ['pileup','jec','jer','muRFcorrdNew','PR','FR'] # no jsf nopdfNew no btag
+
+# systematicList = ['pileup','jec','muRFcorrdNew','PR','FR'] # no jsf nopdfNew no jer no btag
+# systematicList = ['pileup','jer','muRFcorrdNew','PR','FR'] # no jsf nopdfNew no jec no btag
+# systematicList = ['pileup','btag','muRFcorrdNew','PR','FR'] # no jsf nopdfNew no jec no jer
+
+
+# systematicList = ['pileup','jec','jer','pdfNew','muRFcorrdNew','PR','FR'] # no jsf, no btag
+# systematicList = ['pileup','btag','muRFcorrdNew','PR','FR'] # no jsf, no jec no jer nopdfNew
+
+
+# systematicList = ['pileup','jec','btag','pdfNew','muRFcorrdNew','PR','FR'] # no jsf, no jer
+# systematicList = ['pileup','jer','btag','pdfNew','muRFcorrdNew','PR','FR'] # no jsf, no jec
+
+# systematicList = ['pileup']#,'jec','jer','btag','pdfNew','muRFcorrdNew','PR','FR'] # no jsf
+
+# systematicList = ['pileup','jec']#,'jer','btag','pdfNew','muRFcorrdNew','PR','FR'] # no jsf 
+# systematicList = ['pileup','jer']#,'btag','pdfNew','muRFcorrdNew','PR','FR'] # no jsf 
+# systematicList = ['pileup','btag','pdfNew','muRFcorrdNew','PR','FR'] # no jsf
+# systematicList = ['pileup','pdfNew','muRFcorrdNew','PR','FR'] # no jsf
+# systematicList = ['pileup','muRFcorrdNew','PR','FR'] # no jsf
+# systematicList = ['pileup','PR','FR'] # no jsf
+
+
+# systematicList = ['pileup','jec','jer']#,'btag','pdfNew','muRFcorrdNew','PR','FR'] # no jsf 
+# systematicList = ['pileup','jec','jer','btag']#,'pdfNew','muRFcorrdNew','PR','FR'] # no jsf
+# systematicList = ['pileup','jec','jer','btag','pdfNew']#,'muRFcorrdNew','PR','FR'] # no jsf
+# systematicList = ['pileup','jec','jer','btag','pdfNew','muRFcorrdNew']#,'PR','FR'] # no jsf
+# systematicList = ['pileup','jec','jer','btag','pdfNew','muRFcorrdNew','PR']#,'FR'] # no jsf
+
+# systematicList = ['pileup','pdfNew','muRFcorrdNew','PR','FR'] # no jsf no jec no jer no btag
+
+# systematicList = ['jec',] # 
+# systematicList = ['jer'] # 
+# systematicList = ['pdfNew'] # 
+
+
+doAllSys = False
 
 isRebinned=''#post fix for file names if the name changed b/c of rebinning or some other process
 doNormByBinWidth=False # not tested, may not work out of the box
@@ -54,7 +139,8 @@ def formatUpperHist(histogram):
 
 	if 'JetPt' in histogram.GetName() or 'JetEta' in histogram.GetName() or 'JetPhi' in histogram.GetName() or 'Pruned' in histogram.GetName() or 'Tau' in histogram.GetName(): histogram.GetYaxis().SetTitle("Jets")
 	histogram.GetYaxis().CenterTitle()
-	histogram.SetMinimum(0.001)
+	histogram.SetMinimum(0.0001)
+# 	histogram.SetMinimum(0.001)
 	if not yLog: 
 		histogram.SetMinimum(0.25)
 	if yLog:
@@ -111,20 +197,8 @@ def getNormUnc(hist,ibin):
 	return error
 
 plotList = [#distribution name as defined in "doHists.py"
-#	'deltaRb1Nonb',
-#	'deltaRb2Nonb',
-#	'deltaRWNonb',
-#	'deltaEtab1Nonb',
-#	'deltaEtab2Nonb',
-#	'deltaEtaWNonb',
-#	'deltaPhib1Nonb',
-#	'deltaPhib2Nonb',
-#	'deltaPhiWNonb',
-#	'TTbarPtBalance',
-
-#	'JetPtBins',
-#	'deltaRAK8',
 	'NPV',
+	'lepPt',
 	'lep1Pt',
 	'lep2Pt',
 	'lep3Pt',
@@ -132,112 +206,36 @@ plotList = [#distribution name as defined in "doHists.py"
 	'lep2Eta',
 	'lep3Eta',
 	'JetEta',
+	'Jet1Eta',
+	'Jet2Eta',
 	'JetPt' ,
-#	'Jet1Pt',
-#	'Jet2Pt',
-#	'Jet3Pt',
-#	'Jet4Pt',
+	'Jet1Pt' ,
+	'Jet2Pt' ,
 	'HT',
 	'ST',
-#	'MET',
-#	'METwJetSF',
-#	'METwJetSFraw',
+	'MET',
+	'HTrebinned',
+	'STrebinned',
+	'METrebinned',
+
 	'NJets' ,
 	'NBJets',
-# 	'NWJetsSmeared',
-# 	'NWJetsSmeared0p55SF',
-# 	'NWJetsSmeared0p55noSF',
-#	'NJetsAK8',
-#	'JetPtAK8',
-#	'JetEtaAK8',
-# 	'Tau21',
-# 	'Tau21Nm1',
-# 	'PrunedSmeared',
+	'NBJetsCorr',
+
+	'mindeltaR',
+	'mindeltaRB',
+
 	'mindeltaR1',
 	'mindeltaR2',
 	'mindeltaR3',
-#	'deltaRjet1',
-#	'deltaRjet2',
-#	'deltaRjet3',
-#	'minMlb',
-#	'METphi',
-#	'lepPhi',
-#	'lepDxy',
-#	'lepDz',
-#	'lepCharge',
-#	'lepIso',
-#	'Tau1',
-#	'Tau2',
-#	'JetPhi',
-#	'JetPhiAK8',
-#	'Bjet1Pt',
-#	'Wjet1Pt',
-#	'topMass',
-#	'topPt',
-#	'minMlj',
-#	'minMljDR',
-#	'minMlbDR',
-#	'minMljDPhi',
-#	'minMlbDPhi',
-#	'nonMinMlbDR',
-#	'MWb1',
-#	'MWb2',
-#	'HT4jets',
-#	'deltaRlb1',
-#	'deltaRlb2',
-#	'deltaRtW',
-#	'deltaRlW',
-#	'deltaRWb1',
-#	'deltaRWb2',
-#	'deltaPhilb1',
-#	'deltaPhilb2',
-#	'deltaPhitW',
-#	'deltaPhilW',
-#	'deltaPhiWb1',
-#	'deltaPhiWb2',
-#	'WjetPt',
 	'PtRel1',
 	'PtRel2',
 	'PtRel3',
-
-#	'JetPt',
-#	'JetPtCSF',
-#	'JetPtNSF',
-#	'Jet1Pt',
-#	'Jet2Pt',
-#	'Jet2Pt',
-#	'Jet3Pt',
-#	'Jet4Pt',
-#	'Jet5Pt',
-#	'Jet6Pt',
-#	'Jet1PtCSF',
-#	'Jet2PtCSF',
-#	'Jet3PtCSF',
-#	'Jet4PtCSF',
-#	'Jet5PtCSF',
-#	'Jet6PtCSF',
-#	'Jet1PtNSF',
-#	'Jet2PtNSF',
-#	'Jet3PtNSF',
-#	'Jet4PtNSF',
-#	'Jet5PtNSF',
-#	'Jet6PtNSF',
-#	'HT',
-#	'HTCSF',
-#	'HTNSF',
-#	'ST',
-#	'STCSF',
-#	'STNSF',
-#	'NJets',
-#	'NJetsCSF',
-#	'NJetsNSF',
-#	'NBJets',
-#	'NBJetsCSF',
-#	'NBJetsNSF',
-#	'NJetsAK8',
-#	'NJetsAK8CSF',
-#	'JetPtAK8',
-#	'JetPtAK8CSF',
+	'lepCharge',
+	'lepIso',
+	'MllsameFlavorOS',
+	'MllOSall',
+	'Mlll'
 	]
 
 fit  = False
@@ -512,7 +510,7 @@ for discriminant in plotList:
 
 		stackbkgHT.Draw("SAME HIST")
 		hsig.Draw("SAME HIST")
-		hsig1.Draw("SAME HIST")
+# 		hsig1.Draw("SAME HIST")
 		hsig2.Draw("SAME HIST")
 		hsig3.Draw("SAME HIST")
 		if not blind: hData.Draw("SAME E1 X0") #redraw data so its not hidden
@@ -540,15 +538,17 @@ for discriminant in plotList:
 			scaleFact1Str = ''
 		
 		leg.AddEntry(hsig,sigleg+' nominal BRs'+scaleFact1Str,"l")
-		leg.AddEntry(hsig1,sigleg+' #rightarrow bWbW'+scaleFact1Str,"l")
+# 		leg.AddEntry(hsig1,sigleg+' #rightarrow bWbW'+scaleFact1Str,"l")
 		leg.AddEntry(hsig2,sigleg+' #rightarrow tZtZ'+scaleFact1Str,"l")
 		leg.AddEntry(hsig3,sigleg+' #rightarrow tHtH'+scaleFact1Str,"l")
 		try: 
 			if hQCD.Integral()/bkgHT.Integral()>.005: leg.AddEntry(hQCD,"QCD","f") #don't plot QCD if it is less than 0.5%
 		except: pass
-		try: leg.AddEntry(hEWK,"EWK","f")
+# 		try: leg.AddEntry(hEWK,"EWK","f")
+		try: leg.AddEntry(hEWK,"VV & VVV","f")
 		except: pass
-		try: leg.AddEntry(hTOP,"TOP","f")
+# 		try: leg.AddEntry(hTOP,"TOP","f")
+		try: leg.AddEntry(hTOP,"TTV","f")
 		except: pass
 		try: leg.AddEntry(hDDBKG,"DD BKG","f")
 		except: pass
@@ -777,13 +777,11 @@ for discriminant in plotList:
 			c1.SaveAs(savePrefix+"_totBand.root")
 			#c1.SaveAs(savePrefix+"totBand.C")
 		else:
-			c1.SaveAs(savePrefix+".pdf")
+# 			c1.SaveAs(savePrefix+".pdf")
 			c1.SaveAs(savePrefix+".png")
-			c1.SaveAs(savePrefix+".root")
+# 			c1.SaveAs(savePrefix+".root")
 			#c1.SaveAs(savePrefix+".C")
 			
 	RFile.Close()
 
 print("--- %s minutes ---" % (round(time.time() - start_time, 2)/60))
-
-

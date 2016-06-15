@@ -11,7 +11,8 @@ lumi=2.3 #for plots
 lumiInTemplates=str(targetlumi/1000).replace('.','p') # 1/fb
 
 discriminant = 'ST'
-cutString  = 'lep0_MET0_1jet0_2jet0_NJets0_NBJets0_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST0_minMlb0'
+# cutString  = 'lep20_MET20_1jet0_2jet0_NJets0_NBJets0_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST0_minMlb0/'
+cutString  = 'lep25_MET20_1jet0_2jet0_NJets2_NBJets1_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST1200_minMlb0/'
 saveKey = ''#'_topPtSystOnly'
 
 # m1 = '800'
@@ -28,8 +29,10 @@ sig2='TTM'+m2 # choose the 2nd signal to plot
 sig2leg='TT (1.0 TeV)'
 scaleSignals = False
 
-systematicList = ['pileup','jec','jer','jmr','jms','btag','tau21','muR','muF','muRFcorrd','toppt','jsf','PR','FR']
-doAllSys = False
+# systematicList = ['pileup','jec','jer','jmr','jms','btag','tau21','muR','muF','muRFcorrd','toppt','jsf','PR','FR']
+systematicList = ['pileup','jec','jer','btag','pdfNew','muRFcorrdNew','PR','FR']
+
+doAllSys = True
 
 isRebinned=''#'_rebinned'#post fix for file names if the name changed b/c of rebinning or some other process
 doNormByBinWidth=False # not tested, may not work out of the box
@@ -37,10 +40,11 @@ doOneBand = False
 if not doAllSys: doOneBand = True # Don't change this!
 blind = False
 yLog  = True
-doRealPull = True
+doRealPull = False
 if doRealPull: doOneBand=False
 
-templateDir=os.getcwd()+'/templates_ST2016_4_22_15_29_7/'+cutString+'/'
+# templateDir=os.getcwd()+'/templates_ST2016_4_22_15_29_7/'+cutString+'/'
+templateDir='/user_data/rsyarif/optimization_76in74x_AllSys_trilep_2016_6_3/'+cutString+'/'
 tempsig='templates_'+discriminant+'_'+sig1+'_'+lumiInTemplates+'fb'+isRebinned+'.root'	
 
 isEMlist =['EEE','EEM','EMM','MMM']
@@ -135,11 +139,12 @@ totBkgTemp1 = {}
 totBkgTemp2 = {}
 totBkgTemp3 = {}
 for cat in catList:
-	histPrefix=discriminant+'_'+lumiInTemplates+'fb_'
+	histPrefix='triLep'
+# 	histPrefix=discriminant+'_'+lumiInTemplates+'fb_'
 	tagStr='nT'+cat[1]+'_nW'+cat[2]+'_nB'+cat[3]
 	catStr='is'+cat[0]+'_'+tagStr
 	isEM=cat[0]
-	histPrefix+=catStr
+# 	histPrefix+=catStr
 	print histPrefix
 	hTOP = RFile1.Get(histPrefix+'__top').Clone()
 	try: hEWK = RFile1.Get(histPrefix+'__ewk').Clone()
@@ -215,7 +220,7 @@ for cat in catList:
 
 		if doAllSys:
 			for sys in systematicList:
-				if systematic=='PR' or systematic=='FR': continue	
+				if sys=='PR' or sys=='FR': continue	
 				errorPlus = systHists['top'+catStr+sys+'plus'].GetBinContent(ibin)-hTOP.GetBinContent(ibin)
 				errorMinus = hTOP.GetBinContent(ibin)-systHists['top'+catStr+sys+'minus'].GetBinContent(ibin)
 				if errorPlus > 0: errorUp += errorPlus**2
@@ -370,10 +375,10 @@ for cat in catList:
 	chLatex.SetTextSize(0.06)
 	chLatex.SetTextAlign(11) # align right
 	chString = ''
-	if isEM=='EEE': chString+='eee'
-	if isEM=='EEM': chString+='ee#mu'
-	if isEM=='EMM': chString+='e#mu#mu'
-	if isEM=='MMM': chString+='#mu#mu#mu'
+# 	if isEM=='EEE': chString+='eee'
+# 	if isEM=='EEM': chString+='ee#mu'
+# 	if isEM=='EMM': chString+='e#mu#mu'
+# 	if isEM=='MMM': chString+='#mu#mu#mu'
 	chLatex.DrawLatex(0.16, 0.82, chString)
 
 	leg = TLegend(0.65,0.53,0.95,0.90)
@@ -519,7 +524,7 @@ for cat in catList:
 		pull.Draw("HIST")
 
 	#c1.Write()
-	savePrefix = templateDir.replace(cutString,'')+templateDir.split('/')[-2]+'plots/'
+	savePrefix = templateDir.replace(cutString,'')+templateDir.split('/')[-2]+cutString+'/'+'plots/'
 	if not os.path.exists(savePrefix): os.system('mkdir '+savePrefix)
 	savePrefix+=histPrefix+isRebinned+saveKey
 	if doRealPull: savePrefix+='_pull'

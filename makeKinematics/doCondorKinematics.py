@@ -1,31 +1,52 @@
 import os,sys,datetime
 
 thisDir = os.getcwd()
-outputDir = thisDir+'/'
+# outputDir = thisDir+'/'
+relbase = '/home/rsyarif/LJMet/TprimeAnalysis/CMSSW_7_6_3/src/'
+outputDir = '/user_data/rsyarif/'
+
 
 cTime=datetime.datetime.now()
 date='%i_%i_%i'%(cTime.year,cTime.month,cTime.day)
 time='%i_%i_%i'%(cTime.hour,cTime.minute,cTime.second)
-pfix='kinematics_testingSystematics'
-#pfix+='_'+date
-pfix+='_'+date+'_'+time
-#pfix+='_no_jsf'
+# pfix='kinematics_76in74x_condor_trilep_correctLumi'
+# pfix='kinematics_76in74x_condor_trilep_2Dcut_correctLumi'
+# pfix='kinematics_76in74x_condor_dilep_correctLumi'
+# pfix='kinematics_76in74x_condor_dilep_2Dcut_correctLumi'
+
+# pfix='kinematics_76in74x_condor_trilep_correctLumi_noJetSF_pTNbwflat'
+# pfix='kinematics_76in74x_condor_trilep_2Dcut_correctLumi_noJetSF_pTNbwflat'
+# pfix='kinematics_76in74x_condor_dilep_correctLumi_noJetSF_pTNbwflat'
+# pfix='kinematics_76in74x_condor_dilep_2Dcut_correctLumi_noJetSF_pTNbwflat'
+
+# pfix='kinematics_76in74x_condor_trilep_2Dcut_correctLumi_noJetSF_pTNbwflat_rebinned'
+# pfix='kinematics_76in74x_condor_dilep_2Dcut_correctLumi_noJetSF_pTNbwflat_rebinned'
+
+# pfix='kinematics_76in74x_condor_trilep_2Dcut_correctLumi_noJetSF_pTNbwflat_rebinned_OSsfl'
+
+# pfix='kinematics_76in74x_condor_trilep_2Dcut_correctLumi_noJetSF_pTNbwflat_rebinned_mllOS20'
+# pfix='kinematics_76in74x_condor_dilep_2Dcut_correctLumi_noJetSF_pTNbwflat_rebinned_mllOS20'
+
+# pfix='kinematics_76in74x_condor_trilep_2Dcut_correctLumi_noJetSF_pTNbwflat_rebinned_mllOS0'
+# pfix='kinematics_76in74x_condor_dilep_2Dcut_correctLumi_noJetSF_pTNbwflat_rebinned_mllOS0'
+
+# pfix='kinematics_76in74x_condor_trilep_2Dcut_correctLumi_noJetSF_pTNbwflat_rebinned_OSsfl_TEST'
+
+# pfix='kinematics_76in74x_condor_trilep_2Dcut_correctLumi_noJetSF_pTNbwflat_rebinned_OSsfl_TEST_2'
+
+# pfix='kinematics_76in74x_condor_DEBUG_newMll_BJetCorr'
+# pfix='kinematics_76in74x_condor_DEBUG_fixLooseLeps'
+pfix='kinematics_76in74x_condor_DEBUG_fixLooseEl'
+
+
+pfix+='_'+date
+#pfix+='_'+date+'_'+time
+# pfix+='_no_jsf'
+# pfix+='_nbjets1_ST1100'
 
 plotList = [#distribution name as defined in "doHists.py"
-#	'deltaRb1Nonb',
-#	'deltaRb2Nonb',
-#	'deltaRWNonb',
-#	'deltaEtab1Nonb',
-#	'deltaEtab2Nonb',
-#	'deltaEtaWNonb',
-#	'deltaPhib1Nonb',
-#	'deltaPhib2Nonb',
-#	'deltaPhiWNonb',
-#	'TTbarPtBalance',
-
-#	'deltaRAK8',
-#	'MTlmet',
 	'NPV',
+	'lepPt',
 	'lep1Pt',
 	'lep2Pt',
 	'lep3Pt',
@@ -33,84 +54,33 @@ plotList = [#distribution name as defined in "doHists.py"
 	'lep2Eta',
 	'lep3Eta',
  	'JetEta',
+ 	'Jet1Eta',
+ 	'Jet2Eta',
 	'JetPt' ,
-#	'Jet1Pt',
-#	'Jet2Pt',
-#	'Jet3Pt',
-#	'Jet4Pt',
+	'Jet1Pt',
+	'Jet2Pt',
 	'HT',
+	'HTrebinned',
 	'ST',
-#	'MET',
+	'STrebinned',
+	'MET',
+	'METrebinned',
 	'NJets' ,
 	'NBJets',
-# 	'NWJetsSmeared',
-# 	'NWJetsSmeared0p55SF',
-# 	'NWJetsSmeared0p55noSF',
-#	'NJetsAK8',
-#	'JetPtAK8',
-#	'JetEtaAK8',
-#  	'Tau21',
-#  	'Tau21Nm1',
-#  	'PrunedSmeared',
-#  	'PrunedSmearedNm1',
+	'NBJetsCorr',
+	'mindeltaR',
+	'mindeltaRB',
 	'mindeltaR1',
 	'mindeltaR2',
 	'mindeltaR3',
-#	'deltaRjet1',
-#	'deltaRjet2',
-# 	'deltaRjet3',
-# 	'minMlb',
-#	'METphi',
-#	'lepPhi',
-#	'lepDxy',
-#	'lepDz',
-#	'lepCharge',
-#	'lepIso',
-#	'Tau1',
-#	'Tau2',
-#	'JetPhi',
-#	'JetPhiAK8',
-#	'Bjet1Pt',
-#	'Wjet1Pt',
-#	'topMass',
-#	'topPt',
-#	'minMlj',
-#	'minMljDR',
-#	'minMljDPhi',
-#	'minMlbDR',
-#	'minMlbDPhi',
-#	'nonMinMlbDR',
-#	'MWb1',
-#	'MWb2',
-#	'HT4jets',
-#	'deltaRlb1',
-#	'deltaRlb2',
-#	'deltaRtW',
-#	'deltaRlW',
-#	'deltaRWb1',
-#	'deltaRWb2',
-#	'deltaPhilb1',
-#	'deltaPhilb2',
-#	'deltaPhitW',
-#	'deltaPhilW',
-#	'deltaPhiWb1',
-#	'deltaPhiWb2',
-#	'WjetPt',
+	'lepCharge',
+	'lepIso',
 	'PtRel1',
 	'PtRel2',
 	'PtRel3',
-
-# 	'METwJetSF',
-# 	'METwJetSFraw',
-#	'Jet5Pt',
-#	'Jet6Pt',
-#	'HTtest',
-#	'STnewMET',
-#	'NWJets',
-#	'JetPtBinsAK8',
-#	'Pruned',
-#	'nTrueInt',
-#	'nLepGen',
+	'MllsameFlavorOS',
+	'MllOSall',
+	'Mlll',
 	]
 
 catList = ['EEE','EEM','EMM','MMM','All']
@@ -126,14 +96,18 @@ for distribution in plotList:
 		if not os.path.exists(outDir+'/'+cat): os.system('mkdir '+cat)
 		os.chdir(cat)
 		
-		dict={'dir':outputDir,'dist':distribution,'cat':cat}
+# 		dict={'dir':outputDir,'dist':distribution,'cat':cat}
+# 		dict={'dir':thisDir,'dist':distribution,'cat':cat}
+# 		dict={'CMSSWBASE':relbase,'dir':outputDir,'dist':distribution,'cat':cat}
+		dict={'CMSSWBASE':relbase,'thisDir':thisDir,'dist':distribution,'cat':cat}
+
 
 		jdf=open('condor_'+distribution+'.job','w')
 		jdf.write(
 """universe = vanilla
-Executable = %(dir)s/doCondorKinematics.sh
+Executable = %(thisDir)s/doCondorKinematics.sh
 Should_Transfer_Files = YES
-transfer_input_files = %(dir)s/doHists.py,%(dir)s/samples.py,%(dir)s/weights.py,%(dir)s/analyze.py
+transfer_input_files = %(thisDir)s/doHists.py,%(thisDir)s/samples.py,%(thisDir)s/weights.py,%(thisDir)s/analyze.py
 WhenToTransferOutput = ON_EXIT
 
 arguments      = ""
@@ -142,7 +116,7 @@ Output = condor_%(dist)s.out
 Error = condor_%(dist)s.err
 Log = condor_%(dist)s.log
 Notification = Error
-Arguments = %(dir)s %(dist)s %(cat)s
+Arguments = %(CMSSWBASE)s %(dist)s %(cat)s
 
 Queue 1"""%dict)
 		jdf.close()

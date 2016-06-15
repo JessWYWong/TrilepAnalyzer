@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
-#targetlumi = 2318. # 1/pb
-targetlumi = 2215. #1/pb --> Anthony
-#targetlumi = 2269. #1/pb --> Julie
+targetlumi = 2318. # 1/pb
+# targetlumi = 2215. #1/pb --> Anthony
+# targetlumi = 2269. #1/pb --> Julie
 
 BR={}
 BR['BW'] = 0.5
@@ -29,9 +29,9 @@ nRun['TTJetsPH1000mtt'] = nRun['TTJetsPH']*0.02474 + 2360497.
 nRun['WW'] = 993640. 
 nRun['WZ'] = 978512.
 nRun['ZZ'] = 996944.
-nRun['WWZ'] = 250000*(1-2*0.0571) #cs = 0.1651 pb at NLO, frac_negW = 0.0571 (from CMS AN-2015/148)	// N_eff=N_gen(1-2*frac_negW)? 
-nRun['WZZ'] = 250000*(1-2*0.0617)#cs = 0.05565 pb at NLO, frac_negW = 0.0617 (from CMS AN-2015/148) 	// N_eff=N_gen(1-2*frac_negW)?
-nRun['ZZZ'] = 250000*(1-2*0.0723) #cs = 0.01398 pb at NLO, frac_negW = 0.0723 (from CMS AN-2015/148)	// N_eff=N_gen(1-2*frac_negW)?
+nRun['WWZ'] = 221468 #250000*(1-2*0.0571) #cs = 0.1651 pb at NLO, frac_negW = 0.0571 (from CMS AN-2015/148)	// N_eff=N_gen(1-2*frac_negW)? 
+nRun['WZZ'] = 219168 #250000*(1-2*0.0617)#cs = 0.05565 pb at NLO, frac_negW = 0.0617 (from CMS AN-2015/148) 	// N_eff=N_gen(1-2*frac_negW)?
+nRun['ZZZ'] = 213850 #250000*(1-2*0.0723) #cs = 0.01398 pb at NLO, frac_negW = 0.0723 (from CMS AN-2015/148)	// N_eff=N_gen(1-2*frac_negW)?
 nRun['TTWl'] = 129850. #from 252908
 nRun['TTWq'] = 430330. #from 833964
 nRun['TTZl'] = 184990. #from 398000

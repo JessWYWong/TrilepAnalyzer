@@ -11,8 +11,8 @@ R.gROOT.SetBatch(1)
 start_time = time.time()
 
 lumiStr = str(targetlumi/1000).replace('.','p') # 1/fb
-step1Dir = '/user_data/rsyarif/LJMet_3lep_122115_step1hadds/nominal/'
-#step1Dir = '/user_data/ssagir/LJMet_1lepX53_021216hadds/nominal/' #x53
+step1Dir = '/user_data/rsyarif/LJMet76In74_3lepTT_052716_step1_hadds/nominal/'
+
 """
 Note: 
 --Each process in step1 (or step2) directories should have the root files hadded! 
@@ -91,13 +91,18 @@ ddbkgList = ['DataDrivenBkgEEPRD','DataDrivenBkgEERRD','DataDrivenBkgEERRC','Dat
 
 scaleSignalXsecTo1pb = True # this has to be "True" if you are making templates for limit calculation!!!!!!!!
 scaleLumi = False
-lumiScaleCoeff = 2215./2215.
+lumiScaleCoeff = 2318./2318.
 doAllSys = True
-systematicList = ['pileup','jec','jer','jmr','jms','btag','tau21','muR','muF','muRFcorrd','jsf','PR','FR']
+# systematicList = ['pileup','jec','jer','jmr','jms','btag','tau21','muR','muF','muRFcorrd','jsf','PR','FR']
+# systematicList = ['pileup','jec','jer','btag','muR','muF','muRFcorrd','jsf','PR','FR']
+systematicList = ['pileup','jec','jer','btag','pdfNew','muRFcorrdNew','PR','FR']
+
 normalizeRENORM_PDF = False #normalize the renormalization/pdf uncertainties to nominal templates --> normalizes both the background and signal processes !!!!
 
 try: 
 	opts, args = getopt.getopt(sys.argv[2:], "", ["lepPtCut=",
+	                                              "lep1PtCut=",
+	                                              "jetPtCut=",
 	                                              "jet1PtCut=",
 	                                              "jet2PtCut=",
 	                                              "jet3PtCut=",
@@ -112,6 +117,7 @@ try:
 	                                              "htCut=",
 	                                              "stCut=",
 	                                              "minMlbCut=",
+	                                              "mllOSCut=",
 	                                              ])
 	print opts,args
 except getopt.GetoptError as err:
@@ -119,6 +125,8 @@ except getopt.GetoptError as err:
 	sys.exit(1)
 
 lepPtCut=0#40
+lep1PtCut=0#40
+jetPtCut=0#300
 jet1PtCut=0#300
 jet2PtCut=0#150
 metCut=0#75
@@ -133,6 +141,7 @@ bjet1PtCut=0
 htCut=0
 stCut=0
 minMlbCut=0
+mllOSCut=0
 catList  =['EEE','EEM','EMM','MMM']
 nttaglist=['0p']
 nWtaglist=['0p']#,'1p']
@@ -143,6 +152,8 @@ tagList = list(itertools.product(nttaglist,nWtaglist,nbtaglist))
 for o, a in opts:
 	print o, a
 	if o == '--lepPtCut': lepPtCut = float(a)
+	if o == '--lep1PtCut': lep1PtCut = float(a)
+	if o == '--jetPtCut': jetPtCut = float(a)
 	if o == '--jet1PtCut': jet1PtCut = float(a)
 	if o == '--jet2PtCut': jet2PtCut = float(a)
 	if o == '--jet3PtCut': jet3PtCut = float(a)
@@ -157,12 +168,15 @@ for o, a in opts:
 	if o == '--htCut': htCut = float(a)
 	if o == '--stCut': stCut = float(a)
 	if o == '--minMlbCut': minMlbCut = float(a)
+	if o == '--mllOSCut': mllOSCut = float(a)
 	if o == '--isEM': catList = [str(a)]
 	if o == '--nttag': nttaglist = [str(a)]
 	if o == '--nWtag': nWtaglist = [str(a)]
 	if o == '--nbtag': nbtaglist = [str(a)]
 
 cutList = {'lepPtCut':lepPtCut,
+		   'lep1PtCut':lep1PtCut,
+		   'jetPtCut':jetPtCut,
 		   'jet1PtCut':jet1PtCut,
 		   'jet2PtCut':jet2PtCut,
 		   'jet3PtCut':jet3PtCut,
@@ -177,20 +191,21 @@ cutList = {'lepPtCut':lepPtCut,
 		   'htCut':htCut,
 		   'stCut':stCut,
 		   'minMlbCut':minMlbCut,
+		   'mllOSCut':mllOSCut,
 		   }
 
-cutString  = 'lep'+str(int(cutList['lepPtCut']))+'_MET'+str(int(cutList['metCut']))
-cutString += '_1jet'+str(int(cutList['jet1PtCut']))+'_2jet'+str(int(cutList['jet2PtCut']))
+cutString  = 'lepPt'+str(int(cutList['lepPtCut']))+'_lep1Pt'+str(int(cutList['lep1PtCut']))+'_MET'+str(int(cutList['metCut']))
+cutString += '_jetPt'+str(int(cutList['jetPtCut']))+'_jet1Pt'+str(int(cutList['jet1PtCut']))+'_jet2Pt'+str(int(cutList['jet2PtCut']))
 cutString += '_NJets'+str(int(cutList['njetsCut']))+'_NBJets'+str(int(cutList['nbjetsCut']))
 cutString += '_3jet'+str(int(cutList['jet3PtCut']))+'_4jet'+str(int(cutList['jet4PtCut']))
 cutString += '_5jet'+str(int(cutList['jet5PtCut']))+'_DR'+str(cutList['drCut'])
 cutString += '_1Wjet'+str(cutList['Wjet1PtCut'])+'_1bjet'+str(cutList['bjet1PtCut'])
-cutString += '_HT'+str(cutList['htCut'])+'_ST'+str(cutList['stCut'])+'_minMlb'+str(cutList['minMlbCut'])
+cutString += '_HT'+str(cutList['htCut'])+'_ST'+str(cutList['stCut'])+'_minMlb'+str(cutList['minMlbCut'])+'_mllOS'+str(cutList['mllOSCut'])
 
 cTime=datetime.datetime.now()
 datestr='%i_%i_%i'%(cTime.year,cTime.month,cTime.day)
 timestr='%i_%i_%i'%(cTime.hour,cTime.minute,cTime.second)
-pfix='templates_ST'
+pfix='optimization_TEST_DELETE_ME'
 pfix+=datestr+'_'+timestr
 
 normSystematics = {
@@ -774,7 +789,8 @@ def readTree(file):
 	return tFile, tTree
 
 print "READING TREES"
-shapesFiles = ['jec','jer','btag']#,'jsf']
+# shapesFiles = ['jec','jer','btag']#,'jsf']
+shapesFiles = ['jec','jer']#,'jsf']
 tTreeData = {}
 tFileData = {}
 for data in dataList:

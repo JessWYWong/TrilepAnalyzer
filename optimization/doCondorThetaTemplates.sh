@@ -1,26 +1,29 @@
 #!/bin/bash
 
 condorDir=$PWD
-theDir=$1
+relbase=$1
 
+cd $relbase
 source /cvmfs/cms.cern.ch/cmsset_default.sh
-
-cd $theDir
 eval `scramv1 runtime -sh`
+cd -
 
-python doThetaTemplates.py $condorDir \
+python -u doThetaTemplates.py $condorDir \
 						  --lepPtCut=${2} \
-						  --jet1PtCut=${3} \
-						  --jet2PtCut=${4} \
-						  --metCut=${5} \
-						  --njetsCut=${6} \
-						  --nbjetsCut=${7} \
-						  --jet3PtCut=${8} \
-						  --jet4PtCut=${9} \
-						  --jet5PtCut=${10} \
-						  --drCut=${11} \
-						  --Wjet1PtCut=${12} \
-						  --bjet1PtCut=${13} \
-						  --htCut=${14} \
-						  --stCut=${15} \
-						  --minMlbCut=${16} \
+						  --lep1PtCut=${3} \
+						  --jetPtCut=${4} \
+						  --jet1PtCut=${5} \
+						  --jet2PtCut=${6} \
+						  --metCut=${7} \
+						  --njetsCut=${8} \
+						  --nbjetsCut=${9} \
+						  --jet3PtCut=${10} \
+						  --jet4PtCut=${11} \
+						  --jet5PtCut=${12} \
+						  --drCut=${13} \
+						  --Wjet1PtCut=${14} \
+						  --bjet1PtCut=${15} \
+						  --htCut=${16} \
+						  --stCut=${17} \
+						  --minMlbCut=${18} \
+						  --mllOSCut=${19} \

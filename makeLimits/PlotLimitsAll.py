@@ -2,17 +2,25 @@ from ROOT import *
 from array import array
 from numpy import linspace
 from math import *
-import os,sys
+import os,sys,itertools
 
 gROOT.SetBatch(1)
 
 from tdrStyle import *
 setTDRStyle()
 
-lumiPlot = '2.2'
-lumiStr = '2p215'
-distribution = 'HT'
-limitDir='/user_data/ssagir/limits/limits_HT_2016_1_13_9_49_29/'
+# lumiPlot = '2.2'
+lumiPlot = '2.3'
+# lumiStr = '2p215'
+lumiStr = '2p318'
+
+distribution = 'ST'
+# limitDir='/user_data/rsyarif/limits/all/'
+# limitDir='/user_data/rsyarif/limits/allSys/'
+# limitDir='/user_data/rsyarif/limits/allSys_sig__muRFcorrdNew_sig__pdfNew_TrigSys/'
+# limitDir='/user_data/rsyarif/limits/allSys_sig__muRFcorrdNew_sig__pdfNew_no_jec_no_jer/'
+limitDir='/user_data/rsyarif/limits/76in74x_allSys_sig__muRFcorrdNew_sig__pdfNew/'
+
 postfix = '' # for plot names in order to save them as different files
 stat=''#0.75
 isRebinned=''#'_rebinned_modified'+str(stat).replace('.','p')
@@ -21,21 +29,38 @@ xrange_max=1300.
 yrange_min=.0003+.01
 yrange_max=3.05
 
-lepPtCutList  = [40,50,60,80,100]
-jet1PtCutList = [125,150,200,300,400,500]
-jet2PtCutList = [75,100,150,200]
-metCutList    = [40,50,75,100,125]
-njetsCutList  = [3,4,5]
-nbjetsCutList = [0]
-jet3PtCutList = [30,40,50,75,100,150,200]
+# lepPtCutList  = [0]
+# jet1PtCutList = [0]
+# jet2PtCutList = [0]
+# metCutList    = [0]
+# njetsCutList  = [0,1,2,3]
+# nbjetsCutList = [0,1,2,3]
+# jet3PtCutList = [0]
+# jet4PtCutList = [0]
+# jet5PtCutList = [0]
+# drCutList     = [0]
+# Wjet1PtCutList= [0]
+# bjet1PtCutList= [0]
+# htCutList     = [0]
+# stCutList     = [0,500,600,700,800,900,1000,1100]
+# minMlbCutList = [0]
+
+lepPtCutList  = [20,25]
+jet1PtCutList = [0]
+jet2PtCutList = [0]
+metCutList    = [20,30]
+njetsCutList  = [0,1,2,3]
+nbjetsCutList = [0,1,2,3]
+jet3PtCutList = [0]
 jet4PtCutList = [0]
 jet5PtCutList = [0]
-drCutList     = [0,1,1.25,1.5]
-Wjet1PtCutList= [0,200,250,300,400]
-bjet1PtCutList= [0,100,150,200,300]
+drCutList     = [0]
+Wjet1PtCutList= [0]
+bjet1PtCutList= [0]
 htCutList     = [0]
-stCutList     = [0]#,600,800,1000,1200,1500,1750,2000]
-minMlbCutList = [0,50,75,100,120,150,200,250,300]
+stCutList     = [0,500,600,700,800,900,1000,1100,1200,1300]
+minMlbCutList = [0]
+
 cutConfigs = list(itertools.product(lepPtCutList,jet1PtCutList,jet2PtCutList,metCutList,njetsCutList,nbjetsCutList,jet3PtCutList,jet4PtCutList,jet5PtCutList,drCutList,Wjet1PtCutList,bjet1PtCutList,htCutList,stCutList,minMlbCutList))
 
 massPoints = [700,800,900,1000,1100,1200,1300]
