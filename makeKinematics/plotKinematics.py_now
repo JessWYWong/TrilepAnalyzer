@@ -10,8 +10,12 @@ start_time = time.time()
 lumi=12.9 #for plots
 
 # templateDir='/user_data/rsyarif/kinematics_80x_Exactly3Lep_2016_9_8/isPassTrig_All0_dilep1_dilepAnth0_trilep0_isPassTrilepton1_lep1Pt0_NJets2_NBJets0_DR0_ST0_MllOS0/'
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_noMllOScut_2016_9_8/'
 
-templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_noMllOScut_2016_9_8/'
+# templateDir='/user_data/rsyarif/kinematics_80x_Exactly3Lep_2016_9_14/isPassTrig_All0_dilep1_dilepAnth0_trilep0_isPassTrilepton1_lep1Pt0_NJets2_NBJets0_DR0_ST0_MllOS0/'
+
+templateDir='/user_data/rsyarif/kinematics_80x_Exactly3Lep_2016_9_19/isPassTrig_All0_dilep1_dilepAnth0_trilep0_isPassTrilepton1_lep1Pt0_NJets2_NBJets0_DR0_ST0_MllOS0/'
+
 
 lumiInTemplates='12p9'
 
@@ -25,49 +29,11 @@ if 'Final' in templateDir: scaleFact1 = 40
 # systematicList = ['pileup','jec','jer','jsf','jmr','jms','btag','tau21','pdfNew','muRFcorrdNew','toppt','PR','FR']
 # systematicList = ['pileup','jec','jer','jsf','btag','pdfNew','muRFcorrdNew','PR','FR']
 
-systematicList = ['pileup','jec','jer','btag','pdfNew','muRFcorrdNew','PR','FR'] # no jsf
+# systematicList = ['pileup','jec','jer','btag','pdfNew','muRFcorrdNew','PR','FR'] # no jsf
 
-# systematicList = ['pileup','jec','jer','btag','muRFcorrdNew','PR','FR'] # no jsf nopdfNew
-# systematicList = ['pileup','jer','btag','muRFcorrdNew','PR','FR'] # no jsf nopdfNew no jec
-# systematicList = ['pileup','jec','btag','muRFcorrdNew','PR','FR'] # no jsf nopdfNew no jer
-# systematicList = ['pileup','jec','jer','muRFcorrdNew','PR','FR'] # no jsf nopdfNew no btag
+systematicList = ['PR','FR']
 
-# systematicList = ['pileup','jec','muRFcorrdNew','PR','FR'] # no jsf nopdfNew no jer no btag
-# systematicList = ['pileup','jer','muRFcorrdNew','PR','FR'] # no jsf nopdfNew no jec no btag
-# systematicList = ['pileup','btag','muRFcorrdNew','PR','FR'] # no jsf nopdfNew no jec no jer
-
-
-# systematicList = ['pileup','jec','jer','pdfNew','muRFcorrdNew','PR','FR'] # no jsf, no btag
-# systematicList = ['pileup','btag','muRFcorrdNew','PR','FR'] # no jsf, no jec no jer nopdfNew
-
-
-# systematicList = ['pileup','jec','btag','pdfNew','muRFcorrdNew','PR','FR'] # no jsf, no jer
-# systematicList = ['pileup','jer','btag','pdfNew','muRFcorrdNew','PR','FR'] # no jsf, no jec
-
-# systematicList = ['pileup']#,'jec','jer','btag','pdfNew','muRFcorrdNew','PR','FR'] # no jsf
-
-# systematicList = ['pileup','jec']#,'jer','btag','pdfNew','muRFcorrdNew','PR','FR'] # no jsf 
-# systematicList = ['pileup','jer']#,'btag','pdfNew','muRFcorrdNew','PR','FR'] # no jsf 
-# systematicList = ['pileup','btag','pdfNew','muRFcorrdNew','PR','FR'] # no jsf
-# systematicList = ['pileup','pdfNew','muRFcorrdNew','PR','FR'] # no jsf
-# systematicList = ['pileup','muRFcorrdNew','PR','FR'] # no jsf
-# systematicList = ['pileup','PR','FR'] # no jsf
-
-
-# systematicList = ['pileup','jec','jer']#,'btag','pdfNew','muRFcorrdNew','PR','FR'] # no jsf 
-# systematicList = ['pileup','jec','jer','btag']#,'pdfNew','muRFcorrdNew','PR','FR'] # no jsf
-# systematicList = ['pileup','jec','jer','btag','pdfNew']#,'muRFcorrdNew','PR','FR'] # no jsf
-# systematicList = ['pileup','jec','jer','btag','pdfNew','muRFcorrdNew']#,'PR','FR'] # no jsf
-# systematicList = ['pileup','jec','jer','btag','pdfNew','muRFcorrdNew','PR']#,'FR'] # no jsf
-
-# systematicList = ['pileup','pdfNew','muRFcorrdNew','PR','FR'] # no jsf no jec no jer no btag
-
-# systematicList = ['jec',] # 
-# systematicList = ['jer'] # 
-# systematicList = ['pdfNew'] # 
-
-
-doAllSys = False
+doAllSys = True
 
 isRebinned=''#post fix for file names if the name changed b/c of rebinning or some other process
 doNormByBinWidth=False # not tested, may not work out of the box
