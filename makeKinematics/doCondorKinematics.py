@@ -9,47 +9,25 @@ outputDir = '/user_data/rsyarif/'
 cTime=datetime.datetime.now()
 date='%i_%i_%i'%(cTime.year,cTime.month,cTime.day)
 time='%i_%i_%i'%(cTime.hour,cTime.minute,cTime.second)
-# pfix='kinematics_76in74x_condor_trilep_correctLumi'
-# pfix='kinematics_76in74x_condor_trilep_2Dcut_correctLumi'
-# pfix='kinematics_76in74x_condor_dilep_correctLumi'
-# pfix='kinematics_76in74x_condor_dilep_2Dcut_correctLumi'
 
-# pfix='kinematics_76in74x_condor_trilep_correctLumi_noJetSF_pTNbwflat'
-# pfix='kinematics_76in74x_condor_trilep_2Dcut_correctLumi_noJetSF_pTNbwflat'
-# pfix='kinematics_76in74x_condor_dilep_correctLumi_noJetSF_pTNbwflat'
-# pfix='kinematics_76in74x_condor_dilep_2Dcut_correctLumi_noJetSF_pTNbwflat'
-
-# pfix='kinematics_76in74x_condor_trilep_2Dcut_correctLumi_noJetSF_pTNbwflat_rebinned'
-# pfix='kinematics_76in74x_condor_dilep_2Dcut_correctLumi_noJetSF_pTNbwflat_rebinned'
-
-# pfix='kinematics_76in74x_condor_trilep_2Dcut_correctLumi_noJetSF_pTNbwflat_rebinned_OSsfl'
-
-# pfix='kinematics_76in74x_condor_trilep_2Dcut_correctLumi_noJetSF_pTNbwflat_rebinned_mllOS20'
-# pfix='kinematics_76in74x_condor_dilep_2Dcut_correctLumi_noJetSF_pTNbwflat_rebinned_mllOS20'
-
-# pfix='kinematics_76in74x_condor_trilep_2Dcut_correctLumi_noJetSF_pTNbwflat_rebinned_mllOS0'
-# pfix='kinematics_76in74x_condor_dilep_2Dcut_correctLumi_noJetSF_pTNbwflat_rebinned_mllOS0'
-
-# pfix='kinematics_76in74x_condor_trilep_2Dcut_correctLumi_noJetSF_pTNbwflat_rebinned_OSsfl_TEST'
-
-# pfix='kinematics_76in74x_condor_trilep_2Dcut_correctLumi_noJetSF_pTNbwflat_rebinned_OSsfl_TEST_2'
-
-# pfix='kinematics_76in74x_condor_DEBUG_newMll_BJetCorr'
-# pfix='kinematics_76in74x_condor_DEBUG_fixLooseLeps'
-pfix='kinematics_76in74x_condor_DEBUG_fixLooseEl'
+pfix='kinematics_80x_condor_Exactly3Lep_no2Dcut_noMllOScut'
 
 
 pfix+='_'+date
 #pfix+='_'+date+'_'+time
 # pfix+='_no_jsf'
-# pfix+='_nbjets1_ST1100'
 
 plotList = [#distribution name as defined in "doHists.py"
 	'NPV',
 	'lepPt',
+	'ElPt',
+	'MuPt',
 	'lep1Pt',
 	'lep2Pt',
 	'lep3Pt',
+	'lepEta',
+	'ElEta',
+	'MuEta',
 	'lep1Eta',
 	'lep2Eta',
 	'lep3Eta',
@@ -75,11 +53,14 @@ plotList = [#distribution name as defined in "doHists.py"
 	'mindeltaR3',
 	'lepCharge',
 	'lepIso',
+	'ElIso',
+	'MuIso',
 	'PtRel1',
 	'PtRel2',
 	'PtRel3',
 	'MllsameFlavorOS',
 	'MllOSall',
+	'MllOSallmin',
 	'Mlll',
 	]
 
