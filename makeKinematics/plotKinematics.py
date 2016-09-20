@@ -7,52 +7,17 @@ from weights import *
 gROOT.SetBatch(1)
 start_time = time.time()
 
-# lumi=2.2 #for plots
-lumi=2.3 #for plots
+lumi=12.9 #for plots
 
-# templateDir='/user_data/rsyarif/kinematics_76in74x/isPassTrig_All0_dilep1_dilepAnth0_trilep0_isPassTrilepton1_lep20_NJets0_NBJets0_DR0_ST0'
-# templateDir='/user_data/rsyarif/kinematics_76in74x/isPassTrig_All0_dilep0_dilepAnth0_trilep1_isPassTrilepton1_lep20_NJets0_NBJets0_DR0_ST0'
+# templateDir='/user_data/rsyarif/kinematics_80x_Exactly3Lep_2016_9_8/isPassTrig_All0_dilep1_dilepAnth0_trilep0_isPassTrilepton1_lep1Pt0_NJets2_NBJets0_DR0_ST0_MllOS0/'
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_noMllOScut_2016_9_8/'
 
-# templateDir='/user_data/rsyarif/kinematics_76in74x_condor_trilep_correctLumi_2016_6_3/'
-# templateDir='/user_data/rsyarif/kinematics_76in74x_condor_dilep_correctLumi_2016_6_3/'
-# templateDir='/user_data/rsyarif/kinematics_76in74x_condor_trilep_2Dcut_correctLumi_2016_6_3/'
-# templateDir='/user_data/rsyarif/kinematics_76in74x_condor_dilep_2Dcut_correctLumi_2016_6_3/'
+# templateDir='/user_data/rsyarif/kinematics_80x_Exactly3Lep_2016_9_14/isPassTrig_All0_dilep1_dilepAnth0_trilep0_isPassTrilepton1_lep1Pt0_NJets2_NBJets0_DR0_ST0_MllOS0/'
 
-# templateDir='/user_data/rsyarif/kinematics_76in74x_condor_trilep_correctLumi_noJetSF_pTNbwflat_2016_6_3/'
-# templateDir='/user_data/rsyarif/kinematics_76in74x_condor_dilep_correctLumi_noJetSF_pTNbwflat_2016_6_3/'
-# templateDir='/user_data/rsyarif/kinematics_76in74x_condor_trilep_2Dcut_correctLumi_noJetSF_pTNbwflat_2016_6_3/'
-# templateDir='/user_data/rsyarif/kinematics_76in74x_condor_dilep_2Dcut_correctLumi_noJetSF_pTNbwflat_2016_6_3/'
-
-# templateDir='/user_data/rsyarif/kinematics_76in74x_condor_trilep_2Dcut_correctLumi_noJetSF_pTNbwflat_rebinned_2016_6_6/'
-# templateDir='/user_data/rsyarif/kinematics_76in74x_condor_dilep_2Dcut_correctLumi_noJetSF_pTNbwflat_rebinned_2016_6_6/'
-
-# templateDir='/user_data/rsyarif/kinematics_76in74x_condor_trilep_2Dcut_correctLumi_noJetSF_pTNbwflat_rebinned_OSsfl_2016_6_6/'
-
-# templateDir='/user_data/rsyarif/kinematics_76in74x_condor_trilep_2Dcut_correctLumi_noJetSF_pTNbwflat_rebinned_mllOS20_2016_6_7/'
-# templateDir='/user_data/rsyarif/kinematics_76in74x_condor_dilep_2Dcut_correctLumi_noJetSF_pTNbwflat_rebinned_mllOS20_2016_6_7/'
-
-# templateDir='/user_data/rsyarif/kinematics_76in74x_condor_trilep_2Dcut_correctLumi_noJetSF_pTNbwflat_rebinned_mllOS0_2016_6_7/'
-# templateDir='/user_data/rsyarif/kinematics_76in74x_condor_dilep_2Dcut_correctLumi_noJetSF_pTNbwflat_rebinned_mllOS0_2016_6_7/'
-
-# templateDir='/user_data/rsyarif/kinematics_76in74x_condor_trilep_2Dcut_correctLumi_noJetSF_pTNbwflat_rebinned_OSsfl_TEST_2016_6_7/'
-# templateDir='/user_data/rsyarif/kinematics_76in74x_DEBUG_Mlll/isPassTrig_All0_dilep0_dilepAnth0_trilep1_isPassTrilepton1_lep1Pt0_NJets0_NBJets0_DR0_ST0_MllOS20/'
-
-# templateDir='/user_data/rsyarif/kinematics_76in74x_condor_DEBUG_newMll_BJetCorr_2016_6_9//'
-
-# templateDir='/user_data/rsyarif/kinematics_76in74x_condor_DEBUG_newMll_BJetCorr_2016_6_13//'
-
-# templateDir='/user_data/rsyarif/kinematics_76in74x_DEBUG_newMll_BJetCorr_lepIso/isPassTrig_All0_dilep0_dilepAnth0_trilep1_isPassTrilepton1_lep1Pt0_NJets0_NBJets0_DR0_ST0_MllOS20/'
-
-# templateDir='/user_data/rsyarif/kinematics_76in74x_DEBUG_fixLooseLeps/isPassTrig_All0_dilep0_dilepAnth0_trilep1_isPassTrilepton1_lep1Pt0_NJets0_NBJets0_DR0_ST0_MllOS20/'
-
-# templateDir='/user_data/rsyarif/kinematics_76in74x_DEBUG_fixLooseEl/isPassTrig_All0_dilep0_dilepAnth0_trilep1_isPassTrilepton1_lep1Pt0_NJets0_NBJets0_DR0_ST0_MllOS20/'
-
-templateDir='/user_data/rsyarif/kinematics_76in74x_condor_DEBUG_fixLooseEl_2016_6_14/'
+templateDir='/user_data/rsyarif/kinematics_80x_Exactly3Lep_2016_9_19/isPassTrig_All0_dilep1_dilepAnth0_trilep0_isPassTrilepton1_lep1Pt0_NJets2_NBJets0_DR0_ST0_MllOS0/'
 
 
-# lumiInTemplates='2p215'
-# lumiInTemplates='2p269'
-lumiInTemplates='2p318'
+lumiInTemplates='12p9'
 
 sig='ttm800' # choose the 1st signal to plot
 sigleg='TT(0.8 TeV)'
@@ -64,49 +29,11 @@ if 'Final' in templateDir: scaleFact1 = 40
 # systematicList = ['pileup','jec','jer','jsf','jmr','jms','btag','tau21','pdfNew','muRFcorrdNew','toppt','PR','FR']
 # systematicList = ['pileup','jec','jer','jsf','btag','pdfNew','muRFcorrdNew','PR','FR']
 
-systematicList = ['pileup','jec','jer','btag','pdfNew','muRFcorrdNew','PR','FR'] # no jsf
+# systematicList = ['pileup','jec','jer','btag','pdfNew','muRFcorrdNew','PR','FR'] # no jsf
 
-# systematicList = ['pileup','jec','jer','btag','muRFcorrdNew','PR','FR'] # no jsf nopdfNew
-# systematicList = ['pileup','jer','btag','muRFcorrdNew','PR','FR'] # no jsf nopdfNew no jec
-# systematicList = ['pileup','jec','btag','muRFcorrdNew','PR','FR'] # no jsf nopdfNew no jer
-# systematicList = ['pileup','jec','jer','muRFcorrdNew','PR','FR'] # no jsf nopdfNew no btag
+systematicList = ['PR','FR']
 
-# systematicList = ['pileup','jec','muRFcorrdNew','PR','FR'] # no jsf nopdfNew no jer no btag
-# systematicList = ['pileup','jer','muRFcorrdNew','PR','FR'] # no jsf nopdfNew no jec no btag
-# systematicList = ['pileup','btag','muRFcorrdNew','PR','FR'] # no jsf nopdfNew no jec no jer
-
-
-# systematicList = ['pileup','jec','jer','pdfNew','muRFcorrdNew','PR','FR'] # no jsf, no btag
-# systematicList = ['pileup','btag','muRFcorrdNew','PR','FR'] # no jsf, no jec no jer nopdfNew
-
-
-# systematicList = ['pileup','jec','btag','pdfNew','muRFcorrdNew','PR','FR'] # no jsf, no jer
-# systematicList = ['pileup','jer','btag','pdfNew','muRFcorrdNew','PR','FR'] # no jsf, no jec
-
-# systematicList = ['pileup']#,'jec','jer','btag','pdfNew','muRFcorrdNew','PR','FR'] # no jsf
-
-# systematicList = ['pileup','jec']#,'jer','btag','pdfNew','muRFcorrdNew','PR','FR'] # no jsf 
-# systematicList = ['pileup','jer']#,'btag','pdfNew','muRFcorrdNew','PR','FR'] # no jsf 
-# systematicList = ['pileup','btag','pdfNew','muRFcorrdNew','PR','FR'] # no jsf
-# systematicList = ['pileup','pdfNew','muRFcorrdNew','PR','FR'] # no jsf
-# systematicList = ['pileup','muRFcorrdNew','PR','FR'] # no jsf
-# systematicList = ['pileup','PR','FR'] # no jsf
-
-
-# systematicList = ['pileup','jec','jer']#,'btag','pdfNew','muRFcorrdNew','PR','FR'] # no jsf 
-# systematicList = ['pileup','jec','jer','btag']#,'pdfNew','muRFcorrdNew','PR','FR'] # no jsf
-# systematicList = ['pileup','jec','jer','btag','pdfNew']#,'muRFcorrdNew','PR','FR'] # no jsf
-# systematicList = ['pileup','jec','jer','btag','pdfNew','muRFcorrdNew']#,'PR','FR'] # no jsf
-# systematicList = ['pileup','jec','jer','btag','pdfNew','muRFcorrdNew','PR']#,'FR'] # no jsf
-
-# systematicList = ['pileup','pdfNew','muRFcorrdNew','PR','FR'] # no jsf no jec no jer no btag
-
-# systematicList = ['jec',] # 
-# systematicList = ['jer'] # 
-# systematicList = ['pdfNew'] # 
-
-
-doAllSys = False
+doAllSys = True
 
 isRebinned=''#post fix for file names if the name changed b/c of rebinning or some other process
 doNormByBinWidth=False # not tested, may not work out of the box
@@ -199,9 +126,14 @@ def getNormUnc(hist,ibin):
 plotList = [#distribution name as defined in "doHists.py"
 	'NPV',
 	'lepPt',
+	'ElPt',
+	'MuPt',
 	'lep1Pt',
 	'lep2Pt',
 	'lep3Pt',
+	'lepEta',
+	'ElEta',
+	'MuEta',
 	'lep1Eta',
 	'lep2Eta',
 	'lep3Eta',
@@ -220,7 +152,7 @@ plotList = [#distribution name as defined in "doHists.py"
 
 	'NJets' ,
 	'NBJets',
-	'NBJetsCorr',
+	#'NBJetsCorr',
 
 	'mindeltaR',
 	'mindeltaRB',
@@ -233,8 +165,11 @@ plotList = [#distribution name as defined in "doHists.py"
 	'PtRel3',
 	'lepCharge',
 	'lepIso',
+	'ElIso',
+	'MuIso',
 	'MllsameFlavorOS',
 	'MllOSall',
+	'MllOSallmin',
 	'Mlll'
 	]
 
@@ -255,7 +190,11 @@ for discriminant in plotList:
 	for isEM in isEMlist:
 		histPrefix=discriminant+'_'+lumiInTemplates+'fb_'+isEM
 		
-		hTOP = RFile.Get(histPrefix+'__top').Clone()
+		try: hTOP = RFile.Get(histPrefix+'__top').Clone()
+		except: 
+			print "There is no TOP!!!!!!!!"
+			print "Skipping TOP....."
+			pass
 		try: hEWK = RFile.Get(histPrefix+'__ewk').Clone()
 		except: 
 			print "There is no EWK!!!!!!!!"
@@ -272,8 +211,10 @@ for discriminant in plotList:
 			print "Skipping DDBKG....."
 			pass
 					
-		print discriminant,isEM, "TOP", hTOP.Integral()
-		print discriminant,isEM, "EWK", hEWK.Integral()
+		try: print discriminant,isEM, "TOP", hTOP.Integral()
+		except: pass
+		try: print discriminant,isEM, "EWK", hEWK.Integral()
+		except: pass
 		try: print discriminant,isEM, "QCD", hQCD.Integral()
 		except: pass
 		try: print discriminant,isEM, "DDBKG", hDDBKG.Integral()
@@ -322,7 +263,8 @@ for discriminant in plotList:
 						print "Skipping",sys,"for DDBKG"
 						pass
 
-		hTOPstatOnly = hTOP.Clone(hTOP.GetName()+'statOnly')
+		try: hTOPstatOnly = hTOP.Clone(hTOP.GetName()+'statOnly')
+		except: pass
 		try: hEWKstatOnly= hEWK.Clone(hEWK.GetName()+'statOnly')
 		except: pass
 		try: hQCDstatOnly = hQCD.Clone(hQCD.GetName()+'statOnly')
@@ -330,7 +272,8 @@ for discriminant in plotList:
 		try: hDDBKGstatOnly = hDDBKG.Clone(hDDBKG.GetName()+'statOnly')
 		except: pass
 
-		bkgHT = hTOP.Clone()
+		try: bkgHT = hTOP.Clone()
+		except: pass
 		try: bkgHT.Add(hEWK)
 		except: pass
 		try: bkgHT.Add(hQCD)
@@ -338,17 +281,25 @@ for discriminant in plotList:
 		try: bkgHT.Add(hDDBKG)
 		except: pass
 
-		totBkgTemp1[isEM] = TGraphAsymmErrors(bkgHT.Clone(bkgHT.GetName()+'shapeOnly'))
-		totBkgTemp2[isEM] = TGraphAsymmErrors(bkgHT.Clone(bkgHT.GetName()+'shapePlusNorm'))
-		totBkgTemp3[isEM] = TGraphAsymmErrors(bkgHT.Clone(bkgHT.GetName()+'All'))
+		try:
+			totBkgTemp1[isEM] = TGraphAsymmErrors(bkgHT.Clone(bkgHT.GetName()+'shapeOnly'))
+			totBkgTemp2[isEM] = TGraphAsymmErrors(bkgHT.Clone(bkgHT.GetName()+'shapePlusNorm'))
+			totBkgTemp3[isEM] = TGraphAsymmErrors(bkgHT.Clone(bkgHT.GetName()+'All'))
+		except: pass
 			
-		for ibin in range(1,hTOP.GetNbinsX()+1):
+		try:
+			BINS_temp = hTOP.GetNbinsX()
+		except:
+			BINS_temp = 0
+						
+		for ibin in range(1,BINS_temp+1):
 			errorUp = 0.
 			errorDn = 0.
 			errorSym = 0.
 
 			errorStatOnly = bkgHT.GetBinError(ibin)**2
-			errorNorm = getNormUnc(hTOPstatOnly,ibin)
+			try: errorNorm = getNormUnc(hTOPstatOnly,ibin)
+			except: pass
 			try: errorNorm += getNormUnc(hEWKstatOnly,ibin)
 			except: pass
 			try: errorNorm += getNormUnc(hQCDstatOnly,ibin)
@@ -430,9 +381,11 @@ for discriminant in plotList:
 		try: stackbkgHT.Add(hDDBKG)
 		except: pass
 
-		hTOP.SetLineColor(kAzure-6)
-		hTOP.SetFillColor(kAzure-6)
-		hTOP.SetLineWidth(2)
+		try:
+			hTOP.SetLineColor(kAzure-6)
+			hTOP.SetFillColor(kAzure-6)
+			hTOP.SetLineWidth(2)
+		except: pass
 		try: 
 			hEWK.SetLineColor(kMagenta-2)
 			hEWK.SetFillColor(kMagenta-2)
@@ -490,7 +443,10 @@ for discriminant in plotList:
 			lPad.SetLeftMargin(.12)
 			lPad.SetGridy()
 			lPad.Draw()
-		if not doNormByBinWidth: hData.SetMaximum(1.2*max(hData.GetMaximum(),bkgHT.GetMaximum()))
+		try: 
+			if not doNormByBinWidth: hData.SetMaximum(1.2*max(hData.GetMaximum(),bkgHT.GetMaximum()))
+		except: 
+			pass
 		hData.SetMinimum(0.015)
 		hData.SetTitle("")
 		if doNormByBinWidth: hData.GetYaxis().SetTitle("Events / 1 GeV")
@@ -614,11 +570,15 @@ for discriminant in plotList:
 #			pullDenom = bkgHT.Clone("pullDenom")
 #			pullDenom.Scale(1.0/pullDenom.Integral())
 #			pull.Divide(pullDenom)
-			pull.Divide(hData, bkgHT)
-
-			for binNo in range(0,hData.GetNbinsX()+2):
-				if bkgHT.GetBinContent(binNo)!=0:
-					pull.SetBinError(binNo,hData.GetBinError(binNo)/bkgHT.GetBinContent(binNo))
+			try: pull.Divide(hData, bkgHT)
+			except: pass
+			
+			try:
+				for binNo in range(0,hData.GetNbinsX()+2):
+					if bkgHT.GetBinContent(binNo)!=0:
+						pull.SetBinError(binNo,hData.GetBinError(binNo)/bkgHT.GetBinContent(binNo))
+			except: pass
+			
 			pull.SetMaximum(3)
 			pull.SetMinimum(0)
 			pull.SetFillColor(1)
@@ -688,12 +648,17 @@ for discriminant in plotList:
 					print 'Bin',binNo,': content =',pull.GetBinContent(binNo),'; error =',pull.GetBinError(binNo),';'
 		
 			BkgOverBkg = pull.Clone("bkgOverbkg")
-			BkgOverBkg.Divide(bkgHT, bkgHT)
+			try: BkgOverBkg.Divide(bkgHT, bkgHT)
+			except: pass
 			pullUncBandTot=TGraphAsymmErrors(BkgOverBkg.Clone("pulluncTot"))
-			for binNo in range(0,hData.GetNbinsX()+2):
-				if bkgHT.GetBinContent(binNo)!=0:
-					pullUncBandTot.SetPointEYhigh(binNo-1,totBkgTemp3[isEM].GetErrorYhigh(binNo-1)/bkgHT.GetBinContent(binNo))
-					pullUncBandTot.SetPointEYlow(binNo-1,totBkgTemp3[isEM].GetErrorYlow(binNo-1)/bkgHT.GetBinContent(binNo))			
+			
+			try:
+				for binNo in range(0,hData.GetNbinsX()+2):
+					if bkgHT.GetBinContent(binNo)!=0:
+						pullUncBandTot.SetPointEYhigh(binNo-1,totBkgTemp3[isEM].GetErrorYhigh(binNo-1)/bkgHT.GetBinContent(binNo))
+						pullUncBandTot.SetPointEYlow(binNo-1,totBkgTemp3[isEM].GetErrorYlow(binNo-1)/bkgHT.GetBinContent(binNo))			
+			except: pass
+						
 			if not doOneBand: pullUncBandTot.SetFillStyle(3001)
 			else: pullUncBandTot.SetFillStyle(3344)
 			pullUncBandTot.SetFillColor(1)
@@ -703,10 +668,14 @@ for discriminant in plotList:
 			pullUncBandTot.Draw("SAME E2")
 				
 			pullUncBandNorm=TGraphAsymmErrors(BkgOverBkg.Clone("pulluncNorm"))
-			for binNo in range(0,hData.GetNbinsX()+2):
-				if bkgHT.GetBinContent(binNo)!=0:
-					pullUncBandNorm.SetPointEYhigh(binNo-1,totBkgTemp2[isEM].GetErrorYhigh(binNo-1)/bkgHT.GetBinContent(binNo))
-					pullUncBandNorm.SetPointEYlow(binNo-1,totBkgTemp2[isEM].GetErrorYlow(binNo-1)/bkgHT.GetBinContent(binNo))			
+
+			try:
+				for binNo in range(0,hData.GetNbinsX()+2):
+					if bkgHT.GetBinContent(binNo)!=0:
+						pullUncBandNorm.SetPointEYhigh(binNo-1,totBkgTemp2[isEM].GetErrorYhigh(binNo-1)/bkgHT.GetBinContent(binNo))
+						pullUncBandNorm.SetPointEYlow(binNo-1,totBkgTemp2[isEM].GetErrorYlow(binNo-1)/bkgHT.GetBinContent(binNo))
+			except: pass			
+
 			pullUncBandNorm.SetFillStyle(3001)
 			pullUncBandNorm.SetFillColor(2)
 			pullUncBandNorm.SetLineColor(2)
@@ -715,10 +684,14 @@ for discriminant in plotList:
 			if not doOneBand: pullUncBandNorm.Draw("SAME E2")
 			
 			pullUncBandStat=TGraphAsymmErrors(BkgOverBkg.Clone("pulluncStat"))
-			for binNo in range(0,hData.GetNbinsX()+2):
-				if bkgHT.GetBinContent(binNo)!=0:
-					pullUncBandStat.SetPointEYhigh(binNo-1,totBkgTemp1[isEM].GetErrorYhigh(binNo-1)/bkgHT.GetBinContent(binNo))
-					pullUncBandStat.SetPointEYlow(binNo-1,totBkgTemp1[isEM].GetErrorYlow(binNo-1)/bkgHT.GetBinContent(binNo))			
+
+			try:
+				for binNo in range(0,hData.GetNbinsX()+2):
+					if bkgHT.GetBinContent(binNo)!=0:
+						pullUncBandStat.SetPointEYhigh(binNo-1,totBkgTemp1[isEM].GetErrorYhigh(binNo-1)/bkgHT.GetBinContent(binNo))
+						pullUncBandStat.SetPointEYlow(binNo-1,totBkgTemp1[isEM].GetErrorYlow(binNo-1)/bkgHT.GetBinContent(binNo))			
+			except: pass
+			
 			pullUncBandStat.SetFillStyle(3001)
 			pullUncBandStat.SetFillColor(3)
 			pullUncBandStat.SetLineColor(3)

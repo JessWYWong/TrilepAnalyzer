@@ -11,7 +11,8 @@ R.gROOT.SetBatch(1)
 start_time = time.time()
 
 lumiStr = str(targetlumi/1000).replace('.','p') # 1/fb
-step1Dir = '/user_data/rsyarif/LJMet_3lep_122115_step1hadds/nominal/'
+step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_2016_8_31_rizki_step1hadds/nominal/'
+print 'grabbing files from ', step1Dir
 """
 Note: 
 --Each process in step1 (or step2) directories should have the root files hadded! 
@@ -25,29 +26,41 @@ where <shape> is for example "JECUp". hadder.py can be used to prepare input fil
 #################### CUTS & OUTPUT ########################
 ###########################################################
 
-cutList = {'lepPtCut': 0, #40, #0, #
+cutList = {'isPassTrig': 0, 
+		   'isPassTrig_dilep': 1,
+		   'isPassTrig_dilep_anth': 0,
+		   'isPassTrig_trilep': 0, 
+		   'isPassTrilepton': 1,
+		   'lep1PtCut': 0, #40, #0, #
 		   'leadJetPtCut':0, #150, #300, #0, #
 		   'subLeadJetPtCut':0, #75, #150, #0, #
 		   'thirdJetPtCut':0, #30, #100, #0, #
 		   'metCut': 0,#60, #75, #0, #
-		   'njetsCut': 3, #3, #
+		   'njetsCut': 2, #3, #
 		   'nbjetsCut':0, #3, #
 		   'drCut':0, #1.0, #
 	   	   'stCut':0,
+	   	   'mllOSCut':0,
 		   }
 
 if len(sys.argv)>3: catList=[str(sys.argv[3])]
 else: catList=['EEE','EEM','EMM','MMM','All']
 
 scaleSignalXsecTo1pb = False # this has to be "True" if you are making templates for limit calculation!!!!!!!!
-doAllSys= True
+doAllSys= False
 
-cutString = 'lep'+str(int(cutList['lepPtCut']))+'_MET'+str(int(cutList['metCut']))+'_leadJet'+str(int(cutList['leadJetPtCut']))+'_subLeadJet'+str(int(cutList['subLeadJetPtCut']))+'_thirdJet'+str(int(cutList['thirdJetPtCut']))+'_NJets'+str(int(cutList['njetsCut']))+'_NBJets'+str(int(cutList['nbjetsCut']))+'_DR'+str(int(cutList['drCut']))+'_ST'+str(int(cutList['stCut']))
+cutString = 'isPassTrig_All'+str(int(cutList['isPassTrig']))+'_'+'dilep'+str(int(cutList['isPassTrig_dilep']))+'_'+'dilepAnth'+str(int(cutList['isPassTrig_dilep_anth']))+'_'+'trilep'+str(int(cutList['isPassTrig_trilep']))+'_'+'isPassTrilepton'+str(int(cutList['isPassTrilepton']))+'_lep1Pt'+str(int(cutList['lep1PtCut']))+'_NJets'+str(int(cutList['njetsCut']))+'_NBJets'+str(int(cutList['nbjetsCut']))+'_DR'+str(int(cutList['drCut']))+'_ST'+str(int(cutList['stCut']))+'_MllOS'+str(int(cutList['mllOSCut']))
+# cutString = 'isPassTrig'+str(int(cutList['isPassTrig']))+'_'+'isPassTrig_dilep'+str(int(cutList['isPassTrig_dilep']))+'_'+'isPassTrig_dilepHT'+str(int(cutList['isPassTrig_dilepHT']))+'_'+'isPassTrig_trilep'+str(int(cutList['isPassTrig_trilep']))+'_'+'isPassTrilepton'+str(int(cutList['isPassTrilepton']))+'_'+'lep'+str(int(cutList['lepPtCut']))+'_NJets'+str(int(cutList['njetsCut']))+'_NBJets'+str(int(cutList['nbjetsCut']))+'_DR'+str(int(cutList['drCut']))+'_ST'+str(int(cutList['stCut']))
+# cutString = 'lep'+str(int(cutList['lepPtCut']))+'_MET'+str(int(cutList['metCut']))+'_leadJet'+str(int(cutList['leadJetPtCut']))+'_subLeadJet'+str(int(cutList['subLeadJetPtCut']))+'_thirdJet'+str(int(cutList['thirdJetPtCut']))+'_NJets'+str(int(cutList['njetsCut']))+'_NBJets'+str(int(cutList['nbjetsCut']))+'_DR'+str(int(cutList['drCut']))+'_ST'+str(int(cutList['stCut']))
 
 cTime=datetime.datetime.now()
 datestr='%i_%i_%i'%(cTime.year,cTime.month,cTime.day)
 timestr='%i_%i_%i'%(cTime.hour,cTime.minute,cTime.second)
-pfix='templates'
+
+pfix='kinematics_80x_Exactly3Lep'
+
+pfix+='_'+datestr
+
 #pfix+=datestr+'_'+timestr
 
 ###########################################################
@@ -55,124 +68,77 @@ pfix='templates'
 ###########################################################
 
 bigbins = [0,50,100,150,200,250,300,350,400,450,500,600,700,800,1000,1200,1500]
+HTbins = [0,100,200,300,400,500,600,800,1000,1200,1400,1600,2000]
+STbins = [0,100,200,300,400,500,600,800,1000,1200,1400,1600,2000]
+METbins = [0,20,40,60,80,100,120,140,160,180,220,260,300,400,500]
 
 plotList = {#discriminantName:(discriminantLJMETName, binning, xAxisLabel)
-	'deltaRb1Nonb':('deltaR_b1ClosestNonb',linspace(0,5,51).tolist(),';#DeltaR(1^{st} b, nearest light jet)'),
-	'deltaRb2Nonb':('deltaR_b2ClosestNonb',linspace(0,5,51).tolist(),';#DeltaR(2^{nd} b, nearest light jet)'),
-	'deltaRWNonb':('deltaR_WClosestNonb',linspace(0,5,51).tolist(),';#DeltaR(W #rightarrow qq, nearest extra jet)'),
-	'deltaEtab1Nonb':('deltaEta_b1ClosestNonb',linspace(-5,5,51).tolist(),';#Delta#eta(1^{st} b, nearest light jet)'),
-	'deltaEtab2Nonb':('deltaEta_b2ClosestNonb',linspace(-5,5,51).tolist(),';#Delta#eta(2^{nd} b, nearest light jet)'),
-	'deltaEtaWNonb':('deltaEta_WClosestNonb',linspace(-5,5,51).tolist(),';#Delta#eta(W #rightarrow qq, nearest extra jet)'),
-	'deltaPhib1Nonb':('deltaPhi_b1ClosestNonb',linspace(-3.2,3.2,65).tolist(),';#Delta#phi(1^{st} b, nearest light jet)'),
-	'deltaPhib2Nonb':('deltaPhi_b2ClosestNonb',linspace(-3.2,3.2,65).tolist(),';#Delta#phi(2^{nd} b, nearest light jet)'),
-	'deltaPhiWNonb':('deltaPhi_WClosestNonb',linspace(-3.2,3.2,65).tolist(),';#Delta#phi(W #rightarrow qq, nearest extra jet)'),
-	'TTbarPtBalance':('TTbarPtBalance',linspace(0,25,51).tolist(),';pT(b+b+q+q+l+MET) / pT(extra jets)'),
-
-	'deltaRAK8':('minDR_leadAK8otherAK8',linspace(0,5,51).tolist(),';min #DeltaR(1^{st} AK8 jet, other AK8 jet)'),
-	'MTlmet':('MT_lepMet',linspace(0,250,51).tolist(),';M_{T}(l,#slash{E}_{T}) (GeV)'),
 	'NPV'   :('nPV_singleLepCalc',linspace(0, 30, 31).tolist(),';PV multiplicity;'),
 
-	# 'lep1Pt' :('TightLeptonPt_PtOrdered[0]',linspace(0, 1000, 51).tolist(),';Lepton 1 p_{T} (GeV);'),
-	# 'lep2Pt' :('TightLeptonPt_PtOrdered[1]',linspace(0, 1000, 51).tolist(),';Lepton 2 p_{T} (GeV);'),
-	# 'lep3Pt' :('TightLeptonPt_PtOrdered[2]',linspace(0, 1000, 51).tolist(),';Lepton 3 p_{T} (GeV);'),
+	'lepPt' :('AllLeptonPt_PtOrdered',linspace(0, 500, 26).tolist(),';Leptons p_{T} (GeV);'),
+	'ElPt' :('AllLeptonElPt_PtOrdered',linspace(0, 500, 26).tolist(),';Electron p_{T} (GeV);'),
+	'MuPt' :('AllLeptonMuPt_PtOrdered',linspace(0, 500, 26).tolist(),';Muon p_{T} (GeV);'),
 
-	'lep1Pt' :('AllLeptonPt_PtOrdered[0]',linspace(0, 1000, 51).tolist(),';Lepton 1 p_{T} (GeV);'),
-	'lep2Pt' :('AllLeptonPt_PtOrdered[1]',linspace(0, 1000, 51).tolist(),';Lepton 2 p_{T} (GeV);'),
-	'lep3Pt' :('AllLeptonPt_PtOrdered[2]',linspace(0, 1000, 51).tolist(),';Lepton 3 p_{T} (GeV);'),
+	'lep1Pt' :('AllLeptonPt_PtOrdered[0]',linspace(0, 500, 26).tolist(),';Lepton 1 p_{T} (GeV);'),
+	'lep2Pt' :('AllLeptonPt_PtOrdered[1]',linspace(0, 300, 16).tolist(),';Lepton 2 p_{T} (GeV);'),
+	'lep3Pt' :('AllLeptonPt_PtOrdered[2]',linspace(0, 300, 16).tolist(),';Lepton 3 p_{T} (GeV);'),
 
-	# 'lep1Eta':('TightLeptonEta_PtOrdered[0]',linspace(-4, 4, 41).tolist(),';Lepton 1 #eta;'),
-	# 'lep2Eta':('TightLeptonEta_PtOrdered[1]',linspace(-4, 4, 41).tolist(),';Lepton 2 #eta;'),
-	# 'lep3Eta':('TightLeptonEta_PtOrdered[2]',linspace(-4, 4, 41).tolist(),';Lepton 3 #eta;'),
+	'lepEta':('AllLeptonEta_PtOrdered',linspace(-4, 4, 41).tolist(),';Lepton 1 #eta;'),
+	'ElEta':('AllLeptonElEta_PtOrdered',linspace(-4, 4, 41).tolist(),';Electron 1 #eta;'),
+	'MuEta':('AllLeptonMuEta_PtOrdered',linspace(-4, 4, 41).tolist(),';Mu 1 #eta;'),
 
 	'lep1Eta':('AllLeptonEta_PtOrdered[0]',linspace(-4, 4, 41).tolist(),';Lepton 1 #eta;'),
 	'lep2Eta':('AllLeptonEta_PtOrdered[1]',linspace(-4, 4, 41).tolist(),';Lepton 2 #eta;'),
 	'lep3Eta':('AllLeptonEta_PtOrdered[2]',linspace(-4, 4, 41).tolist(),';Lepton 3 #eta;'),
 
 	'JetEta':('theJetEta_JetSubCalc_PtOrdered',linspace(-4, 4, 41).tolist(),';AK4 Jet #eta;'),
-	'JetPt' :('theJetPt_JetSubCalc_PtOrdered',linspace(0, 1500, 51).tolist(),';AK4 Jet p_{T} (GeV);'),
-	'Jet1Pt':('theJetPt_JetSubCalc_PtOrdered[0]',linspace(0, 1500, 51).tolist(),';1^{st} AK4 Jet p_{T} (GeV);'),
-	'Jet2Pt':('theJetPt_JetSubCalc_PtOrdered[1]',linspace(0, 1500, 51).tolist(),';2^{nd} AK4 Jet p_{T} (GeV);'),
-# 	'Jet3Pt':('theJetPt_JetSubCalc_PtOrdered[2]',linspace(0, 800, 51).tolist(),';3^{rd} AK4 Jet p_{T} (GeV);'),
-# 	'Jet4Pt':('theJetPt_JetSubCalc_PtOrdered[3]',linspace(0, 500, 51).tolist(),';4^{th} AK4 Jet p_{T} (GeV);'),
-# 	'Jet5Pt':('theJetPt_JetSubCalc_PtOrdered[4]',linspace(0, 500, 51).tolist(),';5^{th} AK4 Jet p_{T} (GeV);'),
-# 	'Jet6Pt':('theJetPt_JetSubCalc_PtOrdered[5]',linspace(0, 500, 51).tolist(),';6^{th} AK4 Jet p_{T} (GeV);'),
-	'JetPtBins' :('theJetPt_JetSubCalc_PtOrdered',bigbins,';AK4 Jet p_{T} (GeV);'),
-	'Jet1PtBins':('theJetPt_JetSubCalc_PtOrdered[0]',bigbins,';1^{st} AK4 Jet p_{T} (GeV);'),
-	'Jet2PtBins':('theJetPt_JetSubCalc_PtOrdered[1]',bigbins,';2^{nd} AK4 Jet p_{T} (GeV);'),
-	'Jet3PtBins':('theJetPt_JetSubCalc_PtOrdered[2]',bigbins,';3^{rd} AK4 Jet p_{T} (GeV);'),
-# 	'Jet4PtBins':('theJetPt_JetSubCalc_PtOrdered[3]',bigbins,';4^{th} AK4 Jet p_{T} (GeV);'),
-# 	'Jet5PtBins':('theJetPt_JetSubCalc_PtOrdered[4]',bigbins,';5^{th} AK4 Jet p_{T} (GeV);'),
-# 	'Jet6PtBins':('theJetPt_JetSubCalc_PtOrdered[5]',bigbins,';6^{th} AK4 Jet p_{T} (GeV);'),
-	'HTtest'    :('AK4HTnoSF',linspace(0, 5000, 51).tolist(),';H_{T} (GeV), no jet SF;'),
-	'HT'    :('AK4HT',linspace(0, 5000, 51).tolist(),';H_{T} (GeV);'),
-	'ST'    :('AK4HTpMETpLepPt',linspace(0, 5000, 51).tolist(),';S_{T} (GeV);'),
-#  	'STnewMET'    :('AK4HTpJetSFMETpLepPt',linspace(0, 5000, 51).tolist(),';S_{T} (GeV), new MET;'),
-	'MET'   :('corr_met_singleLepCalc',linspace(0, 1500, 51).tolist(),';#slash{E}_{T} (GeV);'),
-	'METwJetSF'   :('corr_JetSFmet_singleLepCalc',linspace(0, 1500, 51).tolist(),';new #slash{E}_{T} from corr (GeV);'),
-	'METwJetSFraw'   :('corr_JetSFRawmet_singleLepCalc',linspace(0, 1500, 51).tolist(),';new #slash{E}_{T} from raw (GeV);'),
+	'Jet1Eta':('theJetEta_JetSubCalc_PtOrdered[0]',linspace(-4, 4, 41).tolist(),';1^{st} AK4 Jet #eta;'),
+	'Jet2Eta':('theJetEta_JetSubCalc_PtOrdered[0]',linspace(-4, 4, 41).tolist(),';2^{nd} AK4 Jet #eta;'),
+
+	'JetPt' :('theJetPt_JetSubCalc_PtOrdered',linspace(0, 750, 16).tolist(),';AK4 Jet p_{T} (GeV);'),
+	'Jet1Pt':('theJetPt_JetSubCalc_PtOrdered[0]',linspace(0, 750, 16).tolist(),';1^{st} AK4 Jet p_{T} (GeV);'),
+	'Jet2Pt':('theJetPt_JetSubCalc_PtOrdered[1]',linspace(0, 750, 16).tolist(),';2^{nd} AK4 Jet p_{T} (GeV);'),
+
+	'HT'    :('AK4HT',linspace(0, 2000, 21).tolist(),';H_{T} (GeV);'),
+	'HTrebinned'    :('AK4HT',HTbins,';H_{T} (GeV);'),
+	'ST'    :('AK4HTpMETpLepPt',linspace(0, 2000, 21).tolist(),';S_{T} (GeV);'),
+	'STrebinned'    :('AK4HTpMETpLepPt',STbins,';S_{T} (GeV);'),
+	'MET'   :('corr_met_singleLepCalc',linspace(0, 500, 26).tolist(),';#slash{E}_{T} (GeV);'),
+	'METrebinned'   :('corr_met_singleLepCalc',METbins,';#slash{E}_{T} (GeV);'),
+
 	'NJets' :('NJets_JetSubCalc',linspace(0, 15, 16).tolist(),';AK4 Jet multiplicity;'),
 	'NBJets':('NJetsCSVwithSF_JetSubCalc',linspace(0, 10, 11).tolist(),';CSVIVFv2 Medium tag multiplicity;'),
-# 	'NWJets':('NJetsWtagged',linspace(0, 6, 7).tolist(),';W tag multiplicity;'),
-# 	'NWJetsSmeared0p55noSF':('NJetsWtagged_JMR',linspace(0, 6, 7).tolist(),';W tag multiplicity;'),
-# 	'NWJetsSmeared0p55SF':('NJetsWtagged_0p55',linspace(0, 6, 7).tolist(),';W tag multiplicity;'),
-# 	'NWJetsSmeared':('NJetsWtagged_0p6',linspace(0, 6, 7).tolist(),';W tag multiplicity;'),
-	'NJetsAK8':('NJetsAK8_JetSubCalc',linspace(0, 8, 9).tolist(),';AK8 Jet multiplicity;'),
-	'JetPtAK8':('theJetAK8Pt_JetSubCalc_PtOrdered',linspace(0, 1500, 51).tolist(),';AK8 Jet p_{T} (GeV);'),
-	'JetPtBinsAK8':('theJetAK8Pt_JetSubCalc_PtOrdered',bigbins,';AK8 Jet p_{T} (GeV);'),
-	'JetEtaAK8':('theJetAK8Eta_JetSubCalc_PtOrdered',linspace(-4, 4, 41).tolist(),';AK8 Jet #eta;'),
-	'Tau21'  :('theJetAK8NjettinessTau2_JetSubCalc_PtOrdered/theJetAK8NjettinessTau1_JetSubCalc_PtOrdered',linspace(0, 1, 51).tolist(),';AK8 Jet #tau_{2}/#tau_{1};'),
-	'Tau21Nm1'  :('theJetAK8NjettinessTau2_JetSubCalc_PtOrdered/theJetAK8NjettinessTau1_JetSubCalc_PtOrdered',linspace(0, 1, 51).tolist(),';AK8 Jet #tau_{2}/#tau_{1};'),
-	'Pruned' :('theJetAK8PrunedMass_JetSubCalc_PtOrdered',linspace(0, 500, 51).tolist(),';AK8 Jet Pruned mass (GeV);'),
-	'PrunedSmeared' :('theJetAK8PrunedMassJMRSmeared_JetSubCalc',linspace(0, 500, 51).tolist(),';AK8 Jet Pruned mass (GeV);'),
-	'PrunedSmearedNm1' :('theJetAK8PrunedMassJMRSmeared_JetSubCalc',linspace(0, 500, 51).tolist(),';AK8 Jet Pruned mass (GeV);'),
+	'NBJetsCorr':('NJetsCSVwithSF_JetSubCalc_noLepCorr',linspace(0, 10, 11).tolist(),';CSVIVFv2 Medium tag multiplicity;'),
+
+	'mindeltaR':('deltaR_lepJets',linspace(0, 5, 51).tolist(),';min #DeltaR(l, jet);'),
+	'mindeltaRB':('deltaR_lepBJets',linspace(0, 5, 51).tolist(),';min #DeltaR(l, bjet);'),
 	'mindeltaR1':('deltaR_lepClosestJet[0]',linspace(0, 5, 51).tolist(),';min #DeltaR(l1, jet);'),
 	'mindeltaR2':('deltaR_lepClosestJet[1]',linspace(0, 5, 51).tolist(),';min #DeltaR(l2, jet);'),
 	'mindeltaR3':('deltaR_lepClosestJet[2]',linspace(0, 5, 51).tolist(),';min #DeltaR(l3, jet);'),
+
 	'deltaRjet1':('deltaR_lepJets[0]',linspace(0, 5, 51).tolist(),';#DeltaR(l, 1^{st} jet);'),
 	'deltaRjet2':('deltaR_lepJets[1]',linspace(0, 5, 51).tolist(),';#DeltaR(l, 2^{nd} jet);'),
 	'deltaRjet3':('deltaR_lepJets[2]',linspace(0, 5, 51).tolist(),';#DeltaR(l, 3^{rd} jet);'),
-	'minMlb' :('minMleppBjet',linspace(0, 1000, 51).tolist(),';min[M(l,b)] (GeV), 1+ b tags;'),  ## B TAG
-	'nTrueInt':('nTrueInteractions_singleLepCalc',linspace(0,30,31).tolist(),';True interaction multiplicity'),
-	'nLepGen':('NLeptonDecays_TpTpCalc',linspace(0,10,11).tolist(),';N lepton decays from TT'),
-	'METphi':('corr_met_phi_singleLepCalc',linspace(-3.2,3.2,65).tolist(),';#phi(#slash{E}_{T})'),
-	'lepPhi':('leptonPhi_singleLepCalc',linspace(-3.2,3.2,65).tolist(),';#phi(l)'),
-	'lepDxy':('leptonDxy_singleLepCalc',linspace(-0.02,0.02,51).tolist(),';lepton xy impact param [cm]'),
-	'lepDz':('leptonDz_singleLepCalc',linspace(-0.1,0.1,51).tolist(),';lepton z impact param [cm]'),
-	'lepCharge':('leptonCharge_singleLepCalc',linspace(-2,2,5).tolist(),';lepton charge'),
-	'lepIso':('leptonMiniIso_singleLepCalc',linspace(0,0.2,51).tolist(),';lepton mini isolation'),
-	'Tau1':('theJetAK8NjettinessTau1_JetSubCalc_PtOrdered',linspace(0,1,51).tolist(),';AK8 Jet #tau_{1}'),
-	'Tau2':('theJetAK8NjettinessTau2_JetSubCalc_PtOrdered',linspace(0,1,51).tolist(),';AK8 Jet #tau_{2}'),
-	'JetPhi':('theJetPhi_JetSubCalc_PtOrdered',linspace(-3.2,3.2,65).tolist(),';AK4 Jet #phi'),
-	'JetPhiAK8':('theJetAK8Phi_JetSubCalc_PtOrdered',linspace(-3.2,3.2,65).tolist(),';AK8 Jet #phi'),
-	'Bjet1Pt':('BJetLeadPtWithSF_JetSubCalc',linspace(0,1500,51).tolist(),';1^{st} b jet p_{T} [GeV]'),  ## B TAG
-# 	'Wjet1Pt':('WJetLeadPt',linspace(0,1500,51).tolist(),';1^{st} W jet p_{T} [GeV]'),
-# 	'topMass':('topMass',linspace(0,1500,51).tolist(),';reconstructed M(t) [GeV]'),
-# 	'topPt':('topPt',linspace(0,1500,51).tolist(),';reconstructed pT(t) [GeV]'),
-	'minMlj':('minMleppJet',linspace(0,1000,51).tolist(),';min[M(l,jet)] [GeV]'),
-	'minMljDR':('deltaRlepJetInMinMljet',linspace(0,5,51).tolist(),';#DeltaR(l,jet) from min[M(l,jet)]'),
-	'minMljDPhi':('deltaPhilepJetInMinMljet',linspace(0,5,51).tolist(),';#Delta#phi(l,jet) from min[M(l,jet)]'),
-	'minMlbDR':('deltaRlepbJetInMinMlb',linspace(0,5,51).tolist(),';#DeltaR(l,b) from min[M(l,b)], 1+ b tags'), ## B TAG
-	'minMlbDPhi':('deltaPhilepbJetInMinMlb',linspace(0,5,51).tolist(),';#Delta#phi(l,b) from min[M(l,b)], 1+ b tags'), ## B TAG
-	'nonMinMlbDR':('deltaRlepbJetNotInMinMlb',linspace(0,5,51).tolist(),';#DeltaR(l,b) not in min[M(l,b)], 1+ b tags'),  ## B TAG
-# 	'MWb1':('M_taggedW_bjet1',linspace(0,1000,51).tolist(),';M(W jet, 1^{st} b jet) [GeV]'), ## B TAG
-# 	'MWb2':('M_taggedW_bjet2',linspace(0,1000,51).tolist(),';M(W jet, 2^{nd} b jet) [GeV]'), ## 2 B TAG
-	'HT4jets':('HT_leading4jets',linspace(0,5000,51).tolist(),';H_{T} from 4 leading jets [GeV]'), 
-	'deltaRlb1':('deltaRlepbJet1',linspace(0,5,51).tolist(),';#DeltaR(l, 1^{st} b jet)'), ## B TAG
-	'deltaRlb2':('deltaRlepbJet2',linspace(0,5,51).tolist(),';#DeltaR(l, 2^{nd} b jet)'), ## 2 B TAG
-# 	'deltaRtW':('deltaRtopWjet',linspace(0,5,51).tolist(),';#DeltaR(reco t, W jet)'),
-# 	'deltaRlW':('deltaRlepWjet',linspace(0,5,51).tolist(),';#DeltaR(l, W jet)'),
-# 	'deltaRWb1':('deltaRtaggedWbJet1',linspace(0,5,51).tolist(),';#DeltaR(W, 1^{st} b jet)'), ## B TAG
-# 	'deltaRWb2':('deltaRtaggedWbJet2',linspace(0,5,51).tolist(),';#DeltaR(W, 2^{nd} b jet)'), ## 2 B TAG
-	'deltaPhilb1':('deltaPhilepbJet1',linspace(0,5,51).tolist(),';#Delta#phi(l, 1^{st} b jet)'), ## B TAG
-	'deltaPhilb2':('deltaPhilepbJet2',linspace(0,5,51).tolist(),';#Delta#phi(l, 2^{nd} b jet)'), ## 2 B TAG
-# 	'deltaPhitW':('deltaPhitopWjet',linspace(0,5,51).tolist(),';#Delta#phi(reco t, W jet)'),
-# 	'deltaPhilW':('deltaPhilepWjet',linspace(0,5,51).tolist(),';#Delta#phi(l, W jet)'),
-# 	'deltaPhiWb1':('deltaPhitaggedWbJet1',linspace(0,5,51).tolist(),';#Delta#phi(W, 1^{st} b jet)'), ## B TAG
-# 	'deltaPhiWb2':('deltaPhitaggedWbJet2',linspace(0,5,51).tolist(),';#Delta#phi(W, 2^{nd} b jet)'), ## 2 B TAG
-# 	'WjetPt':('WJetTaggedPt',linspace(0,1500,51).tolist(),';W jet p_{T} [GeV]'),
+
+	'lepCharge':('AllLeptonCharge_PtOrdered',linspace(-2,2,5).tolist(),';lepton charge'),
+
+	'lepIso':('AllLeptonMiniIso_PtOrdered',linspace(0,0.6,51).tolist(),';lepton mini isolation'),
+	'ElIso':('AllLeptonElMiniIso_PtOrdered',linspace(0,0.6,51).tolist(),';Electron mini isolation'),
+	'MuIso':('AllLeptonMuMiniIso_PtOrdered',linspace(0,0.6,51).tolist(),'; Muon mini isolation'),
+
+	'BjetPt':('theJetBTag_JetSubCalc_PtOrdered',linspace(0,1500,51).tolist(),';b jet p_{T} [GeV]'),  ## B TAG
+	'Bjet1Pt':('theJetBTag_JetSubCalc_PtOrdered[0]',linspace(0,1500,51).tolist(),';1^{st} b jet p_{T} [GeV]'),  ## B TAG
+	'Bjet1Pt':('theJetBTag_JetSubCalc_PtOrdered[1]',linspace(0,1500,51).tolist(),';2^{nd} b jet p_{T} [GeV]'),  ## B TAG
+
 	'PtRel1':('PtRelLepClosestJet[0]',linspace(0,500,51).tolist(),';p_{T,rel}(l1, closest jet) [GeV]'),
 	'PtRel2':('PtRelLepClosestJet[1]',linspace(0,500,51).tolist(),';p_{T,rel}(l2, closest jet) [GeV]'),
 	'PtRel3':('PtRelLepClosestJet[2]',linspace(0,500,51).tolist(),';p_{T,rel}(l3, closest jet) [GeV]'),
+	
+	'MllsameFlavorOS':('Mll_sameFlavorOS',linspace(-10,300,32).tolist(),'; M(ll_{OS}) [GeV]'),
+	'MllOSall':('MllOS_allComb',linspace(-10,300,32).tolist(),'; M(ll_{OS}) all [GeV]'),
+	'MllOSallmin':('MllOS_allComb_min',linspace(-10,300,32).tolist(),'; min ( M(ll_{OS}) ) [GeV]'),
+	'Mlll':('Mlll',linspace(-10,300,32).tolist(),'; M(lll) [GeV]'),
+	
 	}
 
 ###########################################################
@@ -181,40 +147,78 @@ plotList = {#discriminantName:(discriminantLJMETName, binning, xAxisLabel)
 
 bkgList = [
 # 	'DY50',
-	'WJetsMG100',
-	'WJetsMG200',
-	'WJetsMG400',
-	'WJetsMG600',
-	'WJetsMG800',
-	'WJetsMG1200',
-	'WJetsMG2500',
-	'WW','WZ','ZZ',
-	'WWZ','WZZ','ZZZ',
-#	'TTJetsPH',
-	'TTJetsPH0to700inc',
-	'TTJetsPH700to1000inc',
-	'TTJetsPH1000toINFinc',
-	'TTJetsPH700mtt',
-	'TTJetsPH1000mtt',
-	'TTWl','TTWq',
-	'TTZl','TTZq',
-	'Tt','Ts',
-	'TtW','TbtW',
-	'QCDht100','QCDht200','QCDht300','QCDht500','QCDht700','QCDht1000','QCDht1500','QCDht2000',
-	'DataDrivenBkgEEPRD','DataDrivenBkgEERRD','DataDrivenBkgEERRC',
-	'DataDrivenBkgMMPRD','DataDrivenBkgMMRRD','DataDrivenBkgMMRRC',
-	'DataDrivenBkgMEPRD','DataDrivenBkgMERRD','DataDrivenBkgMERRC',
+# 	'WJetsMG100',
+# 	'WJetsMG200',
+# 	'WJetsMG400',
+# 	'WJetsMG600',
+# 	'WJetsMG800',
+# 	'WJetsMG1200',
+# 	'WJetsMG2500',
+# 	'WW',
+	'WZ','ZZ',
+
+	'WWW','WWZ','WZZ','ZZZ',
+# 	'TTJets',
+	'TTJetsPH',
+# 	'TTJetsPH0to700inc',
+# 	'TTJetsPH700to1000inc',
+# 	'TTJetsPH1000toINFinc',
+# 	'TTJetsPH700mtt',
+# 	'TTJetsPH1000mtt',
+# 	'TTWl','TTWq',
+	'TTWl',
+# 	'TTZl','TTZq',
+	'TTZl',
+# 	'Tt','Ts',
+# 	'TtW','TbtW',
+# 	'QCDht100','QCDht200','QCDht300','QCDht500','QCDht700','QCDht1000','QCDht1500','QCDht2000',
+	'DataDrivenBkgEEPRB','DataDrivenBkgEEPRC','DataDrivenBkgEEPRD',
+	'DataDrivenBkgMMPRB','DataDrivenBkgMMPRC','DataDrivenBkgMMPRD',
+	'DataDrivenBkgMEPRB','DataDrivenBkgMEPRC','DataDrivenBkgMEPRD',
+
+	'DataDrivenBkgTTTEEPRB','DataDrivenBkgTTTEEPRC','DataDrivenBkgTTTEEPRD',
+	'DataDrivenBkgTTTMMPRB','DataDrivenBkgTTTMMPRC','DataDrivenBkgTTTMMPRD',
+	'DataDrivenBkgTTTMEPRB','DataDrivenBkgTTTMEPRC','DataDrivenBkgTTTMEPRD',
+
+	'DataDrivenBkgTTLEEPRB','DataDrivenBkgTTLEEPRC','DataDrivenBkgTTLEEPRD',
+	'DataDrivenBkgTTLMMPRB','DataDrivenBkgTTLMMPRC','DataDrivenBkgTTLMMPRD',
+	'DataDrivenBkgTTLMEPRB','DataDrivenBkgTTLMEPRC','DataDrivenBkgTTLMEPRD',
+
+	'DataDrivenBkgTLTEEPRB','DataDrivenBkgTLTEEPRC','DataDrivenBkgTLTEEPRD',
+	'DataDrivenBkgTLTMMPRB','DataDrivenBkgTLTMMPRC','DataDrivenBkgTLTMMPRD',
+	'DataDrivenBkgTLTMEPRB','DataDrivenBkgTLTMEPRC','DataDrivenBkgTLTMEPRD',
+
+	'DataDrivenBkgLTTEEPRB','DataDrivenBkgLTTEEPRC','DataDrivenBkgLTTEEPRD',
+	'DataDrivenBkgLTTMMPRB','DataDrivenBkgLTTMMPRC','DataDrivenBkgLTTMMPRD',
+	'DataDrivenBkgLTTMEPRB','DataDrivenBkgLTTMEPRC','DataDrivenBkgLTTMEPRD',
+
+	'DataDrivenBkgTLLEEPRB','DataDrivenBkgTLLEEPRC','DataDrivenBkgTLLEEPRD',
+	'DataDrivenBkgTLLMMPRB','DataDrivenBkgTLLMMPRC','DataDrivenBkgTLLMMPRD',
+	'DataDrivenBkgTLLMEPRB','DataDrivenBkgTLLMEPRC','DataDrivenBkgTLLMEPRD',
+
+	'DataDrivenBkgLTLEEPRB','DataDrivenBkgLTLEEPRC','DataDrivenBkgLTLEEPRD',
+	'DataDrivenBkgLTLMMPRB','DataDrivenBkgLTLMMPRC','DataDrivenBkgLTLMMPRD',
+	'DataDrivenBkgLTLMEPRB','DataDrivenBkgLTLMEPRC','DataDrivenBkgLTLMEPRD',
+
+	'DataDrivenBkgLLTEEPRB','DataDrivenBkgLLTEEPRC','DataDrivenBkgLLTEEPRD',
+	'DataDrivenBkgLLTMMPRB','DataDrivenBkgLLTMMPRC','DataDrivenBkgLLTMMPRD',
+	'DataDrivenBkgLLTMEPRB','DataDrivenBkgLLTMEPRC','DataDrivenBkgLLTMEPRD',
+
+	'DataDrivenBkgLLLEEPRB','DataDrivenBkgLLLEEPRC','DataDrivenBkgLLLEEPRD',
+	'DataDrivenBkgLLLMMPRB','DataDrivenBkgLLLMMPRC','DataDrivenBkgLLLMMPRD',
+	'DataDrivenBkgLLLMEPRB','DataDrivenBkgLLLMEPRC','DataDrivenBkgLLLMEPRD',
+
 	]
 
 whichSignal = 'TT' #TT, BB, or T53T53
-signalMassRange = [700,1800]
+signalMassRange = [800,1800]
 sigList = [whichSignal+'M'+str(mass) for mass in range(signalMassRange[0],signalMassRange[1]+100,100)]
 if whichSignal=='T53T53': sigList = [whichSignal+'M'+str(mass)+chiral for mass in range(signalMassRange[0],signalMassRange[1]+100,100) for chiral in ['left','right']]
 if whichSignal=='TT': decays = ['BWBW','THTH','TZTZ','TZBW','THBW','TZTH'] #T' decays
 if whichSignal=='BB': decays = ['TWTW','BHBH','BZBZ','BZTW','BHTW','BZBH'] #B' decays
 if whichSignal=='T53T53': decays = [''] #decays to tWtW 100% of the time
 
-dataList = ['DataEERRC','DataEERRD','DataEEPRD','DataMMRRC','DataMMRRD','DataMMPRD','DataMERRC','DataMERRD','DataMEPRD']
+dataList = ['DataEEPRB','DataEEPRC','DataEEPRD','DataMMPRB','DataMMPRC','DataMMPRD','DataMEPRB','DataMEPRC','DataMEPRD']
 
 ###########################################################
 #################### NORMALIZATIONS #######################
@@ -248,7 +252,7 @@ def readTree(file):
 	return tFile, tTree 
 
 print "READING TREES"
-shapesFiles = ['jec','jer','btag']
+shapesFiles = ['jec','jer']
 tTreeData = {}
 tFileData = {}
 for data in dataList:
@@ -289,7 +293,10 @@ print "FINISHED READING"
 
 if len(sys.argv)>2: iPlot=sys.argv[2]
 # else: iPlot='minMlb'
-else: iPlot='ST'
+else: iPlot='STrebinned'
+# else: iPlot='Mlll'
+# else: iPlot='lepIso'
+# else: iPlot='JetPt'
 print "PLOTTING:",iPlot
 print "         LJMET Variable:",plotList[iPlot][0]
 print "         X-AXIS TITLE  :",plotList[iPlot][2]
@@ -304,7 +311,8 @@ for category in catList:
 	sighists  = {}
 	if len(sys.argv)>1: outDir=sys.argv[1]
 	else: 
-		outDir = os.getcwd()+'/'
+		outDir = '/user_data/rsyarif/'
+# 		outDir = os.getcwd()+'/'
 		outDir+=pfix
 		if not os.path.exists(outDir): os.system('mkdir '+outDir)
 		if not os.path.exists(outDir+'/'+cutString): os.system('mkdir '+outDir+'/'+cutString)
@@ -315,6 +323,7 @@ for category in catList:
 		datahists.update(analyze(tTreeData,data,cutList,False,iPlot,plotList[iPlot],category))
 		if catInd==nCats: del tFileData[data]
 	for bkg in bkgList: 
+		print '+++++++++++++++++++++>>>>>>>>>>>>>>>>>>>>>>>>>>  bkg = ' , bkg 
 		bkghists.update(analyze(tTreeBkg,bkg,cutList,doAllSys,iPlot,plotList[iPlot],category))
 		if catInd==nCats: del tFileBkg[bkg]
 		if doAllSys and catInd==nCats:
@@ -330,7 +339,8 @@ for category in catList:
 					for ud in ['Up','Down']: del tFileSig[sig+decay+syst+ud]
 
 	#Negative Bin Correction
-	for bkg in bkghists.keys(): negBinCorrection(bkghists[bkg])
+	for bkg in bkghists.keys(): 
+		if 'DataDrivenBkg' not in bkg:negBinCorrection(bkghists[bkg])
 
 	#OverFlow Correction
 	for data in datahists.keys(): overflow(datahists[data])
@@ -343,4 +353,3 @@ for category in catList:
 	catInd+=1
 
 print("--- %s minutes ---" % (round((time.time() - start_time)/60,2)))
-
