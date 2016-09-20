@@ -157,7 +157,7 @@ bkgList = [
 # 	'WW',
 	'WZ','ZZ',
 
-	'WWZ','WZZ','ZZZ',
+	'WWW','WWZ','WZZ','ZZZ',
 # 	'TTJets',
 	'TTJetsPH',
 # 	'TTJetsPH0to700inc',
@@ -293,7 +293,7 @@ print "FINISHED READING"
 
 if len(sys.argv)>2: iPlot=sys.argv[2]
 # else: iPlot='minMlb'
-else: iPlot='HTrebinned'
+else: iPlot='STrebinned'
 # else: iPlot='Mlll'
 # else: iPlot='lepIso'
 # else: iPlot='JetPt'
