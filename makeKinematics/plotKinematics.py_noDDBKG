@@ -412,17 +412,17 @@ for discriminant in plotList:
 		hsig.Scale(scaleFact1)
 		
 		stackbkgHT = THStack("stackbkgHT","")
-		try: stackbkgHT.Add(hTTJets)
-		except: pass
-		try: stackbkgHT.Add(hTTV)
-		except: pass
-		try: stackbkgHT.Add(hVV)
+		try: stackbkgHT.Add(hWJets)
 		except: pass
 		try: stackbkgHT.Add(hVVV)
 		except: pass
-		try: stackbkgHT.Add(WJets)
+		try: stackbkgHT.Add(hTTV)
 		except: pass
-		try: stackbkgHT.Add(ZJets)
+		try: stackbkgHT.Add(hZJets)
+		except: pass
+		try: stackbkgHT.Add(hTTJets)
+		except: pass
+		try: stackbkgHT.Add(hVV)
 		except: pass
 		try: 
 			if hQCD.Integral()/bkgHT.Integral()>.005: stackbkgHT.Add(hQCD) #don't plot QCD if it is less than 0.5%
@@ -436,8 +436,8 @@ for discriminant in plotList:
 			hTTJets.SetLineWidth(2)
 		except: pass
 		try:
-			hTTV.SetLineColor(kAzure-5)
-			hTTV.SetFillColor(kAzure-5)
+			hTTV.SetLineColor(kAzure-4)
+			hTTV.SetFillColor(kAzure-4)
 			hTTV.SetLineWidth(2)
 		except: pass
 		try: 
@@ -446,18 +446,18 @@ for discriminant in plotList:
 			hVV.SetLineWidth(2)
 		except: pass
 		try: 
-			hVVV.SetLineColor(kMagenta-1)
-			hVVV.SetFillColor(kMagenta-1)
+			hVVV.SetLineColor(kMagenta)
+			hVVV.SetFillColor(kMagenta)
 			hVVV.SetLineWidth(2)
 		except: pass
 		try: 
-			hWJets.SetLineColor(kMagenta+1)
-			hWJets.SetFillColor(kMagenta+1)
+			hWJets.SetLineColor(kRed)
+			hWJets.SetFillColor(kRed)
 			hWJets.SetLineWidth(2)
 		except: pass
 		try: 
-			hZJets.SetLineColor(kMagenta+2)
-			hZJets.SetFillColor(kMagenta+2)
+			hZJets.SetLineColor(kMagenta+4)
+			hZJets.SetFillColor(kMagenta+4)
 			hZJets.SetLineWidth(2)
 		except: pass
 		try:
@@ -579,7 +579,7 @@ for discriminant in plotList:
 		try: leg.AddEntry(hZJets,"Zjets","f")
 		except: pass
 # 		try: leg.AddEntry(hTOP,"TOP","f")
-		try: leg.AddEntry(hTTJets,"TT","f")
+		try: leg.AddEntry(hTTJets,"TTJets","f")
 		except: pass
 		try: leg.AddEntry(hTTV,"TTV","f")
 		except: pass
