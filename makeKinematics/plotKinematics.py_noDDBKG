@@ -414,7 +414,7 @@ for discriminant in plotList:
 		stackbkgHT = THStack("stackbkgHT","")
 		try: stackbkgHT.Add(hTTJets)
 		except: pass
-		try: stackbkgHT.Add(hTTTV)
+		try: stackbkgHT.Add(hTTV)
 		except: pass
 		try: stackbkgHT.Add(hVV)
 		except: pass
