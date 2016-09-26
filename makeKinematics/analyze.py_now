@@ -72,7 +72,7 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 
 # 	cut += ' && Mll_sameFlavorOS > '+str(cutList['mllOSCut']) #to make sure the OS pair are same sign cut above 0. 
 
-#	cut += ' && MllOS_allComb_min > '+str(cutList['mllOSCut']) #to make sure the OS pair are same sign cut above 0. 
+	cut += ' && MllOS_allComb_min > '+str(cutList['mllOSCut']) #to make sure the OS pair are same sign cut above 0. 
 
 # 	cut += ' && ( (MllOS_allComb[0] > 80 && MllOS_allComb[0] < 100)' #on Z cut
 # 	cut += ' || (MllOS_allComb[1] > 80 && MllOS_allComb[1] < 100)' #on Z cut
@@ -289,7 +289,8 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 		weightjsfDownStr  = '1'		
 
 	else: 
-		weightStr           = TrigEff+' * pileupWeight * 1 * isoSF * lepIdSF * MCWeight_singleLepCalc/abs(MCWeight_singleLepCalc) * '+str(weight[process])
+		weightStr           = TrigEff+' * pileupWeight * 1 * isoSF * lepIdSF * EGammaGsfSF * MuTrkSF * MCWeight_singleLepCalc/abs(MCWeight_singleLepCalc) * '+str(weight[process])
+# 		weightStr           = TrigEff+' * pileupWeight * 1 * isoSF * lepIdSF * MCWeight_singleLepCalc/abs(MCWeight_singleLepCalc) * '+str(weight[process])
 # 		weightStr           = TrigEff+' * pileupWeight * JetSF_pTNbwflat * isoSF * lepIdSF * MCWeight_singleLepCalc/abs(MCWeight_singleLepCalc) * '+str(weight[process])
 		weightPileupUpStr   = weightStr.replace('pileupWeight','pileupWeightUp')
 		weightPileupDownStr = weightStr.replace('pileupWeight','pileupWeightDown')
