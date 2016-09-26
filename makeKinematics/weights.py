@@ -17,11 +17,13 @@ BR['TTTHTH'] = BR['TH']*BR['TH']
 nRun={}
 #nRun['DY10to50'] = 21843373# 22217467 # from ???
 nRun['DY'] = 19223700. # from 28697000 # our own calculation for amcatnlo
-nRun['WJets'] = 6776900 # from 9908530 # our own calculation for amcatnlo - DOUBLE CHECK with JULIE!!
+# nRun['WJets'] = 6776900 # from 9908530 # our own calculation for amcatnlo - DOUBLE CHECK with JULIE!!
+nRun['WJets'] = 28210360 # MG, from DAS
+
+nRun['TTJetsPH'] = 182123200. # from DAS /TT_TuneCUETP8M1_13TeV-powheg-pythia8/RunIISpring16MiniAODv2-PUSpring16_80X_mcRun2_asymptotic_2016_miniAODv2_v0_ext4-v1/MINIAODSIM
 
 # numbers not updated to 80x ! - start
 nRun['TTJets'] = 14188545. # from 42784971
-nRun['TTJetsPH'] = 96834559. # /TT_TuneCUETP8M1_13TeV-powheg-pythia8/RunIISpring15MiniAODv2-74X_mcRun2_asymptotic_v2_ext3-v1/MINIAODSIM
 nRun['TTJetsPH0to700inc'] = nRun['TTJetsPH']
 nRun['TTJetsPH700to1000inc'] = nRun['TTJetsPH']*0.0921 + 3877762. #filtering efficiency coeff.
 nRun['TTJetsPH1000toINFinc'] = nRun['TTJetsPH']*0.02474 + 2360497. #filtering efficiency coeff.
@@ -43,14 +45,15 @@ nRun['TTWq'] = 430310. #from 833298 - our own calculation
 nRun['TTZl'] = 185232. #from 398600 - our own calculation 
 nRun['TTZq'] = 351164. #from 749400 - our own calculation 
 
+nRun['WJetsMG100'] = 27546978. # MG, from DAS
+nRun['WJetsMG200'] = 14888384. # MG, from DAS
+nRun['WJetsMG400'] = 5469282. # MG, from DAS
+nRun['WJetsMG600'] = 14410862. # MG, from DAS
+nRun['WJetsMG800'] = 6314257. # MG, from DAS
+nRun['WJetsMG1200'] = 6817172. # MG, from DAS
+nRun['WJetsMG2500'] = 2254248. # MG, from DAS
+
 # numbers not updated to 80x ! - start
-nRun['WJetsMG100'] = 10142187.
-nRun['WJetsMG200'] = 5231856.
-nRun['WJetsMG400'] = 1901705.
-nRun['WJetsMG600'] = 3984529.
-nRun['WJetsMG800'] = 1574633.
-nRun['WJetsMG1200'] = 255637.
-nRun['WJetsMG2500'] = 253036.
 nRun['Ts'] = 613384. #from 984400
 nRun['Tt'] = 4291728. #from 19904330 (was 29892343 in miniAODv1)
 nRun['TtW'] = 995600.
