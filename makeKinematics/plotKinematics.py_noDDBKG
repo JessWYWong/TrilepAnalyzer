@@ -9,7 +9,13 @@ start_time = time.time()
 
 lumi=12.9 #for plots
 
-templateDir='/user_data/rsyarif/kinematics_80x_Exactly3Lep_no2Dcut_noMllOScut_dilepTrigReady_noDDBKG_2016_9_21/isPassTrig_All0_dilep1_dilepAnth0_trilep0_isPassTrilepton1_lep1Pt0_NJets2_NBJets0_DR0_ST0_MllOS0/'
+# templateDir='/user_data/rsyarif/kinematics_80x_Exactly3Lep_no2Dcut_noMllOScut_dilepTrigReady_noDDBKG_2016_9_21/isPassTrig_All0_dilep1_dilepAnth0_trilep0_isPassTrilepton1_lep1Pt0_NJets2_NBJets0_DR0_ST0_MllOS0/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_noMllOScut_dilepTrigReady_noDDBKG_2016_9_21/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_noMllOScut_dilepTrigReady_noDDBKG_fixedSF_2016_9_26/'
+
+templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_noDDBKG_2016_10_14/'
 
 
 lumiInTemplates='12p9'
@@ -24,9 +30,14 @@ if 'Final' in templateDir: scaleFact1 = 40
 # systematicList = ['pileup','jec','jer','jsf','jmr','jms','btag','tau21','pdfNew','muRFcorrdNew','toppt','PR','FR']
 # systematicList = ['pileup','jec','jer','jsf','btag','pdfNew','muRFcorrdNew','PR','FR']
 
-systematicList = ['PR','FR']
+# systematicList = ['pileup','jec','jer','btag','pdfNew','muRFcorrdNew','PR','FR'] # no jsf
 
-doAllSys = True
+# systematicList = ['PR','FR']
+
+systematicList = ['pileup','btag','pdfNew','muRFcorrdNew','PR','FR']
+
+
+doAllSys = False
 
 isRebinned=''#post fix for file names if the name changed b/c of rebinning or some other process
 doNormByBinWidth=False # not tested, may not work out of the box
@@ -99,10 +110,10 @@ def normByBinWidth(result):
 		result.SetBinContent(bin, content/width)
 		result.SetBinError(bin, error/width)
 
-lumiSys = 0.027 #0.046 #4.6% lumi uncertainty #updated 18april2016 cehck twiki!!
-trigSys = math.sqrt(3.*0.03**2) #3% trigger uncertainty ## NEED to add in quadrature for EE, EM, and MM triggers!
-lepIdSys = math.sqrt(3.*0.01**2) #1% lepton id uncertainty ## NEED to add in quadrature for 3 leptons!
-lepIsoSys = math.sqrt(3.*0.01**2) #1% lepton isolation uncertainty ## NEED to add in quadrature for 3 leptons!
+lumiSys = 0.062 #6.2% https://twiki.cern.ch/twiki/bin/view/CMS/TWikiLUM - 20Sep2016
+trigSys = 0.03 #3% trigger uncertainty - AN 2016 229
+lepIdSys = math.sqrt(3.*0.01**2) #1% lepton id uncertainty ## NEED to add in quadrature for 3 leptons! - ATTENTION! NEED UPDATING!
+lepIsoSys = math.sqrt(3.*0.01**2) #1% lepton isolation uncertainty ## NEED to add in quadrature for 3 leptons! - ATTENTION! NEED UPDATING!
 topXsecSys = 0.0 #55 #5.5% top x-sec uncertainty
 ewkXsecSys = 0.0 #5 #5% ewk x-sec uncertainty
 qcdXsecSys = 0.0 #50 #50% qcd x-sec uncertainty
@@ -145,14 +156,14 @@ plotList = [#distribution name as defined in "doHists.py"
 
 	'NJets' ,
 	'NBJets',
-	'NBJetsCorr',
+	#'NBJetsCorr',
 
-	'mindeltaR',
-	'mindeltaRB',
-
-	'mindeltaR1',
-	'mindeltaR2',
-	'mindeltaR3',
+# 	'mindeltaR',
+# 	'mindeltaRB',
+# 
+# 	'mindeltaR1',
+# 	'mindeltaR2',
+# 	'mindeltaR3',
 	'PtRel1',
 	'PtRel2',
 	'PtRel3',
@@ -570,9 +581,9 @@ for discriminant in plotList:
 			if hQCD.Integral()/bkgHT.Integral()>.005: leg.AddEntry(hQCD,"QCD","f") #don't plot QCD if it is less than 0.5%
 		except: pass
 # 		try: leg.AddEntry(hEWK,"EWK","f")
-		try: leg.AddEntry(hVV,"VV","f")
+		try: leg.AddEntry(hVV,"VV (WW,WZ,ZZ) ","f")
 		except: pass
-		try: leg.AddEntry(hVVV,"VVV","f")
+		try: leg.AddEntry(hVVV,"VVV (WWW, WWZ, WZZ, ZZZ) ","f")
 		except: pass
 		try: leg.AddEntry(hWJets,"Wjets","f")
 		except: pass
@@ -581,7 +592,7 @@ for discriminant in plotList:
 # 		try: leg.AddEntry(hTOP,"TOP","f")
 		try: leg.AddEntry(hTTJets,"TTJets","f")
 		except: pass
-		try: leg.AddEntry(hTTV,"TTV","f")
+		try: leg.AddEntry(hTTV,"TTV (TTW,TTZ)","f")
 		except: pass
 # 		try: leg.AddEntry(hDDBKG,"DD BKG","f")
 # 		except: pass
