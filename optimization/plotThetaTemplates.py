@@ -7,12 +7,17 @@ from weights import *
 gROOT.SetBatch(1)
 start_time = time.time()
 
-lumi=2.3 #for plots
+lumi=12.9 #for plots
 lumiInTemplates=str(targetlumi/1000).replace('.','p') # 1/fb
 
 discriminant = 'ST'
-# cutString  = 'lep20_MET20_1jet0_2jet0_NJets0_NBJets0_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST0_minMlb0/'
-cutString  = 'lep25_MET20_1jet0_2jet0_NJets2_NBJets1_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST1200_minMlb0/'
+# cutString = 'lep1Pt0_jetPt0_MET20_NJets3_NBJets0_HT0_ST0_mllOS20'
+# cutString = 'lep1Pt0_jetPt0_MET20_NJets3_NBJets0_HT0_ST600_mllOS20'
+# cutString = 'lep1Pt0_jetPt0_MET20_NJets3_NBJets0_HT0_ST700_mllOS20'
+# cutString = 'lep1Pt0_jetPt0_MET20_NJets3_NBJets0_HT0_ST800_mllOS20'
+# cutString = 'lep1Pt0_jetPt0_MET20_NJets3_NBJets0_HT0_ST900_mllOS20'
+cutString = 'lep1Pt0_jetPt0_MET20_NJets3_NBJets0_HT0_ST1000_mllOS20'
+# cutString = 'lep1Pt0_jetPt0_MET20_NJets3_NBJets0_HT0_ST1100_mllOS20'
 saveKey = ''#'_topPtSystOnly'
 
 # m1 = '800'
@@ -24,10 +29,10 @@ saveKey = ''#'_topPtSystOnly'
 m1 = '800'
 sig1='TTM'+m1 # choose the 1st signal to plot
 sig1leg='TT (0.8 TeV)'
-m2 = '1000'
+m2 = '1200'
 sig2='TTM'+m2 # choose the 2nd signal to plot
-sig2leg='TT (1.0 TeV)'
-scaleSignals = False
+sig2leg='TT (1.2 TeV)'
+scaleSignals = True
 
 # systematicList = ['pileup','jec','jer','jmr','jms','btag','tau21','muR','muF','muRFcorrd','toppt','jsf','PR','FR']
 systematicList = ['pileup','jec','jer','btag','pdfNew','muRFcorrdNew','PR','FR']
@@ -39,12 +44,14 @@ doNormByBinWidth=False # not tested, may not work out of the box
 doOneBand = False
 if not doAllSys: doOneBand = True # Don't change this!
 blind = False
-yLog  = True
+yLog  = False
 doRealPull = False
 if doRealPull: doOneBand=False
 
 # templateDir=os.getcwd()+'/templates_ST2016_4_22_15_29_7/'+cutString+'/'
-templateDir='/user_data/rsyarif/optimization_76in74x_AllSys_trilep_2016_6_3/'+cutString+'/'
+# templateDir='/user_data/rsyarif/optimization_80x_withJECJER_condor_2016_11_30/'+cutString+'/'
+templateDir='/user_data/rsyarif/optimization_80x_withJECJER_condor_FRv7_PRv2_2016_12_14/'+cutString+'/'
+
 tempsig='templates_'+discriminant+'_'+sig1+'_'+lumiInTemplates+'fb'+isRebinned+'.root'	
 
 isEMlist =['EEE','EEM','EMM','MMM']
@@ -54,13 +61,13 @@ nbtaglist=['0p']
 catList = list(itertools.product(isEMlist,nttaglist,nWtaglist,nbtaglist))
 tagList = list(itertools.product(nttaglist,nWtaglist,nbtaglist))
 
-lumiSys = 0.027 #2.7% lumi uncertainty
-trigSys = 0.03 #3% trigger uncertainty
-lepIdSys = 0.01 #1% lepton id uncertainty
-lepIsoSys = 0.01 #1% lepton isolation uncertainty
-topXsecSys = 0.#0.055 #5.5% top x-sec uncertainty
-ewkXsecSys = 0.#0.05 #5% ewk x-sec uncertainty
-qcdXsecSys = 0.#0.50 #50% qcd x-sec uncertainty
+lumiSys = 0.062 #6.2% https://twiki.cern.ch/twiki/bin/view/CMS/TWikiLUM - 20Sep2016 - ATTENTION!! NEEDS to be checked again!
+trigSys = 0.03 #3% trigger uncertainty - AN 2016 229
+lepIdSys = math.sqrt(3.*0.01**2) #1% lepton id uncertainty ## NEED to add in quadrature for 3 leptons! - ATTENTION! NEED UPDATING!
+lepIsoSys = math.sqrt(3.*0.01**2) #1% lepton isolation uncertainty ## NEED to add in quadrature for 3 leptons! - ATTENTION! NEED UPDATING!
+topXsecSys = 0.0 #55 #5.5% top x-sec uncertainty
+ewkXsecSys = 0.0 #5 #5% ewk x-sec uncertainty
+qcdXsecSys = 0.0 #50 #50% qcd x-sec uncertainty
 corrdSys = math.sqrt(lumiSys**2+trigSys**2+lepIdSys**2+lepIsoSys**2)
 
 def getNormUnc(hist,ibin):
@@ -263,9 +270,9 @@ for cat in catList:
 	if not scaleSignals:
 		scaleFact1=1
 		scaleFact2=1
-# 			else:
-# 				scaleFact1=25
-# 				scaleFact2=25
+	else:
+		scaleFact1=1.0
+		scaleFact2=5.
 	hsig1.Scale(scaleFact1)
 	hsig2.Scale(scaleFact2)
 
@@ -283,8 +290,8 @@ for cat in catList:
 	topColor = kAzure-6
 	ewkColor = kMagenta-2
 	qcdColor = kOrange+5
-	sig1Color= kRed
-	sig2Color= kOrange-2
+	sig1Color= kBlack
+	sig2Color= kGreen
 	if 'T53' in sig1: 
 		topColor = kRed-9
 		ewkColor = kBlue-7
@@ -360,8 +367,8 @@ for cat in catList:
 		hsig1.SetMinimum(0.015)
 		if doNormByBinWidth: hsig1.GetYaxis().SetTitle("Events / 1 GeV")
 		else: hsig1.GetYaxis().SetTitle("Events")
-		formatUpperHist(sighist1RH)
-		hsig1.SetMaximum(hData.GetMaximum())
+		formatUpperHist(hsig1)
+		hsig1.SetMaximum(hData.GetMaximum()*2)
 		hsig1.Draw("HIST")
 	stackbkgHT.Draw("SAME HIST")
 	hsig1.Draw("SAME HIST")
@@ -370,6 +377,23 @@ for cat in catList:
 	uPad.RedrawAxis()
 	bkgHTgerr.Draw("SAME E2")
 	
+	#add x labels - start
+	hsig1.GetXaxis().SetLabelOffset(99)
+	y = gPad.GetUymin() - 0.2*hsig1.GetYaxis().GetBinWidth(1)
+	t = TText()
+	t.SetTextAngle(60)
+	t.SetTextSize(0.04)
+	t.SetTextAlign(33)
+	xEEE = hsig1.GetXaxis().GetBinCenter(1);
+	xEEM = hsig1.GetXaxis().GetBinCenter(2);
+	xEMM = hsig1.GetXaxis().GetBinCenter(3);
+	xMMM = hsig1.GetXaxis().GetBinCenter(4);
+	t.DrawText(xEEE,y,"EEE"); 	
+	t.DrawText(xEEM,y,"EEM"); 	
+	t.DrawText(xEMM,y,"EMM"); 	
+	t.DrawText(xMMM,y,"MMM"); 	
+	#add x labels - end
+		
 	chLatex = TLatex()
 	chLatex.SetNDC()
 	chLatex.SetTextSize(0.06)
@@ -431,7 +455,8 @@ for cat in catList:
 	prelimTex3.SetTextSize(0.075)
 	prelimTex3.SetLineWidth(2)
 	if not blind: prelimTex3.DrawLatex(0.24,0.975,"Preliminary")
-	if blind: prelimTex3.DrawLatex(0.29175,0.9364,"Preliminary")
+	if blind: prelimTex3.DrawLatex(0.29175,0.975,"Preliminary")
+	#if blind: prelimTex3.DrawLatex(0.29175,0.9364,"Preliminary")
 
 	if blind == False and not doRealPull:
 		lPad.cd()
@@ -524,7 +549,8 @@ for cat in catList:
 		pull.Draw("HIST")
 
 	#c1.Write()
-	savePrefix = templateDir.replace(cutString,'')+templateDir.split('/')[-2]+cutString+'/'+'plots/'
+# 	savePrefix = templateDir.replace(cutString,'')+templateDir.split('/')[-2]+cutString+'/'+'plots/'
+	savePrefix = templateDir.replace(cutString,'')+templateDir.split('/')[-2]+'/'+'plots/'
 	if not os.path.exists(savePrefix): os.system('mkdir '+savePrefix)
 	savePrefix+=histPrefix+isRebinned+saveKey
 	if doRealPull: savePrefix+='_pull'

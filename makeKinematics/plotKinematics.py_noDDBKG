@@ -15,16 +15,43 @@ lumi=12.9 #for plots
 
 # templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_noMllOScut_dilepTrigReady_noDDBKG_fixedSF_2016_9_26/'
 
-templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_noDDBKG_2016_10_14/'
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_noDDBKG_2016_10_14/'
 
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_noDDBKG_MoreThan2Jets_2016_10_14/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_noDDBKG_exactly2Jets_2016_10_14/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_noDDBKG_v2_DY-MG_2016_10_17/'
+
+#templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_noDDBKG_v2_2016_10_17/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_noDDBKG_v2_noNjetCut_2016_10_18/'
+
+templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_noDDBKG_v2_moreThan2Jets_2016_10_18/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_noDDBKG_v2_exactly2Jets_2016_10_18/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_noDDBKG_v2_exactly1Jet_2016_10_18/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_noDDBKG_v2_exactly0Jet_2016_10_18/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_noDDBKG_v2_lessThan3Jets_2016_10_18/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_noDDBKG_v2_1or2Jets_2016_10_21/'
 
 lumiInTemplates='12p9'
 
 sig='ttm800' # choose the 1st signal to plot
 sigleg='TT(0.8 TeV)'
+
+sigM1200='ttm1200' 
+siglegM1200='TT(1.2 TeV)'
+
 scaleSignals = True
 
-scaleFact1 = 300
+# scaleFact1 = 300
+scaleFact1 = 10
+scaleFact2 = 100
 if 'Final' in templateDir: scaleFact1 = 40
 
 # systematicList = ['pileup','jec','jer','jsf','jmr','jms','btag','tau21','pdfNew','muRFcorrdNew','toppt','PR','FR']
@@ -43,8 +70,8 @@ isRebinned=''#post fix for file names if the name changed b/c of rebinning or so
 doNormByBinWidth=False # not tested, may not work out of the box
 doOneBand = False
 if not doAllSys: doOneBand = True # Don't change this!
-blind = False
-yLog = True
+blind = True
+yLog = False
 
 doRealPull = False
 if doRealPull: doOneBand=False
@@ -250,10 +277,13 @@ for discriminant in plotList:
 		hsig3 = RFile.Get(histPrefix+'__'+sig+'thth').Clone()
 
 		hsig = RFile.Get(histPrefix+'__'+sig+'bwbw').Clone(histPrefix+'__'+sig+'nominal')
+		hsigM1200 = RFile.Get(histPrefix+'__'+sigM1200+'bwbw').Clone(histPrefix+'__'+sigM1200+'nominal')
 		decays = ['tztz','thth','tzbw','thbw','tzth']
 		for decay in decays:
 			htemp = RFile.Get(histPrefix+'__'+sig+decay).Clone()
 			hsig.Add(htemp)
+			htemp = RFile.Get(histPrefix+'__'+sigM1200+decay).Clone()
+			hsigM1200.Add(htemp)
 
 		# original scale = lumi * xsec * BR(50/25/25) / N(33/33/33)
 		hsig1.Scale(1.0/BR['TTBWBW'])
@@ -310,7 +340,7 @@ for discriminant in plotList:
 
 		try: bkgHT = hTTJets.Clone()
 		except: pass
-		try: bkgHT = hTTV.Clone()
+		try: bkgHT.Add(hTTV)
 		except: pass
 		try: bkgHT.Add(hVV)
 		except: pass
@@ -421,6 +451,7 @@ for discriminant in plotList:
 		hsig2.Scale(scaleFact1)
 		hsig3.Scale(scaleFact1)
 		hsig.Scale(scaleFact1)
+		hsigM1200.Scale(scaleFact2)
 		
 		stackbkgHT = THStack("stackbkgHT","")
 		try: stackbkgHT.Add(hWJets)
@@ -484,6 +515,8 @@ for discriminant in plotList:
 		
 		hsig.SetLineColor(kBlack)
 		hsig.SetLineWidth(3)
+		hsigM1200.SetLineColor(kGreen)
+		hsigM1200.SetLineWidth(3)
 		hsig1.SetLineColor(kRed)
 		hsig1.SetLineStyle(2)
 		hsig1.SetLineWidth(3)
@@ -546,9 +579,10 @@ for discriminant in plotList:
 
 		stackbkgHT.Draw("SAME HIST")
 		hsig.Draw("SAME HIST")
+		hsigM1200.Draw("SAME HIST")
 # 		hsig1.Draw("SAME HIST")
-		hsig2.Draw("SAME HIST")
-		hsig3.Draw("SAME HIST")
+# 		hsig2.Draw("SAME HIST")
+# 		hsig3.Draw("SAME HIST")
 		if not blind: hData.Draw("SAME E1 X0") #redraw data so its not hidden
 		uPad.RedrawAxis()
 		bkgHTgerr.Draw("SAME E2")
@@ -570,13 +604,16 @@ for discriminant in plotList:
 		if not blind: leg.AddEntry(hData,"DATA")
 		
 		scaleFact1Str = ' x'+str(scaleFact1)
+		scaleFact2Str = ' x'+str(scaleFact2)
 		if not scaleSignals:
 			scaleFact1Str = ''
+			scaleFact2Str = ''
 		
 		leg.AddEntry(hsig,sigleg+' nominal BRs'+scaleFact1Str,"l")
+		leg.AddEntry(hsigM1200,siglegM1200+' nominal BRs'+scaleFact2Str,"l")
 # 		leg.AddEntry(hsig1,sigleg+' #rightarrow bWbW'+scaleFact1Str,"l")
-		leg.AddEntry(hsig2,sigleg+' #rightarrow tZtZ'+scaleFact1Str,"l")
-		leg.AddEntry(hsig3,sigleg+' #rightarrow tHtH'+scaleFact1Str,"l")
+# 		leg.AddEntry(hsig2,sigleg+' #rightarrow tZtZ'+scaleFact1Str,"l")
+# 		leg.AddEntry(hsig3,sigleg+' #rightarrow tHtH'+scaleFact1Str,"l")
 		try: 
 			if hQCD.Integral()/bkgHT.Integral()>.005: leg.AddEntry(hQCD,"QCD","f") #don't plot QCD if it is less than 0.5%
 		except: pass
@@ -621,7 +658,8 @@ for discriminant in plotList:
 		prelimTex3.SetTextSize(0.075)
 		prelimTex3.SetLineWidth(2)
 		if not blind: prelimTex3.DrawLatex(0.24,0.975,"Preliminary")
-		if blind: prelimTex3.DrawLatex(0.29175,0.9364,"Preliminary")
+		#if blind: prelimTex3.DrawLatex(0.29175,0.9364,"Preliminary")
+		if blind: prelimTex3.DrawLatex(0.29175,0.975,"Preliminary")
 
 		chLatex = TLatex()
 		chLatex.SetNDC()
@@ -833,9 +871,9 @@ for discriminant in plotList:
 		if yLog: savePrefix+='_logy'
 
 		if doOneBand:
-			c1.SaveAs(savePrefix+"_totBand.pdf")
+# 			c1.SaveAs(savePrefix+"_totBand.pdf")
 			c1.SaveAs(savePrefix+"_totBand.png")
-			c1.SaveAs(savePrefix+"_totBand.root")
+# 			c1.SaveAs(savePrefix+"_totBand.root")
 			#c1.SaveAs(savePrefix+"totBand.C")
 		else:
 # 			c1.SaveAs(savePrefix+".pdf")

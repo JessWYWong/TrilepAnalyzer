@@ -7,23 +7,130 @@ from weights import *
 gROOT.SetBatch(1)
 start_time = time.time()
 
-lumi=12.9 #for plots
 
 # templateDir='/user_data/rsyarif/kinematics_80x_Exactly3Lep_2016_9_8/isPassTrig_All0_dilep1_dilepAnth0_trilep0_isPassTrilepton1_lep1Pt0_NJets2_NBJets0_DR0_ST0_MllOS0/'
 # templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_noMllOScut_2016_9_8/'
 
 # templateDir='/user_data/rsyarif/kinematics_80x_Exactly3Lep_2016_9_14/isPassTrig_All0_dilep1_dilepAnth0_trilep0_isPassTrilepton1_lep1Pt0_NJets2_NBJets0_DR0_ST0_MllOS0/'
 
-templateDir='/user_data/rsyarif/kinematics_80x_Exactly3Lep_2016_9_19/isPassTrig_All0_dilep1_dilepAnth0_trilep0_isPassTrilepton1_lep1Pt0_NJets2_NBJets0_DR0_ST0_MllOS0/'
+# templateDir='/user_data/rsyarif/kinematics_80x_Exactly3Lep_2016_9_19/isPassTrig_All0_dilep1_dilepAnth0_trilep0_isPassTrilepton1_lep1Pt0_NJets2_NBJets0_DR0_ST0_MllOS0/'
 
+# templateDir='/user_data/rsyarif/kinematics_80x_Exactly3Lep_2016_9_20/isPassTrig_All0_dilep1_dilepAnth0_trilep0_isPassTrilepton1_lep1Pt0_NJets2_NBJets0_DR0_ST0_MllOS0/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_Exactly3Lep_no2Dcut_noMllOScut_dilepTrigReady_2016_9_20/isPassTrig_All0_dilep1_dilepAnth0_trilep0_isPassTrilepton1_lep1Pt0_NJets2_NBJets0_DR0_ST0_MllOS0/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_noMllOScut_dilepTrigReady_2016_9_20/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_noMllOScut_dilepTrigReady_2016_9_26/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_noMllOScut_dilepTrigReady_fixedSF_2016_9_26/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_noMllOScut_dilepTrigReady_fixedSF_1bjet_2016_9_26/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_noMllOScut_dilepTrigReady_fixedSF_1bjet_mllOSmin20_2016_9_26/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_Exactly3Lep_no2Dcut_noMllOScut_dilepTrigReady_fixedSF_1bjet_mllOSmin20_2016_9_27/isPassTrig_All0_dilep1_dilepAnth0_trilep0_isPassTrilepton1_lep1Pt0_NJets2_NBJets1_DR0_ST0_MllOS20'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_noMllOScut_dilepTrigReady_fixedSF_1bjet_mllOSmin20_2016_9_28/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin0_2016_9_28/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin0_2016_9_29/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_noMllOScut_dilepTrigReady_fixedSF_1bjet_mllOSmin20_2016_9_29/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_2016_9_29/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_1bjet_mllOSmin20_2016_9_30/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_1bjet_mllOSmin20_2016_9_30/isPassTrig_All0_dilep1_dilepAnth0_trilep0_isPassTrilepton1_lep1Pt0_NJets2_NBJets1_DR0_ST0_MllOS20'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_1bjet_mllOSmin20_st600_2016_10_4/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv2_2016_10_6/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_step2_2016_10_7/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv2_step2_2016_10_7/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_1bjet_FRv2_step2_2016_10_7/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin0_step2_2016_10_7/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_step2_2016_10_10/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_2016_10_10/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_1bjet_2016_10_14/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_v2_2016_10_17/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_v2_noNjetCut_2016_10_18/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_v2_moreThan2Jets_2016_10_18/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_v2_exactly2Jets_2016_10_18/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_v2_exactly1Jet_2016_10_18/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_v2_exactly0Jet_2016_10_18/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_v2_lessThan3Jets_2016_10_20/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_v2_1or2Jets_2016_10_21/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_v2_2016_10_26/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_v2_minDRlep3Jet0p05_2016_10_26/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_SUSYID_nJets2_2016_11_3/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_SUSYID_2016_11_4/'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_FRv4_step2_moreThan2Jets_2016_11_4'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_FRv4_step2_moreThan2Jets_2016_11_4'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_FRv5_step2_moreThan2Jets_2016_11_4'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_FRv5_step2_moreThan2Jets_2016_11_7'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_FRv4_step2_moreThan2Jets_DOUBLECHECK_2016_11_7'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_FRv5_step2_moreThan2Jets_DOUBLECHECK_2016_11_7'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_FRv4_step2_moreThan2Jets_DOUBLECHECK_withSYS_2016_11_7'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_FRv5_step2_moreThan2Jets_DOUBLECHECK_withSYS_2016_11_7'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_FRv5_step2_moreThan2Jets_withALLSYS_2016_11_29'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_FRv5_step2_exactly2Jets_noSYS_2016_12_2'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_FRv6_step2_moreThan2Jets_1bjet_withALLSYS_2016_12_9'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_FRv7_PRv2_step2_moreThan2Jets_withALLSYS_2016_12_12'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_FRv7_PRv2_step2_exactly2Jets_noSYS_2016_12_13'
+
+templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_FRv7_PRv2_step2_exactly2Jets_withALLSYS_2016_12_13'
+
+
+lumi=12.9 #for plots
 
 lumiInTemplates='12p9'
 
 sig='ttm800' # choose the 1st signal to plot
 sigleg='TT(0.8 TeV)'
+
+sigM1200='ttm1200' 
+siglegM1200='TT(1.2 TeV)'
+
 scaleSignals = True
 
-scaleFact1 = 300
+# scaleFact1 = 300
+scaleFact1 = 2
+scaleFact2 = 10
 if 'Final' in templateDir: scaleFact1 = 40
 
 # systematicList = ['pileup','jec','jer','jsf','jmr','jms','btag','tau21','pdfNew','muRFcorrdNew','toppt','PR','FR']
@@ -31,7 +138,12 @@ if 'Final' in templateDir: scaleFact1 = 40
 
 # systematicList = ['pileup','jec','jer','btag','pdfNew','muRFcorrdNew','PR','FR'] # no jsf
 
-systematicList = ['PR','FR']
+# systematicList = ['PR','FR']
+
+# systematicList = ['pileup','btag','pdfNew','muRFcorrdNew','PR','FR']
+
+systematicList = ['pileup','btag','pdfNew','muRFcorrdNew','PR','FR','jec','jer']
+
 
 doAllSys = True
 
@@ -106,10 +218,10 @@ def normByBinWidth(result):
 		result.SetBinContent(bin, content/width)
 		result.SetBinError(bin, error/width)
 
-lumiSys = 0.027 #0.046 #4.6% lumi uncertainty #updated 18april2016 cehck twiki!!
-trigSys = math.sqrt(3.*0.03**2) #3% trigger uncertainty ## NEED to add in quadrature for EE, EM, and MM triggers!
-lepIdSys = math.sqrt(3.*0.01**2) #1% lepton id uncertainty ## NEED to add in quadrature for 3 leptons!
-lepIsoSys = math.sqrt(3.*0.01**2) #1% lepton isolation uncertainty ## NEED to add in quadrature for 3 leptons!
+lumiSys = 0.062 #6.2% https://twiki.cern.ch/twiki/bin/view/CMS/TWikiLUM - 20Sep2016
+trigSys = 0.03 #3% trigger uncertainty - AN 2016 229
+lepIdSys = math.sqrt(3.*0.01**2) #1% lepton id uncertainty ## NEED to add in quadrature for 3 leptons! - ATTENTION! NEED UPDATING!
+lepIsoSys = math.sqrt(3.*0.01**2) #1% lepton isolation uncertainty ## NEED to add in quadrature for 3 leptons! - ATTENTION! NEED UPDATING!
 topXsecSys = 0.0 #55 #5.5% top x-sec uncertainty
 ewkXsecSys = 0.0 #5 #5% ewk x-sec uncertainty
 qcdXsecSys = 0.0 #50 #50% qcd x-sec uncertainty
@@ -153,16 +265,20 @@ plotList = [#distribution name as defined in "doHists.py"
 	'NJets' ,
 	'NBJets',
 	#'NBJetsCorr',
+	'mindeltaRlepJets',
+	'mindeltaRlep1Jets',
+	'mindeltaRlep2Jets',
+	'mindeltaRlep3Jets',
 
-	'mindeltaR',
-	'mindeltaRB',
-
-	'mindeltaR1',
-	'mindeltaR2',
-	'mindeltaR3',
-	'PtRel1',
-	'PtRel2',
-	'PtRel3',
+# 	'mindeltaR',
+# 	'mindeltaRB',
+# 
+# 	'mindeltaR1',
+# 	'mindeltaR2',
+# 	'mindeltaR3',
+# 	'PtRel1',
+# 	'PtRel2',
+# 	'PtRel3',
 	'lepCharge',
 	'lepIso',
 	'ElIso',
@@ -226,10 +342,13 @@ for discriminant in plotList:
 		hsig3 = RFile.Get(histPrefix+'__'+sig+'thth').Clone()
 
 		hsig = RFile.Get(histPrefix+'__'+sig+'bwbw').Clone(histPrefix+'__'+sig+'nominal')
+		hsigM1200 = RFile.Get(histPrefix+'__'+sigM1200+'bwbw').Clone(histPrefix+'__'+sigM1200+'nominal')
 		decays = ['tztz','thth','tzbw','thbw','tzth']
 		for decay in decays:
 			htemp = RFile.Get(histPrefix+'__'+sig+decay).Clone()
 			hsig.Add(htemp)
+			htemp = RFile.Get(histPrefix+'__'+sigM1200+decay).Clone()
+			hsigM1200.Add(htemp)
 
 		# original scale = lumi * xsec * BR(50/25/25) / N(33/33/33)
 		hsig1.Scale(1.0/BR['TTBWBW'])
@@ -369,6 +488,7 @@ for discriminant in plotList:
 		hsig2.Scale(scaleFact1)
 		hsig3.Scale(scaleFact1)
 		hsig.Scale(scaleFact1)
+		hsigM1200.Scale(scaleFact2)
 		
 		stackbkgHT = THStack("stackbkgHT","")
 		try: stackbkgHT.Add(hTOP)
@@ -404,6 +524,8 @@ for discriminant in plotList:
 		
 		hsig.SetLineColor(kBlack)
 		hsig.SetLineWidth(3)
+		hsigM1200.SetLineColor(kGreen)
+		hsigM1200.SetLineWidth(3)
 		hsig1.SetLineColor(kRed)
 		hsig1.SetLineStyle(2)
 		hsig1.SetLineWidth(3)
@@ -466,9 +588,10 @@ for discriminant in plotList:
 
 		stackbkgHT.Draw("SAME HIST")
 		hsig.Draw("SAME HIST")
+		hsigM1200.Draw("SAME HIST")
 # 		hsig1.Draw("SAME HIST")
-		hsig2.Draw("SAME HIST")
-		hsig3.Draw("SAME HIST")
+# 		hsig2.Draw("SAME HIST")
+# 		hsig3.Draw("SAME HIST")
 		if not blind: hData.Draw("SAME E1 X0") #redraw data so its not hidden
 		uPad.RedrawAxis()
 		bkgHTgerr.Draw("SAME E2")
@@ -490,13 +613,16 @@ for discriminant in plotList:
 		if not blind: leg.AddEntry(hData,"DATA")
 		
 		scaleFact1Str = ' x'+str(scaleFact1)
+		scaleFact2Str = ' x'+str(scaleFact2)
 		if not scaleSignals:
 			scaleFact1Str = ''
+			scaleFact2Str = ''
 		
 		leg.AddEntry(hsig,sigleg+' nominal BRs'+scaleFact1Str,"l")
+		leg.AddEntry(hsigM1200,siglegM1200+' nominal BRs'+scaleFact2Str,"l")
 # 		leg.AddEntry(hsig1,sigleg+' #rightarrow bWbW'+scaleFact1Str,"l")
-		leg.AddEntry(hsig2,sigleg+' #rightarrow tZtZ'+scaleFact1Str,"l")
-		leg.AddEntry(hsig3,sigleg+' #rightarrow tHtH'+scaleFact1Str,"l")
+# 		leg.AddEntry(hsig2,sigleg+' #rightarrow tZtZ'+scaleFact1Str,"l")
+# 		leg.AddEntry(hsig3,sigleg+' #rightarrow tHtH'+scaleFact1Str,"l")
 		try: 
 			if hQCD.Integral()/bkgHT.Integral()>.005: leg.AddEntry(hQCD,"QCD","f") #don't plot QCD if it is less than 0.5%
 		except: pass
@@ -533,7 +659,8 @@ for discriminant in plotList:
 		prelimTex3.SetTextSize(0.075)
 		prelimTex3.SetLineWidth(2)
 		if not blind: prelimTex3.DrawLatex(0.24,0.975,"Preliminary")
-		if blind: prelimTex3.DrawLatex(0.29175,0.9364,"Preliminary")
+		#if blind: prelimTex3.DrawLatex(0.29175,0.9364,"Preliminary")
+		if blind: prelimTex3.DrawLatex(0.29175,0.975,"Preliminary")
 
 		chLatex = TLatex()
 		chLatex.SetNDC()
@@ -745,9 +872,9 @@ for discriminant in plotList:
 		if yLog: savePrefix+='_logy'
 
 		if doOneBand:
-			c1.SaveAs(savePrefix+"_totBand.pdf")
+			#c1.SaveAs(savePrefix+"_totBand.pdf")
 			c1.SaveAs(savePrefix+"_totBand.png")
-			c1.SaveAs(savePrefix+"_totBand.root")
+			#c1.SaveAs(savePrefix+"_totBand.root")
 			#c1.SaveAs(savePrefix+"totBand.C")
 		else:
 # 			c1.SaveAs(savePrefix+".pdf")

@@ -9,54 +9,33 @@ import os,sys,itertools
 from tdrStyle import *
 setTDRStyle()
 
-lumiPlot = '2.3'
-lumiStr = '2p318'
+lumiPlot = '12.9'
+lumiStr = '12p9'
 distribution = 'ST'
-# limitDir='/user_data/rsyarif/limits/all/'
-# limitDir='/user_data/rsyarif/limits/allSys/'
-# limitDir='/user_data/rsyarif/limits/allSys_sig__muRFcorrdNew_sig__pdfNew_TrigSys/'
-# limitDir='/user_data/rsyarif/limits/allSys_sig__muRFcorrdNew_sig__pdfNew_no_jec_no_jer/'
-limitDir='/user_data/rsyarif/limits/76in74x_allSys_sig__muRFcorrdNew_sig__pdfNew/'
+limitDir='/user_data/rsyarif/limits/optimization_80x_withJECJER_condor_2016_11_29/'
 
 postfix = '' # for plot names in order to save them as different files
 stat=''#0.75
 isRebinned=''#'_rebinned_modified'+str(stat).replace('.','p')
 print "CATEGORY",isRebinned
 
-# lepPtCutList  = [0]
-# jet1PtCutList = [0]
-# jet2PtCutList = [0]
-# metCutList    = [0]
-# njetsCutList  = [0,1,2,3]
-# nbjetsCutList = [0,1,2,3]
-# jet3PtCutList = [0]
-# jet4PtCutList = [0]
-# jet5PtCutList = [0]
-# drCutList     = [0]
-# Wjet1PtCutList= [0]
-# bjet1PtCutList= [0]
-# htCutList     = [0]
-# stCutList     = [0,500,600,700,800,900,1000,1100]
-# minMlbCutList = [0]
-
-lepPtCutList  = [20,25]
-jet1PtCutList = [0]
-jet2PtCutList = [0]
-metCutList    = [20,30]
-njetsCutList  = [0,1,2,3]
-nbjetsCutList = [0,1,2,3]
-jet3PtCutList = [0]
-jet4PtCutList = [0]
-jet5PtCutList = [0]
+lep1PtCutList = [0]
+jetPtCutList  = [0]
+metCutList    = [0]
+njetsCutList  = [3]
+nbjetsCutList = [0]
 drCutList     = [0]
-Wjet1PtCutList= [0]
-bjet1PtCutList= [0]
 htCutList     = [0]
-stCutList     = [0,500,600,700,800,900,1000,1100,1200,1300]
-minMlbCutList = [0]
+stCutList     = [0,300,400,500,600,700,800]
+mllOSCutList  = [20]
+isPassTriLeptonList= [1]
+isPassTrig_dilepList= [1]
 
-cutConfigs = list(itertools.product(lepPtCutList,jet1PtCutList,jet2PtCutList,metCutList,njetsCutList,nbjetsCutList,jet3PtCutList,jet4PtCutList,jet5PtCutList,drCutList,Wjet1PtCutList,bjet1PtCutList,htCutList,stCutList,minMlbCutList))
 
+cutConfigs = list(itertools.product(lep1PtCutList,jetPtCutList,metCutList,njetsCutList,nbjetsCutList,drCutList,htCutList,stCutList,mllOSCutList,isPassTriLeptonList,isPassTrig_dilepList))
+
+
+# massPoints = [700,800,900,1000,1100,1200,1300]
 massPoints = [800]
 mass = array('d', massPoints)
 masserr = array('d', [0]*len(massPoints))
@@ -90,9 +69,10 @@ for i in range(len(mass)):
 	
 ind=1                                                                                               
 for conf in cutConfigs:
-	lepPtCut,jet1PtCut,jet2PtCut,metCut,njetsCut,nbjetsCut,jet3PtCut,jet4PtCut,jet5PtCut,drCut,Wjet1PtCut,bjet1PtCut,htCut,stCut,minMlbCut=conf[0],conf[1],conf[2],conf[3],conf[4],conf[5],conf[6],conf[7],conf[8],conf[9],conf[10],conf[11],conf[12],conf[13],conf[14]
-	cutString = 'lep'+str(int(lepPtCut))+'_MET'+str(int(metCut))+'_1jet'+str(int(jet1PtCut))+'_2jet'+str(int(jet2PtCut))+'_NJets'+str(int(njetsCut))+'_NBJets'+str(int(nbjetsCut))+'_3jet'+str(int(jet3PtCut))+'_4jet'+str(int(jet4PtCut))+'_5jet'+str(int(jet5PtCut))+'_DR'+str(drCut)+'_1Wjet'+str(Wjet1PtCut)+'_1bjet'+str(bjet1PtCut)+'_HT'+str(htCut)+'_ST'+str(stCut)+'_minMlb'+str(minMlbCut)
+	lep1PtCut,jetPtCut,metCut,njetsCut,nbjetsCut,drCut,htCut,stCut,mllOSCut,isPassTriLepton,isPassTrig_dilep=conf[0],conf[1],conf[2],conf[3],conf[4],conf[5],conf[6],conf[7],conf[8],conf[9],conf[10]
+	cutString = 'lep1Pt'+str(int(lep1PtCut))+'_MET'+str(int(metCut))+'_NJets'+str(int(njetsCut))+'_NBJets'+str(int(nbjetsCut))+'_DR'+str(drCut)+'_HT'+str(htCut)+'_ST'+str(stCut)+'_mllOS'+str(mllOSCut)+'_isPassTriLepton'+str(isPassTriLepton)+'_isPassDiLepTrig'+str(isPassTrig_dilep)
 	plotLimits = True
+	print cut
 	for i in range(len(mass)):
 		try: 
 			ftemp = open(limitDir+'/'+cutString+'/limits_templates_'+distribution+'_TTM'+mass_str[i]+'_'+lumiStr+'fb'+isRebinned+'_expected.txt', 'rU')

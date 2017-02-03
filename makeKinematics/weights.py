@@ -15,10 +15,15 @@ BR['TTTHTH'] = BR['TH']*BR['TH']
 
 # Number of processed MC events (before selections)
 nRun={}
-#nRun['DY10to50'] = 21843373# 22217467 # from ???
-nRun['DY'] = 19223700. # from 28697000 # our own calculation for amcatnlo
-# nRun['WJets'] = 6776900 # from 9908530 # our own calculation for amcatnlo - DOUBLE CHECK with JULIE!!
-nRun['WJets'] = 28210360 # MG, from DAS
+
+nRun['DY10to50'] = 22494700. # from 30915900. #our own calculation amcatnlo
+# nRun['DY10to50'] = 35079788 # MG, from DAS
+
+nRun['DY50'] = 19223700. # from 28697000 # our own calculation for amcatnlo
+# nRun['DY50'] = 92655205. # MG, from DAS
+
+nRun['WJets'] = 6776900 # from 9908530 # our own calculation for amcatnlo - DOUBLE CHECK with JULIE!!
+# nRun['WJets'] = 28210360 # MG, from DAS
 
 nRun['TTJetsPH'] = 182123200. # from DAS /TT_TuneCUETP8M1_13TeV-powheg-pythia8/RunIISpring16MiniAODv2-PUSpring16_80X_mcRun2_asymptotic_2016_miniAODv2_v0_ext4-v1/MINIAODSIM
 
@@ -146,15 +151,17 @@ nRun['TTM1800THTH'] = 764200.0*0.333*0.333
 
 # numbers not updated to 80x ! - start
 nRun['QCDht100'] = 81637494.
-nRun['QCDht200'] = 18718905.
-nRun['QCDht300'] = 19826197.
-nRun['QCDht500'] = 19664159.
-nRun['QCDht700'] = 15356448.
-nRun['QCDht1000'] = 4963895.
-nRun['QCDht1500'] = 3868886.
-nRun['QCDht2000'] = 1912529.
 # numbers not updated to 80x ! - end
 
+nRun['QCDht200'] = 38812676.
+nRun['QCDht300'] = 37875602.
+nRun['QCDht500'] = 44138665.
+nRun['QCDht700'] = 29832311.
+nRun['QCDht1000'] = 10335975.
+nRun['QCDht1500'] = 7803965.
+nRun['QCDht2000'] = 4047532.
+
+# Not sure, but maybe numbers not updated to 80x ! - start
 #energy scale samples (Q^2)
 nRun['TTJetsPHQ2U'] = 9921174.
 nRun['TTJetsPHQ2D'] = 9860774.
@@ -162,11 +169,12 @@ nRun['TtWQ2U'] = 497600.
 nRun['TtWQ2D'] = 499200.
 nRun['TbtWQ2U'] = 500000.
 nRun['TbtWQ2D'] = 497600.
+# Not sure, but maybe numbers not updated to 80x ! - end
 
 # Cross sections for MC samples (in pb)
 xsec={}
-#xsec['DY10to50'] = 18610 # https://twiki.cern.ch/twiki/bin/view/CMS/SummaryTable1G25ns
-xsec['DY'] = 6025.2 # https://twiki.cern.ch/twiki/bin/view/CMS/SummaryTable1G25ns
+xsec['DY10to50'] = 18610 # https://twiki.cern.ch/twiki/bin/view/CMS/SummaryTable1G25ns
+xsec['DY50'] = 6025.2 # https://twiki.cern.ch/twiki/bin/view/CMS/SummaryTable1G25ns
 xsec['TTJets'] = 831.76
 xsec['WJets'] = 61526.7
 xsec['TTJetsPH'] = 831.76 # https://twiki.cern.ch/twiki/bin/view/CMS/SummaryTable1G25ns
@@ -233,8 +241,8 @@ xsec['TbtWQ2D'] = xsec['TbtW']
 
 # Calculate lumi normalization weights
 weight = {}
-#weight['DY10to50'] = (targetlumi*xsec['DY10to50']) / (nRun['DY10to50'])
-weight['DY50'] = (targetlumi*xsec['DY']) / (nRun['DY'])
+weight['DY10to50'] = (targetlumi*xsec['DY10to50']) / (nRun['DY10to50'])
+weight['DY50'] = (targetlumi*xsec['DY50']) / (nRun['DY50'])
 weight['TTJets'] = (targetlumi*xsec['TTJets']) / (nRun['TTJets'])
 weight['WJets'] = (targetlumi*xsec['WJets']) / (nRun['WJets'])
 weight['TTJetsPH'] = (targetlumi*xsec['TTJetsPH']) / (nRun['TTJetsPH'])

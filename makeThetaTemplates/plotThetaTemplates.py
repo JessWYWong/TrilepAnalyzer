@@ -7,7 +7,7 @@ from weights import *
 gROOT.SetBatch(1)
 start_time = time.time()
 
-lumi=2.2 #for plots
+lumi=12.9 #for plots
 lumiInTemplates=str(targetlumi/1000).replace('.','p') # 1/fb
 
 discriminant = 'ST'
@@ -32,7 +32,9 @@ sig2='TTM'+m2 # choose the 2nd signal to plot
 sig2leg='TT (1.0 TeV)'
 scaleSignals = False
 
-systematicList = ['pileup','jec','jer','jmr','jms','btag','tau21','muR','muF','muRFcorrd','toppt','jsf','PR','FR']
+# systematicList = ['pileup','jec','jer','jmr','jms','btag','tau21','muR','muF','muRFcorrd','toppt','jsf','PR','FR']
+systematicList = ['pileup','btag','pdfNew','muRFcorrdNew','PR','FR']
+
 doAllSys = True
 
 isRebinned=''#'_rebinned'#post fix for file names if the name changed b/c of rebinning or some other process
@@ -44,17 +46,17 @@ yLog  = True
 doRealPull = False
 if doRealPull: doOneBand=False
 
-templateDir=os.getcwd()+'/templates_ST_2016_4_26_no_jsf_noLumiOnDDbkg/'+cutString+'/'
+templateDir=os.getcwd()+'/templates_ST_2016_11_7_noJECJER/'+cutString+'/'
 tempsig='templates_'+discriminant+'_'+sig1+'_'+lumiInTemplates+'fb'+isRebinned+'.root'	
 
-isEMlist =['EEE','EEM','EMM','MMM']
+catList =['EEE','EEM','EMM','MMM']
 nttaglist=['0p']
 nWtaglist=['0p']
 nbtaglist=['0p']
-catList = list(itertools.product(isEMlist,nttaglist,nWtaglist,nbtaglist))
+catList = list(itertools.product(catList,nttaglist,nWtaglist,nbtaglist))
 tagList = list(itertools.product(nttaglist,nWtaglist,nbtaglist))
 
-lumiSys = 0.027 #0.046 #4.6% lumi uncertainty #updated 18april2016 cehck twiki!!
+lumiSys = 0.062 #0.046 #4.6% lumi uncertainty #updated 18april2016 cehck twiki!!
 trigSys = math.sqrt(3.*0.03**2) #3% trigger uncertainty ## NEED to add in quadrature for EE, EM, and MM triggers!
 lepIdSys = math.sqrt(3.*0.01**2) #1% lepton id uncertainty ## NEED to add in quadrature for 3 leptons!
 lepIsoSys = math.sqrt(3.*0.01**2) #1% lepton isolation uncertainty ## NEED to add in quadrature for 3 leptons!
@@ -533,15 +535,15 @@ for cat in catList:
 	if yLog: savePrefix+='_logy'
 
 	if doOneBand:
-		c1.SaveAs(savePrefix+"totBand.pdf")
+# 		c1.SaveAs(savePrefix+"totBand.pdf")
 		c1.SaveAs(savePrefix+"totBand.png")
-		c1.SaveAs(savePrefix+"totBand.root")
-		c1.SaveAs(savePrefix+"totBand.C")
+# 		c1.SaveAs(savePrefix+"totBand.root")
+# 		c1.SaveAs(savePrefix+"totBand.C")
 	else:
-		c1.SaveAs(savePrefix+".pdf")
+# 		c1.SaveAs(savePrefix+".pdf")
 		c1.SaveAs(savePrefix+".png")
-		c1.SaveAs(savePrefix+".root")
-		c1.SaveAs(savePrefix+".C")
+# 		c1.SaveAs(savePrefix+".root")
+# 		c1.SaveAs(savePrefix+".C")
 	try: del hTOP
 	except: pass
 	try: del hEWK

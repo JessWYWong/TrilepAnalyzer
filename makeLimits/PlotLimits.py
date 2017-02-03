@@ -9,29 +9,31 @@ gROOT.SetBatch(1)
 from tdrStyle import *
 setTDRStyle()
 
-blind=True
+blind=False
 saveKey=''
 signal = 'T'#'B'
-lumiPlot = '2.3'
-lumiStr = '2p318'
+lumiPlot = '12.9'
+lumiStr = '12p9'
 chiral=''#'right'
 discriminant='ST'
 histPrefix=discriminant+'_'+str(lumiStr)+'fb'+chiral
 stat=''#0.75
 isRebinned=''
-#cutString='lep0_MET0_1jet0_2jet0_NJets3_NBJets1_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST1100_minMlb0'
-#cutString='lep0_MET0_1jet0_2jet0_NJets3_NBJets1_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST800_minMlb0'
-#cutString='lep0_MET0_1jet0_2jet0_NJets3_NBJets1_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST600_minMlb0'
-#cutString='lep0_MET0_1jet0_2jet0_NJets3_NBJets1_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST500_minMlb0'
-#cutString='lep0_MET0_1jet0_2jet0_NJets3_NBJets0_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST0_minMlb0'
-# cutString='lep0_MET0_1jet0_2jet0_NJets3_NBJets2_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST1100_minMlb0'
-# cutString='lep0_MET0_1jet0_2jet0_NJets2_NBJets0_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST1100_minMlb0'
-# cutString='lep0_MET0_1jet0_2jet0_NJets3_NBJets0_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST1100_minMlb0'
-cutString='lep25_MET20_1jet0_2jet0_NJets2_NBJets1_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST1200_minMlb0'
+# cutString='lep1Pt0_MET20_jetPt0_NJets3_NBJets0_HT0_ST500_mllOS20_isPassTrig0_isPassTrig_dilep1_isPassTrilepton1'
+# cutString='lep1Pt0_MET20_jetPt0_NJets3_NBJets0_HT0_ST600_mllOS20'
+# cutString='lep1Pt0_MET20_NJets3_NBJets0_DR0_HT0_ST800_mllOS20_isPassTriLepton1_isPassTrig_dilep1'
 
-mass = array('d', [700,800,900,1000,1100,1200,1300])#,1400,1500,1600])
+# cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets0_HT0_ST0_mllOS20'
+# cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets0_HT0_ST600_mllOS20'
+# cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets0_HT0_ST700_mllOS20'
+# cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets0_HT0_ST800_mllOS20'
+# cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets0_HT0_ST900_mllOS20'
+# cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets0_HT0_ST1000_mllOS20'
+cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets0_HT0_ST1100_mllOS20'
+
+mass = array('d', [800,900,1000,1100,1200,1300])#,1400,1500,1600])
 masserr = array('d', [0,0,0,0,0,0,0])#,0,0,0])
-mass_str = ['700','800','900','1000','1100','1200','1300']#,'1400','1500','1600']
+mass_str = ['800','900','1000','1100','1200','1300']#,'1400','1500','1600']
 
 exp   =array('d',[0 for i in range(len(mass))])
 experr=array('d',[0 for i in range(len(mass))])
@@ -234,14 +236,11 @@ BRs['TZ']=[0.25,1.0,0.8,0.6,0.4,0.2,0.0,0.8,0.6,0.4,0.2,0.0,0.6,0.4,0.2,0.0,0.4,
 nBRconf=len(BRs['BW'])
 if not doBRScan: nBRconf=1
 
-# tempKeys = ['allSys']
-# tempKeys = ['allSys_sig__muRFcorrdNew_sig__pdfNew_TrigSys']
-# tempKeys = ['allSys_sig__muRFcorrdNew_sig__pdfNew_no_jec_no_jer']
-tempKeys = ['76in74x_allSys_sig__muRFcorrdNew_sig__pdfNew']
-# tempKeys = ['all']#,'isE','isM','nW0','nW1p','nB0','nB1','nB2','nB3p']
-#tempKeys = ['all_no_jsf']
-#tempKeys = ['all_no_muRF_PDF_onSignal']
-#tempKeys = ['all_no_muRF_PDF_onSignal_jsf']
+# tempKeys = ['80x_noJEC_noJER_TESTINGDELETEME_v2']
+# tempKeys = ['80x_noJEC_noJER_v3']
+# tempKeys = ['80x_withJECJER']
+# tempKeys = ['80x_withJECJER_condor']
+tempKeys = ['80x_withJECJER_condor_FRv7_PRv2']
 
 expLims = []
 obsLims = []

@@ -28,7 +28,7 @@ cutList = {'isPassTrig': 0,
 		   'nbjetsCut':0, #1,
 		   'drCut':0, #1.0, #
 	   	   'stCut':0,
-	   	   'mllOSCut':0,
+	   	   'mllOSCut':20,
 		   }
 
 doAllSys= True
@@ -42,13 +42,125 @@ cutString = 'isPassTrig_All'+str(int(cutList['isPassTrig']))+'_'+'dilep'+str(int
 
 #pfix='kinematics_80x_Exactly3Lep_2016_9_14'
 
-pfix='kinematics_80x_Exactly3Lep_2016_9_19'
+# pfix='kinematics_80x_Exactly3Lep_2016_9_19'
+
+# pfix='kinematics_80x_Exactly3Lep_2016_9_20'
+
+#pfix='kinematics_80x_Exactly3Lep_no2Dcut_noMllOScut_dilepTrigReady_2016_9_20'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_no2Dcut_noMllOScut_dilepTrigReady_2016_9_20'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_no2Dcut_noMllOScut_dilepTrigReady_2016_9_26'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_no2Dcut_noMllOScut_dilepTrigReady_fixedSF_2016_9_26'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_no2Dcut_noMllOScut_dilepTrigReady_fixedSF_1bjet_2016_9_26'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_no2Dcut_noMllOScut_dilepTrigReady_fixedSF_1bjet_mllOSmin20_2016_9_26'
+
+# pfix='kinematics_80x_Exactly3Lep_no2Dcut_noMllOScut_dilepTrigReady_fixedSF_1bjet_mllOSmin20_2016_9_27'+'/'+cutString
+
+# pfix='kinematics_80x_condor_Exactly3Lep_no2Dcut_noMllOScut_dilepTrigReady_fixedSF_1bjet_mllOSmin20_2016_9_28'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin0_2016_9_28'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin0_2016_9_29'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_no2Dcut_noMllOScut_dilepTrigReady_fixedSF_1bjet_mllOSmin20_2016_9_29'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_2016_9_29'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_1bjet_mllOSmin20_2016_9_30'
+
+# pfix='kinematics_80x_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_1bjet_mllOSmin20_2016_9_30'+'/'+cutString
+
+# pfix='kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_1bjet_mllOSmin20_st600_2016_10_4'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv2_2016_10_6'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_step2_2016_10_7'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv2_step2_2016_10_7'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_1bjet_FRv2_step2_2016_10_7'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin0_step2_2016_10_7'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_step2_2016_10_10'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_2016_10_10'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_1bjet_2016_10_14'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_v2_2016_10_17'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_v2_noNjetCut_2016_10_18'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_v2_moreThan2Jets_2016_10_18'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_v2_exactly2Jets_2016_10_18'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_v2_exactly1Jet_2016_10_18'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_v2_exactly0Jet_2016_10_18'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_v2_lessThan3Jets_2016_10_20'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_v2_1or2Jets_2016_10_21'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_v2_2016_10_26'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_SUSYID_nJets2_2016_11_3'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_SUSYID_2016_11_4'
+
+# pfix='kinematics_80x_condor_MultiLep_FRv4_step2_moreThan2Jets_2016_11_4'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_FRv4_step2_moreThan2Jets_2016_11_4'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_FRv5_step2_moreThan2Jets_2016_11_4'
+
+# pfix='kinematics_80x_condor_MultiLep_FRv5_step2_moreThan2Jets_2016_11_7'
+
+# pfix='kinematics_80x_condor_MultiLep_FRv4_step2_moreThan2Jets_DOUBLECHECK_2016_11_7'
+
+# pfix='kinematics_80x_condor_MultiLep_FRv5_step2_moreThan2Jets_DOUBLECHECK_2016_11_7'
+
+# pfix='kinematics_80x_MultiLep_FRv5_step2_moreThan2Jets_DOUBLECHECK_noSYS_2016_11_7'+'/'+cutString
+
+# pfix='kinematics_80x_MultiLep_FRv5_v2_step2_moreThan2Jets_DOUBLECHECK_noSYS_2016_11_7'+'/'+cutString
+
+# pfix='kinematics_80x_condor_MultiLep_FRv4_step2_moreThan2Jets_DOUBLECHECK_withSYS_2016_11_7'
+
+# pfix='kinematics_80x_condor_MultiLep_FRv5_step2_moreThan2Jets_DOUBLECHECK_withSYS_2016_11_7'
+
+# pfix='kinematics_80x_condor_MultiLep_FRv5_step2_moreThan2Jets_withALLSYS_2016_11_29'
+
+# pfix='kinematics_80x_condor_MultiLep_FRv5_step2_moreThan2Jets_withALLSYS_ST600_2016_11_30'
+# 
+# pfix='kinematics_80x_condor_MultiLep_FRv5_step2_moreThan2Jets_withALLSYS_ST700_2016_11_30'
+# 
+# pfix='kinematics_80x_condor_MultiLep_FRv5_step2_moreThan2Jets_withALLSYS_ST800_2016_11_30'
+# 
+# pfix='kinematics_80x_condor_MultiLep_FRv5_step2_moreThan2Jets_withALLSYS_ST900_2016_11_30'
+# 
+# pfix='kinematics_80x_condor_MultiLep_FRv5_step2_moreThan2Jets_withALLSYS_ST1000_2016_11_30'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_FRv5_step2_exactly2Jets_noSYS_2016_12_2'
+
+# pfix='kinematics_80x_condor_MultiLep_FRv6_step2_moreThan2Jets_1bjet_withALLSYS_2016_12_9'
+
+# pfix='kinematics_80x_condor_MultiLep_FRv7_PRv2_step2_moreThan2Jets_withALLSYS_2016_12_12'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_FRv7_PRv2_step2_exactly2Jets_noSYS_2016_12_13'
+
+pfix='kinematics_80x_condor_MultiLep_FRv7_PRv2_step2_exactly2Jets_withALLSYS_2016_12_13'
 
 
 # outDir = os.getcwd()+'/'
 outDir = '/user_data/rsyarif/'
-# outDir+=pfix+'/'
-outDir+=pfix+'/'+cutString
+outDir+=pfix+'/'
+# outDir+=pfix+'/'+cutString
 
 
 isEMlist = ['EEE','EEM','EMM','MMM','All']
@@ -106,19 +218,23 @@ ddbkgLLTList = ['DataDrivenBkgLLTEEPRB','DataDrivenBkgLLTEEPRC','DataDrivenBkgLL
 
 ddbkgLLLList = ['DataDrivenBkgLLLEEPRB','DataDrivenBkgLLLEEPRC','DataDrivenBkgLLLEEPRD','DataDrivenBkgLLLMMPRB','DataDrivenBkgLLLMMPRC','DataDrivenBkgLLLMMPRD','DataDrivenBkgLLLMEPRB','DataDrivenBkgLLLMEPRC','DataDrivenBkgLLLMEPRD']
 
+sigOverSqrtBkgList = [signal+'OverSqrtBkg' for signal in signals]
+
 
 # systematicList = ['pileup','jec','jer','jsf','jmr','jms','btag','tau21','pdfNew','muR','muF',
-# 				  'muRFcoPRC','toppt','muRFcorrdNew','muRFdecorrdNew','PR','FR']
+# 				  'muRFcorrd','toppt','muRFcorrdNew','muRFdecorrdNew','PR','FR']
 # systematicList = ['pileup','jec','jer','jsf','btag','pdfNew','muR','muF',
-# 				  'muRFcoPRC','muRFcorrdNew','muRFdecorrdNew','PR','FR']
-systematicList = ['PR','FR']
+# 				  'muRFcorrd','muRFcorrdNew','muRFdecorrdNew','PR','FR']
+# systematicList = ['PR','FR']
+# systematicList = ['pileup','btag','pdfNew','muR','muF','muRFcorrd','muRFcorrdNew','PR','FR']
+systematicList = ['pileup','btag','pdfNew','muR','muF','muRFcorrd','muRFcorrdNew','PR','FR','jec','jer']
 
 
 ###########################################################
 #################### NORMALIZATIONS #######################
 ###########################################################
 
-lumiSys = 0.062 #6.2% https://twiki.cern.ch/twiki/bin/view/CMS/TWikiLUM - 20Sep2016
+lumiSys = 0.062 #6.2% https://twiki.cern.ch/twiki/bin/view/CMS/TWikiLUM - 20Sep2016 - ATTENTION!! NEEDS to be checked again!
 trigSys = 0.03 #3% trigger uncertainty - AN 2016 229
 lepIdSys = math.sqrt(3.*0.01**2) #1% lepton id uncertainty ## NEED to add in quadrature for 3 leptons! - ATTENTION! NEED UPDATING!
 lepIsoSys = math.sqrt(3.*0.01**2) #1% lepton isolation uncertainty ## NEED to add in quadrature for 3 leptons! - ATTENTION! NEED UPDATING!
@@ -279,163 +395,163 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 						for bkg in ddbkgList: 
 							if bkg!=ddbkgList[0]: hddbkg[isEM+systematic+ud].Add(bkghists[histoPrefix.replace(discriminant,discriminant+systematic+ud)+'_'+bkg])
 
-# 			htop[isEM+'muRFcorrdNewUp'] = htop[isEM+'muRFcorrdUp'].Clone(histoPrefix+'__top__muRFcorrdNew__plus')
-# 			htop[isEM+'muRFcorrdNewDown'] = htop[isEM+'muRFcorrdUp'].Clone(histoPrefix+'__top__muRFcorrdNew__minus')
-# 			hewk[isEM+'muRFcorrdNewUp'] = hewk[isEM+'muRFcorrdUp'].Clone(histoPrefix+'__ewk__muRFcorrdNew__plus')
-# 			hewk[isEM+'muRFcorrdNewDown'] = hewk[isEM+'muRFcorrdUp'].Clone(histoPrefix+'__ewk__muRFcorrdNew__minus')
-# # 			hqcd[isEM+'muRFcorrdNewUp'] = hqcd[isEM+'muRFcorrdUp'].Clone(histoPrefix+'__qcd__muRFcorrdNew__plus')
-# # 			hqcd[isEM+'muRFcorrdNewDown'] = hqcd[isEM+'muRFcorrdUp'].Clone(histoPrefix+'__qcd__muRFcorrdNew__minus')
-# 			for signal in sigList.keys(): hsig[isEM+signal+'muRFcorrdNewUp'] = hsig[isEM+signal+'muRFcorrdUp'].Clone(histoPrefix+'__'+sigList[signal]+'__muRFcorrdNew__plus')
-# 			for signal in sigList.keys(): hsig[isEM+signal+'muRFcorrdNewDown'] = hsig[isEM+signal+'muRFcorrdUp'].Clone(histoPrefix+'__'+sigList[signal]+'__muRFcorrdNew__minus')
-# 			for signal in signals: 
-# 				hsig[isEM+signal+'muRFcorrdNewUp'] = hsig[isEM+signal+decays[0]+'muRFcorrdUp'].Clone(histoPrefix+'__'+signal+'__muRFcorrdNew__plus')
-# 				hsig[isEM+signal+'muRFcorrdNewDown'] = hsig[isEM+signal+decays[0]+'muRFcorrdUp'].Clone(histoPrefix+'__'+signal+'__muRFcorrdNew__minus')
-# 
-# 			htop[isEM+'muRFdecorrdNewUp'] = htop[isEM+'muRFcorrdUp'].Clone(histoPrefix+'__top__muRFdecorrdNew__plus')
-# 			htop[isEM+'muRFdecorrdNewDown'] = htop[isEM+'muRFcorrdUp'].Clone(histoPrefix+'__top__muRFdecorrdNew__minus')
-# 			hewk[isEM+'muRFdecorrdNewUp'] = hewk[isEM+'muRFcorrdUp'].Clone(histoPrefix+'__ewk__muRFdecorrdNew__plus')
-# 			hewk[isEM+'muRFdecorrdNewDown'] = hewk[isEM+'muRFcorrdUp'].Clone(histoPrefix+'__ewk__muRFdecorrdNew__minus')
-# # 			hqcd[isEM+'muRFdecorrdNewUp'] = hqcd[isEM+'muRFcorrdUp'].Clone(histoPrefix+'__qcd__muRFdecorrdNew__plus')
-# # 			hqcd[isEM+'muRFdecorrdNewDown'] = hqcd[isEM+'muRFcorrdUp'].Clone(histoPrefix+'__qcd__muRFdecorrdNew__minus')
-# 			for signal in sigList.keys(): hsig[isEM+signal+'muRFdecorrdNewUp'] = hsig[isEM+signal+'muRFcorrdUp'].Clone(histoPrefix+'__'+sigList[signal]+'__muRFdecorrdNew__plus')
-# 			for signal in sigList.keys(): hsig[isEM+signal+'muRFdecorrdNewDown'] = hsig[isEM+signal+'muRFcorrdUp'].Clone(histoPrefix+'__'+sigList[signal]+'__muRFdecorrdNew__minus')
-# 			for signal in signals: 
-# 				hsig[isEM+signal+'muRFdecorrdNewUp'] = hsig[isEM+signal+decays[0]+'muRFcorrdUp'].Clone(histoPrefix+'__'+signal+'__muRFdecorrdNew__plus')
-# 				hsig[isEM+signal+'muRFdecorrdNewDown'] = hsig[isEM+signal+decays[0]+'muRFcorrdUp'].Clone(histoPrefix+'__'+signal+'__muRFdecorrdNew__minus')
-# 
-# 			# nominal,renormWeights[4],renormWeights[2],renormWeights[1],renormWeights[0],renormWeights[5],renormWeights[3]
-# 			histPrefixList = ['','muRUp','muRDown','muFUp','muFDown','muRFcorrdUp','muRFcorrdDown']
-# 			for ibin in range(1,htop[isEM].GetNbinsX()+1):
-# 				weightListTop = [htop[isEM+item].GetBinContent(ibin) for item in histPrefixList]	
-# 				weightListEwk = [hewk[isEM+item].GetBinContent(ibin) for item in histPrefixList]	
-# # 				weightListQcd = [hqcd[isEM+item].GetBinContent(ibin) for item in histPrefixList]	
-# 				weightListSig = {}
-# 				for signal in sigList.keys()+signals: weightListSig[signal] = [hsig[isEM+signal+item].GetBinContent(ibin) for item in histPrefixList]
-# 				indTopRFcorrdUp = weightListTop.index(max(weightListTop))
-# 				indTopRFcorrdDn = weightListTop.index(min(weightListTop))
-# 				indEwkRFcorrdUp = weightListEwk.index(max(weightListEwk))
-# 				indEwkRFcorrdDn = weightListEwk.index(min(weightListEwk))
+			htop[isEM+'muRFcorrdNewUp'] = htop[isEM+'muRFcorrdUp'].Clone(histoPrefix+'__top__muRFcorrdNew__plus')
+			htop[isEM+'muRFcorrdNewDown'] = htop[isEM+'muRFcorrdUp'].Clone(histoPrefix+'__top__muRFcorrdNew__minus')
+			hewk[isEM+'muRFcorrdNewUp'] = hewk[isEM+'muRFcorrdUp'].Clone(histoPrefix+'__ewk__muRFcorrdNew__plus')
+			hewk[isEM+'muRFcorrdNewDown'] = hewk[isEM+'muRFcorrdUp'].Clone(histoPrefix+'__ewk__muRFcorrdNew__minus')
+# 			hqcd[isEM+'muRFcorrdNewUp'] = hqcd[isEM+'muRFcorrdUp'].Clone(histoPrefix+'__qcd__muRFcorrdNew__plus')
+# 			hqcd[isEM+'muRFcorrdNewDown'] = hqcd[isEM+'muRFcorrdUp'].Clone(histoPrefix+'__qcd__muRFcorrdNew__minus')
+			for signal in sigList.keys(): hsig[isEM+signal+'muRFcorrdNewUp'] = hsig[isEM+signal+'muRFcorrdUp'].Clone(histoPrefix+'__'+sigList[signal]+'__muRFcorrdNew__plus')
+			for signal in sigList.keys(): hsig[isEM+signal+'muRFcorrdNewDown'] = hsig[isEM+signal+'muRFcorrdUp'].Clone(histoPrefix+'__'+sigList[signal]+'__muRFcorrdNew__minus')
+			for signal in signals: 
+				hsig[isEM+signal+'muRFcorrdNewUp'] = hsig[isEM+signal+decays[0]+'muRFcorrdUp'].Clone(histoPrefix+'__'+signal+'__muRFcorrdNew__plus')
+				hsig[isEM+signal+'muRFcorrdNewDown'] = hsig[isEM+signal+decays[0]+'muRFcorrdUp'].Clone(histoPrefix+'__'+signal+'__muRFcorrdNew__minus')
+
+			htop[isEM+'muRFdecorrdNewUp'] = htop[isEM+'muRFcorrdUp'].Clone(histoPrefix+'__top__muRFdecorrdNew__plus')
+			htop[isEM+'muRFdecorrdNewDown'] = htop[isEM+'muRFcorrdUp'].Clone(histoPrefix+'__top__muRFdecorrdNew__minus')
+			hewk[isEM+'muRFdecorrdNewUp'] = hewk[isEM+'muRFcorrdUp'].Clone(histoPrefix+'__ewk__muRFdecorrdNew__plus')
+			hewk[isEM+'muRFdecorrdNewDown'] = hewk[isEM+'muRFcorrdUp'].Clone(histoPrefix+'__ewk__muRFdecorrdNew__minus')
+# 			hqcd[isEM+'muRFdecorrdNewUp'] = hqcd[isEM+'muRFcorrdUp'].Clone(histoPrefix+'__qcd__muRFdecorrdNew__plus')
+# 			hqcd[isEM+'muRFdecorrdNewDown'] = hqcd[isEM+'muRFcorrdUp'].Clone(histoPrefix+'__qcd__muRFdecorrdNew__minus')
+			for signal in sigList.keys(): hsig[isEM+signal+'muRFdecorrdNewUp'] = hsig[isEM+signal+'muRFcorrdUp'].Clone(histoPrefix+'__'+sigList[signal]+'__muRFdecorrdNew__plus')
+			for signal in sigList.keys(): hsig[isEM+signal+'muRFdecorrdNewDown'] = hsig[isEM+signal+'muRFcorrdUp'].Clone(histoPrefix+'__'+sigList[signal]+'__muRFdecorrdNew__minus')
+			for signal in signals: 
+				hsig[isEM+signal+'muRFdecorrdNewUp'] = hsig[isEM+signal+decays[0]+'muRFcorrdUp'].Clone(histoPrefix+'__'+signal+'__muRFdecorrdNew__plus')
+				hsig[isEM+signal+'muRFdecorrdNewDown'] = hsig[isEM+signal+decays[0]+'muRFcorrdUp'].Clone(histoPrefix+'__'+signal+'__muRFdecorrdNew__minus')
+
+			# nominal,renormWeights[4],renormWeights[2],renormWeights[1],renormWeights[0],renormWeights[5],renormWeights[3]
+			histPrefixList = ['','muRUp','muRDown','muFUp','muFDown','muRFcorrdUp','muRFcorrdDown']
+			for ibin in range(1,htop[isEM].GetNbinsX()+1):
+				weightListTop = [htop[isEM+item].GetBinContent(ibin) for item in histPrefixList]	
+				weightListEwk = [hewk[isEM+item].GetBinContent(ibin) for item in histPrefixList]	
+# 				weightListQcd = [hqcd[isEM+item].GetBinContent(ibin) for item in histPrefixList]	
+				weightListSig = {}
+				for signal in sigList.keys()+signals: weightListSig[signal] = [hsig[isEM+signal+item].GetBinContent(ibin) for item in histPrefixList]
+				indTopRFcorrdUp = weightListTop.index(max(weightListTop))
+				indTopRFcorrdDn = weightListTop.index(min(weightListTop))
+				indEwkRFcorrdUp = weightListEwk.index(max(weightListEwk))
+				indEwkRFcorrdDn = weightListEwk.index(min(weightListEwk))
 # 				indQcdRFcorrdUp = weightListQcd.index(max(weightListQcd))
 # 				indQcdRFcorrdDn = weightListQcd.index(min(weightListQcd))
-# 				indSigRFcorrdUp = {}
-# 				indSigRFcorrdDn = {}
-# 				for signal in sigList.keys()+signals: 
-# 					indSigRFcorrdUp[signal] = weightListSig[signal].index(max(weightListSig[signal]))
-# 					indSigRFcorrdDn[signal] = weightListSig[signal].index(min(weightListSig[signal]))
-# 
-# 				indTopRFdecorrdUp = weightListTop.index(max(weightListTop[:-2]))
-# 				indTopRFdecorrdDn = weightListTop.index(min(weightListTop[:-2]))
-# 				indEwkRFdecorrdUp = weightListEwk.index(max(weightListEwk[:-2]))
-# 				indEwkRFdecorrdDn = weightListEwk.index(min(weightListEwk[:-2]))
+				indSigRFcorrdUp = {}
+				indSigRFcorrdDn = {}
+				for signal in sigList.keys()+signals: 
+					indSigRFcorrdUp[signal] = weightListSig[signal].index(max(weightListSig[signal]))
+					indSigRFcorrdDn[signal] = weightListSig[signal].index(min(weightListSig[signal]))
+
+				indTopRFdecorrdUp = weightListTop.index(max(weightListTop[:-2]))
+				indTopRFdecorrdDn = weightListTop.index(min(weightListTop[:-2]))
+				indEwkRFdecorrdUp = weightListEwk.index(max(weightListEwk[:-2]))
+				indEwkRFdecorrdDn = weightListEwk.index(min(weightListEwk[:-2]))
 # 				indQcdRFdecorrdUp = weightListQcd.index(max(weightListQcd[:-2]))
 # 				indQcdRFdecorrdDn = weightListQcd.index(min(weightListQcd[:-2]))
-# 				indSigRFdecorrdUp = {}
-# 				indSigRFdecorrdDn = {}
-# 				for signal in sigList.keys()+signals: 
-# 					indSigRFdecorrdUp[signal] = weightListSig[signal].index(max(weightListSig[signal][:-2]))
-# 					indSigRFdecorrdDn[signal] = weightListSig[signal].index(min(weightListSig[signal][:-2]))
-# 				
-# 				htop[isEM+'muRFcorrdNewUp'].SetBinContent(ibin,htop[isEM+histPrefixList[indTopRFcorrdUp]].GetBinContent(ibin))
-# 				htop[isEM+'muRFcorrdNewDown'].SetBinContent(ibin,htop[isEM+histPrefixList[indTopRFcorrdDn]].GetBinContent(ibin))
-# 				hewk[isEM+'muRFcorrdNewUp'].SetBinContent(ibin,hewk[isEM+histPrefixList[indEwkRFcorrdUp]].GetBinContent(ibin))
-# 				hewk[isEM+'muRFcorrdNewDown'].SetBinContent(ibin,hewk[isEM+histPrefixList[indEwkRFcorrdDn]].GetBinContent(ibin))
-# # 				hqcd[isEM+'muRFcorrdNewUp'].SetBinContent(ibin,hqcd[isEM+histPrefixList[indQcdRFcorrdUp]].GetBinContent(ibin))
-# # 				hqcd[isEM+'muRFcorrdNewDown'].SetBinContent(ibin,hqcd[isEM+histPrefixList[indQcdRFcorrdDn]].GetBinContent(ibin))
-# 				for signal in sigList.keys()+signals: 
-# 					hsig[isEM+signal+'muRFcorrdNewUp'].SetBinContent(ibin,hsig[isEM+signal+histPrefixList[indSigRFcorrdUp[signal]]].GetBinContent(ibin))
-# 					hsig[isEM+signal+'muRFcorrdNewDown'].SetBinContent(ibin,hsig[isEM+signal+histPrefixList[indSigRFcorrdDn[signal]]].GetBinContent(ibin))
-# 				htop[isEM+'muRFdecorrdNewUp'].SetBinContent(ibin,htop[isEM+histPrefixList[indTopRFdecorrdUp]].GetBinContent(ibin))
-# 				htop[isEM+'muRFdecorrdNewDown'].SetBinContent(ibin,htop[isEM+histPrefixList[indTopRFdecorrdDn]].GetBinContent(ibin))
-# 				hewk[isEM+'muRFdecorrdNewUp'].SetBinContent(ibin,hewk[isEM+histPrefixList[indEwkRFdecorrdUp]].GetBinContent(ibin))
-# 				hewk[isEM+'muRFdecorrdNewDown'].SetBinContent(ibin,hewk[isEM+histPrefixList[indEwkRFdecorrdDn]].GetBinContent(ibin))
-# # 				hqcd[isEM+'muRFdecorrdNewUp'].SetBinContent(ibin,hqcd[isEM+histPrefixList[indQcdRFdecorrdUp]].GetBinContent(ibin))
-# # 				hqcd[isEM+'muRFdecorrdNewDown'].SetBinContent(ibin,hqcd[isEM+histPrefixList[indQcdRFdecorrdDn]].GetBinContent(ibin))
-# 				for signal in sigList.keys()+signals: 
-# 					hsig[isEM+signal+'muRFdecorrdNewUp'].SetBinContent(ibin,hsig[isEM+signal+histPrefixList[indSigRFdecorrdUp[signal]]].GetBinContent(ibin))
-# 					hsig[isEM+signal+'muRFdecorrdNewDown'].SetBinContent(ibin,hsig[isEM+signal+histPrefixList[indSigRFdecorrdDn[signal]]].GetBinContent(ibin))
-# 
-# 				htop[isEM+'muRFcorrdNewUp'].SetBinError(ibin,htop[isEM+histPrefixList[indTopRFcorrdUp]].GetBinError(ibin))
-# 				htop[isEM+'muRFcorrdNewDown'].SetBinError(ibin,htop[isEM+histPrefixList[indTopRFcorrdDn]].GetBinError(ibin))
-# 				hewk[isEM+'muRFcorrdNewUp'].SetBinError(ibin,hewk[isEM+histPrefixList[indEwkRFcorrdUp]].GetBinError(ibin))
-# 				hewk[isEM+'muRFcorrdNewDown'].SetBinError(ibin,hewk[isEM+histPrefixList[indEwkRFcorrdDn]].GetBinError(ibin))
-# # 				hqcd[isEM+'muRFcorrdNewUp'].SetBinError(ibin,hqcd[isEM+histPrefixList[indQcdRFcorrdUp]].GetBinError(ibin))
-# # 				hqcd[isEM+'muRFcorrdNewDown'].SetBinError(ibin,hqcd[isEM+histPrefixList[indQcdRFcorrdDn]].GetBinError(ibin))
-# 				for signal in sigList.keys()+signals: 
-# 					hsig[isEM+signal+'muRFcorrdNewUp'].SetBinError(ibin,hsig[isEM+signal+histPrefixList[indSigRFcorrdUp[signal]]].GetBinError(ibin))
-# 					hsig[isEM+signal+'muRFcorrdNewDown'].SetBinError(ibin,hsig[isEM+signal+histPrefixList[indSigRFcorrdDn[signal]]].GetBinError(ibin))
-# 				htop[isEM+'muRFdecorrdNewUp'].SetBinError(ibin,htop[isEM+histPrefixList[indTopRFdecorrdUp]].GetBinError(ibin))
-# 				htop[isEM+'muRFdecorrdNewDown'].SetBinError(ibin,htop[isEM+histPrefixList[indTopRFdecorrdDn]].GetBinError(ibin))
-# 				hewk[isEM+'muRFdecorrdNewUp'].SetBinError(ibin,hewk[isEM+histPrefixList[indEwkRFdecorrdUp]].GetBinError(ibin))
-# 				hewk[isEM+'muRFdecorrdNewDown'].SetBinError(ibin,hewk[isEM+histPrefixList[indEwkRFdecorrdDn]].GetBinError(ibin))
-# # 				hqcd[isEM+'muRFdecorrdNewUp'].SetBinError(ibin,hqcd[isEM+histPrefixList[indQcdRFdecorrdUp]].GetBinError(ibin))
-# # 				hqcd[isEM+'muRFdecorrdNewDown'].SetBinError(ibin,hqcd[isEM+histPrefixList[indQcdRFdecorrdDn]].GetBinError(ibin))
-# 				for signal in sigList.keys()+signals: 
-# 					hsig[isEM+signal+'muRFdecorrdNewUp'].SetBinError(ibin,hsig[isEM+signal+histPrefixList[indSigRFdecorrdUp[signal]]].GetBinError(ibin))
-# 					hsig[isEM+signal+'muRFdecorrdNewDown'].SetBinError(ibin,hsig[isEM+signal+histPrefixList[indSigRFdecorrdDn[signal]]].GetBinError(ibin))
-# 
-# 			for pdfInd in range(100):
-# # 				hqcd[isEM+'pdf'+str(pdfInd)] = bkghists[histoPrefix.replace(discriminant,discriminant+'pdf'+str(pdfInd))+'_'+qcdList[0]].Clone(histoPrefix+'__qcd__pdf'+str(pdfInd))
-# 				hewk[isEM+'pdf'+str(pdfInd)] = bkghists[histoPrefix.replace(discriminant,discriminant+'pdf'+str(pdfInd))+'_'+ewkList[0]].Clone(histoPrefix+'__ewk__pdf'+str(pdfInd))
-# 				htop[isEM+'pdf'+str(pdfInd)] = bkghists[histoPrefix.replace(discriminant,discriminant+'pdf'+str(pdfInd))+'_'+topList[0]].Clone(histoPrefix+'__top__pdf'+str(pdfInd))
-# 				for signal in sigList.keys(): hsig[isEM+signal+'pdf'+str(pdfInd)] = sighists[histoPrefix.replace(discriminant,discriminant+'pdf'+str(pdfInd))+'_'+signal].Clone(histoPrefix+'__'+signal+'__pdf'+str(pdfInd))
-# 				for signal in signals: 
-# 					hsig[isEM+signal+'pdf'+str(pdfInd)] = sighists[histoPrefix.replace(discriminant,discriminant+'pdf'+str(pdfInd))+'_'+signal+decays[0]].Clone(histoPrefix+'__'+signal+'__pdf'+str(pdfInd))
-# 					for decay in decays: 
-# 						if decay!=decays[0]: hsig[isEM+signal+'pdf'+str(pdfInd)].Add(sighists[histoPrefix.replace(discriminant,discriminant+'pdf'+str(pdfInd))+'_'+signal+decay])
+				indSigRFdecorrdUp = {}
+				indSigRFdecorrdDn = {}
+				for signal in sigList.keys()+signals: 
+					indSigRFdecorrdUp[signal] = weightListSig[signal].index(max(weightListSig[signal][:-2]))
+					indSigRFdecorrdDn[signal] = weightListSig[signal].index(min(weightListSig[signal][:-2]))
+				
+				htop[isEM+'muRFcorrdNewUp'].SetBinContent(ibin,htop[isEM+histPrefixList[indTopRFcorrdUp]].GetBinContent(ibin))
+				htop[isEM+'muRFcorrdNewDown'].SetBinContent(ibin,htop[isEM+histPrefixList[indTopRFcorrdDn]].GetBinContent(ibin))
+				hewk[isEM+'muRFcorrdNewUp'].SetBinContent(ibin,hewk[isEM+histPrefixList[indEwkRFcorrdUp]].GetBinContent(ibin))
+				hewk[isEM+'muRFcorrdNewDown'].SetBinContent(ibin,hewk[isEM+histPrefixList[indEwkRFcorrdDn]].GetBinContent(ibin))
+# 				hqcd[isEM+'muRFcorrdNewUp'].SetBinContent(ibin,hqcd[isEM+histPrefixList[indQcdRFcorrdUp]].GetBinContent(ibin))
+# 				hqcd[isEM+'muRFcorrdNewDown'].SetBinContent(ibin,hqcd[isEM+histPrefixList[indQcdRFcorrdDn]].GetBinContent(ibin))
+				for signal in sigList.keys()+signals: 
+					hsig[isEM+signal+'muRFcorrdNewUp'].SetBinContent(ibin,hsig[isEM+signal+histPrefixList[indSigRFcorrdUp[signal]]].GetBinContent(ibin))
+					hsig[isEM+signal+'muRFcorrdNewDown'].SetBinContent(ibin,hsig[isEM+signal+histPrefixList[indSigRFcorrdDn[signal]]].GetBinContent(ibin))
+				htop[isEM+'muRFdecorrdNewUp'].SetBinContent(ibin,htop[isEM+histPrefixList[indTopRFdecorrdUp]].GetBinContent(ibin))
+				htop[isEM+'muRFdecorrdNewDown'].SetBinContent(ibin,htop[isEM+histPrefixList[indTopRFdecorrdDn]].GetBinContent(ibin))
+				hewk[isEM+'muRFdecorrdNewUp'].SetBinContent(ibin,hewk[isEM+histPrefixList[indEwkRFdecorrdUp]].GetBinContent(ibin))
+				hewk[isEM+'muRFdecorrdNewDown'].SetBinContent(ibin,hewk[isEM+histPrefixList[indEwkRFdecorrdDn]].GetBinContent(ibin))
+# 				hqcd[isEM+'muRFdecorrdNewUp'].SetBinContent(ibin,hqcd[isEM+histPrefixList[indQcdRFdecorrdUp]].GetBinContent(ibin))
+# 				hqcd[isEM+'muRFdecorrdNewDown'].SetBinContent(ibin,hqcd[isEM+histPrefixList[indQcdRFdecorrdDn]].GetBinContent(ibin))
+				for signal in sigList.keys()+signals: 
+					hsig[isEM+signal+'muRFdecorrdNewUp'].SetBinContent(ibin,hsig[isEM+signal+histPrefixList[indSigRFdecorrdUp[signal]]].GetBinContent(ibin))
+					hsig[isEM+signal+'muRFdecorrdNewDown'].SetBinContent(ibin,hsig[isEM+signal+histPrefixList[indSigRFdecorrdDn[signal]]].GetBinContent(ibin))
+
+				htop[isEM+'muRFcorrdNewUp'].SetBinError(ibin,htop[isEM+histPrefixList[indTopRFcorrdUp]].GetBinError(ibin))
+				htop[isEM+'muRFcorrdNewDown'].SetBinError(ibin,htop[isEM+histPrefixList[indTopRFcorrdDn]].GetBinError(ibin))
+				hewk[isEM+'muRFcorrdNewUp'].SetBinError(ibin,hewk[isEM+histPrefixList[indEwkRFcorrdUp]].GetBinError(ibin))
+				hewk[isEM+'muRFcorrdNewDown'].SetBinError(ibin,hewk[isEM+histPrefixList[indEwkRFcorrdDn]].GetBinError(ibin))
+# 				hqcd[isEM+'muRFcorrdNewUp'].SetBinError(ibin,hqcd[isEM+histPrefixList[indQcdRFcorrdUp]].GetBinError(ibin))
+# 				hqcd[isEM+'muRFcorrdNewDown'].SetBinError(ibin,hqcd[isEM+histPrefixList[indQcdRFcorrdDn]].GetBinError(ibin))
+				for signal in sigList.keys()+signals: 
+					hsig[isEM+signal+'muRFcorrdNewUp'].SetBinError(ibin,hsig[isEM+signal+histPrefixList[indSigRFcorrdUp[signal]]].GetBinError(ibin))
+					hsig[isEM+signal+'muRFcorrdNewDown'].SetBinError(ibin,hsig[isEM+signal+histPrefixList[indSigRFcorrdDn[signal]]].GetBinError(ibin))
+				htop[isEM+'muRFdecorrdNewUp'].SetBinError(ibin,htop[isEM+histPrefixList[indTopRFdecorrdUp]].GetBinError(ibin))
+				htop[isEM+'muRFdecorrdNewDown'].SetBinError(ibin,htop[isEM+histPrefixList[indTopRFdecorrdDn]].GetBinError(ibin))
+				hewk[isEM+'muRFdecorrdNewUp'].SetBinError(ibin,hewk[isEM+histPrefixList[indEwkRFdecorrdUp]].GetBinError(ibin))
+				hewk[isEM+'muRFdecorrdNewDown'].SetBinError(ibin,hewk[isEM+histPrefixList[indEwkRFdecorrdDn]].GetBinError(ibin))
+# 				hqcd[isEM+'muRFdecorrdNewUp'].SetBinError(ibin,hqcd[isEM+histPrefixList[indQcdRFdecorrdUp]].GetBinError(ibin))
+# 				hqcd[isEM+'muRFdecorrdNewDown'].SetBinError(ibin,hqcd[isEM+histPrefixList[indQcdRFdecorrdDn]].GetBinError(ibin))
+				for signal in sigList.keys()+signals: 
+					hsig[isEM+signal+'muRFdecorrdNewUp'].SetBinError(ibin,hsig[isEM+signal+histPrefixList[indSigRFdecorrdUp[signal]]].GetBinError(ibin))
+					hsig[isEM+signal+'muRFdecorrdNewDown'].SetBinError(ibin,hsig[isEM+signal+histPrefixList[indSigRFdecorrdDn[signal]]].GetBinError(ibin))
+
+			for pdfInd in range(100):
+# 				hqcd[isEM+'pdf'+str(pdfInd)] = bkghists[histoPrefix.replace(discriminant,discriminant+'pdf'+str(pdfInd))+'_'+qcdList[0]].Clone(histoPrefix+'__qcd__pdf'+str(pdfInd))
+				hewk[isEM+'pdf'+str(pdfInd)] = bkghists[histoPrefix.replace(discriminant,discriminant+'pdf'+str(pdfInd))+'_'+ewkList[0]].Clone(histoPrefix+'__ewk__pdf'+str(pdfInd))
+				htop[isEM+'pdf'+str(pdfInd)] = bkghists[histoPrefix.replace(discriminant,discriminant+'pdf'+str(pdfInd))+'_'+topList[0]].Clone(histoPrefix+'__top__pdf'+str(pdfInd))
+				for signal in sigList.keys(): hsig[isEM+signal+'pdf'+str(pdfInd)] = sighists[histoPrefix.replace(discriminant,discriminant+'pdf'+str(pdfInd))+'_'+signal].Clone(histoPrefix+'__'+signal+'__pdf'+str(pdfInd))
+				for signal in signals: 
+					hsig[isEM+signal+'pdf'+str(pdfInd)] = sighists[histoPrefix.replace(discriminant,discriminant+'pdf'+str(pdfInd))+'_'+signal+decays[0]].Clone(histoPrefix+'__'+signal+'__pdf'+str(pdfInd))
+					for decay in decays: 
+						if decay!=decays[0]: hsig[isEM+signal+'pdf'+str(pdfInd)].Add(sighists[histoPrefix.replace(discriminant,discriminant+'pdf'+str(pdfInd))+'_'+signal+decay])
 # 				for bkg in qcdList: 
 # 					if bkg!=qcdList[0]: hqcd[isEM+'pdf'+str(pdfInd)].Add(bkghists[histoPrefix.replace(discriminant,discriminant+'pdf'+str(pdfInd))+'_'+bkg])
-# 				for bkg in ewkList: 
-# 					if bkg!=ewkList[0]: hewk[isEM+'pdf'+str(pdfInd)].Add(bkghists[histoPrefix.replace(discriminant,discriminant+'pdf'+str(pdfInd))+'_'+bkg])
-# 				for bkg in topList: 
-# 					if bkg!=topList[0]: htop[isEM+'pdf'+str(pdfInd)].Add(bkghists[histoPrefix.replace(discriminant,discriminant+'pdf'+str(pdfInd))+'_'+bkg])
-# 			htop[isEM+'pdfNewUp'] = htop[isEM+'pdf0'].Clone(histoPrefix+'__top__pdfNew__plus')
-# 			htop[isEM+'pdfNewDown'] = htop[isEM+'pdf0'].Clone(histoPrefix+'__top__pdfNew__minus')
-# 			hewk[isEM+'pdfNewUp'] = hewk[isEM+'pdf0'].Clone(histoPrefix+'__ewk__pdfNew__plus')
-# 			hewk[isEM+'pdfNewDown'] = hewk[isEM+'pdf0'].Clone(histoPrefix+'__ewk__pdfNew__minus')
+				for bkg in ewkList: 
+					if bkg!=ewkList[0]: hewk[isEM+'pdf'+str(pdfInd)].Add(bkghists[histoPrefix.replace(discriminant,discriminant+'pdf'+str(pdfInd))+'_'+bkg])
+				for bkg in topList: 
+					if bkg!=topList[0]: htop[isEM+'pdf'+str(pdfInd)].Add(bkghists[histoPrefix.replace(discriminant,discriminant+'pdf'+str(pdfInd))+'_'+bkg])
+			htop[isEM+'pdfNewUp'] = htop[isEM+'pdf0'].Clone(histoPrefix+'__top__pdfNew__plus')
+			htop[isEM+'pdfNewDown'] = htop[isEM+'pdf0'].Clone(histoPrefix+'__top__pdfNew__minus')
+			hewk[isEM+'pdfNewUp'] = hewk[isEM+'pdf0'].Clone(histoPrefix+'__ewk__pdfNew__plus')
+			hewk[isEM+'pdfNewDown'] = hewk[isEM+'pdf0'].Clone(histoPrefix+'__ewk__pdfNew__minus')
 # 			hqcd[isEM+'pdfNewUp'] = hqcd[isEM+'pdf0'].Clone(histoPrefix+'__qcd__pdfNew__plus')
 # 			hqcd[isEM+'pdfNewDown'] = hqcd[isEM+'pdf0'].Clone(histoPrefix+'__qcd__pdfNew__minus')
-# 			for signal in sigList.keys(): hsig[isEM+signal+'pdfNewUp'] = hsig[isEM+signal+'pdf0'].Clone(histoPrefix+'__'+sigList[signal]+'__pdfNew__plus')
-# 			for signal in sigList.keys(): hsig[isEM+signal+'pdfNewDown'] = hsig[isEM+signal+'pdf0'].Clone(histoPrefix+'__'+sigList[signal]+'__pdfNew__minus')
-# 			for signal in signals: 
-# 				hsig[isEM+signal+'pdfNewUp'] = hsig[isEM+signal+decays[0]+'pdf0'].Clone(histoPrefix+'__'+signal+'__pdfNew__plus')
-# 				hsig[isEM+signal+'pdfNewDown'] = hsig[isEM+signal+decays[0]+'pdf0'].Clone(histoPrefix+'__'+signal+'__pdfNew__minus')
-# 			for ibin in range(1,htop[isEM+'pdfNewUp'].GetNbinsX()+1):
-# 				weightListTop = [htop[isEM+'pdf'+str(pdfInd)].GetBinContent(ibin) for pdfInd in range(100)]
-# 				weightListEwk = [hewk[isEM+'pdf'+str(pdfInd)].GetBinContent(ibin) for pdfInd in range(100)]
+			for signal in sigList.keys(): hsig[isEM+signal+'pdfNewUp'] = hsig[isEM+signal+'pdf0'].Clone(histoPrefix+'__'+sigList[signal]+'__pdfNew__plus')
+			for signal in sigList.keys(): hsig[isEM+signal+'pdfNewDown'] = hsig[isEM+signal+'pdf0'].Clone(histoPrefix+'__'+sigList[signal]+'__pdfNew__minus')
+			for signal in signals: 
+				hsig[isEM+signal+'pdfNewUp'] = hsig[isEM+signal+decays[0]+'pdf0'].Clone(histoPrefix+'__'+signal+'__pdfNew__plus')
+				hsig[isEM+signal+'pdfNewDown'] = hsig[isEM+signal+decays[0]+'pdf0'].Clone(histoPrefix+'__'+signal+'__pdfNew__minus')
+			for ibin in range(1,htop[isEM+'pdfNewUp'].GetNbinsX()+1):
+				weightListTop = [htop[isEM+'pdf'+str(pdfInd)].GetBinContent(ibin) for pdfInd in range(100)]
+				weightListEwk = [hewk[isEM+'pdf'+str(pdfInd)].GetBinContent(ibin) for pdfInd in range(100)]
 # 				weightListQcd = [hqcd[isEM+'pdf'+str(pdfInd)].GetBinContent(ibin) for pdfInd in range(100)]
-# 				weightListSig = {}
-# 				for signal in sigList.keys()+signals: weightListSig[signal] = [hsig[isEM+signal+'pdf'+str(pdfInd)].GetBinContent(ibin) for pdfInd in range(100)]
-# 				indTopPDFUp = sorted(range(len(weightListTop)), key=lambda k: weightListTop[k])[83]
-# 				indTopPDFDn = sorted(range(len(weightListTop)), key=lambda k: weightListTop[k])[15]
-# 				indEwkPDFUp = sorted(range(len(weightListEwk)), key=lambda k: weightListEwk[k])[83]
-# 				indEwkPDFDn = sorted(range(len(weightListEwk)), key=lambda k: weightListEwk[k])[15]
+				weightListSig = {}
+				for signal in sigList.keys()+signals: weightListSig[signal] = [hsig[isEM+signal+'pdf'+str(pdfInd)].GetBinContent(ibin) for pdfInd in range(100)]
+				indTopPDFUp = sorted(range(len(weightListTop)), key=lambda k: weightListTop[k])[83]
+				indTopPDFDn = sorted(range(len(weightListTop)), key=lambda k: weightListTop[k])[15]
+				indEwkPDFUp = sorted(range(len(weightListEwk)), key=lambda k: weightListEwk[k])[83]
+				indEwkPDFDn = sorted(range(len(weightListEwk)), key=lambda k: weightListEwk[k])[15]
 # 				indQcdPDFUp = sorted(range(len(weightListQcd)), key=lambda k: weightListQcd[k])[83]
 # 				indQcdPDFDn = sorted(range(len(weightListQcd)), key=lambda k: weightListQcd[k])[15]
-# 				indSigPDFUp = {}
-# 				indSigPDFDn = {}
-# 				for signal in sigList.keys()+signals: 
-# 					indSigPDFUp[signal] = sorted(range(len(weightListSig[signal])), key=lambda k: weightListSig[signal][k])[83]
-# 					indSigPDFDn[signal] = sorted(range(len(weightListSig[signal])), key=lambda k: weightListSig[signal][k])[15]
-# 				
-# 				htop[isEM+'pdfNewUp'].SetBinContent(ibin,htop[isEM+'pdf'+str(indTopPDFUp)].GetBinContent(ibin))
-# 				htop[isEM+'pdfNewDown'].SetBinContent(ibin,htop[isEM+'pdf'+str(indTopPDFDn)].GetBinContent(ibin))
-# 				hewk[isEM+'pdfNewUp'].SetBinContent(ibin,hewk[isEM+'pdf'+str(indEwkPDFUp)].GetBinContent(ibin))
-# 				hewk[isEM+'pdfNewDown'].SetBinContent(ibin,hewk[isEM+'pdf'+str(indEwkPDFDn)].GetBinContent(ibin))
-# # 				hqcd[isEM+'pdfNewUp'].SetBinContent(ibin,hqcd[isEM+'pdf'+str(indQcdPDFUp)].GetBinContent(ibin))
-# # 				hqcd[isEM+'pdfNewDown'].SetBinContent(ibin,hqcd[isEM+'pdf'+str(indQcdPDFDn)].GetBinContent(ibin))
-# 				for signal in sigList.keys()+signals: 
-# 					hsig[isEM+signal+'pdfNewUp'].SetBinContent(ibin,hsig[isEM+signal+'pdf'+str(indSigPDFUp[signal])].GetBinContent(ibin))
-# 					hsig[isEM+signal+'pdfNewDown'].SetBinContent(ibin,hsig[isEM+signal+'pdf'+str(indSigPDFDn[signal])].GetBinContent(ibin))
-# 
-# 				htop[isEM+'pdfNewUp'].SetBinError(ibin,htop[isEM+'pdf'+str(indTopPDFUp)].GetBinError(ibin))
-# 				htop[isEM+'pdfNewDown'].SetBinError(ibin,htop[isEM+'pdf'+str(indTopPDFDn)].GetBinError(ibin))
-# 				hewk[isEM+'pdfNewUp'].SetBinError(ibin,hewk[isEM+'pdf'+str(indEwkPDFUp)].GetBinError(ibin))
-# 				hewk[isEM+'pdfNewDown'].SetBinError(ibin,hewk[isEM+'pdf'+str(indEwkPDFDn)].GetBinError(ibin))
-# # 				hqcd[isEM+'pdfNewUp'].SetBinError(ibin,hqcd[isEM+'pdf'+str(indQcdPDFUp)].GetBinError(ibin))
-# # 				hqcd[isEM+'pdfNewDown'].SetBinError(ibin,hqcd[isEM+'pdf'+str(indQcdPDFDn)].GetBinError(ibin))
-# 				for signal in sigList.keys()+signals: 
-# 					hsig[isEM+signal+'pdfNewUp'].SetBinError(ibin,hsig[isEM+signal+'pdf'+str(indSigPDFUp[signal])].GetBinError(ibin))
-# 					hsig[isEM+signal+'pdfNewDown'].SetBinError(ibin,hsig[isEM+signal+'pdf'+str(indSigPDFDn[signal])].GetBinError(ibin))
+				indSigPDFUp = {}
+				indSigPDFDn = {}
+				for signal in sigList.keys()+signals: 
+					indSigPDFUp[signal] = sorted(range(len(weightListSig[signal])), key=lambda k: weightListSig[signal][k])[83]
+					indSigPDFDn[signal] = sorted(range(len(weightListSig[signal])), key=lambda k: weightListSig[signal][k])[15]
+				
+				htop[isEM+'pdfNewUp'].SetBinContent(ibin,htop[isEM+'pdf'+str(indTopPDFUp)].GetBinContent(ibin))
+				htop[isEM+'pdfNewDown'].SetBinContent(ibin,htop[isEM+'pdf'+str(indTopPDFDn)].GetBinContent(ibin))
+				hewk[isEM+'pdfNewUp'].SetBinContent(ibin,hewk[isEM+'pdf'+str(indEwkPDFUp)].GetBinContent(ibin))
+				hewk[isEM+'pdfNewDown'].SetBinContent(ibin,hewk[isEM+'pdf'+str(indEwkPDFDn)].GetBinContent(ibin))
+# 				hqcd[isEM+'pdfNewUp'].SetBinContent(ibin,hqcd[isEM+'pdf'+str(indQcdPDFUp)].GetBinContent(ibin))
+# 				hqcd[isEM+'pdfNewDown'].SetBinContent(ibin,hqcd[isEM+'pdf'+str(indQcdPDFDn)].GetBinContent(ibin))
+				for signal in sigList.keys()+signals: 
+					hsig[isEM+signal+'pdfNewUp'].SetBinContent(ibin,hsig[isEM+signal+'pdf'+str(indSigPDFUp[signal])].GetBinContent(ibin))
+					hsig[isEM+signal+'pdfNewDown'].SetBinContent(ibin,hsig[isEM+signal+'pdf'+str(indSigPDFDn[signal])].GetBinContent(ibin))
+
+				htop[isEM+'pdfNewUp'].SetBinError(ibin,htop[isEM+'pdf'+str(indTopPDFUp)].GetBinError(ibin))
+				htop[isEM+'pdfNewDown'].SetBinError(ibin,htop[isEM+'pdf'+str(indTopPDFDn)].GetBinError(ibin))
+				hewk[isEM+'pdfNewUp'].SetBinError(ibin,hewk[isEM+'pdf'+str(indEwkPDFUp)].GetBinError(ibin))
+				hewk[isEM+'pdfNewDown'].SetBinError(ibin,hewk[isEM+'pdf'+str(indEwkPDFDn)].GetBinError(ibin))
+# 				hqcd[isEM+'pdfNewUp'].SetBinError(ibin,hqcd[isEM+'pdf'+str(indQcdPDFUp)].GetBinError(ibin))
+# 				hqcd[isEM+'pdfNewDown'].SetBinError(ibin,hqcd[isEM+'pdf'+str(indQcdPDFDn)].GetBinError(ibin))
+				for signal in sigList.keys()+signals: 
+					hsig[isEM+signal+'pdfNewUp'].SetBinError(ibin,hsig[isEM+signal+'pdf'+str(indSigPDFUp[signal])].GetBinError(ibin))
+					hsig[isEM+signal+'pdfNewDown'].SetBinError(ibin,hsig[isEM+signal+'pdf'+str(indSigPDFDn[signal])].GetBinError(ibin))
 		
 		#Group data processes
 		hdata[isEM] = datahists[histoPrefix+'_'+dataList[0]].Clone(histoPrefix+'__DATA')
@@ -450,10 +566,14 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 # 		yieldTable[histoPrefix]['totBkg'] = htop[isEM].Integral()+hewk[isEM].Integral()+hqcd[isEM].Integral()+hddbkg[isEM].Integral()
 		yieldTable[histoPrefix]['totBkg'] = htop[isEM].Integral()+hewk[isEM].Integral()+hddbkg[isEM].Integral()
 		yieldTable[histoPrefix]['data']   = hdata[isEM].Integral()
+		for signal in sigList.keys(): yieldTable[histoPrefix][signal] = hsig[isEM+signal].Integral()
+		for signal in signals: yieldTable[histoPrefix][signal] = hsig[isEM+signal].Integral()
 		if yieldTable[histoPrefix]['totBkg']!=0:
 			yieldTable[histoPrefix]['dataOverBkg']= yieldTable[histoPrefix]['data']/yieldTable[histoPrefix]['totBkg']
+			for signal in signals: yieldTable[histoPrefix][signal+'OverSqrtBkg'] = yieldTable[histoPrefix][signal]/math.sqrt(yieldTable[histoPrefix]['totBkg'])
 		else:
 			yieldTable[histoPrefix]['dataOverBkg']= 0.
+			for signal in signals: yieldTable[histoPrefix][signal+'OverSqrtBkg'] = 0.
 # 		yieldTable[histoPrefix]['WJets']  = hwjets[isEM].Integral()
 # 		yieldTable[histoPrefix]['ZJets']  = hzjets[isEM].Integral()
 		yieldTable[histoPrefix]['VV']     = hvv[isEM].Integral()
@@ -466,34 +586,31 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 # 		yieldTable[histoPrefix]['QCD']    = hqcd[isEM].Integral()
 		yieldTable[histoPrefix]['ddbkg']  = hddbkg[isEM].Integral()
 
-		print ''
-		print '----------', isEM,'----------'
+# 		print ''
+# 		print '----------', isEM,'----------'
 
 		yieldTable[histoPrefix]['ddbkgTTT']  = hddbkgTTT[isEM].Integral()
-		print 'hddbkgTTT[isEM].Integral() = ', hddbkgTTT[isEM].Integral()
-		print ''
+# 		print 'hddbkgTTT[isEM].Integral() = ', hddbkgTTT[isEM].Integral()
+# 		print ''
 
 		yieldTable[histoPrefix]['ddbkgTTL']  = hddbkgTTL[isEM].Integral()
-		print 'hddbkgTTL[isEM].Integral() = ', hddbkgTTL[isEM].Integral()
+# 		print 'hddbkgTTL[isEM].Integral() = ', hddbkgTTL[isEM].Integral()
 		yieldTable[histoPrefix]['ddbkgTLT']  = hddbkgTLT[isEM].Integral()
-		print 'hddbkgTLT[isEM].Integral() = ', hddbkgTLT[isEM].Integral()
+# 		print 'hddbkgTLT[isEM].Integral() = ', hddbkgTLT[isEM].Integral()
 		yieldTable[histoPrefix]['ddbkgLTT']  = hddbkgLTT[isEM].Integral()
-		print 'hddbkgLTT[isEM].Integral() = ', hddbkgLTT[isEM].Integral()
-		print ''
+# 		print 'hddbkgLTT[isEM].Integral() = ', hddbkgLTT[isEM].Integral()
+# 		print ''
 
 		yieldTable[histoPrefix]['ddbkgTLL']  = hddbkgTLL[isEM].Integral()
-		print 'hddbkgTLL[isEM].Integral() = ', hddbkgTLL[isEM].Integral()
+# 		print 'hddbkgTLL[isEM].Integral() = ', hddbkgTLL[isEM].Integral()
 		yieldTable[histoPrefix]['ddbkgLTL']  = hddbkgLTL[isEM].Integral()
-		print 'hddbkgLTL[isEM].Integral() = ', hddbkgLTL[isEM].Integral()
+# 		print 'hddbkgLTL[isEM].Integral() = ', hddbkgLTL[isEM].Integral()
 		yieldTable[histoPrefix]['ddbkgLLT']  = hddbkgLLT[isEM].Integral()
-		print 'hddbkgLLT[isEM].Integral() = ', hddbkgLLT[isEM].Integral()
-		print ''
+# 		print 'hddbkgLLT[isEM].Integral() = ', hddbkgLLT[isEM].Integral()
+# 		print ''
 
 		yieldTable[histoPrefix]['ddbkgLLL']  = hddbkgLLL[isEM].Integral()
-		print 'hddbkgLLL[isEM].Integral() = ', hddbkgLLL[isEM].Integral()
-
-		for signal in sigList.keys(): yieldTable[histoPrefix][signal] = hsig[isEM+signal].Integral()
-		for signal in signals: yieldTable[histoPrefix][signal] = hsig[isEM+signal].Integral()
+# 		print 'hddbkgLLL[isEM].Integral() = ', hddbkgLLL[isEM].Integral()
 		
 		#+/- 1sigma variations of shape systematics
 		if doAllSys:
@@ -503,7 +620,7 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 						yieldTable[histoPrefix+systematic+ud]['top'] = htop[isEM+systematic+ud].Integral()
 						if systematic!='toppt':
 							yieldTable[histoPrefix+systematic+ud]['ewk'] = hewk[isEM+systematic+ud].Integral()
-							yieldTable[histoPrefix+systematic+ud]['qcd'] = hqcd[isEM+systematic+ud].Integral()
+# 							yieldTable[histoPrefix+systematic+ud]['qcd'] = hqcd[isEM+systematic+ud].Integral()
 							for signal in sigList.keys(): yieldTable[histoPrefix+systematic+ud][signal] = hsig[isEM+signal+systematic+ud].Integral()
 							for signal in signals: yieldTable[histoPrefix+systematic+ud][signal] = hsig[isEM+signal+systematic+ud].Integral()
 					if systematic=='PR' or systematic=='FR':
@@ -548,7 +665,7 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 # 			yieldErrTable[histoPrefix]['totBkg'] += htop[isEM].GetBinError(ibin)**2+hewk[isEM].GetBinError(ibin)**2+hqcd[isEM].GetBinError(ibin)**2+hddbkg[isEM].GetBinError(ibin)**2
 			yieldErrTable[histoPrefix]['totBkg'] += htop[isEM].GetBinError(ibin)**2+hewk[isEM].GetBinError(ibin)**2+hddbkg[isEM].GetBinError(ibin)**2
 			yieldErrTable[histoPrefix]['data']   += hdata[isEM].GetBinError(ibin)**2
-# 			print "hdata[isEM].GetBinError(ibin) = ", hdata[isEM].GetBinError(ibin)
+# 			print "hdata[isEM].GetBinError(ibin) = ", hdata[isEM].Get/BinError(ibin)
 # 			print "hdata[isEM].GetBinError(ibin)*hdata[isEM].GetBinError(ibin) = ", hdata[isEM].GetBinError(ibin)*hdata[isEM].GetBinError(ibin)
 # 			print "yieldErrTable[histoPrefix]['data'] = ", yieldErrTable[histoPrefix]['data']
 # 			yieldErrTable[histoPrefix]['WJets']  += hwjets[isEM].GetBinError(ibin)**2
@@ -606,6 +723,8 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 # 		print '(yieldErrTable[histoPrefix]["data"]/(yieldTable[histoPrefix]["data"]+1e-20))**2 = ', (yieldErrTable[histoPrefix]['data']/(yieldTable[histoPrefix]['data']+1e-20))**2
 # 		print '(yieldErrTable[histoPrefix]["totBkg"]/(yieldTable[histoPrefix]["totBkg"]+1e-20))**2 = ', (yieldErrTable[histoPrefix]['totBkg']/(yieldTable[histoPrefix]['totBkg']+1e-20))**2
 
+		for signal in signals: yieldErrTable[histoPrefix][signal+'OverSqrtBkg'] = ( yieldTable[histoPrefix][signal+'OverSqrtBkg']**2 ) * ( ( math.sqrt( yieldErrTable[histoPrefix][signal] ) / ( yieldTable[histoPrefix][signal]+1e-20 ) )**2 + ( math.sqrt( math.sqrt(yieldErrTable[histoPrefix]['totBkg'] ) ) / ( math.sqrt(yieldTable[histoPrefix]['totBkg'])+1e-20) )**2 )
+	
 		hdata[isEM].Write()
 		#write theta histograms in root file, avoid having processes with no event yield (to make theta happy) 
 		for signal in sigList.keys()+signals: 
@@ -810,7 +929,7 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 # 	for process in bkgStackList+['ewk','top','qcd','ddbkg','totBkg','data','dataOverBkg']+signals+signalList:
 # 	for process in bkgStackList+['ewk','top','qcd','ddbkg','ddbkgTTT','ddbkgTTL','ddbkgTLL','ddbkgLLL','totBkg','data','dataOverBkg']+signals+signalList:
 # 	for process in bkgStackList+['ewk','top','ddbkg','ddbkgTTT','ddbkgTTL','ddbkgTLL','ddbkgLLL','totBkg','data','dataOverBkg']+signals+signalList:
-	for process in bkgStackList+['ewk','top','ddbkg','ddbkgTTT','ddbkgTTL','ddbkgTLT','ddbkgLTT','ddbkgTLL','ddbkgLTL','ddbkgLLT','ddbkgLLL','totBkg','data','dataOverBkg']+signals+signalList:
+	for process in bkgStackList+['ewk','top','ddbkg','ddbkgTTT','ddbkgTTL','ddbkgTLT','ddbkgLTT','ddbkgTLL','ddbkgLTL','ddbkgLLT','ddbkgLLL','totBkg','data','dataOverBkg']+sigOverSqrtBkgList+signals+signalList:
 		print process.ljust(ljust_i),
 		for isEM in isEMlist:
 			histoPrefix=discriminant+'_'+lumiStr+'fb_'+isEM

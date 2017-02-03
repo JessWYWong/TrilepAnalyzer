@@ -38,10 +38,13 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 # 	cut += ' && (theJetPt_JetSubCalc_PtOrdered[2] > '+str(cutList['thirdJetPtCut'])+')'
 # 	cut += ' && (NJetsHtagged == 0)'
 #	cut += ' && ('+wtagvar+' == 0)'
+#  	cut += ' && minDR_lep3Jet > 0.05'
 #  	cut += ' && (deltaR_lepClosestJet[0] > 0.4 || PtRelLepClosestJet[0] > 40)'
 #  	cut += ' && (deltaR_lepClosestJet[1] > 0.4 || PtRelLepClosestJet[1] > 40)'
 #  	cut += ' && (deltaR_lepClosestJet[2] > 0.4 || PtRelLepClosestJet[2] > 40)'
-	cut += ' && (NJets_JetSubCalc >= '+str(cutList['njetsCut'])+')'
+# 	cut += ' && (NJets_JetSubCalc >= '+str(cutList['njetsCut'])+')'
+	cut += ' && (NJets_JetSubCalc == '+str(cutList['njetsCut'])+')'
+# 	cut += ' && (NJets_JetSubCalc == 1 || NJets_JetSubCalc == '+str(cutList['njetsCut'])+')'
 #	cut += ' && (('+wtagvar+' > 0 && NJets_JetSubCalc >= '+str(cutList['njetsCut'])+') || ('+wtagvar+' == 0 && NJets_JetSubCalc >= '+str(cutList['njetsCut']+1)+'))'
 	cut += ' && (NJetsCSVwithSF_JetSubCalc >= '+str(cutList['nbjetsCut'])+')'
 # 	cut += ' && (NJetsCSVwithSF_JetSubCalc_noLepCorr >= '+str(cutList['nbjetsCut'])+')'
@@ -68,7 +71,7 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 # 	cut += ' && (deltaR_lepJets[1] >= '+str(cutList['drCut'])+')'
  	cut += ' && (AK4HTpMETpLepPt >= '+str(cutList['stCut'])+')'
 
- 	cut += ' && AllLeptonCount_PtOrdered == 3' #require exactly 3 leptons
+#  	cut += ' && AllLeptonCount_PtOrdered == 3' #require exactly 3 leptons
 
 # 	cut += ' && Mll_sameFlavorOS > '+str(cutList['mllOSCut']) #to make sure the OS pair are same sign cut above 0. 
 
@@ -95,7 +98,7 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 
 
 #Start -- Method if isTTT doesnt exist
-	'''
+# 	'''
 	if 'DataDrivenBkgTTT' in process: 
 		cut+=' && (AllLeptonIsTight_PtOrdered[0]==1 && AllLeptonIsTight_PtOrdered[1]==1 && AllLeptonIsTight_PtOrdered[2]==1)'
 
@@ -171,11 +174,11 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 
 	if 'DataDrivenBkgLLL' in process: 
 		cut+=' && (AllLeptonIsTight_PtOrdered[0]==0 && AllLeptonIsTight_PtOrdered[1]==0 && AllLeptonIsTight_PtOrdered[2]==0)'
-	'''
+# 	'''
 #End -- Method if isTTT doesnt exist
 
-#Start -- Method if isTTT doesnt exist
-# 	'''
+#Start -- Method if isTTT  exist
+	'''
 	if 'DataDrivenBkgTTT' in process: cut+=' && isTTT==1'
 	if 'DataDrivenBkgTTL' in process: cut+=' && isTTL==1'
 	if 'DataDrivenBkgTLT' in process: cut+=' && isTLT==1'
@@ -184,7 +187,7 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 	if 'DataDrivenBkgLTL' in process: cut+=' && isLTL==1'
 	if 'DataDrivenBkgLLT' in process: cut+=' && isLLT==1'
 	if 'DataDrivenBkgLLL' in process: cut+=' && isLLL==1'
-# 	'''
+	'''
 #End -- Method if isTTT exist
 
 
@@ -223,16 +226,16 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 			hists[discriminantName+'muRDown_'   +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'muRDown_'   +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
 			hists[discriminantName+'muFUp_'     +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'muFUp_'     +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
 			hists[discriminantName+'muFDown_'   +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'muFDown_'   +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
-			hists[discriminantName+'topptUp_'   +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'topptUp_'   +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
-			hists[discriminantName+'topptDown_' +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'topptDown_' +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
+# 			hists[discriminantName+'topptUp_'   +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'topptUp_'   +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
+# 			hists[discriminantName+'topptDown_' +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'topptDown_' +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
 # 			hists[discriminantName+'jmrUp_'     +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'jmrUp_'     +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
 # 			hists[discriminantName+'jmrDown_'   +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'jmrDown_'   +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
 # 			hists[discriminantName+'jmsUp_'     +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'jmsUp_'     +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
 # 			hists[discriminantName+'jmsDown_'   +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'jmsDown_'   +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
 # 			hists[discriminantName+'tau21Up_'   +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'tau21Up_'   +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
 # 			hists[discriminantName+'tau21Down_' +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'tau21Down_' +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
-			hists[discriminantName+'jsfUp_'     +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'jsfUp_'     +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
-			hists[discriminantName+'jsfDown_'   +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'jsfDown_'   +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
+# 			hists[discriminantName+'jsfUp_'     +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'jsfUp_'     +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
+# 			hists[discriminantName+'jsfDown_'   +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'jsfDown_'   +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
 
 			hists[discriminantName+'btagUp_'    +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'btagUp_'    +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
 			hists[discriminantName+'btagDown_'  +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'btagDown_'  +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
@@ -349,10 +352,10 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 			tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+'muRDown_'   +lumiStr+'fb_'+category+'_'+process, weightmuRDownStr+'*('+cut+isLepCut+')', 'GOFF')
 			tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+'muFUp_'     +lumiStr+'fb_'+category+'_'+process, weightmuFUpStr+'*('+cut+isLepCut+')', 'GOFF')
 			tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+'muFDown_'   +lumiStr+'fb_'+category+'_'+process, weightmuFDownStr+'*('+cut+isLepCut+')', 'GOFF')
-			tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+'topptUp_'   +lumiStr+'fb_'+category+'_'+process, weighttopptUpStr+'*('+cut+isLepCut+')', 'GOFF')
-			tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+'topptDown_' +lumiStr+'fb_'+category+'_'+process, weighttopptDownStr+'*('+cut+isLepCut+')', 'GOFF')
-			tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+'jsfUp_'     +lumiStr+'fb_'+category+'_'+process, weightjsfUpStr+'*('+cut+isLepCut+')', 'GOFF')
-			tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+'jsfDown_'   +lumiStr+'fb_'+category+'_'+process, weightjsfDownStr+'*('+cut+isLepCut+')', 'GOFF')
+# 			tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+'topptUp_'   +lumiStr+'fb_'+category+'_'+process, weighttopptUpStr+'*('+cut+isLepCut+')', 'GOFF')
+# 			tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+'topptDown_' +lumiStr+'fb_'+category+'_'+process, weighttopptDownStr+'*('+cut+isLepCut+')', 'GOFF')
+# 			tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+'jsfUp_'     +lumiStr+'fb_'+category+'_'+process, weightjsfUpStr+'*('+cut+isLepCut+')', 'GOFF')
+# 			tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+'jsfDown_'   +lumiStr+'fb_'+category+'_'+process, weightjsfDownStr+'*('+cut+isLepCut+')', 'GOFF')
 			
 			bTagSFshiftName = discriminantLJMETName
 			if 'NJetsCSV' in discriminantLJMETName: 
@@ -428,13 +431,13 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 # 			if 'WJetTaggedPt' in discriminantLJMETName: TAUName = discriminantLJMETName.replace('WJetTaggedPt','WJetTaggedPtTAUdn')
 # 			print 'TAUdn LJMET NAME',TAUName
 # 			tTree[process].Draw(TAUName+' >> '+discriminantName+'tau21Down'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut+isLepCut+')', 'GOFF')		
-
-			if tTree[process+'jecUp']:
-				tTree[process+'jecUp'].Draw(discriminantLJMETName   +' >> '+discriminantName+'jecUp'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut+isLepCut+')', 'GOFF')
-				tTree[process+'jecDown'].Draw(discriminantLJMETName +' >> '+discriminantName+'jecDown'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut+isLepCut+')', 'GOFF')
-			if tTree[process+'jerUp']:
-				tTree[process+'jerUp'].Draw(discriminantLJMETName   +' >> '+discriminantName+'jerUp'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut+isLepCut+')', 'GOFF')
-				tTree[process+'jerDown'].Draw(discriminantLJMETName +' >> '+discriminantName+'jerDown'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut+isLepCut+')', 'GOFF')
+			if 'DataDriven' not in process:
+				if tTree[process+'jecUp']:
+					tTree[process+'jecUp'].Draw(discriminantLJMETName   +' >> '+discriminantName+'jecUp'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut+isLepCut+')', 'GOFF')
+					tTree[process+'jecDown'].Draw(discriminantLJMETName +' >> '+discriminantName+'jecDown'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut+isLepCut+')', 'GOFF')
+				if tTree[process+'jerUp']:
+					tTree[process+'jerUp'].Draw(discriminantLJMETName   +' >> '+discriminantName+'jerUp'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut+isLepCut+')', 'GOFF')
+					tTree[process+'jerDown'].Draw(discriminantLJMETName +' >> '+discriminantName+'jerDown'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut+isLepCut+')', 'GOFF')
 
 # # 			if tTree[process+'btagUp']:
 # # 				tTree[process+'btagUp'].Draw(discriminantLJMETName  +' >> '+discriminantName+'btagUp'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut+isLepCut+')', 'GOFF')

@@ -9,3 +9,4 @@ cd $theDir
 eval `scramv1 runtime -sh`
 
 /uscms_data/d3/ssagir/ljmet/CMSSW_7_3_0/src/theta/utils/theta-auto.py $configfile
+#/home/rsyarif/LJMet/TprimeAnalysis/CMSSW_7_6_3/src/theta/utils/theta-auto.py $configfile

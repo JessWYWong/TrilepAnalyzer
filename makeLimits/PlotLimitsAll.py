@@ -19,7 +19,8 @@ distribution = 'ST'
 # limitDir='/user_data/rsyarif/limits/allSys/'
 # limitDir='/user_data/rsyarif/limits/allSys_sig__muRFcorrdNew_sig__pdfNew_TrigSys/'
 # limitDir='/user_data/rsyarif/limits/allSys_sig__muRFcorrdNew_sig__pdfNew_no_jec_no_jer/'
-limitDir='/user_data/rsyarif/limits/76in74x_allSys_sig__muRFcorrdNew_sig__pdfNew/'
+# limitDir='/user_data/rsyarif/limits/76in74x_allSys_sig__muRFcorrdNew_sig__pdfNew/'
+limitDir='/user_data/rsyarif/limits/76in74x_NoSys/'
 
 postfix = '' # for plot names in order to save them as different files
 stat=''#0.75
@@ -45,23 +46,45 @@ yrange_max=3.05
 # stCutList     = [0,500,600,700,800,900,1000,1100]
 # minMlbCutList = [0]
 
-lepPtCutList  = [20,25]
+# lepPtCutList  = [20,25]
+# jet1PtCutList = [0]
+# jet2PtCutList = [0]
+# metCutList    = [20,30]
+# njetsCutList  = [0,1,2,3]
+# nbjetsCutList = [0,1,2,3]
+# jet3PtCutList = [0]
+# jet4PtCutList = [0]
+# jet5PtCutList = [0]
+# drCutList     = [0]
+# Wjet1PtCutList= [0]
+# bjet1PtCutList= [0]
+# htCutList     = [0]
+# stCutList     = [0,500,600,700,800,900,1000,1100,1200,1300]
+# minMlbCutList = [0]
+
+lepPtCutList  = [0]
+lep1PtCutList = [0]
+jetPtCutList  = [0]
 jet1PtCutList = [0]
 jet2PtCutList = [0]
-metCutList    = [20,30]
-njetsCutList  = [0,1,2,3]
-nbjetsCutList = [0,1,2,3]
+metCutList    = [0]
+njetsCutList  = [2,3]
+nbjetsCutList = [0,1,2,]
 jet3PtCutList = [0]
 jet4PtCutList = [0]
 jet5PtCutList = [0]
 drCutList     = [0]
 Wjet1PtCutList= [0]
 bjet1PtCutList= [0]
-htCutList     = [0]
-stCutList     = [0,500,600,700,800,900,1000,1100,1200,1300]
+htCutList     = [200,300,400,500]
+stCutList     = [0,500,800,1100,1150,1200,1250,1300]
 minMlbCutList = [0]
+mllOSCutList  = [0,20]
 
-cutConfigs = list(itertools.product(lepPtCutList,jet1PtCutList,jet2PtCutList,metCutList,njetsCutList,nbjetsCutList,jet3PtCutList,jet4PtCutList,jet5PtCutList,drCutList,Wjet1PtCutList,bjet1PtCutList,htCutList,stCutList,minMlbCutList))
+
+#cutConfigs = list(itertools.product(lepPtCutList,jet1PtCutList,jet2PtCutList,metCutList,njetsCutList,nbjetsCutList,jet3PtCutList,jet4PtCutList,jet5PtCutList,drCutList,Wjet1PtCutList,bjet1PtCutList,htCutList,stCutList,minMlbCutList))
+
+cutConfigs = list(itertools.product(lepPtCutList,lep1PtCutList,jetPtCutList,jet1PtCutList,jet2PtCutList,metCutList,njetsCutList,nbjetsCutList,jet3PtCutList,jet4PtCutList,jet5PtCutList,drCutList,Wjet1PtCutList,bjet1PtCutList,htCutList,stCutList,minMlbCutList,mllOSCutList))
 
 massPoints = [700,800,900,1000,1100,1200,1300]
 mass = array('d', massPoints)
@@ -96,8 +119,10 @@ crossingList = {}
 crossingList2 = {}
 ind=1
 for conf in cutConfigs:
-	lepPtCut,jet1PtCut,jet2PtCut,metCut,njetsCut,nbjetsCut,jet3PtCut,jet4PtCut,jet5PtCut,drCut,Wjet1PtCut,bjet1PtCut,htCut,stCut,minMlbCut=conf[0],conf[1],conf[2],conf[3],conf[4],conf[5],conf[6],conf[7],conf[8],conf[9],conf[10],conf[11],conf[12],conf[13],conf[14]
-	cutString = 'lep'+str(int(lepPtCut))+'_MET'+str(int(metCut))+'_1jet'+str(int(jet1PtCut))+'_2jet'+str(int(jet2PtCut))+'_NJets'+str(int(njetsCut))+'_NBJets'+str(int(nbjetsCut))+'_3jet'+str(int(jet3PtCut))+'_4jet'+str(int(jet4PtCut))+'_5jet'+str(int(jet5PtCut))+'_DR'+str(drCut)+'_1Wjet'+str(Wjet1PtCut)+'_1bjet'+str(bjet1PtCut)+'_HT'+str(htCut)+'_ST'+str(stCut)+'_minMlb'+str(minMlbCut)
+#	lepPtCut,jet1PtCut,jet2PtCut,metCut,njetsCut,nbjetsCut,jet3PtCut,jet4PtCut,jet5PtCut,drCut,Wjet1PtCut,bjet1PtCut,htCut,stCut,minMlbCut=conf[0],conf[1],conf[2],conf[3],conf[4],conf[5],conf[6],conf[7],conf[8],conf[9],conf[10],conf[11],conf[12],conf[13],conf[14]
+	lepPtCut,lep1PtCut,jetPtCut,jet1PtCut,jet2PtCut,metCut,njetsCut,nbjetsCut,jet3PtCut,jet4PtCut,jet5PtCut,drCut,Wjet1PtCut,bjet1PtCut,htCut,stCut,minMlbCut,mllOSCut=conf[0],conf[1],conf[2],conf[3],conf[4],conf[5],conf[6],conf[7],conf[8],conf[9],conf[10],conf[11],conf[12],conf[13],conf[14],conf[15],conf[16],conf[17]
+#	cutString = 'lep'+str(int(lepPtCut))+'_MET'+str(int(metCut))+'_1jet'+str(int(jet1PtCut))+'_2jet'+str(int(jet2PtCut))+'_NJets'+str(int(njetsCut))+'_NBJets'+str(int(nbjetsCut))+'_3jet'+str(int(jet3PtCut))+'_4jet'+str(int(jet4PtCut))+'_5jet'+str(int(jet5PtCut))+'_DR'+str(drCut)+'_1Wjet'+str(Wjet1PtCut)+'_1bjet'+str(bjet1PtCut)+'_HT'+str(htCut)+'_ST'+str(stCut)+'_minMlb'+str(minMlbCut)
+	cutString = 'lepPt'+str(int(lepPtCut))+'_lep1Pt'+str(int(lep1PtCut))+'_MET'+str(int(metCut))+'_jet1Pt'+str(int(jet1PtCut))+'_jet2Pt'+str(int(jet2PtCut))+'_NJets'+str(int(njetsCut))+'_NBJets'+str(int(nbjetsCut))+'_jet3Pt'+str(int(jet3PtCut))+'_jet4Pt'+str(int(jet4PtCut))+'_jet5Pt'+str(int(jet5PtCut))+'_DR'+str(drCut)+'_1Wjet'+str(Wjet1PtCut)+'_1bjet'+str(bjet1PtCut)+'_HT'+str(htCut)+'_ST'+str(stCut)+'_minMlb'+str(minMlbCut)+'_mllOS'+str(mllOSCut)
 	plotLimits = True
 	for i in range(len(mass)):
 		try: 

@@ -1,9 +1,9 @@
 import os,sys
 from operator import itemgetter,attrgetter
 
-outDir = os.environ['CMSSW_BASE']+'/src/theta/utils/optimization/limits/lep40_MET80_leadJet450_subLeadJet75_leadbJet0_ST0_HT0'
+# outDir = os.environ['CMSSW_BASE']+'/src/theta/utils/optimization/limits/dummy'
 
-input = '/uscms_data/d3/ssagir/ljmet/CMSSW_7_3_0/src/LJMet/macros/optimization_condor/templates_2015_8_3_4_23_24/lep40_MET80_leadJet450_subLeadJet75_leadbJet0_ST0_HT0/templates_HT_T53T53M900left_5fb_lep40_MET80_leadJet450_subLeadJet75_leadbJet0_ST0_HT0.root'
+input = 'dummy.root'
 
 rFileName = input.split('/')[-1][:-5]
                                                                                                                                           
@@ -17,7 +17,7 @@ def get_model():
     
     for proc in procs:
 		if(proc!="ddbkg"):
-			try: model.add_lognormal_uncertainty('lumiSys', math.log(1.027), proc)
+			try: model.add_lognormal_uncertainty('lumiSys', math.log(1.062), proc)
 			except: pass
 
     return model

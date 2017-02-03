@@ -7,18 +7,20 @@ setTDRStyle()
 R.gROOT.SetBatch(1)
 outDir = os.getcwd()+'/'
 
-lumi = 2.2
+lumi = 12.9
 discriminant = 'ST'
 rfilePostFix = ''
-tempVersion = 'templates_ST_2016_4_26/'
-cutString = '/lep0_MET0_1jet0_2jet0_NJets0_NBJets0_3jet0_4jet0_5jet0_DR0_1Wjet0_1bjet0_HT0_ST0_minMlb0'
-templateFile = '/home/rsyarif/LJMet/TprimeAnalysis/CMSSW_7_6_3/src/TrilepAnalyzer/makeThetaTemplates/'+tempVersion+cutString+'/templates_'+discriminant+'_TTM900_2p215fb'+rfilePostFix+'.root'
-if not os.path.exists(outDir+tempVersion): os.system('mkdir '+outDir+tempVersion)
-if not os.path.exists(outDir+tempVersion+'/bkgs'): os.system('mkdir '+outDir+tempVersion+'/bkgs')
+# tempVersion = 'optimization_80x_noJEC_noJER_2016_11_8'
+tempVersion = 'optimization_80x_withJECJER_2016_11_29'
+# cutString = '/lep1Pt0_MET20_jetPt0_NJets3_NBJets0_HT0_ST500_mllOS20_isPassTrig0_isPassTrig_dilep1_isPassTrilepton1'
+cutString = '/lep1Pt0_MET20_jetPt0_NJets3_NBJets0_HT0_ST600_mllOS20'
+templateFile = '/home/rsyarif/LJMet/TprimeAnalysis/CMSSW_7_6_3/src/TrilepAnalyzer_80x/optimization/'+tempVersion+cutString+'/templates_'+discriminant+'_TTM900_12p9fb'+rfilePostFix+'.root'
+if not os.path.exists(outDir+tempVersion+cutString): os.system('mkdir '+outDir+tempVersion+cutString)
+if not os.path.exists(outDir+tempVersion+cutString+'/bkgs'): os.system('mkdir '+outDir+tempVersion+cutString+'/bkgs')
 
 saveKey = ''#'_B1pOnly'
-bkgList = ['top','ewk','qcd','ddbkg'] #some uncertainties will be skipped depending on the bkgList[0] process!!!!
-systematics = ['pileup','jec','jer','btag','jsf','muRFcorrdNew','pdfNew','FR','PR']
+bkgList = ['top','ewk','ddbkg'] #some uncertainties will be skipped depending on the bkgList[0] process!!!!
+systematics = ['pileup','btag','muRFcorrdNew','pdfNew','FR','PR','jec','jer']
 systematics+= ['elIdSys','muIdSys','elIsoSys','muIsoSys','elelelTrigSys','elelmuTrigSys','elmumuTrigSys','mumumuTrigSys']
 		
 RFile = R.TFile(templateFile)
@@ -207,9 +209,9 @@ for syst in systematics:
 	prelimTex3.SetLineWidth(2)
 	prelimTex3.DrawLatex(0.25175,0.9664,"Preliminary")
 
-	#canv.SaveAs(tempVersion+'/bkgs/'+syst+saveKey+'.pdf')
-	canv.SaveAs(tempVersion+'/bkgs/'+syst+saveKey+'.png')
-	#canv.SaveAs(tempVersion+'/bkgs/'+syst+saveKey+'.root')
+	#canv.SaveAs(tempVersion+cutString+'/bkgs/'+syst+saveKey+'.pdf')
+	canv.SaveAs(tempVersion+cutString+'/bkgs/'+syst+saveKey+'.png')
+	#canv.SaveAs(tempVersion+cutString+'/bkgs/'+syst+saveKey+'.root')
 
 RFile.Close()
 

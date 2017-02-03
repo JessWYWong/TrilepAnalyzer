@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////
 // This class has been automatically generated on
-// Thu Oct  6 20:40:49 2016 by ROOT version 6.02/13
+// Sat Oct 29 18:18:45 2016 by ROOT version 6.02/13
 // from TTree ljmet/ljmet
-// found on file: /user_data/rsyarif/LJMet80x_3lepTT_2016_8_31_rizki_step1hadds_dilepTrigReady/nominal/DoubleEG_PRB_hadd.root
+// found on file: /user_data/rsyarif/LJMet80x_3lepTT_2016_10_13_rizki_step1hadds_ddbkgscan/nominal/DoubleEG_PRB_hadd.root
 //////////////////////////////////////////////////////////
 
 #ifndef step2_h
@@ -84,8 +84,8 @@ public :
    Int_t           isLLL;
    Int_t           MCPastTrigger_dilep;
    Int_t           DataPastTrigger_dilep;
-   Int_t           MCPastTrigger_dilep_anth;
-   Int_t           DataPastTrigger_dilep_anth;
+   Int_t           MCPastTrigger_dilepDZ4runH;
+   Int_t           DataPastTrigger_dilepDZ4runH;
    Int_t           MCPastTrigger_dilepHT;
    Int_t           DataPastTrigger_dilepHT;
    Int_t           MCPastTrigger_trilep;
@@ -176,6 +176,9 @@ public :
    Float_t         AK4HTpMETpLepPt;
    Float_t         AK4HT;
    vector<float>   *ddBkgWeights;
+   vector<float>   *ddBkgWeights_scan;
+   vector<float>   *ddBkgWeights_scan_muFR;
+   vector<float>   *ddBkgWeights_scan_elFR;
    Int_t           NJets_JetSubCalc;
    Int_t           NJetsAK8_JetSubCalc;
    Int_t           NJetsCSVwithSF_JetSubCalc;
@@ -220,9 +223,19 @@ public :
    Float_t         minDR_leadAK8otherAK8;
    Float_t         minDR_lepAK8;
    Float_t         minDR_lepJet;
+   Float_t         minDR_lep1Jet;
+   Float_t         minDR_lep2Jet;
+   Float_t         minDR_lep3Jet;
+   Float_t         minDR_lepMET;
+   Float_t         minDR_METJet;
    Float_t         ptRel_lepJet;
    Float_t         MT_lepMet;
-   vector<float>   *deltaR_lepJets;
+   vector<double>  *deltaR_lepJets;
+   vector<double>  *deltaR_lep1Jets;
+   vector<double>  *deltaR_lep2Jets;
+   vector<double>  *deltaR_lep3Jets;
+   vector<double>  *deltaR_lepMETs;
+   vector<double>  *deltaR_METJets;
    vector<float>   *deltaR_lepBJets;
    vector<double>  *deltaR_lepBJets_bSFup;
    vector<double>  *deltaR_lepBJets_bSFdn;
@@ -245,9 +258,6 @@ public :
    vector<double>  *mass_lepAK8s;
    vector<float>   *minDR_lepJets;
    vector<float>   *minDR_lepBJets;
-   vector<float>   *deltaR_lep1Jets;
-   vector<float>   *deltaR_lep2Jets;
-   vector<float>   *deltaR_lep3Jets;
    vector<float>   *deltaR_lepClosestJet;
    vector<float>   *PtRelLepClosestJet;
    Float_t         Mll_sameFlavorOS;
@@ -314,8 +324,8 @@ public :
    TBranch        *b_isLLL;   //!
    TBranch        *b_MCPastTrigger_dilep;   //!
    TBranch        *b_DataPastTrigger_dilep;   //!
-   TBranch        *b_MCPastTrigger_dilep_anth;   //!
-   TBranch        *b_DataPastTrigger_dilep_anth;   //!
+   TBranch        *b_MCPastTrigger_dilepDZ4runH;   //!
+   TBranch        *b_DataPastTrigger_dilepDZ4runH;   //!
    TBranch        *b_MCPastTrigger_dilepHT;   //!
    TBranch        *b_DataPastTrigger_dilepHT;   //!
    TBranch        *b_MCPastTrigger_trilep;   //!
@@ -406,6 +416,9 @@ public :
    TBranch        *b_AK4HTpMETpLepPt;   //!
    TBranch        *b_AK4HT;   //!
    TBranch        *b_ddBkgWeights;   //!
+   TBranch        *b_ddBkgWeights_scan;   //!
+   TBranch        *b_ddBkgWeights_scan_muFR;   //!
+   TBranch        *b_ddBkgWeights_scan_elFR;   //!
    TBranch        *b_NJets_JetSubCalc;   //!
    TBranch        *b_NJetsAK8_JetSubCalc;   //!
    TBranch        *b_NJetsCSVwithSF_JetSubCalc;   //!
@@ -450,9 +463,19 @@ public :
    TBranch        *b_minDR_leadAK8otherAK8;   //!
    TBranch        *b_minDR_lepAK8;   //!
    TBranch        *b_minDR_lepJet;   //!
+   TBranch        *b_minDR_lep1Jet;   //!
+   TBranch        *b_minDR_lep2Jet;   //!
+   TBranch        *b_minDR_lep3Jet;   //!
+   TBranch        *b_minDR_lepMET;   //!
+   TBranch        *b_minDR_METJet;   //!
    TBranch        *b_ptRel_lepJet;   //!
    TBranch        *b_MT_lepMet;   //!
    TBranch        *b_deltaR_lepJets;   //!
+   TBranch        *b_deltaR_lep1Jets;   //!
+   TBranch        *b_deltaR_lep2Jets;   //!
+   TBranch        *b_deltaR_lep3Jets;   //!
+   TBranch        *b_deltaR_lepMETs;   //!
+   TBranch        *b_deltaR_METJets;   //!
    TBranch        *b_deltaR_lepBJets;   //!
    TBranch        *b_deltaR_lepBJets_bSFup;   //!
    TBranch        *b_deltaR_lepBJets_bSFdn;   //!
@@ -475,9 +498,6 @@ public :
    TBranch        *b_mass_lepAK8s;   //!
    TBranch        *b_minDR_lepJets;   //!
    TBranch        *b_minDR_lepBJets;   //!
-   TBranch        *b_deltaR_lep1Jets;   //!
-   TBranch        *b_deltaR_lep2Jets;   //!
-   TBranch        *b_deltaR_lep3Jets;   //!
    TBranch        *b_deltaR_lepClosestJet;   //!
    TBranch        *b_PtRelLepClosestJet;   //!
    TBranch        *b_Mll_sameFlavorOS;   //!
@@ -619,6 +639,9 @@ void step2::Init(TTree *tree)
    WJetLeadPt_shifts = 0;
    TJetLeadPt_shifts = 0;
    ddBkgWeights = 0;
+   ddBkgWeights_scan = 0;
+   ddBkgWeights_scan_muFR = 0;
+   ddBkgWeights_scan_elFR = 0;
    NJetsCSVwithSF_JetSubCalc_shifts = 0;
    NJetsCSVwithSF_JetSubCalc_noLepCorr_shifts = 0;
    NJetsHtagged_shifts = 0;
@@ -634,6 +657,11 @@ void step2::Init(TTree *tree)
    NJetsWtagged_0p6_shifts = 0;
    NJetsTtagged_0p81_shifts = 0;
    deltaR_lepJets = 0;
+   deltaR_lep1Jets = 0;
+   deltaR_lep2Jets = 0;
+   deltaR_lep3Jets = 0;
+   deltaR_lepMETs = 0;
+   deltaR_METJets = 0;
    deltaR_lepBJets = 0;
    deltaR_lepBJets_bSFup = 0;
    deltaR_lepBJets_bSFdn = 0;
@@ -656,9 +684,6 @@ void step2::Init(TTree *tree)
    mass_lepAK8s = 0;
    minDR_lepJets = 0;
    minDR_lepBJets = 0;
-   deltaR_lep1Jets = 0;
-   deltaR_lep2Jets = 0;
-   deltaR_lep3Jets = 0;
    deltaR_lepClosestJet = 0;
    PtRelLepClosestJet = 0;
    MllOS_allComb = 0;
@@ -729,8 +754,8 @@ void step2::Init(TTree *tree)
 //    inputTree->SetBranchAddress("DataPastTriggerAlt", &DataPastTriggerAlt, &b_DataPastTriggerAlt);
    inputTree->SetBranchAddress("MCPastTrigger_dilep", &MCPastTrigger_dilep, &b_MCPastTrigger_dilep);
    inputTree->SetBranchAddress("DataPastTrigger_dilep", &DataPastTrigger_dilep, &b_DataPastTrigger_dilep);
-   inputTree->SetBranchAddress("MCPastTrigger_dilep_anth", &MCPastTrigger_dilep_anth, &b_MCPastTrigger_dilep_anth);
-   inputTree->SetBranchAddress("DataPastTrigger_dilep_anth", &DataPastTrigger_dilep_anth, &b_DataPastTrigger_dilep_anth);
+   inputTree->SetBranchAddress("MCPastTrigger_dilepDZ4runH", &MCPastTrigger_dilepDZ4runH, &b_MCPastTrigger_dilepDZ4runH);
+   inputTree->SetBranchAddress("DataPastTrigger_dilepDZ4runH", &DataPastTrigger_dilepDZ4runH, &b_DataPastTrigger_dilepDZ4runH);
    inputTree->SetBranchAddress("MCPastTrigger_dilepHT", &MCPastTrigger_dilepHT, &b_MCPastTrigger_dilepHT);
    inputTree->SetBranchAddress("DataPastTrigger_dilepHT", &DataPastTrigger_dilepHT, &b_DataPastTrigger_dilepHT);
    inputTree->SetBranchAddress("MCPastTrigger_trilep", &MCPastTrigger_trilep, &b_MCPastTrigger_trilep);
