@@ -16,17 +16,11 @@ BR['TTTHTH'] = BR['TH']*BR['TH']
 # Number of processed MC events (before selections)
 nRun={}
 
-nRun['DY10to50'] = 22494700. # from 30915900. #our own calculation amcatnlo
-# nRun['DY10to50'] = 35079788 # MG, from DAS
+nRun['DY10to50'] = 29386500. # from 40381400. # calculated using WeightAnalyzer.
+nRun['DY50'] = 19403300. # from 28968300. # calculated using WeightAnalyzer.
+nRun['WJets'] = 16183300. # from 23662100. # calculated using WeightAnalyzer.
 
-nRun['DY50'] = 19223700. # from 28697000 # our own calculation for amcatnlo
-# nRun['DY50'] = 92655205. # MG, from DAS
-
-nRun['WJets'] = 6776900 # from 9908530 # our own calculation for amcatnlo - DOUBLE CHECK with JULIE!!
-# nRun['WJets'] = 28210360 # MG, from DAS
-
-nRun['TTJetsPH'] = 182123200. # from DAS /TT_TuneCUETP8M1_13TeV-powheg-pythia8/RunIISpring16MiniAODv2-PUSpring16_80X_mcRun2_asymptotic_2016_miniAODv2_v0_ext4-v1/MINIAODSIM
-
+nRun['TTJetsPH'] = 155119000. # calculated using WeightAnalyzer.
 # numbers not updated to 80x ! - start
 nRun['TTJets'] = 14188545. # from 42784971
 nRun['TTJetsPH0to700inc'] = nRun['TTJetsPH']
@@ -36,20 +30,19 @@ nRun['TTJetsPH700mtt'] = nRun['TTJetsPH']*0.0921 + 3877762.
 nRun['TTJetsPH1000mtt'] = nRun['TTJetsPH']*0.02474 + 2360497.
 # numbers not updated to 80x ! - end
 
-nRun['WW'] = 993214. 
-# nRun['WZ'] = 1000000.
-nRun['WZ'] = 2000000. #WZTo3LNu
-# nRun['ZZ'] = 989312.
-nRun['ZZ'] = 6638330. #ZZTo4L
-nRun['WWW'] = 210538 #out of 240000 - our own calculation 
-nRun['WWZ'] = 220782 #out of 249200 - our own calculation	
-nRun['WZZ'] = 218986 #out of 249800 - our own calculation  
-nRun['ZZZ'] = 213850 #out of 250000 - our own calculation	
-nRun['TTWl'] = 130275. #from 252673 - our own calculation 
-nRun['TTWq'] = 430310. #from 833298 - our own calculation 
-nRun['TTZl'] = 185232. #from 398600 - our own calculation 
-nRun['TTZq'] = 351164. #from 749400 - our own calculation 
+nRun['WW'] = 993214. # calculated using WeightAnalyzer.
+nRun['WZ'] = 1993200. #WZTo3LNu # calculated using WeightAnalyzer.
+nRun['ZZ'] = 6669990. #ZZTo4L # calculated using WeightAnalyzer.
+nRun['WWW'] = 210538. #out of 240000 - # calculated using WeightAnalyzer. 
+nRun['WWZ'] = 221468. #out of 250000 - # calculated using WeightAnalyzer.	
+nRun['WZZ'] = 216366. #out of 246800 - # calculated using WeightAnalyzer.  
+nRun['ZZZ'] = 213197. #out of 249237 - # calculated using WeightAnalyzer.	
+nRun['TTWl'] = 1603530. #from 3120400 - # calculated using WeightAnalyzer. 
+nRun['TTWq'] = 1e-10 #from ? - # calculated using WeightAnalyzer. 
+nRun['TTZl'] = 927976. #from 1992440 - # calculated using WeightAnalyzer. 
+nRun['TTZq'] = 1e-10 #from ? - # calculated using WeightAnalyzer. 
 
+# numbers not updated to 80x ! - start
 nRun['WJetsMG100'] = 27546978. # MG, from DAS
 nRun['WJetsMG200'] = 14888384. # MG, from DAS
 nRun['WJetsMG400'] = 5469282. # MG, from DAS
@@ -57,8 +50,6 @@ nRun['WJetsMG600'] = 14410862. # MG, from DAS
 nRun['WJetsMG800'] = 6314257. # MG, from DAS
 nRun['WJetsMG1200'] = 6817172. # MG, from DAS
 nRun['WJetsMG2500'] = 2254248. # MG, from DAS
-
-# numbers not updated to 80x ! - start
 nRun['Ts'] = 613384. #from 984400
 nRun['Tt'] = 4291728. #from 19904330 (was 29892343 in miniAODv1)
 nRun['TtW'] = 995600.
@@ -67,87 +58,87 @@ nRun['TbtW'] = 988500.
 
 nRun['TTM700BWBW'] = 798600.0*0.333*0.333 #number not updated
 
-nRun['TTM800BWBW'] = 766000.0*0.333*0.333
-nRun['TTM900BWBW'] = 828000.0*0.333*0.333
-nRun['TTM1000BWBW'] = 832200.0*0.333*0.333
-nRun['TTM1100BWBW'] = 816400.0*0.333*0.333
-nRun['TTM1200BWBW'] = 828600.0*0.333*0.333
-nRun['TTM1300BWBW'] = 824000.0*0.333*0.333
-nRun['TTM1400BWBW'] = 810000.0*0.333*0.333
-nRun['TTM1500BWBW'] = 828200.0*0.333*0.333
-nRun['TTM1600BWBW'] = 111800.0*0.333*0.333
-nRun['TTM1700BWBW'] = 795000.0*0.333*0.333
-nRun['TTM1800BWBW'] = 764200.0*0.333*0.333
+nRun['TTM800BWBW'] = 795000.0*0.333*0.333
+nRun['TTM900BWBW'] = 831200.0*0.333*0.333
+nRun['TTM1000BWBW'] = 829600.0*0.333*0.333
+nRun['TTM1100BWBW'] = 832800.0*0.333*0.333
+nRun['TTM1200BWBW'] = 832600.0*0.333*0.333
+nRun['TTM1300BWBW'] = 831000.0*0.333*0.333
+nRun['TTM1400BWBW'] = 832600.0*0.333*0.333
+nRun['TTM1500BWBW'] = 832800.0*0.333*0.333
+nRun['TTM1600BWBW'] = 832600.0*0.333*0.333
+nRun['TTM1700BWBW'] = 797000.0*0.333*0.333
+nRun['TTM1800BWBW'] = 833000.0*0.333*0.333
 
 nRun['TTM700THBW'] = 798600.0*0.333*0.333*2 #number not updated
 
-nRun['TTM800THBW'] = 766000.0*0.333*0.333*2
-nRun['TTM900THBW'] = 828000.0*0.333*0.333*2
-nRun['TTM1000THBW'] = 832200.0*0.333*0.333*2
-nRun['TTM1100THBW'] = 816400.0*0.333*0.333*2
-nRun['TTM1200THBW'] = 828600.0*0.333*0.333*2
-nRun['TTM1300THBW'] = 824000.0*0.333*0.333*2
-nRun['TTM1400THBW'] = 810000.0*0.333*0.333*2
-nRun['TTM1500THBW'] = 828200.0*0.333*0.333*2
-nRun['TTM1600THBW'] = 111800.0*0.333*0.333*2
-nRun['TTM1700THBW'] = 795000.0*0.333*0.333*2
-nRun['TTM1800THBW'] = 764200.0*0.333*0.333*2
+nRun['TTM800THBW'] = 795000.0*0.333*0.333*2
+nRun['TTM900THBW'] = 831200.0*0.333*0.333*2
+nRun['TTM1000THBW'] = 829600.0*0.333*0.333*2
+nRun['TTM1100THBW'] = 832800.0*0.333*0.333*2
+nRun['TTM1200THBW'] = 832600.0*0.333*0.333*2
+nRun['TTM1300THBW'] = 831000.0*0.333*0.333*2
+nRun['TTM1400THBW'] = 832600.0*0.333*0.333*2
+nRun['TTM1500THBW'] = 832800.0*0.333*0.333*2
+nRun['TTM1600THBW'] = 832600.0*0.333*0.333*2
+nRun['TTM1700THBW'] = 797000.0*0.333*0.333*2
+nRun['TTM1800THBW'] = 833000.0*0.333*0.333*2
 
 nRun['TTM700TZBW'] = 798600.0*0.333*0.333*2 #number not updated
 
-nRun['TTM800TZBW'] = 766000.0*0.333*0.333*2
-nRun['TTM900TZBW'] = 828000.0*0.333*0.333*2
-nRun['TTM1000TZBW'] = 832200.0*0.333*0.333*2
-nRun['TTM1100TZBW'] = 816400.0*0.333*0.333*2
-nRun['TTM1200TZBW'] = 828600.0*0.333*0.333*2
-nRun['TTM1300TZBW'] = 824000.0*0.333*0.333*2
-nRun['TTM1400TZBW'] = 810000.0*0.333*0.333*2
-nRun['TTM1500TZBW'] = 828200.0*0.333*0.333*2
-nRun['TTM1600TZBW'] = 111800.0*0.333*0.333*2
-nRun['TTM1700TZBW'] = 795000.0*0.333*0.333*2
-nRun['TTM1800TZBW'] = 764200.0*0.333*0.333*2
+nRun['TTM800TZBW'] = 795000.0*0.333*0.333*2
+nRun['TTM900TZBW'] = 831200.0*0.333*0.333*2
+nRun['TTM1000TZBW'] = 829600.0*0.333*0.333*2
+nRun['TTM1100TZBW'] = 832800.0*0.333*0.333*2
+nRun['TTM1200TZBW'] = 832600.0*0.333*0.333*2
+nRun['TTM1300TZBW'] = 831000.0*0.333*0.333*2
+nRun['TTM1400TZBW'] = 832600.0*0.333*0.333*2
+nRun['TTM1500TZBW'] = 832800.0*0.333*0.333*2
+nRun['TTM1600TZBW'] = 832600.0*0.333*0.333*2
+nRun['TTM1700TZBW'] = 797000.0*0.333*0.333*2
+nRun['TTM1800TZBW'] = 833000.0*0.333*0.333*2
 
 nRun['TTM700TZTZ'] = 798600.0*0.333*0.333 #number not updated
 
-nRun['TTM800TZTZ'] = 766000.0*0.333*0.333
-nRun['TTM900TZTZ'] = 828000.0*0.333*0.333
-nRun['TTM1000TZTZ'] = 832200.0*0.333*0.333
-nRun['TTM1100TZTZ'] = 816400.0*0.333*0.333
-nRun['TTM1200TZTZ'] = 828600.0*0.333*0.333
-nRun['TTM1300TZTZ'] = 824000.0*0.333*0.333
-nRun['TTM1400TZTZ'] = 810000.0*0.333*0.333
-nRun['TTM1500TZTZ'] = 828200.0*0.333*0.333
-nRun['TTM1600TZTZ'] = 111800.0*0.333*0.333
-nRun['TTM1700TZTZ'] = 795000.0*0.333*0.333
-nRun['TTM1800TZTZ'] = 764200.0*0.333*0.333
+nRun['TTM800TZTZ'] = 795000.0*0.333*0.333
+nRun['TTM900TZTZ'] = 831200.0*0.333*0.333
+nRun['TTM1000TZTZ'] = 829600.0*0.333*0.333
+nRun['TTM1100TZTZ'] = 832800.0*0.333*0.333
+nRun['TTM1200TZTZ'] = 832600.0*0.333*0.333
+nRun['TTM1300TZTZ'] = 831000.0*0.333*0.333
+nRun['TTM1400TZTZ'] = 832600.0*0.333*0.333
+nRun['TTM1500TZTZ'] = 832800.0*0.333*0.333
+nRun['TTM1600TZTZ'] = 832600.0*0.333*0.333
+nRun['TTM1700TZTZ'] = 797000.0*0.333*0.333
+nRun['TTM1800TZTZ'] = 833000.0*0.333*0.333
 
 nRun['TTM700TZTH'] = 798600.0*0.333*0.333*2 #number not updated
 
-nRun['TTM800TZTH'] = 766000.0*0.333*0.333*2
-nRun['TTM900TZTH'] = 828000.0*0.333*0.333*2
-nRun['TTM1000TZTH'] = 832200.0*0.333*0.333*2
-nRun['TTM1100TZTH'] = 816400.0*0.333*0.333*2
-nRun['TTM1200TZTH'] = 828600.0*0.333*0.333*2
-nRun['TTM1300TZTH'] = 824000.0*0.333*0.333*2
-nRun['TTM1400TZTH'] = 810000.0*0.333*0.333*2
-nRun['TTM1500TZTH'] = 828200.0*0.333*0.333*2
-nRun['TTM1600TZTH'] = 111800.0*0.333*0.333*2
-nRun['TTM1700TZTH'] = 795000.0*0.333*0.333*2
-nRun['TTM1800TZTH'] = 764200.0*0.333*0.333*2
+nRun['TTM800TZTH'] = 795000.0*0.333*0.333*2
+nRun['TTM900TZTH'] = 831200.0*0.333*0.333*2
+nRun['TTM1000TZTH'] = 829600.0*0.333*0.333*2
+nRun['TTM1100TZTH'] = 832800.0*0.333*0.333*2
+nRun['TTM1200TZTH'] = 832600.0*0.333*0.333*2
+nRun['TTM1300TZTH'] = 831000.0*0.333*0.333*2
+nRun['TTM1400TZTH'] = 832600.0*0.333*0.333*2
+nRun['TTM1500TZTH'] = 832800.0*0.333*0.333*2
+nRun['TTM1600TZTH'] = 832600.0*0.333*0.333*2
+nRun['TTM1700TZTH'] = 797000.0*0.333*0.333*2
+nRun['TTM1800TZTH'] = 833000.0*0.333*0.333*2
 
 nRun['TTM700THTH'] = 798600.0*0.333*0.333 #number not updated
 
-nRun['TTM800THTH'] = 766000.0*0.333*0.333
-nRun['TTM900THTH'] = 828000.0*0.333*0.333
-nRun['TTM1000THTH'] = 832200.0*0.333*0.333
-nRun['TTM1100THTH'] = 816400.0*0.333*0.333
-nRun['TTM1200THTH'] = 828600.0*0.333*0.333
-nRun['TTM1300THTH'] = 824000.0*0.333*0.333
-nRun['TTM1400THTH'] = 810000.0*0.333*0.333
-nRun['TTM1500THTH'] = 828200.0*0.333*0.333
-nRun['TTM1600THTH'] = 111800.0*0.333*0.333
-nRun['TTM1700THTH'] = 795000.0*0.333*0.333
-nRun['TTM1800THTH'] = 764200.0*0.333*0.333
+nRun['TTM800THTH'] = 795000.0*0.333*0.333
+nRun['TTM900THTH'] = 831200.0*0.333*0.333
+nRun['TTM1000THTH'] = 829600.0*0.333*0.333
+nRun['TTM1100THTH'] = 832800.0*0.333*0.333
+nRun['TTM1200THTH'] = 832600.0*0.333*0.333
+nRun['TTM1300THTH'] = 831000.0*0.333*0.333
+nRun['TTM1400THTH'] = 832600.0*0.333*0.333
+nRun['TTM1500THTH'] = 832800.0*0.333*0.333
+nRun['TTM1600THTH'] = 832600.0*0.333*0.333
+nRun['TTM1700THTH'] = 797000.0*0.333*0.333
+nRun['TTM1800THTH'] = 833000.0*0.333*0.333
 
 # numbers not updated to 80x ! - start
 nRun['QCDht100'] = 81637494.

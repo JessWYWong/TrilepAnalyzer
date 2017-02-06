@@ -353,7 +353,7 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 # 			tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+'jsfDown_'   +lumiStr+'fb_'+category+'_'+process, weightjsfDownStr+'*('+cut+isLepCut+')', 'GOFF')
 			
 			bTagSFshiftName = discriminantLJMETName
-			if 'NJetsCSV' in discriminantLJMETName: 
+			if 'NJetsBTag' in discriminantLJMETName: 
 				bTagSFshiftName = discriminantLJMETName+'_shifts[0]'
 			print 'BTAGup LJMET NAME',bTagSFshiftName.replace('_shifts[0]','_shifts[0]')
 			tTree[process].Draw(bTagSFshiftName.replace('_shifts[0]','_shifts[0]')+' >> '+discriminantName+'btagUp'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut+isLepCut+')', 'GOFF')

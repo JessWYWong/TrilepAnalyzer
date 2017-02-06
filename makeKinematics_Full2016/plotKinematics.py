@@ -73,7 +73,28 @@ start_time = time.time()
 
 # templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_mcICHEP_FRv15b_PRv5test_step2_26Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_1bjet_lepPt30_noSYS_2017_1_31'
 
-templateDir='/user_data/rsyarif/kinematics_80x_MultiLep_Full2016_Moriond17_FRv17b_PRv6_step2_moreThan2Jets_1bjet_AllSYS_2017_1_31'
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv17b_PRv6_step2_moreThan2Jets_1bjet_noSYS_2017_2_3'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv17b_PRv6_step2_moreThan2Jets_1bjet_AllSYS_2017_2_3'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18b_PRv6_step2_moreThan2Jets_1bjet_AllSYS_2017_2_3'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18b_PRv6_step2_exactly2Jets_1bjet_AllSYS_2017_2_3'
+ 
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_Full2016_Moriond17_FRv18b_PRv6_step2_exactly2Jets_1bjet_AllSYS_2017_2_3'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_MultiLep_Full2016_Moriond17_FRv18b_PRv6_step2_moreThan2Jets_1bjet_AllSYS_2017_2_6/isPassTrig_All0_dilep1_dilepAnth0_trilep0_isPassTrilepton1_lep1Pt0_NJets3_NBJets1_DR0_ST0_MllOS20'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18b_PRv6_step2_moreThan2Jets_1bjet_AllSYS_2017_2_6'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18b_PRv6_step2_exactly2Jets_1bjet_AllSYS_2017_2_6'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_Full2016_Moriond17_FRv18b_PRv6_step2_exactly2Jets_1bjet_AllSYS_2017_2_6'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18b_PRv6_step2_moreThan2Jets_1bjet_AllSYS_ST600_2017_2_6'
+
+templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_Full2016_Moriond17_FRv18b_PRv6_step2_exactly1Jet_1bjet_AllSYS_2017_2_6'
+
 
 lumi=36.8 #for plots
 
@@ -96,7 +117,7 @@ systematicList = ['pileup','btag','pdfNew','muRFcorrdNew','PR','FR','jec','jer']
 # systematicList = ['pileup','pdfNew','muRFcorrdNew','PR','FR','jec','jer'] #no btag!!!
 
 
-doAllSys = True
+doAllSys = False
 
 isRebinned=''#post fix for file names if the name changed b/c of rebinning or some other process
 doNormByBinWidth=False # not tested, may not work out of the box

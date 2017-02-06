@@ -39,7 +39,7 @@ isRebinned=''#'_rebinned'#post fix for file names if the name changed b/c of reb
 doNormByBinWidth=False # not tested, may not work out of the box
 doOneBand = False
 if not doAllSys: doOneBand = True # Don't change this!
-blind = False
+blind = True
 yLog  = False
 doRealPull = False
 if doRealPull: doOneBand=False
@@ -54,15 +54,17 @@ if doRealPull: doOneBand=False
 
 # templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_mcICHEP_FRv15_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_2017_1_23/'+cutString+'/'
 
-# cutString = 'lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20'
+cutString = 'lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20'
 # cutString = 'lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST700_mllOS20'
 # cutString = 'lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST800_mllOS20'
 # cutString = 'lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST900_mllOS20'
 # cutString = 'lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1000_mllOS20'
-cutString = 'lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1100_mllOS20'
+# cutString = 'lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1100_mllOS20'
 
-templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_2017_1_23/'+cutString+'/'
+# templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_2017_1_23/'+cutString+'/'
 
+# templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_3Feb2017_step2_2017_2_3/'+cutString+'/'
+templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_6Feb2017_step2_2017_2_6/'+cutString+'/'
 
 
 tempsig='templates_'+discriminant+'_'+sig1+'_'+lumiInTemplates+'fb'+isRebinned+'.root'	
@@ -437,9 +439,9 @@ for cat in catList:
 	try: 
 		if hQCD.Integral()/bkgHT.Integral()>.005: leg.AddEntry(hQCD,"QCD","f") #don't plot QCD if it is less than 0.5%
 	except: pass
-	try: leg.AddEntry(hEWK,"EWK","f")
+	try: leg.AddEntry(hEWK,"VV+VVV","f")
 	except: pass
-	try: leg.AddEntry(hTOP,"TOP","f")
+	try: leg.AddEntry(hTOP,"TTV","f")
 	except: pass
 	try: leg.AddEntry(hDDBKG,"DD BKG","f")
 	except: pass

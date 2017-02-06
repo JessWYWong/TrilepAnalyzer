@@ -26,7 +26,9 @@ lumiStr = str(targetlumi/1000).replace('.','p') # 1/fb
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_HLTupdate_2017_1_11_rizki_PRv4_FRv15b_20Jan2017_updatedbtagWP_step1hadds_step2/nominal'
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_HLTupdate_2017_1_11_rizki_PRv4_FRv15b_26Jan2017_lepPt30_step1hadds_step2/nominal'
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_HLTupdate_2017_1_11_rizki_PRv5test_FRv15b_26Jan2017_lepPt30_step1hadds_step2/nominal'
-step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv17b_2Feb2017_step1hadds_step2/nominal'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv17b_2Feb2017_step1hadds_step2/nominal'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv18b_3Feb2017_step1hadds_step2/nominal'
+step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv18b_6Feb2017_step1hadds_step2/nominal'
 
 print 'grabbing files from ', step1Dir
 """
@@ -55,7 +57,7 @@ cutList = {'isPassTrig': 0,
 		   'njetsCut': 3, #
 		   'nbjetsCut':1, #3, #
 		   'drCut':0, #1.0, #
-	   	   'stCut':0,
+	   	   'stCut':600,
 	   	   'mllOSCut':20,
 		   }
 
@@ -123,7 +125,16 @@ timestr='%i_%i_%i'%(cTime.hour,cTime.minute,cTime.second)
 
 # pfix = 'kinematics_80x_MultiLep_Full2016_mcICHEP_FRv15b_PRv5test_step2_moreThan2Jets_muMinIso0p1_updatedbtagWP_1bjet_lepPt30_noSYS'
 
-pfix = 'kinematics_80x_MultiLep_Full2016_Moriond17_FRv17b_PRv6_step2_moreThan2Jets_1bjet_AllSYS'
+# pfix = 'kinematics_80x_MultiLep_Full2016_Moriond17_FRv17b_PRv6_step2_moreThan2Jets_1bjet_noSYS'
+
+# pfix = 'kinematics_80x_MultiLep_Full2016_Moriond17_FRv17b_PRv6_step2_moreThan2Jets_1bjet_AllSYS'
+
+pfix = 'kinematics_80x_MultiLep_Full2016_Moriond17_FRv18b_PRv6_step2_moreThan2Jets_1bjet_AllSYS'
+
+# pfix = 'kinematics_80x_MultiLep_Full2016_Moriond17_FRv18b_PRv6_step2_exactly2Jets_1bjet_AllSYS'
+# 
+# pfix = 'kinematics_80x_Exactly3Lep_Full2016_Moriond17_FRv18b_PRv6_step2_exactly2Jets_1bjet_AllSYS'
+
 
 pfix+='_'+datestr
 

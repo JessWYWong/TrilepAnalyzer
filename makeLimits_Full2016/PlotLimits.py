@@ -245,9 +245,10 @@ if not doBRScan: nBRconf=1
 # tempKeys = ['80x_Full2016_mcICHEP_fixedST_AllSYS']
 # tempKeys = ['80x_MultiLep_Full2016_mcICHEP_FRv15_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_2017_1_23_nobtagSys']
 # tempKeys = ['80x_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_2017_1_23']
-tempKeys = ['80x_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_26Jan2017_moreThan2Jets_lepPt30_2017_1_30']
+# tempKeys = ['80x_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_26Jan2017_moreThan2Jets_lepPt30_2017_1_30']
 # tempKeys = ['80x_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_26Jan2017_moreThan2Jets_lepPt30_testing_2017_1_31']
-
+# tempKeys = ['80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_2017_2_3']
+tempKeys = ['80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_2017_2_6']
 
 expLims = []
 obsLims = []

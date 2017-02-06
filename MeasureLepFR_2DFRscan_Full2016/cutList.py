@@ -9,7 +9,7 @@ cutList = {'isPassTrig': 0,
 		   'subLeadJetPtCut':0, #75, #150, #0, #
 		   'thirdJetPtCut':0, #30, #100, #0, #
 		   'metCut': 20,#60, #75, #0, #
-		   'njetsCut': 2, 
+		   'njetsCut': 1, 
 		   'nbjetsCut':1,
 		   'drCut':0, #1.0, #
 	   	   'stCut':0,

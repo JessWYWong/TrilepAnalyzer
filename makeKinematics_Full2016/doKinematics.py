@@ -24,7 +24,7 @@ cutList = {'isPassTrig': 0,
 		   'subLeadJetPtCut':0, #75, #150, #0, #
 		   'thirdJetPtCut':0, #30, #100, #0, #
 		   'metCut': 20,#60, #75, #0, #
-		   'njetsCut': 2, 
+		   'njetsCut': 3, 
 		   'nbjetsCut':1, #1,
 		   'drCut':0, #1.0, #
 	   	   'stCut':0,
@@ -104,7 +104,28 @@ cutString = 'isPassTrig_All'+str(int(cutList['isPassTrig']))+'_'+'dilep'+str(int
 
 # pfix='kinematics_80x_condor_MultiLep_Full2016_mcICHEP_FRv15b_PRv5test_step2_26Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_1bjet_lepPt30_noSYS_2017_1_31'
 
-pfix='kinematics_80x_MultiLep_Full2016_Moriond17_FRv17b_PRv6_step2_moreThan2Jets_1bjet_AllSYS_2017_2_2'
+# pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv17b_PRv6_step2_moreThan2Jets_1bjet_noSYS_2017_2_3'
+
+# pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv17b_PRv6_step2_moreThan2Jets_1bjet_AllSYS_2017_2_3'
+
+# pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18b_PRv6_step2_moreThan2Jets_1bjet_AllSYS_2017_2_3'
+
+# pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18b_PRv6_step2_exactly2Jets_1bjet_AllSYS_2017_2_3'
+# 
+# pfix='kinematics_80x_condor_Exactly3Lep_Full2016_Moriond17_FRv18b_PRv6_step2_exactly2Jets_1bjet_AllSYS_2017_2_3'
+
+# pfix='kinematics_80x_MultiLep_Full2016_Moriond17_FRv18b_PRv6_step2_moreThan2Jets_1bjet_AllSYS_2017_2_6/isPassTrig_All0_dilep1_dilepAnth0_trilep0_isPassTrilepton1_lep1Pt0_NJets3_NBJets1_DR0_ST0_MllOS20'
+
+# pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18b_PRv6_step2_moreThan2Jets_1bjet_AllSYS_2017_2_6'
+
+# pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18b_PRv6_step2_exactly2Jets_1bjet_AllSYS_2017_2_6'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_Full2016_Moriond17_FRv18b_PRv6_step2_exactly2Jets_1bjet_AllSYS_2017_2_6'
+
+pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18b_PRv6_step2_moreThan2Jets_1bjet_AllSYS_ST600_2017_2_6'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_Full2016_Moriond17_FRv18b_PRv6_step2_exactly1Jet_1bjet_AllSYS_2017_2_6'
+
 
 # outDir = os.getcwd()+'/'
 outDir = '/user_data/rsyarif/'
@@ -916,6 +937,11 @@ for dist in distList:
 	bkghists  = {}
 	sighists  = {}
 	#if dist!='minMlb' and dist!='HT':continue
+# 	if 'Iso' in dist:continue
+# 	if dist=='MET' not in dist: continue
+# 	if 'NBJets' not in dist: continue 
+# 	if 'NJets' not in dist :continue
+	if 'STrebinned' not in dist :continue
 	for isEM in isEMlist:
 		print "LOADING: ",isEM
 		datahists.update(pickle.load(open(outDir+'/'+isEM+'/datahists_'+dist+'.p','rb')))

@@ -47,7 +47,9 @@ time='%i_%i_%i'%(cTime.hour,cTime.minute,cTime.second)
 
 # pfix='kinematics_80x_condor_Exactly3Lep_ddbkgscan_step2_exactly2Jets_2DFRscan_PRv5test_muMinIso0p1_Full2016_26Jan2017_updatedbtagWP_1bjet_lepPt30'
 
-pfix='kinematics_80x_condor_Exactly3Lep_ddbkgscan_step2_2Feb2017_exactly2Jets_PRv6_1bjet'
+# pfix='kinematics_80x_condor_Exactly3Lep_ddbkgscan_step2_2Feb2017_exactly2Jets_PRv6_1bjet'
+
+pfix='kinematics_80x_condor_Exactly3Lep_ddbkgscan_step2_2Feb2017_exactly1Jet_PRv6_1bjet'
 
 
 pfix+='_'+date

@@ -64,7 +64,20 @@ time='%i_%i_%i'%(cTime.hour,cTime.minute,cTime.second)
 
 # pfix='kinematics_80x_condor_MultiLep_Full2016_mcICHEP_FRv15b_PRv5test_step2_26Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_1bjet_lepPt30_noSYS'
 
-pfix='kinematics_80x_MultiLep_Full2016_Moriond17_FRv17b_PRv6_step2_moreThan2Jets_1bjet_AllSYS'
+# pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv17b_PRv6_step2_moreThan2Jets_1bjet_noSYS'
+
+# pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv17b_PRv6_step2_moreThan2Jets_1bjet_AllSYS'
+
+# pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18b_PRv6_step2_moreThan2Jets_1bjet_AllSYS'
+
+# pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18b_PRv6_step2_exactly2Jets_1bjet_AllSYS'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_Full2016_Moriond17_FRv18b_PRv6_step2_exactly2Jets_1bjet_AllSYS'
+
+pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18b_PRv6_step2_moreThan2Jets_1bjet_AllSYS_ST600'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_Full2016_Moriond17_FRv18b_PRv6_step2_exactly1Jet_1bjet_AllSYS'
+
 
 pfix+='_'+date
 #pfix+='_'+date+'_'+time

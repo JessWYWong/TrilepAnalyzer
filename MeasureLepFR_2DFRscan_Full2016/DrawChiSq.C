@@ -103,14 +103,24 @@ void DrawChiSq(){
 //   DrawChiSq(f,"chiSq_average_lepPt_exactly2Jets_PRv4_muMinIso0p1_IsoTrig_HLTupdate_1bjet_36p814fb",0.15,0.22);
 //   f->Close();
 
-  filename = "/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_ddbkgscan_step2_exactly2Jets_2DFRscan_PRv4_muMinIso0p1_Full2016_20Jan2017_updatedbtagWP_1bjet_lepPt30_2017_1_25/chiSq_lepPt_36p814fb.root";
-  f = TFile::Open(filename);
-  DrawChiSq(f,"chiSq_average_lepPt_exactly2Jets_PRv4_muMinIso0p1_IsoTrig_HLTupdate_1bjet_lepPt30_36p814fb",0.13,0.22);
-  f->Close();
+//   filename = "/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_ddbkgscan_step2_exactly2Jets_2DFRscan_PRv4_muMinIso0p1_Full2016_20Jan2017_updatedbtagWP_1bjet_lepPt30_2017_1_25/chiSq_lepPt_36p814fb.root";
+//   f = TFile::Open(filename);
+//   DrawChiSq(f,"chiSq_average_lepPt_exactly2Jets_PRv4_muMinIso0p1_IsoTrig_HLTupdate_1bjet_lepPt30_36p814fb",0.13,0.22);
+//   f->Close();
+// 
+//   filename = "/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_ddbkgscan_step2_exactly1Jet_2DFRscan_PRv4_muMinIso0p1_Full2016_20Jan2017_updatedbtagWP_1bjet_lepPt30_2017_1_30/chiSq_lepPt_36p814fb.root";
+//   f = TFile::Open(filename);
+//   DrawChiSq(f,"chiSq_average_lepPt_exactly1Jet_PRv4_muMinIso0p1_IsoTrig_HLTupdate_1bjet_lepPt30_36p814fb",0.10,0.27);
+//   f->Close();
 
-  filename = "/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_ddbkgscan_step2_exactly1Jet_2DFRscan_PRv4_muMinIso0p1_Full2016_20Jan2017_updatedbtagWP_1bjet_lepPt30_2017_1_30/chiSq_lepPt_36p814fb.root";
+//   filename = "/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_ddbkgscan_step2_2Feb2017_exactly2Jets_PRv6_1bjet_2017_2_3/chiSq_lepPt_36p814fb.root";
+//   f = TFile::Open(filename);
+//   DrawChiSq(f,"chiSq_average_lepPt_exactly2Jets_PRv6_1bjet_lepPt30_36p814fb",0.11,0.25);
+//   f->Close();
+
+  filename = "/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_ddbkgscan_step2_2Feb2017_exactly1Jet_PRv6_1bjet_2017_2_3/chiSq_lepPt_36p814fb.root";
   f = TFile::Open(filename);
-  DrawChiSq(f,"chiSq_average_lepPt_exactly1Jet_PRv4_muMinIso0p1_IsoTrig_HLTupdate_1bjet_lepPt30_36p814fb",0.10,0.27);
+  DrawChiSq(f,"chiSq_average_lepPt_exactly1Jet_PRv6_1bjet_lepPt30_36p814fb",0.07,0.30);
   f->Close();
 
 

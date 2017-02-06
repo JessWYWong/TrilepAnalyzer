@@ -21,14 +21,16 @@ rfilePostFix = ''
 # cutString = '/lep1Pt0_jetPt0_MET20_NJets3_NBJets0_HT0_ST1000_mllOS20'
 # cutString = '/lep1Pt0_jetPt0_MET20_NJets3_NBJets0_HT0_ST1100_mllOS20'
 
-tempVersion ='optimization_condor_80x_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_2017_1_23'
+# tempVersion ='optimization_condor_80x_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_2017_1_23'
+# tempVersion ='optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_3Feb2017_step2_2017_2_3/'
+tempVersion ='optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_6Feb2017_step2_2017_2_6/'
 
-# cutString = '/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20'
+cutString = '/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20'
 # cutString = '/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST700_mllOS20'
 # cutString = '/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST800_mllOS20'
 # cutString = '/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST900_mllOS20'
 # cutString = '/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1000_mllOS20'
-cutString = '/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1100_mllOS20'
+# cutString = '/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1100_mllOS20'
 
 
 # templateFile = '/home/rsyarif/LJMet/TprimeAnalysis/CMSSW_7_6_3/src/TrilepAnalyzer_80x/optimization_Full2016/'+tempVersion+cutString+'/templates_'+discriminant+'_TTM800_36p46fb'+rfilePostFix+'.root'
@@ -95,7 +97,11 @@ for syst in systematics:
 	hMC.Draw()
 	hMCUp.Draw()
 	hMCDown.Draw()
-	print syst, ((hMCUp.Integral()/hMC.Integral()-1.)+(1.-hMCDown.Integral()/hMC.Integral()))/2
+	print syst, ((hMCUp.Integral()/hMC.Integral()-1.)+(1.-hMCDown.Integral()/hMC.Integral()))/2 *100,'%'
+	print syst,'syst EEE =', ((hMCUp.GetBinContent(1)/hMC.GetBinContent(1)-1.) *100),'% (up)',(1.-hMCDown.GetBinContent(1)/hMC.GetBinContent(1)) *100,'% (down)'
+	print syst,'syst EEM =', ((hMCUp.GetBinContent(2)/hMC.GetBinContent(2)-1.) *100),'% (up)',(1.-hMCDown.GetBinContent(2)/hMC.GetBinContent(2)) *100,'% (down)'
+	print syst,'syst EMM =', ((hMCUp.GetBinContent(3)/hMC.GetBinContent(3)-1.) *100),'% (up)',(1.-hMCDown.GetBinContent(3)/hMC.GetBinContent(3)) *100,'% (down)'
+	print syst,'syst MMM =', ((hMCUp.GetBinContent(4)/hMC.GetBinContent(4)-1.) *100),'% (up)',(1.-hMCDown.GetBinContent(4)/hMC.GetBinContent(4)) *100,'% (down)' 
 
 	canv = R.TCanvas(syst,syst,1000,700)
 	yDiv = 0.35

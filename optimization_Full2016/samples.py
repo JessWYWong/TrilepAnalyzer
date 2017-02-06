@@ -108,41 +108,42 @@ samples = {
 'WJets':'WJetsToLNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8',
 # 'WJets':'WJetsToLNu_TuneCUETP8M1_13TeV-madgraphMLM-pythia8',
 
-'TTJets':'TTJets_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8',
-'TTJetsPH':'TT_TuneCUETP8M1_13TeV-powheg-pythia8',
+
+'TTJetsPH':'TT_TuneCUETP8M2T4_13TeV-powheg-pythia8',
+# 'TTJets':'TTJets_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8',
 # 'TTJetsPH':'TT_TuneCUETP8M1_13TeV-powheg-pythia8_highstats',
-'TTJetsPHQ2U':'TT_TuneCUETP8M1_13TeV-powheg-scaleup-pythia8',
-'TTJetsPHQ2D':'TT_TuneCUETP8M1_13TeV-powheg-scaledown-pythia8',
+# 'TTJetsPHQ2U':'TT_TuneCUETP8M1_13TeV-powheg-scaleup-pythia8',
+# 'TTJetsPHQ2D':'TT_TuneCUETP8M1_13TeV-powheg-scaledown-pythia8',
 # 'TTJetsPH0to700inc':'TT_TuneCUETP8M1_13TeV-powheg-pythia8_highstats_Mtt0to700',
 # 'TTJetsPH700to1000inc':'TT_TuneCUETP8M1_13TeV-powheg-pythia8_highstats_Mtt700to1000',
 # 'TTJetsPH1000toINFinc':'TT_TuneCUETP8M1_13TeV-powheg-pythia8_highstats_Mtt1000toInf',
-'TTJetsPH700mtt':'TT_Mtt-700to1000_TuneCUETP8M1_13TeV-powheg-pythia8',
-'TTJetsPH1000mtt':'TT_Mtt-1000toInf_TuneCUETP8M1_13TeV-powheg-pythia8',
+# 'TTJetsPH700mtt':'TT_Mtt-700to1000_TuneCUETP8M1_13TeV-powheg-pythia8',
+# 'TTJetsPH1000mtt':'TT_Mtt-1000toInf_TuneCUETP8M1_13TeV-powheg-pythia8',
 
 'TTWl':'TTWJetsToLNu_TuneCUETP8M1_13TeV-amcatnloFXFX-madspin-pythia8',
 'TTWq':'TTWJetsToQQ_TuneCUETP8M1_13TeV-amcatnloFXFX-madspin-pythia8',
 'TTZl':'TTZToLLNuNu_M-10_TuneCUETP8M1_13TeV-amcatnlo-pythia8',
 'TTZq':'TTZToQQ_TuneCUETP8M1_13TeV-amcatnlo-pythia8',
 
-'Tt':'ST_t-channel_4f_leptonDecays_13TeV-amcatnlo-pythia8_TuneCUETP8M1',      #amcnlo t and tbar
-'TtQ2U':'ST_t-channel_4f_scaleup_leptonDecays_13TeV-amcatnlo-pythia8_TuneCUETP8M1',
-'TtQ2D':'ST_t-channel_4f_scaledown_leptonDecays_13TeV-amcatnlo-pythia8_TuneCUETP8M1',
-'Ts':'ST_s-channel_4f_leptonDecays_13TeV-amcatnlo-pythia8_TuneCUETP8M1',
-'TtW':'ST_tW_top_5f_inclusiveDecays_13TeV-powheg-pythia8_TuneCUETP8M1',    #pow-pyth t -> tW
-'TtWQ2U':'ST_tW_top_5f_scaleup_inclusiveDecays_13TeV-powheg-pythia8_TuneCUETP8M1',
-'TtWQ2D':'ST_tW_top_5f_scaledown_inclusiveDecays_13TeV-powheg-pythia8_TuneCUETP8M1',
-'TbtW':'ST_tW_antitop_5f_inclusiveDecays_13TeV-powheg-pythia8_TuneCUETP8M1',  #pow-pyth tbar -> tW
-'TbtWQ2U':'ST_tW_antitop_5f_scaleup_inclusiveDecays_13TeV-powheg-pythia8_TuneCUETP8M1',
-'TbtWQ2D':'ST_tW_antitop_5f_scaledown_inclusiveDecays_13TeV-powheg-pythia8_TuneCUETP8M1',
+# 'Tt':'ST_t-channel_4f_leptonDecays_13TeV-amcatnlo-pythia8_TuneCUETP8M1',      #amcnlo t and tbar
+# 'TtQ2U':'ST_t-channel_4f_scaleup_leptonDecays_13TeV-amcatnlo-pythia8_TuneCUETP8M1',
+# 'TtQ2D':'ST_t-channel_4f_scaledown_leptonDecays_13TeV-amcatnlo-pythia8_TuneCUETP8M1',
+# 'Ts':'ST_s-channel_4f_leptonDecays_13TeV-amcatnlo-pythia8_TuneCUETP8M1',
+# 'TtW':'ST_tW_top_5f_inclusiveDecays_13TeV-powheg-pythia8_TuneCUETP8M1',    #pow-pyth t -> tW
+# 'TtWQ2U':'ST_tW_top_5f_scaleup_inclusiveDecays_13TeV-powheg-pythia8_TuneCUETP8M1',
+# 'TtWQ2D':'ST_tW_top_5f_scaledown_inclusiveDecays_13TeV-powheg-pythia8_TuneCUETP8M1',
+# 'TbtW':'ST_tW_antitop_5f_inclusiveDecays_13TeV-powheg-pythia8_TuneCUETP8M1',  #pow-pyth tbar -> tW
+# 'TbtWQ2U':'ST_tW_antitop_5f_scaleup_inclusiveDecays_13TeV-powheg-pythia8_TuneCUETP8M1',
+# 'TbtWQ2D':'ST_tW_antitop_5f_scaledown_inclusiveDecays_13TeV-powheg-pythia8_TuneCUETP8M1',
 
-'QCDht100':'QCD_HT100to200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8',
-'QCDht200':'QCD_HT200to300_TuneCUETP8M1_13TeV-madgraphMLM-pythia8',
-'QCDht300':'QCD_HT300to500_TuneCUETP8M1_13TeV-madgraphMLM-pythia8',
-'QCDht500':'QCD_HT500to700_TuneCUETP8M1_13TeV-madgraphMLM-pythia8',
-'QCDht700':'QCD_HT700to1000_TuneCUETP8M1_13TeV-madgraphMLM-pythia8',
-'QCDht1000':'QCD_HT1000to1500_TuneCUETP8M1_13TeV-madgraphMLM-pythia8',
-'QCDht1500':'QCD_HT1500to2000_TuneCUETP8M1_13TeV-madgraphMLM-pythia8',
-'QCDht2000':'QCD_HT2000toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8',
+# 'QCDht100':'QCD_HT100to200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8',
+# 'QCDht200':'QCD_HT200to300_TuneCUETP8M1_13TeV-madgraphMLM-pythia8',
+# 'QCDht300':'QCD_HT300to500_TuneCUETP8M1_13TeV-madgraphMLM-pythia8',
+# 'QCDht500':'QCD_HT500to700_TuneCUETP8M1_13TeV-madgraphMLM-pythia8',
+# 'QCDht700':'QCD_HT700to1000_TuneCUETP8M1_13TeV-madgraphMLM-pythia8',
+# 'QCDht1000':'QCD_HT1000to1500_TuneCUETP8M1_13TeV-madgraphMLM-pythia8',
+# 'QCDht1500':'QCD_HT1500to2000_TuneCUETP8M1_13TeV-madgraphMLM-pythia8',
+# 'QCDht2000':'QCD_HT2000toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8',
 }
 
 dilep = ['EE','MM','ME']
