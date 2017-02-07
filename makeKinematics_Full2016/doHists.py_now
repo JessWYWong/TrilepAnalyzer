@@ -57,7 +57,7 @@ cutList = {'isPassTrig': 0,
 		   'njetsCut': 3, #
 		   'nbjetsCut':1, #3, #
 		   'drCut':0, #1.0, #
-	   	   'stCut':600,
+	   	   'stCut':0,
 	   	   'mllOSCut':20,
 		   }
 
