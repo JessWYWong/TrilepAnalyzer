@@ -32,7 +32,9 @@ import os,sys,fnmatch
 # templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_3Feb2017_step2_2017_2_3/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1000_mllOS20/'
 # templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_3Feb2017_step2_2017_2_3/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1100_mllOS20/'
 
-templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_6Feb2017_step2_2017_2_6/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20/'
+# templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_6Feb2017_step2_2017_2_6/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20/'
+
+templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_6Feb2017_step2_2017_2_7/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20/'
 
 
 thetaConfigTemp = os.getcwd()+'/theta_config_template.py'
@@ -58,7 +60,8 @@ outputDir = '/user_data/rsyarif/limits/'
 # limitType = '80x_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_26Jan2017_moreThan2Jets_lepPt30_2017_1_30'
 # limitType = '80x_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_26Jan2017_moreThan2Jets_lepPt30_testing_2017_1_31'
 # limitType = '80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_2017_2_3'
-limitType = '80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_2017_2_6'
+# limitType = '80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_2017_2_6'
+limitType = '80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_2017_2_7'
 
 def findfiles(path, filtre):
     for root, dirs, files in os.walk(path):

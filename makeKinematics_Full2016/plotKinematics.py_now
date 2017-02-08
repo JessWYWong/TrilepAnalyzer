@@ -93,7 +93,21 @@ start_time = time.time()
 
 # templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18b_PRv6_step2_moreThan2Jets_1bjet_AllSYS_ST600_2017_2_6'
 
-templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_Full2016_Moriond17_FRv18b_PRv6_step2_exactly1Jet_1bjet_AllSYS_2017_2_6'
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_Full2016_Moriond17_FRv18b_PRv6_step2_exactly1Jet_1bjet_AllSYS_2017_2_6'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18bSys_PRv6_step2_moreThan2Jets_1bjet_bTagSysFixed_addFRsys_AllSYS_2017_2_7'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18bSys_PRv6_step2_exactly2Jets_1bjet_bTagSysFixed_addFRsys_AllSYS_2017_2_7'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18bSys_PRv6_step2_moreThan2Jets_1bjet_bTagSysFixed_addFRsys_AllSYS_ST600_2017_2_7'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv19test_PRv6_step2_moreThan2Jets_1bjet_muFRetaDependence_noSYS_ST600_2017_2_7'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv19test_PRv6_step2_moreThan2Jets_1bjet_muFRetaDependence_AllSYS_2017_2_7'
+
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_Full2016_Moriond17_FRv18bSys_PRv6_step2_exactly2Jets_1bjet_AllSYS_2017_2_7'
+
+templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_Full2016_Moriond17_FRv18bSys_PRv6_step2_exactly1Jet_1bjet_AllSYS_2017_2_7'
 
 
 lumi=36.8 #for plots
@@ -117,7 +131,7 @@ systematicList = ['pileup','btag','pdfNew','muRFcorrdNew','PR','FR','jec','jer']
 # systematicList = ['pileup','pdfNew','muRFcorrdNew','PR','FR','jec','jer'] #no btag!!!
 
 
-doAllSys = False
+doAllSys = True
 
 isRebinned=''#post fix for file names if the name changed b/c of rebinning or some other process
 doNormByBinWidth=False # not tested, may not work out of the box

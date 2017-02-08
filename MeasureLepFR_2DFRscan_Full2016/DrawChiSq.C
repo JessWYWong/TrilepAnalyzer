@@ -118,9 +118,19 @@ void DrawChiSq(){
 //   DrawChiSq(f,"chiSq_average_lepPt_exactly2Jets_PRv6_1bjet_lepPt30_36p814fb",0.11,0.25);
 //   f->Close();
 
-  filename = "/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_ddbkgscan_step2_2Feb2017_exactly1Jet_PRv6_1bjet_2017_2_3/chiSq_lepPt_36p814fb.root";
+//   filename = "/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_ddbkgscan_step2_2Feb2017_exactly1Jet_PRv6_1bjet_2017_2_3/chiSq_lepPt_36p814fb.root";
+//   f = TFile::Open(filename);
+//   DrawChiSq(f,"chiSq_average_lepPt_exactly1Jet_PRv6_1bjet_lepPt30_36p814fb",0.07,0.30);
+//   f->Close();
+
+//   filename = "/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_ddbkgscan_step2_7Feb2017_exactly2Jets_PRv7test_1bjet_2017_2_7/chiSq_lepPt_36p814fb.root";
+//   f = TFile::Open(filename);
+//   DrawChiSq(f,"chiSq_average_lepPt_exactly2Jets_PRv7test_1bjet_lepPt30_36p814fb",0.11,0.25);
+//   f->Close();
+
+  filename = "/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_ddbkgscan_step2_7Feb2017_exactly2Jets_PRv8test_1bjet_2017_2_7/chiSq_lepPt_36p814fb.root";
   f = TFile::Open(filename);
-  DrawChiSq(f,"chiSq_average_lepPt_exactly1Jet_PRv6_1bjet_lepPt30_36p814fb",0.07,0.30);
+  DrawChiSq(f,"chiSq_average_lepPt_exactly2Jets_PRv8test_1bjet_lepPt30_36p814fb",0.11,0.25);
   f->Close();
 
 

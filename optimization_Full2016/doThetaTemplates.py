@@ -17,7 +17,8 @@ lumiStr = str(targetlumi/1000).replace('.','p') # 1/fb
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_HLTupdate_2017_1_11_rizki_PRv4_FRv15b_20Jan2017_updatedbtagWP_step1hadds_step2/nominal/'
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_HLTupdate_2017_1_11_rizki_PRv4_FRv15b_26Jan2017_lepPt30_step1hadds_step2/nominal'
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv18b_3Feb2017_step1hadds_step2/nominal'
-step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv18b_6Feb2017_step1hadds_step2/nominal'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv18b_6Feb2017_step1hadds_step2/nominal'
+step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv18bSys_6Feb2017_step1hadds_step2/nominal'
 
 """
 Note: 
@@ -169,7 +170,8 @@ timestr='%i_%i_%i'%(cTime.hour,cTime.minute,cTime.second)
 # pfix='optimization_LJMet80x_3lepTT_Full2016_mcICHEP_2016_12_15_rizki_withNonIsoTrig_addDZforRunH_fixedST_withJECJER_'
 # pfix='optimization_80x_MultiLep_Full2016_mcICHEP_FRv15_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP'
 # pfix='optimization_80x_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP'
-pfix='optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_6Feb2017_step2'
+# pfix='optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_6Feb2017_step2'
+pfix='optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_6Feb2017_step2'
 
 pfix+=datestr
 

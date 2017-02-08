@@ -50,7 +50,11 @@ doAllSys= False
 
 # pfix='kinematics_80x_condor_Exactly3Lep_ddbkgscan_step2_2Feb2017_exactly2Jets_PRv6_1bjet_2017_2_3/'
 
-pfix='kinematics_80x_condor_Exactly3Lep_ddbkgscan_step2_2Feb2017_exactly1Jet_PRv6_1bjet_2017_2_3/'
+# pfix='kinematics_80x_condor_Exactly3Lep_ddbkgscan_step2_2Feb2017_exactly1Jet_PRv6_1bjet_2017_2_3/'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_ddbkgscan_step2_7Feb2017_exactly2Jets_PRv7test_1bjet_2017_2_7/'
+
+pfix='kinematics_80x_condor_Exactly3Lep_ddbkgscan_step2_7Feb2017_exactly2Jets_PRv8test_1bjet_2017_2_7/'
 
 # outDir = os.getcwd()+'/'
 outDir = '/user_data/rsyarif/'

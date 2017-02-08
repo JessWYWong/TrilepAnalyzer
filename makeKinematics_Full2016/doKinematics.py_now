@@ -31,7 +31,7 @@ cutList = {'isPassTrig': 0,
 	   	   'mllOSCut':20,
 		   }
 
-doAllSys= True
+doAllSys= False
 
 cutString = 'isPassTrig_All'+str(int(cutList['isPassTrig']))+'_'+'dilep'+str(int(cutList['isPassTrig_dilep']))+'_'+'dilepAnth'+str(int(cutList['isPassTrig_dilep_anth']))+'_'+'trilep'+str(int(cutList['isPassTrig_trilep']))+'_'+'isPassTrilepton'+str(int(cutList['isPassTrilepton']))+'_lep1Pt'+str(int(cutList['lep1PtCut']))+'_NJets'+str(int(cutList['njetsCut']))+'_NBJets'+str(int(cutList['nbjetsCut']))+'_DR'+str(int(cutList['drCut']))+'_ST'+str(int(cutList['stCut']))+'_MllOS'+str(int(cutList['mllOSCut']))
 
@@ -122,10 +122,31 @@ cutString = 'isPassTrig_All'+str(int(cutList['isPassTrig']))+'_'+'dilep'+str(int
 
 # pfix='kinematics_80x_condor_Exactly3Lep_Full2016_Moriond17_FRv18b_PRv6_step2_exactly2Jets_1bjet_AllSYS_2017_2_6'
 
-pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18b_PRv6_step2_moreThan2Jets_1bjet_AllSYS_ST600_2017_2_6'
+# pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18b_PRv6_step2_moreThan2Jets_1bjet_AllSYS_ST600_2017_2_6'
 
 # pfix='kinematics_80x_condor_Exactly3Lep_Full2016_Moriond17_FRv18b_PRv6_step2_exactly1Jet_1bjet_AllSYS_2017_2_6'
 
+# pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18bSys_PRv6_step2_moreThan2Jets_1bjet_bTagSysFixed_addFRsys_AllSYS_2017_2_7'
+
+# pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18bSys_PRv6_step2_exactly2Jets_1bjet_bTagSysFixed_addFRsys_AllSYS_2017_2_7'
+
+# pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18bSys_PRv6_step2_moreThan2Jets_1bjet_bTagSysFixed_addFRsys_AllSYS_ST600_2017_2_7'
+
+# pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv19test_PRv6_step2_moreThan2Jets_1bjet_muFRetaDependence_noSYS_ST600_2017_2_7'
+
+# pfix='kinematics_80x_MultiLep_Full2016_Moriond17_FRv19test_PRv6_step2_moreThan2Jets_1bjet_muFRetaDependence_noSYS_ST600_2017_2_7'
+
+# pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv19test_PRv6_step2_moreThan2Jets_1bjet_muFRetaDependence_AllSYS_2017_2_7'
+
+# pfix='kinematics_80x_MultiLep_Full2016_Moriond17_FRv18bSys_PRv7test_step2_moreThan2Jets_1bjet_noSYS_ST600_2017_2_7'
+
+# pfix='kinematics_80x_MultiLep_Full2016_Moriond17_FRv19testV2_PRv6_step2_moreThan2Jets_1bjet_muFRetaDependence_noSYS_ST600_2017_2_7'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_Full2016_Moriond17_FRv18bSys_PRv6_step2_exactly2Jets_1bjet_AllSYS_2017_2_7'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_Full2016_Moriond17_FRv18bSys_PRv6_step2_exactly1Jet_1bjet_AllSYS_2017_2_7'
+
+pfix='kinematics_80x_MultiLep_Full2016_Moriond17_FRv18bSys_PRv8test_step2_moreThan2Jets_1bjet_noSYS_ST600_2017_2_7'
 
 # outDir = os.getcwd()+'/'
 outDir = '/user_data/rsyarif/'
@@ -936,12 +957,11 @@ for dist in distList:
 	datahists = {}
 	bkghists  = {}
 	sighists  = {}
-	#if dist!='minMlb' and dist!='HT':continue
-# 	if 'Iso' in dist:continue
+	if 'Iso' in dist:continue
 # 	if dist=='MET' not in dist: continue
 # 	if 'NBJets' not in dist: continue 
 # 	if 'NJets' not in dist :continue
-	if 'STrebinned' not in dist :continue
+# 	if 'STrebinned' not in dist :continue
 	for isEM in isEMlist:
 		print "LOADING: ",isEM
 		datahists.update(pickle.load(open(outDir+'/'+isEM+'/datahists_'+dist+'.p','rb')))

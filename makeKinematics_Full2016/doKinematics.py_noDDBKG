@@ -24,7 +24,7 @@ cutList = {'isPassTrig': 0,
 		   'subLeadJetPtCut':0, #75, #150, #0, #
 		   'thirdJetPtCut':0, #30, #100, #0, #
 		   'metCut': 20,#60, #75, #0, #
-		   'njetsCut': 2, 
+		   'njetsCut': 0, 
 		   'nbjetsCut':0, #1,
 		   'drCut':0, #1.0, #
 	   	   'stCut':0,
@@ -65,7 +65,11 @@ cutString = 'isPassTrig_All'+str(int(cutList['isPassTrig']))+'_'+'dilep'+str(int
 
 # pfix='kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_noDDBKG_v2_lessThan3Jets_2016_10_18'
 
-pfix='kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_noDDBKG_v2_1or2Jets_2016_10_21'
+# pfix='kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_noDDBKG_v2_1or2Jets_2016_10_21'
+
+# pfix = 'kinematics_80x_MultiLep_Full2016_Moriond17_noSYS_noDDBKG_2017_2_7'
+
+pfix = 'kinematics_80x_condor_MultiLep_Full2016_Moriond17_noSYS_noDDBKG_2017_2_7'
 
 
 # outDir = os.getcwd()+'/'
@@ -107,8 +111,6 @@ ttvList   = ['TTWl','TTZl']
 ttjetList = ['TTJetsPH']
 tList     = ['Tt','Ts','TtW','TbtW']
 
-dataList = ['DataEEPRD','DataEEPRC','DataEEPRB','DataMMPRD','DataMMPRC','DataMMPRB','DataMEPRD','DataMEPRC','DataMEPRD']
-# dataList = ['DataEPRD','DataEPRC','DataEPRB','DataMPRD','DataMPRC','DataMPRD']
 signalList = [signal+decay for signal in signals for decay in decays]
 # topList = ['TTWl','TTZl','TTWq','TTZq'] #NoTTJets, No singleT
 topList = ['TTWl','TTZl','TTJetsPH'] #No singleT
@@ -119,19 +121,32 @@ topList = ['TTWl','TTZl','TTJetsPH'] #No singleT
 # ewkList = ['DY50','WJetsMG100','WJetsMG200','WJetsMG400','WJetsMG600','WJetsMG800','WJetsMG1200','WJets2500','WW','WZ','ZZ','WWZ','WZZ','ZZZ']
 ewkList = ['DY10to50','DY50','WJets','WW','WZ','ZZ','WWW','WWZ','WZZ','ZZZ']
 # qcdList = ['QCDht100','QCDht200','QCDht300','QCDht500','QCDht700','QCDht1000','QCDht1500','QCDht2000']
-ddbkgList = ['DataDrivenBkgEEPRB','DataDrivenBkgEEPRC','DataDrivenBkgEEPRD','DataDrivenBkgMMPRB','DataDrivenBkgMMPRC','DataDrivenBkgMMPRD','DataDrivenBkgMEPRB','DataDrivenBkgMEPRC','DataDrivenBkgMEPRD']
 
-ddbkgTTTList = ['DataDrivenBkgTTTEEPRB','DataDrivenBkgTTTEEPRC','DataDrivenBkgTTTEEPRD','DataDrivenBkgTTTMMPRB','DataDrivenBkgTTTMMPRC','DataDrivenBkgTTTMMPRD','DataDrivenBkgTTTMEPRB','DataDrivenBkgTTTMEPRC','DataDrivenBkgTTTMEPRD']
+dataList = []
+# ddbkgList = []
+# ddbkgTTTList = []
+# ddbkgTTLList = []
+# ddbkgTLTList = []
+# ddbkgLTTList = []
+# ddbkgTLLList = []
+# ddbkgLTLList = []
+# ddbkgLLTList = []
+# ddbkgLLLList = []
 
-ddbkgTTLList = ['DataDrivenBkgTTLEEPRB','DataDrivenBkgTTLEEPRC','DataDrivenBkgTTLEEPRD','DataDrivenBkgTTLMMPRB','DataDrivenBkgTTLMMPRC','DataDrivenBkgTTLMMPRD','DataDrivenBkgTTLMEPRB','DataDrivenBkgTTLMEPRC','DataDrivenBkgTTLMEPRD']
-ddbkgTLTList = ['DataDrivenBkgTLTEEPRB','DataDrivenBkgTLTEEPRC','DataDrivenBkgTLTEEPRD','DataDrivenBkgTLTMMPRB','DataDrivenBkgTLTMMPRC','DataDrivenBkgTLTMMPRD','DataDrivenBkgTLTMEPRB','DataDrivenBkgTLTMEPRC','DataDrivenBkgTLTMEPRD']
-ddbkgLTTList = ['DataDrivenBkgLTTEEPRB','DataDrivenBkgLTTEEPRC','DataDrivenBkgLTTEEPRD','DataDrivenBkgLTTMMPRB','DataDrivenBkgLTTMMPRC','DataDrivenBkgLTTMMPRD','DataDrivenBkgLTTMEPRB','DataDrivenBkgLTTMEPRC','DataDrivenBkgLTTMEPRD']
-
-ddbkgTLLList = ['DataDrivenBkgTLLEEPRB','DataDrivenBkgTLLEEPRC','DataDrivenBkgTLLEEPRD','DataDrivenBkgTLLMMPRB','DataDrivenBkgTLLMMPRC','DataDrivenBkgTLLMMPRD','DataDrivenBkgTLLMEPRB','DataDrivenBkgTLLMEPRC','DataDrivenBkgTLLMEPRD']
-ddbkgLTLList = ['DataDrivenBkgLTLEEPRB','DataDrivenBkgLTLEEPRC','DataDrivenBkgLTLEEPRD','DataDrivenBkgLTLMMPRB','DataDrivenBkgLTLMMPRC','DataDrivenBkgLTLMMPRD','DataDrivenBkgLTLMEPRB','DataDrivenBkgLTLMEPRC','DataDrivenBkgLTLMEPRD']
-ddbkgLLTList = ['DataDrivenBkgLLTEEPRB','DataDrivenBkgLLTEEPRC','DataDrivenBkgLLTEEPRD','DataDrivenBkgLLTMMPRB','DataDrivenBkgLLTMMPRC','DataDrivenBkgLLTMMPRD','DataDrivenBkgLLTMEPRB','DataDrivenBkgLLTMEPRC','DataDrivenBkgLLTMEPRD']
-
-ddbkgLLLList = ['DataDrivenBkgLLLEEPRB','DataDrivenBkgLLLEEPRC','DataDrivenBkgLLLEEPRD','DataDrivenBkgLLLMMPRB','DataDrivenBkgLLLMMPRC','DataDrivenBkgLLLMMPRD','DataDrivenBkgLLLMEPRB','DataDrivenBkgLLLMEPRC','DataDrivenBkgLLLMEPRD']
+#run,dilep, --> set in samples
+dataList = []
+for run_ in run:
+	for dilep_ in dilep:
+		dataList.append('Data'+dilep_+run_)
+# 		ddbkgList.append('DataDrivenBkg'+dilep_+run_)
+# 		ddbkgTTTList.append('DataDrivenBkg'+ddbkgCat[0]+dilep_+run_)
+# 		ddbkgTTLList.append('DataDrivenBkg'+ddbkgCat[1]+dilep_+run_)
+# 		ddbkgTLTList.append('DataDrivenBkg'+ddbkgCat[2]+dilep_+run_)
+# 		ddbkgLTTList.append('DataDrivenBkg'+ddbkgCat[3]+dilep_+run_)
+# 		ddbkgTLLList.append('DataDrivenBkg'+ddbkgCat[4]+dilep_+run_)
+# 		ddbkgLTLList.append('DataDrivenBkg'+ddbkgCat[5]+dilep_+run_)
+# 		ddbkgLLTList.append('DataDrivenBkg'+ddbkgCat[6]+dilep_+run_)
+# 		ddbkgLLLList.append('DataDrivenBkg'+ddbkgCat[7]+dilep_+run_)
 
 
 # systematicList = ['pileup','jec','jer','jsf','jmr','jms','btag','tau21','pdfNew','muR','muF',
@@ -183,7 +198,7 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 	outputRfile = R.TFile(outDir+'/templates_'+discriminant+'_'+lumiStr+'fb.root','RECREATE')
 	hsig,htop,hewk,hqcd,hdata={},{},{},{},{}
 	hwjets,hzjets,httjets,ht,httv,hvv,hww,hwz,hzz,hvvv={},{},{},{},{},{},{},{},{},{}
-	hddbkg,hddbkgTTT,hddbkgTTL,hddbkgTLT,hddbkgLTT,hddbkgTLL,hddbkgLTL,hddbkgLLT,hddbkgLLL={},{},{},{},{},{},{},{},{}
+# 	hddbkg,hddbkgTTT,hddbkgTTL,hddbkgTLT,hddbkgLTT,hddbkgTLL,hddbkgLTL,hddbkgLLT,hddbkgLLL={},{},{},{},{},{},{},{},{}
 	for isEM in isEMlist:
 		histoPrefix=discriminant+'_'+lumiStr+'fb_'+isEM
 
@@ -198,18 +213,18 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 		hwz[isEM] = bkghists[histoPrefix+'_'+wzList[0]].Clone(histoPrefix+'_WZ')
 		hzz[isEM] = bkghists[histoPrefix+'_'+zzList[0]].Clone(histoPrefix+'_ZZ')
 		hvvv[isEM] = bkghists[histoPrefix+'_'+vvvList[0]].Clone(histoPrefix+'_VVV')
-		hddbkg[isEM] = bkghists[histoPrefix+'_'+ddbkgList[0]].Clone(histoPrefix+'_ddbkg')
-		hddbkgTTT[isEM] = bkghists[histoPrefix+'_'+ddbkgTTTList[0]].Clone(histoPrefix+'_ddbkgTTT')
-
-		hddbkgTTL[isEM] = bkghists[histoPrefix+'_'+ddbkgTTLList[0]].Clone(histoPrefix+'_ddbkgTTL')
-		hddbkgTLT[isEM] = bkghists[histoPrefix+'_'+ddbkgTLTList[0]].Clone(histoPrefix+'_ddbkgTLT')
-		hddbkgLTT[isEM] = bkghists[histoPrefix+'_'+ddbkgLTTList[0]].Clone(histoPrefix+'_ddbkgLTT')
-
-		hddbkgTLL[isEM] = bkghists[histoPrefix+'_'+ddbkgTLLList[0]].Clone(histoPrefix+'_ddbkgTLL')
-		hddbkgLTL[isEM] = bkghists[histoPrefix+'_'+ddbkgLTLList[0]].Clone(histoPrefix+'_ddbkgLTL')
-		hddbkgLLT[isEM] = bkghists[histoPrefix+'_'+ddbkgLLTList[0]].Clone(histoPrefix+'_ddbkgLLT')
-
-		hddbkgLLL[isEM] = bkghists[histoPrefix+'_'+ddbkgLLLList[0]].Clone(histoPrefix+'_ddbkgLLL')
+# 		hddbkg[isEM] = bkghists[histoPrefix+'_'+ddbkgList[0]].Clone(histoPrefix+'_ddbkg')
+# 		hddbkgTTT[isEM] = bkghists[histoPrefix+'_'+ddbkgTTTList[0]].Clone(histoPrefix+'_ddbkgTTT')
+# 
+# 		hddbkgTTL[isEM] = bkghists[histoPrefix+'_'+ddbkgTTLList[0]].Clone(histoPrefix+'_ddbkgTTL')
+# 		hddbkgTLT[isEM] = bkghists[histoPrefix+'_'+ddbkgTLTList[0]].Clone(histoPrefix+'_ddbkgTLT')
+# 		hddbkgLTT[isEM] = bkghists[histoPrefix+'_'+ddbkgLTTList[0]].Clone(histoPrefix+'_ddbkgLTT')
+# 
+# 		hddbkgTLL[isEM] = bkghists[histoPrefix+'_'+ddbkgTLLList[0]].Clone(histoPrefix+'_ddbkgTLL')
+# 		hddbkgLTL[isEM] = bkghists[histoPrefix+'_'+ddbkgLTLList[0]].Clone(histoPrefix+'_ddbkgLTL')
+# 		hddbkgLLT[isEM] = bkghists[histoPrefix+'_'+ddbkgLLTList[0]].Clone(histoPrefix+'_ddbkgLLT')
+# 
+# 		hddbkgLLL[isEM] = bkghists[histoPrefix+'_'+ddbkgLLLList[0]].Clone(histoPrefix+'_ddbkgLLL')
 
 
 		for bkg in ttjetList:
@@ -232,28 +247,28 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 			if bkg!=zzList[0]: hzz[isEM].Add(bkghists[histoPrefix+'_'+bkg])
 		for bkg in vvvList:
 			if bkg!=vvvList[0]: hvvv[isEM].Add(bkghists[histoPrefix+'_'+bkg])
-		for bkg in ddbkgList:
-			if bkg!=ddbkgList[0]: hddbkg[isEM].Add(bkghists[histoPrefix+'_'+bkg])
+# 		for bkg in ddbkgList:
+# 			if bkg!=ddbkgList[0]: hddbkg[isEM].Add(bkghists[histoPrefix+'_'+bkg])
 
-		for bkg in ddbkgTTTList:
-			if bkg!=ddbkgTTTList[0]: hddbkgTTT[isEM].Add(bkghists[histoPrefix+'_'+bkg])
-
-		for bkg in ddbkgTTLList:
-			if bkg!=ddbkgTTLList[0]: hddbkgTTL[isEM].Add(bkghists[histoPrefix+'_'+bkg])
-		for bkg in ddbkgTLTList:
-			if bkg!=ddbkgTLTList[0]: hddbkgTLT[isEM].Add(bkghists[histoPrefix+'_'+bkg])
-		for bkg in ddbkgLTTList:
-			if bkg!=ddbkgLTTList[0]: hddbkgLTT[isEM].Add(bkghists[histoPrefix+'_'+bkg])
-
-		for bkg in ddbkgTLLList:
-			if bkg!=ddbkgTLLList[0]: hddbkgTLL[isEM].Add(bkghists[histoPrefix+'_'+bkg])
-		for bkg in ddbkgLTLList:
-			if bkg!=ddbkgLTLList[0]: hddbkgLTL[isEM].Add(bkghists[histoPrefix+'_'+bkg])
-		for bkg in ddbkgLLTList:
-			if bkg!=ddbkgLLTList[0]: hddbkgLLT[isEM].Add(bkghists[histoPrefix+'_'+bkg])
-
-		for bkg in ddbkgLLLList:
-			if bkg!=ddbkgLLLList[0]: hddbkgLLL[isEM].Add(bkghists[histoPrefix+'_'+bkg])
+# 		for bkg in ddbkgTTTList:
+# 			if bkg!=ddbkgTTTList[0]: hddbkgTTT[isEM].Add(bkghists[histoPrefix+'_'+bkg])
+# 
+# 		for bkg in ddbkgTTLList:
+# 			if bkg!=ddbkgTTLList[0]: hddbkgTTL[isEM].Add(bkghists[histoPrefix+'_'+bkg])
+# 		for bkg in ddbkgTLTList:
+# 			if bkg!=ddbkgTLTList[0]: hddbkgTLT[isEM].Add(bkghists[histoPrefix+'_'+bkg])
+# 		for bkg in ddbkgLTTList:
+# 			if bkg!=ddbkgLTTList[0]: hddbkgLTT[isEM].Add(bkghists[histoPrefix+'_'+bkg])
+# 
+# 		for bkg in ddbkgTLLList:
+# 			if bkg!=ddbkgTLLList[0]: hddbkgTLL[isEM].Add(bkghists[histoPrefix+'_'+bkg])
+# 		for bkg in ddbkgLTLList:
+# 			if bkg!=ddbkgLTLList[0]: hddbkgLTL[isEM].Add(bkghists[histoPrefix+'_'+bkg])
+# 		for bkg in ddbkgLLTList:
+# 			if bkg!=ddbkgLLTList[0]: hddbkgLLT[isEM].Add(bkghists[histoPrefix+'_'+bkg])
+# 
+# 		for bkg in ddbkgLLLList:
+# 			if bkg!=ddbkgLLLList[0]: hddbkgLLL[isEM].Add(bkghists[histoPrefix+'_'+bkg])
 
 		
 		#Group QCD processes
@@ -497,33 +512,33 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 		yieldTable[histoPrefix]['TTJets'] = httjets[isEM].Integral()
 # 		yieldTable[histoPrefix]['T']      = ht[isEM].Integral()
 # 		yieldTable[histoPrefix]['QCD']    = hqcd[isEM].Integral()
-		yieldTable[histoPrefix]['ddbkg']  = hddbkg[isEM].Integral()
+# 		yieldTable[histoPrefix]['ddbkg']  = hddbkg[isEM].Integral()
 
 # 		print ''
 # 		print '----------', isEM,'----------'
 
-		yieldTable[histoPrefix]['ddbkgTTT']  = hddbkgTTT[isEM].Integral()
-# 		print 'hddbkgTTT[isEM].Integral() = ', hddbkgTTT[isEM].Integral()
-# 		print ''
-
-		yieldTable[histoPrefix]['ddbkgTTL']  = hddbkgTTL[isEM].Integral()
-# 		print 'hddbkgTTL[isEM].Integral() = ', hddbkgTTL[isEM].Integral()
-		yieldTable[histoPrefix]['ddbkgTLT']  = hddbkgTLT[isEM].Integral()
-# 		print 'hddbkgTLT[isEM].Integral() = ', hddbkgTLT[isEM].Integral()
-		yieldTable[histoPrefix]['ddbkgLTT']  = hddbkgLTT[isEM].Integral()
-# 		print 'hddbkgLTT[isEM].Integral() = ', hddbkgLTT[isEM].Integral()
-# 		print ''
-
-		yieldTable[histoPrefix]['ddbkgTLL']  = hddbkgTLL[isEM].Integral()
-# 		print 'hddbkgTLL[isEM].Integral() = ', hddbkgTLL[isEM].Integral()
-		yieldTable[histoPrefix]['ddbkgLTL']  = hddbkgLTL[isEM].Integral()
-# 		print 'hddbkgLTL[isEM].Integral() = ', hddbkgLTL[isEM].Integral()
-		yieldTable[histoPrefix]['ddbkgLLT']  = hddbkgLLT[isEM].Integral()
-# 		print 'hddbkgLLT[isEM].Integral() = ', hddbkgLLT[isEM].Integral()
-# 		print ''
-
-		yieldTable[histoPrefix]['ddbkgLLL']  = hddbkgLLL[isEM].Integral()
-# 		print 'hddbkgLLL[isEM].Integral() = ', hddbkgLLL[isEM].Integral()
+# 		yieldTable[histoPrefix]['ddbkgTTT']  = hddbkgTTT[isEM].Integral()
+# # 		print 'hddbkgTTT[isEM].Integral() = ', hddbkgTTT[isEM].Integral()
+# # 		print ''
+# 
+# 		yieldTable[histoPrefix]['ddbkgTTL']  = hddbkgTTL[isEM].Integral()
+# # 		print 'hddbkgTTL[isEM].Integral() = ', hddbkgTTL[isEM].Integral()
+# 		yieldTable[histoPrefix]['ddbkgTLT']  = hddbkgTLT[isEM].Integral()
+# # 		print 'hddbkgTLT[isEM].Integral() = ', hddbkgTLT[isEM].Integral()
+# 		yieldTable[histoPrefix]['ddbkgLTT']  = hddbkgLTT[isEM].Integral()
+# # 		print 'hddbkgLTT[isEM].Integral() = ', hddbkgLTT[isEM].Integral()
+# # 		print ''
+# 
+# 		yieldTable[histoPrefix]['ddbkgTLL']  = hddbkgTLL[isEM].Integral()
+# # 		print 'hddbkgTLL[isEM].Integral() = ', hddbkgTLL[isEM].Integral()
+# 		yieldTable[histoPrefix]['ddbkgLTL']  = hddbkgLTL[isEM].Integral()
+# # 		print 'hddbkgLTL[isEM].Integral() = ', hddbkgLTL[isEM].Integral()
+# 		yieldTable[histoPrefix]['ddbkgLLT']  = hddbkgLLT[isEM].Integral()
+# # 		print 'hddbkgLLT[isEM].Integral() = ', hddbkgLLT[isEM].Integral()
+# # 		print ''
+# 
+# 		yieldTable[histoPrefix]['ddbkgLLL']  = hddbkgLLL[isEM].Integral()
+# # 		print 'hddbkgLLL[isEM].Integral() = ', hddbkgLLL[isEM].Integral()
 
 		for signal in sigList.keys(): yieldTable[histoPrefix][signal] = hsig[isEM+signal].Integral()
 		for signal in signals: yieldTable[histoPrefix][signal] = hsig[isEM+signal].Integral()
@@ -539,8 +554,8 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 # 							yieldTable[histoPrefix+systematic+ud]['qcd'] = hqcd[isEM+systematic+ud].Integral()
 							for signal in sigList.keys(): yieldTable[histoPrefix+systematic+ud][signal] = hsig[isEM+signal+systematic+ud].Integral()
 							for signal in signals: yieldTable[histoPrefix+systematic+ud][signal] = hsig[isEM+signal+systematic+ud].Integral()
-					if systematic=='PR' or systematic=='FR':
-						yieldTable[histoPrefix+systematic+ud]['ddbkg'] = hddbkg[isEM+systematic+ud].Integral()
+# 					if systematic=='PR' or systematic=='FR':
+# 						yieldTable[histoPrefix+systematic+ud]['ddbkg'] = hddbkg[isEM+systematic+ud].Integral()
 
 		#prepare MC yield error table
 		yieldErrTable[histoPrefix]['top']    = 0.
@@ -560,18 +575,18 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 		yieldErrTable[histoPrefix]['TTJets'] = 0.
 # 		yieldErrTable[histoPrefix]['T']      = 0.
 # 		yieldErrTable[histoPrefix]['QCD']    = 0.
-		yieldErrTable[histoPrefix]['ddbkg']  = 0.
-		yieldErrTable[histoPrefix]['ddbkgTTT']  = 0.
-
-		yieldErrTable[histoPrefix]['ddbkgTTL']  = 0.
-		yieldErrTable[histoPrefix]['ddbkgTLT']  = 0.
-		yieldErrTable[histoPrefix]['ddbkgLTT']  = 0.
-
-		yieldErrTable[histoPrefix]['ddbkgTLL']  = 0.
-		yieldErrTable[histoPrefix]['ddbkgLTL']  = 0.
-		yieldErrTable[histoPrefix]['ddbkgLLT']  = 0.
-
-		yieldErrTable[histoPrefix]['ddbkgLLL']  = 0.
+# 		yieldErrTable[histoPrefix]['ddbkg']  = 0.
+# 		yieldErrTable[histoPrefix]['ddbkgTTT']  = 0.
+# 
+# 		yieldErrTable[histoPrefix]['ddbkgTTL']  = 0.
+# 		yieldErrTable[histoPrefix]['ddbkgTLT']  = 0.
+# 		yieldErrTable[histoPrefix]['ddbkgLTT']  = 0.
+# 
+# 		yieldErrTable[histoPrefix]['ddbkgTLL']  = 0.
+# 		yieldErrTable[histoPrefix]['ddbkgLTL']  = 0.
+# 		yieldErrTable[histoPrefix]['ddbkgLLT']  = 0.
+# 
+# 		yieldErrTable[histoPrefix]['ddbkgLLL']  = 0.
 		for signal in sigList.keys(): yieldErrTable[histoPrefix][signal] = 0.
 		for signal in signals: yieldErrTable[histoPrefix][signal] = 0.
 
@@ -580,7 +595,8 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 			yieldErrTable[histoPrefix]['ewk']    += hewk[isEM].GetBinError(ibin)**2
 # 			yieldErrTable[histoPrefix]['qcd']    += hqcd[isEM].GetBinError(ibin)**2
 # 			yieldErrTable[histoPrefix]['totBkg'] += htop[isEM].GetBinError(ibin)**2+hewk[isEM].GetBinError(ibin)**2+hqcd[isEM].GetBinError(ibin)**2+hddbkg[isEM].GetBinError(ibin)**2
-			yieldErrTable[histoPrefix]['totBkg'] += htop[isEM].GetBinError(ibin)**2+hewk[isEM].GetBinError(ibin)**2+hddbkg[isEM].GetBinError(ibin)**2
+# 			yieldErrTable[histoPrefix]['totBkg'] += htop[isEM].GetBinError(ibin)**2+hewk[isEM].GetBinError(ibin)**2+hddbkg[isEM].GetBinError(ibin)**2
+			yieldErrTable[histoPrefix]['totBkg'] += htop[isEM].GetBinError(ibin)**2+hewk[isEM].GetBinError(ibin)**2
 			yieldErrTable[histoPrefix]['data']   += hdata[isEM].GetBinError(ibin)**2
 # 			print "hdata[isEM].GetBinError(ibin) = ", hdata[isEM].GetBinError(ibin)
 # 			print "hdata[isEM].GetBinError(ibin)*hdata[isEM].GetBinError(ibin) = ", hdata[isEM].GetBinError(ibin)*hdata[isEM].GetBinError(ibin)
@@ -596,18 +612,18 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 			yieldErrTable[histoPrefix]['TTJets'] += httjets[isEM].GetBinError(ibin)**2
 # 			yieldErrTable[histoPrefix]['T']      += ht[isEM].GetBinError(ibin)**2
 # 			yieldErrTable[histoPrefix]['QCD']    += hqcd[isEM].GetBinError(ibin)**2
-			yieldErrTable[histoPrefix]['ddbkg']  += hddbkg[isEM].GetBinError(ibin)**2
-			yieldErrTable[histoPrefix]['ddbkgTTT']  += hddbkgTTT[isEM].GetBinError(ibin)**2
-
-			yieldErrTable[histoPrefix]['ddbkgTTL']  += hddbkgTTL[isEM].GetBinError(ibin)**2
-			yieldErrTable[histoPrefix]['ddbkgTLT']  += hddbkgTLT[isEM].GetBinError(ibin)**2
-			yieldErrTable[histoPrefix]['ddbkgLTT']  += hddbkgLTT[isEM].GetBinError(ibin)**2
-
-			yieldErrTable[histoPrefix]['ddbkgTLL']  += hddbkgTLL[isEM].GetBinError(ibin)**2
-			yieldErrTable[histoPrefix]['ddbkgLTL']  += hddbkgLTL[isEM].GetBinError(ibin)**2
-			yieldErrTable[histoPrefix]['ddbkgLLT']  += hddbkgLLT[isEM].GetBinError(ibin)**2
-
-			yieldErrTable[histoPrefix]['ddbkgLLL']  += hddbkgLLL[isEM].GetBinError(ibin)**2
+# 			yieldErrTable[histoPrefix]['ddbkg']  += hddbkg[isEM].GetBinError(ibin)**2
+# 			yieldErrTable[histoPrefix]['ddbkgTTT']  += hddbkgTTT[isEM].GetBinError(ibin)**2
+# 
+# 			yieldErrTable[histoPrefix]['ddbkgTTL']  += hddbkgTTL[isEM].GetBinError(ibin)**2
+# 			yieldErrTable[histoPrefix]['ddbkgTLT']  += hddbkgTLT[isEM].GetBinError(ibin)**2
+# 			yieldErrTable[histoPrefix]['ddbkgLTT']  += hddbkgLTT[isEM].GetBinError(ibin)**2
+# 
+# 			yieldErrTable[histoPrefix]['ddbkgTLL']  += hddbkgTLL[isEM].GetBinError(ibin)**2
+# 			yieldErrTable[histoPrefix]['ddbkgLTL']  += hddbkgLTL[isEM].GetBinError(ibin)**2
+# 			yieldErrTable[histoPrefix]['ddbkgLLT']  += hddbkgLLT[isEM].GetBinError(ibin)**2
+# 
+# 			yieldErrTable[histoPrefix]['ddbkgLLL']  += hddbkgLLL[isEM].GetBinError(ibin)**2
 			for signal in sigList.keys(): yieldErrTable[histoPrefix][signal] += hsig[isEM+signal].GetBinError(ibin)**2
 			for signal in signals: yieldErrTable[histoPrefix][signal] += hsig[isEM+signal].GetBinError(ibin)**2
 			
@@ -683,24 +699,24 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 		if hwz[isEM].Integral() > 0   : hwz[isEM].Write()
 		if hzz[isEM].Integral() > 0   : hzz[isEM].Write()
 		if hvvv[isEM].Integral() > 0  : hvvv[isEM].Write()
-		if hddbkg[isEM].Integral() > 0: 
-			hddbkg[isEM].Write()
-			if doAllSys:
-				for systematic in systematicList:
-					if systematic!='PR' and systematic!='FR': continue
-					hddbkg[isEM+systematic+'Up'].Write()
-					hddbkg[isEM+systematic+'Down'].Write()
-		hddbkgTTT[isEM].Write()
-
-		hddbkgTTL[isEM].Write()
-		hddbkgTLT[isEM].Write()
-		hddbkgLTT[isEM].Write()
-
-		hddbkgTLL[isEM].Write()
-		hddbkgLTL[isEM].Write()
-		hddbkgLLT[isEM].Write()
-
-		hddbkgLLL[isEM].Write()
+# 		if hddbkg[isEM].Integral() > 0: 
+# 			hddbkg[isEM].Write()
+# 			if doAllSys:
+# 				for systematic in systematicList:
+# 					if systematic!='PR' and systematic!='FR': continue
+# 					hddbkg[isEM+systematic+'Up'].Write()
+# 					hddbkg[isEM+systematic+'Down'].Write()
+# 		hddbkgTTT[isEM].Write()
+# 
+# 		hddbkgTTL[isEM].Write()
+# 		hddbkgTLT[isEM].Write()
+# 		hddbkgLTT[isEM].Write()
+# 
+# 		hddbkgTLL[isEM].Write()
+# 		hddbkgLTL[isEM].Write()
+# 		hddbkgLLT[isEM].Write()
+# 
+# 		hddbkgLLL[isEM].Write()
 
 	outputRfile.Close()
 
@@ -740,18 +756,18 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 	print 'ewk'.ljust(ljust_i),
 	print 'top'.ljust(ljust_i),
 # 	print 'qcd'.ljust(ljust_i),
-	print 'ddbkg'.ljust(ljust_i),
-	print 'ddbkgTTT'.ljust(ljust_i),
-
-	print 'ddbkgTTL'.ljust(ljust_i),
-	print 'ddbkgTLT'.ljust(ljust_i),
-	print 'ddbkgLTT'.ljust(ljust_i),
-
-	print 'ddbkgTLL'.ljust(ljust_i),
-	print 'ddbkgLTL'.ljust(ljust_i),
-	print 'ddbkgLLT'.ljust(ljust_i),
-
-	print 'ddbkgLLL'.ljust(ljust_i),
+# 	print 'ddbkg'.ljust(ljust_i),
+# 	print 'ddbkgTTT'.ljust(ljust_i),
+# 
+# 	print 'ddbkgTTL'.ljust(ljust_i),
+# 	print 'ddbkgTLT'.ljust(ljust_i),
+# 	print 'ddbkgLTT'.ljust(ljust_i),
+# 
+# 	print 'ddbkgTLL'.ljust(ljust_i),
+# 	print 'ddbkgLTL'.ljust(ljust_i),
+# 	print 'ddbkgLLT'.ljust(ljust_i),
+# 
+# 	print 'ddbkgLLL'.ljust(ljust_i),
 	print 'data'.ljust(ljust_i),
 	print
 	for isEM in isEMlist:
@@ -760,18 +776,18 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 		print str(yieldTable[histoPrefix]['ewk']).ljust(ljust_i),
 		print str(yieldTable[histoPrefix]['top']).ljust(ljust_i),
 # 		print str(yieldTable[histoPrefix]['qcd']).ljust(ljust_i),
-		print str(yieldTable[histoPrefix]['ddbkg']).ljust(ljust_i),
-		print str(yieldTable[histoPrefix]['ddbkgTTT']).ljust(ljust_i),
-
-		print str(yieldTable[histoPrefix]['ddbkgTTL']).ljust(ljust_i),
-		print str(yieldTable[histoPrefix]['ddbkgTLT']).ljust(ljust_i),
-		print str(yieldTable[histoPrefix]['ddbkgLTT']).ljust(ljust_i),
-
-		print str(yieldTable[histoPrefix]['ddbkgTLL']).ljust(ljust_i),
-		print str(yieldTable[histoPrefix]['ddbkgLTL']).ljust(ljust_i),
-		print str(yieldTable[histoPrefix]['ddbkgLLT']).ljust(ljust_i),
-
-		print str(yieldTable[histoPrefix]['ddbkgLLL']).ljust(ljust_i),
+# 		print str(yieldTable[histoPrefix]['ddbkg']).ljust(ljust_i),
+# 		print str(yieldTable[histoPrefix]['ddbkgTTT']).ljust(ljust_i),
+# 
+# 		print str(yieldTable[histoPrefix]['ddbkgTTL']).ljust(ljust_i),
+# 		print str(yieldTable[histoPrefix]['ddbkgTLT']).ljust(ljust_i),
+# 		print str(yieldTable[histoPrefix]['ddbkgLTT']).ljust(ljust_i),
+# 
+# 		print str(yieldTable[histoPrefix]['ddbkgTLL']).ljust(ljust_i),
+# 		print str(yieldTable[histoPrefix]['ddbkgLTL']).ljust(ljust_i),
+# 		print str(yieldTable[histoPrefix]['ddbkgLLT']).ljust(ljust_i),
+# 
+# 		print str(yieldTable[histoPrefix]['ddbkgLLL']).ljust(ljust_i),
 		print str(yieldTable[histoPrefix]['data']).ljust(ljust_i),
 		print
 
@@ -782,18 +798,18 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 		print str(math.sqrt(yieldErrTable[histoPrefix]['ewk'])).ljust(ljust_i),
 		print str(math.sqrt(yieldErrTable[histoPrefix]['top'])).ljust(ljust_i),
 # 		print str(math.sqrt(yieldErrTable[histoPrefix]['qcd'])).ljust(ljust_i),
-		print str(math.sqrt(yieldErrTable[histoPrefix]['ddbkg'])).ljust(ljust_i),
-		print str(math.sqrt(yieldErrTable[histoPrefix]['ddbkgTTT'])).ljust(ljust_i),
-
-		print str(math.sqrt(yieldErrTable[histoPrefix]['ddbkgTTL'])).ljust(ljust_i),
-		print str(math.sqrt(yieldErrTable[histoPrefix]['ddbkgTLT'])).ljust(ljust_i),
-		print str(math.sqrt(yieldErrTable[histoPrefix]['ddbkgLTT'])).ljust(ljust_i),
-
-		print str(math.sqrt(yieldErrTable[histoPrefix]['ddbkgTLL'])).ljust(ljust_i),
-		print str(math.sqrt(yieldErrTable[histoPrefix]['ddbkgLTL'])).ljust(ljust_i),
-		print str(math.sqrt(yieldErrTable[histoPrefix]['ddbkgLLT'])).ljust(ljust_i),
-
-		print str(math.sqrt(yieldErrTable[histoPrefix]['ddbkgLLL'])).ljust(ljust_i),
+# 		print str(math.sqrt(yieldErrTable[histoPrefix]['ddbkg'])).ljust(ljust_i),
+# 		print str(math.sqrt(yieldErrTable[histoPrefix]['ddbkgTTT'])).ljust(ljust_i),
+# 
+# 		print str(math.sqrt(yieldErrTable[histoPrefix]['ddbkgTTL'])).ljust(ljust_i),
+# 		print str(math.sqrt(yieldErrTable[histoPrefix]['ddbkgTLT'])).ljust(ljust_i),
+# 		print str(math.sqrt(yieldErrTable[histoPrefix]['ddbkgLTT'])).ljust(ljust_i),
+# 
+# 		print str(math.sqrt(yieldErrTable[histoPrefix]['ddbkgTLL'])).ljust(ljust_i),
+# 		print str(math.sqrt(yieldErrTable[histoPrefix]['ddbkgLTL'])).ljust(ljust_i),
+# 		print str(math.sqrt(yieldErrTable[histoPrefix]['ddbkgLLT'])).ljust(ljust_i),
+# 
+# 		print str(math.sqrt(yieldErrTable[histoPrefix]['ddbkgLLL'])).ljust(ljust_i),
 		print str(math.sqrt(yieldErrTable[histoPrefix]['data'])).ljust(ljust_i),
 		print
 
@@ -848,7 +864,8 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 # 	for process in bkgStackList+['ewk','top','qcd','ddbkg','ddbkgTTT','ddbkgTTL','ddbkgTLL','ddbkgLLL','totBkg','data','dataOverBkg']+signals+signalList:
 # 	for process in bkgStackList+['ewk','top','ddbkg','ddbkgTTT','ddbkgTTL','ddbkgTLL','ddbkgLLL','totBkg','data','dataOverBkg']+signals+signalList:
 # 	for process in bkgStackList+['ewk','top','ddbkg','ddbkgTTT','ddbkgTTL','ddbkgTLT','ddbkgLTT','ddbkgTLL','ddbkgLTL','ddbkgLLT','ddbkgLLL','totBkg','data','dataOverBkg']+signals+signalList:
-	for process in bkgStackList+['WJets','ZJets','VVV','ewk','TTJets','TTV','top','ddbkg','ddbkgTTT','ddbkgTTL','ddbkgTLT','ddbkgLTT','ddbkgTLL','ddbkgLTL','ddbkgLLT','ddbkgLLL','totBkg','data','dataOverBkg']+signals+signalList:
+# 	for process in bkgStackList+['WJets','ZJets','VVV','ewk','TTJets','TTV','top','ddbkg','ddbkgTTT','ddbkgTTL','ddbkgTLT','ddbkgLTT','ddbkgTLL','ddbkgLTL','ddbkgLLT','ddbkgLLL','totBkg','data','dataOverBkg']+signals+signalList:
+	for process in bkgStackList+['WJets','ZJets','VVV','ewk','TTJets','TTV','top','totBkg','data','dataOverBkg']+signals+signalList:
 		print process.ljust(ljust_i),
 		for isEM in isEMlist:
 			histoPrefix=discriminant+'_'+lumiStr+'fb_'+isEM

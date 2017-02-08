@@ -28,7 +28,12 @@ lumiStr = str(targetlumi/1000).replace('.','p') # 1/fb
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_HLTupdate_2017_1_11_rizki_PRv5test_FRv15b_26Jan2017_lepPt30_step1hadds_step2/nominal'
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv17b_2Feb2017_step1hadds_step2/nominal'
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv18b_3Feb2017_step1hadds_step2/nominal'
-step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv18b_6Feb2017_step1hadds_step2/nominal'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv18b_6Feb2017_step1hadds_step2/nominal'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv18bSys_6Feb2017_step1hadds_step2/nominal'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv19test_7Feb2017_step1hadds_step2/nominal'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv7test_FRv18bSys_7Feb2017_step1hadds_step2/nominal'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv19testV2_7Feb2017_step1hadds_step2/nominal'
+step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv8test_FRv18bSys_7Feb2017_step1hadds_step2/nominal'
 
 print 'grabbing files from ', step1Dir
 """
@@ -57,7 +62,7 @@ cutList = {'isPassTrig': 0,
 		   'njetsCut': 3, #
 		   'nbjetsCut':1, #3, #
 		   'drCut':0, #1.0, #
-	   	   'stCut':0,
+	   	   'stCut':600,
 	   	   'mllOSCut':20,
 		   }
 
@@ -65,7 +70,7 @@ if len(sys.argv)>3: catList=[str(sys.argv[3])]
 else: catList=['EEE','EEM','EMM','MMM','All']
 
 scaleSignalXsecTo1pb = False # this has to be "True" if you are making templates for limit calculation!!!!!!!!
-doAllSys= True
+doAllSys= False
 
 cutString = 'isPassTrig_All'+str(int(cutList['isPassTrig']))+'_'+'dilep'+str(int(cutList['isPassTrig_dilep']))+'_'+'dilepAnth'+str(int(cutList['isPassTrig_dilep_anth']))+'_'+'trilep'+str(int(cutList['isPassTrig_trilep']))+'_'+'isPassTrilepton'+str(int(cutList['isPassTrilepton']))+'_lep1Pt'+str(int(cutList['lep1PtCut']))+'_NJets'+str(int(cutList['njetsCut']))+'_NBJets'+str(int(cutList['nbjetsCut']))+'_DR'+str(int(cutList['drCut']))+'_ST'+str(int(cutList['stCut']))+'_MllOS'+str(int(cutList['mllOSCut']))
 # cutString = 'isPassTrig'+str(int(cutList['isPassTrig']))+'_'+'isPassTrig_dilep'+str(int(cutList['isPassTrig_dilep']))+'_'+'isPassTrig_dilepHT'+str(int(cutList['isPassTrig_dilepHT']))+'_'+'isPassTrig_trilep'+str(int(cutList['isPassTrig_trilep']))+'_'+'isPassTrilepton'+str(int(cutList['isPassTrilepton']))+'_'+'lep'+str(int(cutList['lepPtCut']))+'_NJets'+str(int(cutList['njetsCut']))+'_NBJets'+str(int(cutList['nbjetsCut']))+'_DR'+str(int(cutList['drCut']))+'_ST'+str(int(cutList['stCut']))
@@ -129,12 +134,19 @@ timestr='%i_%i_%i'%(cTime.hour,cTime.minute,cTime.second)
 
 # pfix = 'kinematics_80x_MultiLep_Full2016_Moriond17_FRv17b_PRv6_step2_moreThan2Jets_1bjet_AllSYS'
 
-pfix = 'kinematics_80x_MultiLep_Full2016_Moriond17_FRv18b_PRv6_step2_moreThan2Jets_1bjet_AllSYS'
+# pfix = 'kinematics_80x_MultiLep_Full2016_Moriond17_FRv18b_PRv6_step2_moreThan2Jets_1bjet_AllSYS'
 
 # pfix = 'kinematics_80x_MultiLep_Full2016_Moriond17_FRv18b_PRv6_step2_exactly2Jets_1bjet_AllSYS'
 # 
 # pfix = 'kinematics_80x_Exactly3Lep_Full2016_Moriond17_FRv18b_PRv6_step2_exactly2Jets_1bjet_AllSYS'
 
+# pfix = 'kinematics_80x_MultiLep_Full2016_Moriond17_FRv19test_PRv6_step2_moreThan2Jets_1bjet_muFRetaDependence_noSYS_ST600'
+
+# pfix = 'kinematics_80x_MultiLep_Full2016_Moriond17_FRv18bSys_PRv7test_step2_moreThan2Jets_1bjet_noSYS_ST600'
+
+# pfix = 'kinematics_80x_MultiLep_Full2016_Moriond17_FRv19testV2_PRv6_step2_moreThan2Jets_1bjet_muFRetaDependence_noSYS_ST600'
+
+pfix = 'kinematics_80x_MultiLep_Full2016_Moriond17_FRv18bSys_PRv8test_step2_moreThan2Jets_1bjet_noSYS_ST600'
 
 pfix+='_'+datestr
 

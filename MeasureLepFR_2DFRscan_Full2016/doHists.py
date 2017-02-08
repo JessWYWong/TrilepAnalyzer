@@ -21,7 +21,9 @@ lumiStr = str(targetlumi/1000).replace('.','p') # 1/fb
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_HLTupdate_2017_1_11_rizki_PRv4_FRv14a_muMinIso0p1_20Jan2017_step1hadds_step2/nominal/'
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_HLTupdate_2017_1_11_rizki_PRv4_FRv15_20Jan2017_updatedbtagWP_step1hadds_step2/nominal/'
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_HLTupdate_2017_1_11_rizki_PRv5test_FRv15b_26Jan2017_lepPt30_step1hadds_step2/nominal/'
-step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv17b_2Feb2017_step1hadds_step2/nominal/'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv17b_2Feb2017_step1hadds_step2/nominal/'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv7test_FRv18bSys_7Feb2017_step1hadds_step2/nominal'
+step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv8test_FRv18bSys_7Feb2017_step1hadds_step2/nominal'
 
 print 'grabbing files from ', step1Dir
 """
@@ -74,7 +76,10 @@ timestr='%i_%i_%i'%(cTime.hour,cTime.minute,cTime.second)
 # pfix='kinematics_80x_Exactly3Lep_ddbkgscan_step2_exactly2Jets_2DFRscan_PRv4_muMinIso0p1_Full2016_20Jan2017_updatedbtagWP_1bjet_eta1p2to2p1'
 # pfix='kinematics_80x_Exactly3Lep_ddbkgscan_step2_exactly2Jets_2DFRscan_PRv4_muMinIso0p1_Full2016_20Jan2017_updatedbtagWP_1bjet_eta2p1to2p4'
 # pfix='kinematics_80x_Exactly3Lep_ddbkgscan_step2_2Feb2017_exactly2Jets_PRv6_1bjet'
-pfix='kinematics_80x_Exactly3Lep_ddbkgscan_step2_2Feb2017_exactly1Jet_PRv6_1bjet'
+# pfix='kinematics_80x_Exactly3Lep_ddbkgscan_step2_2Feb2017_exactly1Jet_PRv6_1bjet'
+# pfix='kinematics_80x_Exactly3Lep_ddbkgscan_step2_7Feb2017_exactly2Jets_PRv7test_1bjet'
+pfix='kinematics_80x_Exactly3Lep_ddbkgscan_step2_7Feb2017_exactly2Jets_PRv8test_1bjet'
+pfix=''
 
 pfix+='_'+datestr
 

@@ -33,43 +33,40 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 	cut = '1'
 	cut += ' && (AllLeptonPt_PtOrdered[0] >= '+str(cutList['lep1PtCut'])+')'
 	cut += ' && (corr_met_singleLepCalc >= '+str(cutList['metCut'])+')'
-# 	cut += ' && (theJetPt_JetSubCalc_PtOrdered[0] > '+str(cutList['leadJetPtCut'])+')'
-# 	cut += ' && (theJetPt_JetSubCalc_PtOrdered[1] > '+str(cutList['subLeadJetPtCut'])+')'
-# 	cut += ' && (theJetPt_JetSubCalc_PtOrdered[2] > '+str(cutList['thirdJetPtCut'])+')'
-# 	cut += ' && (NJetsHtagged == 0)'
-#	cut += ' && ('+wtagvar+' == 0)'
-#  	cut += ' && (deltaR_lepClosestJet[0] > 0.4 || PtRelLepClosestJet[0] > 40)'
-#  	cut += ' && (deltaR_lepClosestJet[1] > 0.4 || PtRelLepClosestJet[1] > 40)'
-#  	cut += ' && (deltaR_lepClosestJet[2] > 0.4 || PtRelLepClosestJet[2] > 40)'
-# 	cut += ' && (NJets_JetSubCalc >= '+str(cutList['njetsCut'])+')'
-	cut += ' && (NJets_JetSubCalc == 1 || NJets_JetSubCalc == '+str(cutList['njetsCut'])+')'
-#	cut += ' && (('+wtagvar+' > 0 && NJets_JetSubCalc >= '+str(cutList['njetsCut'])+') || ('+wtagvar+' == 0 && NJets_JetSubCalc >= '+str(cutList['njetsCut']+1)+'))'
-	cut += ' && (NJetsCSVwithSF_JetSubCalc >= '+str(cutList['nbjetsCut'])+')'
-# 	cut += ' && (NJetsCSVwithSF_JetSubCalc_noLepCorr >= '+str(cutList['nbjetsCut'])+')'
-#	cut += ' && DataPastTrigger == 1 && MCPastTrigger == 1'
-# 	if 'Data' in process: cut += ' && DataPastTrigger == 1'
-# 	else: cut += ' && MCPastTrigger == 1'
+	
+	cut += ' && (NJets_singleLepCalc >= '+str(cutList['njetsCut'])+')'
+# 	cut += ' && (NJets_singleLepCalc == '+str(cutList['njetsCut'])+')'
+
+	cut += ' && (NJetsBTagwithSF_singleLepCalc >= '+str(cutList['nbjetsCut'])+')'
+
 	if ('Data' in process and 'Bkg' not in process): 
-		if cutList['isPassTrig']==1:        cut += ' && DataPastTrigger == 1'
-		if cutList['isPassTrig_dilep']==1:  cut += ' && DataPastTrigger_dilep == 1'
-		if cutList['isPassTrig_dilep_anth']==1:cut += ' && DataPastTrigger_dilep_anth == 1'
-		if cutList['isPassTrig_trilep']==1: cut += ' && DataPastTrigger_trilep == 1'
-		if cutList['isPassTrilepton']==1 :  cut += ' && isPassTrilepton == 1'
+		if 'PRH' in process: #for runH use DZ version of HLT
+			if cutList['isPassTrig_dilep']==1:cut += ' && DataPastTrigger_dilepDZ4runH == 1'
+			if cutList['isPassTrilepton']==1 :  cut += ' && isPassTrilepton == 1'
+		else:
+			if cutList['isPassTrig']==1:        cut += ' && DataPastTrigger == 1'
+			if cutList['isPassTrig_dilep']==1:  cut += ' && DataPastTrigger_dilep == 1'
+			if cutList['isPassTrig_dilep_anth']==1:cut += ' && DataPastTrigger_dilep_anth == 1'
+			if cutList['isPassTrig_trilep']==1: cut += ' && DataPastTrigger_trilep == 1'
+			if cutList['isPassTrilepton']==1 :  cut += ' && isPassTrilepton == 1'
 	elif ('DataDrivenBkg' in process): 
-		if cutList['isPassTrig']==1:        cut += ' && DataPastTrigger == 1'
-		if cutList['isPassTrig_dilep']==1:  cut += ' && DataPastTrigger_dilep == 1'
-		if cutList['isPassTrig_dilep_anth']==1:cut += ' && DataPastTrigger_dilep_anth == 1'
-		if cutList['isPassTrig_trilep']==1: cut += ' && DataPastTrigger_trilep == 1'
+		if 'PRH' in process: #for runH use DZ version of HLT
+			if cutList['isPassTrig_dilep']==1:cut += ' && DataPastTrigger_dilepDZ4runH == 1'
+		else:
+			if cutList['isPassTrig']==1:        cut += ' && DataPastTrigger == 1'
+			if cutList['isPassTrig_dilep']==1:  cut += ' && DataPastTrigger_dilep == 1'
+			if cutList['isPassTrig_dilep_anth']==1:cut += ' && DataPastTrigger_dilep_anth == 1'
+			if cutList['isPassTrig_trilep']==1: cut += ' && DataPastTrigger_trilep == 1'
 	elif ('Data' not in process): 
 		if cutList['isPassTrig']==1:        cut += ' && MCPastTrigger == 1'
 		if cutList['isPassTrig_dilep']==1:  cut += ' && MCPastTrigger_dilep == 1'
 		if cutList['isPassTrig_dilep_anth']==1:cut += ' && MCPastTrigger_dilep_anth == 1'
 		if cutList['isPassTrig_trilep']==1: cut += ' && MCPastTrigger_trilep == 1'
 		if cutList['isPassTrilepton']==1 :  cut += ' && isPassTrilepton == 1'	
-# 	cut += ' && (deltaR_lepJets[1] >= '+str(cutList['drCut'])+')'
  	cut += ' && (AK4HTpMETpLepPt >= '+str(cutList['stCut'])+')'
 
- 	cut += ' && AllLeptonCount_PtOrdered == 3' #require exactly 3 leptons
+#  	cut += ' && AllLeptonCount_PtOrdered == 3' #require exactly 3 leptons
+#  	cut += ' && AllLeptonCount_PtOrdered > 3' #require more than 3 leptons
 
 # 	cut += ' && Mll_sameFlavorOS > '+str(cutList['mllOSCut']) #to make sure the OS pair are same sign cut above 0. 
 
@@ -355,17 +352,24 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 # 			tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+'jsfUp_'     +lumiStr+'fb_'+category+'_'+process, weightjsfUpStr+'*('+cut+isLepCut+')', 'GOFF')
 # 			tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+'jsfDown_'   +lumiStr+'fb_'+category+'_'+process, weightjsfDownStr+'*('+cut+isLepCut+')', 'GOFF')
 			
+			# replace cuts for shifts
+			nbtagLJMETname = 'NJetsBTagwithSF_singleLepCalc'
+			cut_btagUp = cut.replace(nbtagLJMETname,'NJetsBTagwithSF_singleLepCalc_shifts[0]')#nbtagLJMETname+'_shifts[0]')
+			cut_btagDn = cut.replace(nbtagLJMETname,'NJetsBTagwithSF_singleLepCalc_shifts[1]')#nbtagLJMETname+'_shifts[1]')
+			cut_mistagUp = cut.replace(nbtagLJMETname,'NJetsBTagwithSF_singleLepCalc_shifts[2]')#nbtagLJMETname+'_shifts[2]')
+			cut_mistagDn = cut.replace(nbtagLJMETname,'NJetsBTagwithSF_singleLepCalc_shifts[3]')#nbtagLJMETname+'_shifts[3]')
+			
 			bTagSFshiftName = discriminantLJMETName
-			if 'NJetsCSV' in discriminantLJMETName: 
+			if 'NJetsBTag' in discriminantLJMETName: 
 				bTagSFshiftName = discriminantLJMETName+'_shifts[0]'
 			print 'BTAGup LJMET NAME',bTagSFshiftName.replace('_shifts[0]','_shifts[0]')
-			tTree[process].Draw(bTagSFshiftName.replace('_shifts[0]','_shifts[0]')+' >> '+discriminantName+'btagUp'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut+isLepCut+')', 'GOFF')
+			tTree[process].Draw(bTagSFshiftName.replace('_shifts[0]','_shifts[0]')+' >> '+discriminantName+'btagUp'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut_btagUp+isLepCut+')', 'GOFF')
 			print 'BTAGdn LJMET NAME',bTagSFshiftName.replace('_shifts[0]','_shifts[1]')
-			tTree[process].Draw(bTagSFshiftName.replace('_shifts[0]','_shifts[1]')+' >> '+discriminantName+'btagDown'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut+isLepCut+')', 'GOFF')
+			tTree[process].Draw(bTagSFshiftName.replace('_shifts[0]','_shifts[1]')+' >> '+discriminantName+'btagDown'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut_btagDn+isLepCut+')', 'GOFF')
 			print 'MISTAGup LJMET NAME',bTagSFshiftName.replace('_shifts[0]','_shifts[2]')
-			tTree[process].Draw(bTagSFshiftName.replace('_shifts[0]','_shifts[2]')+' >> '+discriminantName+'mistagUp'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut+isLepCut+')', 'GOFF')
+			tTree[process].Draw(bTagSFshiftName.replace('_shifts[0]','_shifts[2]')+' >> '+discriminantName+'mistagUp'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut_mistagUp+isLepCut+')', 'GOFF')
 			print 'MISTAGdn LJMET NAME',bTagSFshiftName.replace('_shifts[0]','_shifts[3]')
-			tTree[process].Draw(bTagSFshiftName.replace('_shifts[0]','_shifts[3]')+' >> '+discriminantName+'mistagDown'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut+isLepCut+')', 'GOFF')
+			tTree[process].Draw(bTagSFshiftName.replace('_shifts[0]','_shifts[3]')+' >> '+discriminantName+'mistagDown'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut_mistagDn+isLepCut+')', 'GOFF')
 
 
 # 			JMRName = discriminantLJMETName
@@ -429,13 +433,13 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 # 			if 'WJetTaggedPt' in discriminantLJMETName: TAUName = discriminantLJMETName.replace('WJetTaggedPt','WJetTaggedPtTAUdn')
 # 			print 'TAUdn LJMET NAME',TAUName
 # 			tTree[process].Draw(TAUName+' >> '+discriminantName+'tau21Down'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut+isLepCut+')', 'GOFF')		
-
-# 			if tTree[process+'jecUp']:
-# 				tTree[process+'jecUp'].Draw(discriminantLJMETName   +' >> '+discriminantName+'jecUp'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut+isLepCut+')', 'GOFF')
-# 				tTree[process+'jecDown'].Draw(discriminantLJMETName +' >> '+discriminantName+'jecDown'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut+isLepCut+')', 'GOFF')
-# 			if tTree[process+'jerUp']:
-# 				tTree[process+'jerUp'].Draw(discriminantLJMETName   +' >> '+discriminantName+'jerUp'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut+isLepCut+')', 'GOFF')
-# 				tTree[process+'jerDown'].Draw(discriminantLJMETName +' >> '+discriminantName+'jerDown'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut+isLepCut+')', 'GOFF')
+# 			if 'DataDriven' not in process:
+# 				if tTree[process+'jecUp']:
+# 					tTree[process+'jecUp'].Draw(discriminantLJMETName   +' >> '+discriminantName+'jecUp'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut+isLepCut+')', 'GOFF')
+# 					tTree[process+'jecDown'].Draw(discriminantLJMETName +' >> '+discriminantName+'jecDown'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut+isLepCut+')', 'GOFF')
+# 				if tTree[process+'jerUp']:
+# 					tTree[process+'jerUp'].Draw(discriminantLJMETName   +' >> '+discriminantName+'jerUp'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut+isLepCut+')', 'GOFF')
+# 					tTree[process+'jerDown'].Draw(discriminantLJMETName +' >> '+discriminantName+'jerDown'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut+isLepCut+')', 'GOFF')
 
 # # 			if tTree[process+'btagUp']:
 # # 				tTree[process+'btagUp'].Draw(discriminantLJMETName  +' >> '+discriminantName+'btagUp'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut+isLepCut+')', 'GOFF')

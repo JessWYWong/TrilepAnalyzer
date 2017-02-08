@@ -64,7 +64,8 @@ cutString = 'lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20'
 # templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_2017_1_23/'+cutString+'/'
 
 # templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_3Feb2017_step2_2017_2_3/'+cutString+'/'
-templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_6Feb2017_step2_2017_2_6/'+cutString+'/'
+# templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_6Feb2017_step2_2017_2_6/'+cutString+'/'
+templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_6Feb2017_step2_2017_2_7/'+cutString+'/'
 
 
 tempsig='templates_'+discriminant+'_'+sig1+'_'+lumiInTemplates+'fb'+isRebinned+'.root'	

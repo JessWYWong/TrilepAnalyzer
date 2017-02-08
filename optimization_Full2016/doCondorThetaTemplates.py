@@ -25,7 +25,8 @@ time='%i_%i_%i'%(cTime.hour,cTime.minute,cTime.second)
 # pfix='optimization_condor_80x_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_26Jan2017_moreThan2Jets_lepPt30'
 # pfix='optimization_condor_80x_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_26Jan2017_moreThan2Jets_lepPt30_testing'
 # pfix='optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_3Feb2017_step2'
-pfix='optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_6Feb2017_step2'
+# pfix='optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_6Feb2017_step2'
+pfix='optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_6Feb2017_step2'
 
 pfix+='_'+date#+'_'+time
 

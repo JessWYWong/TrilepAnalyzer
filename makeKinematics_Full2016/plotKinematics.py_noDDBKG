@@ -7,7 +7,8 @@ from weights import *
 gROOT.SetBatch(1)
 start_time = time.time()
 
-lumi=12.9 #for plots
+# lumi=12.9 #for plots
+lumi=36.8 #for plots
 
 # templateDir='/user_data/rsyarif/kinematics_80x_Exactly3Lep_no2Dcut_noMllOScut_dilepTrigReady_noDDBKG_2016_9_21/isPassTrig_All0_dilep1_dilepAnth0_trilep0_isPassTrilepton1_lep1Pt0_NJets2_NBJets0_DR0_ST0_MllOS0/'
 
@@ -27,7 +28,7 @@ lumi=12.9 #for plots
 
 # templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_noDDBKG_v2_noNjetCut_2016_10_18/'
 
-templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_noDDBKG_v2_moreThan2Jets_2016_10_18/'
+# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_noDDBKG_v2_moreThan2Jets_2016_10_18/'
 
 # templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_noDDBKG_v2_exactly2Jets_2016_10_18/'
 
@@ -39,7 +40,12 @@ templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepT
 
 # templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_noDDBKG_v2_1or2Jets_2016_10_21/'
 
-lumiInTemplates='12p9'
+# templateDir='/user_data/rsyarif/kinematics_80x_MultiLep_Full2016_Moriond17_noSYS_noDDBKG_2017_2_7'
+
+templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_Moriond17_noSYS_noDDBKG_2017_2_7'
+
+
+lumiInTemplates='36p814'
 
 sig='ttm800' # choose the 1st signal to plot
 sigleg='TT(0.8 TeV)'
@@ -50,8 +56,8 @@ siglegM1200='TT(1.2 TeV)'
 scaleSignals = True
 
 # scaleFact1 = 300
-scaleFact1 = 10
-scaleFact2 = 100
+scaleFact1 = 100
+scaleFact2 = 1000
 if 'Final' in templateDir: scaleFact1 = 40
 
 # systematicList = ['pileup','jec','jer','jsf','jmr','jms','btag','tau21','pdfNew','muRFcorrdNew','toppt','PR','FR']

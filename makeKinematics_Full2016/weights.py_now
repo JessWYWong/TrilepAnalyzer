@@ -17,7 +17,8 @@ BR['TTTHTH'] = BR['TH']*BR['TH']
 nRun={}
 
 nRun['DY10to50'] = 29386500. # from 40381400. # calculated using WeightAnalyzer.
-nRun['DY50'] = 19403300. # from 28968300. # calculated using WeightAnalyzer.
+#nRun['DY50'] = 19403300. # from 28968300. # calculated using WeightAnalyzer.
+nRun['DY50'] = 16912500. # from 25249500. # calculated using WeightAnalyzer few jobs failed!.
 nRun['WJets'] = 16183300. # from 23662100. # calculated using WeightAnalyzer.
 
 nRun['TTJetsPH'] = 155119000. # calculated using WeightAnalyzer.
@@ -30,7 +31,7 @@ nRun['TTJetsPH700mtt'] = nRun['TTJetsPH']*0.0921 + 3877762.
 nRun['TTJetsPH1000mtt'] = nRun['TTJetsPH']*0.02474 + 2360497.
 # numbers not updated to 80x ! - end
 
-nRun['WW'] = 993214. # calculated using WeightAnalyzer.
+nRun['WW'] = 6987120. # calculated using WeightAnalyzer.
 nRun['WZ'] = 1993200. #WZTo3LNu # calculated using WeightAnalyzer.
 nRun['ZZ'] = 6669990. #ZZTo4L # calculated using WeightAnalyzer.
 nRun['WWW'] = 210538. #out of 240000 - # calculated using WeightAnalyzer. 

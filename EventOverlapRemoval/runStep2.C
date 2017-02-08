@@ -85,17 +85,24 @@ void runStep2(){
 //   inputDir="LJMet80x_3lepTT_Full2016_HLTupdate_2017_1_11_rizki_PRv5test_FRv15b_26Jan2017_lepPt30_step1hadds";
 //   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv17b_2Feb2017_step1hadds";
 //   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv18b_3Feb2017_step1hadds";
-  inputDir="LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv18b_6Feb2017_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv18b_6Feb2017_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv18bSys_6Feb2017_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv18bSys_6Feb2017_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv19test_6Feb2017_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv7test_FRv18bSys_7Feb2017_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv19test_7Feb2017_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv19testV2_7Feb2017_step1hadds";
+  inputDir="LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv8test_FRv18bSys_7Feb2017_step1hadds";
 
   subDir="nominal";
 
   outputDir=inputDir+"_step2";
   
   //copy input to output folder
-  system("cp -r "+bruxDir+"/"+inputDir+" "+bruxDir+"/"+outputDir);
+//   system("cp -r "+bruxDir+"/"+inputDir+" "+bruxDir+"/"+outputDir);
   
   //create folder to save original overlapping datasets
-  system("mkdir -pv "+bruxDir+"/"+outputDir+"/"+subDir+"/overlappingSets");
+//   system("mkdir -pv "+bruxDir+"/"+outputDir+"/"+subDir+"/overlappingSets");
     
   gSystem->AddIncludePath("-I$CMSSW_BASE/src/");
   
@@ -104,8 +111,8 @@ void runStep2(){
   	inputFile = bruxDir+"/"+inputDir+"/"+subDir+"/"+fileNames.at(i);
   	outputFile = bruxDir+"/"+outputDir+"/"+subDir+"/"+fileNames.at(i);
   	
-  	std::cout << "Moving original overlapping datasets to new folder:" << std::endl;
-  	system("mv -v "+bruxDir+"/"+outputDir+"/"+subDir+"/"+fileNames.at(i)+" "+bruxDir+"/"+outputDir+"/"+subDir+"/overlappingSets/");
+//   	std::cout << "Moving original overlapping datasets to new folder:" << std::endl;
+//   	system("mv -v "+bruxDir+"/"+outputDir+"/"+subDir+"/"+fileNames.at(i)+" "+bruxDir+"/"+outputDir+"/"+subDir+"/overlappingSets/");
   	std::cout << "" << std::endl;
   	
   	step2 t(inputFile,outputFile);
