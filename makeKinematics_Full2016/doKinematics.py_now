@@ -226,6 +226,12 @@ sigOverSqrtBkgList = [signal+'OverSqrtBkg' for signal in signals]
 # systematicList = ['pileup','btag','pdfNew','muR','muF','muRFcorrd','muRFcorrdNew','PR','FR']
 systematicList = ['pileup','btag','pdfNew','muR','muF','muRFcorrd','muRFcorrdNew','PR','FR','jec','jer']
 
+#how to incorporate this?
+ddbkgSystematics = {
+					'elPR':{'EEE':1.38,'EEM':1.12,'EMM':1.07,'MMM':1.00},
+					'muPR':{'EEE':1.00,'EEM':1.02,'EMM':1.04,'MMM':1.09},
+					'muFReta':{'EEE':1.00,'EEM':1.22,'EMM':1.11,'MMM':1.48}
+					}
 
 ###########################################################
 #################### NORMALIZATIONS #######################
@@ -238,6 +244,8 @@ lepIsoSys = math.sqrt(3.*0.01**2) #1% lepton isolation uncertainty ## NEED to ad
 topXsecSys = 0.0 #55 #5.5% top x-sec uncertainty
 ewkXsecSys = 0.0 #5 #5% ewk x-sec uncertainty
 qcdXsecSys = 0.0 #50 #50% qcd x-sec uncertainty
+
+
 corrdSys = math.sqrt(lumiSys**2+trigSys**2+lepIdSys**2+lepIsoSys**2)
 
 def round_sig(x,sig=2):

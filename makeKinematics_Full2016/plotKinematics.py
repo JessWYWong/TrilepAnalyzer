@@ -213,6 +213,14 @@ ewkXsecSys = 0.0 #5 #5% ewk x-sec uncertainty
 qcdXsecSys = 0.0 #50 #50% qcd x-sec uncertainty
 corrdSys = math.sqrt(lumiSys**2+trigSys**2+lepIdSys**2+lepIsoSys**2)
 
+
+#how to incorporate this?
+ddbkgSystematics = {
+					'elPR':{'EEE':0.38,'EEM':0.12,'EMM':0.07,'MMM':0.00,'All':.14},
+					'muPR':{'EEE':0.00,'EEM':0.02,'EMM':0.04,'MMM':0.09,'All':0.05},
+					'muFReta':{'EEE':0.00,'EEM':0.22,'EMM':0.11,'MMM':0.48,'All':.22}
+					}
+
 def getNormUnc(hist,ibin):
 	contentsquared = hist.GetBinContent(ibin)**2
 	error = corrdSys*corrdSys*contentsquared  #correlated uncertainties
@@ -220,6 +228,12 @@ def getNormUnc(hist,ibin):
 	if 'ewk' in hist.GetName(): error += ewkXsecSys*ewkXsecSys*contentsquared # cross section
 	if 'qcd' in hist.GetName(): error += qcdXsecSys*qcdXsecSys*contentsquared # cross section
 	return error
+
+def getDDBKGNormUnc(hist,ibin,cat):
+	contentsquared = hist.GetBinContent(ibin)**2
+	error = (ddbkgSystematics['elPR'][cat]**2 + ddbkgSystematics['muPR'][cat]**2 + ddbkgSystematics['muFReta'][cat]**2) * contentsquared  #correlated uncertainties
+	return error
+
 
 plotList = [#distribution name as defined in "doHists.py"
 	'NPV',
@@ -408,6 +422,8 @@ for discriminant in plotList:
 			try: errorNorm += getNormUnc(hEWKstatOnly,ibin)
 			except: pass
 			try: errorNorm += getNormUnc(hQCDstatOnly,ibin)
+			except: pass
+			try: errorNorm += getDDBKGNormUnc(hDDBKGstatOnly,ibin,isEM)
 			except: pass
 
 			if doAllSys:

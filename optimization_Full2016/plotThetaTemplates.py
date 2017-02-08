@@ -65,7 +65,8 @@ cutString = 'lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20'
 
 # templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_3Feb2017_step2_2017_2_3/'+cutString+'/'
 # templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_6Feb2017_step2_2017_2_6/'+cutString+'/'
-templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_6Feb2017_step2_2017_2_7/'+cutString+'/'
+# templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_6Feb2017_step2_2017_2_7/'+cutString+'/'
+templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_6Feb2017_newdbkgSys_step2_2017_2_8/'+cutString+'/'
 
 
 tempsig='templates_'+discriminant+'_'+sig1+'_'+lumiInTemplates+'fb'+isRebinned+'.root'	
@@ -84,6 +85,12 @@ lepIsoSys = math.sqrt(3.*0.01**2) #1% lepton isolation uncertainty ## NEED to ad
 topXsecSys = 0.0 #55 #5.5% top x-sec uncertainty
 ewkXsecSys = 0.0 #5 #5% ewk x-sec uncertainty
 qcdXsecSys = 0.0 #50 #50% qcd x-sec uncertainty
+
+#how to incorporate these systematics per trilep category???
+elPRsys = [0.38,.12,.07,0.] #eee,eem,emm,mmm
+muPRsys = [0.,.02,.04,.09]
+muFRetaSys = [.0,.22,.11,.48] 
+
 corrdSys = math.sqrt(lumiSys**2+trigSys**2+lepIdSys**2+lepIsoSys**2)
 
 def getNormUnc(hist,ibin):
