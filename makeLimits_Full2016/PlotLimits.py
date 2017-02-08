@@ -27,7 +27,7 @@ isRebinned=''
 # cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets0_HT0_ST1000_mllOS20'
 # cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets0_HT0_ST1100_mllOS20'
 
-cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20'
+# cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20'
 # cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST700_mllOS20'
 # cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST800_mllOS20'
 # cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST900_mllOS20'
@@ -35,6 +35,9 @@ cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20'
 # cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1100_mllOS20'
 
 # cutString='lep1Pt30_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20'
+
+cutString='lep1Pt0_MET20_jetPt0_NJets3_NBJets1_HT0_ST600_mllOS20'
+
 
 mass = array('d', [800,900,1000,1100,1200,1300])#,1400,1500,1600])
 masserr = array('d', [0,0,0,0,0,0,0])#,0,0,0])
@@ -250,7 +253,10 @@ if not doBRScan: nBRconf=1
 # tempKeys = ['80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_2017_2_3']
 # tempKeys = ['80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_2017_2_6']
 # tempKeys = ['80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_2017_2_7']
-tempKeys = ['80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_newdbkgSys_2017_2_8']
+# tempKeys = ['80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_newdbkgSys_2017_2_8']
+# tempKeys = ['80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_newdbkgSys_CorrectedLumiSYS_2017_2_8']
+# tempKeys = ['80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_newdbkgSys_CorrectedLumiSYS_ALLsys_2017_2_8']
+tempKeys = ['80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_newdbkgSys_CorrectedLumiSYS_ALLsys_oneDDBKGsys_2017_2_8']
 
 expLims = []
 obsLims = []

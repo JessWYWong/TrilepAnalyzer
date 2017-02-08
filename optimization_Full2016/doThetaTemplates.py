@@ -69,7 +69,7 @@ ttvList   = ['TTWl','TTZl']
 # tList     = ['Tt','Ts','TtW','TbtW']
 
 whichSignal = 'TT' #TT, BB, or X53X53
-signalMassRange = [800,1800]
+signalMassRange = [800,1300]
 sigList = [whichSignal+'M'+str(mass) for mass in range(signalMassRange[0],signalMassRange[1]+100,100)]
 if whichSignal=='X53X53': sigList = [whichSignal+'M'+str(mass)+chiral for mass in range(signalMassRange[0],signalMassRange[1]+100,100) for chiral in ['left','right']]
 if whichSignal=='TT': decays = ['BWBW','THTH','TZTZ','TZBW','THBW','TZTH'] #T' decays
@@ -92,9 +92,11 @@ scaleSignalXsecTo1pb = True # this has to be "True" if you are making templates 
 scaleLumi = False
 lumiScaleCoeff = 1.
 doAllSys = True
-# systematicList = ['pileup','btag','pdfNew','muR','muF','muRFcorrd','muRFcorrdNew','PR','FR']
-systematicList = ['pileup','pdfNew','muR','muF','muRFcorrd','muRFcorrdNew','PR','FR',]
-# systematicList = ['pileup','btag','pdfNew','muR','muF','muRFcorrd','muRFcorrdNew','PR','FR','jec','jer']
+# systematicList = ['pileup','btag','pdfNew','muR','muF','muRFcorrd','muRFcorrdNew','PR','FR'] #no jec, jer
+# systematicList = ['pileup','pdfNew','muR','muF','muRFcorrd','muRFcorrdNew','PR','FR',] #no btag
+# systematicList = ['pileup','btag','pdfNew','muR','muF','muRFcorrd','muRFcorrdNew','jec','jer'] #no PR,FR
+
+systematicList = ['pileup','btag','pdfNew','muR','muF','muRFcorrd','muRFcorrdNew','PR','FR','jec','jer'] #ALL
 
 normalizeRENORM_PDF = False #normalize the renormalization/pdf uncertainties to nominal templates --> normalizes both the background and signal processes !!!!
 
@@ -170,9 +172,11 @@ timestr='%i_%i_%i'%(cTime.hour,cTime.minute,cTime.second)
 # pfix='optimization_LJMet80x_3lepTT_Full2016_mcICHEP_2016_12_15_rizki_withNonIsoTrig_addDZforRunH_fixedST_withJECJER_'
 # pfix='optimization_80x_MultiLep_Full2016_mcICHEP_FRv15_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP'
 # pfix='optimization_80x_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP'
-# pfix='optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_6Feb2017_step2'
-# pfix='optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_6Feb2017_step2'
-pfix='optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_6Feb2017_step2_TESTING'
+# pfix='optimization_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_6Feb2017_step2'
+# pfix='optimization_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_6Feb2017_step2'
+# pfix='optimization_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_6Feb2017_step2_TESTING'
+# pfix='optimization_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_6Feb2017_newdbkgSys_CorrectedLumiSYS_ALLsys_step2'
+pfix='optimization_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_6Feb2017_newdbkgSys_CorrectedLumiSYS_ALLsys_oneDDBKGsys_step2'
 
 pfix+='_'+datestr
 
@@ -192,6 +196,11 @@ ddbkgSystematics = {
 					'muPR':{'EEE':1.00,'EEM':1.02,'EMM':1.04,'MMM':1.09},
 					'muFReta':{'EEE':1.00,'EEM':1.22,'EMM':1.11,'MMM':1.48}
 					}
+
+# ddbkgSystematics = {
+# 					'ddbkgSys':{'EEE':1.57,'EEM':1.53,'EMM':1.45,'MMM':1.73},
+# 					}
+
 
 if len(sys.argv)>1: outDir=sys.argv[1]
 else: 
@@ -276,14 +285,14 @@ def makeThetaCats(datahists,sighists,bkghists,discriminant):
 			if doAllSys:
 				for systematic in systematicList+normSystematics.keys()+ddbkgSystematics.keys():
 					for ud in ['Up','Down']:
-						if systematic!='toppt' and systematic!='PR' and systematic!='FR' and systematic!='elPR' and systematic!='muPR' and systematic!='muFReta':
+						if systematic!='toppt' and systematic!='PR' and systematic!='FR' and systematic!='ddbkgSys' and systematic!='elPR' and systematic!='muPR' and systematic!='muFReta':
 							print 'for: ewk, top, sig, creating systematics:', systematic, ud
 							hewkY[signal+systematic+ud] = R.TH1F('triLep__ewk__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'),'',len(catList),0,len(catList))
 							htopY[signal+systematic+ud] = R.TH1F('triLep__top__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'),'',len(catList),0,len(catList))
 							hsigY[signal+systematic+ud] = R.TH1F('triLep__sig__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'),'',len(catList),0,len(catList))
 						if systematic=='toppt': # top pt is only on the ttbar sample, so it needs special treatment!
 							htopY[signal+systematic+ud] = R.TH1F('triLep__top__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'),'',len(catList),0,len(catList))
-						if systematic=='PR' or systematic=='FR' or systematic=='elPR' or systematic=='muPR' or systematic=='muFReta': # PR and FR is only on the ddbkg sample, so it needs special treatment!
+						if systematic=='PR' or systematic=='FR' or systematic=='ddbkgSys' or systematic=='elPR' or systematic=='muPR' or systematic=='muFReta': # PR and FR is only on the ddbkg sample, so it needs special treatment!
 							print 'for: ddbkg, creating systematics:', systematic,ud
 							hddbkgY[signal+systematic+ud] = R.TH1F('triLep__ddbkg__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'),'',len(catList),0,len(catList))
 
@@ -555,7 +564,7 @@ def makeThetaCats(datahists,sighists,bkghists,discriminant):
 			if doAllSys:
 				for systematic in systematicList+normSystematics.keys()+ddbkgSystematics.keys():
 					for ud in ['Up','Down']:
-						if systematic!='toppt' and systematic!='PR' and systematic!='FR' and systematic!='elPR' and systematic!='muPR' and systematic!='muFReta':
+						if systematic!='toppt' and systematic!='PR' and systematic!='FR' and systematic!='ddbkgSys' and systematic!='elPR' and systematic!='muPR' and systematic!='muFReta':
 							if hewkY[signal+systematic+ud].Integral() > 0: hewkY[signal+systematic+ud].Write()
 							if htopY[signal+systematic+ud].Integral() > 0: htopY[signal+systematic+ud].Write()
 							if hsigY[signal+systematic+ud].Integral() > 0:
@@ -563,7 +572,7 @@ def makeThetaCats(datahists,sighists,bkghists,discriminant):
 								hsigY[signal+systematic+ud].Write()
 						if systematic=='toppt': # top pt is only on the ttbar sample, so it needs special treatment!
 							if htopY[signal+systematic+ud].Integral() > 0: htopY[signal+systematic+ud].Write()
-						if systematic=='PR' or systematic=='FR' or systematic=='elPR' or systematic=='muPR' or systematic=='muFReta': # PR and FR is only on the ddbkg sample, so it needs special treatment!
+						if systematic=='PR' or systematic=='FR' or systematic=='ddbkgSys' or systematic=='elPR' or systematic=='muPR' or systematic=='muFReta': # PR and FR is only on the ddbkg sample, so it needs special treatment!
 							if hddbkgY[signal+systematic+ud].Integral() > 0: hddbkgY[signal+systematic+ud].Write()
 			outputRfile.Close()
 
@@ -667,20 +676,20 @@ def makeThetaCats(datahists,sighists,bkghists,discriminant):
 # 					for systematic in systematicList+['pdfNew','muRFcorrdNew']:
 					for systematic in systematicList+normSystematics.keys()+ddbkgSystematics.keys():
 						if systematic=='toppt' and process!='top': continue
-						if not (process=='ddbkg' or systematic=='PR' or systematic=='FR' or systematic=='elPR' or systematic=='muPR' or systematic=='muFReta'):
+						if not (process=='ddbkg' or systematic=='PR' or systematic=='FR' or systematic=='ddbkgSys' or systematic=='elPR' or systematic=='muPR' or systematic=='muFReta'):
 							print (systematic+ud).ljust(ljust_i),
 							for cat in catList:
 								catStr=cat
 								histoPrefix=discriminant+'_'+lumiStr+'fb_'+catStr
-								print ' & '+str(round_sig(yieldTable[histoPrefix+systematic+ud][process]/(yieldTable[histoPrefix][process]+1e-20),2)),
+								print ' & '+str(round_sig(yieldTable[histoPrefix+systematic+ud][process]/(yieldTable[histoPrefix][process]+1e-20),3)),
 							print '\\\\',
 							print
-						if process=='ddbkg' and (systematic=='PR' or systematic=='FR' or systematic=='elPR' or systematic=='muPR' or systematic=='muFReta'):
+						if process=='ddbkg' and (systematic=='PR' or systematic=='FR' or systematic=='ddbkgSys' or systematic=='elPR' or systematic=='muPR' or systematic=='muFReta'):
 							print (systematic+ud).ljust(ljust_i),
 							for cat in catList:
 								catStr=cat
 								histoPrefix=discriminant+'_'+lumiStr+'fb_'+catStr
-								print ' & '+str(round_sig(yieldTable[histoPrefix+systematic+ud][process]/(yieldTable[histoPrefix][process]+1e-20),2)),
+								print ' & '+str(round_sig(yieldTable[histoPrefix+systematic+ud][process]/(yieldTable[histoPrefix][process]+1e-20),3)),
 							print '\\\\',
 							print
 		
