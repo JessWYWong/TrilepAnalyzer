@@ -10,14 +10,14 @@ gROOT.SetBatch(1)
 from tdrStyle import *
 setTDRStyle()
 
-lumiPlot = '12.9'
-lumiStr = '12p892'
-distribution = 'ST'
-signal = 'X53X53'
-chiral = 'left'
-limitDir='/user_data/ssagir/x53x53_limits_2016/templates_ST_2016_10_29_discovery/all/'
+lumiPlot = '35.9'
+lumiStr = '35p867'
+distribution = 'STrebinned'
+signal = 'TT'
+chiral = ''
+limitDir='/user_data/rsyarif/optimization_condor_PRv6_FRv20b_newMllOSV2_Allsys_2017_3_1/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20/4binsCount/'
 postfix = '' # for plot names in order to save them as different files
-isRebinned='_rebinned_stat0p25'
+isRebinned=''
 xrange_min=800.
 xrange_max=1200.
 yrange_min=.0003+.01
@@ -28,7 +28,7 @@ mass = array('d', massPoints)
 masserr = array('d', [0]*len(massPoints))
 mass_str = [str(item) for item in massPoints]
 
-theory_xsec_dicts = {'700':0.455,'800':0.196,'900':0.0903,'1000':0.0440,'1100':0.0224,'1200':0.0118,'1300':0.00639,'1400':0.00354,'1500':0.00200,'1600':0.001148}
+theory_xsec_dicts = ['700':0.455,'800':0.196,'900':0.0903,'1000':0.0440,'1100':0.0224,'1200':0.0118,'1300':0.00639,'1400':0.00354,'1500':0.00200,'1600':0.001148,'1700':0.000666,'1800':0.000391]#pb
 theory_xsec = [theory_xsec_dicts[item] for item in mass_str]
 xsec = array('d', [1]*len(massPoints)) # scales the limits
 
@@ -62,7 +62,8 @@ for cutString in cutStrings:
 	#if '_NJets4_' not in cutString: continue
 	plotLimits = True
 	for kutle in mass_str:
-		if not os.path.exists(limitDir+'/'+cutString+'/templates_'+distribution+'_'+signal+'M'+kutle+chiral+'_'+lumiStr+'fb'+isRebinned+'.json'): 
+# 		if not os.path.exists(limitDir+'/'+cutString+'/templates_'+distribution+'_'+signal+'M'+kutle+chiral+'_'+lumiStr+'fb'+isRebinned+'.json'): 
+		if not os.path.exists(limitDir+'/templates_'+distribution+'_'+signal+'M'+kutle+chiral+'_'+lumiStr+'fb'+isRebinned+'.json'): 
 			plotLimits = False
 	if not plotLimits: continue
 	if (ind % 500)==0: 
