@@ -10,22 +10,12 @@ def get_model():
     model.set_signal_processes('sig')
     
     procs = model.processes
-    obsvs = model.observables.keys()
-
-#     for obs in obsvs:
-# 		if 'isE' in obs:
-# 			model.add_lognormal_uncertainty('elTrigSys', math.log(1.03), '*', obs)
-# 			model.add_lognormal_uncertainty('elIdSys', math.log(1.01), '*', obs)
-# 			model.add_lognormal_uncertainty('elIsoSys', math.log(1.01), '*', obs)
-# 		elif 'isM' in obs:
-# 			model.add_lognormal_uncertainty('muTrigSys', math.log(1.011), '*', obs)
-# 			model.add_lognormal_uncertainty('muIdSys', math.log(1.011), '*', obs)
-# 			model.add_lognormal_uncertainty('muIsoSys', math.log(1.03), '*', obs)
-#     model.add_lognormal_uncertainty('lumiSys', math.log(1.062), '*', '*')
-#     model.add_lognormal_uncertainty('topSys', math.log(1.50), 'top', '*')
-#     model.add_lognormal_uncertainty('ewkSys', math.log(1.50), 'ewk', '*')
-#     model.add_lognormal_uncertainty('qcdSys', math.log(1.50), 'qcd', '*')
-#     model.add_lognormal_uncertainty('sigSys', math.log(1.10), 'sig', '*')
+    
+    for proc in procs:
+		if(proc!="ddbkg"):
+# 			try: model.add_lognormal_uncertainty('lumiSys', math.log(1.062), proc)
+			try: model.add_lognormal_uncertainty('lumiSys', math.log(1.026), proc) #https://hypernews.cern.ch/HyperNews/CMS/get/physics-announcements/4495.html
+			except: pass
 
     return model
 
