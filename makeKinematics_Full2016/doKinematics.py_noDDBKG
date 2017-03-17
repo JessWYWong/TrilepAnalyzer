@@ -69,8 +69,35 @@ cutString = 'isPassTrig_All'+str(int(cutList['isPassTrig']))+'_'+'dilep'+str(int
 
 # pfix = 'kinematics_80x_MultiLep_Full2016_Moriond17_noSYS_noDDBKG_2017_2_7'
 
-pfix = 'kinematics_80x_condor_MultiLep_Full2016_Moriond17_noSYS_noDDBKG_2017_2_7'
+# pfix = 'kinematics_80x_condor_MultiLep_Full2016_Moriond17_noSYS_noDDBKG_2017_2_7'
 
+# pfix = 'kinematics_80x_MultiLep_Full2016_Moriond17_1bjet_noSYS_noDDBKG_2017_2_20/isPassTrig_All0_dilep1_dilepAnth0_trilep0_isPassTrilepton1_lep1Pt0_NJets0_NBJets1_DR0_ST0_MllOS20/'
+# pfix = 'kinematics_80x_MultiLep_Full2016_Moriond17_moretThan2Jets_1bjet_noSYS_noDDBKG_2017_2_20/isPassTrig_All0_dilep1_dilepAnth0_trilep0_isPassTrilepton1_lep1Pt0_NJets3_NBJets1_DR0_ST0_MllOS20/'
+# pfix = 'kinematics_80x_MultiLep_Full2016_Moriond17_exactly2Jets_1bjet_noSYS_noDDBKG_2017_2_20/isPassTrig_All0_dilep1_dilepAnth0_trilep0_isPassTrilepton1_lep1Pt0_NJets2_NBJets1_DR0_ST0_MllOS20/'
+# pfix = 'kinematics_80x_MultiLep_Full2016_Moriond17_exactly1Jet_1bjet_noSYS_noDDBKG_2017_2_20/isPassTrig_All0_dilep1_dilepAnth0_trilep0_isPassTrilepton1_lep1Pt0_NJets1_NBJets1_DR0_ST0_MllOS20/'
+
+# pfix = 'kinematics_80x_MultiLep_Full2016_Moriond17_1bjet_noSYS_fixedLumi_noDDBKG_2017_2_23/isPassTrig_All0_dilep1_dilepAnth0_trilep0_isPassTrilepton1_lep1Pt0_NJets0_NBJets1_DR0_ST0_MllOS20/'
+
+# pfix = 'kinematics_80x_MultiLep_Full2016_Moriond17_1bjet_noSYS_fixedLumi_noDDBKG_oldMllOScut_2017_2_23/isPassTrig_All0_dilep1_dilepAnth0_trilep0_isPassTrilepton1_lep1Pt0_NJets0_NBJets1_DR0_ST0_MllOS20/'
+
+# pfix = 'kinematics_80x_condor_MultiLep_Full2016_Moriond17_1bjet_noSYS_fixedLumi_noDDBKG_newMllOScut_2017_2_23/'
+
+# pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_1bjet_noSYS_fixedLumi_noDDBKG_newMllOScut_exactly2Jets_2017_2_27'
+# pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_1bjet_noSYS_fixedLumi_noDDBKG_newMllOScut_exactly1Jet_2017_2_27'
+# pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_1bjet_noSYS_fixedLumi_noDDBKG_newMllOScut_moreThan2Jets_2017_2_27'
+
+pfix='kinematics_80x_condor_MultiLep_newMllOScutV2_latestLJMETFeb24_2017_noDDBKG_2017_3_2'
+
+# pfix='kinematics_80x_condor_MultiLep_newMllOScutV2_latestLJMETFeb24_2017_noDDBKG_SR_2017_3_2'
+
+# pfix='kinematics_80x_condor_MultiLep_newMllOScutV2_latestLJMETFeb24_2017_noDDBKG_CR2_2017_3_2'
+# 
+# pfix='kinematics_80x_condor_MultiLep_newMllOScutV2_latestLJMETFeb24_2017_noDDBKG_CR1_2017_3_2'
+
+# pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_1bjet_fixedLumi_noDDBKG_newMllOScutV2_2017_3_2'
+
+
+if len(sys.argv)>1: pfix = sys.argv[1] 
 
 # outDir = os.getcwd()+'/'
 outDir = '/user_data/rsyarif/'
@@ -96,30 +123,40 @@ sigList = {signal+decay:(signal+decay).lower() for signal in signals for decay i
 # bkgStackList = ['WJets','VV','TTV','TTJets','T','QCD','ddbkg']
 # bkgStackList = ['VV','VVV','TTV','ddbkg']
 bkgStackList = ['VV','WW','WZ','ZZ','VV','VVV','TTV',]
+# bkgStackList = ['VV','WW','WZinc','ZZinc','VV','VVV','TTV',]
 # wjetList  = ['WJetsMG100','WJetsMG200','WJetsMG400','WJetsMG600','WJetsMG800','WJetsMG1200','WJetsMG2500']
 wjetList  = ['WJets']
-zjetList  = ['DY10to50','DY50']
+# zjetList  = ['DY10to50','DY50']
+
+zjetList  = ['DYMG100','DYMG200','DYMG400','DYMG600','DYMG800','DYMG1200','DYMG2500']
+
 vvList    = ['WW','WZ','ZZ']
+# vvList    = ['WW','WZinc','ZZinc']
 # vvList    = ['WZ','ZZ']
 wwList    = ['WW']
 wzList    = ['WZ']
+# wzList    = ['WZinc']
 zzList    = ['ZZ']
+# zzList    = ['ZZinc']
+
 vvvList   = ['WWW','WWZ','WZZ','ZZZ']
-# ttvList   = ['TTWl','TTWq','TTZl','TTZq']
-ttvList   = ['TTWl','TTZl']
+
+ttvList   = ['TTWl','TTWq','TTZl','TTZq']
+# ttvList   = ['TTWl','TTZl']
+
 # ttjetList = ['TTJetsPH0to700inc','TTJetsPH700to1000inc','TTJetsPH1000toINFinc','TTJetsPH700mtt','TTJetsPH1000mtt']
 ttjetList = ['TTJetsPH']
 tList     = ['Tt','Ts','TtW','TbtW']
 
 signalList = [signal+decay for signal in signals for decay in decays]
-# topList = ['TTWl','TTZl','TTWq','TTZq'] #NoTTJets, No singleT
-topList = ['TTWl','TTZl','TTJetsPH'] #No singleT
-# topList = ['TTJetsPH0to700inc','TTJetsPH700to1000inc','TTJetsPH1000toINFinc','TTJetsPH700mtt','TTJetsPH1000mtt','TTWl','TTZl','TTWq','TTZq','Tt','Ts','TtW','TbtW']
-#topList = ['TTJetsPH','TTWl','TTZl','TTWq','TTZq','Tt','Ts','TtW','TbtW']
-# ewkList = ['WZ','ZZ','WWZ','WZZ','ZZZ'] #No DY, WJets, WW
-#ewkList = ['DY50','WJetsMG100','WJetsMG200','WJetsMG400','WJetsMG600','WJetsMG800','WJetsMG1200','WJetsMG2500','WW','WZ','ZZ','WWZ','WZZ','ZZZ']
-# ewkList = ['DY50','WJetsMG100','WJetsMG200','WJetsMG400','WJetsMG600','WJetsMG800','WJetsMG1200','WJets2500','WW','WZ','ZZ','WWZ','WZZ','ZZZ']
-ewkList = ['DY10to50','DY50','WJets','WW','WZ','ZZ','WWW','WWZ','WZZ','ZZZ']
+topList = ['TTWl','TTZl','TTWq','TTZq','TTJetsPH'] 
+
+# topList = ['TTWl','TTZl','TTJetsPH']
+
+# ewkList = ['DY10to50','DY50','WJets','WW','WZinc','ZZinc','WWW','WWZ','WZZ','ZZZ'] #VVinclusive
+# ewkList = ['DY10to50','DY50','WJets','WW','WZ','ZZ','WWW','WWZ','WZZ','ZZZ']
+ewkList = ['DYMG100','DYMG200','DYMG400','DYMG600','DYMG800','DYMG1200','DYMG2500','WJets','WW','WZ','ZZ','WWW','WWZ','WZZ','ZZZ'] #binnedDY
+
 # qcdList = ['QCDht100','QCDht200','QCDht300','QCDht500','QCDht700','QCDht1000','QCDht1500','QCDht2000']
 
 dataList = []
@@ -161,10 +198,10 @@ systematicList = ['pileup','btag','pdfNew','muR','muF','muRFcorrd','muRFcorrdNew
 #################### NORMALIZATIONS #######################
 ###########################################################
 
-lumiSys = 0.062 #6.2% https://twiki.cern.ch/twiki/bin/view/CMS/TWikiLUM - 20Sep2016
+lumiSys = 0.026 #6.2% https://twiki.cern.ch/twiki/bin/view/CMS/TWikiLUM - 20Sep2016
 trigSys = 0.03 #3% trigger uncertainty - AN 2016 229
 lepIdSys = math.sqrt(3.*0.01**2) #1% lepton id uncertainty ## NEED to add in quadrature for 3 leptons! - ATTENTION! NEED UPDATING!
-lepIsoSys = math.sqrt(3.*0.01**2) #1% lepton isolation uncertainty ## NEED to add in quadrature for 3 leptons! - ATTENTION! NEED UPDATING!
+lepIsoSys = math.sqrt(3.*0.02**2) #1% lepton isolation uncertainty ## NEED to add in quadrature for 3 leptons! - ATTENTION! NEED UPDATING!
 topXsecSys = 0.0 #55 #5.5% top x-sec uncertainty
 ewkXsecSys = 0.0 #5 #5% ewk x-sec uncertainty
 qcdXsecSys = 0.0 #50 #50% qcd x-sec uncertainty
@@ -506,7 +543,9 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 		yieldTable[histoPrefix]['VV']     = hvv[isEM].Integral()
 		yieldTable[histoPrefix]['WW']     = hww[isEM].Integral()
 		yieldTable[histoPrefix]['WZ']     = hwz[isEM].Integral()
+# 		yieldTable[histoPrefix]['WZinc']     = hwz[isEM].Integral()
 		yieldTable[histoPrefix]['ZZ']     = hzz[isEM].Integral()
+# 		yieldTable[histoPrefix]['ZZinc']     = hzz[isEM].Integral()
 		yieldTable[histoPrefix]['VVV']    = hvvv[isEM].Integral()
 		yieldTable[histoPrefix]['TTV']    = httv[isEM].Integral()
 		yieldTable[histoPrefix]['TTJets'] = httjets[isEM].Integral()
@@ -569,7 +608,9 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 		yieldErrTable[histoPrefix]['VV']     = 0.
 		yieldErrTable[histoPrefix]['WW']     = 0.
 		yieldErrTable[histoPrefix]['WZ']     = 0.
+# 		yieldErrTable[histoPrefix]['WZinc']     = 0.
 		yieldErrTable[histoPrefix]['ZZ']     = 0.
+# 		yieldErrTable[histoPrefix]['ZZinc']     = 0.
 		yieldErrTable[histoPrefix]['VVV']    = 0.
 		yieldErrTable[histoPrefix]['TTV']    = 0.
 		yieldErrTable[histoPrefix]['TTJets'] = 0.
@@ -606,7 +647,9 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 			yieldErrTable[histoPrefix]['VV']     += hvv[isEM].GetBinError(ibin)**2
 			yieldErrTable[histoPrefix]['WW']     += hww[isEM].GetBinError(ibin)**2
 			yieldErrTable[histoPrefix]['WZ']     += hwz[isEM].GetBinError(ibin)**2
+# 			yieldErrTable[histoPrefix]['WZinc']     += hwz[isEM].GetBinError(ibin)**2
 			yieldErrTable[histoPrefix]['ZZ']     += hzz[isEM].GetBinError(ibin)**2
+# 			yieldErrTable[histoPrefix]['ZZinc']     += hzz[isEM].GetBinError(ibin)**2
 			yieldErrTable[histoPrefix]['VVV']    += hvvv[isEM].GetBinError(ibin)**2
 			yieldErrTable[histoPrefix]['TTV']    += httv[isEM].GetBinError(ibin)**2
 			yieldErrTable[histoPrefix]['TTJets'] += httjets[isEM].GetBinError(ibin)**2
@@ -637,7 +680,9 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 		yieldErrTable[histoPrefix]['VV']     += (corrdSys*yieldTable[histoPrefix]['VV'])**2+(ewkXsecSys*yieldTable[histoPrefix]['VV'])**2 #ATTENTION! CHECK IF CORRECT CALCULATION!
 		yieldErrTable[histoPrefix]['WW']     += (corrdSys*yieldTable[histoPrefix]['WW'])**2+(ewkXsecSys*yieldTable[histoPrefix]['WW'])**2 #ATTENTION! CHECK IF CORRECT CALCULATION!
 		yieldErrTable[histoPrefix]['WZ']     += (corrdSys*yieldTable[histoPrefix]['WZ'])**2+(ewkXsecSys*yieldTable[histoPrefix]['WZ'])**2 #ATTENTION! CHECK IF CORRECT CALCULATION!
+# 		yieldErrTable[histoPrefix]['WZinc']     += (corrdSys*yieldTable[histoPrefix]['WZinc'])**2+(ewkXsecSys*yieldTable[histoPrefix]['WZinc'])**2 #ATTENTION! CHECK IF CORRECT CALCULATION!
 		yieldErrTable[histoPrefix]['ZZ']     += (corrdSys*yieldTable[histoPrefix]['ZZ'])**2+(ewkXsecSys*yieldTable[histoPrefix]['ZZ'])**2 #ATTENTION! CHECK IF CORRECT CALCULATION!
+# 		yieldErrTable[histoPrefix]['ZZinc']     += (corrdSys*yieldTable[histoPrefix]['ZZinc'])**2+(ewkXsecSys*yieldTable[histoPrefix]['ZZinc'])**2 #ATTENTION! CHECK IF CORRECT CALCULATION!
 		yieldErrTable[histoPrefix]['VVV']    += (corrdSys*yieldTable[histoPrefix]['VVV'])**2+(ewkXsecSys*yieldTable[histoPrefix]['VVV'])**2	#ATTENTION! CHECK IF CORRECT CALCULATION!
 		yieldErrTable[histoPrefix]['TTV']    += (corrdSys*yieldTable[histoPrefix]['TTV'])**2+(topXsecSys*yieldTable[histoPrefix]['TTV'])**2 #ATTENTION! CHECK IF CORRECT CALCULATION!
 		yieldErrTable[histoPrefix]['TTJets'] += (corrdSys*yieldTable[histoPrefix]['TTJets'])**2+(topXsecSys*yieldTable[histoPrefix]['TTJets'])**2

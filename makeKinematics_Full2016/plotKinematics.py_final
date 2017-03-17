@@ -8,57 +8,19 @@ gROOT.SetBatch(1)
 start_time = time.time()
 
 
-# templateDir='/user_data/rsyarif/kinematics_80x_Exactly3Lep_no2Dcut_noMllOScut_dilepTrigReady_noDDBKG_2016_9_21/isPassTrig_All0_dilep1_dilepAnth0_trilep0_isPassTrilepton1_lep1Pt0_NJets2_NBJets0_DR0_ST0_MllOS0/'
+templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18bSys_PRv6_step2_moreThan2Jets_1bjet_bTagSysFixed_addFRsys_noMuTrkSF_fixedLumi_AllSYS_2017_2_20'
 
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_noMllOScut_dilepTrigReady_noDDBKG_2016_9_21/'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_noMllOScut_dilepTrigReady_noDDBKG_fixedSF_2016_9_26/'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_noDDBKG_2016_10_14/'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_noDDBKG_MoreThan2Jets_2016_10_14/'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_noDDBKG_exactly2Jets_2016_10_14/'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_noDDBKG_v2_DY-MG_2016_10_17/'
-
-#templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_noDDBKG_v2_2016_10_17/'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_noDDBKG_v2_noNjetCut_2016_10_18/'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_noDDBKG_v2_moreThan2Jets_2016_10_18/'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_noDDBKG_v2_exactly2Jets_2016_10_18/'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_noDDBKG_v2_exactly1Jet_2016_10_18/'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_noDDBKG_v2_exactly0Jet_2016_10_18/'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_noDDBKG_v2_lessThan3Jets_2016_10_18/'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_no2Dcut_dilepTrigReady_fixedSF_mllOSmin20_FRv3_step2_noDDBKG_v2_1or2Jets_2016_10_21/'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_MultiLep_Full2016_Moriond17_noSYS_noDDBKG_2017_2_7'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_Moriond17_noSYS_noDDBKG_2017_2_7'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_MultiLep_Full2016_Moriond17_1bjet_noSYS_fixedLumi_noDDBKG_2017_2_23/isPassTrig_All0_dilep1_dilepAnth0_trilep0_isPassTrilepton1_lep1Pt0_NJets0_NBJets1_DR0_ST0_MllOS20/'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_MultiLep_Full2016_Moriond17_1bjet_noSYS_fixedLumi_noDDBKG_oldMllOScut_2017_2_23/isPassTrig_All0_dilep1_dilepAnth0_trilep0_isPassTrilepton1_lep1Pt0_NJets0_NBJets1_DR0_ST0_MllOS20/'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_Moriond17_1bjet_noSYS_fixedLumi_noDDBKG_newMllOScut_2017_2_23//'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_Moriond17_1bjet_noSYS_fixedLumi_noDDBKG_newMllOScut_exactly2Jets_2017_2_27/'
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_Moriond17_1bjet_noSYS_fixedLumi_noDDBKG_newMllOScut_exactly1Jet_2017_2_27/'
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_Moriond17_1bjet_noSYS_fixedLumi_noDDBKG_newMllOScut_moreThan2Jets_2017_2_27/'
-
+DEBUG=False
 
 mainDir='/user_data/rsyarif/'
 templateDir=mainDir
 
-# templateDir+='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_Moriond17_1bjet_noSYS_fixedLumi_noDDBKG_newMllOScut_exactly2Jets_2017_2_27/'
-# templateDir+='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_Moriond17_1bjet_noSYS_fixedLumi_noDDBKG_newMllOScut_exactly1Jet_2017_2_27/'
-templateDir+='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_Moriond17_1bjet_noSYS_fixedLumi_noDDBKG_newMllOScut_moreThan2Jets_2017_2_27/'
+templateDir+='kinematics_80x_condor_Exactly3Lep_Full2016_Moriond17_FRv18bSys_PRv6_step2_exactly2Jets_1bjet_fixedLumi_newMllOScut_fixedAllSYS_2017_2_23'
+# templateDir+='kinematics_80x_condor_Exactly3Lep_Full2016_Moriond17_FRv18bSys_PRv6_step2_exactly1Jet_1bjet_fixedLumi_newMllOScut_fixedAllSYS_2017_2_23'
+# templateDir+='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18bSys_PRv6_step2_exactly2Jets_1bjet_fixedLumi_newMllOScut_fixedAllSYS_2017_2_23'
+# templateDir+='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18bSys_PRv6_step2_moreThan2Jets_1bjet_fixedLumi_newMllOScut_fixedAllSYS_2017_2_23'
+# templateDir+='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18bSys_PRv6_step2_moreThan2Jets_1bjet_fixedLumi_newMllOScut_fixedAllSYS_ST600_2017_2_23'
+
 
 if len(sys.argv)>1: templateDir = mainDir+sys.argv[1] 
 
@@ -85,9 +47,9 @@ scaleFact1 = 2
 scaleFact2 = 10
 if 'Final' in templateDir: scaleFact1 = 40
 
-systematicList = ['pileup','btag','mistag','pdfNew','muRFcorrdNew','jec','jer']
+systematicList = ['pileup','btag','mistag','pdfNew','muRFcorrdNew','elPR','elFR','muPR','muFR','jec','jer']
 
-doAllSys = False
+doAllSys = True
 
 isRebinned=''#post fix for file names if the name changed b/c of rebinning or some other process
 doNormByBinWidth=False # not tested, may not work out of the box
@@ -176,7 +138,7 @@ lepIsoSys = 0.03 #ATTENTION: is this right? add 1% linearly per lepton??
 topXsecSys = 0.0 #55 #5.5% top x-sec uncertainty
 ewkXsecSys = 0.0 #5 #5% ewk x-sec uncertainty
 qcdXsecSys = 0.0 #50 #50% qcd x-sec uncertainty
-corrdSys = math.sqrt(lumiSys**2+trigSys**2+lepIdSys**2+lepIsoSys**2)
+
 
 #how to incorporate these?
 normSystematics = { #The All category was obtained by quad sum of the cats! its approximate!
@@ -190,6 +152,18 @@ normSystematics = { #The All category was obtained by quad sum of the cats! its 
 					'mumumuTrigSys':{'EEE':0.00,'EEM':0.00,'EMM':0.00,'MMM':0.03,'All':0.03},
 					}
 
+# ddbkgSystematics = {
+# 					'elPRsys':{'EEE':0.38,'EEM':0.12,'EMM':0.07,'MMM':0.00,'All':0.14},
+# 					'muPRsys':{'EEE':0.00,'EEM':0.02,'EMM':0.04,'MMM':0.09,'All':0.05},
+# 					'muFReta':{'EEE':0.00,'EEM':0.22,'EMM':0.11,'MMM':0.48,'All':0.22}
+# 					}
+
+ddbkgSystematics = {
+					'elPRsys':{'EEE':0.09,'EEM':0.15,'EMM':0.08,'MMM':0.00,'All':0.13},
+					'muPRsys':{'EEE':0.00,'EEM':0.04,'EMM':0.08,'MMM':0.17,'All':0.06},
+					'muFReta':{'EEE':0.00,'EEM':0.13,'EMM':0.10,'MMM':0.24,'All':0.11}
+					}
+
 
 def getNormUnc(hist,ibin,cat):
 	contentsquared = hist.GetBinContent(ibin)**2
@@ -199,6 +173,12 @@ def getNormUnc(hist,ibin,cat):
 	if 'ewk' in hist.GetName(): error += ewkXsecSys*ewkXsecSys*contentsquared # cross section
 	if 'qcd' in hist.GetName(): error += qcdXsecSys*qcdXsecSys*contentsquared # cross section
 	return error
+
+def getDDBKGNormUnc(hist,ibin,cat):
+	contentsquared = hist.GetBinContent(ibin)**2
+	error = (ddbkgSystematics['elPRsys'][cat]**2 + ddbkgSystematics['muPRsys'][cat]**2 + ddbkgSystematics['muFReta'][cat]**2) * contentsquared  #correlated uncertainties
+	return error
+
 
 plotList = [#distribution name as defined in "doHists.py"
 	'NPV',
@@ -232,6 +212,8 @@ plotList = [#distribution name as defined in "doHists.py"
 # 	'MET',
 	'HTrebinned',
 	'STrebinned',
+	'STrebinnedv2',
+	'STrebinnedv3',
 	'METrebinned',
 
 	'NJets' ,
@@ -279,50 +261,30 @@ for discriminant in plotList:
 	for isEM in isEMlist:
 		histPrefix=discriminant+'_'+lumiInTemplates+'fb_'+isEM
 		
-		try: hTTJets = RFile.Get(histPrefix+'_TTJets').Clone()
+		try: hTOP = RFile.Get(histPrefix+'__top').Clone()
 		except: 
-			print "There is no TTJets!!!!!!!! Skipping."
+			if(DEBUG): print "There is no TOP!!!!!!!!",
+			if(DEBUG): print "Skipping TOP....."
 			pass
-		try: hTTV = RFile.Get(histPrefix+'_TTV').Clone()
+		try: hEWK = RFile.Get(histPrefix+'__ewk').Clone()
 		except: 
-			print "There is no TTV!!!!!!!! Skipping."
-			pass
-		try: hVV = RFile.Get(histPrefix+'_VV').Clone()
-		except: 
-			print "There is no VV!!!!!!!! Skipping."
-			pass
-		try: hVVV = RFile.Get(histPrefix+'_VVV').Clone()
-		except: 
-			print "There is no VVV!!!!!!!! Skipping."
-			pass
-		try: hWJets = RFile.Get(histPrefix+'_WJets').Clone()
-		except: 
-			print "There is no WJets!!!!!!!! Skipping."
-			pass
-		try: hZJets = RFile.Get(histPrefix+'_ZJets').Clone()
-		except: 
-			print "There is no ZJets!!!!!!!! Skipping."
+			if(DEBUG): print "There is no EWK!!!!!!!!",
+			if(DEBUG): print "Skipping EWK....."
 			pass
 		try: hQCD = RFile.Get(histPrefix+'__qcd').Clone()
 		except: 
-			print "There is no QCD!!!!!!!! Skipping."
+			if(DEBUG): print "There is no QCD!!!!!!!!",
+			if(DEBUG): print "Skipping QCD....."
 			pass
 		try: hDDBKG = RFile.Get(histPrefix+'_ddbkg').Clone()
 		except: 
-			print "There is no DDBKG!!!!!!!! Skipping."
+			if(DEBUG): print "There is no DDBKG!!!!!!!!",
+			if(DEBUG): print "Skipping DDBKG....."
 			pass
 					
-		try: print discriminant,isEM, "TTJets", hTTJets.Integral()
+		try: print discriminant,isEM, "TOP", hTOP.Integral()
 		except: pass
-		try: print discriminant,isEM, "TTV", hTTV.Integral()
-		except: pass
-		try: print discriminant,isEM, "VV", hVV.Integral()
-		except: pass
-		try: print discriminant,isEM, "VVV", hVVV.Integral()
-		except: pass
-		try: print discriminant,isEM, "WJets", hWJets.Integral()
-		except: pass
-		try: print discriminant,isEM, "ZJets", hZJets.Integral()
+		try: print discriminant,isEM, "EWK", hEWK.Integral()
 		except: pass
 		try: print discriminant,isEM, "QCD", hQCD.Integral()
 		except: pass
@@ -348,12 +310,8 @@ for discriminant in plotList:
 		hsig2.Scale(1.0/BR['TTTZTZ'])
 		hsig3.Scale(1.0/BR['TTTHTH'])
 		if doNormByBinWidth:
-			normByBinWidth(hTTJets)
-			normByBinWidth(hTTV)
-			normByBinWidth(hVV)
-			normByBinWidth(hVVV)
-			normByBinWidth(hWJets)
-			normByBinWidth(hZJets)
+			normByBinWidth(hTOP)
+			normByBinWidth(hEWK)
 			normByBinWidth(hQCD)
 			normByBinWidth(hsig1)
 			normByBinWidth(hsig2)
@@ -364,54 +322,38 @@ for discriminant in plotList:
 				for ud in ['minus','plus']:
 					try: systHists['top'+sys+ud] = RFile.Get(histPrefix+'__top__'+sys+'__'+ud).Clone()
 					except: 
-						print "Skipping",sys,"for TOP"
+						if(DEBUG): print "Skipping",sys,"for TOP"
 						pass
 					try: systHists['ewk'+sys+ud] = RFile.Get(histPrefix+'__ewk__'+sys+'__'+ud).Clone()
 					except: 
-						print "Skipping",sys,"for EWK"
+						if(DEBUG): print "Skipping",sys,"for EWK"
 						pass
 					try: systHists['qcd'+sys+ud] = RFile.Get(histPrefix+'__qcd__'+sys+'__'+ud).Clone()
 					except: 
-						print "Skipping",sys,"for QCD"
+						if(DEBUG): print "Skipping",sys,"for QCD"
 						pass
 					try: systHists['ddbkg'+sys+ud] = RFile.Get(histPrefix+'__ddbkg__'+sys+'__'+ud).Clone()
 					except: 
-						print "Skipping",sys,"for DDBKG"
+						if(DEBUG): print "Skipping",sys,"for DDBKG"
 						pass
 
-		try: hTTJetsstatOnly = hTTJets.Clone(hTTJets.GetName()+'statOnly')
+		try: hTOPstatOnly = hTOP.Clone(hTOP.GetName()+'statOnly')
 		except: pass
-		try: hTTVstatOnly = hTTV.Clone(hTTV.GetName()+'statOnly')
-		except: pass
-		try: hVVstatOnly= hVV.Clone(hVV.GetName()+'statOnly')
-		except: pass
-		try: hVVVstatOnly= hVVV.Clone(hVVV.GetName()+'statOnly')
-		except: pass
-		try: hWJetsstatOnly= hWJets.Clone(hWJets.GetName()+'statOnly')
-		except: pass
-		try: hZJetsstatOnly= hZJets.Clone(hZJets.GetName()+'statOnly')
+		try: hEWKstatOnly= hEWK.Clone(hEWK.GetName()+'statOnly')
 		except: pass
 		try: hQCDstatOnly = hQCD.Clone(hQCD.GetName()+'statOnly')
 		except: pass
 		try: hDDBKGstatOnly = hDDBKG.Clone(hDDBKG.GetName()+'statOnly')
 		except: pass
 
-		try: bkgHT = hTTJets.Clone()
+		try: bkgHT = hTOP.Clone()
 		except: pass
-		try: bkgHT.Add(hTTV)
-		except: pass
-		try: bkgHT.Add(hVV)
-		except: pass
-		try: bkgHT.Add(hVVV)
-		except: pass
-		try: bkgHT.Add(hWJets)
-		except: pass
-		try: bkgHT.Add(hZJets)
+		try: bkgHT.Add(hEWK)
 		except: pass
 		try: bkgHT.Add(hQCD)
 		except: pass
-# 		try: bkgHT.Add(hDDBKG)
-# 		except: pass
+		try: bkgHT.Add(hDDBKG)
+		except: pass
 
 		try:
 			totBkgTemp1[isEM] = TGraphAsymmErrors(bkgHT.Clone(bkgHT.GetName()+'shapeOnly'))
@@ -420,7 +362,7 @@ for discriminant in plotList:
 		except: pass
 			
 		try:
-			BINS_temp = hTTJets.GetNbinsX()
+			BINS_temp = hTOP.GetNbinsX()
 		except:
 			BINS_temp = 0
 						
@@ -428,26 +370,21 @@ for discriminant in plotList:
 			errorUp = 0.
 			errorDn = 0.
 			errorSym = 0.
+			errorNorm = 0.
 
 			errorStatOnly = bkgHT.GetBinError(ibin)**2
-			try: errorNorm = getNormUnc(hTTJetsstatOnly,ibin,isEM)
+			try: errorNorm = getNormUnc(hTOPstatOnly,ibin,isEM)
 			except: pass
-			try: errorNorm = getNormUnc(hTTVstatOnly,ibin,isEM)
-			except: pass
-			try: errorNorm += getNormUnc(hVVstatOnly,ibin,isEM)
-			except: pass
-			try: errorNorm += getNormUnc(hVVVstatOnly,ibin,isEM)
-			except: pass
-			try: errorNorm += getNormUnc(hWJetsstatOnly,ibin,isEM)
-			except: pass
-			try: errorNorm += getNormUnc(hZJetsstatOnly,ibin,isEM)
+			try: errorNorm += getNormUnc(hEWKstatOnly,ibin,isEM)
 			except: pass
 			try: errorNorm += getNormUnc(hQCDstatOnly,ibin,isEM)
+			except: pass
+			try: errorNorm += getDDBKGNormUnc(hDDBKGstatOnly,ibin,isEM)
 			except: pass
 
 			if doAllSys:
 				for sys in systematicList:
-					if not (sys=='PR' or sys=='FR'):
+					if not ('PR' in sys or 'FR' in sys):
 						errorSym += (0.5*abs(systHists['top'+sys+'plus'].GetBinContent(ibin)-systHists['top'+sys+'minus'].GetBinContent(ibin)))**2				
 						errorPlus = systHists['top'+sys+'plus'].GetBinContent(ibin)-hTOP.GetBinContent(ibin)
 						errorMinus = hTOP.GetBinContent(ibin)-systHists['top'+sys+'minus'].GetBinContent(ibin)
@@ -474,7 +411,7 @@ for discriminant in plotList:
 								if errorMinus > 0: errorDn += errorMinus**2
 								else: errorUp += errorMinus**2
 							except: pass
-					if sys=='PR' or sys=='FR':
+					if 'PR' in sys or 'FR' in sys:
 						try: errorSym += (0.5*abs(systHists['ddbkg'+sys+'plus'].GetBinContent(ibin)-systHists['ddbkg'+sys+'minus'].GetBinContent(ibin)))**2				
 						except: pass
 						try: errorPlus = systHists['ddbkg'+sys+'plus'].GetBinContent(ibin)-hDDBKG.GetBinContent(ibin)
@@ -512,53 +449,25 @@ for discriminant in plotList:
 		hsigM1200.Scale(scaleFact2)
 		
 		stackbkgHT = THStack("stackbkgHT","")
-		try: stackbkgHT.Add(hWJets)
+		try: stackbkgHT.Add(hTOP)
 		except: pass
-		try: stackbkgHT.Add(hVVV)
-		except: pass
-		try: stackbkgHT.Add(hTTV)
-		except: pass
-		try: stackbkgHT.Add(hZJets)
-		except: pass
-		try: stackbkgHT.Add(hTTJets)
-		except: pass
-		try: stackbkgHT.Add(hVV)
+		try: stackbkgHT.Add(hEWK)
 		except: pass
 		try: 
 			if hQCD.Integral()/bkgHT.Integral()>.005: stackbkgHT.Add(hQCD) #don't plot QCD if it is less than 0.5%
 		except: pass
-# 		try: stackbkgHT.Add(hDDBKG)
-# 		except: pass
+		try: stackbkgHT.Add(hDDBKG)
+		except: pass
 
 		try:
-			hTTJets.SetLineColor(kAzure-6)
-			hTTJets.SetFillColor(kAzure-6)
-			hTTJets.SetLineWidth(2)
-		except: pass
-		try:
-			hTTV.SetLineColor(kAzure-4)
-			hTTV.SetFillColor(kAzure-4)
-			hTTV.SetLineWidth(2)
+			hTOP.SetLineColor(kAzure-6)
+			hTOP.SetFillColor(kAzure-6)
+			hTOP.SetLineWidth(2)
 		except: pass
 		try: 
-			hVV.SetLineColor(kMagenta-2)
-			hVV.SetFillColor(kMagenta-2)
-			hVV.SetLineWidth(2)
-		except: pass
-		try: 
-			hVVV.SetLineColor(kMagenta)
-			hVVV.SetFillColor(kMagenta)
-			hVVV.SetLineWidth(2)
-		except: pass
-		try: 
-			hWJets.SetLineColor(kRed)
-			hWJets.SetFillColor(kRed)
-			hWJets.SetLineWidth(2)
-		except: pass
-		try: 
-			hZJets.SetLineColor(kMagenta+4)
-			hZJets.SetFillColor(kMagenta+4)
-			hZJets.SetLineWidth(2)
+			hEWK.SetLineColor(kMagenta-2)
+			hEWK.SetFillColor(kMagenta-2)
+			hEWK.SetLineWidth(2)
 		except: pass
 		try:
 			hQCD.SetLineColor(kOrange+5)
@@ -676,21 +585,13 @@ for discriminant in plotList:
 			if hQCD.Integral()/bkgHT.Integral()>.005: leg.AddEntry(hQCD,"QCD","f") #don't plot QCD if it is less than 0.5%
 		except: pass
 # 		try: leg.AddEntry(hEWK,"EWK","f")
-		try: leg.AddEntry(hVV,"VV (WW,WZ,ZZ) ","f")
-		except: pass
-		try: leg.AddEntry(hVVV,"VVV (WWW, WWZ, WZZ, ZZZ) ","f")
-		except: pass
-		try: leg.AddEntry(hWJets,"Wjets","f")
-		except: pass
-		try: leg.AddEntry(hZJets,"Zjets","f")
+		try: leg.AddEntry(hEWK,"VV & VVV","f")
 		except: pass
 # 		try: leg.AddEntry(hTOP,"TOP","f")
-		try: leg.AddEntry(hTTJets,"TTJets","f")
+		try: leg.AddEntry(hTOP,"TTV","f")
 		except: pass
-		try: leg.AddEntry(hTTV,"TTV (TTW,TTZ)","f")
+		try: leg.AddEntry(hDDBKG,"DD BKG","f")
 		except: pass
-# 		try: leg.AddEntry(hDDBKG,"DD BKG","f")
-# 		except: pass
 		leg.AddEntry(bkgHTgerr,"Bkg uncert. (stat. #oplus syst.)","f")
 		leg.Draw("same")
 
@@ -930,15 +831,15 @@ for discriminant in plotList:
 		if blind: savePrefix+='_blinded'
 
 		if doOneBand:
-# 			c1.SaveAs(savePrefix+"_totBand.pdf")
+			#c1.SaveAs(savePrefix+"_totBand.pdf")
 			c1.SaveAs(savePrefix+"_totBand.png")
-# 			c1.SaveAs(savePrefix+"_totBand.root")
-			#c1.SaveAs(savePrefix+"totBand.C")
+			#c1.SaveAs(savePrefix+"_totBand.root")
+# 			c1.SaveAs(savePrefix+"totBand.C")
 		else:
 # 			c1.SaveAs(savePrefix+".pdf")
 			c1.SaveAs(savePrefix+".png")
 # 			c1.SaveAs(savePrefix+".root")
-			#c1.SaveAs(savePrefix+".C")
+# 			c1.SaveAs(savePrefix+".C")
 			
 	RFile.Close()
 
