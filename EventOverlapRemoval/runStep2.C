@@ -60,9 +60,12 @@ void runStep2(){
    fileNames.push_back("DoubleEG_RRG_hadd.root");
    fileNames.push_back("DoubleMuon_RRG_hadd.root");
    fileNames.push_back("MuonEG_RRG_hadd.root");
-   fileNames.push_back("DoubleEG_PRH_hadd.root");
-   fileNames.push_back("DoubleMuon_PRH_hadd.root");
-   fileNames.push_back("MuonEG_PRH_hadd.root");
+//    fileNames.push_back("DoubleEG_PRH_hadd.root");
+//    fileNames.push_back("DoubleMuon_PRH_hadd.root");
+//    fileNames.push_back("MuonEG_PRH_hadd.root");
+   fileNames.push_back("DoubleEG_RRH_hadd.root");
+   fileNames.push_back("DoubleMuon_RRH_hadd.root");
+   fileNames.push_back("MuonEG_RRH_hadd.root");
 //    
 // //   inputDir="LJMet80x_3lepTT_Full2016_2016_12_15_rizki_withNonIsoTrig_step1hadds";
 // //   inputDir="LJMet80x_3lepTT_Full2016_mcICHEP_2016_12_15_rizki_withNonIsoTrig_addDZforRunH_step1hadds";
@@ -92,14 +95,34 @@ void runStep2(){
 //   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv7test_FRv18bSys_7Feb2017_step1hadds";
 //   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv19test_7Feb2017_step1hadds";
 //   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv19testV2_7Feb2017_step1hadds";
-  inputDir="LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv8test_FRv18bSys_7Feb2017_step1hadds";
-
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv8test_FRv18bSys_7Feb2017_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv20b_1Mar2017_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv20b_1Mar2017_scaleFRforCR1_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv21test_1Mar2017_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv20b_2Mar2017_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv21test_2Mar2017_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv20b_2Mar2017_scaleFRforCR1_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRv6_FRv22_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv20b_3Mar2017_scaleFR_CR2CR1_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv20b_3Mar2017_scaleFR_CR2SR_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv23test_3Mar2017_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRv6_FRv22_newMuTrkSF_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRv6_FRv24_newMuTrkSF_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRv6_FRv27_newMuTrkSF_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRv6_FRv29CR1_newMuTrkSF_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRv9_FRv24_postPreapproval_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRv9_FRv29CR1_postPreapproval_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRvElPRtest_FRv24_postPreapproval_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRvMuPRtest_FRv24_postPreapproval_step1hadds";
+  inputDir="LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRv9_FRvMuEtatest_postPreapproval_step1hadds";
+  
   subDir="nominal";
 
   outputDir=inputDir+"_step2";
   
   //copy input to output folder
-//   system("cp -r "+bruxDir+"/"+inputDir+" "+bruxDir+"/"+outputDir);
+  system("cp -r "+bruxDir+"/"+inputDir+" "+bruxDir+"/"+outputDir);
   
   //create folder to save original overlapping datasets
 //   system("mkdir -pv "+bruxDir+"/"+outputDir+"/"+subDir+"/overlappingSets");

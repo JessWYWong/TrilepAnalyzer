@@ -7,115 +7,35 @@ from weights import *
 gROOT.SetBatch(1)
 start_time = time.time()
 
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_mcICHEP_IsoTrig_FRv7_PRv2_step2_moreThan2Jets_AllSYS_2016_12_19'
 
-# templateDir='/user_data/rsyarif/kinematics_80x_MultiLep_Full2016_IsoTrig_FRv7_PRv2_step2_moreThan2Jets_noSYS_2016_12_19/isPassTrig_All0_dilep1_dilepAnth0_trilep0_isPassTrilepton1_lep1Pt0_NJets3_NBJets0_DR0_ST0_MllOS20'
+templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18bSys_PRv6_step2_moreThan2Jets_1bjet_bTagSysFixed_addFRsys_noMuTrkSF_fixedLumi_AllSYS_2017_2_20'
 
-# templateDir='/user_data/rsyarif/kinematics_80x_Exactly3Lep_Full2016_mcICHEP_IsoTrig_FRv7_PRv2_step2_exactly2Jets_noSYS_2016_12_20/isPassTrig_All0_dilep1_dilepAnth0_trilep0_isPassTrilepton1_lep1Pt0_NJets2_NBJets0_DR0_ST0_MllOS20'
+DEBUG=False
 
-# templateDir='/user_data/rsyarif/kinematics_80x_Exactly3Lep_Full2016_mcICHEP_IsoTrig_FRv7_PRv2_step2_exactly2Jets_AllSYS_2016_12_20/isPassTrig_All0_dilep1_dilepAnth0_trilep0_isPassTrilepton1_lep1Pt0_NJets2_NBJets0_DR0_ST0_MllOS20'
+mainDir='/user_data/rsyarif/'
+templateDir=mainDir
 
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_Full2016_mcICHEP_IsoTrig_FRv7_PRv2_step2_exactly2Jets_noSYS_2016_12_20'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_MultiLep_Full2016_mcICHEP_IsoTrig_addDZforRunH_FRv7_PRv2_step2_moreThan2Jets_noSYS_2016_12_21/isPassTrig_All0_dilep1_dilepAnth0_trilep0_isPassTrilepton1_lep1Pt0_NJets3_NBJets0_DR0_ST0_MllOS20'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_mcICHEP_IsoTrig_addDZforRunH_FRv7_PRv2_step2_moreThan2Jets_AllSYS_2016_12_21'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_mcICHEP_IsoTrig_addDZforRunH_FRv7_PRv2_step2_moreThan2Jets_fixedST_AllSYS_2016_12_21'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_Full2016_mcICHEP_IsoTrig_addDZforRunH_FRv7_PRv2_step2_exactly2Jets_fixedST_AllSYS_2016_12_22'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_mcICHEP_IsoTrig_addDZforRunH_FRv8_PRv2_step2_moreThan2Jets_fixedST_looseLepjetClean_AllSYS_2017_1_9'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_mcICHEP_IsoTrig_addDZforRunH_FRv9_PRv2_step2_moreThan2Jets_fixedST_looseLepjetClean_AllSYS_2017_1_10'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_mcICHEP_IsoTrig_addDZforRunH_FRv11_PRv3_ClintsAN16-242_step2_moreThan2Jets_fixedST_looseLepjetClean_AllSYS_2017_1_10'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_mcICHEP_IsoTrig_addDZforRunH_FRv11_PRv3_ClintsAN16-242_step2_moreThan2Jets_fixedST_looseLepjetClean_AllSYS_2017_1_11' #Corrected MC Iso's
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_mcICHEP_IsoTrig_addDZforRunH_FRv10_PRv2_step2_moreThan2Jets_fixedST_looseLepjetClean_1bjet_AllSYS_2017_1_11'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_mcICHEP_IsoTrig_HLTupdate_FRv9_PRv2_step2_moreThan2Jets_AllSYS_2017_1_13'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_mcICHEP_IsoTrig_HLTupdate_FRv9_PRv2_step2_exactly2Jets_AllSYS_2017_1_13'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_mcICHEP_IsoTrig_HLTupdate_FRv12_PRv2_step2_moreThan2Jets_AllSYS_2017_1_14'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_mcICHEP_IsoTrig_HLTupdate_FRv13_PRv2_step2_moreThan2Jets_1bjet_AllSYS_2017_1_14'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_mcICHEP_IsoTrig_HLTupdate_FRv12_PRv2_step2_exactly1Jet_AllSYS_2017_1_16'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_mcICHEP_FRv14a_PRv4_step2_20Jan2017_moreThan2Jets_AllSYS_2017_1_20'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_mcICHEP_FRv14a_PRv4_step2_20Jan2017_exactly2Jets_AllSYS_2017_1_20'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MoreThan3Lep_Full2016_mcICHEP_FRv14a_PRv4_step2_20Jan2017_moreThan2Jets_noSYS_2017_1_20'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_mcICHEP_FRv14a_PRv4_step2_20Jan2017_moreThan2Jets_noMllOScut_noSYS_2017_1_20'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_mcICHEP_FRv14a_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p2_noSYS_2017_1_20'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_mcICHEP_FRv15_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_AllSYS_2017_1_23'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_mcICHEP_FRv15_PRv4_step2_20Jan2017_exactly2Jets_muMinIso0p1_updatedbtagWP_AllSYS_2017_1_23'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_1bjet_AllSYS_2017_1_23'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_20Jan2017_exactly2Jets_muMinIso0p1_updatedbtagWP_1bjet_AllSYS_2017_1_23'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_1bjet_lepPt30_AllSYS_2017_1_25'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_26Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_1bjet_lepPt30_altBinning_AllSYS_2017_1_26'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_moreThan2Jets_muMinIso0p1_updatedbtagWP_1bjet_ST600_AllSYS_2017_1_27/isPassTrig_All0_dilep1_dilepAnth0_trilep0_isPassTrilepton1_lep1Pt0_NJets3_NBJets1_DR0_ST600_MllOS20'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_Full2016_mcICHEP_FRv15b_PRv4_step2_26Jan2017_exactly2Jets_muMinIso0p1_updatedbtagWP_1bjet_noSYS_2017_1_28'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_mcICHEP_FRv15b_PRv5test_step2_26Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_1bjet_lepPt30_noSYS_2017_1_31'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv17b_PRv6_step2_moreThan2Jets_1bjet_noSYS_2017_2_3'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv17b_PRv6_step2_moreThan2Jets_1bjet_AllSYS_2017_2_3'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18b_PRv6_step2_moreThan2Jets_1bjet_AllSYS_2017_2_3'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18b_PRv6_step2_exactly2Jets_1bjet_AllSYS_2017_2_3'
- 
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_Full2016_Moriond17_FRv18b_PRv6_step2_exactly2Jets_1bjet_AllSYS_2017_2_3'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_MultiLep_Full2016_Moriond17_FRv18b_PRv6_step2_moreThan2Jets_1bjet_AllSYS_2017_2_6/isPassTrig_All0_dilep1_dilepAnth0_trilep0_isPassTrilepton1_lep1Pt0_NJets3_NBJets1_DR0_ST0_MllOS20'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18b_PRv6_step2_moreThan2Jets_1bjet_AllSYS_2017_2_6'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18b_PRv6_step2_exactly2Jets_1bjet_AllSYS_2017_2_6'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_Full2016_Moriond17_FRv18b_PRv6_step2_exactly2Jets_1bjet_AllSYS_2017_2_6'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18b_PRv6_step2_moreThan2Jets_1bjet_AllSYS_ST600_2017_2_6'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_Full2016_Moriond17_FRv18b_PRv6_step2_exactly1Jet_1bjet_AllSYS_2017_2_6'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18bSys_PRv6_step2_moreThan2Jets_1bjet_bTagSysFixed_addFRsys_AllSYS_2017_2_7'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18bSys_PRv6_step2_exactly2Jets_1bjet_bTagSysFixed_addFRsys_AllSYS_2017_2_7'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18bSys_PRv6_step2_moreThan2Jets_1bjet_bTagSysFixed_addFRsys_AllSYS_ST600_2017_2_7'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv19test_PRv6_step2_moreThan2Jets_1bjet_muFRetaDependence_noSYS_ST600_2017_2_7'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv19test_PRv6_step2_moreThan2Jets_1bjet_muFRetaDependence_AllSYS_2017_2_7'
-
-# templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_Full2016_Moriond17_FRv18bSys_PRv6_step2_exactly2Jets_1bjet_AllSYS_2017_2_7'
-
-templateDir='/user_data/rsyarif/kinematics_80x_condor_Exactly3Lep_Full2016_Moriond17_FRv18bSys_PRv6_step2_exactly1Jet_1bjet_AllSYS_2017_2_7'
+templateDir+='kinematics_80x_condor_Exactly3Lep_Full2016_Moriond17_FRv18bSys_PRv6_step2_exactly2Jets_1bjet_fixedLumi_newMllOScut_fixedAllSYS_2017_2_23'
+# templateDir+='kinematics_80x_condor_Exactly3Lep_Full2016_Moriond17_FRv18bSys_PRv6_step2_exactly1Jet_1bjet_fixedLumi_newMllOScut_fixedAllSYS_2017_2_23'
+# templateDir+='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18bSys_PRv6_step2_exactly2Jets_1bjet_fixedLumi_newMllOScut_fixedAllSYS_2017_2_23'
+# templateDir+='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18bSys_PRv6_step2_moreThan2Jets_1bjet_fixedLumi_newMllOScut_fixedAllSYS_2017_2_23'
+# templateDir+='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18bSys_PRv6_step2_moreThan2Jets_1bjet_fixedLumi_newMllOScut_fixedAllSYS_ST600_2017_2_23'
 
 
-lumi=36.8 #for plots
+if len(sys.argv)>1: templateDir = mainDir+sys.argv[1] 
 
-lumiInTemplates='36p814'
 
-sig='ttm800' # choose the 1st signal to plot
-sigleg='TT(0.8 TeV)'
+# lumi=36.8 #for plots
+lumi=35.9 #for plots
+
+# lumiInTemplates='36p814'
+lumiInTemplates='35p867'
+
+# sig='ttm800' # choose the 1st signal to plot
+# sigleg='TT(0.8 TeV)'
+
+sig='ttm1000' # choose the 1st signal to plot
+sigleg='TT(1.0 TeV)'
 
 sigM1200='ttm1200' 
 siglegM1200='TT(1.2 TeV)'
@@ -127,9 +47,7 @@ scaleFact1 = 2
 scaleFact2 = 10
 if 'Final' in templateDir: scaleFact1 = 40
 
-systematicList = ['pileup','btag','pdfNew','muRFcorrdNew','PR','FR','jec','jer']
-# systematicList = ['pileup','pdfNew','muRFcorrdNew','PR','FR','jec','jer'] #no btag!!!
-
+systematicList = ['pileup','btag','mistag','pdfNew','muRFcorrdNew','elPR','elFR','muPR','muFR','jec','jer']
 
 doAllSys = True
 
@@ -137,8 +55,15 @@ isRebinned=''#post fix for file names if the name changed b/c of rebinning or so
 doNormByBinWidth=False # not tested, may not work out of the box
 doOneBand = False
 if not doAllSys: doOneBand = True # Don't change this!
-blind = False
+blind = True
 yLog = True
+
+if len(sys.argv)>2: blind = bool( int(sys.argv[2]) )  
+if len(sys.argv)>3: yLog  = bool( int(sys.argv[3]) )
+print 'bool(sys.argv[2]) =', bool(int(sys.argv[2])),  
+print 'Blind = ', blind
+print 'bool(sys.argv[3]) =', bool(int(sys.argv[3])),  
+print 'yLog = ', yLog
 
 doRealPull = False
 if doRealPull: doOneBand=False
@@ -204,26 +129,46 @@ def normByBinWidth(result):
 		result.SetBinContent(bin, content/width)
 		result.SetBinError(bin, error/width)
 
-lumiSys = 0.062 #6.2% https://twiki.cern.ch/twiki/bin/view/CMS/TWikiLUM - 20Sep2016
+lumiSys = 0.026 #6.2% https://hypernews.cern.ch/HyperNews/CMS/get/physics-announcements/4495.html - 11Feb2017
 trigSys = 0.03 #3% trigger uncertainty - AN 2016 229
-lepIdSys = math.sqrt(3.*0.01**2) #1% lepton id uncertainty ## NEED to add in quadrature for 3 leptons! - ATTENTION! NEED UPDATING!
-lepIsoSys = math.sqrt(3.*0.01**2) #1% lepton isolation uncertainty ## NEED to add in quadrature for 3 leptons! - ATTENTION! NEED UPDATING!
+# lepIdSys = math.sqrt(3.*0.01**2) #1% lepton id uncertainty ## NEED to add in quadrature for 3 leptons! - ATTENTION! NEED UPDATING!
+# lepIsoSys = math.sqrt(3.*0.01**2) #1% lepton isolation uncertainty ## NEED to add in quadrature for 3 leptons! - ATTENTION! NEED UPDATING!
+lepIdSys = 0.03 #ATTENTION: is this right? add 1% linearly per lepton??
+lepIsoSys = 0.03 #ATTENTION: is this right? add 1% linearly per lepton??
 topXsecSys = 0.0 #55 #5.5% top x-sec uncertainty
 ewkXsecSys = 0.0 #5 #5% ewk x-sec uncertainty
 qcdXsecSys = 0.0 #50 #50% qcd x-sec uncertainty
-corrdSys = math.sqrt(lumiSys**2+trigSys**2+lepIdSys**2+lepIsoSys**2)
 
 
-#how to incorporate this?
-ddbkgSystematics = {
-					'elPR':{'EEE':0.38,'EEM':0.12,'EMM':0.07,'MMM':0.00,'All':.14},
-					'muPR':{'EEE':0.00,'EEM':0.02,'EMM':0.04,'MMM':0.09,'All':0.05},
-					'muFReta':{'EEE':0.00,'EEM':0.22,'EMM':0.11,'MMM':0.48,'All':.22}
+#how to incorporate these?
+normSystematics = { #The All category was obtained by quad sum of the cats! its approximate!
+					'elIdSys':{'EEE':0.06,'EEM':0.04,'EMM':0.02,'MMM':0.00,'All':0.075},
+					'muIdSys':{'EEE':0.00,'EEM':0.02,'EMM':0.04,'MMM':0.06,'All':0.075},
+					'elIsoSys':{'EEE':0.03,'EEM':0.02,'EMM':0.01,'MMM':0.00,'All':0.037},
+					'muIsoSys':{'EEE':0.00,'EEM':0.01,'EMM':0.02,'MMM':0.03,'All':0.037},
+					'elelelTrigSys':{'EEE':0.03,'EEM':0.00,'EMM':0.00,'MMM':0.00,'All':0.03},
+					'elelmuTrigSys':{'EEE':0.00,'EEM':0.03,'EMM':0.00,'MMM':0.00,'All':0.03},
+					'elmumuTrigSys':{'EEE':0.00,'EEM':0.00,'EMM':0.03,'MMM':0.00,'All':0.03},
+					'mumumuTrigSys':{'EEE':0.00,'EEM':0.00,'EMM':0.00,'MMM':0.03,'All':0.03},
 					}
 
-def getNormUnc(hist,ibin):
+# ddbkgSystematics = {
+# 					'elPRsys':{'EEE':0.38,'EEM':0.12,'EMM':0.07,'MMM':0.00,'All':0.14},
+# 					'muPRsys':{'EEE':0.00,'EEM':0.02,'EMM':0.04,'MMM':0.09,'All':0.05},
+# 					'muFReta':{'EEE':0.00,'EEM':0.22,'EMM':0.11,'MMM':0.48,'All':0.22}
+# 					}
+
+ddbkgSystematics = {
+					'elPRsys':{'EEE':0.09,'EEM':0.15,'EMM':0.08,'MMM':0.00,'All':0.13},
+					'muPRsys':{'EEE':0.00,'EEM':0.04,'EMM':0.08,'MMM':0.17,'All':0.06},
+					'muFReta':{'EEE':0.00,'EEM':0.13,'EMM':0.10,'MMM':0.24,'All':0.11}
+					}
+
+
+def getNormUnc(hist,ibin,cat):
 	contentsquared = hist.GetBinContent(ibin)**2
-	error = corrdSys*corrdSys*contentsquared  #correlated uncertainties
+	corrdSysSq = lumiSys**2 + trigSys**2 + normSystematics['elIdSys'][cat]**2 + normSystematics['muIdSys'][cat]**2 + normSystematics['elIsoSys'][cat]**2 + normSystematics['muIsoSys'][cat]**2 
+	error = corrdSysSq * contentsquared  #correlated uncertainties
 	if 'top' in hist.GetName(): error += topXsecSys*topXsecSys*contentsquared # cross section
 	if 'ewk' in hist.GetName(): error += ewkXsecSys*ewkXsecSys*contentsquared # cross section
 	if 'qcd' in hist.GetName(): error += qcdXsecSys*qcdXsecSys*contentsquared # cross section
@@ -231,12 +176,13 @@ def getNormUnc(hist,ibin):
 
 def getDDBKGNormUnc(hist,ibin,cat):
 	contentsquared = hist.GetBinContent(ibin)**2
-	error = (ddbkgSystematics['elPR'][cat]**2 + ddbkgSystematics['muPR'][cat]**2 + ddbkgSystematics['muFReta'][cat]**2) * contentsquared  #correlated uncertainties
+	error = (ddbkgSystematics['elPRsys'][cat]**2 + ddbkgSystematics['muPRsys'][cat]**2 + ddbkgSystematics['muFReta'][cat]**2) * contentsquared  #correlated uncertainties
 	return error
 
 
 plotList = [#distribution name as defined in "doHists.py"
 	'NPV',
+
 	'lepPt',
 	'ElPt',
 	'MuPt',
@@ -249,17 +195,25 @@ plotList = [#distribution name as defined in "doHists.py"
 	'lep1Eta',
 	'lep2Eta',
 	'lep3Eta',
+	'Nlep',
+	'Nel',
+	'Nmu',
+
 	'JetEta',
-	'Jet1Eta',
-	'Jet2Eta',
+# 	'Jet1Eta',
+# 	'Jet2Eta',
 	'JetPt' ,
-	'Jet1Pt' ,
-	'Jet2Pt' ,
-	'HT',
-	'ST',
-	'MET',
+# 	'Jet1Pt' ,
+# 	'Jet2Pt' ,
+
+
+# 	'HT',
+# 	'ST',
+# 	'MET',
 	'HTrebinned',
 	'STrebinned',
+	'STrebinnedv2',
+	'STrebinnedv3',
 	'METrebinned',
 
 	'NJets' ,
@@ -279,14 +233,15 @@ plotList = [#distribution name as defined in "doHists.py"
 # 	'PtRel1',
 # 	'PtRel2',
 # 	'PtRel3',
-	'lepCharge',
-	'lepIso',
-	'ElIso',
-	'MuIso',
-	'MllsameFlavorOS',
+# 	'lepCharge',
+# 	'lepIso',
+# 	'ElIso',
+# 	'MuIso',
+# 	'MllsameFlavorOS',
 	'MllOSall',
 	'MllOSallmin',
-	'Mlll'
+	'MllOSallmax',
+# 	'Mlll'
 	]
 
 fit  = False
@@ -308,23 +263,23 @@ for discriminant in plotList:
 		
 		try: hTOP = RFile.Get(histPrefix+'__top').Clone()
 		except: 
-			print "There is no TOP!!!!!!!!"
-			print "Skipping TOP....."
+			if(DEBUG): print "There is no TOP!!!!!!!!",
+			if(DEBUG): print "Skipping TOP....."
 			pass
 		try: hEWK = RFile.Get(histPrefix+'__ewk').Clone()
 		except: 
-			print "There is no EWK!!!!!!!!"
-			print "Skipping EWK....."
+			if(DEBUG): print "There is no EWK!!!!!!!!",
+			if(DEBUG): print "Skipping EWK....."
 			pass
 		try: hQCD = RFile.Get(histPrefix+'__qcd').Clone()
 		except: 
-			print "There is no QCD!!!!!!!!"
-			print "Skipping QCD....."
+			if(DEBUG): print "There is no QCD!!!!!!!!",
+			if(DEBUG): print "Skipping QCD....."
 			pass
 		try: hDDBKG = RFile.Get(histPrefix+'_ddbkg').Clone()
 		except: 
-			print "There is no DDBKG!!!!!!!!"
-			print "Skipping DDBKG....."
+			if(DEBUG): print "There is no DDBKG!!!!!!!!",
+			if(DEBUG): print "Skipping DDBKG....."
 			pass
 					
 		try: print discriminant,isEM, "TOP", hTOP.Integral()
@@ -367,19 +322,19 @@ for discriminant in plotList:
 				for ud in ['minus','plus']:
 					try: systHists['top'+sys+ud] = RFile.Get(histPrefix+'__top__'+sys+'__'+ud).Clone()
 					except: 
-						print "Skipping",sys,"for TOP"
+						if(DEBUG): print "Skipping",sys,"for TOP"
 						pass
 					try: systHists['ewk'+sys+ud] = RFile.Get(histPrefix+'__ewk__'+sys+'__'+ud).Clone()
 					except: 
-						print "Skipping",sys,"for EWK"
+						if(DEBUG): print "Skipping",sys,"for EWK"
 						pass
 					try: systHists['qcd'+sys+ud] = RFile.Get(histPrefix+'__qcd__'+sys+'__'+ud).Clone()
 					except: 
-						print "Skipping",sys,"for QCD"
+						if(DEBUG): print "Skipping",sys,"for QCD"
 						pass
 					try: systHists['ddbkg'+sys+ud] = RFile.Get(histPrefix+'__ddbkg__'+sys+'__'+ud).Clone()
 					except: 
-						print "Skipping",sys,"for DDBKG"
+						if(DEBUG): print "Skipping",sys,"for DDBKG"
 						pass
 
 		try: hTOPstatOnly = hTOP.Clone(hTOP.GetName()+'statOnly')
@@ -415,20 +370,21 @@ for discriminant in plotList:
 			errorUp = 0.
 			errorDn = 0.
 			errorSym = 0.
+			errorNorm = 0.
 
 			errorStatOnly = bkgHT.GetBinError(ibin)**2
-			try: errorNorm = getNormUnc(hTOPstatOnly,ibin)
+			try: errorNorm = getNormUnc(hTOPstatOnly,ibin,isEM)
 			except: pass
-			try: errorNorm += getNormUnc(hEWKstatOnly,ibin)
+			try: errorNorm += getNormUnc(hEWKstatOnly,ibin,isEM)
 			except: pass
-			try: errorNorm += getNormUnc(hQCDstatOnly,ibin)
+			try: errorNorm += getNormUnc(hQCDstatOnly,ibin,isEM)
 			except: pass
 			try: errorNorm += getDDBKGNormUnc(hDDBKGstatOnly,ibin,isEM)
 			except: pass
 
 			if doAllSys:
 				for sys in systematicList:
-					if not (sys=='PR' or sys=='FR'):
+					if not ('PR' in sys or 'FR' in sys):
 						errorSym += (0.5*abs(systHists['top'+sys+'plus'].GetBinContent(ibin)-systHists['top'+sys+'minus'].GetBinContent(ibin)))**2				
 						errorPlus = systHists['top'+sys+'plus'].GetBinContent(ibin)-hTOP.GetBinContent(ibin)
 						errorMinus = hTOP.GetBinContent(ibin)-systHists['top'+sys+'minus'].GetBinContent(ibin)
@@ -455,7 +411,7 @@ for discriminant in plotList:
 								if errorMinus > 0: errorDn += errorMinus**2
 								else: errorUp += errorMinus**2
 							except: pass
-					if sys=='PR' or sys=='FR':
+					if 'PR' in sys or 'FR' in sys:
 						try: errorSym += (0.5*abs(systHists['ddbkg'+sys+'plus'].GetBinContent(ibin)-systHists['ddbkg'+sys+'minus'].GetBinContent(ibin)))**2				
 						except: pass
 						try: errorPlus = systHists['ddbkg'+sys+'plus'].GetBinContent(ibin)-hDDBKG.GetBinContent(ibin)
@@ -872,6 +828,7 @@ for discriminant in plotList:
 		savePrefix+=histPrefix+isRebinned
 		if doRealPull: savePrefix+='_pull'
 		if yLog: savePrefix+='_logy'
+		if blind: savePrefix+='_blinded'
 
 		if doOneBand:
 			#c1.SaveAs(savePrefix+"_totBand.pdf")

@@ -54,7 +54,40 @@ doAllSys= False
 
 # pfix='kinematics_80x_condor_Exactly3Lep_ddbkgscan_step2_7Feb2017_exactly2Jets_PRv7test_1bjet_2017_2_7/'
 
-pfix='kinematics_80x_condor_Exactly3Lep_ddbkgscan_step2_7Feb2017_exactly2Jets_PRv8test_1bjet_2017_2_7/'
+# pfix='kinematics_80x_condor_Exactly3Lep_ddbkgscan_step2_7Feb2017_exactly2Jets_PRv8test_1bjet_2017_2_7/'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_ddbkgscan_step2_2Feb2017_exactly2Jets_PRv6_1bjet_newMllOS_fixedlumi_2017_2_27/'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_ddbkgscan_step2_2Feb2017_exactly1Jet_PRv6_1bjet_newMllOS_fixedlumi_2017_2_27/'
+
+# pfix='kinematics_condor_ddbkgscan_PRv6_1Mar2017_scaleFRforCR1_step1hadds_step2_FRCR1'
+
+# pfix='kinematics_condor_ddbkgscan_PRv6_LJMet24Feb2017_FRCR2_2017_3_2'
+# pfix='kinematics_condor_ddbkgscan_PRv6_LJMet24Feb2017_FRCR1_2017_3_2'
+
+# pfix='kinematics_condor_ddbkgscan_PRv6_2Mar2017_take2_scaleFRforCR1_step1hadds_step2_FRCR1_2017_3_2'
+
+# pfix='kinematics_condor_ddbkgscan_PRv6_3Mar2017_scaleFR_CR2CR1_step1hadds_step2_FRCR2_2017_3_3'
+# pfix='kinematics_condor_ddbkgscan_PRv6_3Mar2017_scaleFR_CR2SR_step1hadds_step2_FRCR2_2017_3_3'
+
+# pfix='kinematics_condor_ddbkgscan_PRv6_LJMet24Feb2017_newMuTrkSF_FRCR2_2017_3_3'
+# pfix='kinematics_condor_ddbkgscan_PRv6_LJMet24Feb2017_newMuTrkSF_FRCR1_2017_3_3'
+
+# pfix='kinematics_condor_ddbkgscan_PRv6_LJMet24Feb2017_newMuTrkSF_FRCR2_nobjet_2017_3_4'
+# pfix='kinematics_condor_ddbkgscan_PRv6_LJMet24Feb2017_newMuTrkSF_FRCR1_nobjet_2017_3_4'
+
+# pfix='kinematics_condor_ddbkgscan_PRv6_LJMet24Feb2017_newMuTrkSF_FRCR1CR2_2017_3_5'
+# pfix='kinematics_condor_ddbkgscan_PRv6_LJMet24Feb2017_newMuTrkSF_FRCR1CR2_nobjet_2017_3_4'
+
+# pfix='kinematics_condor_ddbkgscan_PRv9_postPreapproval_FRCR2_2017_3_8' --> WRONG
+# pfix='kinematics_condor_ddbkgscan_PRv9_postPreapproval_FRCR1_2017_3_8' --> WRONG
+# pfix='kinematics_condor_ddbkgscan_PRv9_postPreapproval_FRCR1CR2_2017_3_8'
+
+
+# pfix='kinematics_condor_ddbkgscan_PRv9_postPreapproval_FRCR2_2017_3_9'
+# pfix='kinematics_condor_ddbkgscan_PRv9_postPreapproval_FRCR1_2017_3_9'
+pfix='kinematics_condor_ddbkgscan_PRv9_postPreapproval_FRCR1CR2_2017_3_12'
+
 
 # outDir = os.getcwd()+'/'
 outDir = '/user_data/rsyarif/'
@@ -152,10 +185,12 @@ systematicList = ['pileup','btag','pdfNew','muR','muF','muRFcorrd','muRFcorrdNew
 #################### NORMALIZATIONS #######################
 ###########################################################
 
-lumiSys = 0.062 #6.2% https://twiki.cern.ch/twiki/bin/view/CMS/TWikiLUM - 20Sep2016 - ATTENTION!! NEEDS to be checked again!
+lumiSys = 0.026 #6.2% https://twiki.cern.ch/twiki/bin/view/CMS/TWikiLUM - 20Sep2016 - ATTENTION!! NEEDS to be checked again!
 trigSys = 0.03 #3% trigger uncertainty - AN 2016 229
-lepIdSys = math.sqrt(3.*0.01**2) #1% lepton id uncertainty ## NEED to add in quadrature for 3 leptons! - ATTENTION! NEED UPDATING!
-lepIsoSys = math.sqrt(3.*0.01**2) #1% lepton isolation uncertainty ## NEED to add in quadrature for 3 leptons! - ATTENTION! NEED UPDATING!
+# lepIdSys = math.sqrt(3.*0.02**2) #1% lepton id uncertainty ## NEED to add in quadrature for 3 leptons! - ATTENTION! NEED UPDATING!
+# lepIsoSys = math.sqrt(3.*0.01**2) #1% lepton isolation uncertainty ## NEED to add in quadrature for 3 leptons! - ATTENTION! NEED UPDATING!
+lepIdSys = 0.06 #1% lepton id uncertainty ## NEED to add in quadrature for 3 leptons! - ATTENTION! NEED UPDATING!
+lepIsoSys = 0.03 #1% lepton isolation uncertainty ## NEED to add in quadrature for 3 leptons! - ATTENTION! NEED UPDATING!
 topXsecSys = 0.0 #55 #5.5% top x-sec uncertainty
 ewkXsecSys = 0.0 #5 #5% ewk x-sec uncertainty
 qcdXsecSys = 0.0 #50 #50% qcd x-sec uncertainty
@@ -1013,7 +1048,7 @@ for file in findfiles(outDir+'/'+category[0]+'/', '*.p'):
 print distList
 for dist in distList:
 	print "DISTRIBUTION: ",dist
-# 	if 'STrebinned' in dist:
+	if 'lepPt' not in dist: continue
 # 		print 'Skipping',  dist
 # 		continue
 	datahists = {}

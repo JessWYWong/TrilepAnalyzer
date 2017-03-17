@@ -78,7 +78,8 @@ nbtaglist=['0p']
 catList = list(itertools.product(isEMlist,nttaglist,nWtaglist,nbtaglist))
 tagList = list(itertools.product(nttaglist,nWtaglist,nbtaglist))
 
-lumiSys = 0.062 #6.2% https://twiki.cern.ch/twiki/bin/view/CMS/TWikiLUM - 20Sep2016 - ATTENTION!! NEEDS to be checked again!
+# lumiSys = 0.062 #6.2% https://twiki.cern.ch/twiki/bin/view/CMS/TWikiLUM - 20Sep2016 - ATTENTION!! NEEDS to be checked again!
+lumiSys = 0.026 #https://hypernews.cern.ch/HyperNews/CMS/get/physics-announcements/4495.html
 trigSys = 0.03 #3% trigger uncertainty - AN 2016 229
 lepIdSys = math.sqrt(3.*0.01**2) #1% lepton id uncertainty ## NEED to add in quadrature for 3 leptons! - ATTENTION! NEED UPDATING!
 lepIsoSys = math.sqrt(3.*0.01**2) #1% lepton isolation uncertainty ## NEED to add in quadrature for 3 leptons! - ATTENTION! NEED UPDATING!

@@ -1,55 +1,35 @@
 import os,sys,fnmatch
 
-# templateDir='/home/rsyarif/LJMet/TprimeAnalysis/CMSSW_7_6_3/src/TrilepAnalyzer_80x/optimization_Full2016/optimization_LJMet80x_3lepTT_Full2016_mcICHEP_2016_12_15_rizki_withNonIsoTrig_addDZforRunH_withJECJER_2016_12_21/lep1Pt0_MET20_jetPt0_NJets3_NBJets0_HT0_ST600_mllOS20/'
-# templateDir='/home/rsyarif/LJMet/TprimeAnalysis/CMSSW_7_6_3/src/TrilepAnalyzer_80x/optimization_Full2016/optimization_LJMet80x_3lepTT_Full2016_mcICHEP_2016_12_15_rizki_withNonIsoTrig_addDZforRunH_fixedST_withJECJER_2016_12_22/lep1Pt0_MET20_jetPt0_NJets3_NBJets0_HT0_ST600_mllOS20/'
-# templateDir='/user_data/rsyarif/optimization_condor_LJMet80x_3lepTT_Full2016_mcICHEP_2016_12_15_rizki_withNonIsoTrig_addDZforRunH_fixedST_2016_12_23/lep1Pt0_jetPt0_MET20_NJets3_NBJets0_HT0_ST700_mllOS20/'
-# templateDir='/user_data/rsyarif/optimization_condor_LJMet80x_3lepTT_Full2016_mcICHEP_2016_12_15_rizki_withNonIsoTrig_addDZforRunH_fixedST_2016_12_23/lep1Pt0_jetPt0_MET20_NJets3_NBJets0_HT0_ST800_mllOS20/'
-# templateDir='/user_data/rsyarif/optimization_condor_LJMet80x_3lepTT_Full2016_mcICHEP_2016_12_15_rizki_withNonIsoTrig_addDZforRunH_fixedST_2016_12_23/lep1Pt0_jetPt0_MET20_NJets3_NBJets0_HT0_ST900_mllOS20/'
-# templateDir='/user_data/rsyarif/optimization_condor_LJMet80x_3lepTT_Full2016_mcICHEP_2016_12_15_rizki_withNonIsoTrig_addDZforRunH_fixedST_2016_12_23/lep1Pt0_jetPt0_MET20_NJets3_NBJets0_HT0_ST1000_mllOS20/'
-# templateDir='/user_data/rsyarif/optimization_condor_LJMet80x_3lepTT_Full2016_mcICHEP_2016_12_15_rizki_withNonIsoTrig_addDZforRunH_fixedST_2016_12_23/lep1Pt0_jetPt0_MET20_NJets3_NBJets0_HT0_ST1100_mllOS20/'
+templateDir = '/user_data/rsyarif/'
 
-# templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_mcICHEP_FRv15_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_2017_1_23/lep1Pt0_jetPt0_MET20_NJets3_NBJets0_HT0_ST600_mllOS20/'
-# templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_mcICHEP_FRv15_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_2017_1_23/lep1Pt0_jetPt0_MET20_NJets3_NBJets0_HT0_ST700_mllOS20/'
-# templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_mcICHEP_FRv15_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_2017_1_23/lep1Pt0_jetPt0_MET20_NJets3_NBJets0_HT0_ST800_mllOS20/'
-# templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_mcICHEP_FRv15_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_2017_1_23/lep1Pt0_jetPt0_MET20_NJets3_NBJets0_HT0_ST900_mllOS20/'
-# templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_mcICHEP_FRv15_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_2017_1_23/lep1Pt0_jetPt0_MET20_NJets3_NBJets0_HT0_ST1000_mllOS20/'
-# templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_mcICHEP_FRv15_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_2017_1_23/lep1Pt0_jetPt0_MET20_NJets3_NBJets0_HT0_ST1100_mllOS20/'
+# templateDir+='optimization_condor_80x_MultiLep_Full2016_Moriond17_PRv6_FRv18bSys_fixedLumiSYS_fixedLepIdIsoSys_ALLsys_step2_TESTING_2017_2_15/'
+# templateDir+='optimization_condor_80x_MultiLep_Full2016_Moriond17_PRv6_FRv18bSys_fixedLumi_ALLsys_step2_addbMistag_addMoreSignal_2017_2_16/'
+# templateDir+='optimization_condor_80x_MultiLep_Full2016_Moriond17_PRv6_FRv18bSys_fixedLumi_ALLsys_step2_addmistag_addMoreSignal_2017_2_17/'
+# templateDir+='optimization_condor_80x_MultiLep_Full2016_Moriond17_PRv6_FRv18bSys_fixedLumi_newMllOScut_fixedAllSYS_step2_addmistag_addMoreSignal_2017_2_23/'
+# templateDir+='optimization_condor_PRv6_FRv20b_newMllOSV2_Allsys_2017_3_1/'
+# templateDir+='optimization_reMiniAOD_PRv6_FRv24_newMuTrkSF_AllSys_2017_3_5/'
+templateDir+='optimization_reMiniAOD_PRv9_FRv24_newFRsys_AllSys_2017_3_10/'
 
-# templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_2017_1_23/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20/'
-# templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_2017_1_23/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST700_mllOS20/'
-# templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_2017_1_23/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST800_mllOS20/'
-# templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_2017_1_23/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST900_mllOS20/'
-# templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_2017_1_23/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1000_mllOS20/'
-# templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_2017_1_23/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1100_mllOS20/'
+limitType = templateDir.split('/')[-2]
 
-# templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_26Jan2017_moreThan2Jets_lepPt30_2017_1_30/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20/'
-# templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_26Jan2017_moreThan2Jets_lepPt30_testing_2017_1_31/lep1Pt30_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20/'
+# templateDir+='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20/'
+templateDir+='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST700_mllOS20/'
+# templateDir+='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST800_mllOS20/'
+# templateDir+='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST900_mllOS20/'
+# templateDir+='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1000_mllOS20/'
+# templateDir+='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1100_mllOS20/'
 
-# templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_3Feb2017_step2_2017_2_3/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20/'
-# templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_3Feb2017_step2_2017_2_3/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST700_mllOS20/'
-# templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_3Feb2017_step2_2017_2_3/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST800_mllOS20/'
-# templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_3Feb2017_step2_2017_2_3/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST900_mllOS20/'
-# templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_3Feb2017_step2_2017_2_3/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1000_mllOS20/'
-# templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_3Feb2017_step2_2017_2_3/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1100_mllOS20/'
+# templateDir+='4binsCount_updatedLumi_updatedLepIdUnc_addbmistag_normRENORMPDF/'
+# templateDir+='4binsCount_updatedLumi_updatedLepIdUnc_addmistag_normRENORMPDF/'
+# templateDir+='4binsCount_newMllOScut/'
+templateDir+='4binsCount/'
+print "Checking:", templateDir
 
-# templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_6Feb2017_step2_2017_2_6/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20/'
 
-# templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_6Feb2017_step2_2017_2_7/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20/'
+outputDir = '/user_data/rsyarif/limits/'
 
-# templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_6Feb2017_newdbkgSys_step2_2017_2_8/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20/'
-# templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_6Feb2017_newdbkgSys_step2_2017_2_8/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20/'
-# templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_6Feb2017_newdbkgSys_step2_2017_2_8/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST800_mllOS20/'
 
-# templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_6Feb2017_newdbkgSys_CorrectedLumiSYS_step2_2017_2_8/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20/'
-
-# templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_6Feb2017_newdbkgSys_CorrectedLumiSYS_ALLsys_step2_2017_2_8/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20/'
-
-# templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_6Feb2017_newdbkgSys_CorrectedLumiSYS_ALLsys_ONEddbkgSYS_step2_2017_2_8/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20/'
-
-# templateDir='/home/rsyarif/LJMet/TprimeAnalysis/CMSSW_7_6_3/src/TrilepAnalyzer_80x/optimization_Full2016/optimization_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_6Feb2017_newdbkgSys_CorrectedLumiSYS_ALLsys_step2_2017_2_8/lep1Pt0_MET20_jetPt0_NJets3_NBJets1_HT0_ST600_mllOS20/'
-
-templateDir='/home/rsyarif/LJMet/TprimeAnalysis/CMSSW_7_6_3/src/TrilepAnalyzer_80x/optimization_Full2016/optimization_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_6Feb2017_newdbkgSys_CorrectedLumiSYS_ALLsys_oneDDBKGsys_step2_2017_2_8/lep1Pt0_MET20_jetPt0_NJets3_NBJets1_HT0_ST600_mllOS20/'
-
+lumiStr = '35p867'
 
 thetaConfigTemp = os.getcwd()+'/theta_config_template.py'
 
@@ -58,28 +38,9 @@ toFilter = ['pdf','muR','muF','muRFcorrd','muRFdecorrdNew','muRFenv','tau21','jm
 # toFilter = []
 # toFilter+= ['jec','jer']
 toFilter = ['__'+item+'__' for item in toFilter]
-toFilter += ['sig__pdfNew','sig__muRFcorrdNew']
+# toFilter += ['sig__pdfNew','sig__muRFcorrdNew']
 print 'Filtering the following : ',toFilter
 
-if not os.path.exists('/user_data/rsyarif/limits/'+templateDir.split('/')[-1]): os.system('mkdir /user_data/rsyarif/limits/'+templateDir.split('/')[-1]) #prevent writing these (they are large) to brux6 common area
-# outputDir = '/user_data/rsyarif/limits/'+templateDir.split('/')[-1]+'/'
-outputDir = '/user_data/rsyarif/limits/'
-# limitType = '80x_noJEC_noJER_v3'
-# limitType = '80x_withJECJER'
-# limitType = '80x_withJECJER_condor'
-# limitType = '80x_withJECJER_condor_FRv7_PRv2'
-# limitType = '80x_Full2016_mcICHEP_fixedST_AllSYS'
-# limitType = '80x_MultiLep_Full2016_mcICHEP_FRv15_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_2017_1_23_nobtagSys'
-# limitType = '80x_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_2017_1_23'
-# limitType = '80x_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_26Jan2017_moreThan2Jets_lepPt30_2017_1_30'
-# limitType = '80x_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_26Jan2017_moreThan2Jets_lepPt30_testing_2017_1_31'
-# limitType = '80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_2017_2_3'
-# limitType = '80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_2017_2_6'
-# limitType = '80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_2017_2_7'
-# limitType = '80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_newdbkgSys_2017_2_8'
-# limitType = '80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_newdbkgSys_CorrectedLumiSYS_2017_2_8'
-# limitType = '80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_newdbkgSys_CorrectedLumiSYS_ALLsys_2017_2_8'
-limitType = '80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_newdbkgSys_CorrectedLumiSYS_ALLsys_oneDDBKGsys_2017_2_8'
 
 def findfiles(path, filtre):
     for root, dirs, files in os.walk(path):
@@ -127,17 +88,26 @@ def makeThetaConfig(rFile,outDir):
 
 count=0
 for file in rootfilelist:
-	print file
+	print ''
+	print 'file   : ',file
 	signal = file.split('/')[-1].split('_')[2]
-	BRStr = file.split('/')[-1][file.split('/')[-1].find(signal)+len(signal):file.split('/')[-1].find('_36p814fb')]
+	BRStr = file.split('/')[-1][file.split('/')[-1].find(signal)+len(signal):file.split('/')[-1].find('_'+lumiStr+'fb')]
 	outDir = outputDir+limitType+BRStr+'/'
-	print signal,BRStr
-	if not os.path.exists(outDir): os.system('mkdir '+outDir)
+	print 'signal : ',signal,BRStr
+# 	print 'outDir : ',outDir
+	if not os.path.exists(outDir): os.system('mkdir -v '+outDir)
+	outDir+='/'+templateDir.split('/')[-3]
+	if not os.path.exists(outDir): os.system('mkdir -v '+outDir)
+# 	print 'outDir : ',outDir
+# 	print 'pwd:',os.getcwd()
 	os.chdir(outDir)
-	fileDir = file.split('/')[-2]
+# 	print 'pwd:',os.getcwd()
+	fileDir = '/'+file.split('/')[-2]
 	#if os.path.exists(outDir+fileDir+'/'+file.split('/')[-1][:-5]+'.job'): continue
-	if not os.path.exists(outDir+fileDir): os.system('mkdir '+fileDir)
-	os.chdir(fileDir)
+# 	print 'outDir+fileDir:',outDir+fileDir
+	if not os.path.exists(outDir+fileDir): os.system('mkdir -v '+outDir+fileDir)
+	os.chdir(outDir+fileDir)
+# 	print 'fileDir: ',fileDir
 	makeThetaConfig(file,outDir)
 
 	dict={'configdir':outDir+fileDir,'configfile':file.split('/')[-1][:-5]}
@@ -164,5 +134,6 @@ Queue 1"""%dict)
 	os.system('condor_submit '+file.split('/')[-1][:-5]+'.job')
 	os.chdir('..')
 	count+=1
+	
 print "Total number of jobs submitted:", count
                   

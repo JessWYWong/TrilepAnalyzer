@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
-targetlumi = 36814. # 1/pb  https://hypernews.cern.ch/HyperNews/CMS/get/luminosity/662.html   
+# targetlumi = 36814. # 1/pb  https://hypernews.cern.ch/HyperNews/CMS/get/luminosity/662.html   
+targetlumi = 35867. # 1/pb  https://mail.google.com/mail/u/0/#label/eDRAWER%2FCERN-HyperNews/15a2f9a2bd29c798 https://hypernews.cern.ch/HyperNews/CMS/get/physics-announcements/4495.html   
 
 BR={}
 BR['BW'] = 0.5
@@ -16,9 +17,12 @@ BR['TTTHTH'] = BR['TH']*BR['TH']
 # Number of processed MC events (before selections)
 nRun={}
 
+nRun['DY50'] = 96658943. # from DAS https://cmsweb.cern.ch/das/request?input=dataset%3D%2FDYJetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8%2FRunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6_ext2-v1%2FMINIAODSIM&instance=prod%2Fglobal
+
+
 nRun['DY10to50'] = 29386500. # from 40381400. # calculated using WeightAnalyzer.
 #nRun['DY50'] = 19403300. # from 28968300. # calculated using WeightAnalyzer.
-nRun['DY50'] = 16912500. # from 25249500. # calculated using WeightAnalyzer few jobs failed!.
+# nRun['DY50'] = 16912500. # from 25249500. # calculated using WeightAnalyzer few jobs failed!.
 nRun['WJets'] = 16183300. # from 23662100. # calculated using WeightAnalyzer.
 
 nRun['TTJetsPH'] = 155119000. # calculated using WeightAnalyzer.
@@ -166,7 +170,8 @@ nRun['TbtWQ2D'] = 497600.
 # Cross sections for MC samples (in pb)
 xsec={}
 xsec['DY10to50'] = 18610 # https://twiki.cern.ch/twiki/bin/view/CMS/SummaryTable1G25ns
-xsec['DY50'] = 6025.2 # https://twiki.cern.ch/twiki/bin/view/CMS/SummaryTable1G25ns
+# xsec['DY50'] = 6025.2 # https://twiki.cern.ch/twiki/bin/view/CMS/SummaryTable1G25ns
+xsec['DY50'] = 5765.4 #1921.8*3 +-0.6*3 (integration err) +- 33.2*3 pb (pdf+alpha_s err) : https://twiki.cern.ch/twiki/bin/view/CMS/SummaryTable1G25ns#DY_Z 
 xsec['TTJets'] = 831.76
 xsec['WJets'] = 61526.7
 xsec['TTJetsPH'] = 831.76 # https://twiki.cern.ch/twiki/bin/view/CMS/SummaryTable1G25ns

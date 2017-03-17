@@ -12,10 +12,10 @@ setTDRStyle()
 blind=True
 saveKey=''
 signal = 'T'#'B'
-lumiPlot = '36.8'
-lumiStr = '36p814'
+lumiPlot = '35.9'
+lumiStr = '35p867'
 chiral=''#'right'
-discriminant='ST'
+discriminant='STrebinned'
 histPrefix=discriminant+'_'+str(lumiStr)+'fb'+chiral
 stat=''#0.75
 isRebinned=''
@@ -28,7 +28,7 @@ isRebinned=''
 # cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets0_HT0_ST1100_mllOS20'
 
 # cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20'
-# cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST700_mllOS20'
+cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST700_mllOS20'
 # cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST800_mllOS20'
 # cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST900_mllOS20'
 # cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1000_mllOS20'
@@ -36,12 +36,15 @@ isRebinned=''
 
 # cutString='lep1Pt30_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20'
 
-cutString='lep1Pt0_MET20_jetPt0_NJets3_NBJets1_HT0_ST600_mllOS20'
+# cutString='lep1Pt0_MET20_jetPt0_NJets3_NBJets1_HT0_ST600_mllOS20'
 
+# cutString+='/4binsCount_updatedLumi_updatedLepIdUnc_addmistag_normRENORMPDF'
+# cutString+='/4binsCount_newMllOScut/'
+cutString+='/4binsCount/'
 
-mass = array('d', [800,900,1000,1100,1200,1300])#,1400,1500,1600])
-masserr = array('d', [0,0,0,0,0,0,0])#,0,0,0])
-mass_str = ['800','900','1000','1100','1200','1300']#,'1400','1500','1600']
+mass = array('d', [800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800])
+masserr = array('d', [0,0,0,0,0,0,0,0,0,0,0,0])
+mass_str = ['800','900','1000','1100','1200','1300','1400','1500','1600','1700','1800']
 
 exp   =array('d',[0 for i in range(len(mass))])
 experr=array('d',[0 for i in range(len(mass))])
@@ -52,8 +55,8 @@ exp68L=array('d',[0 for i in range(len(mass))])
 exp95H=array('d',[0 for i in range(len(mass))])
 exp95L=array('d',[0 for i in range(len(mass))])
 
-xsec = array('d', [1,1,1,1,1,1,1])#,1,1,1])
-theory_br = [.1285,.1285,.1285,.1285,.1285,.1285,.1285]#,.1285,.1285,.1285]
+xsec = array('d', [1,1,1,1,1,1,1,1,1,1,1])
+theory_br = [.1285,.1285,.1285,.1285,.1285,.1285,.1285,.1285,.1285,.1285]
 if chiral=='right':theory_xsec  = [0.442,0.190,0.0877,0.0427,0.0217,0.0114,0.00618,0.00342,0.00193,0.00111]
 elif chiral=='left':theory_xsec = [0.442,0.190,0.0877,0.0427,0.0217,0.0114,0.00618,0.00342,0.00193,0.00111]
 else: print "Please enter left or right"
@@ -179,7 +182,7 @@ def PlotLimits(limitDir,limitFile,tempKey):
 
     expected95.Draw("a3")
     expected95.GetYaxis().SetRangeUser(.008+.00001,10.45)
-    expected95.GetXaxis().SetRangeUser(700,1300)
+    expected95.GetXaxis().SetRangeUser(800,1800)
     if tempKey=='nB0': expected95.GetYaxis().SetRangeUser(.008+.00001,25.45)   
     expected95.GetXaxis().SetTitle(signal+" mass [GeV]")
     expected95.GetYaxis().SetTitle("#sigma ("+signal+"#bar{"+signal+"})[pb]")
@@ -230,34 +233,35 @@ def PlotLimits(limitDir,limitFile,tempKey):
     folder = '.'
     outDir=folder+'/'+limitDir.split('/')[-3]+'plots'
     if not os.path.exists(outDir): os.system('mkdir '+outDir)
-    c4.SaveAs(outDir+'/LimitPlot_'+histPrefix+isRebinned+saveKey+'_'+tempKey+'_'+cutString+'.root')
-    c4.SaveAs(outDir+'/LimitPlot_'+histPrefix+isRebinned+saveKey+'_'+tempKey+'_'+cutString+'.pdf')
-    c4.SaveAs(outDir+'/LimitPlot_'+histPrefix+isRebinned+saveKey+'_'+tempKey+'_'+cutString+'.png')
-    c4.SaveAs(outDir+'/LimitPlot_'+histPrefix+isRebinned+saveKey+'_'+tempKey+'_'+cutString+'.C')
+    outDir=folder+'/'+limitDir.split('/')[-3]+'plots'+'/'+limitDir.split('/')[-2]
+    if not os.path.exists(outDir): os.system('mkdir '+outDir)
+#     c4.SaveAs(outDir+'/LimitPlot_'+histPrefix+isRebinned+saveKey+'_'+tempKey+'_'+cutString+'.root')
+#     c4.SaveAs(outDir+'/LimitPlot_'+histPrefix+isRebinned+saveKey+'_'+tempKey+'_'+cutString+'.pdf')
+#     c4.SaveAs(outDir+'/LimitPlot_'+histPrefix+isRebinned+saveKey+'_'+tempKey+'_'+cutString+'.png')
+#     c4.SaveAs(outDir+'/LimitPlot_'+histPrefix+isRebinned+saveKey+'_'+tempKey+'_'+cutString+'.C')
+    c4.SaveAs(outDir+'/LimitPlot_'+histPrefix+isRebinned+saveKey+'_'+cutString.replace('/','_')+'.root')
+    c4.SaveAs(outDir+'/LimitPlot_'+histPrefix+isRebinned+saveKey+'_'+cutString.replace('/','_')+'.pdf')
+    c4.SaveAs(outDir+'/LimitPlot_'+histPrefix+isRebinned+saveKey+'_'+cutString.replace('/','_')+'.png')
+    c4.SaveAs(outDir+'/LimitPlot_'+histPrefix+isRebinned+saveKey+'_'+cutString.replace('/','_')+'.C')
     return int(round(limExpected)), int(round(limObserved))
 
-doBRScan = False
+doBRScan = True
 BRs={}
-BRs['BW']=[0.50,0.0,0.0,0.0,0.0,0.0,0.0,0.2,0.2,0.2,0.2,0.2,0.4,0.4,0.4,0.4,0.6,0.6,0.6,0.8,0.8,1.0]
-BRs['TH']=[0.25,0.0,0.2,0.4,0.6,0.8,1.0,0.0,0.2,0.4,0.6,0.8,0.0,0.2,0.4,0.6,0.0,0.2,0.4,0.0,0.2,0.0]
-BRs['TZ']=[0.25,1.0,0.8,0.6,0.4,0.2,0.0,0.8,0.6,0.4,0.2,0.0,0.6,0.4,0.2,0.0,0.4,0.2,0.0,0.2,0.0,0.0]
+# BRs['BW']=[0.50,0.0,0.0,0.0,0.0,0.0,0.0,0.2,0.2,0.2,0.2,0.2,0.4,0.4,0.4,0.4,0.6,0.6,0.6,0.8,0.8,1.0]
+# BRs['TH']=[0.25,0.0,0.2,0.4,0.6,0.8,1.0,0.0,0.2,0.4,0.6,0.8,0.0,0.2,0.4,0.6,0.0,0.2,0.4,0.0,0.2,0.0]
+# BRs['TZ']=[0.25,1.0,0.8,0.6,0.4,0.2,0.0,0.8,0.6,0.4,0.2,0.0,0.6,0.4,0.2,0.0,0.4,0.2,0.0,0.2,0.0,0.0]
+BRs['BW']=[0.50,0.0,0.0]
+BRs['TH']=[0.25,0.5,0.0]
+BRs['TZ']=[0.25,0.5,1.0]
 nBRconf=len(BRs['BW'])
 if not doBRScan: nBRconf=1
 
-# tempKeys = ['80x_Full2016_mcICHEP_AllSYS']
-# tempKeys = ['80x_Full2016_mcICHEP_fixedST_AllSYS']
-# tempKeys = ['80x_MultiLep_Full2016_mcICHEP_FRv15_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_2017_1_23_nobtagSys']
-# tempKeys = ['80x_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_2017_1_23']
-# tempKeys = ['80x_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_26Jan2017_moreThan2Jets_lepPt30_2017_1_30']
-# tempKeys = ['80x_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_26Jan2017_moreThan2Jets_lepPt30_testing_2017_1_31']
-# tempKeys = ['80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_2017_2_3']
-# tempKeys = ['80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_2017_2_6']
-# tempKeys = ['80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_2017_2_7']
-# tempKeys = ['80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_newdbkgSys_2017_2_8']
-# tempKeys = ['80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_newdbkgSys_CorrectedLumiSYS_2017_2_8']
-# tempKeys = ['80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_newdbkgSys_CorrectedLumiSYS_ALLsys_2017_2_8']
-tempKeys = ['80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_newdbkgSys_CorrectedLumiSYS_ALLsys_oneDDBKGsys_2017_2_8']
-
+# tempKeys = ['optimization_condor_80x_MultiLep_Full2016_Moriond17_PRv6_FRv18bSys_fixedLumi_ALLsys_step2_addbMistag_addMoreSignal_2017_2_16']
+# tempKeys = ['optimization_condor_80x_MultiLep_Full2016_Moriond17_PRv6_FRv18bSys_fixedLumi_ALLsys_step2_addmistag_addMoreSignal_2017_2_17']
+# tempKeys = ['optimization_condor_80x_MultiLep_Full2016_Moriond17_PRv6_FRv18bSys_fixedLumi_newMllOScut_fixedAllSYS_step2_addmistag_addMoreSignal_2017_2_23']
+# tempKeys = ['optimization_condor_PRv6_FRv20b_newMllOSV2_Allsys_2017_3_1']
+# tempKeys = ['optimization_reMiniAOD_PRv6_FRv24_newMuTrkSF_AllSys_2017_3_5']
+tempKeys = ['optimization_reMiniAOD_PRv9_FRv24_newFRsys_AllSys_2017_3_10']
 expLims = []
 obsLims = []
 for tempKey in tempKeys:

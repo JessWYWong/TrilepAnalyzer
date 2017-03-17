@@ -68,9 +68,32 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 #  	cut += ' && AllLeptonCount_PtOrdered == 3' #require exactly 3 leptons
 #  	cut += ' && AllLeptonCount_PtOrdered > 3' #require more than 3 leptons
 
-# 	cut += ' && Mll_sameFlavorOS > '+str(cutList['mllOSCut']) #to make sure the OS pair are same sign cut above 0. 
+	### cut only events where there is a OS lepton pair and that it has 0<MllOS<cutvalue 
+# 	cut += ' && ( (MllOS_allComb[0] > '+str(cutList['mllOSCut'])+' || MllOS_allComb[0] < 0)' 
+# 	cut += ' && (MllOS_allComb[1] > '+str(cutList['mllOSCut'])+' || MllOS_allComb[1] < 0)' 
+# 	cut += ' && (MllOS_allComb[2] > '+str(cutList['mllOSCut'])+' || MllOS_allComb[2] < 0) )' 
 
-	cut += ' && MllOS_allComb_min > '+str(cutList['mllOSCut']) #to make sure the OS pair are same sign cut above 0. 
+	### cut only events where there is a OS lepton pair and that it has 0<MllOS<cutvalue - to account for up to 6 leptons! - only works with step1 starting Mar 1, 2017 !!
+	cut += ' && ( (MllOS_allComb[0] > '+str(cutList['mllOSCut'])+' || MllOS_allComb[0] < 0)' 
+	cut += ' && (MllOS_allComb[1] > '+str(cutList['mllOSCut'])+' || MllOS_allComb[1] < 0)' 
+	cut += ' && (MllOS_allComb[2] > '+str(cutList['mllOSCut'])+' || MllOS_allComb[2] < 0)' 
+	cut += ' && (MllOS_allComb[3] > '+str(cutList['mllOSCut'])+' || MllOS_allComb[3] < 0)' 
+	cut += ' && (MllOS_allComb[4] > '+str(cutList['mllOSCut'])+' || MllOS_allComb[4] < 0)' 
+	cut += ' && (MllOS_allComb[5] > '+str(cutList['mllOSCut'])+' || MllOS_allComb[5] < 0)' 
+	cut += ' && (MllOS_allComb[6] > '+str(cutList['mllOSCut'])+' || MllOS_allComb[6] < 0)' 
+	cut += ' && (MllOS_allComb[7] > '+str(cutList['mllOSCut'])+' || MllOS_allComb[7] < 0)' 
+	cut += ' && (MllOS_allComb[8] > '+str(cutList['mllOSCut'])+' || MllOS_allComb[8] < 0)' 
+	cut += ' && (MllOS_allComb[9] > '+str(cutList['mllOSCut'])+' || MllOS_allComb[9] < 0)' 
+	cut += ' && (MllOS_allComb[10] > '+str(cutList['mllOSCut'])+' || MllOS_allComb[10] < 0)' 
+	cut += ' && (MllOS_allComb[11] > '+str(cutList['mllOSCut'])+' || MllOS_allComb[11] < 0)' 
+	cut += ' && (MllOS_allComb[12] > '+str(cutList['mllOSCut'])+' || MllOS_allComb[12] < 0)' 
+	cut += ' && (MllOS_allComb[13] > '+str(cutList['mllOSCut'])+' || MllOS_allComb[13] < 0)' 
+	cut += ' && (MllOS_allComb[14] > '+str(cutList['mllOSCut'])+' || MllOS_allComb[14] < 0) )' 
+
+
+# 	cut += ' && MllOS_allComb_min > '+str(cutList['mllOSCut']) #to make sure the OS pair are same sign cut above 0. 
+
+# 	cut += ' && Mll_sameFlavorOS > '+str(cutList['mllOSCut']) #to make sure the OS pair are same sign cut above 0. 
 
 # 	cut += ' && ( (MllOS_allComb[0] > 80 && MllOS_allComb[0] < 100)' #on Z cut
 # 	cut += ' || (MllOS_allComb[1] > 80 && MllOS_allComb[1] < 100)' #on Z cut
@@ -83,6 +106,7 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 # 	cut += ' && ( (MllOS_allComb[0] <= 80 || MllOS_allComb[0] >= 100)' #off Z cut
 # 	cut += ' || (MllOS_allComb[1] <= 80 || MllOS_allComb[1] >= 100)' #off Z cut
 # 	cut += ' || (MllOS_allComb[2] <= 80 || MllOS_allComb[2] >= 100) )' #off Z cut
+
 
 	isLepCut=''
 	if category=='EEE': isLepCut+=' && isEEE==1'
@@ -234,8 +258,8 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 
 			hists[discriminantName+'btagUp_'    +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'btagUp_'    +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
 			hists[discriminantName+'btagDown_'  +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'btagDown_'  +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
-			hists[discriminantName+'bmistagUp_'    +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'bmistagUp_'    +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
-			hists[discriminantName+'bmistagDown_'  +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'bmistagDown_'  +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
+			hists[discriminantName+'mistagUp_'    +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'mistagUp_'    +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
+			hists[discriminantName+'mistagDown_'  +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'mistagDown_'  +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
 
 
 			if tTree[process+'jecUp']:		
@@ -288,6 +312,7 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 
 	else: 
 		weightStr           = TrigEff+' * pileupWeight * 1 * isoSF * lepIdSF * EGammaGsfSF * MuTrkSF * MCWeight_singleLepCalc/abs(MCWeight_singleLepCalc) * '+str(weight[process])
+# 		weightStr           = TrigEff+' * pileupWeight * 1 * isoSF * lepIdSF * EGammaGsfSF * MCWeight_singleLepCalc/abs(MCWeight_singleLepCalc) * '+str(weight[process])
 # 		weightStr           = TrigEff+' * pileupWeight * 1 * isoSF * lepIdSF * MCWeight_singleLepCalc/abs(MCWeight_singleLepCalc) * '+str(weight[process])
 # 		weightStr           = TrigEff+' * pileupWeight * JetSF_pTNbwflat * isoSF * lepIdSF * MCWeight_singleLepCalc/abs(MCWeight_singleLepCalc) * '+str(weight[process])
 		weightPileupUpStr   = weightStr.replace('pileupWeight','pileupWeightUp')

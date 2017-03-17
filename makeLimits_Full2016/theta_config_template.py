@@ -17,7 +17,8 @@ def get_model():
     
     for proc in procs:
 		if(proc!="ddbkg"):
-			try: model.add_lognormal_uncertainty('lumiSys', math.log(1.062), proc)
+# 			try: model.add_lognormal_uncertainty('lumiSys', math.log(1.062), proc)
+			try: model.add_lognormal_uncertainty('lumiSys', math.log(1.026), proc) #https://hypernews.cern.ch/HyperNews/CMS/get/physics-announcements/4495.html
 			except: pass
 
     return model
@@ -28,7 +29,8 @@ model = get_model()
 
 model_summary(model)
 
-plot_exp, plot_obs = bayesian_limits(model,'all', n_toy = 5000, n_data = 500)
+# plot_exp, plot_obs = bayesian_limits(model,'all', n_toy = 5000, n_data = 500)
+plot_exp, plot_obs = bayesian_limits(model,'all', n_toy = 100000, n_data = 1000)
 #plot_exp, plot_obs = bayesian_limits(model,'expected')
 plot_exp.write_txt('limits_'+rFileName+'_expected.txt')
 plot_obs.write_txt('limits_'+rFileName+'_observed.txt')

@@ -1,4 +1,4 @@
 #!/bin/bash
 
-python doHists.py
-python doKinematics.py
+source switchToFinal.sh
+python doCondorKinematics.py

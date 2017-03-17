@@ -84,7 +84,17 @@ samples = {
 # 'DY10to50': 'DYJetsToLL_M-10to50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8',
 'DY10to50':'DYJetsToLL_M-10to50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8',
 # 'DY50':'DYJetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8',
-'DY50':'DYJetsToLL_M-50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8',
+'DY50':'DYJetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8_combined',
+# 'DY50':'DYJetsToLL_M-50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8',
+# 'DY50':DYJetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8',
+
+'DYMG100':'DYJetsToLL_M-50_HT-100to200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8',
+'DYMG200':'DYJetsToLL_M-50_HT-200to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8',
+'DYMG400':'DYJetsToLL_M-50_HT-400to600_TuneCUETP8M1_13TeV-madgraphMLM-pythia8',
+'DYMG600':'DYJetsToLL_M-50_HT-600to800_TuneCUETP8M1_13TeV-madgraphMLM-pythia8',
+'DYMG800':'DYJetsToLL_M-50_HT-800to1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8',
+'DYMG1200':'DYJetsToLL_M-50_HT-1200to2500_TuneCUETP8M1_13TeV-madgraphMLM-pythia8',
+'DYMG2500':'DYJetsToLL_M-50_HT-2500toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8',
 
 'WJetsMG100':'WJetsToLNu_HT-100To200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8',
 'WJetsMG200':'WJetsToLNu_HT-200To400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8',
@@ -95,9 +105,9 @@ samples = {
 'WJetsMG2500':'WJetsToLNu_HT-2500ToInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8',
 
 'WW':'WW_TuneCUETP8M1_13TeV-pythia8',
-#'WZ':'WZ_TuneCUETP8M1_13TeV-pythia8',
+'WZinc':'WZ_TuneCUETP8M1_13TeV-pythia8',
 'WZ':'WZTo3LNu_TuneCUETP8M1_13TeV-powheg-pythia8',
-# 'ZZ':'ZZ_TuneCUETP8M1_13TeV-pythia8',
+'ZZinc':'ZZ_TuneCUETP8M1_13TeV-pythia8',
 'ZZ':'ZZTo4L_13TeV_powheg_pythia8',
 
 'WWW':'WWW_4F_TuneCUETP8M1_13TeV-amcatnlo-pythia8',
@@ -148,7 +158,7 @@ samples = {
 
 dilep = ['EE','MM','ME']
 dict_dilep = {dilep[0]:'DoubleEG',dilep[1]:'DoubleMuon',dilep[2]:'MuonEG'}
-run = ['RRB','RRC','RRD','RRE','RRF','RRG','PRH']
+run = ['RRB','RRC','RRD','RRE','RRF','RRG','RRH']
 ddbkgCat = ['TTT','TTL','TLT','LTT','TLL','LTL','LLT','LLL']
 
 for run_ in run:

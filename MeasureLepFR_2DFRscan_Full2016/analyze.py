@@ -56,12 +56,13 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 
 
 	cut += ' && (corr_met_singleLepCalc >= '+str(cutList['metCut'])+')'
-	cut += ' && (NJets_singleLepCalc == '+str(cutList['njetsCut'])+')'
+# 	cut += ' && (NJets_singleLepCalc == '+str(cutList['njetsCut'])+')'
+	cut += ' && (NJets_singleLepCalc == 2 || NJets_singleLepCalc == 1)'
 # 	cut += ' && (NJets_JetSubCalc >= '+str(cutList['njetsCut'])+')'
 	cut += ' && (NJetsBTagwithSF_singleLepCalc >= '+str(cutList['nbjetsCut'])+')'
 # 	cut += ' && (NJetsCSVwithSF_JetSubCalc_noLepCorr >= '+str(cutList['nbjetsCut'])+')'
 	if ('Data' in process and 'Bkg' not in process): 
-		if 'PRH' in process: #for runH use DZ version of HLT
+		if 'RRH' in process: #for runH use DZ version of HLT
 			if cutList['isPassTrig_dilep']==1:cut += ' && DataPastTrigger_dilepDZ4runH == 1'
 			if cutList['isPassTrilepton']==1 :  cut += ' && isPassTrilepton == 1'
 		else:
@@ -71,7 +72,7 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 			if cutList['isPassTrig_trilep']==1: cut += ' && DataPastTrigger_trilep == 1'
 			if cutList['isPassTrilepton']==1 :  cut += ' && isPassTrilepton == 1'
 	elif ('DataDrivenBkg' in process): 
-		if 'PRH' in process: #for runH use DZ version of HLT
+		if 'RRH' in process: #for runH use DZ version of HLT
 			if cutList['isPassTrig_dilep']==1:cut += ' && DataPastTrigger_dilepDZ4runH == 1'
 		else:
 			if cutList['isPassTrig']==1:        cut += ' && DataPastTrigger == 1'
@@ -89,7 +90,12 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 
  	cut += ' && AllLeptonCount_PtOrdered == 3' #require exactly 3 leptons
 
-	cut += ' && MllOS_allComb_min > '+str(cutList['mllOSCut']) #to make sure the OS pair are same sign cut above 0. 
+	### cut only events where there is a OS lepton pair and that it has 0<MllOS<cutvalue 
+	cut += ' && ( (MllOS_allComb[0] > '+str(cutList['mllOSCut'])+' || MllOS_allComb[0] < 0)' 
+	cut += ' && (MllOS_allComb[1] > '+str(cutList['mllOSCut'])+' || MllOS_allComb[1] < 0)' 
+	cut += ' && (MllOS_allComb[2] > '+str(cutList['mllOSCut'])+' || MllOS_allComb[2] < 0) )' 
+
+# 	cut += ' && MllOS_allComb_min > '+str(cutList['mllOSCut']) #to make sure the OS pair are same sign cut above 0. 
 
 	catCut=''
 	if category=='EEE': catCut+=' && isEEE==1'

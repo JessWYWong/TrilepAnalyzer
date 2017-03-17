@@ -176,15 +176,21 @@ timestr='%i_%i_%i'%(cTime.hour,cTime.minute,cTime.second)
 # pfix='optimization_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_6Feb2017_step2'
 # pfix='optimization_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_6Feb2017_step2_TESTING'
 # pfix='optimization_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_6Feb2017_newdbkgSys_CorrectedLumiSYS_ALLsys_step2'
-pfix='optimization_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_6Feb2017_newdbkgSys_CorrectedLumiSYS_ALLsys_oneDDBKGsys_step2'
+# pfix='optimization_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_6Feb2017_newdbkgSys_CorrectedLumiSYS_ALLsys_oneDDBKGsys_step2'
+# pfix='optimization_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_6Feb2017_newdbkgSys_CorrectedLumiSYS_ALLsys_oneDDBKGsys_step2'
+pfix='optimization_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_6Feb2017_newdbkgSys_fixedLumiSYS_fixedLepIdIsoSys_ALLsys_step2'
 
 pfix+='_'+datestr
 
 normSystematics = {
-					'elIdSys':{'EEE':1.017,'EEM':1.014,'EMM':1.01,'MMM':1.00},
-					'muIdSys':{'EEE':1.00,'EEM':1.01,'EMM':1.014,'MMM':1.017},
-					'elIsoSys':{'EEE':1.017,'EEM':1.014,'EMM':1.01,'MMM':1.00},
-					'muIsoSys':{'EEE':1.00,'EEM':1.01,'EMM':1.014,'MMM':1.017},
+# 					'elIdSys':{'EEE':1.017,'EEM':1.014,'EMM':1.01,'MMM':1.00},
+# 					'muIdSys':{'EEE':1.00,'EEM':1.01,'EMM':1.014,'MMM':1.017},
+# 					'elIsoSys':{'EEE':1.017,'EEM':1.014,'EMM':1.01,'MMM':1.00},
+# 					'muIsoSys':{'EEE':1.00,'EEM':1.01,'EMM':1.014,'MMM':1.017},
+					'elIdSys':{'EEE':1.03,'EEM':1.02,'EMM':1.01,'MMM':1.00},
+					'muIdSys':{'EEE':1.00,'EEM':1.01,'EMM':1.02,'MMM':1.03},
+					'elIsoSys':{'EEE':1.03,'EEM':1.02,'EMM':1.01,'MMM':1.00},
+					'muIsoSys':{'EEE':1.00,'EEM':1.01,'EMM':1.02,'MMM':1.03},
 					'elelelTrigSys':{'EEE':1.03,'EEM':1.00,'EMM':1.00,'MMM':1.00},
 					'elelmuTrigSys':{'EEE':1.00,'EEM':1.03,'EMM':1.00,'MMM':1.00},
 					'elmumuTrigSys':{'EEE':1.00,'EEM':1.00,'EMM':1.03,'MMM':1.00},
@@ -741,9 +747,11 @@ for bkg in bkgList:
 					tFileBkg[bkg+syst+ud],tTreeBkg[bkg+syst+ud]=readTree(step1Dir.replace('nominal',syst.upper()+ud.lower())+'/'+samples[bkg]+'_hadd.root')
 print "FINISHED READING"
 
+STbins = [0,100,200,300,400,500,600,800,1000,1400,2000]
 plotList = {#discriminantName:(discriminantLJMETName, binning, xAxisLabel)
 			'HT':('AK4HT',linspace(0, 5000, 51).tolist(),';H_{T} (GeV);'),
 			'ST':('AK4HTpMETpLepPt',linspace(0, 5000, 51).tolist(),';S_{T} (GeV);'),
+			'STrebinned'    :('AK4HTpMETpLepPt',STbins,';S_{T} (GeV);'),
 			}
 
 iPlot='ST' #choose a discriminant from plotList!

@@ -81,8 +81,8 @@ samples = {
 
 # 'DY10to50': 'DYJetsToLL_M-10to50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8',
 'DY10to50':'DYJetsToLL_M-10to50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8',
-# 'DY50':'DYJetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8',
-'DY50':'DYJetsToLL_M-50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8',
+'DY50':'DYJetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8',
+# 'DY50':'DYJetsToLL_M-50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8',
 
 'WJetsMG100':'WJetsToLNu_HT-100To200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8',
 'WJetsMG200':'WJetsToLNu_HT-200To400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8',
@@ -145,7 +145,7 @@ samples = {
 
 dilep = ['EE','MM','ME']
 dict_dilep = {dilep[0]:'DoubleEG',dilep[1]:'DoubleMuon',dilep[2]:'MuonEG'}
-run = ['RRB','RRC','RRD','RRE','RRF','RRG','PRH']
+run = ['RRB','RRC','RRD','RRE','RRF','RRG','RRH']
 ddbkgCat = ['TTT','TTL','TLT','LTT','TLL','LTL','LLT','LLL']
 
 for run_ in run:

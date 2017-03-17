@@ -53,7 +53,38 @@ time='%i_%i_%i'%(cTime.hour,cTime.minute,cTime.second)
 
 # pfix='kinematics_80x_condor_Exactly3Lep_ddbkgscan_step2_7Feb2017_exactly2Jets_PRv7test_1bjet'
 
-pfix='kinematics_80x_condor_Exactly3Lep_ddbkgscan_step2_7Feb2017_exactly2Jets_PRv8test_1bjet'
+# pfix='kinematics_80x_condor_Exactly3Lep_ddbkgscan_step2_7Feb2017_exactly2Jets_PRv8test_1bjet'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_ddbkgscan_step2_2Feb2017_exactly2Jets_PRv6_1bjet_newMllOS_fixedlumi'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_ddbkgscan_step2_2Feb2017_exactly1Jet_PRv6_1bjet_newMllOS_fixedlumi'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_ddbkgscan_step2_2Feb2017_exactly2Jets_PRv6_1bjet_newMllOS_fixedlumi_oriBin'
+
+# pfix='kinematics_80x_condor_Exactly3Lep_ddbkgscan_step2_2Feb2017_exactly1Jet_PRv6_1bjet_newMllOS_fixedlumi'
+
+# pfix='kinematics_condor_ddbkgscan_PRv6_1Mar2017_scaleFRforCR1_step1hadds_step2_FRCR1'
+
+# pfix='kinematics_condor_ddbkgscan_PRv6_LJMet24Feb2017_FRCR2'
+
+# pfix='kinematics_condor_ddbkgscan_PRv6_LJMet24Feb2017_FRCR1'
+
+# pfix='kinematics_condor_ddbkgscan_PRv6_2Mar2017_take2_scaleFRforCR1_step1hadds_step2_FRCR1'
+# pfix='kinematics_condor_ddbkgscan_PRv6_3Mar2017_scaleFR_CR2CR1_step1hadds_step2_FRCR2'
+# pfix='kinematics_condor_ddbkgscan_PRv6_3Mar2017_scaleFR_CR2SR_step1hadds_step2_FRCR2'
+
+# pfix='kinematics_condor_ddbkgscan_PRv6_LJMet24Feb2017_newMuTrkSF_FRCR2'
+# pfix='kinematics_condor_ddbkgscan_PRv6_LJMet24Feb2017_newMuTrkSF_FRCR1'
+
+# pfix='kinematics_condor_ddbkgscan_PRv6_LJMet24Feb2017_newMuTrkSF_FRCR2_nobjet'
+# pfix='kinematics_condor_ddbkgscan_PRv6_LJMet24Feb2017_newMuTrkSF_FRCR1_nobjet'
+
+# pfix='kinematics_condor_ddbkgscan_PRv6_LJMet24Feb2017_newMuTrkSF_FRCR1CR2'
+# pfix='kinematics_condor_ddbkgscan_PRv6_LJMet24Feb2017_newMuTrkSF_FRCR1CR2_nobjet'
+
+# pfix='kinematics_condor_ddbkgscan_PRv9_postPreapproval_FRCR2'
+# pfix='kinematics_condor_ddbkgscan_PRv9_postPreapproval_FRCR1'
+pfix='kinematics_condor_ddbkgscan_PRv9_postPreapproval_FRCR1CR2'
 
 
 pfix+='_'+date

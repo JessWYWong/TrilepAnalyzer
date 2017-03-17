@@ -7,8 +7,8 @@ setTDRStyle()
 R.gROOT.SetBatch(1)
 outDir = os.getcwd()+'/'
 
-lumi = 36.8
-discriminant = 'ST'
+lumi = 35.9
+discriminant = 'STrebinned'
 rfilePostFix = ''
 # tempVersion = 'optimization_LJMet80x_3lepTT_Full2016_mcICHEP_2016_12_15_rizki_withNonIsoTrig_addDZforRunH_withJECJER_2016_12_21'
 
@@ -24,23 +24,31 @@ rfilePostFix = ''
 # tempVersion ='optimization_condor_80x_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_2017_1_23'
 # tempVersion ='optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_3Feb2017_step2_2017_2_3/'
 # tempVersion ='optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_6Feb2017_step2_2017_2_6/'
-tempVersion ='optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_6Feb2017_step2_2017_2_7/'
+# tempVersion ='optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_6Feb2017_step2_2017_2_7/'
+tempVersion ='optimization_reMiniAOD_PRv6_FRv24_newMuTrkSF_AllSys_2017_3_5/'
 
-cutString = '/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20'
-# cutString = '/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST700_mllOS20'
+# cutString = '/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20'
+cutString = '/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST700_mllOS20'
 # cutString = '/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST800_mllOS20'
 # cutString = '/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST900_mllOS20'
 # cutString = '/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1000_mllOS20'
 # cutString = '/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1100_mllOS20'
 
+cutString += '/4binsCount'
+
+BRstr='_bW0p5_tZ0p25_tH0p25'
+
+rfilePostFix=BRstr
+
 
 # templateFile = '/home/rsyarif/LJMet/TprimeAnalysis/CMSSW_7_6_3/src/TrilepAnalyzer_80x/optimization_Full2016/'+tempVersion+cutString+'/templates_'+discriminant+'_TTM800_36p46fb'+rfilePostFix+'.root'
-templateFile = '/user_data/rsyarif/'+tempVersion+cutString+'/templates_'+discriminant+'_TTM800_36p814fb'+rfilePostFix+'.root'
+# templateFile = '/user_data/rsyarif/'+tempVersion+cutString+'/templates_'+discriminant+'_TTM800_36p814fb'+rfilePostFix+'.root'
+templateFile = '/user_data/rsyarif/'+tempVersion+cutString+'/templates_'+discriminant+'_TTM800'+rfilePostFix+'_35p867fb.root'
 if not os.path.exists(outDir+tempVersion+cutString): os.system('mkdir '+outDir+tempVersion+cutString)
 if not os.path.exists(outDir+tempVersion+cutString+'/signals'): os.system('mkdir '+outDir+tempVersion+cutString+'/signals')
 
-systematics = ['pileup','btag','jec','jer']#,'pdfNew','muRFcorrdNew']
-# systematics = ['pileup','jec','jer']#,'pdfNew','muRFcorrdNew'] #no btag!
+# systematics = ['pileup','btag','mistag','jec','jer','pdfNew','muRFcorrdNew']
+systematics = ['pileup','btag','mistag','jec','jer','pdfNew','muRFcorrdNewSig']
 systematics+= ['elIdSys','muIdSys','elIsoSys','muIsoSys','elelelTrigSys','elelmuTrigSys','elmumuTrigSys','mumumuTrigSys']
 
 signameList = [
@@ -61,8 +69,13 @@ signameList = [
 for signal in signameList:
 	RFile = R.TFile(templateFile.replace('TTM900',signal))
 	for syst in systematics:
+		print '========== syst:', syst,'==========='
 		Prefix = 'triLep__sig'
 		hMC = RFile.Get(Prefix).Clone()
+# 		if 'mucorrdNew' in sys:
+# 			hMCUp = RFile.Get(Prefix+'__'+syst+'__plus').Clone()
+# 			hMCDown = RFile.Get(Prefix+'__'+syst+'__minus').Clone()
+# 		else:
 		hMCUp = RFile.Get(Prefix+'__'+syst+'__plus').Clone()
 		hMCDown = RFile.Get(Prefix+'__'+syst+'__minus').Clone()
 		hMC.Draw()
@@ -215,6 +228,7 @@ for signal in signameList:
 		prelimTex3.DrawLatex(0.25175,0.9664,"Preliminary")
 
 		os.system('mkdir -v '+tempVersion)
+		os.system('mkdir -v '+tempVersion+cutString.split('/')[1])
 		os.system('mkdir -v '+tempVersion+cutString)
 		os.system('mkdir -v '+tempVersion+cutString+'/signals/')
 

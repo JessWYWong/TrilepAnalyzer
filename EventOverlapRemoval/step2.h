@@ -103,6 +103,7 @@ public :
    Float_t         leptonDz_singleLepCalc;
    Int_t           leptonCharge_singleLepCalc;
    Int_t           elTrigPresel_singleLepCalc;
+
    vector<float>   *AllLeptonElPt_PtOrdered;
    vector<float>   *AllLeptonElEta_PtOrdered;
    vector<float>   *AllLeptonElPhi_PtOrdered;
@@ -110,6 +111,7 @@ public :
    vector<float>   *AllLeptonElMiniIso_PtOrdered;
    vector<int>     *AllLeptonElFlavor_PtOrdered;
    vector<int>     *AllLeptonElIsTight_PtOrdered;
+   Int_t     	   *AllLeptonElCount_PtOrdered;
    vector<float>   *AllLeptonMuPt_PtOrdered;
    vector<float>   *AllLeptonMuEta_PtOrdered;
    vector<float>   *AllLeptonMuPhi_PtOrdered;
@@ -117,6 +119,7 @@ public :
    vector<float>   *AllLeptonMuMiniIso_PtOrdered;
    vector<int>     *AllLeptonMuFlavor_PtOrdered;
    vector<int>     *AllLeptonMuIsTight_PtOrdered;
+   Int_t     	   *AllLeptonMuCount_PtOrdered;
    vector<float>   *AllLeptonPt_PtOrdered;
    vector<float>   *AllLeptonEta_PtOrdered;
    vector<float>   *AllLeptonPhi_PtOrdered;
@@ -126,6 +129,53 @@ public :
    vector<int>     *AllLeptonIsTight_PtOrdered;
    vector<int>     *AllLeptonCharge_PtOrdered;
    Int_t           AllLeptonCount_PtOrdered;
+
+   vector<float>   *AllLeptonElPt_PtOrderedOnly;
+   vector<float>   *AllLeptonElEta_PtOrderedOnly;
+   vector<float>   *AllLeptonElPhi_PtOrderedOnly;
+   vector<float>   *AllLeptonElEnergy_PtOrderedOnly;
+   vector<float>   *AllLeptonElMiniIso_PtOrderedOnly;
+   vector<int>     *AllLeptonElFlavor_PtOrderedOnly;
+   vector<int>     *AllLeptonElIsTight_PtOrderedOnly;
+   vector<float>   *AllLeptonMuPt_PtOrderedOnly;
+   vector<float>   *AllLeptonMuEta_PtOrderedOnly;
+   vector<float>   *AllLeptonMuPhi_PtOrderedOnly;
+   vector<float>   *AllLeptonMuEnergy_PtOrderedOnly;
+   vector<float>   *AllLeptonMuMiniIso_PtOrderedOnly;
+   vector<int>     *AllLeptonMuFlavor_PtOrderedOnly;
+   vector<int>     *AllLeptonMuIsTight_PtOrderedOnly;
+   vector<float>   *AllLeptonPt_PtOrderedOnly;
+   vector<float>   *AllLeptonEta_PtOrderedOnly;
+   vector<float>   *AllLeptonPhi_PtOrderedOnly;
+   vector<float>   *AllLeptonEnergy_PtOrderedOnly;
+   vector<float>   *AllLeptonMiniIso_PtOrderedOnly;
+   vector<int>     *AllLeptonFlavor_PtOrderedOnly;
+   vector<int>     *AllLeptonIsTight_PtOrderedOnly;
+   vector<int>     *AllLeptonCharge_PtOrderedOnly;
+
+   vector<float>   *AllLeptonElPt_PtOrderedOnly_top3;
+   vector<float>   *AllLeptonElEta_PtOrderedOnly_top3;
+   vector<float>   *AllLeptonElPhi_PtOrderedOnly_top3;
+   vector<float>   *AllLeptonElEnergy_PtOrderedOnly_top3;
+   vector<float>   *AllLeptonElMiniIso_PtOrderedOnly_top3;
+   vector<int>     *AllLeptonElFlavor_PtOrderedOnly_top3;
+   vector<int>     *AllLeptonElIsTight_PtOrderedOnly_top3;
+   vector<float>   *AllLeptonMuPt_PtOrderedOnly_top3;
+   vector<float>   *AllLeptonMuEta_PtOrderedOnly_top3;
+   vector<float>   *AllLeptonMuPhi_PtOrderedOnly_top3;
+   vector<float>   *AllLeptonMuEnergy_PtOrderedOnly_top3;
+   vector<float>   *AllLeptonMuMiniIso_PtOrderedOnly_top3;
+   vector<int>     *AllLeptonMuFlavor_PtOrderedOnly_top3;
+   vector<int>     *AllLeptonMuIsTight_PtOrderedOnly_top3;
+   vector<float>   *AllLeptonPt_PtOrderedOnly_top3;
+   vector<float>   *AllLeptonEta_PtOrderedOnly_top3;
+   vector<float>   *AllLeptonPhi_PtOrderedOnly_top3;
+   vector<float>   *AllLeptonEnergy_PtOrderedOnly_top3;
+   vector<float>   *AllLeptonMiniIso_PtOrderedOnly_top3;
+   vector<int>     *AllLeptonFlavor_PtOrderedOnly_top3;
+   vector<int>     *AllLeptonIsTight_PtOrderedOnly_top3;
+   vector<int>     *AllLeptonCharge_PtOrderedOnly_top3;
+
    vector<float>   *TightLeptonPt_PtOrdered;
    vector<float>   *TightLeptonEta_PtOrdered;
    vector<float>   *TightLeptonPhi_PtOrdered;
@@ -343,6 +393,7 @@ public :
    TBranch        *b_leptonDz_singleLepCalc;   //!
    TBranch        *b_leptonCharge_singleLepCalc;   //!
    TBranch        *b_elTrigPresel_singleLepCalc;   //!
+
    TBranch        *b_AllLeptonElPt_PtOrdered;   //!
    TBranch        *b_AllLeptonElEta_PtOrdered;   //!
    TBranch        *b_AllLeptonElPhi_PtOrdered;   //!
@@ -350,6 +401,7 @@ public :
    TBranch        *b_AllLeptonElMiniIso_PtOrdered;   //!
    TBranch        *b_AllLeptonElFlavor_PtOrdered;   //!
    TBranch        *b_AllLeptonElIsTight_PtOrdered;   //!
+   TBranch        *b_AllLeptonElCount_PtOrdered;   //!
    TBranch        *b_AllLeptonMuPt_PtOrdered;   //!
    TBranch        *b_AllLeptonMuEta_PtOrdered;   //!
    TBranch        *b_AllLeptonMuPhi_PtOrdered;   //!
@@ -357,6 +409,7 @@ public :
    TBranch        *b_AllLeptonMuMiniIso_PtOrdered;   //!
    TBranch        *b_AllLeptonMuFlavor_PtOrdered;   //!
    TBranch        *b_AllLeptonMuIsTight_PtOrdered;   //!
+   TBranch        *b_AllLeptonMuCount_PtOrdered;   //!
    TBranch        *b_AllLeptonPt_PtOrdered;   //!
    TBranch        *b_AllLeptonEta_PtOrdered;   //!
    TBranch        *b_AllLeptonPhi_PtOrdered;   //!
@@ -366,6 +419,53 @@ public :
    TBranch        *b_AllLeptonIsTight_PtOrdered;   //!
    TBranch        *b_AllLeptonCharge_PtOrdered;   //!
    TBranch        *b_AllLeptonCount_PtOrdered;   //!
+
+   TBranch        *b_AllLeptonElPt_PtOrderedOnly;   //!
+   TBranch        *b_AllLeptonElEta_PtOrderedOnly;   //!
+   TBranch        *b_AllLeptonElPhi_PtOrderedOnly;   //!
+   TBranch        *b_AllLeptonElEnergy_PtOrderedOnly;   //!
+   TBranch        *b_AllLeptonElMiniIso_PtOrderedOnly;   //!
+   TBranch        *b_AllLeptonElFlavor_PtOrderedOnly;   //!
+   TBranch        *b_AllLeptonElIsTight_PtOrderedOnly;   //!
+   TBranch        *b_AllLeptonMuPt_PtOrderedOnly;   //!
+   TBranch        *b_AllLeptonMuEta_PtOrderedOnly;   //!
+   TBranch        *b_AllLeptonMuPhi_PtOrderedOnly;   //!
+   TBranch        *b_AllLeptonMuEnergy_PtOrderedOnly;   //!
+   TBranch        *b_AllLeptonMuMiniIso_PtOrderedOnly;   //!
+   TBranch        *b_AllLeptonMuFlavor_PtOrderedOnly;   //!
+   TBranch        *b_AllLeptonMuIsTight_PtOrderedOnly;   //!
+   TBranch        *b_AllLeptonPt_PtOrderedOnly;   //!
+   TBranch        *b_AllLeptonEta_PtOrderedOnly;   //!
+   TBranch        *b_AllLeptonPhi_PtOrderedOnly;   //!
+   TBranch        *b_AllLeptonEnergy_PtOrderedOnly;   //!
+   TBranch        *b_AllLeptonMiniIso_PtOrderedOnly;   //!
+   TBranch        *b_AllLeptonFlavor_PtOrderedOnly;   //!
+   TBranch        *b_AllLeptonIsTight_PtOrderedOnly;   //!
+   TBranch        *b_AllLeptonCharge_PtOrderedOnly;   //!
+
+   TBranch        *b_AllLeptonElPt_PtOrderedOnly_top3;   //!
+   TBranch        *b_AllLeptonElEta_PtOrderedOnly_top3;   //!
+   TBranch        *b_AllLeptonElPhi_PtOrderedOnly_top3;   //!
+   TBranch        *b_AllLeptonElEnergy_PtOrderedOnly_top3;   //!
+   TBranch        *b_AllLeptonElMiniIso_PtOrderedOnly_top3;   //!
+   TBranch        *b_AllLeptonElFlavor_PtOrderedOnly_top3;   //!
+   TBranch        *b_AllLeptonElIsTight_PtOrderedOnly_top3;   //!
+   TBranch        *b_AllLeptonMuPt_PtOrderedOnly_top3;   //!
+   TBranch        *b_AllLeptonMuEta_PtOrderedOnly_top3;   //!
+   TBranch        *b_AllLeptonMuPhi_PtOrderedOnly_top3;   //!
+   TBranch        *b_AllLeptonMuEnergy_PtOrderedOnly_top3;   //!
+   TBranch        *b_AllLeptonMuMiniIso_PtOrderedOnly_top3;   //!
+   TBranch        *b_AllLeptonMuFlavor_PtOrderedOnly_top3;   //!
+   TBranch        *b_AllLeptonMuIsTight_PtOrderedOnly_top3;   //!
+   TBranch        *b_AllLeptonPt_PtOrderedOnly_top3;   //!
+   TBranch        *b_AllLeptonEta_PtOrderedOnly_top3;   //!
+   TBranch        *b_AllLeptonPhi_PtOrderedOnly_top3;   //!
+   TBranch        *b_AllLeptonEnergy_PtOrderedOnly_top3;   //!
+   TBranch        *b_AllLeptonMiniIso_PtOrderedOnly_top3;   //!
+   TBranch        *b_AllLeptonFlavor_PtOrderedOnly_top3;   //!
+   TBranch        *b_AllLeptonIsTight_PtOrderedOnly_top3;   //!
+   TBranch        *b_AllLeptonCharge_PtOrderedOnly_top3;   //!
+
    TBranch        *b_TightLeptonPt_PtOrdered;   //!
    TBranch        *b_TightLeptonEta_PtOrdered;   //!
    TBranch        *b_TightLeptonPhi_PtOrdered;   //!
@@ -594,6 +694,53 @@ void step2::Init(TTree *tree)
    AllLeptonFlavor_PtOrdered = 0;
    AllLeptonIsTight_PtOrdered = 0;
    AllLeptonCharge_PtOrdered = 0;
+
+   AllLeptonElPt_PtOrderedOnly = 0;
+   AllLeptonElEta_PtOrderedOnly = 0;
+   AllLeptonElPhi_PtOrderedOnly = 0;
+   AllLeptonElEnergy_PtOrderedOnly = 0;
+   AllLeptonElMiniIso_PtOrderedOnly = 0;
+   AllLeptonElFlavor_PtOrderedOnly = 0;
+   AllLeptonElIsTight_PtOrderedOnly = 0;
+   AllLeptonMuPt_PtOrderedOnly = 0;
+   AllLeptonMuEta_PtOrderedOnly = 0;
+   AllLeptonMuPhi_PtOrderedOnly = 0;
+   AllLeptonMuEnergy_PtOrderedOnly = 0;
+   AllLeptonMuMiniIso_PtOrderedOnly = 0;
+   AllLeptonMuFlavor_PtOrderedOnly = 0;
+   AllLeptonMuIsTight_PtOrderedOnly = 0;
+   AllLeptonPt_PtOrderedOnly = 0;
+   AllLeptonEta_PtOrderedOnly = 0;
+   AllLeptonPhi_PtOrderedOnly = 0;
+   AllLeptonEnergy_PtOrderedOnly = 0;
+   AllLeptonMiniIso_PtOrderedOnly = 0;
+   AllLeptonFlavor_PtOrderedOnly = 0;
+   AllLeptonIsTight_PtOrderedOnly = 0;
+   AllLeptonCharge_PtOrderedOnly = 0;
+
+   AllLeptonElPt_PtOrderedOnly_top3 = 0;
+   AllLeptonElEta_PtOrderedOnly_top3 = 0;
+   AllLeptonElPhi_PtOrderedOnly_top3 = 0;
+   AllLeptonElEnergy_PtOrderedOnly_top3 = 0;
+   AllLeptonElMiniIso_PtOrderedOnly_top3 = 0;
+   AllLeptonElFlavor_PtOrderedOnly_top3 = 0;
+   AllLeptonElIsTight_PtOrderedOnly_top3 = 0;
+   AllLeptonMuPt_PtOrderedOnly_top3 = 0;
+   AllLeptonMuEta_PtOrderedOnly_top3 = 0;
+   AllLeptonMuPhi_PtOrderedOnly_top3 = 0;
+   AllLeptonMuEnergy_PtOrderedOnly_top3 = 0;
+   AllLeptonMuMiniIso_PtOrderedOnly_top3 = 0;
+   AllLeptonMuFlavor_PtOrderedOnly_top3 = 0;
+   AllLeptonMuIsTight_PtOrderedOnly_top3 = 0;
+   AllLeptonPt_PtOrderedOnly_top3 = 0;
+   AllLeptonEta_PtOrderedOnly_top3 = 0;
+   AllLeptonPhi_PtOrderedOnly_top3 = 0;
+   AllLeptonEnergy_PtOrderedOnly_top3 = 0;
+   AllLeptonMiniIso_PtOrderedOnly_top3 = 0;
+   AllLeptonFlavor_PtOrderedOnly_top3 = 0;
+   AllLeptonIsTight_PtOrderedOnly_top3 = 0;
+   AllLeptonCharge_PtOrderedOnly_top3 = 0;
+
    TightLeptonPt_PtOrdered = 0;
    TightLeptonEta_PtOrdered = 0;
    TightLeptonPhi_PtOrdered = 0;
@@ -773,6 +920,7 @@ void step2::Init(TTree *tree)
    inputTree->SetBranchAddress("leptonDz_singleLepCalc", &leptonDz_singleLepCalc, &b_leptonDz_singleLepCalc);
    inputTree->SetBranchAddress("leptonCharge_singleLepCalc", &leptonCharge_singleLepCalc, &b_leptonCharge_singleLepCalc);
    inputTree->SetBranchAddress("elTrigPresel_singleLepCalc", &elTrigPresel_singleLepCalc, &b_elTrigPresel_singleLepCalc);
+
    inputTree->SetBranchAddress("AllLeptonElPt_PtOrdered", &AllLeptonElPt_PtOrdered, &b_AllLeptonElPt_PtOrdered);
    inputTree->SetBranchAddress("AllLeptonElEta_PtOrdered", &AllLeptonElEta_PtOrdered, &b_AllLeptonElEta_PtOrdered);
    inputTree->SetBranchAddress("AllLeptonElPhi_PtOrdered", &AllLeptonElPhi_PtOrdered, &b_AllLeptonElPhi_PtOrdered);
@@ -780,6 +928,8 @@ void step2::Init(TTree *tree)
    inputTree->SetBranchAddress("AllLeptonElMiniIso_PtOrdered", &AllLeptonElMiniIso_PtOrdered, &b_AllLeptonElMiniIso_PtOrdered);
    inputTree->SetBranchAddress("AllLeptonElFlavor_PtOrdered", &AllLeptonElFlavor_PtOrdered, &b_AllLeptonElFlavor_PtOrdered);
    inputTree->SetBranchAddress("AllLeptonElIsTight_PtOrdered", &AllLeptonElIsTight_PtOrdered, &b_AllLeptonElIsTight_PtOrdered);
+   inputTree->SetBranchAddress("AllLeptonElCount_PtOrdered", &AllLeptonElCount_PtOrdered, &b_AllLeptonElCount_PtOrdered);
+
    inputTree->SetBranchAddress("AllLeptonMuPt_PtOrdered", &AllLeptonMuPt_PtOrdered, &b_AllLeptonMuPt_PtOrdered);
    inputTree->SetBranchAddress("AllLeptonMuEta_PtOrdered", &AllLeptonMuEta_PtOrdered, &b_AllLeptonMuEta_PtOrdered);
    inputTree->SetBranchAddress("AllLeptonMuPhi_PtOrdered", &AllLeptonMuPhi_PtOrdered, &b_AllLeptonMuPhi_PtOrdered);
@@ -787,6 +937,8 @@ void step2::Init(TTree *tree)
    inputTree->SetBranchAddress("AllLeptonMuMiniIso_PtOrdered", &AllLeptonMuMiniIso_PtOrdered, &b_AllLeptonMuMiniIso_PtOrdered);
    inputTree->SetBranchAddress("AllLeptonMuFlavor_PtOrdered", &AllLeptonMuFlavor_PtOrdered, &b_AllLeptonMuFlavor_PtOrdered);
    inputTree->SetBranchAddress("AllLeptonMuIsTight_PtOrdered", &AllLeptonMuIsTight_PtOrdered, &b_AllLeptonMuIsTight_PtOrdered);
+   inputTree->SetBranchAddress("AllLeptonMuCount_PtOrdered", &AllLeptonMuCount_PtOrdered, &b_AllLeptonMuCount_PtOrdered);
+
    inputTree->SetBranchAddress("AllLeptonPt_PtOrdered", &AllLeptonPt_PtOrdered, &b_AllLeptonPt_PtOrdered);
    inputTree->SetBranchAddress("AllLeptonEta_PtOrdered", &AllLeptonEta_PtOrdered, &b_AllLeptonEta_PtOrdered);
    inputTree->SetBranchAddress("AllLeptonPhi_PtOrdered", &AllLeptonPhi_PtOrdered, &b_AllLeptonPhi_PtOrdered);
@@ -796,6 +948,53 @@ void step2::Init(TTree *tree)
    inputTree->SetBranchAddress("AllLeptonIsTight_PtOrdered", &AllLeptonIsTight_PtOrdered, &b_AllLeptonIsTight_PtOrdered);
    inputTree->SetBranchAddress("AllLeptonCharge_PtOrdered", &AllLeptonCharge_PtOrdered, &b_AllLeptonCharge_PtOrdered);
    inputTree->SetBranchAddress("AllLeptonCount_PtOrdered", &AllLeptonCount_PtOrdered, &b_AllLeptonCount_PtOrdered);
+
+   inputTree->SetBranchAddress("AllLeptonElPt_PtOrderedOnly", &AllLeptonElPt_PtOrderedOnly, &b_AllLeptonElPt_PtOrderedOnly);
+   inputTree->SetBranchAddress("AllLeptonElEta_PtOrderedOnly", &AllLeptonElEta_PtOrderedOnly, &b_AllLeptonElEta_PtOrderedOnly);
+   inputTree->SetBranchAddress("AllLeptonElPhi_PtOrderedOnly", &AllLeptonElPhi_PtOrderedOnly, &b_AllLeptonElPhi_PtOrderedOnly);
+   inputTree->SetBranchAddress("AllLeptonElEnergy_PtOrderedOnly", &AllLeptonElEnergy_PtOrderedOnly, &b_AllLeptonElEnergy_PtOrderedOnly);
+   inputTree->SetBranchAddress("AllLeptonElMiniIso_PtOrderedOnly", &AllLeptonElMiniIso_PtOrderedOnly, &b_AllLeptonElMiniIso_PtOrderedOnly);
+   inputTree->SetBranchAddress("AllLeptonElFlavor_PtOrderedOnly", &AllLeptonElFlavor_PtOrderedOnly, &b_AllLeptonElFlavor_PtOrderedOnly);
+   inputTree->SetBranchAddress("AllLeptonElIsTight_PtOrderedOnly", &AllLeptonElIsTight_PtOrderedOnly, &b_AllLeptonElIsTight_PtOrderedOnly);
+   inputTree->SetBranchAddress("AllLeptonMuPt_PtOrderedOnly", &AllLeptonMuPt_PtOrderedOnly, &b_AllLeptonMuPt_PtOrderedOnly);
+   inputTree->SetBranchAddress("AllLeptonMuEta_PtOrderedOnly", &AllLeptonMuEta_PtOrderedOnly, &b_AllLeptonMuEta_PtOrderedOnly);
+   inputTree->SetBranchAddress("AllLeptonMuPhi_PtOrderedOnly", &AllLeptonMuPhi_PtOrderedOnly, &b_AllLeptonMuPhi_PtOrderedOnly);
+   inputTree->SetBranchAddress("AllLeptonMuEnergy_PtOrderedOnly", &AllLeptonMuEnergy_PtOrderedOnly, &b_AllLeptonMuEnergy_PtOrderedOnly);
+   inputTree->SetBranchAddress("AllLeptonMuMiniIso_PtOrderedOnly", &AllLeptonMuMiniIso_PtOrderedOnly, &b_AllLeptonMuMiniIso_PtOrderedOnly);
+   inputTree->SetBranchAddress("AllLeptonMuFlavor_PtOrderedOnly", &AllLeptonMuFlavor_PtOrderedOnly, &b_AllLeptonMuFlavor_PtOrderedOnly);
+   inputTree->SetBranchAddress("AllLeptonMuIsTight_PtOrderedOnly", &AllLeptonMuIsTight_PtOrderedOnly, &b_AllLeptonMuIsTight_PtOrderedOnly);
+   inputTree->SetBranchAddress("AllLeptonPt_PtOrderedOnly", &AllLeptonPt_PtOrderedOnly, &b_AllLeptonPt_PtOrderedOnly);
+   inputTree->SetBranchAddress("AllLeptonEta_PtOrderedOnly", &AllLeptonEta_PtOrderedOnly, &b_AllLeptonEta_PtOrderedOnly);
+   inputTree->SetBranchAddress("AllLeptonPhi_PtOrderedOnly", &AllLeptonPhi_PtOrderedOnly, &b_AllLeptonPhi_PtOrderedOnly);
+   inputTree->SetBranchAddress("AllLeptonEnergy_PtOrderedOnly", &AllLeptonEnergy_PtOrderedOnly, &b_AllLeptonEnergy_PtOrderedOnly);
+   inputTree->SetBranchAddress("AllLeptonMiniIso_PtOrderedOnly", &AllLeptonMiniIso_PtOrderedOnly, &b_AllLeptonMiniIso_PtOrderedOnly);
+   inputTree->SetBranchAddress("AllLeptonFlavor_PtOrderedOnly", &AllLeptonFlavor_PtOrderedOnly, &b_AllLeptonFlavor_PtOrderedOnly);
+   inputTree->SetBranchAddress("AllLeptonIsTight_PtOrderedOnly", &AllLeptonIsTight_PtOrderedOnly, &b_AllLeptonIsTight_PtOrderedOnly);
+   inputTree->SetBranchAddress("AllLeptonCharge_PtOrderedOnly", &AllLeptonCharge_PtOrderedOnly, &b_AllLeptonCharge_PtOrderedOnly);
+
+   inputTree->SetBranchAddress("AllLeptonElPt_PtOrderedOnly_top3", &AllLeptonElPt_PtOrderedOnly_top3, &b_AllLeptonElPt_PtOrderedOnly_top3);
+   inputTree->SetBranchAddress("AllLeptonElEta_PtOrderedOnly_top3", &AllLeptonElEta_PtOrderedOnly_top3, &b_AllLeptonElEta_PtOrderedOnly_top3);
+   inputTree->SetBranchAddress("AllLeptonElPhi_PtOrderedOnly_top3", &AllLeptonElPhi_PtOrderedOnly_top3, &b_AllLeptonElPhi_PtOrderedOnly_top3);
+   inputTree->SetBranchAddress("AllLeptonElEnergy_PtOrderedOnly_top3", &AllLeptonElEnergy_PtOrderedOnly_top3, &b_AllLeptonElEnergy_PtOrderedOnly_top3);
+   inputTree->SetBranchAddress("AllLeptonElMiniIso_PtOrderedOnly_top3", &AllLeptonElMiniIso_PtOrderedOnly_top3, &b_AllLeptonElMiniIso_PtOrderedOnly_top3);
+   inputTree->SetBranchAddress("AllLeptonElFlavor_PtOrderedOnly_top3", &AllLeptonElFlavor_PtOrderedOnly_top3, &b_AllLeptonElFlavor_PtOrderedOnly_top3);
+   inputTree->SetBranchAddress("AllLeptonElIsTight_PtOrderedOnly_top3", &AllLeptonElIsTight_PtOrderedOnly_top3, &b_AllLeptonElIsTight_PtOrderedOnly_top3);
+   inputTree->SetBranchAddress("AllLeptonMuPt_PtOrderedOnly_top3", &AllLeptonMuPt_PtOrderedOnly_top3, &b_AllLeptonMuPt_PtOrderedOnly_top3);
+   inputTree->SetBranchAddress("AllLeptonMuEta_PtOrderedOnly_top3", &AllLeptonMuEta_PtOrderedOnly_top3, &b_AllLeptonMuEta_PtOrderedOnly_top3);
+   inputTree->SetBranchAddress("AllLeptonMuPhi_PtOrderedOnly_top3", &AllLeptonMuPhi_PtOrderedOnly_top3, &b_AllLeptonMuPhi_PtOrderedOnly_top3);
+   inputTree->SetBranchAddress("AllLeptonMuEnergy_PtOrderedOnly_top3", &AllLeptonMuEnergy_PtOrderedOnly_top3, &b_AllLeptonMuEnergy_PtOrderedOnly_top3);
+   inputTree->SetBranchAddress("AllLeptonMuMiniIso_PtOrderedOnly_top3", &AllLeptonMuMiniIso_PtOrderedOnly_top3, &b_AllLeptonMuMiniIso_PtOrderedOnly_top3);
+   inputTree->SetBranchAddress("AllLeptonMuFlavor_PtOrderedOnly_top3", &AllLeptonMuFlavor_PtOrderedOnly_top3, &b_AllLeptonMuFlavor_PtOrderedOnly_top3);
+   inputTree->SetBranchAddress("AllLeptonMuIsTight_PtOrderedOnly_top3", &AllLeptonMuIsTight_PtOrderedOnly_top3, &b_AllLeptonMuIsTight_PtOrderedOnly_top3);
+   inputTree->SetBranchAddress("AllLeptonPt_PtOrderedOnly_top3", &AllLeptonPt_PtOrderedOnly_top3, &b_AllLeptonPt_PtOrderedOnly_top3);
+   inputTree->SetBranchAddress("AllLeptonEta_PtOrderedOnly_top3", &AllLeptonEta_PtOrderedOnly_top3, &b_AllLeptonEta_PtOrderedOnly_top3);
+   inputTree->SetBranchAddress("AllLeptonPhi_PtOrderedOnly_top3", &AllLeptonPhi_PtOrderedOnly_top3, &b_AllLeptonPhi_PtOrderedOnly_top3);
+   inputTree->SetBranchAddress("AllLeptonEnergy_PtOrderedOnly_top3", &AllLeptonEnergy_PtOrderedOnly_top3, &b_AllLeptonEnergy_PtOrderedOnly_top3);
+   inputTree->SetBranchAddress("AllLeptonMiniIso_PtOrderedOnly_top3", &AllLeptonMiniIso_PtOrderedOnly_top3, &b_AllLeptonMiniIso_PtOrderedOnly_top3);
+   inputTree->SetBranchAddress("AllLeptonFlavor_PtOrderedOnly_top3", &AllLeptonFlavor_PtOrderedOnly_top3, &b_AllLeptonFlavor_PtOrderedOnly_top3);
+   inputTree->SetBranchAddress("AllLeptonIsTight_PtOrderedOnly_top3", &AllLeptonIsTight_PtOrderedOnly_top3, &b_AllLeptonIsTight_PtOrderedOnly_top3);
+   inputTree->SetBranchAddress("AllLeptonCharge_PtOrderedOnly_top3", &AllLeptonCharge_PtOrderedOnly_top3, &b_AllLeptonCharge_PtOrderedOnly_top3);
+
    inputTree->SetBranchAddress("TightLeptonPt_PtOrdered", &TightLeptonPt_PtOrdered, &b_TightLeptonPt_PtOrdered);
    inputTree->SetBranchAddress("TightLeptonEta_PtOrdered", &TightLeptonEta_PtOrdered, &b_TightLeptonEta_PtOrdered);
    inputTree->SetBranchAddress("TightLeptonPhi_PtOrdered", &TightLeptonPhi_PtOrdered, &b_TightLeptonPhi_PtOrdered);

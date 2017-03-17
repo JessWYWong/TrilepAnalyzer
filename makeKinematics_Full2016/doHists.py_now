@@ -33,7 +33,8 @@ lumiStr = str(targetlumi/1000).replace('.','p') # 1/fb
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv19test_7Feb2017_step1hadds_step2/nominal'
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv7test_FRv18bSys_7Feb2017_step1hadds_step2/nominal'
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv19testV2_7Feb2017_step1hadds_step2/nominal'
-step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv8test_FRv18bSys_7Feb2017_step1hadds_step2/nominal'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv8test_FRv18bSys_7Feb2017_step1hadds_step2/nominal'
+step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv20b_1Mar2017_step1hadds_step2/nominal'
 
 print 'grabbing files from ', step1Dir
 """
@@ -70,7 +71,7 @@ if len(sys.argv)>3: catList=[str(sys.argv[3])]
 else: catList=['EEE','EEM','EMM','MMM','All']
 
 scaleSignalXsecTo1pb = False # this has to be "True" if you are making templates for limit calculation!!!!!!!!
-doAllSys= False
+doAllSys= True
 
 cutString = 'isPassTrig_All'+str(int(cutList['isPassTrig']))+'_'+'dilep'+str(int(cutList['isPassTrig_dilep']))+'_'+'dilepAnth'+str(int(cutList['isPassTrig_dilep_anth']))+'_'+'trilep'+str(int(cutList['isPassTrig_trilep']))+'_'+'isPassTrilepton'+str(int(cutList['isPassTrilepton']))+'_lep1Pt'+str(int(cutList['lep1PtCut']))+'_NJets'+str(int(cutList['njetsCut']))+'_NBJets'+str(int(cutList['nbjetsCut']))+'_DR'+str(int(cutList['drCut']))+'_ST'+str(int(cutList['stCut']))+'_MllOS'+str(int(cutList['mllOSCut']))
 # cutString = 'isPassTrig'+str(int(cutList['isPassTrig']))+'_'+'isPassTrig_dilep'+str(int(cutList['isPassTrig_dilep']))+'_'+'isPassTrig_dilepHT'+str(int(cutList['isPassTrig_dilepHT']))+'_'+'isPassTrig_trilep'+str(int(cutList['isPassTrig_trilep']))+'_'+'isPassTrilepton'+str(int(cutList['isPassTrilepton']))+'_'+'lep'+str(int(cutList['lepPtCut']))+'_NJets'+str(int(cutList['njetsCut']))+'_NBJets'+str(int(cutList['nbjetsCut']))+'_DR'+str(int(cutList['drCut']))+'_ST'+str(int(cutList['stCut']))
@@ -146,7 +147,15 @@ timestr='%i_%i_%i'%(cTime.hour,cTime.minute,cTime.second)
 
 # pfix = 'kinematics_80x_MultiLep_Full2016_Moriond17_FRv19testV2_PRv6_step2_moreThan2Jets_1bjet_muFRetaDependence_noSYS_ST600'
 
-pfix = 'kinematics_80x_MultiLep_Full2016_Moriond17_FRv18bSys_PRv8test_step2_moreThan2Jets_1bjet_noSYS_ST600'
+# pfix = 'kinematics_80x_MultiLep_Full2016_Moriond17_FRv18bSys_PRv8test_step2_moreThan2Jets_1bjet_noSYS_ST600'
+
+
+# pfix = 'kinematics_80x_MultiLep_Full2016_Moriond17_FRv18bSys_PRv6_step2_moreThan2Jets_1bjet_noSYS_ST600'
+# pfix = 'kinematics_80x_MultiLep_Full2016_Moriond17_FRv18bSys_PRv6_step2_moreThan2Jets_1bjet_noSYS_ST700'
+# pfix = 'kinematics_80x_MultiLep_Full2016_Moriond17_FRv18bSys_PRv6_step2_moreThan2Jets_1bjet_noSYS_ST800'
+# pfix = 'kinematics_80x_MultiLep_Full2016_Moriond17_FRv18bSys_PRv6_step2_moreThan2Jets_1bjet_noSYS_ST900'
+# pfix = 'kinematics_80x_MultiLep_Full2016_Moriond17_FRv18bSys_PRv6_step2_moreThan2Jets_1bjet_noSYS_ST1000'
+pfix = 'kinematics_80x_MultiLep_Full2016_Moriond17_FRv18bSys_PRv6_step2_moreThan2Jets_1bjet_noSYS_ST1100'
 
 pfix+='_'+datestr
 
@@ -169,6 +178,7 @@ pTbins = [0,10,30,40,60,80,100,120,140,160,180,200,220,240,260,280,300,350,400,4
 Mbins = [-10.0, 0.0, 20.0, 40.0, 60.0, 80.0, 100.0, 120.0, 140.0, 160.0, 180.0, 200.0, 220.0, 240.0, 260.0, 300.0]
 # jetPtbins =  [0.0, 50.0, 100.0, 150.0, 200.0, 250.0, 300.0, 350.0, 450.0, 550.0, 650.0, 750.0]
 jetPtbins =  [0.0, 30, 60.0, 100.0, 150.0, 200.0, 250.0, 300.0, 350.0, 450.0, 550.0, 650.0, 750.0]
+Nlepbins=[0,1,2,3,4,5,6,7,8,9,10]
 
 plotList = {#discriminantName:(discriminantLJMETName, binning, xAxisLabel)
 	'NPV'   :('nPV_singleLepCalc',linspace(0, 30, 31).tolist(),';PV multiplicity;'),
@@ -181,17 +191,21 @@ plotList = {#discriminantName:(discriminantLJMETName, binning, xAxisLabel)
 	'ElPt' :('AllLeptonElPt_PtOrdered',pTbins,';Electron p_{T} (GeV);'),
 	'MuPt' :('AllLeptonMuPt_PtOrdered',pTbins,';Muon p_{T} (GeV);'),
 
-# 	'lep1Pt' :('AllLeptonPt_PtOrdered[0]',linspace(0, 500, 26).tolist(),';Lepton 1 p_{T} (GeV);'),
-# 	'lep2Pt' :('AllLeptonPt_PtOrdered[1]',linspace(0, 300, 16).tolist(),';Lepton 2 p_{T} (GeV);'),
-# 	'lep3Pt' :('AllLeptonPt_PtOrdered[2]',linspace(0, 300, 16).tolist(),';Lepton 3 p_{T} (GeV);'),
+	'lep1Pt' :('AllLeptonPt_PtOrderedOnly_top3[0]',pTbins,';Lepton 1 p_{T} (GeV);'),
+	'lep2Pt' :('AllLeptonPt_PtOrderedOnly_top3[1]',pTbins,';Lepton 2 p_{T} (GeV);'),
+	'lep3Pt' :('AllLeptonPt_PtOrderedOnly_top3[2]',pTbins,';Lepton 3 p_{T} (GeV);'),
 
 	'lepEta':('AllLeptonEta_PtOrdered',linspace(-4, 4, 41).tolist(),';Lepton 1 #eta;'),
 	'ElEta':('AllLeptonElEta_PtOrdered',linspace(-4, 4, 41).tolist(),';Electron 1 #eta;'),
 	'MuEta':('AllLeptonMuEta_PtOrdered',linspace(-4, 4, 41).tolist(),';Mu 1 #eta;'),
 
-# 	'lep1Eta':('AllLeptonEta_PtOrdered[0]',linspace(-4, 4, 41).tolist(),';Lepton 1 #eta;'),
-# 	'lep2Eta':('AllLeptonEta_PtOrdered[1]',linspace(-4, 4, 41).tolist(),';Lepton 2 #eta;'),
-# 	'lep3Eta':('AllLeptonEta_PtOrdered[2]',linspace(-4, 4, 41).tolist(),';Lepton 3 #eta;'),
+	'lep1Eta':('AllLeptonEta_PtOrderedOnly_top3[0]',linspace(-4, 4, 41).tolist(),';Lepton 1 #eta;'),
+	'lep2Eta':('AllLeptonEta_PtOrderedOnly_top3[1]',linspace(-4, 4, 41).tolist(),';Lepton 2 #eta;'),
+	'lep3Eta':('AllLeptonEta_PtOrderedOnly_top3[2]',linspace(-4, 4, 41).tolist(),';Lepton 3 #eta;'),
+
+	'Nlep':('AllLeptonCount_PtOrdered',Nlepbins,';Lepton Multiplicity;'),
+	'Nel':('AllLeptonElCount_PtOrdered',Nlepbins,';electron Multiplicity;'),
+	'Nmu':('AllLeptonMuCount_PtOrdered',Nlepbins,';#mu Multiplicity;'),
 
 	'JetEta':('AK4JetEta_singleLepCalc_PtOrdered',linspace(-4, 4, 41).tolist(),';AK4 Jet #eta;'),
 # 	'Jet1Eta':('AK4JetEta_singleLepCalc_PtOrdered[0]',linspace(-4, 4, 41).tolist(),';1^{st} AK4 Jet #eta;'),
@@ -206,18 +220,18 @@ plotList = {#discriminantName:(discriminantLJMETName, binning, xAxisLabel)
 # 	'Jet2Pt':('AK4JetPt_singleLepCalc_PtOrdered[1]',jetPtbins,';2^{nd} AK4 Jet p_{T} (GeV);'),
 
 
-	'HT'    :('AK4HT',linspace(0, 2000, 21).tolist(),';H_{T} (GeV);'),
+# 	'HT'    :('AK4HT',linspace(0, 2000, 21).tolist(),';H_{T} (GeV);'),
 	'HTrebinned'    :('AK4HT',HTbins,';H_{T} (GeV);'),
-	'ST'    :('AK4HTpMETpLepPt',linspace(0, 2000, 21).tolist(),';S_{T} (GeV);'),
+# 	'ST'    :('AK4HTpMETpLepPt',linspace(0, 2000, 21).tolist(),';S_{T} (GeV);'),
 	'STrebinned'    :('AK4HTpMETpLepPt',STbins,';S_{T} (GeV);'),
-	'MET'   :('corr_met_singleLepCalc',linspace(0, 500, 26).tolist(),';#slash{E}_{T} (GeV);'),
+# 	'MET'   :('corr_met_singleLepCalc',linspace(0, 500, 26).tolist(),';#slash{E}_{T} (GeV);'),
 	'METrebinned'   :('corr_met_singleLepCalc',METbins,';#slash{E}_{T} (GeV);'),
 
 	'NJets' :('NJets_singleLepCalc',linspace(0, 15, 16).tolist(),';AK4 Jet multiplicity;'),
 	'NBJets':('NJetsBTagwithSF_singleLepCalc',linspace(0, 10, 11).tolist(),';CSVIVFv2 Medium tag multiplicity;'),
-	'NBJetsCorr':('NJetsBTagwithSF_singleLepCalc_noLepCorr',linspace(0, 10, 11).tolist(),';CSVIVFv2 Medium tag multiplicity;'),
+# 	'NBJetsCorr':('NJetsBTagwithSF_singleLepCalc_noLepCorr',linspace(0, 10, 11).tolist(),';CSVIVFv2 Medium tag multiplicity;'),
 
-	'mindeltaRlepJets':('minDR_lepJet',linspace(0, 1, 26).tolist(),';min #DeltaR(leps, jets);'),
+# 	'mindeltaRlepJets':('minDR_lepJet',linspace(0, 1, 26).tolist(),';min #DeltaR(leps, jets);'),
 # 	'mindeltaRlep1Jets':('minDR_lep1Jet',linspace(0, 1, 26).tolist(),';min #DeltaR(lep_1, jets);'),
 # 	'mindeltaRlep2Jets':('minDR_lep2Jet',linspace(0, 1, 26).tolist(),';min #DeltaR(lep_2, jets);'),
 # 	'mindeltaRlep3Jets':('minDR_lep3Jet',linspace(0, 1, 26).tolist(),';min #DeltaR(lep_3, jets);'),
@@ -231,13 +245,13 @@ plotList = {#discriminantName:(discriminantLJMETName, binning, xAxisLabel)
 # 	'deltaRjet2':('deltaR_lepJets[1]',linspace(0, 5, 51).tolist(),';#DeltaR(l, 2^{nd} jet);'),
 # 	'deltaRjet3':('deltaR_lepJets[2]',linspace(0, 5, 51).tolist(),';#DeltaR(l, 3^{rd} jet);'),
 
-	'lepCharge':('AllLeptonCharge_PtOrdered',linspace(-2,2,5).tolist(),';lepton charge'),
+# 	'lepCharge':('AllLeptonCharge_PtOrdered',linspace(-2,2,5).tolist(),';lepton charge'),
 
-	'lepIso':('AllLeptonMiniIso_PtOrdered',linspace(0,0.6,51).tolist(),';lepton mini isolation'),
-	'ElIso':('AllLeptonElMiniIso_PtOrdered',linspace(0,0.6,51).tolist(),';Electron mini isolation'),
-	'MuIso':('AllLeptonMuMiniIso_PtOrdered',linspace(0,0.6,51).tolist(),'; Muon mini isolation'),
+# 	'lepIso':('AllLeptonMiniIso_PtOrdered',linspace(0,0.6,51).tolist(),';lepton mini isolation'),
+# 	'ElIso':('AllLeptonElMiniIso_PtOrdered',linspace(0,0.6,51).tolist(),';Electron mini isolation'),
+# 	'MuIso':('AllLeptonMuMiniIso_PtOrdered',linspace(0,0.6,51).tolist(),'; Muon mini isolation'),
 
-	'BjetPt':('AK4JetBTag_singleLepCalc_PtOrdered',linspace(0,1500,51).tolist(),';b jet p_{T} [GeV]'),  ## B TAG
+# 	'BjetPt':('AK4JetBTag_singleLepCalc_PtOrdered',linspace(0,1500,51).tolist(),';b jet p_{T} [GeV]'),  ## B TAG
 # 	'Bjet1Pt':('AK4JetBTag_singleLepCalc_PtOrdered[0]',linspace(0,1500,51).tolist(),';1^{st} b jet p_{T} [GeV]'),  ## B TAG
 # 	'Bjet1Pt':('AK4JetBTag_singleLepCalc_PtOrdered[1]',linspace(0,1500,51).tolist(),';2^{nd} b jet p_{T} [GeV]'),  ## B TAG
 
@@ -250,10 +264,11 @@ plotList = {#discriminantName:(discriminantLJMETName, binning, xAxisLabel)
 # 	'MllOSallmin':('MllOS_allComb_min',linspace(-10,300,32).tolist(),'; min ( M(ll_{OS}) ) [GeV]'),
 # 	'Mlll':('Mlll',linspace(-10,300,32).tolist(),'; M(lll) [GeV]'),
 
-	'MllsameFlavorOS':('Mll_sameFlavorOS',Mbins,'; M(ll_{OS}) [GeV]'),
+# 	'MllsameFlavorOS':('Mll_sameFlavorOS',Mbins,'; M(ll_{OS}) [GeV]'),
 	'MllOSall':('MllOS_allComb',Mbins,'; M(ll_{OS}) all [GeV]'),
 	'MllOSallmin':('MllOS_allComb_min',Mbins,'; min ( M(ll_{OS}) ) [GeV]'),
-	'Mlll':('Mlll',Mbins,'; M(lll) [GeV]'),
+	'MllOSallmax':('MllOS_allComb_max',Mbins,'; max ( M(ll_{OS}) ) [GeV]'),
+# 	'Mlll':('Mlll',Mbins,'; M(lll) [GeV]'),
 	
 	}
 

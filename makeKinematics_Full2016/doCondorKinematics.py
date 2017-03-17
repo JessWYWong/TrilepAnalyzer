@@ -10,99 +10,20 @@ cTime=datetime.datetime.now()
 date='%i_%i_%i'%(cTime.year,cTime.month,cTime.day)
 time='%i_%i_%i'%(cTime.hour,cTime.minute,cTime.second)
 
-# pfix='kinematics_80x_condor_MultiLep_Full2016_mcICHEP_IsoTrig_FRv7_PRv2_step2_moreThan2Jets_AllSYS'
-# 
-# pfix='kinematics_80x_condor_Exactly3Lep_Full2016_mcICHEP_IsoTrig_FRv7_PRv2_step2_exactly2Jets_noSYS'
+pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv20b_PRv6_step2_moreThan2Jets_1bjet_fixedLumi_newMllOScutV2_fixedAllSYS_ST600'
 
-# pfix='kinematics_80x_condor_MultiLep_Full2016_mcICHEP_IsoTrig_addDZforRunH_FRv7_PRv2_step2_moreThan2Jets_AllSYS'
+if len(sys.argv)>1: pfix=str(sys.argv[1])
 
-# pfix='kinematics_80x_condor_MultiLep_Full2016_mcICHEP_IsoTrig_addDZforRunH_FRv7_PRv2_step2_moreThan2Jets_fixedST_AllSYS'
+cutType=''
+if len(sys.argv)>2: cutType=str(sys.argv[2])
 
-# pfix='kinematics_80x_condor_Exactly3Lep_Full2016_mcICHEP_IsoTrig_addDZforRunH_FRv7_PRv2_step2_exactly2Jets_fixedST_AllSYS'
+# if cutType=='FRCR2' or cutType=='FRCR1'or cutType=='CR2' or cutType=='SR' or 'fSR' in cutType or cutType=='CR1' or cutType=='ALLR': pfix+='_'+cutType+'_'+date
+if cutType!='': pfix+='_'+cutType+'_'+date
+else: pfix+='_'+date
 
-# pfix='kinematics_80x_condor_MultiLep_Full2016_mcICHEP_IsoTrig_addDZforRunH_FRv8_PRv2_step2_moreThan2Jets_fixedST_looseLepjetClean_AllSYS'
-
-# pfix='kinematics_80x_condor_MultiLep_Full2016_mcICHEP_IsoTrig_addDZforRunH_FRv9_PRv2_step2_moreThan2Jets_fixedST_looseLepjetClean_AllSYS'
-
-# pfix='kinematics_80x_condor_MultiLep_Full2016_mcICHEP_IsoTrig_addDZforRunH_FRv11_PRv3_ClintsAN16-242_step2_moreThan2Jets_fixedST_looseLepjetClean_AllSYS'
-
-# pfix='kinematics_80x_condor_MultiLep_Full2016_mcICHEP_IsoTrig_addDZforRunH_FRv10_PRv2_step2_moreThan2Jets_fixedST_looseLepjetClean_1bjet_AllSYS'
-
-# pfix='kinematics_80x_condor_MultiLep_Full2016_mcICHEP_IsoTrig_HLTupdate_FRv9_PRv2_step2_moreThan2Jets_AllSYS'
-
-# pfix='kinematics_80x_condor_MultiLep_Full2016_mcICHEP_IsoTrig_HLTupdate_FRv9_PRv2_step2_exactly2Jets_AllSYS'
-
-# pfix='kinematics_80x_condor_MultiLep_Full2016_mcICHEP_IsoTrig_HLTupdate_FRv12_PRv2_step2_moreThan2Jets_AllSYS'
-
-# pfix='kinematics_80x_condor_MultiLep_Full2016_mcICHEP_IsoTrig_HLTupdate_FRv13_PRv2_step2_moreThan2Jets_1bjet_AllSYS'
-
-# pfix='kinematics_80x_condor_MultiLep_Full2016_mcICHEP_IsoTrig_HLTupdate_FRv12_PRv2_step2_exactly1Jet_AllSYS'
-
-# pfix='kinematics_80x_condor_MultiLep_Full2016_mcICHEP_FRv14a_PRv4_step2_20Jan2017_moreThan2Jets_AllSYS'
-
-# pfix='kinematics_80x_condor_MultiLep_Full2016_mcICHEP_FRv14a_PRv4_step2_20Jan2017_exactly2Jets_AllSYS'
-
-# pfix='kinematics_80x_condor_MoreThan3Lep_Full2016_mcICHEP_FRv14a_PRv4_step2_20Jan2017_moreThan2Jets_noSYS'
-
-# pfix='kinematics_80x_condor_MultiLep_Full2016_mcICHEP_FRv14a_PRv4_step2_20Jan2017_moreThan2Jets_noMllOScut_noSYS'
-
-# pfix='kinematics_80x_condor_MultiLep_Full2016_mcICHEP_FRv14a_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p2_noSYS'
-
-# pfix='kinematics_80x_condor_MultiLep_Full2016_mcICHEP_FRv15_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_AllSYS'
-
-# pfix='kinematics_80x_condor_MultiLep_Full2016_mcICHEP_FRv15_PRv4_step2_20Jan2017_exactly2Jets_muMinIso0p1_updatedbtagWP_AllSYS'
-
-# pfix='kinematics_80x_condor_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_1bjet_AllSYS'
-
-# pfix='kinematics_80x_condor_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_20Jan2017_exactly2Jets_muMinIso0p1_updatedbtagWP_1bjet_AllSYS'
-
-# pfix='kinematics_80x_condor_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_1bjet_lepPt30_AllSYS'
-
-# pfix='kinematics_80x_condor_MultiLep_Full2016_mcICHEP_FRv15b_PRv4_step2_26Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_1bjet_lepPt30_altBinning_AllSYS'
-
-# pfix='kinematics_80x_condor_Exactly3Lep_Full2016_mcICHEP_FRv15b_PRv4_step2_26Jan2017_exactly2Jets_muMinIso0p1_updatedbtagWP_1bjet_noSYS'
-
-# pfix='kinematics_80x_condor_MultiLep_Full2016_mcICHEP_FRv15b_PRv5test_step2_26Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_1bjet_lepPt30_noSYS'
-
-# pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv17b_PRv6_step2_moreThan2Jets_1bjet_noSYS'
-
-# pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv17b_PRv6_step2_moreThan2Jets_1bjet_AllSYS'
-
-# pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18b_PRv6_step2_moreThan2Jets_1bjet_AllSYS'
-
-# pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18b_PRv6_step2_exactly2Jets_1bjet_AllSYS'
-
-# pfix='kinematics_80x_condor_Exactly3Lep_Full2016_Moriond17_FRv18b_PRv6_step2_exactly2Jets_1bjet_AllSYS'
-
-# pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18b_PRv6_step2_moreThan2Jets_1bjet_AllSYS_ST600'
-
-# pfix='kinematics_80x_condor_Exactly3Lep_Full2016_Moriond17_FRv18b_PRv6_step2_exactly1Jet_1bjet_AllSYS'
-
-# pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18bSys_PRv6_step2_moreThan2Jets_1bjet_bTagSysFixed_addFRsys_AllSYS'
-
-# pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18bSys_PRv6_step2_exactly2Jets_1bjet_bTagSysFixed_addFRsys_AllSYS'
-
-# pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv19test_PRv6_step2_moreThan2Jets_1bjet_muFRetaDependence_AllSYS'
-
-# pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv19test_PRv6_step2_moreThan2Jets_1bjet_muFRetaDependence_noSYS_ST600'
-
-# pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18bSys_PRv6_step2_moreThan2Jets_1bjet_bTagSysFixed_addFRsys_AllSYS_ST600'
-
-# pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv19test_PRv6_step2_moreThan2Jets_1bjet_muFRetaDependence_noSYS_ST600'
-
-# pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv19test_PRv6_step2_moreThan2Jets_1bjet_muFRetaDependence_AllSYS'
-
-# pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_FRv18bSys_PRv7test_step2_moreThan2Jets_1bjet_noSYS_ST600'
-
-# pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_noSYS_noDDBKG'
-
-# pfix='kinematics_80x_condor_Exactly3Lep_Full2016_Moriond17_FRv18bSys_PRv6_step2_exactly2Jets_1bjet_AllSYS'
-
-pfix='kinematics_80x_condor_Exactly3Lep_Full2016_Moriond17_FRv18bSys_PRv6_step2_exactly1Jet_1bjet_AllSYS'
-
-pfix+='_'+date
 #pfix+='_'+date+'_'+time
 # pfix+='_no_jsf'
+
 
 plotList = [#distribution name as defined in "doHists.py"
 	'NPV',
@@ -110,37 +31,37 @@ plotList = [#distribution name as defined in "doHists.py"
 	'ElPt',
 	'MuPt',
 
-# 	'lep1Pt',
-# 	'lep2Pt',
-# 	'lep3Pt',
+	'lep1Pt',
+	'lep2Pt',
+	'lep3Pt',
 
 	'lepEta',
 	'ElEta',
 	'MuEta',
 
-# 	'lep1Eta',
-# 	'lep2Eta',
-# 	'lep3Eta',
+	'lep1Eta',
+	'lep2Eta',
+	'lep3Eta',
+	
+	'Nlep',
+	'Nel',
+	'Nmu',
 
  	'JetEta',
 
-#  	'Jet1Eta',
-#  	'Jet2Eta',
-
 	'JetPt' ,
 
-# 	'Jet1Pt',
-# 	'Jet2Pt',
-
-	'HT',
+# 	'HT',
 	'HTrebinned',
-	'ST',
+# 	'ST',
 	'STrebinned',
-	'MET',
+	'STrebinnedv2',
+	'STrebinnedv3',
+# 	'MET',
 	'METrebinned',
 	'NJets' ,
 	'NBJets',
-	'NBJetsCorr',
+# 	'NBJetsCorr',
 
 # 	'mindeltaRlepJets',
 # 	'mindeltaRlep1Jets',
@@ -152,9 +73,9 @@ plotList = [#distribution name as defined in "doHists.py"
 # 	'mindeltaR3',
 # 	'lepCharge',
 
-	'lepIso',
-	'ElIso',
-	'MuIso',
+# 	'lepIso',
+# 	'ElIso',
+# 	'MuIso',
 
 # 	'PtRel1',
 # 	'PtRel2',
@@ -163,6 +84,7 @@ plotList = [#distribution name as defined in "doHists.py"
 # 	'MllsameFlavorOS',
 # 	'MllOSall',
 	'MllOSallmin',
+	'MllOSallmax',
 # 	'Mlll',
 	]
 
@@ -174,6 +96,9 @@ os.chdir(outDir)
 
 count = 0
 for distribution in plotList:
+	print 'Process condor jobs for:',cutType, distribution
+	if ('noWeight' in cutType):
+		if not ('STrebinnedv' in distribution): continue
 	for cat in catList:
 		print cat
 		if not os.path.exists(outDir+'/'+cat): os.system('mkdir '+cat)
@@ -182,7 +107,8 @@ for distribution in plotList:
 # 		dict={'dir':outputDir,'dist':distribution,'cat':cat}
 # 		dict={'dir':thisDir,'dist':distribution,'cat':cat}
 # 		dict={'CMSSWBASE':relbase,'dir':outputDir,'dist':distribution,'cat':cat}
-		dict={'CMSSWBASE':relbase,'thisDir':thisDir,'dist':distribution,'cat':cat}
+# 		dict={'CMSSWBASE':relbase,'thisDir':thisDir,'dist':distribution,'cat':cat}
+		dict={'CMSSWBASE':relbase,'thisDir':thisDir,'dist':distribution,'cat':cat,'cutType':cutType}
 
 
 		jdf=open('condor_'+distribution+'.job','w')
@@ -199,7 +125,7 @@ Output = condor_%(dist)s.out
 Error = condor_%(dist)s.err
 Log = condor_%(dist)s.log
 Notification = Error
-Arguments = %(CMSSWBASE)s %(dist)s %(cat)s
+Arguments = %(CMSSWBASE)s %(dist)s %(cat)s %(cutType)s
 
 Queue 1"""%dict)
 		jdf.close()
