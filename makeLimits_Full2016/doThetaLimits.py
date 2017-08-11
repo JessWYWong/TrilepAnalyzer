@@ -8,22 +8,48 @@ templateDir = '/user_data/rsyarif/'
 # templateDir+='optimization_condor_80x_MultiLep_Full2016_Moriond17_PRv6_FRv18bSys_fixedLumi_newMllOScut_fixedAllSYS_step2_addmistag_addMoreSignal_2017_2_23/'
 # templateDir+='optimization_condor_PRv6_FRv20b_newMllOSV2_Allsys_2017_3_1/'
 # templateDir+='optimization_reMiniAOD_PRv6_FRv24_newMuTrkSF_AllSys_2017_3_5/'
-templateDir+='optimization_reMiniAOD_PRv9_FRv24_newFRsys_AllSys_2017_3_10/'
+# templateDir+='optimization_reMiniAOD_PRv9_FRv24_newFRsys_AllSys_2017_3_10/'
+# templateDir+='optimization_reMiniAOD_PRv9_FRv30CR2_newRunH_AllSys_2017_3_27/'
+# templateDir+='optimization_reMiniAOD_PRv9_FRv30CR2_newRunH_AllSys_2017_3_28/'
+# templateDir+='optimization_reMiniAOD_PRv9_FRv30CR2_newRunH_correctedMuTrkSF_AllSys_2017_4_4/'
 
 limitType = templateDir.split('/')[-2]
 
+if len(sys.argv)>1: 
+	templateDir+=sys.argv[1]+'/'
+	limitType = sys.argv[1]
+
+
 # templateDir+='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20/'
-templateDir+='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST700_mllOS20/'
+# templateDir+='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST700_mllOS20/'
 # templateDir+='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST800_mllOS20/'
 # templateDir+='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST900_mllOS20/'
 # templateDir+='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1000_mllOS20/'
 # templateDir+='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1100_mllOS20/'
+# templateDir+='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1300_mllOS20/'
+# templateDir+='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1400_mllOS20/'
+# templateDir+='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1500_mllOS20/'
+# templateDir+='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1600_mllOS20/'
+
+if len(sys.argv)>2: 
+	templateDir+=sys.argv[2]+'/'
 
 # templateDir+='4binsCount_updatedLumi_updatedLepIdUnc_addbmistag_normRENORMPDF/'
 # templateDir+='4binsCount_updatedLumi_updatedLepIdUnc_addmistag_normRENORMPDF/'
 # templateDir+='4binsCount_newMllOScut/'
-templateDir+='4binsCount/'
+# templateDir+='4binsCount/'
+# templateDir+='4binsCount_accurateLHEsys/'
+
+# templateDir+='4binsCount_accurateLHEsys_FRsysMar28/'
+# templateDir+='Shape_accurateLHESys_FRsysMar28/'
+
+if len(sys.argv)>3: 
+	templateDir+=sys.argv[3]+'/'
+
 print "Checking:", templateDir
+
+if len(sys.argv)>4: 
+	outSubDir=sys.argv[4]+'/'
 
 
 outputDir = '/user_data/rsyarif/limits/'
@@ -33,11 +59,13 @@ lumiStr = '35p867'
 
 thetaConfigTemp = os.getcwd()+'/theta_config_template.py'
 
-toFilter = ['pdf','muR','muF','muRFcorrd','muRFdecorrdNew','muRFenv','tau21','jmr','jms']
+toFilter = ['muR__','muF__','muRFcorrd__','elelelTrigSys','elelmuTrigSys','elmumuTrigSys','mumumuTrigSys','elIsoSys','elIdSys','muIsoSys','muIdSys','PR__']
+# toFilter = ['pdf','muR','muF','muRFcorrd','muRFdecorrdNew','muRFenv','tau21','jmr','jms']
 # toFilter = ['pdf','muR','muF','muRFcorrd','muRFdecorrdNew','muRFenv','tau21','jmr','jms','btag'] #filter btag!
 # toFilter = []
 # toFilter+= ['jec','jer']
-toFilter = ['__'+item+'__' for item in toFilter]
+# toFilter = ['__'+item+'__' for item in toFilter]
+toFilter = [item for item in toFilter]
 # toFilter += ['sig__pdfNew','sig__muRFcorrdNew']
 print 'Filtering the following : ',toFilter
 
@@ -64,7 +92,8 @@ thetaConfigLines = f.readlines()
 f.close()
 
 def makeThetaConfig(rFile,outDir):
-	rFileDir = rFile.split('/')[-2]
+# 	rFileDir = rFile.split('/')[-2]
+	rFileDir = outSubDir
 	with open(outDir+'/'+rFileDir+'/'+rFile.split('/')[-1][:-5]+'.py','w') as fout:
 		for line in thetaConfigLines:
 			if line.startswith('outDir ='): fout.write('outDir = \''+outDir+'/'+rFileDir+'\'')
@@ -92,6 +121,10 @@ for file in rootfilelist:
 	print 'file   : ',file
 	signal = file.split('/')[-1].split('_')[2]
 	BRStr = file.split('/')[-1][file.split('/')[-1].find(signal)+len(signal):file.split('/')[-1].find('_'+lumiStr+'fb')]
+	if BRStr != '_bW0p5_tZ0p25_tH0p25': 
+# 	if BRStr != '_bW0p0_tZ1p0_tH0p0': 
+		print '--> Skipping'
+		continue
 	outDir = outputDir+limitType+BRStr+'/'
 	print 'signal : ',signal,BRStr
 # 	print 'outDir : ',outDir
@@ -103,11 +136,15 @@ for file in rootfilelist:
 	os.chdir(outDir)
 # 	print 'pwd:',os.getcwd()
 	fileDir = '/'+file.split('/')[-2]
+# 	fileDir = '/'+outSubDir
 	#if os.path.exists(outDir+fileDir+'/'+file.split('/')[-1][:-5]+'.job'): continue
 # 	print 'outDir+fileDir:',outDir+fileDir
-	if not os.path.exists(outDir+fileDir): os.system('mkdir -v '+outDir+fileDir)
-	os.chdir(outDir+fileDir)
+# 	if not os.path.exists(outDir+fileDir): os.system('mkdir -v '+outDir+fileDir)
+# 	os.chdir(outDir+fileDir)
 # 	print 'fileDir: ',fileDir
+	print 'outDir : ',outDir+'/'+outSubDir
+	if not os.path.exists(outDir+'/'+outSubDir): os.system('mkdir -v '+outDir+'/'+outSubDir)
+	os.chdir(outDir+'/'+outSubDir)
 	makeThetaConfig(file,outDir)
 
 	dict={'configdir':outDir+fileDir,'configfile':file.split('/')[-1][:-5]}
