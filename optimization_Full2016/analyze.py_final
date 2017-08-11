@@ -56,9 +56,17 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 		#if cutList['isPassTrig']==1:        cut += ' && MCPastTrigger == 1'
 		if cutList['isPassTrig_dilep']==1:  cut += ' && MCPastTrigger_dilep == 1'
 		if cutList['isPassTrilepton']==1 :  cut += ' && isPassTrilepton == 1'	
+
+ 	cut += ' && (AK4HT >= '+str(cutList['htCut'])+')'
+
  	cut += ' && (AK4HTpMETpLepPt >= '+str(cutList['stCut'])+')'
 
 #  	cut += ' && AllLeptonCount_PtOrdered == 3' #require exactly 3 leptons
+
+	#ATTENION, lines below might need to be commented!!
+# 	cut += ' && ( ( ptRel_minDRlep1Jet > '+str(cutList['ptRelCut'])+'  || minDR_lep1Jet > '+str(cutList['minDRlepJetCut'])+' )' 
+# 	cut += '   && ( ptRel_minDRlep2Jet > '+str(cutList['ptRelCut'])+'  || minDR_lep2Jet > '+str(cutList['minDRlepJetCut'])+' )' 
+# 	cut += '   && ( ptRel_minDRlep3Jet > '+str(cutList['ptRelCut'])+'  || minDR_lep3Jet > '+str(cutList['minDRlepJetCut'])+' ) )' 
 
 	### cut only events where there is a OS lepton pair and that it has 0<MllOS<cutvalue 
 # 	cut += ' && ( (MllOS_allComb[0] > '+str(cutList['mllOSCut'])+' || MllOS_allComb[0] < 0)' 
@@ -377,7 +385,8 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 			cut_mistagDn = cut.replace(nbtagLJMETname,'NJetsBTagwithSF_singleLepCalc_shifts[3]')#nbtagLJMETname+'_shifts[3]')
 			
 			bTagSFshiftName = discriminantLJMETName
-			if 'NJetsBTag' in discriminantLJMETName: 
+			#if 'NJetsBTag' in discriminantLJMETName: 
+			if 'NJetsBTag' in discriminantLJMETName or 'minMlllB' in discriminantLJMETName: #is this correct?
 				bTagSFshiftName = discriminantLJMETName+'_shifts[0]'
 			if(displayAnalyze):print 'BTAGup LJMET NAME',bTagSFshiftName.replace('_shifts[0]','_shifts[0]')
 			tTree[process].Draw(bTagSFshiftName.replace('_shifts[0]','_shifts[0]')+' >> '+discriminantName+'btagUp'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut_btagUp+isLepCut+')', 'GOFF')
