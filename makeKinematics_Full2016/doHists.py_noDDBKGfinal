@@ -15,7 +15,9 @@ lumiStr = str(targetlumi/1000).replace('.','p') # 1/fb
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv20b_2Mar2017_step1hadds_step2/nominal'
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_step1hadds_step2/nominal'
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRv6_FRv24_newMuTrkSF_step1hadds_step2/nominal'
-step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRv9_FRv24_postPreapproval_step1hadds_step2/nominal'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRv9_FRv24_postPreapproval_step1hadds_step2/nominal'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv24_step1hadds_step2/nominal'
+step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRv9_FRv30CR2_correctedMuTrkSF_step1hadds_step2/nominal';
 
 print 'grabbing files from ', step1Dir
 """
@@ -225,7 +227,7 @@ plotList = {#discriminantName:(discriminantLJMETName, binning, xAxisLabel)
 
 # 	'HT'    :('AK4HT',linspace(0, 2000, 21).tolist(),';H_{T} (GeV);'),
 	'HTrebinned'    :('AK4HT',HTbins,';H_{T} (GeV);'),
-# 	'ST'    :('AK4HTpMETpLepPt',linspace(0, 2000, 21).tolist(),';S_{T} (GeV);'),
+	'ST'    :('AK4HTpMETpLepPt',linspace(0, 2000, 21).tolist(),';S_{T} (GeV);'),
 	'STrebinned'    :('AK4HTpMETpLepPt',STbins,';S_{T} (GeV);'),
 # 	'MET'   :('corr_met_singleLepCalc',linspace(0, 500, 26).tolist(),';#slash{E}_{T} (GeV);'),
 	'METrebinned'   :('corr_met_singleLepCalc',METbins,';#slash{E}_{T} (GeV);'),
