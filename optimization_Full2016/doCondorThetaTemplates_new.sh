@@ -19,3 +19,5 @@ python -u doHists.py $condorDir \
 						  --mllOSCut=${9} \
 						  --isPassTriLepton=${10} \
 						  --isPassTrig_dilep=${11} \
+						  --ptRelCut=${12}\
+						  --minDRlepJetCut=${13}\
