@@ -11,14 +11,26 @@ R.gROOT.SetBatch(1)
 start_time = time.time()
 
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRv6_FRv24_newMuTrkSF_step1hadds_step2/nominal'
-step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRv9_FRv24_postPreapproval_step1hadds_step2/nominal'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRv9_FRv24_postPreapproval_step1hadds_step2/nominal'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv30CR2_step1hadds_step2/nominal'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRv9_FRv30CR2_correctedMuTrkSF_step1hadds_step2/nominal' #includes newRunH
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv30CR2extSys_step1hadds_step2/nominal' #includes correctedMuTrkSF
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv30CR2statOnly_correctedMuTrkSF_step1hadds_step2/nominal'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv30CR2Sys2Only_correctedMuTrkSF_step1hadds_step2/nominal'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv30CR2Sys4Only_correctedMuTrkSF_step1hadds_step2/nominal'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv10_FRv42CR2_correctedMuTrkSF_step1hadds_step2/nominal'
+step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv45FRSRHT400low_correctedMuTrkSF_moreVars_fixlepOrder_step1hadds_step2/nominal'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv47FRSRHT400low2Dext_correctedMuTrkSF_moreVars_fixlepOrder_ptRel_step1hadds_step2/nominal'
+
+print 'grabbing files from ', step1Dir
 
 cTime=datetime.datetime.now()
 datestr='%i_%i_%i'%(cTime.year,cTime.month,cTime.day)
 timestr='%i_%i_%i'%(cTime.hour,cTime.minute,cTime.second)
 
 # pfix='optimization_PRv6_FRv24_newMuTrkSF_AllSys'
-pfix='optimization_reMiniAOD_PRv9_FRv24_newFRsys_AllSys_BB_TEST'
+# pfix='optimization_reMiniAOD_PRv9_FRv24_newFRsys_AllSys_BB_TEST'
+pfix='optimization_reMiniAOD_dummy'
 
 pfix+='_'+datestr
 
@@ -72,6 +84,7 @@ ttvList   = ['TTWl','TTZl']
 
 # whichSignal = 'TT' #TT, BB, or X53X53
 whichSignal = 'BB' #TT, BB, or X53X53
+
 signalMassRange = [800,1800]
 sigList = [whichSignal+'M'+str(mass) for mass in range(signalMassRange[0],signalMassRange[1]+100,100)]
 if whichSignal=='X53X53': sigList = [whichSignal+'M'+str(mass)+chiral for mass in range(signalMassRange[0],signalMassRange[1]+100,100) for chiral in ['left','right']]
@@ -109,6 +122,8 @@ try:
 	                                              "mllOSCut=",
 	                                              "isPassTrig_dilep=",
 	                                              "isPassTriLepton=",
+	                                              "ptRelCut=",
+	                                              "minDRlepJetCut=",
 	                                              ])
 	print '[opts][args]:',opts,args
 except getopt.GetoptError as err:
@@ -125,6 +140,8 @@ stCut=600
 mllOSCut=20
 isPassTrig_dilep=1
 isPassTrilepton=1
+ptRelCut=10
+minDRlepJetCut=0.2
 
 catList  =['EEE','EEM','EMM','MMM']
 
@@ -138,6 +155,8 @@ for o, a in opts:
 	if o == '--htCut': htCut = float(a)
 	if o == '--stCut': stCut = float(a)
 	if o == '--mllOSCut': mllOSCut = float(a)
+	if o == '--ptRelCut': ptRelCut = float(a)
+	if o == '--minDRlepJetCut': minDRlepJetCut = float(a)
 	if o == '--whichCat': catList = [str(a)]
 
 cutList = {
@@ -151,6 +170,8 @@ cutList = {
 		   'mllOSCut':mllOSCut,
 		   'isPassTrig_dilep':isPassTrig_dilep,
 		   'isPassTrilepton':isPassTrilepton,
+		   'ptRelCut':ptRelCut,
+		   'minDRlepJetCut':minDRlepJetCut,
 		   }
 
 cutString  = 'lep1Pt'+str(int(cutList['lep1PtCut']))
@@ -161,22 +182,24 @@ cutString += '_NBJets'+str(int(cutList['nbjetsCut']))
 cutString += '_HT'+str(cutList['htCut'])
 cutString += '_ST'+str(cutList['stCut'])
 cutString += '_mllOS'+str(cutList['mllOSCut'])
+cutString += '_ptRel'+str(cutList['ptRelCut'])
+cutString += '_minDRlJ'+str(cutList['minDRlepJetCut']).replace('.','p')
 
 
-normSystematics = {
-# 					'elIdSys':{'EEE':1.017,'EEM':1.014,'EMM':1.01,'MMM':1.00},
-# 					'muIdSys':{'EEE':1.00,'EEM':1.01,'EMM':1.014,'MMM':1.017},
-# 					'elIsoSys':{'EEE':1.017,'EEM':1.014,'EMM':1.01,'MMM':1.00},
-# 					'muIsoSys':{'EEE':1.00,'EEM':1.01,'EMM':1.014,'MMM':1.017},
-					'elIdSys':{'EEE':1.03,'EEM':1.02,'EMM':1.01,'MMM':1.00},
-					'muIdSys':{'EEE':1.00,'EEM':1.01,'EMM':1.02,'MMM':1.03},
-					'elIsoSys':{'EEE':1.03,'EEM':1.02,'EMM':1.01,'MMM':1.00},
-					'muIsoSys':{'EEE':1.00,'EEM':1.01,'EMM':1.02,'MMM':1.03},
-					'elelelTrigSys':{'EEE':1.03,'EEM':1.00,'EMM':1.00,'MMM':1.00},
-					'elelmuTrigSys':{'EEE':1.00,'EEM':1.03,'EMM':1.00,'MMM':1.00},
-					'elmumuTrigSys':{'EEE':1.00,'EEM':1.00,'EMM':1.03,'MMM':1.00},
-					'mumumuTrigSys':{'EEE':1.00,'EEM':1.00,'EMM':1.00,'MMM':1.03},
-					}
+# normSystematics = {
+# # 					'elIdSys':{'EEE':1.017,'EEM':1.014,'EMM':1.01,'MMM':1.00},
+# # 					'muIdSys':{'EEE':1.00,'EEM':1.01,'EMM':1.014,'MMM':1.017},
+# # 					'elIsoSys':{'EEE':1.017,'EEM':1.014,'EMM':1.01,'MMM':1.00},
+# # 					'muIsoSys':{'EEE':1.00,'EEM':1.01,'EMM':1.014,'MMM':1.017},
+# 					'elIdSys':{'EEE':1.03,'EEM':1.02,'EMM':1.01,'MMM':1.00},
+# 					'muIdSys':{'EEE':1.00,'EEM':1.01,'EMM':1.02,'MMM':1.03},
+# 					'elIsoSys':{'EEE':1.03,'EEM':1.02,'EMM':1.01,'MMM':1.00},
+# 					'muIsoSys':{'EEE':1.00,'EEM':1.01,'EMM':1.02,'MMM':1.03},
+# 					'elelelTrigSys':{'EEE':1.03,'EEM':1.00,'EMM':1.00,'MMM':1.00},
+# 					'elelmuTrigSys':{'EEE':1.00,'EEM':1.03,'EMM':1.00,'MMM':1.00},
+# 					'elmumuTrigSys':{'EEE':1.00,'EEM':1.00,'EMM':1.03,'MMM':1.00},
+# 					'mumumuTrigSys':{'EEE':1.00,'EEM':1.00,'EMM':1.00,'MMM':1.03},
+# 					}
 
 # ddbkgSystematics = {
 # 					'elPRsys':{'EEE':1.38,'EEM':1.12,'EMM':1.07,'MMM':1.00},
@@ -184,11 +207,11 @@ normSystematics = {
 # 					'muFReta':{'EEE':1.00,'EEM':1.22,'EMM':1.11,'MMM':1.48}
 # 					}
 
-ddbkgSystematics = {
-					'elPRsys':{'EEE':1.09,'EEM':1.15,'EMM':1.08,'MMM':1.00},
-					'muPRsys':{'EEE':1.00,'EEM':1.04,'EMM':1.08,'MMM':1.17},
-					'muFReta':{'EEE':1.00,'EEM':1.13,'EMM':1.10,'MMM':1.24}
-					}
+# ddbkgSystematics = {
+# 					'elPRsys':{'EEE':1.09,'EEM':1.15,'EMM':1.08,'MMM':1.00},
+# 					'muPRsys':{'EEE':1.00,'EEM':1.04,'EMM':1.08,'MMM':1.17},
+# 					'muFReta':{'EEE':1.00,'EEM':1.13,'EMM':1.10,'MMM':1.24}
+# 					}
 
 
 if len(sys.argv)>1: outDir=sys.argv[1]
@@ -275,16 +298,27 @@ print "FINISHED READING"
 ######################## ANALYZE ##########################
 ###########################################################
 
-
+HTbins = [0,100,200,300,400,500,600,800,1000,2000]
 STbins = [0,100,200,300,400,500,600,800,1000,1400,2000]
+STbinsv2 = [0,100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1600,2000]
+MlllBbins=[100,200,300,400,500,600,700,800,1000,1500]
 plotList = {#discriminantName:(discriminantLJMETName, binning, xAxisLabel)
 			'HT':('AK4HT',linspace(0, 5000, 51).tolist(),';H_{T} (GeV);'),
+			'HTrebinned'    :('AK4HT',HTbins,';H_{T} (GeV);'),
 			'ST':('AK4HTpMETpLepPt',linspace(0, 5000, 51).tolist(),';S_{T} (GeV);'),
 			'STrebinned'    :('AK4HTpMETpLepPt',STbins,';S_{T} (GeV);'),
+			'STrebinnedv2'    :('AK4HTpMETpLepPt',STbinsv2,';S_{T} (GeV);'),
+			'NJets' :('NJets_singleLepCalc',linspace(0, 15, 16).tolist(),';AK4 Jet multiplicity;'),
+			'minMlllBv2':('minMlllBjet',linspace(0, 1500, 31).tolist(),';min[M(trilepton, b-jet)];'),
+			'minMlllBv4':('minMlllBjet',MlllBbins,';min[M(trilepton, b-jet)];'),
 			}
 
 # iPlot='ST' #choose a discriminant from plotList!
-iPlot='STrebinned' #choose a discriminant from plotList!
+# iPlot='STrebinned' #choose a discriminant from plotList!
+# iPlot='STrebinnedv2' #choose a discriminant from plotList!
+# iPlot='HTrebinned' #choose a discriminant from plotList!
+# iPlot='NJets' #choose a discriminant from plotList! NJets can only be used with CutNCount!! Use STrebinned for shape!
+iPlot='minMlllBv4' #choose a discriminant from plotList!
 if(displayProcess):print "PLOTTING:",iPlot
 if(displayProcess):print "         LJMET Variable:",plotList[iPlot][0]
 if(displayProcess):print "         X-AXIS TITLE  :",plotList[iPlot][2]
