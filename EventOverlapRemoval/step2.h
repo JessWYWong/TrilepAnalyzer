@@ -242,6 +242,8 @@ public :
    Float_t         topMass;
    Float_t         minMleppBjet;
    vector<double>  *minMleppBjet_shifts;
+   Float_t         minMlllBjet;
+   vector<double>  *minMlllBjet_shifts;
    Float_t         minMleppJet;
    Float_t         genTopPt;
    Float_t         genAntiTopPt;
@@ -276,14 +278,23 @@ public :
    Float_t         minDR_lep1Jet;
    Float_t         minDR_lep2Jet;
    Float_t         minDR_lep3Jet;
+   Float_t         ptRel_minDRlepJet;
+   Float_t         ptRel_minDRlep1Jet;
+   Float_t         ptRel_minDRlep2Jet;
+   Float_t         ptRel_minDRlep3Jet;
    Float_t         minDR_lepMET;
    Float_t         minDR_METJet;
+   Float_t         minDPhi_METJet;
    Float_t         ptRel_lepJet;
    Float_t         MT_lepMet;
    vector<double>  *deltaR_lepJets;
    vector<double>  *deltaR_lep1Jets;
    vector<double>  *deltaR_lep2Jets;
    vector<double>  *deltaR_lep3Jets;
+   vector<double>  *ptRel_lepJets;
+   vector<double>  *ptRel_lep1Jets;
+   vector<double>  *ptRel_lep2Jets;
+   vector<double>  *ptRel_lep3Jets;
    vector<double>  *deltaR_lepMETs;
    vector<double>  *deltaR_METJets;
    vector<float>   *deltaR_lepBJets;
@@ -532,6 +543,8 @@ public :
    TBranch        *b_topMass;   //!
    TBranch        *b_minMleppBjet;   //!
    TBranch        *b_minMleppBjet_shifts;   //!
+   TBranch        *b_minMlllBjet;   //!
+   TBranch        *b_minMlllBjet_shifts;   //!
    TBranch        *b_mixnMleppJet;   //!
    TBranch        *b_genTopPt;   //!
    TBranch        *b_genAntiTopPt;   //!
@@ -566,14 +579,23 @@ public :
    TBranch        *b_minDR_lep1Jet;   //!
    TBranch        *b_minDR_lep2Jet;   //!
    TBranch        *b_minDR_lep3Jet;   //!
+   TBranch        *b_ptRel_minDRlepJet;   //!
+   TBranch        *b_ptRel_minDRlep1Jet;   //!
+   TBranch        *b_ptRel_minDRlep2Jet;   //!
+   TBranch        *b_ptRel_minDRlep3Jet;   //!
    TBranch        *b_minDR_lepMET;   //!
    TBranch        *b_minDR_METJet;   //!
+   TBranch        *b_minDPhi_METJet;   //!
    TBranch        *b_ptRel_lepJet;   //!
    TBranch        *b_MT_lepMet;   //!
    TBranch        *b_deltaR_lepJets;   //!
    TBranch        *b_deltaR_lep1Jets;   //!
    TBranch        *b_deltaR_lep2Jets;   //!
    TBranch        *b_deltaR_lep3Jets;   //!
+   TBranch        *b_ptRel_lepJets;   //!
+   TBranch        *b_ptRel_lep1Jets;   //!
+   TBranch        *b_ptRel_lep2Jets;   //!
+   TBranch        *b_ptRel_lep3Jets;   //!
    TBranch        *b_deltaR_lepMETs;   //!
    TBranch        *b_deltaR_METJets;   //!
    TBranch        *b_deltaR_lepBJets;   //!
@@ -793,6 +815,7 @@ void step2::Init(TTree *tree)
    NJetsCSVwithSF_JetSubCalc_noLepCorr_shifts = 0;
    NJetsHtagged_shifts = 0;
    minMleppBjet_shifts = 0;
+   minMlllBjet_shifts = 0;
    deltaRlepbJetInMinMlb_shifts = 0;
    deltaPhilepbJetInMinMlb_shifts = 0;
    deltaRtopWjet_shifts = 0;
@@ -807,7 +830,11 @@ void step2::Init(TTree *tree)
    deltaR_lep1Jets = 0;
    deltaR_lep2Jets = 0;
    deltaR_lep3Jets = 0;
-   deltaR_lepMETs = 0;
+   ptRel_lepJets = 0;
+   ptRel_lep1Jets = 0;
+   ptRel_lep2Jets = 0;
+   ptRel_lep3Jets = 0;
+   ptRel_lepMETs = 0;
    deltaR_METJets = 0;
    deltaR_lepBJets = 0;
    deltaR_lepBJets_bSFup = 0;
@@ -834,6 +861,8 @@ void step2::Init(TTree *tree)
    deltaR_lepClosestJet = 0;
    PtRelLepClosestJet = 0;
    MllOS_allComb = 0;
+   minMlllBjet = 0;
+   minDPhi_METJet = 0;
    // Set branch addresses and branch pointers
    if (!tree) return;
    inputTree = tree;
@@ -1058,6 +1087,8 @@ void step2::Init(TTree *tree)
    inputTree->SetBranchAddress("topMass", &topMass, &b_topMass);
    inputTree->SetBranchAddress("minMleppBjet", &minMleppBjet, &b_minMleppBjet);
    inputTree->SetBranchAddress("minMleppBjet_shifts", &minMleppBjet_shifts, &b_minMleppBjet_shifts);
+   inputTree->SetBranchAddress("minMlllBjet", &minMlllBjet, &b_minMlllBjet);
+   inputTree->SetBranchAddress("minMlllBjet_shifts", &minMlllBjet_shifts, &b_minMlllBjet_shifts);
    inputTree->SetBranchAddress("minMleppJet", &minMleppJet, &b_mixnMleppJet);
    inputTree->SetBranchAddress("genTopPt", &genTopPt, &b_genTopPt);
    inputTree->SetBranchAddress("genAntiTopPt", &genAntiTopPt, &b_genAntiTopPt);
@@ -1089,9 +1120,16 @@ void step2::Init(TTree *tree)
    inputTree->SetBranchAddress("minDR_leadAK8otherAK8", &minDR_leadAK8otherAK8, &b_minDR_leadAK8otherAK8);
    inputTree->SetBranchAddress("minDR_lepAK8", &minDR_lepAK8, &b_minDR_lepAK8);
    inputTree->SetBranchAddress("minDR_lepJet", &minDR_lepJet, &b_minDR_lepJet);
+   inputTree->SetBranchAddress("minDR_lep1Jet", &minDR_lep1Jet, &b_minDR_lep1Jet);
+   inputTree->SetBranchAddress("minDR_lep2Jet", &minDR_lep2Jet, &b_minDR_lep2Jet);
+   inputTree->SetBranchAddress("minDR_lep3Jet", &minDR_lep3Jet, &b_minDR_lep3Jet);
+   inputTree->SetBranchAddress("ptRel_minDRlepJet", &ptRel_minDRlepJet, &b_ptRel_minDRlepJet);
+   inputTree->SetBranchAddress("ptRel_minDRlep1Jet", &ptRel_minDRlep1Jet, &b_ptRel_minDRlep1Jet);
+   inputTree->SetBranchAddress("ptRel_minDRlep2Jet", &ptRel_minDRlep2Jet, &b_ptRel_minDRlep2Jet);
+   inputTree->SetBranchAddress("ptRel_minDRlep3Jet", &ptRel_minDRlep3Jet, &b_ptRel_minDRlep3Jet);
+   inputTree->SetBranchAddress("minDPhi_METJet", &minDPhi_METJet, &b_minDPhi_METJet);
    inputTree->SetBranchAddress("ptRel_lepJet", &ptRel_lepJet, &b_ptRel_lepJet);
    inputTree->SetBranchAddress("MT_lepMet", &MT_lepMet, &b_MT_lepMet);
-   inputTree->SetBranchAddress("deltaR_lepJets", &deltaR_lepJets, &b_deltaR_lepJets);
    inputTree->SetBranchAddress("deltaR_lepBJets", &deltaR_lepBJets, &b_deltaR_lepBJets);
    inputTree->SetBranchAddress("deltaR_lepBJets_bSFup", &deltaR_lepBJets_bSFup, &b_deltaR_lepBJets_bSFup);
    inputTree->SetBranchAddress("deltaR_lepBJets_bSFdn", &deltaR_lepBJets_bSFdn, &b_deltaR_lepBJets_bSFdn);
@@ -1114,9 +1152,14 @@ void step2::Init(TTree *tree)
    inputTree->SetBranchAddress("mass_lepAK8s", &mass_lepAK8s, &b_mass_lepAK8s);
    inputTree->SetBranchAddress("minDR_lepJets", &minDR_lepJets, &b_minDR_lepJets);
    inputTree->SetBranchAddress("minDR_lepBJets", &minDR_lepBJets, &b_minDR_lepBJets);
+   inputTree->SetBranchAddress("deltaR_lepJets", &deltaR_lepJets, &b_deltaR_lepJets);
    inputTree->SetBranchAddress("deltaR_lep1Jets", &deltaR_lep1Jets, &b_deltaR_lep1Jets);
    inputTree->SetBranchAddress("deltaR_lep2Jets", &deltaR_lep2Jets, &b_deltaR_lep2Jets);
    inputTree->SetBranchAddress("deltaR_lep3Jets", &deltaR_lep3Jets, &b_deltaR_lep3Jets);
+   inputTree->SetBranchAddress("ptRel_lepJets", &ptRel_lepJets, &b_ptRel_lepJets);
+   inputTree->SetBranchAddress("ptRel_lep1Jets", &ptRel_lep1Jets, &b_ptRel_lep1Jets);
+   inputTree->SetBranchAddress("ptRel_lep2Jets", &ptRel_lep2Jets, &b_ptRel_lep2Jets);
+   inputTree->SetBranchAddress("ptRel_lep3Jets", &ptRel_lep3Jets, &b_ptRel_lep3Jets);
    inputTree->SetBranchAddress("deltaR_lepClosestJet", &deltaR_lepClosestJet, &b_deltaR_lepClosestJet);
    inputTree->SetBranchAddress("PtRelLepClosestJet", &PtRelLepClosestJet, &b_PtRelLepClosestJet);
    inputTree->SetBranchAddress("Mll_sameFlavorOS", &Mll_sameFlavorOS, &b_Mll_sameFlavorOS);
