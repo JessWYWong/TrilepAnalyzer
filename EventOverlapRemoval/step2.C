@@ -3,7 +3,6 @@
 #include <TH2.h>
 #include <TStyle.h>
 #include <TCanvas.h>
-#include "eventRegistry.C" 
 #include <iostream>
 #include <fstream>
 
@@ -41,7 +40,6 @@ void step2::Loop()
 
    int duplicates=0;
    int uniques=0;
-   eventRegistry EventRegistry;
 
    //read CheckOverlap event filter file                                                                                                                                                                         
    vector <int> CheckOverlap_run;
@@ -90,16 +88,6 @@ void step2::Loop()
 //       if(jentry>10) break;
       
       std::cout << "run / lumi / event : " << run_CommonCalc << " / " << lumi_CommonCalc << " / "<< event_CommonCalc ;
-
-      //Anthony's event overlap filter                                                                                                 
-//       if(   RegisterEvent(run_CommonCalc , lumi_CommonCalc, event_CommonCalc, &EventRegistry)  ){
-// 		  std::cout << "----> is a DUPLICATE!!" << std::endl;      
-// 		  duplicates++;
-// 		  continue;
-//       }
-//       else{
-// 		  std::cout << "" << std::endl;      
-//       }
 
       //CheckOverlap filter                                                                                                 
       bool filterEvent = false;
