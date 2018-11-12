@@ -11,9 +11,9 @@ debug = True
 yLog = True
 lumi = 35.9
 doSys = True
-doJustStatUnc = True
+doJustStatUnc = False
 doJustSysUnc = False
-doAllUnc = False
+doAllUnc = True
 
 def formatDataPlot(histo):
 	histo.SetMarkerStyle(20)
@@ -21,8 +21,10 @@ def formatDataPlot(histo):
 	histo.SetLineWidth(2)
 
 def formatTOPPlot(hTOP):
-	hTOP.SetLineColor(kAzure-6)
-	hTOP.SetFillColor(kAzure-6)
+# 	hTOP.SetLineColor(kAzure-6)
+# 	hTOP.SetFillColor(kAzure-6)
+	hTOP.SetLineColor(kCyan)
+	hTOP.SetFillColor(kCyan)
 	hTOP.SetLineWidth(2)
 
 def formatEWKPlot(hEWK):
@@ -47,7 +49,7 @@ def formatUpperHist(histogram):
 	histogram.SetMinimum(0.25)
 	if yLog:
 		uPad.SetLogy()
-		histogram.SetMinimum(0.1)
+		histogram.SetMinimum(0.0001)
 		
 def formatLowerHist(histogram):
 	histogram.GetXaxis().SetLabelSize(.12)
@@ -65,6 +67,16 @@ def formatLowerHist(histogram):
 	histogram.GetYaxis().SetRangeUser(0,2.99)
 	histogram.GetYaxis().CenterTitle()
 
+def poissonErrors(tgae):
+	alpha = 1. - 0.6827
+	for ibin in range(0,tgae.GetN()):
+		N = tgae.GetY()[ibin]
+		L = 0
+		if N != 0: L = Math.gamma_quantile(alpha/2.,N,1.)
+		U = Math.gamma_quantile_c(alpha/2.,N+1,1)
+		tgae.SetPointEYlow(ibin,N-L)
+		tgae.SetPointEYhigh(ibin,U-N)
+
 
 #open files
 # 
@@ -77,10 +89,16 @@ def formatLowerHist(histogram):
 # mleFile = "histos-mle_templates_HTrebinned_TTM1000_bW0p5_tZ0p25_tH0p25_35p867fb_bkgonly"
 
 # dataFile = "/user_data/rsyarif/optimization_reMiniAOD_PRv9_FRv45FRSRHT400low_newRunH_correctedMuTrkSF_AllSys_2017_7_24/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT400_ST0_mllOS20/Shape_accurateLHESys_FRsysMar28_newSigSF_AsymmFRsys/templates_minMlllBv4_TTM1000_bW0p5_tZ0p25_tH0p25_35p867fb.root"
-dataFile = "/user_data/rsyarif/optimization_reMiniAOD_PRv9_FRv45FRSRHT400low_newRunH_correctedMuTrkSF_addMlllBUnc_AllSys_2017_8_10/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT400_ST0_mllOS20/Shape_accurateLHESys_FRsysMar28_newSigSF_AsymmFRsys/templates_minMlllBv4_TTM1000_bW0p5_tZ0p25_tH0p25_35p867fb.root"
+# dataFile = "/user_data/rsyarif/optimization_reMiniAOD_PRv9_FRv45FRSRHT400low_newRunH_correctedMuTrkSF_addMlllBUnc_AllSys_2017_8_10/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT400_ST0_mllOS20/Shape_accurateLHESys_FRsysMar28_newSigSF_AsymmFRsys/templates_minMlllBv4_TTM1000_bW0p5_tZ0p25_tH0p25_35p867fb.root"
 # dataFile = "/user_data/rsyarif/optimization_reMiniAOD_PRv9_FRv47FRSRHT400low2Dext_newRunH_correctedMuTrkSF_AllSys_2017_7_28/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT400_ST0_mllOS20_ptRel10_minDRlJ0p2/Shape_accurateLHESys_FRsysMar28_newSigSF_AsymmFRsys/templates_minMlllBv4_TTM1000_bW0p5_tZ0p25_tH0p25_35p867fb.root"
-mleFile = "histos-mle_templates_minMlllBv4_TTM1000_bW0p5_tZ0p25_tH0p25_35p867fb_bkgonly"
+# dataFile = "/user_data/rsyarif/optimization_reMiniAOD_PRv9_FRv45FRSRHT400low_newRunH_correctedMuTrkSF_fixedMlllBUnc_AllSys_2017_8_14/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT400_ST0_mllOS20/Shape_accurateLHESys_FRsysMar28_newSigSF_AsymmFRsys/templates_minMlllBv4_TTM1000_bW0p5_tZ0p25_tH0p25_35p867fb.root"
+# mleFile = "histos-mle_templates_minMlllBv4_TTM1000_bW0p5_tZ0p25_tH0p25_35p867fb_bkgonly"
 
+dataFile = "/user_data/rsyarif/optimization_reMiniAOD_PRv9_FRv49sys_elMVAfix_AllSys_2017_9_21/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST0_mllOS20/Shape_accurateLHESys_FRsysSep21_newSigSF_AsymmFRsys/templates_STrebinnedv2_TTM1000_bW0p5_tZ0p25_tH0p25_35p867fb.root"
+mleFile = "histos-mle_templates_STrebinnedv2_TTM1000_bW0p5_tZ0p25_tH0p25_35p867fb_bkgonly"
+
+# dataFile = "/user_data/rsyarif/optimization_reMiniAOD_PRv9_FRv48sys_elMVAfix_AllSys_2017_9_21/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT400_ST0_mllOS20/Shape_accurateLHESys_FRsysSep21_newSigSF_AsymmFRsys/templates_minMlllBv4_TTM1000_bW0p5_tZ0p25_tH0p25_35p867fb.root"
+# mleFile = "histos-mle_templates_minMlllBv4_TTM1000_bW0p5_tZ0p25_tH0p25_35p867fb_bkgonly"
 
 rFile = ROOT.TFile(dataFile)
 rFile_mle = ROOT.TFile(mleFile+".root")
@@ -360,7 +378,7 @@ for icat in xrange(len(category)):
 	lPad.Draw()
 	hdata[category[icat]].SetMinimum(0.015)
 	hdata[category[icat]].SetTitle("")
-	hdata[category[icat]].GetYaxis().SetTitle("Events")
+	hdata[category[icat]].GetYaxis().SetTitle("Events / bin")
 	formatUpperHist(hdata[category[icat]])
 
 	uPad.cd()
@@ -369,6 +387,10 @@ for icat in xrange(len(category)):
 	hs[category[icat]].Draw("SAME HIST")
 	hdata[category[icat]].Draw("SAME E1 X0")
 
+	hdata[category[icat]].SetMaximum(50*max(hdata[category[icat]].GetMaximum(),hs[category[icat]].GetMaximum()))
+	if yLog:
+		hdata[category[icat]].SetMinimum(0.101)
+	
 	uPad.RedrawAxis()
 
 	leg[category[icat]] = TLegend(0.65,0.53,0.95,0.90)
@@ -381,14 +403,12 @@ for icat in xrange(len(category)):
 	leg[category[icat]].SetTextFont(42)
 	leg[category[icat]].AddEntry(hdata[category[icat]],"DATA")
 	
-	try: leg[category[icat]].AddEntry(hewk[category[icat]],"VV & VVV","f")
-	except: pass
-	try: leg[category[icat]].AddEntry(htop[category[icat]],"TTV","f")
-	except: pass
 	try: leg[category[icat]].AddEntry(hddbkg[category[icat]],"DD BKG","f")
 	except: pass
-	#leg.AddEntry(bkgHTgerr,"Bkg uncert. (stat. #oplus syst.)","f")
-	leg[category[icat]].Draw("SAME")
+	try: leg[category[icat]].AddEntry(hewk[category[icat]],"VV(V)","f")
+	except: pass
+	try: leg[category[icat]].AddEntry(htop[category[icat]],"t#bar{t}+V","f")
+	except: pass
 
 	prelimTex=TLatex()
 	prelimTex.SetNDC()
@@ -411,7 +431,7 @@ for icat in xrange(len(category)):
 	prelimTex3.SetTextFont(52)
 	prelimTex3.SetTextSize(0.075)
 	prelimTex3.SetLineWidth(2)
-	prelimTex3.DrawLatex(0.24,0.975,"Preliminary")
+# 	prelimTex3.DrawLatex(0.24,0.975,"Preliminary")
 
 	chLatex = TLatex()
 	chLatex.SetNDC()
@@ -433,7 +453,7 @@ for icat in xrange(len(category)):
 # 	except: pass	
 	
 # 	try:
-	if debug: print 'bin ','			hdata','				hbkg','			ratio','			','statErr','		','errPlus','		','errPlus'
+	if debug: print 'bin ','			hdata','				hbkg','			ratio','			','statErr','		','errPlus','		','errMin'
 	for ibin in range(0,hdata[category[icat]].GetNbinsX()+2):
 		if debug: print ibin,'			',hdata[category[icat]].GetBinContent(ibin),'+-',round(hdata[category[icat]].GetBinError(ibin),2),'			',round(htotbkg[category[icat]].GetBinContent(ibin),2),
 
@@ -531,6 +551,10 @@ for icat in xrange(len(category)):
 	htotbkgErr[category[icat]].Draw("SAME E2")
 	uPad.RedrawAxis()
 
+	leg[category[icat]].AddEntry(htotbkgErr[category[icat]],"Bkg uncert.","f")
+	leg[category[icat]].Draw("SAME")
+
+
 if doJustStatUnc:
 	canvas.SaveAs(mleFile+"_onlyStatUnc.png")
 	canvas.SaveAs(mleFile+"_onlyStatUnc.pdf")
@@ -539,7 +563,11 @@ if doJustSysUnc:
 	canvas.SaveAs(mleFile+"_onlySysUnc.png")
 	canvas.SaveAs(mleFile+"_onlySysUnc.pdf")
 
-if doAllUnc:
+if doAllUnc and (not yLog):
 	canvas.SaveAs(mleFile+"_AllUnc.png")
 	canvas.SaveAs(mleFile+"_AllUnc.pdf")
+
+if doAllUnc and yLog:
+	canvas.SaveAs(mleFile+"_AllUnc_log.png")
+	canvas.SaveAs(mleFile+"_AllUnc_log.pdf")
 

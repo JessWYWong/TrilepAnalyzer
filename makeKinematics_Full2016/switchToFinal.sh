@@ -4,6 +4,7 @@ cp -v doCondorKinematics.py_new doCondorKinematics.py
 cp -v doCondorKinematics.sh_new doCondorKinematics.sh
 
 cp -v doKinematics.py_final doKinematics.py
-cp -v plotKinematics.py_final plotKinematics.py
+# cp -v plotKinematics.py_final plotKinematics.py
+cp -v plotKinematics.py_final_v2 plotKinematics.py
 cp -v samples.py_final samples.py
 cp -v weights.py_final weights.py

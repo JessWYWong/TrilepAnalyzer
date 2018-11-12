@@ -24,7 +24,14 @@ nRun['DY10to50'] = 29386500. # from 40381400. # calculated using WeightAnalyzer.
 #nRun['DY50'] = 19403300. # from 28968300. # calculated using WeightAnalyzer. 
 # nRun['DY50'] = 16912500. # from 25249500. # calculated using WeightAnalyzer few jobs failed!.
 
-nRun['TTJetsPH'] = 155119000. # calculated using WeightAnalyzer.
+# nRun['TTJetsPH'] = 155119000. # calculated using WeightAnalyzer.
+
+nRun['TTJetsPH'] = 155235652. # Sinans number https://github.com/sisagir/singleLepAnalyzer/blob/x53x53_2016/weights.py#L46-L50
+nRun['TTJetsPH0to700inc'] = nRun['TTJetsPH']
+nRun['TTJetsPH700to1000inc'] = nRun['TTJetsPH']*0.0921 + 38578334. # Sinans number https://github.com/sisagir/singleLepAnalyzer/blob/x53x53_2016/weights.py#L46-L50
+nRun['TTJetsPH1000toINFinc'] = nRun['TTJetsPH']*0.02474 + 24561633.# Sinans number https://github.com/sisagir/singleLepAnalyzer/blob/x53x53_2016/weights.py#L46-L50
+nRun['TTJetsPH700mtt'] = nRun['TTJetsPH700to1000inc']
+nRun['TTJetsPH1000mtt'] = nRun['TTJetsPH1000toINFinc']
 
 # Cross sections for MC samples (in pb)
 xsec={}
@@ -33,8 +40,15 @@ xsec['DY10to50'] = 18610 # https://twiki.cern.ch/twiki/bin/view/CMS/SummaryTable
 xsec['DY50'] = 5765.4 #1921.8*3 +-0.6*3 (integration err) +- 33.2*3 pb (pdf+alpha_s err) : https://twiki.cern.ch/twiki/bin/view/CMS/SummaryTable1G25ns#DY_Z 
 xsec['TTJetsPH'] = 831.76 # https://twiki.cern.ch/twiki/bin/view/CMS/SummaryTable1G25ns
 
+# Sinans number https://github.com/sisagir/singleLepAnalyzer/blob/x53x53_2016/weights.py#L300-L303
+xsec['TTJetsPH0to700inc'] = 831.76
+xsec['TTJetsPH700to1000inc'] = 831.76*0.0921 #(xsec*filtering coeff.)
+xsec['TTJetsPH1000toINFinc'] = 831.76*0.02474 #(xsec*filtering coeff.)
+xsec['TTJetsPH700mtt'] = xsec['TTJetsPH700to1000inc']
+xsec['TTJetsPH1000mtt'] = xsec['TTJetsPH1000toINFinc']
+
 # Calculate lumi normalization weights
 weight = {}
 for sample in sorted(nRun.keys()): 
 	weight[sample] = (targetlumi*xsec[sample]) / (nRun[sample])
-	#print sample, (xsec[sample]) / (nRun[sample])
+	print sample, (xsec[sample]) / (nRun[sample])

@@ -72,6 +72,12 @@ nRun['TTWq'] = 430310 #from 833298 - # calculated using WeightAnalyzer.
 nRun['TTZl'] = 927976. #from 1992440 - # calculated using WeightAnalyzer. 
 nRun['TTZq'] = 351164 #from 749400 - # calculated using WeightAnalyzer. 
 
+#### As requested by Cristina Botta (ARC B2G-17-011).
+nRun['TTGJets'] = 4870911* 0.325 #relim estimate: ran 1204482 events, adjusted count 391002. Could assume adjusted = 0.325 * total, from Julie Nov29-2017
+nRun['ZGTo2LG'] = 1579452 #ZG: int 2307158, adjusted count 1579452 , from Julie Nov29-2017
+nRun['TTZToLLM1to10'] = 246792 #DAS
+ 
+
 # numbers not updated to 80x ! - start
 nRun['WJetsMG100'] = 27546978. # MG, from DAS
 nRun['WJetsMG200'] = 14888384. # MG, from DAS
@@ -312,6 +318,11 @@ xsec['Tt'] = 216.99/3 #(1/3 was suggested by Thomas Peiffer to account for the l
 xsec['Ts'] = 11.36/3 #(1/3 was suggested by Thomas Peiffer to account for the leptonic branching ratio)# https://twiki.cern.ch/twiki/bin/viewauth/CMS/SingleTopSigma
 xsec['TtW'] = 35.6 # https://twiki.cern.ch/twiki/bin/viewauth/CMS/SingleTopSigma
 xsec['TbtW'] = 35.6 # https://twiki.cern.ch/twiki/bin/viewauth/CMS/SingleTopSigma
+
+#### As requested by Cristina Botta (ARC B2G-17-011).
+xsec['TTGJets'] = 3.697 #AN2016_386_v9
+xsec['ZGTo2LG'] = 123.9 #AN2016_386_v9
+xsec['TTZToLLM1to10'] = 0.0493 #AN2016_386_v9
 
 xsec['TTM700']   = 0.455 # from https://twiki.cern.ch/twiki/bin/view/CMS/B2GMonteCarlo
 xsec['TTM800']  = 0.196 # from https://twiki.cern.ch/twiki/bin/view/CMS/B2GMonteCarlo

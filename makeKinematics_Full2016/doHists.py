@@ -10,18 +10,73 @@ import ROOT as R
 R.gROOT.SetBatch(1)
 start_time = time.time()
 
+scaleSignalXsecTo1pb = False # this has to be "True" if you are making templates for limit calculation!!!!!!!!
+doAllSys= False
+
 lumiStr = str(targetlumi/1000).replace('.','p') # 1/fb
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_step1hadds_step2/nominal'
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRv6_FRv22_step1hadds_step2/nominal'
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRv6_FRv24_newMuTrkSF_step1hadds_step2/nominal'
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRv6_FRv27_newMuTrkSF_step1hadds_step2/nominal'
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRv6_FRv29CR1_newMuTrkSF_step1hadds_step2/nominal'
-step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRv9_FRv24_postPreapproval_step1hadds_step2/nominal'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRv9_FRv24_postPreapproval_step1hadds_step2/nominal'
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRv9_FRv29CR1_postPreapproval_step1hadds_step2/nominal'
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRvElPRtest_FRv24_postPreapproval_step1hadds_step2/nominal'
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRvMuPRtest_FRv24_postPreapproval_step1hadds_step2/nominal'
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRv9_FRvMuEtatest_postPreapproval_step1hadds_step2/nominal'
 
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv30CR2_step1hadds_step2/nominal'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv31CR1_step1hadds_step2/nominal'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRvElPRtest_FRv30CR2_step1hadds_step2/nominal'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRvMuPRtest_FRv30CR2_step1hadds_step2/nominal'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRvMuEtatest_step1hadds_step2/nominal'
+
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRv9_FRv30CR2_correctedMuTrkSF_step1hadds_step2/nominal' #includes newRunH
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRv9_FRv31CR1_correctedMuTrkSF_step1hadds_step2/nominal' #includes newRunH
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRvElPRtest_FRv30CR2_correctedMuTrkSF_step1hadds_step2/nominal' #includes newRunH
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRvMuPRtest_FRv30CR2_correctedMuTrkSF_step1hadds_step2/nominal' #includes newRunH
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRv9_FRvMuEtatest_correctedMuTrkSF_step1hadds_step2/nominal' #includes newRunH
+
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv30CR2extSys_step1hadds_step2/nominal' #correctedMuTrkSF
+
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv33_correctedMuTrkSF_step1hadds_step2/nominal' #experimenting!
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv34_correctedMuTrkSF_step1hadds_step2/nominal' #experimenting!
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv35bPtDep_correctedMuTrkSF_step1hadds_step2/nominal' #testing PtDEpendance using resultss from fakerate ttbarMC
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv39PtDep_correctedMuTrkSF_step1hadds_step2/nominal' #testing PtDEpendance based results from fakerate ttbarMC but translated 
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv40PtDep_correctedMuTrkSF_step1hadds_step2/nominal' #testing PtDEpendance based results from fakerate ttbarMC but translated # NEEED TO RERUN!!!
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv41SRST1000low_correctedMuTrkSF_step1hadds_step2/nominal'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv41lessSys_correctedMuTrkSF_step1hadds_step2/nominal'
+
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv30CR2_correctedMuTrkSF_moreVars_step1hadds_step2/nominal' #moreVars
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv30CR2_correctedMuTrkSF_moreVars_elEta2p1_step1hadds_step2/nominal' #moreVars elEta<2.1
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv43FRSRHT600low_correctedMuTrkSF_moreVars_step1hadds_step2/nominal' 
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv30CR2_correctedMuTrkSF_moreVars_fixlepOrder_step1hadds_step2/nominal' #lepton ordering by pt only for the new vars
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv44FRSRmlllb400low_correctedMuTrkSF_moreVars_fixlepOrder_step1hadds_step2/nominal' 
+
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv45FRSRHT400low_correctedMuTrkSF_moreVars_fixlepOrder_step1hadds_step2/nominal' #ptRel
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv30CR2_correctedMuTrkSF_moreVars_fixlepOrder_ptRel_step1hadds_step2/nominal' #ptRel
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv46FRSRHT400low2D_correctedMuTrkSF_moreVars_fixlepOrder_ptRel_step1hadds_step2/nominal' #FR46 is limited to FR 0.5, not optimal FR results
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv47FRSRHT400low2Dext_correctedMuTrkSF_moreVars_fixlepOrder_ptRel_step1hadds_step2/nominal' #FR47 FR scan extended
+
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv45FRSRHT400low_fixedMinMlllBshifts_step1hadds_step2/nominal'
+
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv45_elMVAaltFix_step1hadds_step2/nominal'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv48_elMVAaltFix_step1hadds_step2/nominal' #FRSRHT400low
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv49_elMVAaltFix_step1hadds_step2/nominal' #FRCR2
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv50_elMVAaltFix_step1hadds_step2/nominal' #FRCR1
+
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv48MuEtaTest_elMVAaltFix_step1hadds_step2/nominal'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9ElPRtest_FRv48_elMVAaltFix_step1hadds_step2/nominal'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9MuPRtest_FRv48_elMVAaltFix_step1hadds_step2/nominal'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv49MuEtaTest_elMVAaltFix_step1hadds_step2/nominal'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9ElPRtest_FRv49_elMVAaltFix_step1hadds_step2/nominal'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9MuPRtest_FRv49_elMVAaltFix_step1hadds_step2/nominal'
+
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv48sys_elMVAaltFix_step1hadds_step2/nominal' #FRSRHT400low contains stat+(ttbar sig-ctrl)
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv49sys_elMVAaltFix_step1hadds_step2/nominal' #FRCR2 contains stat+(ttbar sig-ctrl)
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv50sys_elMVAaltFix_step1hadds_step2/nominal' #FRCR2 contains stat+(ttbar sig-ctrl) from FR49sys
+
+step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv49sys_addIP_step1hadds_step2/nominal' #FRCR2 contains stat+(ttbar sig-ctrl) from FR49sys
 
 
 print 'grabbing files from ', step1Dir
@@ -77,6 +132,7 @@ if cutType=='ALLR':
 			   'drCut':0,
 			   'stCut':0,
 			   'mllOSCut':20,
+			   'htCut':0,
 			   }
 
 if 'CR2' in cutType:
@@ -96,6 +152,51 @@ if 'CR2' in cutType:
 			   'drCut':0,
 			   'stCut':0,
 			   'mllOSCut':20,
+			   'htCut':0,
+			   }
+
+if cutType=='CR2_2DlepJet':
+	print 'Applying exactly 2jets criteria with 2DlepJet cut'
+	cutList = {'isPassTrig': 0, 
+			   'isPassTrig_dilep': 1,
+			   'isPassTrig_dilep_anth': 0,
+			   'isPassTrig_trilep': 0, 
+			   'isPassTrilepton': 1,
+			   'lep1PtCut': 0,
+			   'leadJetPtCut':0,
+			   'subLeadJetPtCut':0, 
+			   'thirdJetPtCut':0, 
+			   'metCut': 20,
+			   'njetsCut': 2,
+			   'nbjetsCut':1,
+			   'drCut':0,
+			   'stCut':0,
+			   'mllOSCut':20,
+			   'htCut':0,
+			   'minDRlepJetCut': 0.2,
+			   'ptRelCut':10,
+			   }
+
+if 'CR2HT400low_2DlepJet' in cutType:
+	print 'Applying exactly 2jets criteria with HT<400, 2DlepJet cut'
+	cutList = {'isPassTrig': 0, 
+			   'isPassTrig_dilep': 1,
+			   'isPassTrig_dilep_anth': 0,
+			   'isPassTrig_trilep': 0, 
+			   'isPassTrilepton': 1,
+			   'lep1PtCut': 0,
+			   'leadJetPtCut':0,
+			   'subLeadJetPtCut':0, 
+			   'thirdJetPtCut':0, 
+			   'metCut': 20,
+			   'njetsCut': 2,
+			   'nbjetsCut':1,
+			   'drCut':0,
+			   'stCut':0,
+			   'mllOSCut':20,
+			   'htCut':400,
+			   'minDRlepJetCut': 0.2,
+			   'ptRelCut':10,
 			   }
 
 if 'CR1' in cutType:
@@ -115,7 +216,53 @@ if 'CR1' in cutType:
 			   'drCut':0,
 			   'stCut':0,
 			   'mllOSCut':20,
+			   'htCut':0,
 			   }
+
+if cutType=='CR1_2DlepJet':
+	print 'Applying exactly 1 jet criteria with 2DlepJet cut'
+	cutList = {'isPassTrig': 0, 
+			   'isPassTrig_dilep': 1,
+			   'isPassTrig_dilep_anth': 0,
+			   'isPassTrig_trilep': 0, 
+			   'isPassTrilepton': 1,
+			   'lep1PtCut': 0,
+			   'leadJetPtCut':0,
+			   'subLeadJetPtCut':0, 
+			   'thirdJetPtCut':0, 
+			   'metCut': 20,
+			   'njetsCut': 1,
+			   'nbjetsCut':1,
+			   'drCut':0,
+			   'stCut':0,
+			   'mllOSCut':20,
+			   'htCut':0,
+			   'minDRlepJetCut': 0.2,
+			   'ptRelCut':10,
+			   }
+
+if 'CR1HT400low_2DlepJet' in cutType:
+	print 'Applying exactly 1jet criteria with HT<400, 2DlepJet cut'
+	cutList = {'isPassTrig': 0, 
+			   'isPassTrig_dilep': 1,
+			   'isPassTrig_dilep_anth': 0,
+			   'isPassTrig_trilep': 0, 
+			   'isPassTrilepton': 1,
+			   'lep1PtCut': 0,
+			   'leadJetPtCut':0,
+			   'subLeadJetPtCut':0, 
+			   'thirdJetPtCut':0, 
+			   'metCut': 20,
+			   'njetsCut': 1,
+			   'nbjetsCut':1,
+			   'drCut':0,
+			   'stCut':0,
+			   'mllOSCut':20,
+			   'htCut':400,
+			   'minDRlepJetCut': 0.2,
+			   'ptRelCut':10,
+			   }
+
 
 if 'CR1' in cutType and 'CR2' in cutType:
 	print 'Applying 1 or 2 jets criteria'
@@ -153,6 +300,72 @@ if cutType=='SR':
 			   'drCut':0,
 			   'stCut':0,
 			   'mllOSCut':20,
+			   'htCut':0,
+			   }
+
+if cutType=='SR_minDRlepJet0p2':
+	print 'Applying moreThan2jets criteria with minDRlep1,2,3 cuts'
+	cutList = {'isPassTrig': 0, 
+			   'isPassTrig_dilep': 1,
+			   'isPassTrig_dilep_anth': 0,
+			   'isPassTrig_trilep': 0, 
+			   'isPassTrilepton': 1,
+			   'lep1PtCut': 0,
+			   'leadJetPtCut':0,
+			   'subLeadJetPtCut':0, 
+			   'thirdJetPtCut':0, 
+			   'metCut': 20,
+			   'njetsCut': 3,
+			   'nbjetsCut':1,
+			   'drCut':0,
+			   'stCut':0,
+			   'mllOSCut':20,
+			   'htCut':0,
+			   'minDRlepJetCut': 0.2,
+			   }
+
+if cutType=='SR_2Dlep1Jet':
+	print 'Applying moreThan2jets criteria with 2Dlep1Jet cut'
+	cutList = {'isPassTrig': 0, 
+			   'isPassTrig_dilep': 1,
+			   'isPassTrig_dilep_anth': 0,
+			   'isPassTrig_trilep': 0, 
+			   'isPassTrilepton': 1,
+			   'lep1PtCut': 0,
+			   'leadJetPtCut':0,
+			   'subLeadJetPtCut':0, 
+			   'thirdJetPtCut':0, 
+			   'metCut': 20,
+			   'njetsCut': 3,
+			   'nbjetsCut':1,
+			   'drCut':0,
+			   'stCut':0,
+			   'mllOSCut':20,
+			   'htCut':0,
+			   'minDRlepJetCut': 0.2,
+			   'ptRelCut':10,
+			   }
+
+if cutType=='SR_2DlepJet':
+	print 'Applying moreThan2jets criteria with 2DlepJet cut'
+	cutList = {'isPassTrig': 0, 
+			   'isPassTrig_dilep': 1,
+			   'isPassTrig_dilep_anth': 0,
+			   'isPassTrig_trilep': 0, 
+			   'isPassTrilepton': 1,
+			   'lep1PtCut': 0,
+			   'leadJetPtCut':0,
+			   'subLeadJetPtCut':0, 
+			   'thirdJetPtCut':0, 
+			   'metCut': 20,
+			   'njetsCut': 3,
+			   'nbjetsCut':1,
+			   'drCut':0,
+			   'stCut':0,
+			   'mllOSCut':20,
+			   'htCut':0,
+			   'minDRlepJetCut': 0.2,
+			   'ptRelCut':10,
 			   }
 
 if cutType=='fSR':
@@ -175,7 +388,7 @@ if cutType=='fSR':
 			   }
 
 if cutType=='fSRST700':
-	print 'Applying moreThan2jets with ST>600 criteria'
+	print 'Applying moreThan2jets with ST>700 criteria'
 	cutList = {'isPassTrig': 0, 
 			   'isPassTrig_dilep': 1,
 			   'isPassTrig_dilep_anth': 0,
@@ -193,8 +406,46 @@ if cutType=='fSRST700':
 			   'mllOSCut':20,
 			   }
 
+if cutType=='fSRST800':
+	print 'Applying moreThan2jets with ST>800 criteria'
+	cutList = {'isPassTrig': 0, 
+			   'isPassTrig_dilep': 1,
+			   'isPassTrig_dilep_anth': 0,
+			   'isPassTrig_trilep': 0, 
+			   'isPassTrilepton': 1,
+			   'lep1PtCut': 0,
+			   'leadJetPtCut':0,
+			   'subLeadJetPtCut':0, 
+			   'thirdJetPtCut':0, 
+			   'metCut': 20,
+			   'njetsCut': 3,
+			   'nbjetsCut':1,
+			   'drCut':0,
+			   'stCut':800,
+			   'mllOSCut':20,
+			   }
+
+if cutType=='fSRST900':
+	print 'Applying moreThan2jets with ST>900 criteria'
+	cutList = {'isPassTrig': 0, 
+			   'isPassTrig_dilep': 1,
+			   'isPassTrig_dilep_anth': 0,
+			   'isPassTrig_trilep': 0, 
+			   'isPassTrilepton': 1,
+			   'lep1PtCut': 0,
+			   'leadJetPtCut':0,
+			   'subLeadJetPtCut':0, 
+			   'thirdJetPtCut':0, 
+			   'metCut': 20,
+			   'njetsCut': 3,
+			   'nbjetsCut':1,
+			   'drCut':0,
+			   'stCut':900,
+			   'mllOSCut':20,
+			   }
+
 if cutType=='fSRST1000':
-	print 'Applying moreThan2jets with ST>600 criteria'
+	print 'Applying moreThan2jets with ST>1000 criteria'
 	cutList = {'isPassTrig': 0, 
 			   'isPassTrig_dilep': 1,
 			   'isPassTrig_dilep_anth': 0,
@@ -213,7 +464,7 @@ if cutType=='fSRST1000':
 			   }
 
 if cutType=='fSRST1100':
-	print 'Applying moreThan2jets with ST>600 criteria'
+	print 'Applying moreThan2jets with ST>1100 criteria'
 	cutList = {'isPassTrig': 0, 
 			   'isPassTrig_dilep': 1,
 			   'isPassTrig_dilep_anth': 0,
@@ -232,7 +483,7 @@ if cutType=='fSRST1100':
 			   }
 
 if cutType=='fSRST1200':
-	print 'Applying moreThan2jets with ST>600 criteria'
+	print 'Applying moreThan2jets with ST>1200 criteria'
 	cutList = {'isPassTrig': 0, 
 			   'isPassTrig_dilep': 1,
 			   'isPassTrig_dilep_anth': 0,
@@ -251,7 +502,7 @@ if cutType=='fSRST1200':
 			   }
 
 if cutType=='fSRST1300':
-	print 'Applying moreThan2jets with ST>600 criteria'
+	print 'Applying moreThan2jets with ST>1300 criteria'
 	cutList = {'isPassTrig': 0, 
 			   'isPassTrig_dilep': 1,
 			   'isPassTrig_dilep_anth': 0,
@@ -270,7 +521,7 @@ if cutType=='fSRST1300':
 			   }
 
 if cutType=='fSRST1400':
-	print 'Applying moreThan2jets with ST>600 criteria'
+	print 'Applying moreThan2jets with ST>1400 criteria'
 	cutList = {'isPassTrig': 0, 
 			   'isPassTrig_dilep': 1,
 			   'isPassTrig_dilep_anth': 0,
@@ -288,12 +539,320 @@ if cutType=='fSRST1400':
 			   'mllOSCut':20,
 			   }
 
+if cutType=='fSRST1500':
+	print 'Applying moreThan2jets with ST>1500 criteria'
+	cutList = {'isPassTrig': 0, 
+			   'isPassTrig_dilep': 1,
+			   'isPassTrig_dilep_anth': 0,
+			   'isPassTrig_trilep': 0, 
+			   'isPassTrilepton': 1,
+			   'lep1PtCut': 0,
+			   'leadJetPtCut':0,
+			   'subLeadJetPtCut':0, 
+			   'thirdJetPtCut':0, 
+			   'metCut': 20,
+			   'njetsCut': 3,
+			   'nbjetsCut':1,
+			   'drCut':0,
+			   'stCut':1500,
+			   'mllOSCut':20,
+			   }
+
+if cutType=='fSRST1600':
+	print 'Applying moreThan2jets with ST>1600 criteria'
+	cutList = {'isPassTrig': 0, 
+			   'isPassTrig_dilep': 1,
+			   'isPassTrig_dilep_anth': 0,
+			   'isPassTrig_trilep': 0, 
+			   'isPassTrilepton': 1,
+			   'lep1PtCut': 0,
+			   'leadJetPtCut':0,
+			   'subLeadJetPtCut':0, 
+			   'thirdJetPtCut':0, 
+			   'metCut': 20,
+			   'njetsCut': 3,
+			   'nbjetsCut':1,
+			   'drCut':0,
+			   'stCut':1600,
+			   'mllOSCut':20,
+			   }
+
+if 'CR2ST1000low' in cutType:
+	print 'Applying exactly2jets criteria. (debug: chop off high ST)'
+	cutList = {'isPassTrig': 0, 
+			   'isPassTrig_dilep': 1,
+			   'isPassTrig_dilep_anth': 0,
+			   'isPassTrig_trilep': 0, 
+			   'isPassTrilepton': 1,
+			   'lep1PtCut': 0,
+			   'leadJetPtCut':0,
+			   'subLeadJetPtCut':0, 
+			   'thirdJetPtCut':0, 
+			   'metCut': 20,
+			   'njetsCut': 2,
+			   'nbjetsCut':1,
+			   'drCut':0,
+			   'stCut':1000,
+			   'mllOSCut':20,
+			   'htCut':0,
+			   }
+
+if 'SRST1000low' in cutType:
+	print 'Applying moreThan2jets criteria (debug: chop off high ST)'
+	cutList = {'isPassTrig': 0, 
+			   'isPassTrig_dilep': 1,
+			   'isPassTrig_dilep_anth': 0,
+			   'isPassTrig_trilep': 0, 
+			   'isPassTrilepton': 1,
+			   'lep1PtCut': 0,
+			   'leadJetPtCut':0,
+			   'subLeadJetPtCut':0, 
+			   'thirdJetPtCut':0, 
+			   'metCut': 20,
+			   'njetsCut': 3,
+			   'nbjetsCut':1,
+			   'drCut':0,
+			   'stCut':1000,
+			   'mllOSCut':20,
+			   'htCut':0,
+			   }
+
+if 'CR2HT600low' in cutType:
+	print 'Applying exactly2jets criteria. (chop off high ST)'
+	cutList = {'isPassTrig': 0, 
+			   'isPassTrig_dilep': 1,
+			   'isPassTrig_dilep_anth': 0,
+			   'isPassTrig_trilep': 0, 
+			   'isPassTrilepton': 1,
+			   'lep1PtCut': 0,
+			   'leadJetPtCut':0,
+			   'subLeadJetPtCut':0, 
+			   'thirdJetPtCut':0, 
+			   'metCut': 20,
+			   'njetsCut': 2,
+			   'nbjetsCut':1,
+			   'drCut':0,
+			   'stCut':0,
+			   'mllOSCut':20,
+			   'htCut':600,
+			   }
+
+if 'SRHT400' in cutType:
+	print 'Applying moreThan2jets criteria with HT>400 (or HT<400 if +low in cutType),'
+	cutList = {'isPassTrig': 0, 
+			   'isPassTrig_dilep': 1,
+			   'isPassTrig_dilep_anth': 0,
+			   'isPassTrig_trilep': 0, 
+			   'isPassTrilepton': 1,
+			   'lep1PtCut': 0,
+			   'leadJetPtCut':0,
+			   'subLeadJetPtCut':0, 
+			   'thirdJetPtCut':0, 
+			   'metCut': 20,
+			   'njetsCut': 3,
+			   'nbjetsCut':1,
+			   'drCut':0,
+			   'stCut':0,
+			   'mllOSCut':20,
+			   'htCut':400,
+			   }
+
+if 'SRHT400_minDRlepJet0p2' in cutType:
+	print 'Applying moreThan2jets criteria with HT>400, minDRlep1,2,3 cuts'
+	cutList = {'isPassTrig': 0, 
+			   'isPassTrig_dilep': 1,
+			   'isPassTrig_dilep_anth': 0,
+			   'isPassTrig_trilep': 0, 
+			   'isPassTrilepton': 1,
+			   'lep1PtCut': 0,
+			   'leadJetPtCut':0,
+			   'subLeadJetPtCut':0, 
+			   'thirdJetPtCut':0, 
+			   'metCut': 20,
+			   'njetsCut': 3,
+			   'nbjetsCut':1,
+			   'drCut':0,
+			   'stCut':0,
+			   'mllOSCut':20,
+			   'htCut':400,
+			   'minDRlepJetCut': 0.2,
+			   }
+
+if 'SRHT400_2Dlep1Jet' in cutType:
+	print 'Applying moreThan2jets criteria with HT>400, 2Dlep1Jet cut'
+	cutList = {'isPassTrig': 0, 
+			   'isPassTrig_dilep': 1,
+			   'isPassTrig_dilep_anth': 0,
+			   'isPassTrig_trilep': 0, 
+			   'isPassTrilepton': 1,
+			   'lep1PtCut': 0,
+			   'leadJetPtCut':0,
+			   'subLeadJetPtCut':0, 
+			   'thirdJetPtCut':0, 
+			   'metCut': 20,
+			   'njetsCut': 3,
+			   'nbjetsCut':1,
+			   'drCut':0,
+			   'stCut':0,
+			   'mllOSCut':20,
+			   'htCut':400,
+			   'minDRlepJetCut': 0.2,
+			   'ptRelCut':10,
+			   }
+
+if 'SRHT400_2DlepJet' in cutType:
+	print 'Applying moreThan2jets criteria with HT>400, 2DlepJet cut'
+	cutList = {'isPassTrig': 0, 
+			   'isPassTrig_dilep': 1,
+			   'isPassTrig_dilep_anth': 0,
+			   'isPassTrig_trilep': 0, 
+			   'isPassTrilepton': 1,
+			   'lep1PtCut': 0,
+			   'leadJetPtCut':0,
+			   'subLeadJetPtCut':0, 
+			   'thirdJetPtCut':0, 
+			   'metCut': 20,
+			   'njetsCut': 3,
+			   'nbjetsCut':1,
+			   'drCut':0,
+			   'stCut':0,
+			   'mllOSCut':20,
+			   'htCut':400,
+			   'minDRlepJetCut': 0.2,
+			   'ptRelCut':10,
+			   }
+
+if 'SRHT400low_2DlepJet' in cutType:
+	print 'Applying moreThan2jets criteria with HT<400, 2DlepJet cut'
+	cutList = {'isPassTrig': 0, 
+			   'isPassTrig_dilep': 1,
+			   'isPassTrig_dilep_anth': 0,
+			   'isPassTrig_trilep': 0, 
+			   'isPassTrilepton': 1,
+			   'lep1PtCut': 0,
+			   'leadJetPtCut':0,
+			   'subLeadJetPtCut':0, 
+			   'thirdJetPtCut':0, 
+			   'metCut': 20,
+			   'njetsCut': 3,
+			   'nbjetsCut':1,
+			   'drCut':0,
+			   'stCut':0,
+			   'mllOSCut':20,
+			   'htCut':400,
+			   'minDRlepJetCut': 0.2,
+			   'ptRelCut':10,
+			   }
+
+
+if 'SRHT600' in cutType:
+	print 'Applying moreThan2jets criteria'
+	cutList = {'isPassTrig': 0, 
+			   'isPassTrig_dilep': 1,
+			   'isPassTrig_dilep_anth': 0,
+			   'isPassTrig_trilep': 0, 
+			   'isPassTrilepton': 1,
+			   'lep1PtCut': 0,
+			   'leadJetPtCut':0,
+			   'subLeadJetPtCut':0, 
+			   'thirdJetPtCut':0, 
+			   'metCut': 20,
+			   'njetsCut': 3,
+			   'nbjetsCut':1,
+			   'drCut':0,
+			   'stCut':0,
+			   'mllOSCut':20,
+			   'htCut':600,
+			   }
+
+
+if 'SRHT600low' in cutType:
+	print 'Applying moreThan2jets criteria (chop off high HT)'
+	cutList = {'isPassTrig': 0, 
+			   'isPassTrig_dilep': 1,
+			   'isPassTrig_dilep_anth': 0,
+			   'isPassTrig_trilep': 0, 
+			   'isPassTrilepton': 1,
+			   'lep1PtCut': 0,
+			   'leadJetPtCut':0,
+			   'subLeadJetPtCut':0, 
+			   'thirdJetPtCut':0, 
+			   'metCut': 20,
+			   'njetsCut': 3,
+			   'nbjetsCut':1,
+			   'drCut':0,
+			   'stCut':0,
+			   'mllOSCut':20,
+			   'htCut':600,
+			   }
+
+
+if 'FRSRHT600low' in cutType:
+	print 'Applying moreThan2jets criteria (chop off high HT) with exactly 3 leps'
+	cutList = {'isPassTrig': 0, 
+			   'isPassTrig_dilep': 1,
+			   'isPassTrig_dilep_anth': 0,
+			   'isPassTrig_trilep': 0, 
+			   'isPassTrilepton': 1,
+			   'lep1PtCut': 0,
+			   'leadJetPtCut':0,
+			   'subLeadJetPtCut':0, 
+			   'thirdJetPtCut':0, 
+			   'metCut': 20,
+			   'njetsCut': 3,
+			   'nbjetsCut':1,
+			   'drCut':0,
+			   'stCut':0,
+			   'mllOSCut':20,
+			   'htCut':600,
+			   }
+
+if 'SRmlllb400' in cutType:
+	print 'Applying moreThan2jets criteria, chop off low min[M(lll,b)]'
+	cutList = {'isPassTrig': 0, 
+			   'isPassTrig_dilep': 1,
+			   'isPassTrig_dilep_anth': 0,
+			   'isPassTrig_trilep': 0, 
+			   'isPassTrilepton': 1,
+			   'lep1PtCut': 0,
+			   'leadJetPtCut':0,
+			   'subLeadJetPtCut':0, 
+			   'thirdJetPtCut':0, 
+			   'metCut': 20,
+			   'njetsCut': 3,
+			   'nbjetsCut':1,
+			   'drCut':0,
+			   'stCut':0,
+			   'mllOSCut':20,
+			   'htCut':0,
+			   'mlllbCut':400,
+			   }
+
+if 'FRSRmlllb400low' in cutType:
+	print 'Applying moreThan2jets criteria, chop off low min[M(lll,b)]), with exactly 3 leps'
+	cutList = {'isPassTrig': 0, 
+			   'isPassTrig_dilep': 1,
+			   'isPassTrig_dilep_anth': 0,
+			   'isPassTrig_trilep': 0, 
+			   'isPassTrilepton': 1,
+			   'lep1PtCut': 0,
+			   'leadJetPtCut':0,
+			   'subLeadJetPtCut':0, 
+			   'thirdJetPtCut':0, 
+			   'metCut': 20,
+			   'njetsCut': 3,
+			   'nbjetsCut':1,
+			   'drCut':0,
+			   'stCut':0,
+			   'mllOSCut':20,
+			   'htCut':0,
+			   'mlllbCut':400,
+			   }
+
+
 
 if len(sys.argv)>3: catList=[str(sys.argv[3])]
 else: catList=['EEE','EEM','EMM','MMM','All']
-
-scaleSignalXsecTo1pb = False # this has to be "True" if you are making templates for limit calculation!!!!!!!!
-doAllSys= False
 
 cutString = 'isPassTrig_All'+str(int(cutList['isPassTrig']))+'_'+'dilep'+str(int(cutList['isPassTrig_dilep']))+'_'+'dilepAnth'+str(int(cutList['isPassTrig_dilep_anth']))+'_'+'trilep'+str(int(cutList['isPassTrig_trilep']))+'_'+'isPassTrilepton'+str(int(cutList['isPassTrilepton']))+'_lep1Pt'+str(int(cutList['lep1PtCut']))+'_NJets'+str(int(cutList['njetsCut']))+'_NBJets'+str(int(cutList['nbjetsCut']))+'_DR'+str(int(cutList['drCut']))+'_ST'+str(int(cutList['stCut']))+'_MllOS'+str(int(cutList['mllOSCut']))
 
@@ -321,12 +880,23 @@ METbins = [0,20,40,60,80,100,120,140,160,180,220,300,500]
 # pTbins = [0,20,40,60,80,100,120,140,160,180,200,220,240,260,280,300,350,400,450,500]
 # pTbins = [0,10,25,40,60,80,100,120,140,160,180,200,220,240,260,280,300,350,400,450,500]
 pTbins = [0,10,30,40,60,80,100,120,140,160,180,200,220,240,260,280,300,350,400,450,500]
+pTbinsV2 = [0,30,40,60,80,100,120,140,160,180,500]
 Mbins = [-10.0, 0.0, 20.0, 40.0, 60.0, 80.0, 100.0, 120.0, 140.0, 160.0, 180.0, 200.0, 220.0, 240.0, 260.0, 300.0]
+MbinsV2 = [-10.0, 0.0, 20.0, 40.0, 60.0, 80.0, 100.0, 120.0, 140.0, 160.0, 180.0, 200.0, 220.0, 240.0, 260.0, 300.0, 350.0, 400.00]
 # jetPtbins =  [0.0, 50.0, 100.0, 150.0, 200.0, 250.0, 300.0, 350.0, 450.0, 550.0, 650.0, 750.0]
 jetPtbins =  [0.0, 30, 60.0, 100.0, 150.0, 200.0, 250.0, 300.0, 350.0, 450.0, 550.0, 650.0, 750.0]
 Nlepbins=[0,1,2,3,4,5,6,7,8,9,10]
+MlllBbins=[100,200,300,400,500,600,700,800,1000,1500]
 
 plotList = {#discriminantName:(discriminantLJMETName, binning, xAxisLabel)
+# 	'ElDxy' :('AllLeptonElDxy_PtOrdered',linspace(-0.05, 0.05, 81).tolist(),';Electron IP_{xy} (cm);'),
+# 	'ElDz' :('AllLeptonElDz_PtOrdered',linspace(-0.2, 0.2, 81).tolist(),';Electron IP_{z} (cm);'),
+	'ElDxy' :('AllLeptonElDxy_PtOrdered',linspace(-0.1, 0.1, 21).tolist(),';Electron IP_{xy} (cm);'),
+	'ElDz' :('AllLeptonElDz_PtOrdered',linspace(-0.2, 0.2, 21).tolist(),';Electron IP_{z} (cm);'),
+
+	'MuDxy' :('AllLeptonMuDxy_PtOrdered',linspace(-0.1, 0.1, 21).tolist(),';Muon IP_{xy} (cm);'),
+	'MuDz' :('AllLeptonMuDz_PtOrdered',linspace(-0.2, 0.2, 21).tolist(),';Muon IP_{z} (cm);'),
+
 	'NPV'   :('nPV_singleLepCalc',linspace(0, 30, 31).tolist(),';PV multiplicity;'),
 
 # 	'lepPt' :('AllLeptonPt_PtOrdered',linspace(0, 500, 26).tolist(),';Leptons p_{T} (GeV);'),
@@ -334,6 +904,7 @@ plotList = {#discriminantName:(discriminantLJMETName, binning, xAxisLabel)
 # 	'MuPt' :('AllLeptonMuPt_PtOrdered',linspace(0, 500, 26).tolist(),';Muon p_{T} (GeV);'),
 
 	'lepPt' :('AllLeptonPt_PtOrdered',pTbins,';Leptons p_{T} (GeV);'),
+	'lepPtRebinned' :('AllLeptonPt_PtOrdered',pTbinsV2,';Leptons p_{T} (GeV);'),
 	'ElPt' :('AllLeptonElPt_PtOrdered',pTbins,';Electron p_{T} (GeV);'),
 	'MuPt' :('AllLeptonMuPt_PtOrdered',pTbins,';Muon p_{T} (GeV);'),
 
@@ -341,9 +912,9 @@ plotList = {#discriminantName:(discriminantLJMETName, binning, xAxisLabel)
 	'lep2Pt' :('AllLeptonPt_PtOrderedOnly_top3[1]',pTbins,';Lepton 2 p_{T} (GeV);'),
 	'lep3Pt' :('AllLeptonPt_PtOrderedOnly_top3[2]',pTbins,';Lepton 3 p_{T} (GeV);'),
 
-	'lepEta':('AllLeptonEta_PtOrdered',linspace(-4, 4, 41).tolist(),';Lepton 1 #eta;'),
-	'ElEta':('AllLeptonElEta_PtOrdered',linspace(-4, 4, 41).tolist(),';Electron 1 #eta;'),
-	'MuEta':('AllLeptonMuEta_PtOrdered',linspace(-4, 4, 41).tolist(),';Mu 1 #eta;'),
+	'lepEta':('AllLeptonEta_PtOrdered',linspace(-4, 4, 41).tolist(),';Lepton #eta;'),
+	'ElEta':('AllLeptonElEta_PtOrdered',linspace(-4, 4, 41).tolist(),';Electron #eta;'),
+	'MuEta':('AllLeptonMuEta_PtOrdered',linspace(-4, 4, 41).tolist(),';Mu #eta;'),
 
 	'lep1Eta':('AllLeptonEta_PtOrderedOnly_top3[0]',linspace(-4, 4, 41).tolist(),';Lepton 1 #eta;'),
 	'lep2Eta':('AllLeptonEta_PtOrderedOnly_top3[1]',linspace(-4, 4, 41).tolist(),';Lepton 2 #eta;'),
@@ -366,12 +937,12 @@ plotList = {#discriminantName:(discriminantLJMETName, binning, xAxisLabel)
 # 	'Jet2Pt':('AK4JetPt_singleLepCalc_PtOrdered[1]',jetPtbins,';2^{nd} AK4 Jet p_{T} (GeV);'),
 
 
-# 	'HT'    :('AK4HT',linspace(0, 2000, 21).tolist(),';H_{T} (GeV);'),
+	'HT'    :('AK4HT',linspace(0, 4000, 41).tolist(),';H_{T} (GeV);'),
 	'HTrebinned'    :('AK4HT',HTbins,';H_{T} (GeV);'),
-# 	'ST'    :('AK4HTpMETpLepPt',linspace(0, 2000, 21).tolist(),';S_{T} (GeV);'),
+	'ST'    :('AK4HTpMETpLepPt',linspace(0, 5000, 51).tolist(),';S_{T} (GeV);'),
 	'STrebinned'    :('AK4HTpMETpLepPt',STbins,';S_{T} (GeV);'),
 	'STrebinnedv2'    :('AK4HTpMETpLepPt',STbinsv2,';S_{T} (GeV);'),
-	'STrebinnedv3'    :('AK4HTpMETpLepPt',STbinsv3,';S_{T} (GeV);'),
+# 	'STrebinnedv3'    :('AK4HTpMETpLepPt',STbinsv3,';S_{T} (GeV);'),
 # 	'MET'   :('corr_met_singleLepCalc',linspace(0, 500, 26).tolist(),';#slash{E}_{T} (GeV);'),
 	'METrebinned'   :('corr_met_singleLepCalc',METbins,';#slash{E}_{T} (GeV);'),
 
@@ -383,6 +954,25 @@ plotList = {#discriminantName:(discriminantLJMETName, binning, xAxisLabel)
 # 	'mindeltaRlep1Jets':('minDR_lep1Jet',linspace(0, 1, 26).tolist(),';min #DeltaR(lep_1, jets);'),
 # 	'mindeltaRlep2Jets':('minDR_lep2Jet',linspace(0, 1, 26).tolist(),';min #DeltaR(lep_2, jets);'),
 # 	'mindeltaRlep3Jets':('minDR_lep3Jet',linspace(0, 1, 26).tolist(),';min #DeltaR(lep_3, jets);'),
+
+# 	'minMlB':('minMleppBjet',Mbins,';min[M(lep, b-jet)];'),
+# 	'minMlBv2':('minMleppBjet',MbinsV2,';min[M(lep, b-jet)];'),
+# 	'minMlllB':('minMlllBjet',linspace(0, 1500, 51).tolist(),';min[M(trilepton, b-jet)];'),
+	'minMlllBv2':('minMlllBjet',linspace(0, 1500, 31).tolist(),';min[M(trilepton, b-jet)];'),
+# 	'minMlllBv3':('minMlllBjet',linspace(0, 2000, 41).tolist(),';min[M(trilepton, b-jet)];'),
+	'minMlllBv4':('minMlllBjet',MlllBbins,';min[M(trilepton, b-jet)];'),
+
+	'minDPhiMETJet':('minDPhi_METJet',linspace(0, 3.15, 51).tolist(),';min #Delta#Phi(E_{miss}, jets);'),
+	'DRlep1Jet1':('deltaR_lep1Jets[0]',linspace(0, 4, 51).tolist(),';#DeltaR(lep_{1},jet_{1});'),
+	'minDRlep1Jets':('minDR_lep1Jet',linspace(0, 4, 51).tolist(),';min #DeltaR(lep_{1}, jets);'),
+	'minDRlep2Jets':('minDR_lep2Jet',linspace(0, 4, 51).tolist(),';min #DeltaR(lep_{2}, jets);'),
+	'minDRlep3Jets':('minDR_lep3Jet',linspace(0, 4, 51).tolist(),';min #DeltaR(lep_{3}, jets);'),
+	'minDRlepsJets':('minDR_lepJet',linspace(0, 4, 51).tolist(),';min #DeltaR(leps, jets);'),
+
+	'PtRel1':('ptRel_minDRlep1Jet',linspace(0,300,31).tolist(),';p_{T,rel}(lep_{1}, closest jet) [GeV]'),
+	'PtRel2':('ptRel_minDRlep2Jet',linspace(0,300,31).tolist(),';p_{T,rel}(lep_{2}, closest jet) [GeV]'),
+	'PtRel3':('ptRel_minDRlep3Jet',linspace(0,300,31).tolist(),';p_{T,rel}(lep_{3}, closest jet) [GeV]'),
+	'PtRel':('ptRel_minDRlepJet',linspace(0,300,31).tolist(),';p_{T,rel}(min[#DeltaR(lep,jet)] [GeV]'),
 
 # 	'mindeltaRB':('deltaR_lepBJets',linspace(0, 5, 51).tolist(),';min #DeltaR(l, bjet);'),
 # 	'mindeltaR1':('deltaR_lepClosestJet[0]',linspace(0, 5, 51).tolist(),';min #DeltaR(l1, jet);'),
@@ -414,8 +1004,8 @@ plotList = {#discriminantName:(discriminantLJMETName, binning, xAxisLabel)
 
 # 	'MllsameFlavorOS':('Mll_sameFlavorOS',Mbins,'; M(ll_{OS}) [GeV]'),
 # 	'MllOSall':('MllOS_allComb',Mbins,'; M(ll_{OS}) all [GeV]'),
-	'MllOSallmin':('MllOS_allComb_min',Mbins,'; min ( M(ll_{OS}) ) [GeV]'),
-	'MllOSallmax':('MllOS_allComb_max',Mbins,'; max ( M(ll_{OS}) ) [GeV]'),
+# 	'MllOSallmin':('MllOS_allComb_min',Mbins,'; min ( M(ll_{OS}) ) [GeV]'),
+# 	'MllOSallmax':('MllOS_allComb_max',Mbins,'; max ( M(ll_{OS}) ) [GeV]'),
 # 	'Mlll':('Mlll',Mbins,'; M(lll) [GeV]'),
 	
 	}
@@ -454,6 +1044,7 @@ bkgList = [
 	]
 
 whichSignal = 'TT' #TT, BB, or T53T53
+# whichSignal = 'BB'
 signalMassRange = [800,1800]
 sigList = [whichSignal+'M'+str(mass) for mass in range(signalMassRange[0],signalMassRange[1]+100,100)]
 if whichSignal=='T53T53': sigList = [whichSignal+'M'+str(mass)+chiral for mass in range(signalMassRange[0],signalMassRange[1]+100,100) for chiral in ['left','right']]

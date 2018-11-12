@@ -56,9 +56,11 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 
 
 	cut += ' && (corr_met_singleLepCalc >= '+str(cutList['metCut'])+')'
-	cut += ' && (NJets_singleLepCalc >= '+str(cutList['njetsCut'])+')'
-# 	cut += ' && (NJets_singleLepCalc == '+str(cutList['njetsCut'])+')'
-# 	cut += ' && (NJets_singleLepCalc == 2 || NJets_singleLepCalc == 1)'
+
+# 	cut += ' && (NJets_singleLepCalc >= '+str(cutList['njetsCut'])+')' #SR
+	cut += ' && (NJets_singleLepCalc == '+str(cutList['njetsCut'])+')' #FRCR1, FRCR2
+# 	cut += ' && (NJets_singleLepCalc == 2 || NJets_singleLepCalc == 1)' #FRCR1CR2
+
 # 	cut += ' && (NJets_JetSubCalc >= '+str(cutList['njetsCut'])+')'
 	cut += ' && (NJetsBTagwithSF_singleLepCalc >= '+str(cutList['nbjetsCut'])+')'
 # 	cut += ' && (NJetsCSVwithSF_JetSubCalc_noLepCorr >= '+str(cutList['nbjetsCut'])+')'
@@ -105,10 +107,21 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 # 		if cutList['isPassTrig_dilep_anth']==1:cut += ' && MCPastTrigger_dilep_anth == 1'
 # 		if cutList['isPassTrig_trilep']==1: cut += ' && MCPastTrigger_trilep == 1'
 # 		if cutList['isPassTrilepton']==1 :  cut += ' && isPassTrilepton == 1'	
-
-
 # 	cut += ' && (deltaR_lepJets[1] >= '+str(cutList['drCut'])+')'
- 	cut += ' && (AK4HTpMETpLepPt >= '+str(cutList['stCut'])+')'
+
+ 	cut += ' && (AK4HTpMETpLepPt >= '+str(cutList['stCut'])+')' #remove low ST default
+#  	cut += ' && (AK4HTpMETpLepPt < '+str(cutList['stCut'])+')' #remove high ST
+
+ 	cut += ' && (AK4HT >= '+str(cutList['htCut'])+')' #remove low HT default
+#  	cut += ' && (AK4HT < '+str(cutList['htCut'])+')' #remove high HT
+
+	cut += ' && (minMlllBjet >= '+str(cutList['mlllbCut'])+')' #remove low value default
+# 	cut += ' && (minMlllBjet < '+str(cutList['mlllbCut'])+')' #remove high value
+
+	#ATTENION, lines below might need to be commented!!
+# 	cut += ' && ( ( ptRel_minDRlep1Jet > '+str(cutList['ptRelCut'])+'  || minDR_lep1Jet > '+str(cutList['minDRlepJetCut'])+' )' 
+# 	cut += '   && ( ptRel_minDRlep2Jet > '+str(cutList['ptRelCut'])+'  || minDR_lep2Jet > '+str(cutList['minDRlepJetCut'])+' )' 
+# 	cut += '   && ( ptRel_minDRlep3Jet > '+str(cutList['ptRelCut'])+'  || minDR_lep3Jet > '+str(cutList['minDRlepJetCut'])+' ) )' 
 
  	cut += ' && AllLeptonCount_PtOrdered == 3' #require exactly 3 leptons
 

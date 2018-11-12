@@ -29,7 +29,7 @@ sig2leg='TT (1.2 TeV)'
 scaleSignals = True
 
 # systematicList = ['pileup','btag','mistag','jec','jer','pdfNew','muRFcorrdNew','elPR','elFR','muPR','muFR']
-systematicList = ['pileup','btag','mistag','jec','jer','pdfNew','muRFcorrdNewTop','muRFcorrdNewEwk','muRFcorrdNewSig','elPR','elFR','muPR','muFR']
+systematicList = ['pileup','btag','mistag','pdfNew','muRFcorrdNewTop','muRFcorrdNewEwk','muRFcorrdNewSig','jec','jer','elPR','elFR','muPR','muFR']
 
 normSystematics = {
 					'elIdSys':{'EEE':0.06,'EEM':0.04,'EMM':0.02,'MMM':0.00},
@@ -98,7 +98,9 @@ cutString = 'lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST700_mllOS20'
 
 # templateDir='/user_data/rsyarif/optimization_reMiniAOD_PRv6_FRv24_newMuTrkSF_AllSys_2017_3_5/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1100_mllOS20/4binsCount/'
 
-templateDir='/user_data/rsyarif/optimization_reMiniAOD_PRv9_FRv24_newFRsys_AllSys_2017_3_10/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST700_mllOS20/4binsCount/'
+# templateDir='/user_data/rsyarif/optimization_reMiniAOD_PRv9_FRv24_newFRsys_AllSys_2017_3_10/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST700_mllOS20/4binsCount/'
+
+templateDir='/user_data/rsyarif/optimization_reMiniAOD_PRv9_FRv24_newFRsys_AllSys_2017_3_10/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST700_mllOS20/4binsCount_accurateLHEsys/'
 
 BRconfStr='_bW0p5_tZ0p25_tH0p25'
 # BRconfStr='_bW0p0_tZ0p5_tH0p5'
@@ -312,7 +314,8 @@ for cat in ['']: # you dont really need to loop.
 # 	for ibin in range(1,hTOP.GetNbinsX()+1):
 	for ibin in range(1,hTOP.GetNbinsX()+1): #here the bins are bin1:EEE,bin2:EEM,bin3:EMM,bin4:MMM
 		print ''
-		print 'ibin:', ibin, '(',catList[ibin-1],')'
+		print '----- ibin:', ibin, '(',catList[ibin-1],') ----'
+		print ''
 		print 'hEWK.GetBinError(',catList[ibin-1],'):',hEWK.GetBinError(ibin)
 		print 'hTOP.GetBinError(',catList[ibin-1],'):',hTOP.GetBinError(ibin)
 		print 'hDDBKG.GetBinError(',catList[ibin-1],'):',hDDBKG.GetBinError(ibin)
@@ -332,37 +335,59 @@ for cat in ['']: # you dont really need to loop.
 		except: pass
 
 		if doAllSys:
+			topTotErrUp = 0.0
+			topTotErrDn = 0.0
+			topTotErrSym = 0.0
+			ewkTotErrUp = 0.0
+			ewkTotErrDn = 0.0
+			ewkTotErrSym = 0.0
 			ddbkgTotErrUp = 0.0
 			ddbkgTotErrDn = 0.0
+			ddbkgTotErrSym = 0.0
 			for sys in systematicList:
+				print '	sys:',sys
 				if not ('PR' in sys or 'FR' in sys or 'Ewk' in sys or 'Sig' in sys):
-					errorPlus = systHists['top'+catStr+sys+'plus'].GetBinContent(ibin)-hTOP.GetBinContent(ibin)
-					errorMinus = hTOP.GetBinContent(ibin)-systHists['top'+catStr+sys+'minus'].GetBinContent(ibin)
-					if errorPlus > 0: errorUp += errorPlus**2
-					else: errorDn += errorPlus**2
-					if errorMinus > 0: errorDn += errorMinus**2
-					else: errorUp += errorMinus**2
-					print '		top',sys,'Up :',  systHists['top'+catStr+sys+'plus'].GetBinContent(ibin)-hTOP.GetBinContent(ibin)
-					print '		top',sys,'Dn :',  hTOP.GetBinContent(ibin)-systHists['top'+catStr+sys+'minus'].GetBinContent(ibin)
-					if sys!='toppt':
-						try:
-							errorPlus = systHists['ewk'+catStr+sys+'plus'].GetBinContent(ibin)-hEWK.GetBinContent(ibin)
-							errorMinus = hEWK.GetBinContent(ibin)-systHists['ewk'+catStr+sys+'minus'].GetBinContent(ibin)
-							if errorPlus > 0: errorUp += errorPlus**2
-							else: errorDn += errorPlus**2
-							if errorMinus > 0: errorDn += errorMinus**2
-							else: errorUp += errorMinus**2
-							print '		ewk',sys,'Up :',  systHists['ewk'+catStr+sys+'plus'].GetBinContent(ibin)-hEWK.GetBinContent(ibin)
-							print '		ewk',sys,'Dn :',  hEWK.GetBinContent(ibin)-systHists['ewk'+catStr+sys+'minus'].GetBinContent(ibin)
-						except: pass
-						try:
-							errorPlus = systHists['qcd'+catStr+sys+'plus'].GetBinContent(ibin)-hQCD.GetBinContent(ibin)
-							errorMinus = hQCD.GetBinContent(ibin)-systHists['qcd'+catStr+sys+'minus'].GetBinContent(ibin)
-							if errorPlus > 0: errorUp += errorPlus**2
-							else: errorDn += errorPlus**2
-							if errorMinus > 0: errorDn += errorMinus**2
-							else: errorUp += errorMinus**2
-						except: pass													
+					try:
+						errorPlus = systHists['top'+catStr+sys+'plus'].GetBinContent(ibin)-hTOP.GetBinContent(ibin)
+						errorMinus = hTOP.GetBinContent(ibin)-systHists['top'+catStr+sys+'minus'].GetBinContent(ibin)
+						if errorPlus > 0: errorUp += errorPlus**2
+						else: errorDn += errorPlus**2
+						if errorMinus > 0: errorDn += errorMinus**2
+						else: errorUp += errorMinus**2
+# 						print '		top',sys,'Up  :',  systHists['top'+catStr+sys+'plus'].GetBinContent(ibin)-hTOP.GetBinContent(ibin)
+# 						print '		top',sys,'Dn  :',  hTOP.GetBinContent(ibin)-systHists['top'+catStr+sys+'minus'].GetBinContent(ibin)
+						print '		top',sys,'sym :',  0.5*(math.fabs(systHists['top'+catStr+sys+'plus'].GetBinContent(ibin)-hTOP.GetBinContent(ibin)) + math.fabs(hTOP.GetBinContent(ibin)-systHists['top'+catStr+sys+'minus'].GetBinContent(ibin)))
+						topTotErrUp+= (systHists['top'+catStr+sys+'plus'].GetBinContent(ibin)-hTOP.GetBinContent(ibin))**2
+						topTotErrDn+= (hTOP.GetBinContent(ibin)-systHists['top'+catStr+sys+'minus'].GetBinContent(ibin))**2						
+						topTotErrSym +=  ( 0.5*(math.fabs(errorPlus)+math.fabs(errorMinus)) ) **2
+						print '				top (sys) after adding',sys,' :',math.sqrt( (0.5*(math.sqrt(math.fabs(topTotErrUp))+math.sqrt(math.fabs(topTotErrDn))))**2 + (getNormUnc(hTOP,ibin)))
+						print '				top (sys Sym) after adding',sys,' :',math.sqrt( topTotErrSym + (getNormUnc(hTOP,ibin) ) )
+					except: pass
+				if not ('PR' in sys or 'FR' in sys or 'Top' in sys or 'Sig' in sys):
+					try:
+						errorPlus = systHists['ewk'+catStr+sys+'plus'].GetBinContent(ibin)-hEWK.GetBinContent(ibin)
+						errorMinus = hEWK.GetBinContent(ibin)-systHists['ewk'+catStr+sys+'minus'].GetBinContent(ibin)
+						if errorPlus > 0: errorUp += errorPlus**2
+						else: errorDn += errorPlus**2
+						if errorMinus > 0: errorDn += errorMinus**2
+						else: errorUp += errorMinus**2
+# 						print '		ewk',sys,'Up  :',  systHists['ewk'+catStr+sys+'plus'].GetBinContent(ibin)-hEWK.GetBinContent(ibin)
+# 						print '		ewk',sys,'Dn  :',  hEWK.GetBinContent(ibin)-systHists['ewk'+catStr+sys+'minus'].GetBinContent(ibin)
+						print '		ewk',sys,'sym :',  0.5*(math.fabs(systHists['ewk'+catStr+sys+'plus'].GetBinContent(ibin)-hEWK.GetBinContent(ibin)) + math.fabs(hEWK.GetBinContent(ibin)-systHists['ewk'+catStr+sys+'minus'].GetBinContent(ibin)))
+						ewkTotErrUp+=(systHists['ewk'+catStr+sys+'plus'].GetBinContent(ibin)-hEWK.GetBinContent(ibin))**2
+						ewkTotErrDn+=(hEWK.GetBinContent(ibin)-systHists['ewk'+catStr+sys+'minus'].GetBinContent(ibin))**2						
+						ewkTotErrSym +=  ( 0.5*(math.fabs(errorPlus)+math.fabs(errorMinus)) ) **2
+						print '				ewk (sys) after adding',sys,' :',math.sqrt( (0.5*(math.sqrt(math.fabs(ewkTotErrUp))+math.sqrt(math.fabs(ewkTotErrDn))))**2 + (getNormUnc(hEWK,ibin)))
+						print '				ewk (sys Sym) after adding',sys,' :',math.sqrt( ewkTotErrSym + (getNormUnc(hEWK,ibin) ) )
+					except: pass
+					try:
+						errorPlus = systHists['qcd'+catStr+sys+'plus'].GetBinContent(ibin)-hQCD.GetBinContent(ibin)
+						errorMinus = hQCD.GetBinContent(ibin)-systHists['qcd'+catStr+sys+'minus'].GetBinContent(ibin)
+						if errorPlus > 0: errorUp += errorPlus**2
+						else: errorDn += errorPlus**2
+						if errorMinus > 0: errorDn += errorMinus**2
+						else: errorUp += errorMinus**2
+					except: pass													
 				if 'PR' in sys or 'FR' in sys:
 					try: errorSym += (0.5*abs(systHists['ddbkg'+catStr+sys+'plus'].GetBinContent(ibin)-systHists['ddbkg'+catStr+sys+'minus'].GetBinContent(ibin)))**2				
 					except: pass
@@ -374,13 +399,40 @@ for cat in ['']: # you dont really need to loop.
 					else: errorDn += errorPlus**2
 					if errorMinus > 0: errorDn += errorMinus**2
 					else: errorUp += errorMinus**2
-					ddbkgTotErrUp+=systHists['ddbkg'+catStr+sys+'plus'].GetBinContent(ibin)-hDDBKG.GetBinContent(ibin)
-					ddbkgTotErrDn+=hDDBKG.GetBinContent(ibin)-systHists['ddbkg'+catStr+sys+'minus'].GetBinContent(ibin)
-					print '		ddbkg',sys,'Up :',  systHists['ddbkg'+catStr+sys+'plus'].GetBinContent(ibin)-hDDBKG.GetBinContent(ibin)
-					print '		ddbkg',sys,'Dn :',  hDDBKG.GetBinContent(ibin)-systHists['ddbkg'+catStr+sys+'minus'].GetBinContent(ibin)
+					ddbkgTotErrUp+= (systHists['ddbkg'+catStr+sys+'plus'].GetBinContent(ibin)-hDDBKG.GetBinContent(ibin) )**2
+					ddbkgTotErrDn+= (hDDBKG.GetBinContent(ibin)-systHists['ddbkg'+catStr+sys+'minus'].GetBinContent(ibin) )**2
+					ddbkgTotErrSym +=  ( 0.5*( math.fabs(errorPlus)+math.fabs(errorMinus) ) ) **2
+# 					print '		ddbkg',sys,'Up  :',  systHists['ddbkg'+catStr+sys+'plus'].GetBinContent(ibin)-hDDBKG.GetBinContent(ibin)
+# 					print '		ddbkg',sys,'Dn  :',  hDDBKG.GetBinContent(ibin)-systHists['ddbkg'+catStr+sys+'minus'].GetBinContent(ibin)
+					print '		ddbkg',sys,'sym :',  0.5*(math.fabs(errorPlus) + math.fabs(errorMinus))
 
-		print '		ddbkgTotErrUp:',math.sqrt(ddbkgTotErrUp+getDDBKGNormUnc(hDDBKG,ibin))
-		print '		ddbkgTotErrDn:',math.sqrt(ddbkgTotErrDn+getDDBKGNormUnc(hDDBKG,ibin))
+
+# 		print '			ddbkgTotErrUp:',math.sqrt(ddbkgTotErrUp+getDDBKGNormUnc(hDDBKG,ibin))
+# 		print '			ddbkgTotErrDn:',math.sqrt(ddbkgTotErrDn+getDDBKGNormUnc(hDDBKG,ibin))
+		
+		print ''
+		print '			top(stat) 				:', hTOP.GetBinError(ibin)
+		print '			top math.sqrt(getNormUnc) 		:', math.sqrt(getNormUnc(hTOP,ibin)) 
+		print '			top (stat+math.sqrt(getNormUnc)) 	:', math.sqrt(hTOP.GetBinError(ibin)**2 + getNormUnc(hTOP,ibin)) 
+		print '			top (sys) 				:', math.sqrt( ( 0.5*(math.sqrt(math.fabs(topTotErrUp))+math.sqrt(math.fabs(topTotErrDn))) )**2 + getNormUnc(hTOP,ibin) )
+		print '			top (sys Sym) 				:', math.sqrt( topTotErrSym  + getNormUnc(hTOP,ibin) )
+		print '		-->	top (stat+sys) 				:', math.sqrt( ( 0.5*(math.sqrt(math.fabs(topTotErrUp))+math.sqrt(math.fabs(topTotErrDn))) )**2 + getNormUnc(hTOP,ibin) + hTOP.GetBinError(ibin)**2 ),'<--'
+		print ''
+		print '			ewk(stat) 				:', hEWK.GetBinError(ibin)
+		print '			ewk math.sqrt(getNormUnc) 		:', math.sqrt(getNormUnc(hEWK,ibin)) 
+		print '			ewk (stat+math.sqrt(getNormUnc)) 	:', math.sqrt(hEWK.GetBinError(ibin)**2 + getNormUnc(hEWK,ibin)) 
+		print '			ewk (sys) 				:', math.sqrt( ( 0.5*(math.sqrt(math.fabs(ewkTotErrUp))+math.sqrt(math.fabs(ewkTotErrDn))) )**2 + getNormUnc(hEWK,ibin) )
+		print '			ewk (sys Sym) 				:', math.sqrt( ewkTotErrSym  + getNormUnc(hEWK,ibin) )
+		print '		-->	ewk (stat+sys) 				:', math.sqrt( ( 0.5*(math.sqrt(math.fabs(ewkTotErrUp))+math.sqrt(math.fabs(ewkTotErrDn))) )**2 + getNormUnc(hEWK,ibin) + hEWK.GetBinError(ibin)**2 ),'<--'
+		print ''
+		print '			ddbkgTotSym (stat) 			:', hDDBKG.GetBinError(ibin)
+# 		print '			ddbkgTotSym (stat) ** 2 		:', hDDBKG.GetBinError(ibin) ** 2
+		print '			ddbkgTotSym math.sqrt(getDDBKGNormUnc) 	:', math.sqrt(getDDBKGNormUnc(hDDBKG,ibin)) 
+# 		print '			ddbkgTotSym (getDDBKGNormUnc) 		:', getDDBKGNormUnc(hDDBKG,ibin) 
+		print '			ddbkgTotSym (stat+getDDBKGNormUnc) 	:', math.sqrt( hDDBKG.GetBinError(ibin)**2 + getDDBKGNormUnc(hDDBKG,ibin) )
+		print '			ddbkgTotSym (sys) 			:', math.sqrt(( 0.5*(math.sqrt(math.fabs(ddbkgTotErrUp))+math.sqrt(math.fabs(ddbkgTotErrDn))) )**2 + getDDBKGNormUnc(hDDBKG,ibin) )
+		print '			ddbkgTotSym (sys Sym) 			:', math.sqrt( ddbkgTotErrSym  + getDDBKGNormUnc(hDDBKG,ibin) )
+		print '		-->	ddbkgTotSym (stat+sys) 			:', math.sqrt( ( 0.5*(math.sqrt(math.fabs(ddbkgTotErrUp))+math.sqrt(math.fabs(ddbkgTotErrDn))) )**2 + getDDBKGNormUnc(hDDBKG,ibin) + hDDBKG.GetBinError(ibin)**2 ),'<--'
 
 # 		totBkgTemp1[catStr].SetPointEYhigh(ibin-1,math.sqrt(errorUp))
 # 		totBkgTemp1[catStr].SetPointEYlow(ibin-1, math.sqrt(errorDn))
@@ -396,10 +448,18 @@ for cat in ['']: # you dont really need to loop.
 		totBkgTemp3.SetPointEYhigh(ibin-1,math.sqrt(errorUp+errorNorm+errorStatOnly))
 		totBkgTemp3.SetPointEYlow(ibin-1, math.sqrt(errorDn+errorNorm+errorStatOnly))
 
-		print '	totBkgTemp3.GetErrorYhigh(',catList[ibin-1],'):',totBkgTemp3.GetErrorYhigh(ibin-1)
-		print '	totBkgTemp3.GetErrorYlow(',catList[ibin-1],') :',totBkgTemp3.GetErrorYlow(ibin-1)
+# 		print '	totBkgTemp3.GetErrorYhigh(',catList[ibin-1],'):',totBkgTemp3.GetErrorYhigh(ibin-1)
+# 		print '	totBkgTemp3.GetErrorYlow(',catList[ibin-1],') :',totBkgTemp3.GetErrorYlow(ibin-1)
 
-		print '	total error in ',catList[ibin-1],' :',(totBkgTemp3.GetErrorYhigh(ibin-1)+totBkgTemp3.GetErrorYlow(ibin-1))*0.5
+		print ''
+		print '	total sqrt(errorUp) in ',catList[ibin-1],' :',math.sqrt(errorUp)
+		print '	total sqrt(errorDn) in ',catList[ibin-1],' :',math.sqrt(errorDn)
+		print '	total sqrt(errorNorm+errorStatOnly) in ',catList[ibin-1],' :',math.sqrt(errorNorm+errorStatOnly)
+		print '	total sqrt(errorUp+errorNorm+errorStatOnly) in ',catList[ibin-1],' :',math.sqrt(errorUp+errorNorm+errorStatOnly)
+		print '	total sqrt(errorDn+errorNorm+errorStatOnly) in ',catList[ibin-1],' :',math.sqrt(errorDn+errorNorm+errorStatOnly)
+		print ''
+		print '		--> total stat+sys error in ',catList[ibin-1],' :',(math.fabs(totBkgTemp3.GetErrorYhigh(ibin-1))+math.fabs(totBkgTemp3.GetErrorYlow(ibin-1)))*0.5,'<--'
+		print ''
 
 # 	bkgHTgerr = totBkgTemp3[catStr].Clone()
 	bkgHTgerr = totBkgTemp3.Clone()

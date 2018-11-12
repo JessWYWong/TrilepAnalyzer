@@ -7,10 +7,11 @@ from weights import *
 gROOT.SetBatch(1)
 start_time = time.time()
 
-lumi=36.8 #for plots
+# lumi=36.8 #for plots
+lumi=35.9 #for plots
 lumiInTemplates=str(targetlumi/1000).replace('.','p') # 1/fb
 
-discriminant = 'ST'
+discriminant = 'STrebinnedv2'
 
 saveKey = ''#'_topPtSystOnly'
 
@@ -20,9 +21,12 @@ saveKey = ''#'_topPtSystOnly'
 # m2 = '800'
 # sig2='X53X53M'+m1+'right' # choose the 2nd signal to plot
 # sig2leg='X_{5/3}#bar{X}_{5/3} RH (0.8 TeV)'
-m1 = '800'
+# m1 = '800'
+# sig1='TTM'+m1 # choose the 1st signal to plot
+# sig1leg='TT (0.8 TeV)'
+m1 = '1000'
 sig1='TTM'+m1 # choose the 1st signal to plot
-sig1leg='TT (0.8 TeV)'
+sig1leg='TT (1.0 TeV)'
 m2 = '1200'
 sig2='TTM'+m2 # choose the 2nd signal to plot
 sig2leg='TT (1.2 TeV)'
@@ -30,7 +34,8 @@ scaleSignals = True
 
 # systematicList = ['pileup','jec','jer','jmr','jms','btag','tau21','muR','muF','muRFcorrd','toppt','jsf','PR','FR']
 
-systematicList = ['pileup','jec','jer','btag','pdfNew','muRFcorrdNew','PR','FR']
+# systematicList = ['pileup','jec','jer','btag','pdfNew','muRFcorrdNew','PR','FR']
+systematicList = ['pileup','jec','jer','btag','mistag','pdfNew','muRFcorrdNewSig','muRFcorrdNewEwk','muRFcorrdNewTop','PR','FR']
 # systematicList = ['pileup','jec','jer','pdfNew','muRFcorrdNew','PR','FR'] #no btag!
 
 doAllSys = True
@@ -54,7 +59,8 @@ if doRealPull: doOneBand=False
 
 # templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_mcICHEP_FRv15_PRv4_step2_20Jan2017_moreThan2Jets_muMinIso0p1_updatedbtagWP_2017_1_23/'+cutString+'/'
 
-cutString = 'lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20'
+cutString = 'lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST0_mllOS20'
+# cutString = 'lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20'
 # cutString = 'lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST700_mllOS20'
 # cutString = 'lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST800_mllOS20'
 # cutString = 'lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST900_mllOS20'
@@ -66,16 +72,21 @@ cutString = 'lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20'
 # templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_3Feb2017_step2_2017_2_3/'+cutString+'/'
 # templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18b_6Feb2017_step2_2017_2_6/'+cutString+'/'
 # templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_6Feb2017_step2_2017_2_7/'+cutString+'/'
-templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_6Feb2017_newdbkgSys_step2_2017_2_8/'+cutString+'/'
+# templateDir='/user_data/rsyarif/optimization_condor_80x_MultiLep_Full2016_Moriond17_newJEC_newElMVA_PRv6_FRv18bSys_6Feb2017_newdbkgSys_step2_2017_2_8/'+cutString+'/'
+templateDir='/user_data/rsyarif/optimization_reMiniAOD_PRv9_FRv30CR2_newRunH_correctedMuTrkSF_AllSys_2017_4_14/'+cutString+'/'
+subDir = '/Shape_accurateLHESys_FRsysMar28_newSigSF/'
 
+templateDir+=subDir
 
-tempsig='templates_'+discriminant+'_'+sig1+'_'+lumiInTemplates+'fb'+isRebinned+'.root'	
+# tempsig='templates_'+discriminant+'_'+sig1+'_'+lumiInTemplates+'fb'+isRebinned+'.root'	
+tempsig='templates_'+discriminant+'_'+sig1+'_bW0p5_tZ0p25_tH0p25_'+lumiInTemplates+'fb'+isRebinned+'.root'	
 
 isEMlist =['EEE','EEM','EMM','MMM']
 nttaglist=['0p']
 nWtaglist=['0p']
 nbtaglist=['0p']
-catList = list(itertools.product(isEMlist,nttaglist,nWtaglist,nbtaglist))
+catList =['EEE','EEM','EMM','MMM']
+# catList = list(itertools.product(isEMlist,nttaglist,nWtaglist,nbtaglist))
 tagList = list(itertools.product(nttaglist,nWtaglist,nbtaglist))
 
 # lumiSys = 0.062 #6.2% https://twiki.cern.ch/twiki/bin/view/CMS/TWikiLUM - 20Sep2016 - ATTENTION!! NEEDS to be checked again!
@@ -169,13 +180,15 @@ systHists = {}
 totBkgTemp1 = {}
 totBkgTemp2 = {}
 totBkgTemp3 = {}
+# for cat in catList:
 for cat in catList:
 	histPrefix='triLep'
 # 	histPrefix=discriminant+'_'+lumiInTemplates+'fb_'
-	tagStr='nT'+cat[1]+'_nW'+cat[2]+'_nB'+cat[3]
-	catStr='is'+cat[0]+'_'+tagStr
-	isEM=cat[0]
-# 	histPrefix+=catStr
+# 	tagStr='nT'+cat[1]+'_nW'+cat[2]+'_nB'+cat[3]
+# 	catStr='is'+cat[0]+'_'+tagStr
+# 	isEM=cat[0]
+	catStr=cat
+	histPrefix+=catStr
 	print histPrefix
 	hTOP = RFile1.Get(histPrefix+'__top').Clone()
 	try: hEWK = RFile1.Get(histPrefix+'__ewk').Clone()
@@ -252,13 +265,14 @@ for cat in catList:
 		if doAllSys:
 			for sys in systematicList:
 				if sys=='PR' or sys=='FR': continue	
-				errorPlus = systHists['top'+catStr+sys+'plus'].GetBinContent(ibin)-hTOP.GetBinContent(ibin)
-				errorMinus = hTOP.GetBinContent(ibin)-systHists['top'+catStr+sys+'minus'].GetBinContent(ibin)
-				if errorPlus > 0: errorUp += errorPlus**2
-				else: errorDn += errorPlus**2
-				if errorMinus > 0: errorDn += errorMinus**2
-				else: errorUp += errorMinus**2
-				if sys!='toppt':
+				if 'Ewk' not in sys and 'Sig' not in sys: 	
+					errorPlus = systHists['top'+catStr+sys+'plus'].GetBinContent(ibin)-hTOP.GetBinContent(ibin)
+					errorMinus = hTOP.GetBinContent(ibin)-systHists['top'+catStr+sys+'minus'].GetBinContent(ibin)
+					if errorPlus > 0: errorUp += errorPlus**2
+					else: errorDn += errorPlus**2
+					if errorMinus > 0: errorDn += errorMinus**2
+					else: errorUp += errorMinus**2
+				if sys!='toppt' and 'Top' not in sys and 'Sig' not in sys:
 					try:
 						errorPlus = systHists['ewk'+catStr+sys+'plus'].GetBinContent(ibin)-hEWK.GetBinContent(ibin)
 						errorMinus = hEWK.GetBinContent(ibin)-systHists['ewk'+catStr+sys+'minus'].GetBinContent(ibin)
@@ -574,7 +588,9 @@ for cat in catList:
 
 	#c1.Write()
 # 	savePrefix = templateDir.replace(cutString,'')+templateDir.split('/')[-2]+cutString+'/'+'plots/'
-	savePrefix = templateDir.replace(cutString,'')+templateDir.split('/')[-2]+'/'+'plots/'
+# 	savePrefix = templateDir.replace(cutString,'')+templateDir.split('/')[-2]+'/'+'plots/'
+	savePrefix = templateDir+'/plots/'
+	print 'Attempting to save in: ', savePrefix
 	if not os.path.exists(savePrefix): os.system('mkdir '+savePrefix)
 	savePrefix+=histPrefix+isRebinned+saveKey
 	if doRealPull: savePrefix+='_pull'

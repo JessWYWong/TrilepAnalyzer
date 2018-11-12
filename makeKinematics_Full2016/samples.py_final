@@ -217,6 +217,11 @@ samples = {
 'TTZl':'TTZToLLNuNu_M-10_TuneCUETP8M1_13TeV-amcatnlo-pythia8',
 'TTZq':'TTZToQQ_TuneCUETP8M1_13TeV-amcatnlo-pythia8',
 
+#### As requested by Cristina Botta (ARC B2G-17-011).
+'TTGJets':'TTGJets_TuneCUETP8M1_13TeV-amcatnloFXFX-madspin-pythia8',
+'ZGTo2LG':'ZGTo2LG_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8',
+'TTZToLLM1to10':'TTZToLL_M-1to10_TuneCUETP8M1_13TeV-madgraphMLM-pythia8',
+
 # 'Tt':'ST_t-channel_4f_leptonDecays_13TeV-amcatnlo-pythia8_TuneCUETP8M1',      #amcnlo t and tbar
 # 'TtQ2U':'ST_t-channel_4f_scaleup_leptonDecays_13TeV-amcatnlo-pythia8_TuneCUETP8M1',
 # 'TtQ2D':'ST_t-channel_4f_scaledown_leptonDecays_13TeV-amcatnlo-pythia8_TuneCUETP8M1',

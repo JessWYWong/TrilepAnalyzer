@@ -9,7 +9,8 @@ gROOT.SetBatch(1)
 from tdrStyle import *
 setTDRStyle()
 
-inputFile = "mle_covcorr_templates_minMlllBv4_TTM1000_bW0p5_tZ0p25_tH0p25_35p867fb_bkgonly"
+# inputFile = "mle_covcorr_templates_minMlllBv4_TTM1000_bW0p5_tZ0p25_tH0p25_35p867fb_bkgonly"
+inputFile = "mle_covcorr_templates_STrebinnedv2_TTM1000_bW0p5_tZ0p25_tH0p25_35p867fb_bkgonly"
 
 file = ROOT.TFile(inputFile+'.root')
 

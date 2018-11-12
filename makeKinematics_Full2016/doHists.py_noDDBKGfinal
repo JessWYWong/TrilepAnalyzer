@@ -17,7 +17,9 @@ lumiStr = str(targetlumi/1000).replace('.','p') # 1/fb
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRv6_FRv24_newMuTrkSF_step1hadds_step2/nominal'
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRv9_FRv24_postPreapproval_step1hadds_step2/nominal'
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv24_step1hadds_step2/nominal'
-step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRv9_FRv30CR2_correctedMuTrkSF_step1hadds_step2/nominal';
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRv9_FRv30CR2_correctedMuTrkSF_step1hadds_step2/nominal';
+# step1Dir ='/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_AK4JetFlavor_step1hadds/nominal' #here also contains data from /LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv45FRSRHT400low_fixedMinMlllBshifts_step1hadds_step2/
+step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv45_elMVAaltFix_step1hadds_step2/nominal'
 
 print 'grabbing files from ', step1Dir
 """
@@ -48,6 +50,7 @@ cutList = {'isPassTrig': 0,
 		   'drCut':0, #1.0, #
 	   	   'stCut':0,
 	   	   'mllOSCut':20,
+			'htCut':0,
 		   }
 
 print 'sys.argv', sys.argv
@@ -72,6 +75,7 @@ if cutType=='ALLR':
 			   'drCut':0,
 			   'stCut':0,
 			   'mllOSCut':20,
+			   'htCut':0,
 			   }
 
 if 'CR2' in cutType:
@@ -91,6 +95,7 @@ if 'CR2' in cutType:
 			   'drCut':0,
 			   'stCut':0,
 			   'mllOSCut':20,
+			   'htCut':0,
 			   }
 
 if 'CR1' in cutType:
@@ -110,6 +115,7 @@ if 'CR1' in cutType:
 			   'drCut':0,
 			   'stCut':0,
 			   'mllOSCut':20,
+			   'htCut':0,
 			   }
 
 if cutType=='SR':
@@ -129,6 +135,7 @@ if cutType=='SR':
 			   'drCut':0,
 			   'stCut':0,
 			   'mllOSCut':20,
+			   'htCut':0,
 			   }
 
 if cutType=='fSR':
@@ -148,6 +155,28 @@ if cutType=='fSR':
 			   'drCut':0,
 			   'stCut':600,
 			   'mllOSCut':20,
+			   'htCut':0,
+			   }
+
+
+if 'SRHT400' in cutType:
+	print 'Applying moreThan2jets criteria with HT>400 (or HT<400 if +low in cutType),'
+	cutList = {'isPassTrig': 0, 
+			   'isPassTrig_dilep': 1,
+			   'isPassTrig_dilep_anth': 0,
+			   'isPassTrig_trilep': 0, 
+			   'isPassTrilepton': 1,
+			   'lep1PtCut': 0,
+			   'leadJetPtCut':0,
+			   'subLeadJetPtCut':0, 
+			   'thirdJetPtCut':0, 
+			   'metCut': 20,
+			   'njetsCut': 3,
+			   'nbjetsCut':1,
+			   'drCut':0,
+			   'stCut':0,
+			   'mllOSCut':20,
+			   'htCut':400,
 			   }
 
 if len(sys.argv)>3: catList=[str(sys.argv[3])]
@@ -275,6 +304,7 @@ plotList = {#discriminantName:(discriminantLJMETName, binning, xAxisLabel)
 	'MllOSallmax':('MllOS_allComb_max',Mbins,'; max ( M(ll_{OS}) ) [GeV]'),
 # 	'Mlll':('Mlll',Mbins,'; M(lll) [GeV]'),
 	
+	'AK4JetFlavor':('AK4JetFlav_singleLepCalc_PtOrdered',linspace(-1, 10, 12).tolist(),';AK4 Jet Flavor;'),
 	}
 
 ###########################################################

@@ -383,6 +383,8 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 	try:
 		tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+''+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut+isLepCut+')', 'GOFF')
 		print '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> DRAW SUCCESSFULL!!!!!'
+		print 'weight: ',weightStr
+		print 'Yield : ', tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+''+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut+isLepCut+')', 'GOFF')
 	except:
 		print '--------------------------------------------------------------------------------------------------------------------------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>Skip DRAW'
 
@@ -416,7 +418,8 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 			cut_mistagDn = cut.replace(nbtagLJMETname,'NJetsBTagwithSF_singleLepCalc_shifts[3]')#nbtagLJMETname+'_shifts[3]')
 			
 			bTagSFshiftName = discriminantLJMETName
-			if 'NJetsBTag' in discriminantLJMETName or 'minMlllB' in discriminantLJMETName:
+# 			if 'NJetsBTag' in discriminantLJMETName:
+			if 'NJetsBTag' in discriminantLJMETName or 'minMlllB' in discriminantLJMETName: #is this correct??
 				bTagSFshiftName = discriminantLJMETName+'_shifts[0]'
 				#print 'bTagSFshiftname:', discriminantLJMETName,'-->',bTagSFshiftName
 			print 'BTAGup LJMET NAME',bTagSFshiftName.replace('_shifts[0]','_shifts[0]')

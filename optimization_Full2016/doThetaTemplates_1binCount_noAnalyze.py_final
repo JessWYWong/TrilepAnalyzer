@@ -11,18 +11,19 @@ R.gROOT.SetBatch(1)
 start_time = time.time()
 
 DEBUG=False
-if len(sys.argv)>2: DEBUG=sys.argv[2]
+if len(sys.argv)>3: DEBUG=sys.argv[3]
 
 cTime=datetime.datetime.now()
 datestr='%i_%i_%i'%(cTime.year,cTime.month,cTime.day)
 timestr='%i_%i_%i'%(cTime.hour,cTime.minute,cTime.second)
 
-# pfix='/user_data/rsyarif/optimization_80x_condor_MultiLep_Full2016_Moriond17_PRv6_FRv18bSys_fixedLumiSYS_fixedLepIdIsoSys_ALLsys_step2_TESTING_2017_2_15/lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20'
-pfix='/user_data/rsyarif/dummy/dummy'
+outDir='/user_data/rsyarif/'
 
-newOutDir='/1binCount'
-
+outDir+='/dummy/dummy/'
 if len(sys.argv)>1: outDir=sys.argv[1]
+
+newOutDir='/1binCount_FRsysMar28'
+if len(sys.argv)>2: newOutDir=sys.argv[2]
 
 lumiStr = str(targetlumi/1000).replace('.','p') # 1/fb
 
@@ -132,12 +133,17 @@ normSystematics = {
 # 					'muFReta':{'EEE':1.00,'EEM':1.22,'EMM':1.11,'MMM':1.48}
 # 					}
 
-ddbkgSystematics = {
-					'elPRsys':{'EEE':1.09,'EEM':1.15,'EMM':1.08,'MMM':1.00},
-					'muPRsys':{'EEE':1.00,'EEM':1.04,'EMM':1.08,'MMM':1.17},
-					'muFReta':{'EEE':1.00,'EEM':1.13,'EMM':1.10,'MMM':1.24}
-					}
+# ddbkgSystematics = {
+# 					'elPRsys':{'EEE':1.09,'EEM':1.15,'EMM':1.08,'MMM':1.00},
+# 					'muPRsys':{'EEE':1.00,'EEM':1.04,'EMM':1.08,'MMM':1.17},
+# 					'muFReta':{'EEE':1.00,'EEM':1.13,'EMM':1.10,'MMM':1.24}
+# 					}
 
+ddbkgSystematics = { #based on newRunH Mar28 ST700
+					'elPRsys':{'EEE':1.21,'EEM':1.12,'EMM':1.06,'MMM':1.00},
+					'muPRsys':{'EEE':1.00,'EEM':1.03,'EMM':1.07,'MMM':1.15},
+					'muFReta':{'EEE':1.00,'EEM':1.11,'EMM':1.10,'MMM':1.26}
+					}
 
 def round_sig(x,sig=2):
 	try:

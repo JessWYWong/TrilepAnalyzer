@@ -26,8 +26,8 @@ if(DEBUG or DEBUG_normalizeRENORM_PDF): print ''
 # lumiStr = '36p814'
 lumiStr = '35p867'
 print 'lumiStr =',lumiStr
-doAllSys= True
-# doAllSys= False
+# doAllSys= True
+doAllSys= False
 print 'doAllSys =', doAllSys
 normalizeRENORM_PDF = True 
 print 'normalizeRENORM_PDF =', normalizeRENORM_PDF
@@ -160,11 +160,31 @@ normSystematics = { #The All category was obtained by quad sum of the cats! its 
 # 					'muFReta':{'EEE':0.00,'EEM':0.11,'EMM':0.10,'MMM':0.26,'All':0.12}
 # 					}
 
-ddbkgSystematics = { #based on newRunH Mar28 No ST cut
-					'elPRsys':{'EEE':0.21,'EEM':0.05,'EMM':0.02,'MMM':0.00,'All':0.05},
-					'muPRsys':{'EEE':0.00,'EEM':0.02,'EMM':0.03,'MMM':0.07,'All':0.03},
-					'muFReta':{'EEE':0.00,'EEM':0.12,'EMM':0.16,'MMM':0.29,'All':0.15}
-					}
+# ddbkgSystematics = { #based on newRunH Mar28 No ST cut
+# 					'elPRsys':{'EEE':0.21,'EEM':0.05,'EMM':0.02,'MMM':0.00,'All':0.05},
+# 					'muPRsys':{'EEE':0.00,'EEM':0.02,'EMM':0.03,'MMM':0.07,'All':0.03},
+# 					'muFReta':{'EEE':0.00,'EEM':0.12,'EMM':0.16,'MMM':0.29,'All':0.15},
+# 					'FRsys'  :{'EEE':0.38,'EEM':0.29,'EMM':0.18,'MMM':0.36,'All':0.20}, #_extraFRsys17Aug
+# 					}
+
+ddbkgSystematics = {}
+
+if 'FRv48sys' in pfix:
+	ddbkgSystematics = { #based on elMVAvalueFix Sep20-Sep21 No ST cut - FOR FRv48sys
+						'elPRsys':{'EEE':0.09,'EEM':0.05,'EMM':0.02,'MMM':0.00,'All':0.04},
+						'muPRsys':{'EEE':0.00,'EEM':0.01,'EMM':0.02,'MMM':0.07,'All':0.02},
+						'muFReta':{'EEE':0.00,'EEM':0.12,'EMM':0.16,'MMM':0.33,'All':0.15},
+						'FRsys'  :{'EEE':0.34,'EEM':0.31,'EMM':0.19,'MMM':0.24,'All':0.24}, #FRSTHT400low (data-MC)/ddbkg and ttbar MC closure
+						}
+	print 'Using ddbkgSystematics for FRv48sys'
+else:
+	ddbkgSystematics = { #based on elMVAvalueFix Sep20-Sep21 No ST cut - FOR FRv49sys
+						'elPRsys':{'EEE':0.09,'EEM':0.05,'EMM':0.02,'MMM':0.00,'All':0.04},
+						'muPRsys':{'EEE':0.00,'EEM':0.01,'EMM':0.02,'MMM':0.07,'All':0.02},
+						'muFReta':{'EEE':0.00,'EEM':0.12,'EMM':0.16,'MMM':0.33,'All':0.15},
+						'FRsys'  :{'EEE':0.45,'EEM':0.38,'EMM':0.18,'MMM':0.20,'All':0.24}, #FRCR2 (data-MC)/ddbkg and ttbar MC closure
+						}
+	print 'Using ddbkgSystematics for FRv49sys'
 
 
 ###########################################################
@@ -187,7 +207,7 @@ def getCorrdSysMC(cat): #this is approximate!?
 
 	
 def getCorrdSysDDBKG(cat):
-	ddbkgSys = math.sqrt( ddbkgSystematics['elPRsys'][cat]**2 + ddbkgSystematics['muPRsys'][cat]**2 + ddbkgSystematics['muFReta'][cat]**2 )
+	ddbkgSys = math.sqrt( ddbkgSystematics['elPRsys'][cat]**2 + ddbkgSystematics['muPRsys'][cat]**2 + ddbkgSystematics['muFReta'][cat]**2 + ddbkgSystematics['FRsys'][cat]**2 )
 	return ddbkgSys
 
 
@@ -1157,7 +1177,7 @@ for dist in distList:
 	if whichPlots==1:
 # 		if not ('STrebinned' in dist or 'lepPt' in dist) :continue
 # 		if not ('ST' in dist or 'lepPt' in dist or 'lepEta' in dist or 'lep1Pt' in dist or 'lep1Eta' in dist or 'lep2Pt' in dist or 'lep2Eta' in dist or 'lep3Pt' in dist or 'lep3Eta' in dist or 'Nlep' in dist or 'Nel' in dist or 'Nmu' in dist) :continue
-		if not ('NBJets' in dist or 'METrebinned' in dist or 'JetPt' in dist or 'JetEta' in dist or 'minMlllBv4' in dist or 'HT' in dist or 'ST' in dist or 'lepPt' in dist or 'lepEta' in dist or 'lep1Pt' in dist or 'lep1Eta' in dist or 'lep2Pt' in dist or 'lep2Eta' in dist or 'lep3Pt' in dist or 'lep3Eta' in dist or 'Nlep' in dist or 'Nel' in dist or 'Nmu' in dist or 'ElPt' in dist or 'MuPt' in dist) :continue
+		if not ('NJets' in dist or 'NBJets' in dist or 'METrebinned' in dist or 'JetPt' in dist or 'JetEta' in dist or 'minMlllBv4' in dist or 'HT' in dist or 'ST' in dist or 'lepPt' in dist or 'lepPtRebinned' in dist or 'lepEta' in dist or 'lep1Pt' in dist or 'lep1Eta' in dist or 'lep2Pt' in dist or 'lep2Eta' in dist or 'lep3Pt' in dist or 'lep3Eta' in dist or 'Nlep' in dist or 'Nel' in dist or 'Nmu' in dist or 'ElPt' in dist or 'MuPt' in dist) :continue
 	if whichPlots==2:
 		if not ('JetPt' in dist or 'JetEta' in dist or 'NJets' in dist or 'NBJets' in dist or 'lepEta' in dist or 'ST' in dist or 'METrebinned' in dist or 'lepPt' in dist) :continue
 # 	if not('STrebinnedv' in dist): continue
@@ -1172,7 +1192,7 @@ for dist in distList:
 	if whichPlots==7:
 		if not ('DR' in dist) :continue
 	if whichPlots==8:
-		if not ('lepPt' in dist or 'minMlllBv2' in dist or 'ST' in dist) :continue
+		if not ('lepPt' in dist or 'minMlllBv4' in dist or 'ST' in dist) :continue
 	if whichPlots==9:
 		if not ('minMlllBv4' in dist or 'HT' in dist or 'DR' in dist or 'PtRel' in dist or 'lepPt' in dist) :continue
 	if whichPlots==10:

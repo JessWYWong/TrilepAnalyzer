@@ -50,7 +50,7 @@ void step2::Loop()
 
    //creates empty file if it doesn exist and //ios::app = All output operations are performed at the end of the file, appending the content to the current content of the file.
    ofstream outfileCheckOverlapm( "CheckOverlap.txt", ios::app);    
-
+   
    cout << "Reading CheckOverlap.txt file and saving unique events" << std::endl;
    ifstream infileCheckOverlapm( "CheckOverlap.txt" ); 
    while (infileCheckOverlapm)

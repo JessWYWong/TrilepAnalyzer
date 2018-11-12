@@ -26,66 +26,89 @@ else: pfix+='_'+date
 
 
 plotList = [#distribution name as defined in "doHists.py"
-	'NPV',
+# 	'ElDxy',
+# 	'ElDz',
+# 	'MuDxy',
+# 	'MuDz',
+
+# 	'AK4JetFlavor', #only for MC
+# 
+# 	'NPV',
 	'lepPt',
-	'ElPt',
-	'MuPt',
-
-	'lep1Pt',
-	'lep2Pt',
-	'lep3Pt',
-
-	'lepEta',
-	'ElEta',
-	'MuEta',
-
-	'lep1Eta',
-	'lep2Eta',
-	'lep3Eta',
-	
-	'Nlep',
-	'Nel',
-	'Nmu',
-
- 	'JetEta',
-
-	'JetPt' ,
-
+# 	'lepPtRebinned',
+# 	'ElPt',
+# 	'MuPt',
+# 
+# 	'lep1Pt',
+# 	'lep2Pt',
+# 	'lep3Pt',
+# 
+# 	'lepEta',
+# # 	'ElEta',
+# # 	'MuEta',
+# 
+# 	'lep1Eta',
+# 	'lep2Eta',
+# 	'lep3Eta',
+# 	
+# 	'Nlep',
+# 	'Nel',
+# 	'Nmu',
+# 
+#  	'JetEta',
+# 
+# 	'JetPt' ,
+# 
 # 	'HT',
-	'HTrebinned',
-# 	'ST',
-	'STrebinned',
+# 	'HTrebinned',
+	'ST',
+# # 	'STrebinned',
 	'STrebinnedv2',
-	'STrebinnedv3',
-# 	'MET',
-	'METrebinned',
+# # 	'STrebinnedv3',
+# # 	'MET',
+# 	'METrebinned',
 	'NJets' ,
-	'NBJets',
-# 	'NBJetsCorr',
-
-# 	'mindeltaRlepJets',
-# 	'mindeltaRlep1Jets',
-# 	'mindeltaRlep2Jets',
-# 	'mindeltaRlep3Jets',
-# 	'mindeltaRB',
-# 	'mindeltaR1',
-# 	'mindeltaR2',
-# 	'mindeltaR3',
-# 	'lepCharge',
-
-# 	'lepIso',
-# 	'ElIso',
-# 	'MuIso',
-
-# 	'PtRel1',
-# 	'PtRel2',
-# 	'PtRel3',
-
-# 	'MllsameFlavorOS',
-# 	'MllOSall',
-	'MllOSallmin',
-	'MllOSallmax',
-# 	'Mlll',
+# 	'NBJets',
+# # 	'NBJetsCorr',
+# 
+# # 	'minMlB',
+# # 	'minMlBv2', #
+# # 	'minMlllB',
+# 	'minMlllBv2',
+# # 	'minMlllBv3', #
+# 	'minMlllBv4', #
+# 
+# # 	'minDPhiMETJet',
+# # 	'DRlep1Jet1',
+# # 	'minDRlep1Jets',
+# # 	'minDRlep2Jets',
+# # 	'minDRlep3Jets',
+# # 	'minDRlepsJets',
+# 
+# # 	'mindeltaRlepJets',
+# # 	'mindeltaRlep1Jets',
+# # 	'mindeltaRlep2Jets',
+# # 	'mindeltaRlep3Jets',
+# # 	'mindeltaRB',
+# # 	'mindeltaR1',
+# # 	'mindeltaR2',
+# # 	'mindeltaR3',
+# # 	'lepCharge',
+# 
+# # 	'lepIso',
+# # 	'ElIso',
+# # 	'MuIso',
+# 
+# # 	'PtRel1',
+# # 	'PtRel2',
+# # 	'PtRel3',
+# # 	'PtRel',
+# 
+# # 	'MllsameFlavorOS',
+# # 	'MllOSall',
+# # 	'MllOSallmin',
+# # 	'MllOSallmax',
+# # 	'Mlll',
 	]
 
 catList = ['EEE','EEM','EMM','MMM','All']
@@ -98,7 +121,7 @@ count = 0
 for distribution in plotList:
 	print 'Process condor jobs for:',cutType, distribution
 	if ('noWeight' in cutType):
-		if not ('STrebinnedv' in distribution): continue
+		if not ('ST' in distribution): continue
 	for cat in catList:
 		print cat
 		if not os.path.exists(outDir+'/'+cat): os.system('mkdir '+cat)

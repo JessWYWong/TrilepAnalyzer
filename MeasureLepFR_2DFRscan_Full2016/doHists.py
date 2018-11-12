@@ -31,7 +31,16 @@ lumiStr = str(targetlumi/1000).replace('.','p') # 1/fb
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv20b_3Mar2017_scaleFR_CR2CR1_step1hadds_step2/nominal/'
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_newJEC_newElMVA_2017_1_30_rizki_PRv6_FRv20b_3Mar2017_scaleFR_CR2SR_step1hadds_step2/nominal/'
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRv6_FRv22_newMuTrkSF_step1hadds_step2/nominal/'
-step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRv9_FRv24_postPreapproval_step1hadds_step2/nominal/'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRv9_FRv24_postPreapproval_step1hadds_step2/nominal/'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv24_step1hadds_step2/nominal/'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_2017_2_24_rizki_PRv9_FRv30CR2_correctedMuTrkSF_step1hadds_step2/nominal/'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv10_FRv30CR2_correctedMuTrkSF_step1hadds_step2/nominal/'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv30CR2_correctedMuTrkSF_moreVars_step1hadds_step2/nominal/'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv30CR2_correctedMuTrkSF_moreVars_fixlepOrder_step1hadds_step2/nominal/'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv30CR2_correctedMuTrkSF_moreVars_fixlepOrder_ptRel_step1hadds_step2/nominal' #ptRel'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv46FRSRHT400low2D_correctedMuTrkSF_moreVars_fixlepOrder_ptRel_step1hadds_step2/nominal' #extended FR range up to 1.0
+step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv45_elMVAaltFix_step1hadds_step2/nominal' #elMVA bug fix.
+
 
 print 'grabbing files from ', step1Dir
 """
@@ -88,7 +97,7 @@ timestr='%i_%i_%i'%(cTime.hour,cTime.minute,cTime.second)
 # pfix='kinematics_80x_Exactly3Lep_ddbkgscan_step2_7Feb2017_exactly2Jets_PRv7test_1bjet'
 # pfix='kinematics_80x_Exactly3Lep_ddbkgscan_step2_7Feb2017_exactly2Jets_PRv8test_1bjet'
 
-pfix='kinematics_80x_Exactly3Lep_ddbkgscan_step2_exactly2Jets_PRv6_1bjet_TESTTTTING'
+pfix='kinematics_80x_Exactly3Lep_ddbkgscan_step2_exactly2Jets_dummy_TESTTTTING'
 pfix=''
 
 pfix+='_'+datestr
@@ -110,6 +119,7 @@ METbins = [0,20,40,60,80,100,120,140,160,180,220,300,500]
 # pTbins = [0,10,25,40,60,80,100,120,140,160,180,200,220,240,260,280,300,350,400,450,500]
 pTbins = [0,10,30,40,60,80,100,120,140,160,180,200,220,240,260,280,300,350,400,450,500]
 Mbins = [-10.0, 0.0, 20.0, 40.0, 60.0, 80.0, 100.0, 120.0, 140.0, 160.0, 180.0, 200.0, 220.0, 240.0, 260.0, 300.0]
+MbinsV2 = [-10.0, 0.0, 20.0, 40.0, 60.0, 80.0, 100.0, 120.0, 140.0, 160.0, 180.0, 200.0, 220.0, 240.0, 260.0, 300.0, 350.0, 400.00]
 # jetPtbins =  [0.0, 50.0, 100.0, 150.0, 200.0, 250.0, 300.0, 350.0, 450.0, 550.0, 650.0, 750.0]
 jetPtbins =  [0.0, 30, 60.0, 100.0, 150.0, 200.0, 250.0, 300.0, 350.0, 450.0, 550.0, 650.0, 750.0]
 etaBins= [-4.0,-3.0,-2.4,-2.1,-1.2,0,1.2,2.1,2.4,3.0,4.0]
@@ -165,10 +175,23 @@ plotList = {#discriminantName:(discriminantLJMETName, binning, xAxisLabel)
 	'NBJets':('NJetsCSVwithSF_JetSubCalc',linspace(0, 10, 11).tolist(),';CSVIVFv2 Medium tag multiplicity;'),
 	'NBJetsCorr':('NJetsCSVwithSF_JetSubCalc_noLepCorr',linspace(0, 10, 11).tolist(),';CSVIVFv2 Medium tag multiplicity;'),
 
-	'mindeltaRlepJets':('minDR_lepJet',linspace(0, 1, 26).tolist(),';min #DeltaR(leps, jets);'),
-	'mindeltaRlep1Jets':('minDR_lep1Jet',linspace(0, 1, 26).tolist(),';min #DeltaR(lep_1, jets);'),
-	'mindeltaRlep2Jets':('minDR_lep2Jet',linspace(0, 1, 26).tolist(),';min #DeltaR(lep_2, jets);'),
-	'mindeltaRlep3Jets':('minDR_lep3Jet',linspace(0, 1, 26).tolist(),';min #DeltaR(lep_3, jets);'),
+# 	'mindeltaRlepJets':('minDR_lepJet',linspace(0, 1, 26).tolist(),';min #DeltaR(leps, jets);'),
+# 	'mindeltaRlep1Jets':('minDR_lep1Jet',linspace(0, 1, 26).tolist(),';min #DeltaR(lep_1, jets);'),
+# 	'mindeltaRlep2Jets':('minDR_lep2Jet',linspace(0, 1, 26).tolist(),';min #DeltaR(lep_2, jets);'),
+# 	'mindeltaRlep3Jets':('minDR_lep3Jet',linspace(0, 1, 26).tolist(),';min #DeltaR(lep_3, jets);'),
+
+	'minMlB':('minMleppBjet',Mbins,';min[M(lep, b-jet)];'),
+	'minMlBv2':('minMleppBjet',MbinsV2,';min[M(lep, b-jet)];'),
+	'minMlllB':('minMlllBjet',linspace(0, 1500, 51).tolist(),';min[M(trilepton, b-jet)];'),
+	'minMlllBv2':('minMlllBjet',linspace(0, 1500, 31).tolist(),';min[M(trilepton, b-jet)];'),
+	'minMlllBv3':('minMlllBjet',linspace(0, 2000, 41).tolist(),';min[M(trilepton, b-jet)];'),
+
+	'minDPhiMETJet':('minDPhi_METJet',linspace(0, 3.15, 51).tolist(),';min #Delta#Phi(E_{miss}, jets);'),
+	'DRlep1Jet1':('deltaR_lep1Jets[0]',linspace(0, 2, 51).tolist(),';#DeltaR(lep_{1},jet_{1});'),
+	'minDRlep1Jets':('minDR_lep1Jet',linspace(0, 2, 51).tolist(),';min #DeltaR(lep_{1}, jets);'),
+	'minDRlep2Jets':('minDR_lep2Jet',linspace(0, 2, 51).tolist(),';min #DeltaR(lep_{2}, jets);'),
+	'minDRlep3Jets':('minDR_lep3Jet',linspace(0, 2, 51).tolist(),';min #DeltaR(lep_{3}, jets);'),
+	'minDRlepsJets':('minDR_lepJet',linspace(0, 2, 51).tolist(),';min #DeltaR(leps, jets);'),
 
 # 	'mindeltaRB':('deltaR_lepBJets',linspace(0, 5, 51).tolist(),';min #DeltaR(l, bjet);'),
 # 	'mindeltaR1':('deltaR_lepClosestJet[0]',linspace(0, 5, 51).tolist(),';min #DeltaR(l1, jet);'),

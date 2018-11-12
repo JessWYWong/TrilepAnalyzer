@@ -49,8 +49,8 @@ if 'Final' in templateDir: scaleFact1 = 40
 
 systematicList = ['pileup','btag','mistag','pdfNew','muRFcorrdNew','elPR','elFR','muPR','muFR','jec','jer']
 
-# doAllSys = False
-doAllSys = True
+doAllSys = False
+# doAllSys = True
 
 isRebinned=''#post fix for file names if the name changed b/c of rebinning or some other process
 doNormByBinWidth=False # not tested, may not work out of the box
@@ -189,9 +189,13 @@ def getDDBKGNormUnc(hist,ibin,cat):
 
 
 plotList = [#distribution name as defined in "doHists.py"
+	'ElDxy',
+	'ElDz',
+	
 	'NPV',
 
 	'lepPt',
+	'lepPtRebinned',
 	'ElPt',
 	'MuPt',
 	'lep1Pt',
@@ -593,6 +597,7 @@ for discriminant in plotList:
 		leg.SetLineStyle(0)
 		leg.SetBorderSize(0) 
 		leg.SetTextFont(42)
+		leg.SetTextSize(0.08*0.35)
 		if not blind: leg.AddEntry(hData,"DATA")
 		
 		scaleFact1Str = ' x'+str(scaleFact1)
@@ -749,7 +754,8 @@ for discriminant in plotList:
 				pull.Fit("line4","R")
 				pull.Draw("E1 same")
 			else:
-				pull.Draw("E1")
+# 				pull.Draw("E1")
+				pull.Draw("E0")
 
 			if 'Bins' in discriminant:
 				print '******************************'

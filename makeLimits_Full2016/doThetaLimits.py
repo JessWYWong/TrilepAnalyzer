@@ -121,12 +121,17 @@ for file in rootfilelist:
 	print 'file   : ',file
 	signal = file.split('/')[-1].split('_')[2]
 	BRStr = file.split('/')[-1][file.split('/')[-1].find(signal)+len(signal):file.split('/')[-1].find('_'+lumiStr+'fb')]
-	if BRStr != '_bW0p5_tZ0p25_tH0p25': 
-# 	if BRStr != '_bW0p0_tZ1p0_tH0p0': 
-		print '--> Skipping'
-		continue
+	if not('_BB' in sys.argv[1]):
+		if not('_bW0p5_tZ0p25_tH0p25' in BRStr or '_bW0p0_tZ0p5_tH0p5' in BRStr or '_bW0p0_tZ1p0_tH0p0' in BRStr): 
+			print '--> Skipping'
+			continue
+	if ('_BB' in sys.argv[1]):
+		if not('_tW0p5_bZ0p25_bH0p25' in BRStr or '_tW0p0_bZ0p5_bH0p5' in BRStr or '_tW1p0_bZ0p0_bH0p0' in BRStr): 
+			print '--> Skipping'
+			continue
 	outDir = outputDir+limitType+BRStr+'/'
 	print 'signal : ',signal,BRStr
+# 	if not ('M800' in signal or 'M1000' in signal): continue
 # 	print 'outDir : ',outDir
 	if not os.path.exists(outDir): os.system('mkdir -v '+outDir)
 	outDir+='/'+templateDir.split('/')[-3]

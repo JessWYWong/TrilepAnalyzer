@@ -130,6 +130,13 @@ public :
    vector<int>     *AllLeptonCharge_PtOrdered;
    Int_t           AllLeptonCount_PtOrdered;
 
+   vector<float>   *AllLeptonElDxy_PtOrdered;
+   vector<float>   *AllLeptonElDz_PtOrdered;
+   vector<float>   *AllLeptonMuDxy_PtOrdered;
+   vector<float>   *AllLeptonMuDz_PtOrdered;
+   vector<float>   *AllLeptonDxy_PtOrdered;
+   vector<float>   *AllLeptonDz_PtOrdered;
+
    vector<float>   *AllLeptonElPt_PtOrderedOnly;
    vector<float>   *AllLeptonElEta_PtOrderedOnly;
    vector<float>   *AllLeptonElPhi_PtOrderedOnly;
@@ -152,6 +159,13 @@ public :
    vector<int>     *AllLeptonFlavor_PtOrderedOnly;
    vector<int>     *AllLeptonIsTight_PtOrderedOnly;
    vector<int>     *AllLeptonCharge_PtOrderedOnly;
+
+   vector<float>   *AllLeptonElDxy_PtOrderedOnly;
+   vector<float>   *AllLeptonElDz_PtOrderedOnly;
+   vector<float>   *AllLeptonMuDxy_PtOrderedOnly;
+   vector<float>   *AllLeptonMuDz_PtOrderedOnly;
+   vector<float>   *AllLeptonDxy_PtOrderedOnly;
+   vector<float>   *AllLeptonDz_PtOrderedOnly;
 
    vector<float>   *AllLeptonElPt_PtOrderedOnly_top3;
    vector<float>   *AllLeptonElEta_PtOrderedOnly_top3;
@@ -431,6 +445,13 @@ public :
    TBranch        *b_AllLeptonCharge_PtOrdered;   //!
    TBranch        *b_AllLeptonCount_PtOrdered;   //!
 
+   TBranch        *b_AllLeptonElDxy_PtOrdered;   //!
+   TBranch        *b_AllLeptonElDz_PtOrdered;   //!
+   TBranch        *b_AllLeptonMuDxy_PtOrdered;   //!
+   TBranch        *b_AllLeptonMuDz_PtOrdered;   //!
+   TBranch        *b_AllLeptonDxy_PtOrdered;   //!
+   TBranch        *b_AllLeptonDz_PtOrdered;   //!
+
    TBranch        *b_AllLeptonElPt_PtOrderedOnly;   //!
    TBranch        *b_AllLeptonElEta_PtOrderedOnly;   //!
    TBranch        *b_AllLeptonElPhi_PtOrderedOnly;   //!
@@ -453,6 +474,13 @@ public :
    TBranch        *b_AllLeptonFlavor_PtOrderedOnly;   //!
    TBranch        *b_AllLeptonIsTight_PtOrderedOnly;   //!
    TBranch        *b_AllLeptonCharge_PtOrderedOnly;   //!
+
+   TBranch        *b_AllLeptonElDxy_PtOrderedOnly;   //!
+   TBranch        *b_AllLeptonElDz_PtOrderedOnly;   //!
+   TBranch        *b_AllLeptonMuDxy_PtOrderedOnly;   //!
+   TBranch        *b_AllLeptonMuDz_PtOrderedOnly;   //!
+   TBranch        *b_AllLeptonDxy_PtOrderedOnly;   //!
+   TBranch        *b_AllLeptonDz_PtOrderedOnly;   //!
 
    TBranch        *b_AllLeptonElPt_PtOrderedOnly_top3;   //!
    TBranch        *b_AllLeptonElEta_PtOrderedOnly_top3;   //!
@@ -717,6 +745,14 @@ void step2::Init(TTree *tree)
    AllLeptonIsTight_PtOrdered = 0;
    AllLeptonCharge_PtOrdered = 0;
 
+   AllLeptonElDxy_PtOrdered = 0;
+   AllLeptonElDz_PtOrdered = 0;
+   AllLeptonMuDxy_PtOrdered = 0;
+   AllLeptonMuDz_PtOrdered = 0;
+   AllLeptonDxy_PtOrdered = 0;
+   AllLeptonDz_PtOrdered = 0;
+
+
    AllLeptonElPt_PtOrderedOnly = 0;
    AllLeptonElEta_PtOrderedOnly = 0;
    AllLeptonElPhi_PtOrderedOnly = 0;
@@ -739,6 +775,13 @@ void step2::Init(TTree *tree)
    AllLeptonFlavor_PtOrderedOnly = 0;
    AllLeptonIsTight_PtOrderedOnly = 0;
    AllLeptonCharge_PtOrderedOnly = 0;
+
+   AllLeptonElDxy_PtOrderedOnly = 0;
+   AllLeptonElDz_PtOrderedOnly = 0;
+   AllLeptonMuDxy_PtOrderedOnly = 0;
+   AllLeptonMuDz_PtOrderedOnly = 0;
+   AllLeptonDxy_PtOrderedOnly = 0;
+   AllLeptonDz_PtOrderedOnly = 0;
 
    AllLeptonElPt_PtOrderedOnly_top3 = 0;
    AllLeptonElEta_PtOrderedOnly_top3 = 0;
@@ -978,6 +1021,13 @@ void step2::Init(TTree *tree)
    inputTree->SetBranchAddress("AllLeptonCharge_PtOrdered", &AllLeptonCharge_PtOrdered, &b_AllLeptonCharge_PtOrdered);
    inputTree->SetBranchAddress("AllLeptonCount_PtOrdered", &AllLeptonCount_PtOrdered, &b_AllLeptonCount_PtOrdered);
 
+   inputTree->SetBranchAddress("AllLeptonElDxy_PtOrdered", &AllLeptonElDxy_PtOrdered, &b_AllLeptonElDxy_PtOrdered);
+   inputTree->SetBranchAddress("AllLeptonElDz_PtOrdered", &AllLeptonElDz_PtOrdered, &b_AllLeptonElDz_PtOrdered);
+   inputTree->SetBranchAddress("AllLeptonMuDxy_PtOrdered", &AllLeptonMuDxy_PtOrdered, &b_AllLeptonMuDxy_PtOrdered);
+   inputTree->SetBranchAddress("AllLeptonMuDz_PtOrdered", &AllLeptonMuDz_PtOrdered, &b_AllLeptonMuDz_PtOrdered);
+   inputTree->SetBranchAddress("AllLeptonDxy_PtOrdered", &AllLeptonDxy_PtOrdered, &b_AllLeptonDxy_PtOrdered);
+   inputTree->SetBranchAddress("AllLeptonDz_PtOrdered", &AllLeptonDz_PtOrdered, &b_AllLeptonDz_PtOrdered);
+
    inputTree->SetBranchAddress("AllLeptonElPt_PtOrderedOnly", &AllLeptonElPt_PtOrderedOnly, &b_AllLeptonElPt_PtOrderedOnly);
    inputTree->SetBranchAddress("AllLeptonElEta_PtOrderedOnly", &AllLeptonElEta_PtOrderedOnly, &b_AllLeptonElEta_PtOrderedOnly);
    inputTree->SetBranchAddress("AllLeptonElPhi_PtOrderedOnly", &AllLeptonElPhi_PtOrderedOnly, &b_AllLeptonElPhi_PtOrderedOnly);
@@ -1000,6 +1050,13 @@ void step2::Init(TTree *tree)
    inputTree->SetBranchAddress("AllLeptonFlavor_PtOrderedOnly", &AllLeptonFlavor_PtOrderedOnly, &b_AllLeptonFlavor_PtOrderedOnly);
    inputTree->SetBranchAddress("AllLeptonIsTight_PtOrderedOnly", &AllLeptonIsTight_PtOrderedOnly, &b_AllLeptonIsTight_PtOrderedOnly);
    inputTree->SetBranchAddress("AllLeptonCharge_PtOrderedOnly", &AllLeptonCharge_PtOrderedOnly, &b_AllLeptonCharge_PtOrderedOnly);
+
+   inputTree->SetBranchAddress("AllLeptonElDxy_PtOrderedOnly", &AllLeptonElDxy_PtOrderedOnly, &b_AllLeptonElDxy_PtOrderedOnly);
+   inputTree->SetBranchAddress("AllLeptonElDz_PtOrderedOnly", &AllLeptonElDz_PtOrderedOnly, &b_AllLeptonElDz_PtOrderedOnly);
+   inputTree->SetBranchAddress("AllLeptonMuDxy_PtOrderedOnly", &AllLeptonMuDxy_PtOrderedOnly, &b_AllLeptonMuDxy_PtOrderedOnly);
+   inputTree->SetBranchAddress("AllLeptonMuDz_PtOrderedOnly", &AllLeptonMuDz_PtOrderedOnly, &b_AllLeptonMuDz_PtOrderedOnly);
+   inputTree->SetBranchAddress("AllLeptonDxy_PtOrderedOnly", &AllLeptonDxy_PtOrderedOnly, &b_AllLeptonDxy_PtOrderedOnly);
+   inputTree->SetBranchAddress("AllLeptonDz_PtOrderedOnly", &AllLeptonDz_PtOrderedOnly, &b_AllLeptonDz_PtOrderedOnly);
 
    inputTree->SetBranchAddress("AllLeptonElPt_PtOrderedOnly_top3", &AllLeptonElPt_PtOrderedOnly_top3, &b_AllLeptonElPt_PtOrderedOnly_top3);
    inputTree->SetBranchAddress("AllLeptonElEta_PtOrderedOnly_top3", &AllLeptonElEta_PtOrderedOnly_top3, &b_AllLeptonElEta_PtOrderedOnly_top3);

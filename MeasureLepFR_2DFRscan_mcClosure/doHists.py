@@ -17,9 +17,19 @@ lumiStr = str(targetlumi/1000).replace('.','p') # 1/fb
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_saveLooseMC_2017_3_4_rizki_PRv6_FRv28ttbar_newMuTrkSF_step1hadds/nominal/'
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_saveLooseMC_2017_3_4_rizki_PRv6_FRv26ttbar_newMuTrkSF_step1hadds/nominal/'
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_saveVeryLooseMC_2017_3_6_rizki_PRv6_FRv28ttbar_step1hadds/nominal/'
-step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_saveLooseMC_2017_3_4_rizki_PRv9_FRv24_postPreapprovalF_PromptCount_V9_extScan_step1hadds/nominal/'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_saveLooseMC_2017_3_4_rizki_PRv9_FRv24_postPreapprovalF_PromptCount_V9_extScan_step1hadds/nominal/'
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_saveLooseMC_2017_3_7_rizki_mcClosure_step1hadds/nominal/' #--> PRv9
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_saveLooseMC_newTT_2017_3_21_rizki_mcClosure_step1hadds/nominal/' #--> PRv9
 
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lep_Moriond17_mcFakeRate_saveLooseMC_2017_4_20_rizki_step1hadds/nominal/' #-->PRv9
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lep_Moriond17_mcFakeRate_saveLooseMC_2017_4_20_rizki_PRv9_FRv35_step1hadds/nominal/'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lep_Moriond17_mcFakeRate_saveLooseMC_2017_4_20_rizki_PRv9_FRv36_step1hadds/nominal/'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lep_Moriond17_mcFakeRate_saveLooseMC_2017_4_20_rizki_PRv9_FRv37_step1hadds/nominal/'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lep_Moriond17_mcFakeRate_saveLooseMC_2017_4_20_rizki_PRv9_FRv38_step1hadds/nominal/'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lep_Moriond17_mcFakeRate_saveLooseMC_2017_4_20_rizki_PRv9_FRv35_step1hadds/nominal/' #--> double checking but also with muFR=.14instead of .13 in FRv35
+
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lep_Moriond17_ttbarFakeRate_saveLooseMC_2017_4_17_dR0p01_PRv9_FRv45_elMVAaltFix_rizki_step1hadds/nominal'
+step1Dir = '/user_data/rsyarif/LJMet80x_3lep_Moriond17_ttbarFakeRate_saveLooseMC_2017_4_17_dR0p01_PRv9_FRv48_elMVAaltFix_rizki_step1hadds/nominal'
 
 print 'grabbing files from ', step1Dir
 """
@@ -81,12 +91,16 @@ etaBins= [-4.0,-3.0,-2.4,-2.1,-1.2,0,1.2,2.1,2.4,3.0,4.0]
 plotList = {#discriminantName:(discriminantLJMETName, binning, xAxisLabel)
 
 	'lepPt' :('AllLeptonPt_PtOrdered',pTbins,';Leptons p_{T} (GeV);'),
-# 	'ElPt' :('AllLeptonElPt_PtOrdered',pTbins,';Electron p_{T} (GeV);'),
-# 	'MuPt' :('AllLeptonMuPt_PtOrdered',pTbins,';Muon p_{T} (GeV);'),
+	'ElPt' :('AllLeptonElPt_PtOrdered',pTbins,';Electron p_{T} (GeV);'),
+	'MuPt' :('AllLeptonMuPt_PtOrdered',pTbins,';Muon p_{T} (GeV);'),
 
-	'lep1Pt' :('AllLeptonPt_PtOrdered[0]',linspace(0, 500, 26).tolist(),';Lepton 1 p_{T} (GeV);'),
-	'lep2Pt' :('AllLeptonPt_PtOrdered[1]',linspace(0, 300, 16).tolist(),';Lepton 2 p_{T} (GeV);'),
-	'lep3Pt' :('AllLeptonPt_PtOrdered[2]',linspace(0, 300, 16).tolist(),';Lepton 3 p_{T} (GeV);'),
+# 	'lep1Pt' :('AllLeptonPt_PtOrdered[0]',linspace(0, 500, 26).tolist(),';Lepton 1 p_{T} (GeV);'),
+# 	'lep2Pt' :('AllLeptonPt_PtOrdered[1]',linspace(0, 300, 16).tolist(),';Lepton 2 p_{T} (GeV);'),
+# 	'lep3Pt' :('AllLeptonPt_PtOrdered[2]',linspace(0, 300, 16).tolist(),';Lepton 3 p_{T} (GeV);'),
+
+	'lep1Pt' :('AllLeptonPt_PtOrdered[0]',pTbins,';Lepton 1 p_{T} (GeV);'),
+	'lep2Pt' :('AllLeptonPt_PtOrdered[1]',pTbins,';Lepton 2 p_{T} (GeV);'),
+	'lep3Pt' :('AllLeptonPt_PtOrdered[2]',pTbins,';Lepton 3 p_{T} (GeV);'),
 
 	'lepEta':('AllLeptonEta_PtOrdered',etaBins,';Lepton 1 #eta;'),
 # 	'ElEta':('AllLeptonElEta_PtOrdered',etaBins,';Electron 1 #eta;'),
@@ -124,7 +138,7 @@ bkgList = []
 # loop,run,dilep --> set in samples
 for muFRindex in xrange(loop):
 	for elFRindex in xrange(loop):
-		if(doDDBKGscan):bkgList.append('MatrixBkg_muFR'+str(muFRindex)+'elFR'+str(elFRindex))
+		if(doDDBKGscan):bkgList.append('MatrixBkg_muFR'+str(muFRindex+((int)(initial*100)))+'elFR'+str(elFRindex+((int)(initial*100))))
 
 dataList=[]
 if 'TT' in useWhichSampleForMatrix:dataList.append('TTJetsPH')

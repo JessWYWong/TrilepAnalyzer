@@ -84,7 +84,410 @@ time='%i_%i_%i'%(cTime.hour,cTime.minute,cTime.second)
 
 # pfix='kinematics_condor_ddbkgscan_PRv9_postPreapproval_FRCR2'
 # pfix='kinematics_condor_ddbkgscan_PRv9_postPreapproval_FRCR1'
-pfix='kinematics_condor_ddbkgscan_PRv9_postPreapproval_FRCR1CR2'
+# pfix='kinematics_condor_ddbkgscan_PRv9_postPreapproval_FRCR1CR2'
+
+# pfix='kinematics_condor_ddbkgscan_PRv9_newRunH_FRCR2'
+# pfix='kinematics_condor_ddbkgscan_PRv9_newRunH_FRCR1'
+# pfix='kinematics_condor_ddbkgscan_PRv9_newRunH_FRCR1CR2'
+
+# pfix='kinematics_condor_ddbkgscan_PRv9_newRunH_correctedMuTrSF_FRCR2'
+# pfix='kinematics_condor_ddbkgscan_PRv9_newRunH_correctedMuTrSF_FRCR1'
+# pfix='kinematics_condor_ddbkgscan_PRv9_newRunH_correctedMuTrSF_FRCR1CR2'
+
+# pfix='kinematics_condor_ddbkgscan_PRv9_newRunH_correctedMuTrSF_FRSRST1000low'
+
+# pfix='kinematics_condor_ddbkgscan_PRv10_newRunH_correctedMuTrSF_FRCR2'
+# pfix='kinematics_condor_ddbkgscan_PRv10_newRunH_correctedMuTrSF_FRCR1'
+
+# pfix='kinematics_condor_ddbkgscan_PRv9_newRunH_correctedMuTrSF_FRSRHT600low' #remember to modify analyse.py for low hT
+'''
+cutList = {'isPassTrig': 0, 
+		   'isPassTrig_dilep': 1,
+		   'isPassTrig_dilep_anth': 0,
+		   'isPassTrig_trilep': 0, 
+		   'isPassTrilepton': 1,
+		   'lepPtCut': 30, #40, #0, #
+		   'leadJetPtCut':0,#150, #300, #0, #
+		   'subLeadJetPtCut':0, #75, #150, #0, #
+		   'thirdJetPtCut':0, #30, #100, #0, #
+		   'metCut': 20,#60, #75, #0, #
+		   'njetsCut': 3, #FRCR2:2, FRCR1:1, SR:3 
+		   'nbjetsCut':1,
+		   'drCut':0, #1.0, #
+	   	   'stCut':0,
+	   	   'mllOSCut':20,
+	   	   'htCut':600,
+		   }
+'''
+# pfix='kinematics_condor_ddbkgscan_PRv9_newRunH_correctedMuTrSF_FRCR2HT600low' #remember to modify analyse.py for low hT
+'''
+cutList = {'isPassTrig': 0, 
+		   'isPassTrig_dilep': 1,
+		   'isPassTrig_dilep_anth': 0,
+		   'isPassTrig_trilep': 0, 
+		   'isPassTrilepton': 1,
+		   'lepPtCut': 30, #40, #0, #
+		   'leadJetPtCut':0,#150, #300, #0, #
+		   'subLeadJetPtCut':0, #75, #150, #0, #
+		   'thirdJetPtCut':0, #30, #100, #0, #
+		   'metCut': 20,#60, #75, #0, #
+		   'njetsCut': 2, #FRCR2:2, FRCR1:1, SR:3 
+		   'nbjetsCut':1,
+		   'drCut':0, #1.0, #
+	   	   'stCut':0,
+	   	   'mllOSCut':20,
+	   	   'htCut':600,
+		   }
+'''
+# pfix='kinematics_condor_ddbkgscan_PRv9_newRunH_correctedMuTrSF_FRCR1HT600low' #remember to modify analyse.py for low hT
+'''
+cutList = {'isPassTrig': 0, 
+		   'isPassTrig_dilep': 1,
+		   'isPassTrig_dilep_anth': 0,
+		   'isPassTrig_trilep': 0, 
+		   'isPassTrilepton': 1,
+		   'lepPtCut': 30, #40, #0, #
+		   'leadJetPtCut':0,#150, #300, #0, #
+		   'subLeadJetPtCut':0, #75, #150, #0, #
+		   'thirdJetPtCut':0, #30, #100, #0, #
+		   'metCut': 20,#60, #75, #0, #
+		   'njetsCut': 1, #FRCR2:2, FRCR1:1, SR:3 
+		   'nbjetsCut':1,
+		   'drCut':0, #1.0, #
+	   	   'stCut':0,
+	   	   'mllOSCut':20,
+	   	   'htCut':600,
+		   }
+'''
+
+# pfix='kinematics_condor_ddbkgscan_PRv9_newRunH_correctedMuTrSF_FRSRmlllb400low' #remember to modify analyse.py for SR, ST HT set to defaults, mlllb low
+'''
+cutList = {'isPassTrig': 0, 
+		   'isPassTrig_dilep': 1,
+		   'isPassTrig_dilep_anth': 0,
+		   'isPassTrig_trilep': 0, 
+		   'isPassTrilepton': 1,
+		   'lepPtCut': 30, 
+		   'leadJetPtCut':0,
+		   'subLeadJetPtCut':0, 
+		   'thirdJetPtCut':0,
+		   'metCut': 20,
+		   'njetsCut': 3, #FRCR2:2, FRCR1:1, SR:3 
+		   'nbjetsCut':1,
+		   'drCut':0, 
+	   	   'stCut':0,
+	   	   'mllOSCut':20,
+	   	   'htCut':0,
+	   	   'mlllbCut':400,
+		   }
+'''
+# pfix='kinematics_condor_ddbkgscan_PRv9_newRunH_correctedMuTrSF_FRCR2mlllb400low' #remember to modify analyse.py for SR, ST HT set to defaults, mlllb low
+'''
+cutList = {'isPassTrig': 0, 
+		   'isPassTrig_dilep': 1,
+		   'isPassTrig_dilep_anth': 0,
+		   'isPassTrig_trilep': 0, 
+		   'isPassTrilepton': 1,
+		   'lepPtCut': 30, 
+		   'leadJetPtCut':0,
+		   'subLeadJetPtCut':0, 
+		   'thirdJetPtCut':0,
+		   'metCut': 20,
+		   'njetsCut': 2, #FRCR2:2, FRCR1:1, SR:3 
+		   'nbjetsCut':1,
+		   'drCut':0, 
+	   	   'stCut':0,
+	   	   'mllOSCut':20,
+	   	   'htCut':0,
+	   	   'mlllbCut':400,
+		   }
+'''
+
+# pfix='kinematics_condor_ddbkgscan_PRv9_newRunH_correctedMuTrSF_FRSRHT400low' #remember to modify analyse.py for low hT and cutList.py!
+'''
+cutList = {'isPassTrig': 0, 
+		   'isPassTrig_dilep': 1,
+		   'isPassTrig_dilep_anth': 0,
+		   'isPassTrig_trilep': 0, 
+		   'isPassTrilepton': 1,
+		   'lepPtCut': 30, 
+		   'leadJetPtCut':0,
+		   'subLeadJetPtCut':0, 
+		   'thirdJetPtCut':0,
+		   'metCut': 20,
+		   'njetsCut': 3, #FRCR2:2, FRCR1:1, SR:3 
+		   'nbjetsCut':1,
+		   'drCut':0, 
+	   	   'stCut':0,
+	   	   'mllOSCut':20,
+	   	   'htCut':400,
+	   	   'mlllbCut':0,
+		   }
+'''
+
+# pfix='kinematics_condor_ddbkgscan_PRv9_newRunH_correctedMuTrSF_FRSRHT400low_2Dcut' #remember to modify analyse.py for low hT and cutList.py!
+'''
+cutList = {'isPassTrig': 0, 
+		   'isPassTrig_dilep': 1,
+		   'isPassTrig_dilep_anth': 0,
+		   'isPassTrig_trilep': 0, 
+		   'isPassTrilepton': 1,
+		   'lepPtCut': 30, 
+		   'leadJetPtCut':0,
+		   'subLeadJetPtCut':0, 
+		   'thirdJetPtCut':0,
+		   'metCut': 20,
+		   'njetsCut': 3, #FRCR2:2, FRCR1:1, SR:3 
+		   'nbjetsCut':1,
+		   'drCut':0, 
+	   	   'stCut':0,
+	   	   'mllOSCut':20,
+	   	   'htCut':400,
+	   	   'mlllbCut':0,
+	   	   'minDRlepJetCut': 0.2,
+	   	   'ptRelCut':10,
+		   }
+'''
+
+# pfix='kinematics_condor_ddbkgscan_PRv9_newRunH_correctedMuTrSF_FRSRHT400low_2Dcut_extend' #scan FR 0.01 to 1.0 #remember to modify analyse.py for low hT and cutList.py!
+'''
+cutList = {'isPassTrig': 0, 
+		   'isPassTrig_dilep': 1,
+		   'isPassTrig_dilep_anth': 0,
+		   'isPassTrig_trilep': 0, 
+		   'isPassTrilepton': 1,
+		   'lepPtCut': 30, 
+		   'leadJetPtCut':0,
+		   'subLeadJetPtCut':0, 
+		   'thirdJetPtCut':0,
+		   'metCut': 20,
+		   'njetsCut': 3, #FRCR2:2, FRCR1:1, SR:3 
+		   'nbjetsCut':1,
+		   'drCut':0, 
+	   	   'stCut':0,
+	   	   'mllOSCut':20,
+	   	   'htCut':400,
+	   	   'mlllbCut':0,
+	   	   'minDRlepJetCut': 0.2,
+	   	   'ptRelCut':10,
+		   }
+'''
+
+# pfix='kinematics_condor_ddbkgscan_PRv9_newRunH_correctedMuTrSF_FRCR2HT400low_2Dcut_extend' #scan FR 0.01 to 1.0 #remember to modify analyse.py for low hT, njets and cutList.py!
+'''
+cutList = {'isPassTrig': 0, 
+		   'isPassTrig_dilep': 1,
+		   'isPassTrig_dilep_anth': 0,
+		   'isPassTrig_trilep': 0, 
+		   'isPassTrilepton': 1,
+		   'lepPtCut': 30, 
+		   'leadJetPtCut':0,
+		   'subLeadJetPtCut':0, 
+		   'thirdJetPtCut':0,
+		   'metCut': 20,
+		   'njetsCut': 2, #FRCR2:2, FRCR1:1, SR:3 
+		   'nbjetsCut':1,
+		   'drCut':0, 
+	   	   'stCut':0,
+	   	   'mllOSCut':20,
+	   	   'htCut':400,
+	   	   'mlllbCut':0,
+	   	   'minDRlepJetCut': 0.2,
+	   	   'ptRelCut':10,
+		   }
+'''
+
+# pfix='kinematics_condor_ddbkgscan_PRv9_newRunH_correctedMuTrSF_FRCR1HT400low_2Dcut_extend' #scan FR 0.01 to 1.0 #remember to modify analyse.py for low hT, njets and cutList.py!
+'''
+cutList = {'isPassTrig': 0, 
+		   'isPassTrig_dilep': 1,
+		   'isPassTrig_dilep_anth': 0,
+		   'isPassTrig_trilep': 0, 
+		   'isPassTrilepton': 1,
+		   'lepPtCut': 30, 
+		   'leadJetPtCut':0,
+		   'subLeadJetPtCut':0, 
+		   'thirdJetPtCut':0,
+		   'metCut': 20,
+		   'njetsCut': 1, #FRCR2:2, FRCR1:1, SR:3 
+		   'nbjetsCut':1,
+		   'drCut':0, 
+	   	   'stCut':0,
+	   	   'mllOSCut':20,
+	   	   'htCut':400,
+	   	   'mlllbCut':0,
+	   	   'minDRlepJetCut': 0.2,
+	   	   'ptRelCut':10,
+		   }
+'''
+
+# pfix='kinematics_condor_ddbkgscan_PRv9_newRunH_correctedMuTrSF_FRCR2_2Dcut_extend' #scan FR 0.01 to 1.0 #remember to modify analyse.py for low hT, njets and cutList.py!
+'''
+cutList = {'isPassTrig': 0, 
+		   'isPassTrig_dilep': 1,
+		   'isPassTrig_dilep_anth': 0,
+		   'isPassTrig_trilep': 0, 
+		   'isPassTrilepton': 1,
+		   'lepPtCut': 30, 
+		   'leadJetPtCut':0,
+		   'subLeadJetPtCut':0, 
+		   'thirdJetPtCut':0,
+		   'metCut': 20,
+		   'njetsCut': 2, #FRCR2:2, FRCR1:1, SR:3 
+		   'nbjetsCut':1,
+		   'drCut':0, 
+	   	   'stCut':0,
+	   	   'mllOSCut':20,
+	   	   'htCut':0,
+	   	   'mlllbCut':0,
+	   	   'minDRlepJetCut': 0.2,
+	   	   'ptRelCut':10,
+		   }
+'''
+
+# pfix='kinematics_condor_ddbkgscan_PRv9_newRunH_correctedMuTrSF_FRCR1_2Dcut_extend' #scan FR 0.01 to 1.0 #remember to modify analyse.py for low hT, njets and cutList.py!
+'''
+cutList = {'isPassTrig': 0, 
+		   'isPassTrig_dilep': 1,
+		   'isPassTrig_dilep_anth': 0,
+		   'isPassTrig_trilep': 0, 
+		   'isPassTrilepton': 1,
+		   'lepPtCut': 30, 
+		   'leadJetPtCut':0,
+		   'subLeadJetPtCut':0, 
+		   'thirdJetPtCut':0,
+		   'metCut': 20,
+		   'njetsCut': 1, #FRCR2:2, FRCR1:1, SR:3 
+		   'nbjetsCut':1,
+		   'drCut':0, 
+	   	   'stCut':0,
+	   	   'mllOSCut':20,
+	   	   'htCut':0,
+	   	   'mlllbCut':0,
+	   	   'minDRlepJetCut': 0.2,
+	   	   'ptRelCut':10,
+		   }
+'''
+
+# pfix='kinematics_condor_ddbkgscan_PRv9_newRunH_elMVAaltFix_FRSRHT400low' #remember to modify analyse.py for low hT and cutList.py!
+'''
+cutList = {'isPassTrig': 0, 
+		   'isPassTrig_dilep': 1,
+		   'isPassTrig_dilep_anth': 0,
+		   'isPassTrig_trilep': 0, 
+		   'isPassTrilepton': 1,
+		   'lepPtCut': 30, 
+		   'leadJetPtCut':0,
+		   'subLeadJetPtCut':0, 
+		   'thirdJetPtCut':0,
+		   'metCut': 20,
+		   'njetsCut': 3, #FRCR2:2, FRCR1:1, SR:3 
+		   'nbjetsCut':1,
+		   'drCut':0, 
+	   	   'stCut':0,
+	   	   'mllOSCut':20,
+	   	   'htCut':400,
+	   	   'mlllbCut':0,
+	   	   'minDRlepJetCut': 0,
+	   	   'ptRelCut':0,
+		   }
+'''
+
+# pfix='kinematics_condor_ddbkgscan_PRv9_newRunH_elMVAaltFix_FRCR2' #remember to modify analyse.py for low hT and cutList.py!
+'''
+cutList = {'isPassTrig': 0, 
+		   'isPassTrig_dilep': 1,
+		   'isPassTrig_dilep_anth': 0,
+		   'isPassTrig_trilep': 0, 
+		   'isPassTrilepton': 1,
+		   'lepPtCut': 30, 
+		   'leadJetPtCut':0,
+		   'subLeadJetPtCut':0, 
+		   'thirdJetPtCut':0,
+		   'metCut': 20,
+		   'njetsCut': 2, #FRCR2:2, FRCR1:1, SR:3 
+		   'nbjetsCut':1,
+		   'drCut':0, 
+	   	   'stCut':0,
+	   	   'mllOSCut':20,
+	   	   'htCut':0,
+	   	   'mlllbCut':0,
+	   	   'minDRlepJetCut': 0,
+	   	   'ptRelCut':0,
+		   }
+'''
+
+# pfix='kinematics_condor_ddbkgscan_PRv9_newRunH_elMVAaltFix_FRSRHT400' #remember to modify analyse.py for low hT and cutList.py!
+'''
+cutList = {'isPassTrig': 0, 
+		   'isPassTrig_dilep': 1,
+		   'isPassTrig_dilep_anth': 0,
+		   'isPassTrig_trilep': 0, 
+		   'isPassTrilepton': 1,
+		   'lepPtCut': 30, 
+		   'leadJetPtCut':0,
+		   'subLeadJetPtCut':0, 
+		   'thirdJetPtCut':0,
+		   'metCut': 20,
+		   'njetsCut': 3, #FRCR2:2, FRCR1:1, SR:3 
+		   'nbjetsCut':1,
+		   'drCut':0, 
+	   	   'stCut':0,
+	   	   'mllOSCut':20,
+	   	   'htCut':400,
+	   	   'mlllbCut':0,
+	   	   'minDRlepJetCut': 0,
+	   	   'ptRelCut':0,
+		   }
+'''
+
+# pfix='kinematics_condor_ddbkgscan_PRv9_newRunH_elMVAaltFix_FRSR' #remember to modify analyse.py for low hT and cutList.py!
+'''
+cutList = {'isPassTrig': 0, 
+		   'isPassTrig_dilep': 1,
+		   'isPassTrig_dilep_anth': 0,
+		   'isPassTrig_trilep': 0, 
+		   'isPassTrilepton': 1,
+		   'lepPtCut': 30, 
+		   'leadJetPtCut':0,
+		   'subLeadJetPtCut':0, 
+		   'thirdJetPtCut':0,
+		   'metCut': 20,
+		   'njetsCut': 3, #FRCR2:2, FRCR1:1, SR:3 
+		   'nbjetsCut':1,
+		   'drCut':0, 
+	   	   'stCut':0,
+	   	   'mllOSCut':20,
+	   	   'htCut':0,
+	   	   'mlllbCut':0,
+	   	   'minDRlepJetCut': 0,
+	   	   'ptRelCut':0,
+		   }
+'''
+
+pfix='kinematics_condor_ddbkgscan_PRv9_newRunH_elMVAaltFix_FRCR1' #remember to modify analyse.py for low hT and cutList.py!
+'''
+cutList = {'isPassTrig': 0, 
+		   'isPassTrig_dilep': 1,
+		   'isPassTrig_dilep_anth': 0,
+		   'isPassTrig_trilep': 0, 
+		   'isPassTrilepton': 1,
+		   'lepPtCut': 30, 
+		   'leadJetPtCut':0,
+		   'subLeadJetPtCut':0, 
+		   'thirdJetPtCut':0,
+		   'metCut': 20,
+		   'njetsCut': 1, #FRCR2:2, FRCR1:1, SR:3 
+		   'nbjetsCut':1,
+		   'drCut':0, 
+	   	   'stCut':0,
+	   	   'mllOSCut':20,
+	   	   'htCut':0,
+	   	   'mlllbCut':0,
+	   	   'minDRlepJetCut': 0,
+	   	   'ptRelCut':0,
+		   }
+'''
 
 
 pfix+='_'+date
@@ -99,7 +502,7 @@ plotList = [#distribution name as defined in "doHists.py"
 # 	'lep1Pt',
 # 	'lep2Pt',
 # 	'lep3Pt',
-	'lepEta',
+# 	'lepEta',
 # 	'ElEta',
 # 	'MuEta',
 # 	'lep1Eta',
@@ -114,7 +517,7 @@ plotList = [#distribution name as defined in "doHists.py"
 # 	'HT',
 # 	'HTrebinned',
 # 	'ST',
-	'STrebinned',
+# 	'STrebinned',
 # 	'MET',
 # 	'METrebinned',
 # 	'NJets' ,

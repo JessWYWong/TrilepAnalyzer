@@ -81,8 +81,8 @@ siglegM1200='TT(1.2 TeV)'
 scaleSignals = True
 
 # scaleFact1 = 300
-scaleFact1 = 2
-scaleFact2 = 10
+scaleFact1 = 5 #50
+scaleFact2 = 10 #100
 if 'Final' in templateDir: scaleFact1 = 40
 
 systematicList = ['pileup','btag','mistag','pdfNew','muRFcorrdNew','jec','jer']
@@ -201,6 +201,8 @@ def getNormUnc(hist,ibin,cat):
 	return error
 
 plotList = [#distribution name as defined in "doHists.py"
+	'AK4JetFlavor', #only for MC
+
 	'NPV',
 
 	'lepPt',
@@ -930,12 +932,12 @@ for discriminant in plotList:
 		if blind: savePrefix+='_blinded'
 
 		if doOneBand:
-# 			c1.SaveAs(savePrefix+"_totBand.pdf")
+			c1.SaveAs(savePrefix+"_totBand.pdf")
 			c1.SaveAs(savePrefix+"_totBand.png")
 # 			c1.SaveAs(savePrefix+"_totBand.root")
 			#c1.SaveAs(savePrefix+"totBand.C")
 		else:
-# 			c1.SaveAs(savePrefix+".pdf")
+			c1.SaveAs(savePrefix+".pdf")
 			c1.SaveAs(savePrefix+".png")
 # 			c1.SaveAs(savePrefix+".root")
 			#c1.SaveAs(savePrefix+".C")

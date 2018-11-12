@@ -145,14 +145,30 @@ void runStep2(){
 //   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv45FRSRHT400low_correctedMuTrkSF_moreVars_fixlepOrder_step1hadds"; 
 //   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv30CR2_correctedMuTrkSF_moreVars_fixlepOrder_ptRel_step1hadds"; 
 //   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv46FRSRHT400low2D_correctedMuTrkSF_moreVars_fixlepOrder_ptRel_step1hadds"; 
-  inputDir="LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv47FRSRHT400low2Dext_correctedMuTrkSF_moreVars_fixlepOrder_ptRel_step1hadds"; 
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv47FRSRHT400low2Dext_correctedMuTrkSF_moreVars_fixlepOrder_ptRel_step1hadds"; 
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv45FRSRHT400low_fixedMinMlllBshifts_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv45_elMVAaltFix_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv48_elMVAaltFix_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv49_elMVAaltFix_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv48MuEtaTest_elMVAaltFix_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9ElPRtest_FRv48_elMVAaltFix_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9MuPRtest_FRv48_elMVAaltFix_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv49MuEtaTest_elMVAaltFix_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9ElPRtest_FRv49_elMVAaltFix_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9MuPRtest_FRv49_elMVAaltFix_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv50_elMVAaltFix_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv48sys_elMVAaltFix_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv49sys_elMVAaltFix_step1hadds";
+//   inputDir="LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv50sys_elMVAaltFix_step1hadds";
+  inputDir="LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv49sys_addIP_step1hadds";
   
   subDir="nominal";
 
   outputDir=inputDir+"_step2";
+//   outputDir=inputDir+"_step2_TEMPDELETEME";
   
   //copy input to output folder
-  system("cp -r "+bruxDir+"/"+inputDir+" "+bruxDir+"/"+outputDir);
+  system("cp -vr "+bruxDir+"/"+inputDir+" "+bruxDir+"/"+outputDir);
   
   //create folder to save original overlapping datasets
 //   system("mkdir -pv "+bruxDir+"/"+outputDir+"/"+subDir+"/overlappingSets");

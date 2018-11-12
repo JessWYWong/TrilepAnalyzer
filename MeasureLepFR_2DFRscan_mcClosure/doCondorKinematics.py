@@ -11,8 +11,310 @@ time='%i_%i_%i'%(cTime.hour,cTime.minute,cTime.second)
 
 # pfix='kinematics_condor_ddbkgscan_PRv6_FRv28ttbar_ttbarClosure_saveVeryLoose'
 # pfix='kinematics_condor_ddbkgscan_PRv9_FRv24_postPreapprovalF_PromptCount_V9_extScan_ttbarClosure'
-pfix='kinematics_condor_ddbkgscan_ttbarClosure'
+# pfix='kinematics_condor_ddbkgscan_ttbarClosure'
 # pfix='kinematics_condor_ddbkgscan_zjetsClosure'
+# pfix='kinematics_condor_ddbkgscan_ttbarClosure_fixedBug'
+# pfix='kinematics_condor_NOddbkgscan_ttbarClosure_fixedBug'
+
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_fixedBug' 
+"""
+cutList = {'isPassTrig': 0, 
+		   'isPassTrig_dilep': 1,
+		   'isPassTrig_dilep_anth': 0,
+		   'isPassTrig_trilep': 0, 
+		   'isPassTrilepton': 1,
+		   'lepPtCut': 30, #40, #0, #
+		   'leadJetPtCut':0,#150, #300, #0, #
+		   'subLeadJetPtCut':0, #75, #150, #0, #
+		   'thirdJetPtCut':0, #30, #100, #0, #
+		   'metCut': 0,#60, #75, #0, #
+		   'njetsCut': 0, 
+		   'nbjetsCut':0,
+		   'drCut':0, #1.0, #
+	   	   'stCut':0,
+	   	   'mllOSCut':0,
+		   }
+
+"""
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_fixedBug_SR'
+""" 
+cutList = {'isPassTrig': 0, 
+		   'isPassTrig_dilep': 1,
+		   'isPassTrig_dilep_anth': 0,
+		   'isPassTrig_trilep': 0, 
+		   'isPassTrilepton': 1,
+		   'lepPtCut': 30, #40, #0, #
+		   'leadJetPtCut':0,#150, #300, #0, #
+		   'subLeadJetPtCut':0, #75, #150, #0, #
+		   'thirdJetPtCut':0, #30, #100, #0, #
+		   'metCut': 20,#60, #75, #0, #
+		   'njetsCut': 3, 
+		   'nbjetsCut':1,
+		   'drCut':0, #1.0, #
+	   	   'stCut':0,
+	   	   'mllOSCut':20,
+		   }
+"""
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_fixedBug_CR2'
+"""
+cutList = {'isPassTrig': 0, 
+		   'isPassTrig_dilep': 1,
+		   'isPassTrig_dilep_anth': 0,
+		   'isPassTrig_trilep': 0, 
+		   'isPassTrilepton': 1,
+		   'lepPtCut': 30, #40, #0, #
+		   'leadJetPtCut':0,#150, #300, #0, #
+		   'subLeadJetPtCut':0, #75, #150, #0, #
+		   'thirdJetPtCut':0, #30, #100, #0, #
+		   'metCut': 20,#60, #75, #0, #
+		   'njetsCut': 2, 
+		   'nbjetsCut':1,
+		   'drCut':0, #1.0, #
+	   	   'stCut':0,
+	   	   'mllOSCut':20,
+		   }
+"""
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_fixedBug_CR1'
+"""
+cutList = {'isPassTrig': 0, 
+		   'isPassTrig_dilep': 1,
+		   'isPassTrig_dilep_anth': 0,
+		   'isPassTrig_trilep': 0, 
+		   'isPassTrilepton': 1,
+		   'lepPtCut': 30, #40, #0, #
+		   'leadJetPtCut':0,#150, #300, #0, #
+		   'subLeadJetPtCut':0, #75, #150, #0, #
+		   'thirdJetPtCut':0, #30, #100, #0, #
+		   'metCut': 20,#60, #75, #0, #
+		   'njetsCut': 1, 
+		   'nbjetsCut':1,
+		   'drCut':0, #1.0, #
+	   	   'stCut':0,
+	   	   'mllOSCut':20,
+		   }
+"""
+
+# pfix='kinematics_condor_FULLddbkgscan_DYClosure' 
+"""
+cutList = {'isPassTrig': 0, 
+		   'isPassTrig_dilep': 1,
+		   'isPassTrig_dilep_anth': 0,
+		   'isPassTrig_trilep': 0, 
+		   'isPassTrilepton': 1,
+		   'lepPtCut': 30, #40, #0, #
+		   'leadJetPtCut':0,#150, #300, #0, #
+		   'subLeadJetPtCut':0, #75, #150, #0, #
+		   'thirdJetPtCut':0, #30, #100, #0, #
+		   'metCut': 0,#60, #75, #0, #
+		   'njetsCut': 0, 
+		   'nbjetsCut':0,
+		   'drCut':0, #1.0, #
+	   	   'stCut':0,
+	   	   'mllOSCut':0,
+		   }
+"""
+# pfix='kinematics_condor_FULLddbkgscan_DYClosure_SR' 
+""" 
+cutList = {'isPassTrig': 0, 
+		   'isPassTrig_dilep': 1,
+		   'isPassTrig_dilep_anth': 0,
+		   'isPassTrig_trilep': 0, 
+		   'isPassTrilepton': 1,
+		   'lepPtCut': 30, #40, #0, #
+		   'leadJetPtCut':0,#150, #300, #0, #
+		   'subLeadJetPtCut':0, #75, #150, #0, #
+		   'thirdJetPtCut':0, #30, #100, #0, #
+		   'metCut': 20,#60, #75, #0, #
+		   'njetsCut': 3, 
+		   'nbjetsCut':1,
+		   'drCut':0, #1.0, #
+	   	   'stCut':0,
+	   	   'mllOSCut':20,
+		   }
+"""
+# pfix='kinematics_condor_FULLddbkgscan_DYClosure_CR2' 
+"""
+cutList = {'isPassTrig': 0, 
+		   'isPassTrig_dilep': 1,
+		   'isPassTrig_dilep_anth': 0,
+		   'isPassTrig_trilep': 0, 
+		   'isPassTrilepton': 1,
+		   'lepPtCut': 30, #40, #0, #
+		   'leadJetPtCut':0,#150, #300, #0, #
+		   'subLeadJetPtCut':0, #75, #150, #0, #
+		   'thirdJetPtCut':0, #30, #100, #0, #
+		   'metCut': 20,#60, #75, #0, #
+		   'njetsCut': 2, 
+		   'nbjetsCut':1,
+		   'drCut':0, #1.0, #
+	   	   'stCut':0,
+	   	   'mllOSCut':20,
+		   }
+"""
+
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_fixedBug_PRv9_FRv35' 
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_fixedBug_PRv9_FRv36' 
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_fixedBug_PRv9_FRv37' 
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_fixedBug_PRv9_FRv38' 
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_fixedBug_PRv9_FRv35a' #--> double checking but also with muFR=.14instead of .13 in FRv35
+"""
+cutList = {'isPassTrig': 0, 
+		   'isPassTrig_dilep': 1,
+		   'isPassTrig_dilep_anth': 0,
+		   'isPassTrig_trilep': 0, 
+		   'isPassTrilepton': 1,
+		   'lepPtCut': 30, #40, #0, #
+		   'leadJetPtCut':0,#150, #300, #0, #
+		   'subLeadJetPtCut':0, #75, #150, #0, #
+		   'thirdJetPtCut':0, #30, #100, #0, #
+		   'metCut': 0,#60, #75, #0, #
+		   'njetsCut': 0, 
+		   'nbjetsCut':0,
+		   'drCut':0, #1.0, #
+	   	   'stCut':0,
+	   	   'mllOSCut':0,
+		   }
+
+"""
+
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_PRv9_FRv48_elMVAvalueFix_SR' #remember to modify analyse.py for low hT and cutList.py and samples.py!
+""" 
+cutList = {'isPassTrig': 0, 
+		   'isPassTrig_dilep': 1,
+		   'isPassTrig_dilep_anth': 0,
+		   'isPassTrig_trilep': 0, 
+		   'isPassTrilepton': 1,
+		   'lepPtCut': 30, #40, #0, #
+		   'leadJetPtCut':0,#150, #300, #0, #
+		   'subLeadJetPtCut':0, #75, #150, #0, #
+		   'thirdJetPtCut':0, #30, #100, #0, #
+		   'metCut': 20,#60, #75, #0, #
+		   'njetsCut': 3, 
+		   'nbjetsCut':1,
+		   'drCut':0, #1.0, #
+	   	   'stCut':0,
+	   	   'mllOSCut':20,
+	   	   'htCut':0,
+	   	   'mlllbCut':0,
+	   	   'minDRlepJetCut': 0,
+	   	   'ptRelCut':0,
+		   }
+"""
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_PRv9_FRv48_elMVAvalueFix_CR2' #remember to modify analyse.py for Njets==2 and for low hT and cutList.py  and samples.py!
+"""
+cutList = {'isPassTrig': 0, 
+		   'isPassTrig_dilep': 1,
+		   'isPassTrig_dilep_anth': 0,
+		   'isPassTrig_trilep': 0, 
+		   'isPassTrilepton': 1,
+		   'lepPtCut': 30, #40, #0, #
+		   'leadJetPtCut':0,#150, #300, #0, #
+		   'subLeadJetPtCut':0, #75, #150, #0, #
+		   'thirdJetPtCut':0, #30, #100, #0, #
+		   'metCut': 20,#60, #75, #0, #
+		   'njetsCut': 2, 
+		   'nbjetsCut':1,
+		   'drCut':0, #1.0, #
+	   	   'stCut':0,
+	   	   'mllOSCut':20,
+	   	   'htCut':0,
+	   	   'mlllbCut':0,
+	   	   'minDRlepJetCut': 0,
+	   	   'ptRelCut':0,
+		   }
+"""
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_PRv9_FRv48_elMVAvalueFix_SRHT400' #remember to modify analyse.py for low hT and cutList.py and samples.py!
+"""
+cutList = {'isPassTrig': 0, 
+		   'isPassTrig_dilep': 1,
+		   'isPassTrig_dilep_anth': 0,
+		   'isPassTrig_trilep': 0, 
+		   'isPassTrilepton': 1,
+		   'lepPtCut': 30, #40, #0, #
+		   'leadJetPtCut':0,#150, #300, #0, #
+		   'subLeadJetPtCut':0, #75, #150, #0, #
+		   'thirdJetPtCut':0, #30, #100, #0, #
+		   'metCut': 20,#60, #75, #0, #
+		   'njetsCut': 3, 
+		   'nbjetsCut':1,
+		   'drCut':0, #1.0, #
+	   	   'stCut':0,
+	   	   'mllOSCut':20,
+	   	   'htCut':400,
+	   	   'mlllbCut':0,
+	   	   'minDRlepJetCut': 0,
+	   	   'ptRelCut':0,
+		   }
+"""
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_PRv9_FRv48_elMVAvalueFix_SRHT400low' #remember to modify analyse.py for low hT and cutList.py and samples.py!
+"""
+cutList = {'isPassTrig': 0, 
+		   'isPassTrig_dilep': 1,
+		   'isPassTrig_dilep_anth': 0,
+		   'isPassTrig_trilep': 0, 
+		   'isPassTrilepton': 1,
+		   'lepPtCut': 30, #40, #0, #
+		   'leadJetPtCut':0,#150, #300, #0, #
+		   'subLeadJetPtCut':0, #75, #150, #0, #
+		   'thirdJetPtCut':0, #30, #100, #0, #
+		   'metCut': 20,#60, #75, #0, #
+		   'njetsCut': 3, 
+		   'nbjetsCut':1,
+		   'drCut':0, #1.0, #
+	   	   'stCut':0,
+	   	   'mllOSCut':20,
+	   	   'htCut':400,
+	   	   'mlllbCut':0,
+	   	   'minDRlepJetCut': 0,
+	   	   'ptRelCut':0,
+		   }
+"""
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_PRv9_FRv48_elMVAvalueFix' #remember to modify analyse.py for low hT and cutList.py and samples.py!
+"""
+cutList = {'isPassTrig': 0, 
+		   'isPassTrig_dilep': 1,
+		   'isPassTrig_dilep_anth': 0,
+		   'isPassTrig_trilep': 0, 
+		   'isPassTrilepton': 1,
+		   'lepPtCut': 30, #40, #0, #
+		   'leadJetPtCut':0,#150, #300, #0, #
+		   'subLeadJetPtCut':0, #75, #150, #0, #
+		   'thirdJetPtCut':0, #30, #100, #0, #
+		   'metCut': 0,#60, #75, #0, #
+		   'njetsCut': 0, 
+		   'nbjetsCut':0,
+		   'drCut':0, #1.0, #
+	   	   'stCut':0,
+	   	   'mllOSCut':0,
+	   	   'htCut':0,
+	   	   'mlllbCut':0,
+	   	   'minDRlepJetCut': 0,
+	   	   'ptRelCut':0,
+		   }
+"""
+pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_PRv9_FRv48_elMVAvalueFix_CR1' #remember to modify analyse.py for Njets==1 and for low hT and cutList.py  and samples.py!
+"""
+cutList = {'isPassTrig': 0, 
+		   'isPassTrig_dilep': 1,
+		   'isPassTrig_dilep_anth': 0,
+		   'isPassTrig_trilep': 0, 
+		   'isPassTrilepton': 1,
+		   'lepPtCut': 30, #40, #0, #
+		   'leadJetPtCut':0,#150, #300, #0, #
+		   'subLeadJetPtCut':0, #75, #150, #0, #
+		   'thirdJetPtCut':0, #30, #100, #0, #
+		   'metCut': 20,#60, #75, #0, #
+		   'njetsCut': 1, 
+		   'nbjetsCut':1,
+		   'drCut':0, #1.0, #
+	   	   'stCut':0,
+	   	   'mllOSCut':20,
+	   	   'htCut':0,
+	   	   'mlllbCut':0,
+	   	   'minDRlepJetCut': 0,
+	   	   'ptRelCut':0,
+		   }
+"""
 
 
 pfix+='_'+date
@@ -27,7 +329,7 @@ plotList = [#distribution name as defined in "doHists.py"
 # 	'lep1Pt',
 # 	'lep2Pt',
 # 	'lep3Pt',
-	'lepEta',
+# 	'lepEta',
 # 	'ElEta',
 # 	'MuEta',
 # 	'lep1Eta',
@@ -42,7 +344,7 @@ plotList = [#distribution name as defined in "doHists.py"
 # 	'HT',
 # 	'HTrebinned',
 # 	'ST',
-	'STrebinned',
+# 	'STrebinned',
 # 	'MET',
 # 	'METrebinned',
 # 	'NJets' ,

@@ -158,8 +158,8 @@ for run_ in run:
 
 #adding scans of ddbkg
 increment = 0.01;
-initial = 0.0;
-end = 0.5;
+initial = 0.0; #0.15;
+end = 0.5; #0.65;
 loop = (int) ( ( end - initial ) / increment ) + 1;
 muFR=0.;
 elFR=0.;
@@ -168,5 +168,5 @@ for muFRindex in xrange(loop):
 	for elFRindex in xrange(loop):
 		for i in xrange(len(run)):
 			for j in xrange(len(dilep)):
-				samples['DataDrivenBkg'+dilep[j]+run[i]+'muFR'+str(muFRindex)+'elFR'+str(elFRindex)]=dict_dilep[dilep[j]]+'_'+run[i]
+				samples['DataDrivenBkg'+dilep[j]+run[i]+'muFR'+str(muFRindex+((int)(initial*100)))+'elFR'+str(elFRindex+((int)(initial*100)))]=dict_dilep[dilep[j]]+'_'+run[i]
 

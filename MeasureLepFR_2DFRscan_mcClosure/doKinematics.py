@@ -19,16 +19,72 @@ start_time = time.time()
 
 doAllSys= False
 doDDBKGscan=True
-
 printProcess=True
+ptScan = False
+
 # muFRtoPrint = 40	
 # elFRtoPrint = 98
-muFRtoPrint = 45	
-elFRtoPrint = 97
+# 
+#All region ttbar
+# muFRtoPrint = 14	
+# elFRtoPrint = 21
+# 
+# #SR ttbar
+# muFRtoPrint = 12	
+# elFRtoPrint = 24
 
-if printProcess: print ''
-if printProcess: print ' -- printing: muFR = ', muFRtoPrint, ', elFR = ', elFRtoPrint, '--'
-if printProcess: print ''
+#CR2 ttbar
+# muFRtoPrint = 12	
+# elFRtoPrint = 18
+
+#CR1 ttbar
+# muFRtoPrint = 16	
+# elFRtoPrint = 22
+
+# #All region DY
+# muFRtoPrint = 7	
+# elFRtoPrint = 44
+
+#SR DY
+# muFRtoPrint = 5	
+# elFRtoPrint = 46
+
+# muFRtoPrint = 13	
+# elFRtoPrint = 21
+
+########### elMVAvalueFix #########
+
+#SR ttbar
+# muFRtoPrint = 11	
+# elFRtoPrint = 17
+
+#CR2 ttbar
+# muFRtoPrint = 11	
+# elFRtoPrint = 13
+
+#SRHT400 ttbar
+# muFRtoPrint = 12	
+# elFRtoPrint = 26
+
+#SRHT400low ttbar
+# muFRtoPrint = 11	
+# elFRtoPrint = 14
+
+#All region ttbar
+muFRtoPrint = 14	
+elFRtoPrint = 16
+
+#CR1 ttbar
+# muFRtoPrint = 16	
+# elFRtoPrint = 17
+
+###################################
+
+
+
+if printProcess and doDDBKGscan: print ''
+if printProcess and doDDBKGscan: print ' -- printing: muFR = ', muFRtoPrint, ', elFR = ', elFRtoPrint, '--'
+if printProcess and doDDBKGscan: print ''
 
 # pfix='kinematics_condor_ddbkgscan_PRv6_ttbarClosure_2017_3_6'
 # pfix='kinematics_condor_ddbkgscan_PRv6_FRv25ttbar_ttbarClosure_2017_3_6'
@@ -44,10 +100,40 @@ dataList = []
 
 # pfix='kinematics_condor_ddbkgscan_PRv9_FRv24_postPreapprovalF_PromptCount_V9_extScan_ttbarClosure_2017_3_9/'
 # pfix='kinematics_condor_ddbkgscan_ttbarClosure_2017_3_16'
-# dataList = ['TTJetsPH']
+# pfix='kinematics_condor_ddbkgscan_ttbarClosure_fixedBug_2017_4_30'
+# pfix='kinematics_condor_ddbkgscan_ttbarClosure_fixedBug_2017_5_1'
+# pfix='kinematics_condor_NOddbkgscan_ttbarClosure_fixedBug_2017_5_1'
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_fixedBug_2017_5_1'
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_fixedBug_SR_2017_5_12'
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_fixedBug_CR2_2017_5_13'
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_fixedBug_CR1_2017_5_16'
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_fixedBug_PRv9_FRv35_2017_6_1'
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_fixedBug_PRv9_FRv36_2017_6_1'
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_fixedBug_PRv9_FRv37_2017_6_2'
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_fixedBug_PRv9_FRv36_2017_6_2' #has more plots
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_fixedBug_PRv9_FRv35_2017_6_2' #has more plots
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_fixedBug_2017_6_1' #ElPt MuPt
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_fixedBug_PRv9_FRv38_2017_6_5'
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_fixedBug_PRv9_FRv35a_2017_6_5' #--> double checking but also with muFR=.14instead of .13 in FRv35
 
-pfix='kinematics_condor_ddbkgscan_zjetsClosure_2017_3_15'
-dataList = ['DY50']
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_PRv9_FRv48_elMVAvalueFix_SR_2017_9_18'
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_PRv9_FRv48_elMVAvalueFix_CR2_2017_9_18'
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_PRv9_FRv48_elMVAvalueFix_SRHT400_2017_9_18'
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_PRv9_FRv48_elMVAvalueFix_SRHT400low_2017_9_18'
+pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_PRv9_FRv48_elMVAvalueFix_2017_9_20'
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_PRv9_FRv48_elMVAvalueFix_CR1_2017_9_25'
+dataList = ['TTJetsPH']
+
+
+# 
+# # pfix='kinematics_condor_ddbkgscan_zjetsClosure_2017_3_15'
+# # pfix='kinematics_condor_FULLddbkgscan_DYClosure_2017_5_14'
+# # pfix='kinematics_condor_FULLddbkgscan_DYClosure_SR_2017_5_14'
+# # pfix='kinematics_condor_FULLddbkgscan_DYClosure_CR2_2017_5_14'
+# pfix='kinematics_condor_FULLddbkgscan_DYClosure_SR_2017_6_22'
+# # pfix='kinematics_condor_FULLddbkgscan_DYClosure_CR2_2017_6_22'
+# # pfix='kinematics_condor_FULLddbkgscan_DYClosure_2017_6_22'
+# dataList = ['DY50']
 
 # outDir = os.getcwd()+'/'
 outDir = '/user_data/rsyarif/'
@@ -166,8 +252,9 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 		#print 'Cloning ', histoPrefix+'_'+ddbkgList[0], 'and naming it', histoPrefix+'_ddbkg'
 		#print hddbkg
 		for FRindex in xrange(len(ddbkgList_scan)):
-			hddbkg_scan[FRindex][cat] = bkghists[histoPrefix+'_'+ddbkgList_scan[FRindex][0]].Clone(histoPrefix+'_ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100))))
-			#print 'Cloning ',histoPrefix+'_'+ddbkgList_scan[FRindex][0],'and naming it',histoPrefix+'_ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))
+			ddbkgIndexing = 'MuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))
+			hddbkg_scan[FRindex][cat] = bkghists[histoPrefix+'_'+ddbkgList_scan[FRindex][0]].Clone(histoPrefix+'_ddbkg'+ddbkgIndexing)
+			#print 'Cloning ',histoPrefix+'_'+ddbkgList_scan[FRindex][0],'and naming it',histoPrefix+'_ddbkg'+ddbkgIndexing
 			#print hddbkg_scan[FRindex]
 
 		hddbkgTTT[cat] = bkghists[histoPrefix+'_'+ddbkgTTTList[0]].Clone(histoPrefix+'_ddbkgTTT')
@@ -229,8 +316,9 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 
 		#look here
 		for FRindex in xrange(len(ddbkgList_scan)):
-# 			yieldTable[histoPrefix]['totBkg_ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))] = htop[cat].Integral()+hewk[cat].Integral()+hddbkg_scan[FRindex][cat].Integral()
-			yieldTable[histoPrefix]['totBkg_ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))] = hddbkg_scan[FRindex][cat].Integral()
+			ddbkgIndexing = 'MuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))
+# 			yieldTable[histoPrefix]['totBkg_ddbkg'+ddbkgIndexing] = htop[cat].Integral()+hewk[cat].Integral()+hddbkg_scan[FRindex][cat].Integral()
+			yieldTable[histoPrefix]['totBkg_ddbkg'+ddbkgIndexing] = hddbkg_scan[FRindex][cat].Integral()
 			#print histoPrefix+' totBkg_ddbkgMuFR'+str(FRindex/loop)+'_ElFR'+str(FRindex%loop)+' =', yieldTable[histoPrefix]['totBkg_ddbkgMuFR'+str(FRindex/loop)+'_ElFR'+str(FRindex%loop)] 
 
 		yieldTable[histoPrefix]['data']   = hdata[cat].Integral()
@@ -240,69 +328,110 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 			yieldTable[histoPrefix]['dataOverBkg']= 0.
 
 		#look here
-		print ''
+		upperCeiling = 50000. # for protection against extraordinarily large chiSq:
+		if doDDBKGscan and printProcess==True: print ''
 		for FRindex in xrange(len(ddbkgList_scan)):
-			if yieldTable[histoPrefix]['totBkg_ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))]!=0:
-				yieldTable[histoPrefix]['dataOverBkg_ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))]= yieldTable[histoPrefix]['data']/yieldTable[histoPrefix]['totBkg_ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))]
+			ddbkgIndexing = 'MuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))
+			if yieldTable[histoPrefix]['totBkg_ddbkg'+ddbkgIndexing]!=0:
+				yieldTable[histoPrefix]['dataOverBkg_ddbkg'+ddbkgIndexing]= yieldTable[histoPrefix]['data']/yieldTable[histoPrefix]['totBkg_ddbkg'+ddbkgIndexing]
 			else:
-				yieldTable[histoPrefix]['dataOverBkg_ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))]= 0.
-			yieldTable[histoPrefix]['chiSq_ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))] = 0.
+				yieldTable[histoPrefix]['dataOverBkg_ddbkg'+ddbkgIndexing]= 0.
+			yieldTable[histoPrefix]['chiSq_ddbkg'+ddbkgIndexing] = 0.
+			yieldTable[histoPrefix]['chiSq_ddbkg'+ddbkgIndexing+'_pt30to60'] = 0.
+			yieldTable[histoPrefix]['chiSq_ddbkg'+ddbkgIndexing+'_pt60to100'] = 0.
+			yieldTable[histoPrefix]['chiSq_ddbkg'+ddbkgIndexing+'_pt100to140'] = 0.
+			yieldTable[histoPrefix]['chiSq_ddbkg'+ddbkgIndexing+'_pt140to180'] = 0.
+			yieldTable[histoPrefix]['chiSq_ddbkg'+ddbkgIndexing+'_pt180to500'] = 0.
 			if 'lepPt' in discriminant: 
-# 				for ibin in [3,4,5,6,7,8,9,10,11,13]: #rebin for ttbar MC
-				for ibin in [3,4,5,6,7,9,11]: #for Zjets
+				for ibin in [3,4,5,6,7,8,9,10,11,13]: #rebin for ttbar MC
+# 				for ibin in [3,4,5,6,7,9,11]: #for Zjets
 					data_rebin = 0.
 					ddbkg_rebin = 0.
-					if ibin==7:
-						for ibin_rebin in [7,8]: #for Zjets
-							data_rebin += hdata[cat].GetBinContent(ibin_rebin)
-							ddbkg_rebin += hddbkg_scan[FRindex][cat].GetBinContent(ibin_rebin)
-					if ibin==9:
-						for ibin_rebin in [9,10]: #for Zjets
-							data_rebin += hdata[cat].GetBinContent(ibin_rebin)
-							ddbkg_rebin += hddbkg_scan[FRindex][cat].GetBinContent(ibin_rebin)
-					if ibin==11:
-# 						for ibin_rebin in [11,12]: #rebin for ttbar MC
-						for ibin_rebin in [11,12,13,14,15,16,17,18,19,20]: #for Zjets
-							data_rebin += hdata[cat].GetBinContent(ibin_rebin)
-							ddbkg_rebin += hddbkg_scan[FRindex][cat].GetBinContent(ibin_rebin)
-# 					elif ibin==13: 
-# 						for ibin_rebin in [13,14,15,16,17,18,19,20]: #rebin for ttbar MC
+# 					if ibin==7:
+# 						for ibin_rebin in [7,8]: #for Zjets
 # 							data_rebin += hdata[cat].GetBinContent(ibin_rebin)
-# 							ddbkg_rebin += hddbkg_scan[FRindex][cat].GetBinContent(ibin_rebin)			
+# 							ddbkg_rebin += hddbkg_scan[FRindex][cat].GetBinContent(ibin_rebin)
+# 					if ibin==9:
+# 						for ibin_rebin in [9,10]: #for Zjets
+# 							data_rebin += hdata[cat].GetBinContent(ibin_rebin)
+# 							ddbkg_rebin += hddbkg_scan[FRindex][cat].GetBinContent(ibin_rebin)
+
+					if ibin==11:
+						for ibin_rebin in [11,12]: #rebin for ttbar MC
+# 						for ibin_rebin in [11,12,13,14,15,16,17,18,19,20]: #for Zjets
+							data_rebin += hdata[cat].GetBinContent(ibin_rebin)
+							ddbkg_rebin += hddbkg_scan[FRindex][cat].GetBinContent(ibin_rebin)
+					elif ibin==13: 
+						for ibin_rebin in [13,14,15,16,17,18,19,20]: #rebin for ttbar MC
+							data_rebin += hdata[cat].GetBinContent(ibin_rebin)
+							ddbkg_rebin += hddbkg_scan[FRindex][cat].GetBinContent(ibin_rebin)			
 					else:
 						data_rebin += hdata[cat].GetBinContent(ibin)
 						ddbkg_rebin += hddbkg_scan[FRindex][cat].GetBinContent(ibin)													
-					yieldTable[histoPrefix]['chiSq_ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))] += ( data_rebin - 	ddbkg_rebin )**2 / ( ddbkg_rebin+1e-10 ) 
-					if printProcess==True and FRindex/loop+((int)(initial*100))==muFRtoPrint and FRindex%loop+((int)(initial*100))==elFRtoPrint:
+
+					yieldTable[histoPrefix]['chiSq_ddbkg'+ddbkgIndexing] += ( data_rebin - 	ddbkg_rebin )**2 / ( ddbkg_rebin+1e-10 ) 
+
+					if(ptScan):
+						if(ibin<5): # _pt30to60
+							yieldTable[histoPrefix]['chiSq_ddbkg'+ddbkgIndexing+'_pt30to60'] += ( data_rebin - 	ddbkg_rebin )**2 / ( ddbkg_rebin+1e-10 ) 
+						elif(ibin<7): # _pt60to100
+							yieldTable[histoPrefix]['chiSq_ddbkg'+ddbkgIndexing+'_pt60to100'] += ( data_rebin - 	ddbkg_rebin )**2 / ( ddbkg_rebin+1e-10 ) 
+						elif(ibin<9): # _pt100to140
+							yieldTable[histoPrefix]['chiSq_ddbkg'+ddbkgIndexing+'_pt100to140'] += ( data_rebin - 	ddbkg_rebin )**2 / ( ddbkg_rebin+1e-10 ) 
+						elif(ibin<11): # _pt140to180
+							yieldTable[histoPrefix]['chiSq_ddbkg'+ddbkgIndexing+'_pt140to180'] += ( data_rebin - 	ddbkg_rebin )**2 / ( ddbkg_rebin+1e-10 ) 
+						else: # _pt180to500
+							yieldTable[histoPrefix]['chiSq_ddbkg'+ddbkgIndexing+'_pt180to500'] += ( data_rebin - 	ddbkg_rebin )**2 / ( ddbkg_rebin+1e-10 ) 
+
+					if doDDBKGscan and printProcess==True and FRindex/loop+((int)(initial*100))==muFRtoPrint and FRindex%loop+((int)(initial*100))==elFRtoPrint:
 						print cat,discriminant,'bin:', ibin, 'data =', data_rebin,
 						print ',	ddbkg =', round_sig(ddbkg_rebin,4),
 						print ',	( data - ddbkg )**2 / ddbkg=', round_sig( ( data_rebin - 	ddbkg_rebin )**2 / ( ddbkg_rebin+1e-10 ),4)
 
 				#protect against extraordinarily large chiSq:
-				if yieldTable[histoPrefix]['chiSq_ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))] > 1000.: yieldTable[histoPrefix]['chiSq_ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))]=1000.
+				if yieldTable[histoPrefix]['chiSq_ddbkg'+ddbkgIndexing] > upperCeiling: yieldTable[histoPrefix]['chiSq_ddbkg'+ddbkgIndexing]=upperCeiling
+				if(ptScan):
+					if yieldTable[histoPrefix]['chiSq_ddbkg'+ddbkgIndexing+'_pt30to60'] > upperCeiling: yieldTable[histoPrefix]['chiSq_ddbkg'+ddbkgIndexing]=upperCeiling
+					if yieldTable[histoPrefix]['chiSq_ddbkg'+ddbkgIndexing+'_pt60to100'] > upperCeiling: yieldTable[histoPrefix]['chiSq_ddbkg'+ddbkgIndexing]=upperCeiling
+					if yieldTable[histoPrefix]['chiSq_ddbkg'+ddbkgIndexing+'_pt100to140'] > upperCeiling: yieldTable[histoPrefix]['chiSq_ddbkg'+ddbkgIndexing]=upperCeiling
+					if yieldTable[histoPrefix]['chiSq_ddbkg'+ddbkgIndexing+'_pt140to180'] > upperCeiling: yieldTable[histoPrefix]['chiSq_ddbkg'+ddbkgIndexing]=upperCeiling
+					if yieldTable[histoPrefix]['chiSq_ddbkg'+ddbkgIndexing+'_pt180to500'] > upperCeiling: yieldTable[histoPrefix]['chiSq_ddbkg'+ddbkgIndexing]=upperCeiling
 				continue			
 
 			for ibin in range(1,hdata[cat].GetXaxis().GetNbins()+1):
-				yieldTable[histoPrefix]['chiSq_ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))] += ( hdata[cat].GetBinContent(ibin) - 	( hddbkg_scan[FRindex][cat].GetBinContent(ibin) ) )**2 / ( hddbkg_scan[FRindex][cat].GetBinContent(ibin)+1e-10 ) 
+				yieldTable[histoPrefix]['chiSq_ddbkg'+ddbkgIndexing] += ( hdata[cat].GetBinContent(ibin) - 	( hddbkg_scan[FRindex][cat].GetBinContent(ibin) ) )**2 / ( hddbkg_scan[FRindex][cat].GetBinContent(ibin)+1e-10 ) 
 				if printProcess!=True or FRindex/loop+((int)(initial*100))!=muFRtoPrint or FRindex%loop+((int)(initial*100))!=elFRtoPrint:continue
 				print cat,discriminant,'bin:', ibin, 'data =', ( hdata[cat].GetBinContent(ibin) ), 
 				print ',	ddbkg:', round_sig( hddbkg_scan[FRindex][cat].GetBinContent(ibin), 4 ),  
 				print ',	( data - ddbkg )**2 / ddbkg =', round_sig( ( hdata[cat].GetBinContent(ibin) - 	( hddbkg_scan[FRindex][cat].GetBinContent(ibin) ) )**2 / ( hddbkg_scan[FRindex][cat].GetBinContent(ibin)+1e-10 ) , 4 )
 
 			#protect against extraordinarily large chiSq:
-			if yieldTable[histoPrefix]['chiSq_ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))] > 1000.: yieldTable[histoPrefix]['chiSq_ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))]=1000.
+			if yieldTable[histoPrefix]['chiSq_ddbkg'+ddbkgIndexing] > upperCeiling: yieldTable[histoPrefix]['chiSq_ddbkg'+ddbkgIndexing]=upperCeiling
 
-		if printProcess==True and yieldTable[histoPrefix]['chiSq_ddbkgMuFR'+str(muFRtoPrint)+'_ElFR'+str(elFRtoPrint)]==1000:
+		if doDDBKGscan and printProcess==True and yieldTable[histoPrefix]['chiSq_ddbkgMuFR'+str(muFRtoPrint)+'_ElFR'+str(elFRtoPrint)]==upperCeiling:
 			print cat, 'chiSq >=', yieldTable[histoPrefix]['chiSq_ddbkgMuFR'+str(muFRtoPrint)+'_ElFR'+str(elFRtoPrint)]
-		elif printProcess==True:
-			print cat, 'chiSq =', yieldTable[histoPrefix]['chiSq_ddbkgMuFR'+str(muFRtoPrint)+'_ElFR'+str(elFRtoPrint)]
+			if(ptScan):
+				print cat, 'chiSq _pt30to60 >=', yieldTable[histoPrefix]['chiSq_ddbkgMuFR'+str(muFRtoPrint)+'_ElFR'+str(elFRtoPrint)+'_pt30to60']
+				print cat, 'chiSq _pt60to100 >=', yieldTable[histoPrefix]['chiSq_ddbkgMuFR'+str(muFRtoPrint)+'_ElFR'+str(elFRtoPrint)+'_pt60to100']
+				print cat, 'chiSq _pt100to140 >=', yieldTable[histoPrefix]['chiSq_ddbkgMuFR'+str(muFRtoPrint)+'_ElFR'+str(elFRtoPrint)+'_pt100to140']
+				print cat, 'chiSq _pt140to180 >=', yieldTable[histoPrefix]['chiSq_ddbkgMuFR'+str(muFRtoPrint)+'_ElFR'+str(elFRtoPrint)+'_pt140to180']
+				print cat, 'chiSq _pt180to500 >=', yieldTable[histoPrefix]['chiSq_ddbkgMuFR'+str(muFRtoPrint)+'_ElFR'+str(elFRtoPrint)+'_pt180to500']
+		elif doDDBKGscan and printProcess==True:
+			print cat, 'chiSq =	', yieldTable[histoPrefix]['chiSq_ddbkgMuFR'+str(muFRtoPrint)+'_ElFR'+str(elFRtoPrint)]
+			if(ptScan):
+				print cat, 'chiSq _pt30to60 =	', yieldTable[histoPrefix]['chiSq_ddbkgMuFR'+str(muFRtoPrint)+'_ElFR'+str(elFRtoPrint)+'_pt30to60']
+				print cat, 'chiSq _pt60to100 =	', yieldTable[histoPrefix]['chiSq_ddbkgMuFR'+str(muFRtoPrint)+'_ElFR'+str(elFRtoPrint)+'_pt60to100']
+				print cat, 'chiSq _pt100to140 =	', yieldTable[histoPrefix]['chiSq_ddbkgMuFR'+str(muFRtoPrint)+'_ElFR'+str(elFRtoPrint)+'_pt100to140']
+				print cat, 'chiSq _pt140to180 =	', yieldTable[histoPrefix]['chiSq_ddbkgMuFR'+str(muFRtoPrint)+'_ElFR'+str(elFRtoPrint)+'_pt140to180']
+				print cat, 'chiSq _pt180to500 =	', yieldTable[histoPrefix]['chiSq_ddbkgMuFR'+str(muFRtoPrint)+'_ElFR'+str(elFRtoPrint)+'_pt180to500']
 
 		yieldTable[histoPrefix]['ddbkg']  = hddbkg[cat].Integral()
 					
 		#look here
 		for FRindex in xrange(len(ddbkgList_scan)):
-			yieldTable[histoPrefix]['ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))]  = hddbkg_scan[FRindex][cat].Integral()
-			#print 'yield '+histoPrefix+' ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100))),'=',yieldTable[histoPrefix]['ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))]
+			ddbkgIndexing = 'MuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))
+			yieldTable[histoPrefix]['ddbkg'+ddbkgIndexing]  = hddbkg_scan[FRindex][cat].Integral()
+			#print 'yield '+histoPrefix+' ddbkg'+ddbkgIndexing,'=',yieldTable[histoPrefix]['ddbkg'+ddbkgIndexing]
 
 		yieldTable[histoPrefix]['ddbkgTTT']  = hddbkgTTT[cat].Integral()
 		yieldTable[histoPrefix]['ddbkgTTL']  = hddbkgTTL[cat].Integral()
@@ -329,9 +458,10 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 
 		#look here
 		for FRindex in xrange(len(ddbkgList_scan)): 
-			yieldErrTable[histoPrefix]['totBkg_ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))] = 0.
-			yieldErrTable[histoPrefix]['dataOverBkg_ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))]= 0.
-			yieldErrTable[histoPrefix]['ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))]  = 0.
+			ddbkgIndexing = 'MuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))
+			yieldErrTable[histoPrefix]['totBkg_ddbkg'+ddbkgIndexing] = 0.
+			yieldErrTable[histoPrefix]['dataOverBkg_ddbkg'+ddbkgIndexing]= 0.
+			yieldErrTable[histoPrefix]['ddbkg'+ddbkgIndexing]  = 0.
 
 		yieldErrTable[histoPrefix]['ddbkgTTT']  = 0.
 		yieldErrTable[histoPrefix]['ddbkgTTL']  = 0.
@@ -360,17 +490,19 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 
 		#look here , need to treat totbkg and ddbkg errors a bit differently to account for muFR scanning
 		for FRindex in xrange(len(ddbkgList_scan)):
+			ddbkgIndexing = 'MuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))
 			for ibin in range(1,hdata[cat].GetXaxis().GetNbins()+1):
-				yieldErrTable[histoPrefix]['totBkg_ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))] += hddbkg_scan[FRindex][cat].GetBinError(ibin)**2
-				yieldErrTable[histoPrefix]['ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))]  += hddbkg_scan[FRindex][cat].GetBinError(ibin)**2
+				yieldErrTable[histoPrefix]['totBkg_ddbkg'+ddbkgIndexing] += hddbkg_scan[FRindex][cat].GetBinError(ibin)**2
+				yieldErrTable[histoPrefix]['ddbkg'+ddbkgIndexing]  += hddbkg_scan[FRindex][cat].GetBinError(ibin)**2
 
 		#yieldErrTable[histoPrefix]['totBkg'] += (corrdSys*yieldTable[histoPrefix]['totBkg'])**2+(topXsecSys*yieldTable[histoPrefix]['top'])**2+(ewkXsecSys*yieldTable[histoPrefix]['ewk'])**2
 
 		#look here
 		for FRindex in xrange(len(ddbkgList_scan)):
-			#yieldErrTable[histoPrefix]['totBkg_ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))] += (corrdSys*yieldTable[histoPrefix]['totBkg_ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))])**2+(topXsecSys*yieldTable[histoPrefix]['top'])**2+(ewkXsecSys*yieldTable[histoPrefix]['ewk'])**2
-			yieldErrTable[histoPrefix]['totBkg_ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))] += (corrdSys*yieldTable[histoPrefix]['totBkg_ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))])**2
-			#print 'sqrt yieldErrTable ',histoPrefix,' totBkg_ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100))),'=',math.sqrt(yieldErrTable[histoPrefix]['totBkg_ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))])
+			ddbkgIndexing = 'MuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))
+			#yieldErrTable[histoPrefix]['totBkg_ddbkg'+ddbkgIndexing] += (corrdSys*yieldTable[histoPrefix]['totBkg_ddbkg'+ddbkgIndexing])**2+(topXsecSys*yieldTable[histoPrefix]['top'])**2+(ewkXsecSys*yieldTable[histoPrefix]['ewk'])**2
+			yieldErrTable[histoPrefix]['totBkg_ddbkg'+ddbkgIndexing] += (corrdSys*yieldTable[histoPrefix]['totBkg_ddbkg'+ddbkgIndexing])**2
+			#print 'sqrt yieldErrTable ',histoPrefix,' totBkg_ddbkg'+ddbkgIndexing,'=',math.sqrt(yieldErrTable[histoPrefix]['totBkg_ddbkg'+ddbkgIndexing])
 
 
 		if yieldTable[histoPrefix]['totBkg']!=0: 
@@ -382,17 +514,18 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 
 		#look here
 		for FRindex in xrange(len(ddbkgList_scan)):
-			if yieldTable[histoPrefix]['totBkg_ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))]!=0: 
-				Ratio = yieldTable[histoPrefix]['data']/yieldTable[histoPrefix]['totBkg_ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))]
+			ddbkgIndexing = 'MuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))
+			if yieldTable[histoPrefix]['totBkg_ddbkg'+ddbkgIndexing]!=0: 
+				Ratio = yieldTable[histoPrefix]['data']/yieldTable[histoPrefix]['totBkg_ddbkg'+ddbkgIndexing]
 			else:
 				Ratio = 0.0			
-			yieldErrTable[histoPrefix]['dataOverBkg_ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))] = (Ratio**2) * (        (math.sqrt(yieldErrTable[histoPrefix]['data'])      /(yieldTable[histoPrefix]['data']+1e-20))**2 + (math.sqrt(yieldErrTable[histoPrefix]['totBkg_ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))])/(yieldTable[histoPrefix]['totBkg_ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))]+1e-20))**2)
-			#print 'sqrt yieldErrTable '+histoPrefix+'dataOverBkg_ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))+' =',math.sqrt( yieldErrTable[histoPrefix]['dataOverBkg_ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))] )
+			yieldErrTable[histoPrefix]['dataOverBkg_ddbkg'+ddbkgIndexing] = (Ratio**2) * (        (math.sqrt(yieldErrTable[histoPrefix]['data'])      /(yieldTable[histoPrefix]['data']+1e-20))**2 + (math.sqrt(yieldErrTable[histoPrefix]['totBkg_ddbkg'+ddbkgIndexing])/(yieldTable[histoPrefix]['totBkg_ddbkg'+ddbkgIndexing]+1e-20))**2)
+			#print 'sqrt yieldErrTable '+histoPrefix+'dataOverBkg_ddbkg'+ddbkgIndexing+' =',math.sqrt( yieldErrTable[histoPrefix]['dataOverBkg_ddbkg'+ddbkgIndexing] )
 
 		#print interactive display output
-		if printProcess==True: print 'data      :',yieldTable[histoPrefix]['data'],'+-',round_sig(math.sqrt(yieldErrTable[histoPrefix]['data']),4)
-		if printProcess==True: print 'ddbkg     :',round_sig(yieldTable[histoPrefix]['ddbkgMuFR'+str(muFRtoPrint)+'_ElFR'+str(elFRtoPrint)],4),'+-',round_sig(math.sqrt(yieldErrTable[histoPrefix]['ddbkgMuFR'+str(muFRtoPrint)+'_ElFR'+str(elFRtoPrint)]),4)
-		if printProcess==True: print 'data/ddbkg:',round_sig(yieldTable[histoPrefix]['dataOverBkg_ddbkgMuFR'+str(muFRtoPrint)+'_ElFR'+str(elFRtoPrint)],4),'+-',round_sig(math.sqrt(yieldErrTable[histoPrefix]['dataOverBkg_ddbkgMuFR'+str(muFRtoPrint)+'_ElFR'+str(elFRtoPrint)]),4)
+		if doDDBKGscan and printProcess==True: print 'data      :',yieldTable[histoPrefix]['data'],'+-',round_sig(math.sqrt(yieldErrTable[histoPrefix]['data']),4)
+		if doDDBKGscan and printProcess==True: print 'ddbkg     :',round_sig(yieldTable[histoPrefix]['ddbkgMuFR'+str(muFRtoPrint)+'_ElFR'+str(elFRtoPrint)],4),'+-',round_sig(math.sqrt(yieldErrTable[histoPrefix]['ddbkgMuFR'+str(muFRtoPrint)+'_ElFR'+str(elFRtoPrint)]),4)
+		if doDDBKGscan and printProcess==True: print 'data/ddbkg:',round_sig(yieldTable[histoPrefix]['dataOverBkg_ddbkgMuFR'+str(muFRtoPrint)+'_ElFR'+str(elFRtoPrint)],4),'+-',round_sig(math.sqrt(yieldErrTable[histoPrefix]['dataOverBkg_ddbkgMuFR'+str(muFRtoPrint)+'_ElFR'+str(elFRtoPrint)]),4)
 
 		hdata[cat].Write()
 		#write theta histograms in root file, avoid having processes with no event yield (to make theta happy) 
@@ -405,6 +538,7 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 					hddbkg[cat+systematic+'Down'].Write()
 		#look here
 		for FRindex in xrange(len(ddbkgList_scan)):
+			ddbkgIndexing = 'MuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))
 			if hddbkg_scan[FRindex][cat].Integral() > 0: hddbkg_scan[FRindex][cat].Write()
 
 		hddbkgTTT[cat].Write()
@@ -569,49 +703,60 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 	print ''
 	print 'Processing 2D Lep FR scan Chi Sq:'
 	outputRfile_chiSq = R.TFile(outDir+'/chiSq_'+discriminant+'_'+lumiStr+'fb.root','RECREATE')
-	h_chiSq={}
-	min_chiSq={}
-	min_process = {}		
-	for cat in category:
-		histoPrefix=discriminant+'_'+lumiStr+'fb_'+cat
-		min_chiSq[cat] = 100000.
-		h_chiSq[cat] = R.TH2D('chiSq_'+cat,'chiSq_'+cat,loop,initial,end+increment,loop,initial,end+increment)
+	ptRanges = ['']
+	if(ptScan):ptRanges = ['','_pt30to60','_pt60to100','_pt100to140','_pt140to180','_pt180to500']
+	for postFix in ptRanges:
+		print 'processing '+postFix+' ...'
+		h_chiSq={}
+		min_chiSq={}
+		min_process = {}		
+		for cat in category:
+			h_chiSq[cat]={}
+			min_chiSq[cat]={}
+			min_process[cat]={}		
+			histoPrefix=discriminant+'_'+lumiStr+'fb_'+cat
+			min_chiSq[cat][postFix] = 100000.
+			h_chiSq[cat][postFix] = R.TH2D('chiSq_'+cat+postFix,'chiSq_'+cat+postFix,loop,initial,end+increment,loop,initial,end+increment)
+			for FRindex in xrange(len(ddbkgList_scan)):
+				process ='chiSq_ddbkg'+'MuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100))) 
+				chiSq = round_sig(yieldTable[histoPrefix][process+postFix],4)
+				bin_x = 1+(FRindex/loop)
+				bin_y = 1+(FRindex%loop)
+				h_chiSq[cat][postFix].SetBinContent(bin_x,bin_y,chiSq)
+				if chiSq < min_chiSq[cat][postFix] and chiSq!=0 : #protect against chiSq==0.0!
+					min_chiSq[cat][postFix] = chiSq
+					min_process[cat][postFix] = process
+				#if doDDBKGscan and printProcess and FRindex/loop+((int)(initial*100))==muFRtoPrint and FRindex%loop+((int)(initial*100))==elFRtoPrint:print cat, process, 'filling TH2D(', bin_x-1,bin_y-1,chiSq,')'
+				h_chiSq[cat][postFix].Write()
+
+		#Calculate average chi_avr plot, and find global minimum.
+		h_chiSq['average'] = {}
+		min_chiSq['average'] = {}
+		min_process['average']={}		
+		min_chiSq['average'][postFix] = 100000.
+		h_chiSq['average'][postFix] = R.TH2D('chiSq_average'+postFix,'chiSq_average'+postFix,loop,initial,end+increment,loop,initial,end+increment)
 		for FRindex in xrange(len(ddbkgList_scan)):
+			chiSq_avr = 0.0
 			process ='chiSq_ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100))) 
-			chiSq = round_sig(yieldTable[histoPrefix][process],4)
+			for cat in category: 
+				if 'All' in cat: continue
+				#chiSq_avr += round_sig(yieldTable[discriminant+'_'+lumiStr+'fb_'+cat][process+postFix] / 4. ,4)
+				chiSq_avr += round_sig(yieldTable[discriminant+'_'+lumiStr+'fb_'+cat][process+postFix] ,4) #based on recommendation by Roman, and also Meenakshi, she actually said it a while ago. Just sum al four categories and dont average, since these four categories are statistically independent.
+			if chiSq_avr < min_chiSq['average'][postFix] and chiSq_avr!=0 : #protect against chiSq==0.0!
+				min_chiSq['average'][postFix] = chiSq_avr
+				min_process['average'][postFix] = process
 			bin_x = 1+(FRindex/loop)
 			bin_y = 1+(FRindex%loop)
-			h_chiSq[cat].SetBinContent(bin_x,bin_y,chiSq)
-			if chiSq < min_chiSq[cat] and chiSq!=0 : #protect against chiSq==0.0!
-				min_chiSq[cat] = chiSq
-				min_process[cat] = process
-			#if printProcess and FRindex/loop+((int)(initial*100))==muFRtoPrint and FRindex%loop+((int)(initial*100))==elFRtoPrint:print cat, process, 'filling TH2D(', bin_x-1,bin_y-1,chiSq,')'
-		h_chiSq[cat].Write()
+			h_chiSq['average'][postFix].SetBinContent(bin_x,bin_y,chiSq_avr)
+			#if doDDBKGscan and printProcess and FRindex/loop+((int)(initial*100))==muFRtoPrint and FRindex%loop+((int)(initial*100))==elFRtoPrint:print 'average', process, 'filling TH2D(',bin_x-1,bin_y-1,chiSq_avr,')'
+		h_chiSq['average'][postFix].Write()
 
-	#Calculate average chi_avr plot, and find global minimum.
-	min_chiSq['average'] = 100000.
-	h_chiSq['average'] = R.TH2D('chiSq_average','chiSq_average',loop,initial,end+increment,loop,initial,end+increment)
-	for FRindex in xrange(len(ddbkgList_scan)):
-		chiSq_avr = 0.0
-		process ='chiSq_ddbkgMuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100))) 
-		for cat in category: 
-			if 'All' in cat: continue
-			chiSq_avr += round_sig(yieldTable[discriminant+'_'+lumiStr+'fb_'+cat][process] / 4. ,4)
-		if chiSq_avr < min_chiSq['average'] and chiSq_avr!=0 : #protect against chiSq==0.0!
-			min_chiSq['average'] = chiSq_avr
-			min_process['average'] = process
-		bin_x = 1+(FRindex/loop)
-		bin_y = 1+(FRindex%loop)
-		h_chiSq['average'].SetBinContent(bin_x,bin_y,chiSq_avr)
-		#if printProcess and FRindex/loop+((int)(initial*100))==muFRtoPrint and FRindex%loop+((int)(initial*100))==elFRtoPrint:print 'average', process, 'filling TH2D(',bin_x-1,bin_y-1,chiSq_avr,')'
-	h_chiSq['average'].Write()
-
-	for cat in category+['average']: 
-		try:
-			print 'Minimum ',cat,' chi sq = ', min_chiSq[cat], min_process[cat].replace('chiSq_ddbkg','').split('_')[0].replace('MuFR','MuFR = '),'% ',min_process[cat].replace('chiSq_ddbkg','').split('_')[1].replace('ElFR','ElFR = '),'%'
-		except:
-			print 'Something is wrong or empty. So check!'
-			continue
+		for cat in category+['average']: 
+			try:
+				print 'Minimum ',cat,' chi sq '+postFix+' = ', min_chiSq[cat][postFix], min_process[cat][postFix].replace('chiSq_ddbkg','').split('_')[0].replace('MuFR','MuFR = '),'% ',min_process[cat][postFix].replace('chiSq_ddbkg','').split('_')[1].replace('ElFR','ElFR = '),'%'
+			except:
+				print 'Something is wrong or empty. So check!'
+				continue
 	
 	outputRfile_chiSq.Close()
 
@@ -633,9 +778,10 @@ for file in findfiles(outDir+'/'+category[0]+'/', '*.p'):
 print distList
 for dist in distList:
 	print "DISTRIBUTION: ",dist
-# 	if 'lepPt' not in dist: continue
+	if 'lepPt' not in dist: continue
+# 	if 'ElPt' not in dist and 'MuPt' not in dist: continue
 # 	if 'ST' in dist: continue
-	if 'lepEta' in dist: continue
+# 	if 'lepEta' in dist: continue
 	datahists = {}
 	bkghists  = {}
 	sighists  = {}

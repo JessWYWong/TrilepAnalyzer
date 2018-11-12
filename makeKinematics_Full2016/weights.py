@@ -14,6 +14,17 @@ BR['TTTZTZ'] = BR['TZ']*BR['TZ']
 BR['TTTZTH'] = 2*BR['TZ']*BR['TH']
 BR['TTTHTH'] = BR['TH']*BR['TH']
 
+BR['TW'] = 0.5
+BR['BZ'] = 0.25
+BR['BH'] = 0.25
+BR['BBTWTW'] = BR['TW']*BR['TW']
+BR['BBBHTW'] = 2*BR['BH']*BR['TW']
+BR['BBBZTW'] = 2*BR['BZ']*BR['TW']
+BR['BBBZBZ'] = BR['BZ']*BR['BZ']
+BR['BBBZBH'] = 2*BR['BZ']*BR['BH']
+BR['BBBHBH'] = BR['BH']*BR['BH']
+
+
 # Number of processed MC events (before selections)
 nRun={}
 
@@ -60,6 +71,12 @@ nRun['TTWl'] = 1603530. #from 3120400 - # calculated using WeightAnalyzer.
 nRun['TTWq'] = 430310 #from 833298 - # calculated using WeightAnalyzer. 
 nRun['TTZl'] = 927976. #from 1992440 - # calculated using WeightAnalyzer. 
 nRun['TTZq'] = 351164 #from 749400 - # calculated using WeightAnalyzer. 
+
+#### As requested by Cristina Botta (ARC B2G-17-011).
+nRun['TTGJets'] = 4870911* 0.325 #relim estimate: ran 1204482 events, adjusted count 391002. Could assume adjusted = 0.325 * total, from Julie Nov29-2017
+nRun['ZGTo2LG'] = 1579452 #ZG: int 2307158, adjusted count 1579452 , from Julie Nov29-2017
+nRun['TTZToLLM1to10'] = 246792 #DAS
+ 
 
 # numbers not updated to 80x ! - start
 nRun['WJetsMG100'] = 27546978. # MG, from DAS
@@ -159,6 +176,80 @@ nRun['TTM1600THTH'] = 832600.0*0.333*0.333
 nRun['TTM1700THTH'] = 797000.0*0.333*0.333
 nRun['TTM1800THTH'] = 833000.0*0.333*0.333
 
+nRun['BBM700TWTW'] = 814800.0*0.333*0.333
+nRun['BBM800TWTW'] = 826200.0*0.333*0.333
+nRun['BBM900TWTW'] = 799800.0*0.333*0.333
+nRun['BBM1000TWTW'] = 825600.0*0.333*0.333
+nRun['BBM1100TWTW'] = 832000.0*0.333*0.333
+nRun['BBM1200TWTW'] = 832200.0*0.333*0.333
+nRun['BBM1300TWTW'] = 807200.0*0.333*0.333
+nRun['BBM1400TWTW'] = 816800.0*0.333*0.333
+nRun['BBM1500TWTW'] = 831000.0*0.333*0.333
+nRun['BBM1600TWTW'] = 696600.0*0.333*0.333
+nRun['BBM1700TWTW'] = 832600.0*0.333*0.333
+nRun['BBM1800TWTW'] = 795400.0*0.333*0.333
+nRun['BBM700BHTW'] = 814800.0*0.333*0.333*2
+nRun['BBM800BHTW'] = 826200.0*0.333*0.333*2
+nRun['BBM900BHTW'] = 799800.0*0.333*0.333*2
+nRun['BBM1000BHTW'] = 825600.0*0.333*0.333*2
+nRun['BBM1100BHTW'] = 832000.0*0.333*0.333*2
+nRun['BBM1200BHTW'] = 832200.0*0.333*0.333*2
+nRun['BBM1300BHTW'] = 807200.0*0.333*0.333*2
+nRun['BBM1400BHTW'] = 816800.0*0.333*0.333*2
+nRun['BBM1500BHTW'] = 831000.0*0.333*0.333*2
+nRun['BBM1600BHTW'] = 696600.0*0.333*0.333*2
+nRun['BBM1700BHTW'] = 832600.0*0.333*0.333*2
+nRun['BBM1800BHTW'] = 795400.0*0.333*0.333*2
+nRun['BBM700BZTW'] = 814800.0*0.333*0.333*2
+nRun['BBM800BZTW'] = 826200.0*0.333*0.333*2
+nRun['BBM900BZTW'] = 799800.0*0.333*0.333*2
+nRun['BBM1000BZTW'] = 825600.0*0.333*0.333*2
+nRun['BBM1100BZTW'] = 832000.0*0.333*0.333*2
+nRun['BBM1200BZTW'] = 832200.0*0.333*0.333*2
+nRun['BBM1300BZTW'] = 807200.0*0.333*0.333*2
+nRun['BBM1400BZTW'] = 816800.0*0.333*0.333*2
+nRun['BBM1500BZTW'] = 831000.0*0.333*0.333*2
+nRun['BBM1600BZTW'] = 696600.0*0.333*0.333*2
+nRun['BBM1700BZTW'] = 832600.0*0.333*0.333*2
+nRun['BBM1800BZTW'] = 795400.0*0.333*0.333*2
+nRun['BBM700BZBZ'] = 814800.0*0.333*0.333
+nRun['BBM800BZBZ'] = 826200.0*0.333*0.333
+nRun['BBM900BZBZ'] = 799800.0*0.333*0.333
+nRun['BBM1000BZBZ'] = 825600.0*0.333*0.333
+nRun['BBM1100BZBZ'] = 832000.0*0.333*0.333
+nRun['BBM1200BZBZ'] = 832200.0*0.333*0.333
+nRun['BBM1300BZBZ'] = 807200.0*0.333*0.333
+nRun['BBM1400BZBZ'] = 816800.0*0.333*0.333
+nRun['BBM1500BZBZ'] = 831000.0*0.333*0.333
+nRun['BBM1600BZBZ'] = 696600.0*0.333*0.333
+nRun['BBM1700BZBZ'] = 832600.0*0.333*0.333
+nRun['BBM1800BZBZ'] = 795400.0*0.333*0.333
+nRun['BBM700BZBH'] = 814800.0*0.333*0.333*2
+nRun['BBM800BZBH'] = 826200.0*0.333*0.333*2
+nRun['BBM900BZBH'] = 799800.0*0.333*0.333*2
+nRun['BBM1000BZBH'] = 825600.0*0.333*0.333*2
+nRun['BBM1100BZBH'] = 832000.0*0.333*0.333*2
+nRun['BBM1200BZBH'] = 832200.0*0.333*0.333*2
+nRun['BBM1300BZBH'] = 807200.0*0.333*0.333*2
+nRun['BBM1400BZBH'] = 816800.0*0.333*0.333*2
+nRun['BBM1500BZBH'] = 831000.0*0.333*0.333*2
+nRun['BBM1600BZBH'] = 696600.0*0.333*0.333*2
+nRun['BBM1700BZBH'] = 832600.0*0.333*0.333*2
+nRun['BBM1800BZBH'] = 795400.0*0.333*0.333*2
+nRun['BBM700BHBH'] = 814800.0*0.333*0.333
+nRun['BBM800BHBH'] = 826200.0*0.333*0.333
+nRun['BBM900BHBH'] = 799800.0*0.333*0.333
+nRun['BBM1000BHBH'] = 825600.0*0.333*0.333
+nRun['BBM1100BHBH'] = 832000.0*0.333*0.333
+nRun['BBM1200BHBH'] = 832200.0*0.333*0.333
+nRun['BBM1300BHBH'] = 807200.0*0.333*0.333
+nRun['BBM1400BHBH'] = 816800.0*0.333*0.333
+nRun['BBM1500BHBH'] = 831000.0*0.333*0.333
+nRun['BBM1600BHBH'] = 696600.0*0.333*0.333
+nRun['BBM1700BHBH'] = 832600.0*0.333*0.333
+nRun['BBM1800BHBH'] = 795400.0*0.333*0.333
+
+
 # numbers not updated to 80x ! - start
 nRun['QCDht100'] = 81637494.
 # numbers not updated to 80x ! - end
@@ -228,6 +319,11 @@ xsec['Ts'] = 11.36/3 #(1/3 was suggested by Thomas Peiffer to account for the le
 xsec['TtW'] = 35.6 # https://twiki.cern.ch/twiki/bin/viewauth/CMS/SingleTopSigma
 xsec['TbtW'] = 35.6 # https://twiki.cern.ch/twiki/bin/viewauth/CMS/SingleTopSigma
 
+#### As requested by Cristina Botta (ARC B2G-17-011).
+xsec['TTGJets'] = 3.697 #AN2016_386_v9
+xsec['ZGTo2LG'] = 123.9 #AN2016_386_v9
+xsec['TTZToLLM1to10'] = 0.0493 #AN2016_386_v9
+
 xsec['TTM700']   = 0.455 # from https://twiki.cern.ch/twiki/bin/view/CMS/B2GMonteCarlo
 xsec['TTM800']  = 0.196 # from https://twiki.cern.ch/twiki/bin/view/CMS/B2GMonteCarlo
 xsec['TTM900']   = 0.0903 # from https://twiki.cern.ch/twiki/bin/view/CMS/B2GMonteCarlo
@@ -240,6 +336,20 @@ xsec['TTM1500']  = 0.00200 # from https://twiki.cern.ch/twiki/bin/view/CMS/B2GMo
 xsec['TTM1600'] = 0.001148 # from https://twiki.cern.ch/twiki/bin/view/CMS/B2GMonteCarlo
 xsec['TTM1700']  = 0.000666 # from https://twiki.cern.ch/twiki/bin/view/CMS/B2GMonteCarlo
 xsec['TTM1800'] = 0.000391 # from https://twiki.cern.ch/twiki/bin/view/CMS/B2GMonteCarlo
+
+
+xsec['BBM700']   = 0.455 # from https://twiki.cern.ch/twiki/bin/view/CMS/B2GMonteCarlo
+xsec['BBM800']  = 0.196 # from https://twiki.cern.ch/twiki/bin/view/CMS/B2GMonteCarlo
+xsec['BBM900']   = 0.0903 # from https://twiki.cern.ch/twiki/bin/view/CMS/B2GMonteCarlo
+xsec['BBM1000']  = 0.0440 # from https://twiki.cern.ch/twiki/bin/view/CMS/B2GMonteCarlo
+xsec['BBM1100']  = 0.0224 # from https://twiki.cern.ch/twiki/bin/view/CMS/B2GMonteCarlo
+xsec['BBM1200'] = 0.0118 # from https://twiki.cern.ch/twiki/bin/view/CMS/B2GMonteCarlo
+xsec['BBM1300']  = 0.00639 # from https://twiki.cern.ch/twiki/bin/view/CMS/B2GMonteCarlo
+xsec['BBM1400'] = 0.00354 # from https://twiki.cern.ch/twiki/bin/view/CMS/B2GMonteCarlo
+xsec['BBM1500']  = 0.00200 # from https://twiki.cern.ch/twiki/bin/view/CMS/B2GMonteCarlo
+xsec['BBM1600'] = 0.001148 # from https://twiki.cern.ch/twiki/bin/view/CMS/B2GMonteCarlo
+xsec['BBM1700']  = 0.000666 # from https://twiki.cern.ch/twiki/bin/view/CMS/B2GMonteCarlo
+xsec['BBM1800'] = 0.000391 # from https://twiki.cern.ch/twiki/bin/view/CMS/B2GMonteCarlo
 
 
 xsec['QCDht100'] = 27990000. # from https://twiki.cern.ch/twiki/bin/viewauth/CMS/SummaryTable1G25ns#QCD

@@ -5,7 +5,8 @@ jetPtCutList  = [0]
 metCutList    = [20]
 njetsCutList  = [3]
 nbjetsCutList = [1]
-htCutList     = [400]
+htCutList     = [0]
+# htCutList     = [400]
 stCutList     = [0]#600,700,800,900,1000,1100]
 mllOSCutList  = [20]
 isPassTriLeptonList= [1]
@@ -45,7 +46,17 @@ time='%i_%i_%i'%(cTime.hour,cTime.minute,cTime.second)
 # pfix='optimization_reMiniAOD_PRv9_FRv47FRSRHT400low2Dext_newRunH_correctedMuTrkSF_AllSys'
 
 # pfix='optimization_reMiniAOD_PRv9_FRv45FRSRHT400low_newRunH_correctedMuTrkSF_addMlllBUnc_AllSys'
-pfix='optimization_reMiniAOD_PRv9_FRv45FRSRHT400low_newRunH_correctedMuTrkSF_addMlllBUnc_AllSys_BB'
+# pfix='optimization_reMiniAOD_PRv9_FRv45FRSRHT400low_newRunH_correctedMuTrkSF_addMlllBUnc_AllSys_BB'
+
+# pfix='optimization_reMiniAOD_PRv9_FRv45FRSRHT400low_newRunH_correctedMuTrkSF_fixedMlllBUnc_AllSys'
+# pfix='optimization_reMiniAOD_PRv9_FRv45FRSRHT400low_newRunH_correctedMuTrkSF_fixedMlllBUnc_AllSys_BB'
+
+# pfix='optimization_reMiniAOD_PRv9_FRv48sys_elMVAfix_AllSys'
+# pfix='optimization_reMiniAOD_PRv9_FRv48sys_elMVAfix_AllSys_BB'
+
+# pfix='optimization_reMiniAOD_PRv9_FRv49sys_elMVAfix_AllSys'
+pfix='optimization_reMiniAOD_PRv9_FRv49sys_elMVAfix_AllSys_BB'
+
 
 pfix+='_'+date#+'_'+time
 

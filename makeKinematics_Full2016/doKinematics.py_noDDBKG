@@ -97,7 +97,14 @@ pfix='kinematics_80x_condor_MultiLep_newMllOScutV2_latestLJMETFeb24_2017_noDDBKG
 # pfix='kinematics_80x_condor_MultiLep_Full2016_Moriond17_1bjet_fixedLumi_noDDBKG_newMllOScutV2_2017_3_2'
 
 
+whichPlots=1
+
 if len(sys.argv)>1: pfix = sys.argv[1] 
+if len(sys.argv)>2: whichPlots = int(sys.argv[2]) 
+print 'whichPlots =', whichPlots,' --> ',
+if whichPlots==0:print 'Processing all observables'
+if whichPlots==1:print 'Processing just AK4JetFlavor'
+
 
 # outDir = os.getcwd()+'/'
 outDir = '/user_data/rsyarif/'
@@ -941,7 +948,8 @@ for dist in distList:
 	datahists = {}
 	bkghists  = {}
 	sighists  = {}
-	#if dist!='minMlb' and dist!='HT':continue
+	if whichPlots==1:
+		if not ('AK4JetFlavor' in dist) :continue
 	for isEM in isEMlist:
 		print "LOADING: ",isEM
 		datahists.update(pickle.load(open(outDir+'/'+isEM+'/datahists_'+dist+'.p','rb')))

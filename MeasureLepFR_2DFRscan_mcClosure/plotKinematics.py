@@ -5,7 +5,7 @@ from ROOT import *
 from weights import *
 from cutList import *
 from samples import *
-
+from array import array
 
 gROOT.SetBatch(1)
 start_time = time.time()
@@ -15,18 +15,82 @@ start_time = time.time()
 # pfix='kinematics_condor_ddbkgscan_PRv9_FRv24_postPreapprovalF_PromptCount_V9_extScan_ttbarClosure_2017_3_9'
 # pfix='LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_saveLooseMC_2017_3_7_rizki_mcClosure_step1hadds'
 # pfix='kinematics_condor_ddbkgscan_ttbarClosure_2017_3_16'
-pfix='kinematics_condor_ddbkgscan_zjetsClosure_2017_3_15'
+# pfix='kinematics_condor_ddbkgscan_zjetsClosure_2017_3_15'
+# pfix='kinematics_condor_ddbkgscan_ttbarClosure_fixedBug_2017_4_30'
+# pfix='kinematics_condor_ddbkgscan_ttbarClosure_fixedBug_2017_5_1'
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_fixedBug_2017_5_1'
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_fixedBug_SR_2017_5_12'
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_fixedBug_CR2_2017_5_13'
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_fixedBug_PRv9_FRv35_2017_6_1'
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_fixedBug_PRv9_FRv36_2017_6_1'
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_fixedBug_2017_6_1'
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_fixedBug_PRv9_FRv37_2017_6_2'
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_fixedBug_PRv9_FRv36_2017_6_2' #has more plots
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_fixedBug_PRv9_FRv35_2017_6_2' #has more plots
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_fixedBug_2017_6_1' #Elpt MuPt
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_fixedBug_PRv9_FRv38_2017_6_5'
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_fixedBug_PRv9_FRv35a_2017_6_5' #--> double checking but also with muFR=.14instead of .13 in FRv35
+
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_PRv9_FRv48_elMVAvalueFix_SR_2017_9_18'
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_PRv9_FRv48_elMVAvalueFix_CR2_2017_9_18'
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_PRv9_FRv48_elMVAvalueFix_SRHT400_2017_9_18'
+# pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_PRv9_FRv48_elMVAvalueFix_SRHT400low_2017_9_18'
+pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_PRv9_FRv48_elMVAvalueFix_2017_9_20'
+
+doDDBKGscan=True
+
+# muFRtoPlot = 12
+# elFRtoPlot = 18
+
+# muFRtoPlot = 14
+# elFRtoPlot = 21
+
+# #SR ttbar
+# muFRtoPlot = 12	
+# elFRtoPlot = 24
+
+#CR2 ttbar
+# muFRtoPlot = 12	
+# elFRtoPlot = 18
+
+# muFRtoPlot = 12
+# elFRtoPlot = 24
 
 
-muFRtoPlot = 45
-elFRtoPlot = 97
+# muFRtoPlot = 28
+# elFRtoPlot = 35
 
 # muFRtoPlot = 40
 # elFRtoPlot = 98
 
-print ''
-print ' -- plotting: muFR = ', muFRtoPlot, ', elFR = ', elFRtoPlot, '--'
-print ''
+########### elMVAvalueFix #########
+
+#SR ttbar
+# muFRtoPlot = 11	
+# elFRtoPlot = 17
+
+#CR2 ttbar
+# muFRtoPlot = 11	
+# elFRtoPlot = 13
+
+#SRHT400 ttbar
+# muFRtoPlot = 12	
+# elFRtoPlot = 26
+
+#SRHT400low ttbar
+# muFRtoPlot = 11	
+# elFRtoPlot = 14
+
+#All region ttbar
+muFRtoPlot = 14	
+elFRtoPlot = 16
+
+###################################
+
+
+if(doDDBKGscan):print ''
+if(doDDBKGscan):print ' -- plotting: muFR = ', muFRtoPlot, ', elFR = ', elFRtoPlot, '--'
+if(doDDBKGscan):print ''
 
 
 # if len(sys.argv)>2:
@@ -71,7 +135,7 @@ doNormByBinWidth=False # not tested, may not work out of the box
 doOneBand = False
 if not doAllSys: doOneBand = True # Don't change this!
 blind = False
-yLog = False
+yLog = True
 
 doRealPull = False
 if doRealPull: doOneBand=False
@@ -111,7 +175,7 @@ def formatLowerHist(histogram):
 	histogram.GetXaxis().SetTitleSize(0.15)
 	histogram.GetXaxis().SetTitleOffset(0.95)
 	histogram.GetXaxis().SetNdivisions(506)
-	#histogram.GetXaxis().SetTitle("S_{T} (GeV)")
+# 	histogram.GetXaxis().SetTitle("Leptons p_{T} (GeV)")
 
 	histogram.GetYaxis().SetLabelSize(0.12)
 	histogram.GetYaxis().SetTitleSize(0.14)
@@ -178,7 +242,7 @@ plotList = [#distribution name as defined in "doHists.py"
 # 	'ST',
 # 	'MET',
 # 	'HTrebinned',
-	'STrebinned',
+# 	'STrebinned',
 # 	'METrebinned',
 # 
 # 	'NJets' ,
@@ -207,6 +271,11 @@ plotList = [#distribution name as defined in "doHists.py"
 # 	'MllOSallmin',
 # 	'Mlll'
 	]
+
+# lepPtbins = [0,10,30,40,60,80,100,120,140,160,180,220,260,300,400,500]
+lepPtbins = [0,10,30,40,60,80,100,120,140,160,180,220,300,400,500]
+rebinLepPt = False
+checkUncBand = True
 
 fit  = False
 fit2 = False
@@ -242,10 +311,44 @@ for discriminant in plotList:
 # 			print "There is no QCD!!!!!!!!"
 # 			print "Skipping QCD....."
 # 			pass
-		try: hDDBKG = RFile.Get(histPrefix+'_ddbkgMuFR'+str(muFRindex)+'_ElFR'+str(elFRindex)).Clone()
+		try: 
+			hDDBKG = RFile.Get(histPrefix+'_ddbkg').Clone()
+			if(doDDBKGscan): hDDBKG = RFile.Get(histPrefix+'_ddbkgMuFR'+str(muFRindex)+'_ElFR'+str(elFRindex)).Clone()
+			if(rebinLepPt): 
+				hTemp = RFile.Get(histPrefix+'_ddbkg').Clone()
+				#for bin in xrange(hDDBKG.GetSize()): print 'DDBKG bin',bin,' : ',hDDBKG.GetBinContent(bin)
+				hDDBKG = TH1D(hDDBKG.GetName(),hDDBKG.GetTitle(),len(lepPtbins)-1,array('d',lepPtbins))
+				for bin in xrange(hTemp.GetSize()): 
+					if (bin<11): hDDBKG.SetBinContent(bin,hTemp.GetBinContent(bin))
+					elif (bin==11):
+						content = 0.
+						for bin in [11,12]: content += hTemp.GetBinContent(bin)
+						hDDBKG.SetBinContent(11,content)
+					elif (bin==13):
+						content = 0.
+						for bin in [13,14,15,16]: content += hTemp.GetBinContent(bin)
+						hDDBKG.SetBinContent(12,content)
+# 					elif (bin==15):
+# 						content = 0.
+# 						for bin in [15,16]: content += hTemp.GetBinContent(bin)
+# 						hDDBKG.SetBinContent(13,content)
+					elif (bin==17):
+						content = 0.
+						for bin in [17,18]: content += hTemp.GetBinContent(bin)
+						hDDBKG.SetBinContent(13,content)
+					elif (bin==19):
+						content = 0.
+						for bin in [19,20]: content += hTemp.GetBinContent(bin)
+						hDDBKG.SetBinContent(14,content)
+					elif (bin==21): hDDBKG.SetBinContent(16,hTemp.GetBinContent(bin))
+				#for bin in xrange(hDDBKG.GetSize()): print 'bin',bin,' : ',hDDBKG.GetBinContent(bin)
 		except: 
-			print "There is no DDBKG MuFR"+str(muFRindex)+"_ElFR"+str(elFRindex)+"!!!!!!!!"
-			print "Skipping DDBKG MuFR"+str(muFRindex)+"_ElFR"+str(elFRindex)+"....."
+			if(doDDBKGscan):
+				print "There is no DDBKG MuFR"+str(muFRindex)+"_ElFR"+str(elFRindex)+"!!!!!!!!"
+				print "Skipping DDBKG MuFR"+str(muFRindex)+"_ElFR"+str(elFRindex)+"....."
+			else:
+				print "There is no DDBKG !!!!!!!!"
+				print "Skipping DDBKG....."
 			print "Skipping to draw for", cat
 			continue
 				
@@ -255,10 +358,38 @@ for discriminant in plotList:
 		except: pass
 		try: print discriminant,cat, "QCD", hQCD.Integral()
 		except: pass
-		try: print discriminant,cat, "DDBKG MuFR"+str(muFRindex)+"_ElFR"+str(elFRindex)+"", hDDBKG.Integral()
+		try: 
+			if(doDDBKGscan):
+				print discriminant,cat, "DDBKG MuFR"+str(muFRindex)+"_ElFR"+str(elFRindex)+"", hDDBKG.Integral()
+			else:
+				print discriminant,cat, "DDBKG"+"", hDDBKG.Integral()
 		except: pass
 	
 		hData = RFile.Get(histPrefix+'__DATA').Clone()
+		if(rebinLepPt): 
+			hTemp = RFile.Get(histPrefix+'__DATA').Clone()
+			#for bin in xrange(hData.GetSize()): print 'DATA bin',bin,' : ',hData.GetBinContent(bin)
+			hData = TH1D(hData.GetName(),hData.GetTitle(),len(lepPtbins)-1,array('d',lepPtbins))
+			for bin in xrange(hTemp.GetSize()): 
+				if (bin<11): hData.SetBinContent(bin,hTemp.GetBinContent(bin))
+				elif (bin==11):
+					content = 0.
+					for bin in [11,12]: content += hTemp.GetBinContent(bin)
+					hData.SetBinContent(11,content)
+				elif (bin==13):
+					content = 0.
+					for bin in [13,14,15,16]: content += hTemp.GetBinContent(bin)
+					hData.SetBinContent(12,content)
+				elif (bin==17):
+					content = 0.
+					for bin in [17,18]: content += hTemp.GetBinContent(bin)
+					hData.SetBinContent(13,content)
+				elif (bin==19):
+					content = 0.
+					for bin in [19,20]: content += hTemp.GetBinContent(bin)
+					hData.SetBinContent(14,content)
+				elif (bin==21): hData.SetBinContent(16,hTemp.GetBinContent(bin))
+			#for bin in xrange(hData.GetSize()): print 'DATA rebin',bin,' : ',hData.GetBinContent(bin)
 # 		hsig1 = RFile.Get(histPrefix+'__'+sig+'bwbw').Clone()
 # 		hsig2 = RFile.Get(histPrefix+'__'+sig+'tztz').Clone()
 # 		hsig3 = RFile.Get(histPrefix+'__'+sig+'thth').Clone()
@@ -298,7 +429,8 @@ for discriminant in plotList:
 						pass
 					try: systHists['ddbkg'+sys+ud] = RFile.Get(histPrefix+'__ddbkg__'+sys+'__'+ud).Clone()
 					except: 
-						print "Skipping",sys,"for DDBKG MuFR"+str(muFRindex)+"_ElFR"+str(elFRindex)
+						if(doDDBKGscan):print "Skipping",sys,"for DDBKG MuFR"+str(muFRindex)+"_ElFR"+str(elFRindex)
+						else: print "Skipping",sys,"for DDBKG"
 						pass
 
 		try: hTOPstatOnly = hTOP.Clone(hTOP.GetName()+'statOnly')
@@ -326,17 +458,22 @@ for discriminant in plotList:
 		except: pass
 		
 		try:
-			BINS_temp = hTOP.GetNbinsX()
+			BINS_temp = hData.GetNbinsX()
 		except:
 			BINS_temp = 0
 					
+		if(checkUncBand):print "Setting uncertainties:"
+		errorNorm = 0.
 		for ibin in range(1,BINS_temp+1):
 			errorUp = 0.
 			errorDn = 0.
 			errorSym = 0.
 
-			try: errorStatOnly = bkgHT.GetBinError(ibin)**2
-			except: 
+			try: 
+				errorStatOnly = bkgHT.GetBinError(ibin)**2
+				if(checkUncBand):print "Bin",ibin,"errorStatOnly : ",errorStatOnly 
+			except:
+				if(checkUncBand):print "Bin",ibin,"Skipping errorStatOnly!!" 
 				pass
 				continue
 			try: errorNorm = getNormUnc(hTOPstatOnly,ibin)
@@ -529,7 +666,8 @@ for discriminant in plotList:
 		leg.SetLineStyle(0)
 		leg.SetBorderSize(0) 
 		leg.SetTextFont(42)
-		if not blind: leg.AddEntry(hData,"ttbar 'DATA' ")
+# 		if not blind: leg.AddEntry(hData,"ttbar 'DATA' ")
+		if not blind: leg.AddEntry(hData,"t#bar{t}  Observed ")
 	
 		scaleFact1Str = ' x'+str(scaleFact1)
 		if not scaleSignals:
@@ -548,9 +686,13 @@ for discriminant in plotList:
 # 		try: leg.AddEntry(hTOP,"TOP","f")
 # 		try: leg.AddEntry(hTOP,"TTV","f")
 # 		except: pass
-		try: leg.AddEntry(hDDBKG,"tt 'DD BKG' (fr_{#mu}:"+str(muFRtoPlot)+",fr_{el}:"+str(elFRtoPlot)+")","f")
+# 		try: leg.AddEntry(hDDBKG,"tt 'DD BKG' (fr_{#mu}:"+str(muFRtoPlot)+",fr_{el}:"+str(elFRtoPlot)+")","f")
+		try: 
+			if(doDDBKGscan):leg.AddEntry(hDDBKG,"t#bar{t}  Predicted (FR_{#mu}:"+str(muFRtoPlot)+",FR_{el}:"+str(elFRtoPlot)+")","f")
+			else:leg.AddEntry(hDDBKG,"t#bar{t}  Predicted","f")
 		except: pass
-		leg.AddEntry(bkgHTgerr,"Bkg uncert. (stat. #oplus syst.)","f")
+# 		leg.AddEntry(bkgHTgerr,"Bkg uncert. (stat. #oplus syst.)","f")
+		leg.AddEntry(bkgHTgerr,"Bkg uncert. (stat.)","f")
 		leg.Draw("same")
 
 		prelimTex=TLatex()
@@ -559,7 +701,7 @@ for discriminant in plotList:
 		prelimTex.SetTextFont(42)
 		prelimTex.SetTextSize(0.07)
 		prelimTex.SetLineWidth(2)
-		prelimTex.DrawLatex(0.95,0.92,str(lumi)+" fb^{-1} (13 TeV)")
+# 		prelimTex.DrawLatex(0.95,0.92,str(lumi)+" fb^{-1} (13 TeV)")
 
 		prelimTex2=TLatex()
 		prelimTex2.SetNDC()
@@ -681,7 +823,8 @@ for discriminant in plotList:
 				pull.Fit("line4","R")
 				pull.Draw("E1 same")
 			else:
-				pull.Draw("E1")
+# 				pull.Draw("E1")
+				pull.Draw("E0")
 
 			if 'Bins' in discriminant:
 				print '******************************'
@@ -695,11 +838,21 @@ for discriminant in plotList:
 			pullUncBandTot=TGraphAsymmErrors(BkgOverBkg.Clone("pulluncTot"))
 		
 			try:
+				if(checkUncBand):print "CHECKING uncert bands:"
 				for binNo in range(0,hData.GetNbinsX()+2):
+					if(checkUncBand):print "		Bin: ",binNo," -- ",
+					if(checkUncBand):print "	EYhigh: ",round(totBkgTemp3[cat].GetErrorYhigh(binNo-1),2), 
+					if(checkUncBand):print "	EYlow : ",round(totBkgTemp3[cat].GetErrorYlow(binNo-1),2), 
+					if(checkUncBand):print "	content: ",round(bkgHT.GetBinContent(binNo),2), 
 					if bkgHT.GetBinContent(binNo)!=0:
+						if(checkUncBand):print "	uncBand: ",round(totBkgTemp3[cat].GetErrorYhigh(binNo-1)/bkgHT.GetBinContent(binNo),2)  
 						pullUncBandTot.SetPointEYhigh(binNo-1,totBkgTemp3[cat].GetErrorYhigh(binNo-1)/bkgHT.GetBinContent(binNo))
 						pullUncBandTot.SetPointEYlow(binNo-1,totBkgTemp3[cat].GetErrorYlow(binNo-1)/bkgHT.GetBinContent(binNo))			
-			except: pass
+					else:
+						if(checkUncBand):print "	","not computable" 						
+			except: 
+				if(checkUncBand):print "		Skipping bin ",binNo, "!!"					
+				pass
 					
 			if not doOneBand: pullUncBandTot.SetFillStyle(3001)
 			else: pullUncBandTot.SetFillStyle(3344)
@@ -786,16 +939,28 @@ for discriminant in plotList:
 		if doRealPull: savePrefix+='_pull'
 		if yLog: savePrefix+='_logy'
 
-		if doOneBand:
-# 			c1.SaveAs(savePrefix+"_totBand"+"_ddbkg_MuFR"+str(muFRindex)+"_ElFR"+str(elFRindex)+".pdf")
-			c1.SaveAs(savePrefix+"_totBand"+"_ddbkg_MuFR"+str(muFRindex)+"_ElFR"+str(elFRindex)+".png")
-# 			c1.SaveAs(savePrefix+"_totBand"+"_ddbkg_MuFR"+str(muFRindex)+"_ElFR"+str(elFRindex)+".root")
-# 			c1.SaveAs(savePrefix+"totBand"+"_ddbkg_MuFR"+str(muFRindex)+"_ElFR"+str(elFRindex)+".C")
+		if doDDBKGscan:
+			if doOneBand:
+				c1.SaveAs(savePrefix+"_totBand"+"_ddbkg_MuFR"+str(muFRindex)+"_ElFR"+str(elFRindex)+".pdf")
+				c1.SaveAs(savePrefix+"_totBand"+"_ddbkg_MuFR"+str(muFRindex)+"_ElFR"+str(elFRindex)+".png")
+	# 			c1.SaveAs(savePrefix+"_totBand"+"_ddbkg_MuFR"+str(muFRindex)+"_ElFR"+str(elFRindex)+".root")
+	# 			c1.SaveAs(savePrefix+"totBand"+"_ddbkg_MuFR"+str(muFRindex)+"_ElFR"+str(elFRindex)+".C")
+			else:
+				c1.SaveAs(savePrefix+"_ddbkg_MuFR"+str(muFRindex)+"_ElFR"+str(elFRindex)+".pdf")
+				c1.SaveAs(savePrefix+"_ddbkg_MuFR"+str(muFRindex)+"_ElFR"+str(elFRindex)+".png")
+	# 			c1.SaveAs(savePrefix+"_ddbkg_MuFR"+str(muFRindex)+"_ElFR"+str(elFRindex)+".root")
+	# 			c1.SaveAs(savePrefix+"_ddbkg_MuFR"+str(muFRindex)+"_ElFR"+str(elFRindex)+".C")
 		else:
-# 			c1.SaveAs(savePrefix+"_ddbkg_MuFR"+str(muFRindex)+"_ElFR"+str(elFRindex)+".pdf")
-			c1.SaveAs(savePrefix+"_ddbkg_MuFR"+str(muFRindex)+"_ElFR"+str(elFRindex)+".png")
-# 			c1.SaveAs(savePrefix+"_ddbkg_MuFR"+str(muFRindex)+"_ElFR"+str(elFRindex)+".root")
-# 			c1.SaveAs(savePrefix+"_ddbkg_MuFR"+str(muFRindex)+"_ElFR"+str(elFRindex)+".C")
+			if doOneBand:
+				c1.SaveAs(savePrefix+"_totBand"+"_ddbkg.pdf")
+				c1.SaveAs(savePrefix+"_totBand"+"_ddbkg.png")
+	# 			c1.SaveAs(savePrefix+"_totBand"+"_ddbkg.root")
+	# 			c1.SaveAs(savePrefix+"totBand"+"_ddbkg.C")
+			else:
+				c1.SaveAs(savePrefix+"_ddbkg.pdf")
+				c1.SaveAs(savePrefix+"_ddbkg.png")
+	# 			c1.SaveAs(savePrefix+"_ddbkg.root")
+	# 			c1.SaveAs(savePrefix+"_ddbkg.C")
 			
 	RFile.Close()
 

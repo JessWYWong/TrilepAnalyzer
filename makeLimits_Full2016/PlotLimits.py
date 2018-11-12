@@ -9,13 +9,19 @@ gROOT.SetBatch(1)
 from tdrStyle import *
 setTDRStyle()
 
-blind=True
+blind=False
 saveKey=''
-signal = 'T'#'B'
+signal = 'T'
+if('_BB' in sys.argv[1]): signal = 'B'
 lumiPlot = '35.9'
 lumiStr = '35p867'
 chiral=''#'right'
-discriminant='STrebinned'
+# discriminant='STrebinned'
+# discriminant='ST'
+discriminant='STrebinnedv2'
+# discriminant='HTrebinned'
+if('_FRv48' in sys.argv[1]):discriminant='minMlllBv4'
+
 histPrefix=discriminant+'_'+str(lumiStr)+'fb'+chiral
 stat=''#0.75
 isRebinned=''
@@ -28,19 +34,35 @@ isRebinned=''
 # cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets0_HT0_ST1100_mllOS20'
 
 # cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20'
-cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST700_mllOS20'
+# cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST700_mllOS20'
 # cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST800_mllOS20'
 # cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST900_mllOS20'
 # cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1000_mllOS20'
-# cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1100_mllOS20'
+# cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1300_mllOS20'
+# cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1400_mllOS20'
+# cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1500_mllOS20'
+# cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1600_mllOS20'
 
 # cutString='lep1Pt30_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20'
 
 # cutString='lep1Pt0_MET20_jetPt0_NJets3_NBJets1_HT0_ST600_mllOS20'
 
+cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT400_ST1000_mllOS20'
+
+if len(sys.argv)>2: 
+	cutString=sys.argv[2]
+
+
 # cutString+='/4binsCount_updatedLumi_updatedLepIdUnc_addmistag_normRENORMPDF'
 # cutString+='/4binsCount_newMllOScut/'
-cutString+='/4binsCount/'
+# cutString+='/4binsCount/'
+# cutString+='/4binsCount_accurateLHEsys/'
+# cutString+='/4binsCount_accurateLHEsys_FRsysMar28/'
+# cutString+='/Shape_accurateLHESys_FRsysMar28/'
+
+if len(sys.argv)>3: 
+	cutString+='/'+sys.argv[3]+'/'
+
 
 mass = array('d', [800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800])
 masserr = array('d', [0,0,0,0,0,0,0,0,0,0,0,0])
@@ -60,9 +82,15 @@ theory_br = [.1285,.1285,.1285,.1285,.1285,.1285,.1285,.1285,.1285,.1285]
 if chiral=='right':theory_xsec  = [0.442,0.190,0.0877,0.0427,0.0217,0.0114,0.00618,0.00342,0.00193,0.00111]
 elif chiral=='left':theory_xsec = [0.442,0.190,0.0877,0.0427,0.0217,0.0114,0.00618,0.00342,0.00193,0.00111]
 else: print "Please enter left or right"
-theory_xsec = [0.455,0.196,0.0903,0.0440,0.0224,0.0118,0.00639,0.00354,0.00200,0.001148,0.000666,0.000391]#pb
-xsecErrUp = [19.,8.5,4.0,2.1,1.1,0.64,0.37,0.22,0.14,0.087,0.056,0.037]#fb
-xsecErrDn = [19.,8.1,3.8,1.9,1.0,0.56,0.32,0.19,0.12,0.072,0.045,0.029]#fb
+
+# theory_xsec = [0.455,0.196,0.0903,0.0440,0.0224,0.0118,0.00639,0.00354,0.00200,0.001148,0.000666,0.000391]#pb
+# xsecErrUp = [19.,8.5,4.0,2.1,1.1,0.64,0.37,0.22,0.14,0.087,0.056,0.037]#fb
+# xsecErrDn = [19.,8.1,3.8,1.9,1.0,0.56,0.32,0.19,0.12,0.072,0.045,0.029]#fb
+
+theory_xsec = [0.196,0.0903,0.0440,0.0224,0.0118,0.00639,0.00354,0.00200,0.001148,0.000666,0.000391]#pb
+xsecErrUp = [8.5,4.0,2.1,1.1,0.64,0.37,0.22,0.14,0.087,0.056,0.037]#fb
+xsecErrDn = [8.1,3.8,1.9,1.0,0.56,0.32,0.19,0.12,0.072,0.045,0.029]#fb
+
 theory_xsec_up = [item/1000 for item in xsecErrUp]
 theory_xsec_dn = [item/1000 for item in xsecErrDn]
 if signal=='X53':
@@ -181,7 +209,9 @@ def PlotLimits(limitDir,limitFile,tempKey):
     c4.SetLogy()
 
     expected95.Draw("a3")
-    expected95.GetYaxis().SetRangeUser(.008+.00001,10.45)
+#     expected95.GetYaxis().SetRangeUser(.008+.00001,10.45)
+#     expected95.GetYaxis().SetRangeUser(.004+.00001,10.45)
+    expected95.GetYaxis().SetRangeUser(.0008+.00001,1.045)
     expected95.GetXaxis().SetRangeUser(800,1800)
     if tempKey=='nB0': expected95.GetYaxis().SetRangeUser(.008+.00001,25.45)   
     expected95.GetXaxis().SetTitle(signal+" mass [GeV]")
@@ -250,9 +280,22 @@ BRs={}
 # BRs['BW']=[0.50,0.0,0.0,0.0,0.0,0.0,0.0,0.2,0.2,0.2,0.2,0.2,0.4,0.4,0.4,0.4,0.6,0.6,0.6,0.8,0.8,1.0]
 # BRs['TH']=[0.25,0.0,0.2,0.4,0.6,0.8,1.0,0.0,0.2,0.4,0.6,0.8,0.0,0.2,0.4,0.6,0.0,0.2,0.4,0.0,0.2,0.0]
 # BRs['TZ']=[0.25,1.0,0.8,0.6,0.4,0.2,0.0,0.8,0.6,0.4,0.2,0.0,0.6,0.4,0.2,0.0,0.4,0.2,0.0,0.2,0.0,0.0]
+
 BRs['BW']=[0.50,0.0,0.0]
 BRs['TH']=[0.25,0.5,0.0]
 BRs['TZ']=[0.25,0.5,1.0]
+
+# BRs['BW']=[0.50]
+# BRs['TH']=[0.25]
+# BRs['TZ']=[0.25]
+# BRs['BW']=[0.0]
+# BRs['TH']=[0.0]
+# BRs['TZ']=[1.0]
+
+BRs['TW']=[0.50,0.0,1.0]
+BRs['BH']=[0.25,0.5,0.0]
+BRs['BZ']=[0.25,0.5,0.0]
+
 nBRconf=len(BRs['BW'])
 if not doBRScan: nBRconf=1
 
@@ -261,13 +304,22 @@ if not doBRScan: nBRconf=1
 # tempKeys = ['optimization_condor_80x_MultiLep_Full2016_Moriond17_PRv6_FRv18bSys_fixedLumi_newMllOScut_fixedAllSYS_step2_addmistag_addMoreSignal_2017_2_23']
 # tempKeys = ['optimization_condor_PRv6_FRv20b_newMllOSV2_Allsys_2017_3_1']
 # tempKeys = ['optimization_reMiniAOD_PRv6_FRv24_newMuTrkSF_AllSys_2017_3_5']
-tempKeys = ['optimization_reMiniAOD_PRv9_FRv24_newFRsys_AllSys_2017_3_10']
+# tempKeys = ['optimization_reMiniAOD_PRv9_FRv24_newFRsys_AllSys_2017_3_10']
+# tempKeys = ['optimization_reMiniAOD_PRv9_FRv30CR2_newRunH_AllSys_2017_3_27']
+# tempKeys = ['optimization_reMiniAOD_PRv9_FRv30CR2_newRunH_AllSys_2017_3_28']
+tempKeys = ['optimization_reMiniAOD_PRv9_FRv30CR2_newRunH_correctedMuTrkSF_AllSys_2017_4_4']
+
+if len(sys.argv)>1: 
+	tempKeys=[sys.argv[1]]
+
+
 expLims = []
 obsLims = []
 for tempKey in tempKeys:
 	for BRind in range(nBRconf):
 		BRconfStr=''
 		if doBRScan: BRconfStr='_bW'+str(BRs['BW'][BRind]).replace('.','p')+'_tZ'+str(BRs['TZ'][BRind]).replace('.','p')+'_tH'+str(BRs['TH'][BRind]).replace('.','p')
+		if('_BB' in sys.argv[1]) and doBRScan: BRconfStr='_tW'+str(BRs['TW'][BRind]).replace('.','p')+'_bZ'+str(BRs['BZ'][BRind]).replace('.','p')+'_bH'+str(BRs['BH'][BRind]).replace('.','p')
 		limitDir='/user_data/rsyarif/limits/'+tempKey+BRconfStr+'/'
 		limitFile='/limits_templates_'+discriminant+'_'+signal+signal+'M700'+chiral+BRconfStr+'_'+str(lumiStr)+'fb'+isRebinned+'_expected.txt'	
 		expTemp,obsTemp = PlotLimits(limitDir,limitFile,tempKey+BRconfStr)

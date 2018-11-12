@@ -75,15 +75,46 @@ def get_model3L():
             try: model.add_lognormal_uncertainty('lumiSys', math.log(1.026), proc, '*')
             except RuntimeError: pass
 
-        else:
-            try: model.add_lognormal_uncertainty('FRsys',math.log(1.20),proc,'triLepMMM')
+#         else: #From ttbar closure
+#             try: model.add_lognormal_uncertainty('FRsys',math.log(1.20),proc,'triLepMMM')
+#             except RuntimeError: pass
+#             try: model.add_lognormal_uncertainty('FRsys',math.log(1.12),proc,'triLepEMM')
+#             except RuntimeError: pass
+#             try: model.add_lognormal_uncertainty('FRsys',math.log(1.26),proc,'triLepEEM')
+#             except RuntimeError: pass
+#             try: model.add_lognormal_uncertainty('FRsys',math.log(1.24),proc,'triLepEEE')
+#             except RuntimeError: pass
+
+#         else: #From ttbar closure + (data-MC)/ddbkg _extraFRsys17Aug
+#             try: model.add_lognormal_uncertainty('FRsys',math.log(1.36),proc,'triLepMMM')
+#             except RuntimeError: pass
+#             try: model.add_lognormal_uncertainty('FRsys',math.log(1.18),proc,'triLepEMM')
+#             except RuntimeError: pass
+#             try: model.add_lognormal_uncertainty('FRsys',math.log(1.29),proc,'triLepEEM')
+#             except RuntimeError: pass
+#             try: model.add_lognormal_uncertainty('FRsys',math.log(1.38),proc,'triLepEEE')
+#             except RuntimeError: pass
+
+        else: #From ttbar closure + (data-MC)/ddbkg Sep20-21 for FRv48sys
+            try: model.add_lognormal_uncertainty('FRsys',math.log(1.24),proc,'triLepMMM')
             except RuntimeError: pass
-            try: model.add_lognormal_uncertainty('FRsys',math.log(1.12),proc,'triLepEMM')
+            try: model.add_lognormal_uncertainty('FRsys',math.log(1.19),proc,'triLepEMM')
             except RuntimeError: pass
-            try: model.add_lognormal_uncertainty('FRsys',math.log(1.26),proc,'triLepEEM')
+            try: model.add_lognormal_uncertainty('FRsys',math.log(1.31),proc,'triLepEEM')
             except RuntimeError: pass
-            try: model.add_lognormal_uncertainty('FRsys',math.log(1.24),proc,'triLepEEE')
+            try: model.add_lognormal_uncertainty('FRsys',math.log(1.34),proc,'triLepEEE')
             except RuntimeError: pass
+
+#         else: #From ttbar closure + (data-MC)/ddbkg Sep20-21 for FRv49sys
+#             try: model.add_lognormal_uncertainty('FRsys',math.log(1.20),proc,'triLepMMM')
+#             except RuntimeError: pass
+#             try: model.add_lognormal_uncertainty('FRsys',math.log(1.18),proc,'triLepEMM')
+#             except RuntimeError: pass
+#             try: model.add_lognormal_uncertainty('FRsys',math.log(1.38),proc,'triLepEEM')
+#             except RuntimeError: pass
+#             try: model.add_lognormal_uncertainty('FRsys',math.log(1.45),proc,'triLepEEE')
+#             except RuntimeError: pass
+
 
 #     flatpars = {'mean': 0.0, 
 #                 'range': [float('-inf'), float('inf')], 

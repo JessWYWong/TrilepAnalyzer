@@ -8,10 +8,13 @@ void DrawChiSq(TFile *f,TString outname,Double_t xp, Double_t yp){
 
   TH2D *h = (TH2D*) f->Get("chiSq_average");
 
+  h->GetXaxis()->SetRangeUser(0.01,0.75);
+  h->GetYaxis()->SetRangeUser(0.01,0.75);
+
   h->GetXaxis()->SetTitle("#mu FR");
   h->GetYaxis()->SetTitle("el FR");
 
-  h->Draw("colzcont2");
+  h->Draw("colzcont2logz");
 
   Double_t x = h->GetXaxis()->GetBinCenter( h->GetXaxis()->FindBin(xp) );
   Double_t y = h->GetYaxis()->GetBinCenter( h->GetYaxis()->FindBin(yp) );
@@ -32,6 +35,7 @@ void DrawChiSq(TFile *f,TString outname,Double_t xp, Double_t yp){
   l_ver->Draw("same");
 
   c->SaveAs(outname+".png");
+  c->SaveAs(outname+".pdf");
   c->SaveAs(outname+".C");
 
 }
@@ -173,11 +177,55 @@ void DrawChiSq(){
 //   DrawChiSq(f,"chiSq_average_lepPt_PRv6_ttbarClosure_35p867fb",0.0,0.0);
 //   f->Close();
 
-  filename = "/user_data/rsyarif/kinematics_condor_ddbkgscan_PRv9_FRv24_postPreapprovalF_PromptCount_V9_extScan_ttbarClosure_2017_3_9/chiSq_lepPt_35p867fb.root";
-  f = TFile::Open(filename);
-  DrawChiSq(f,"chiSq_average_lepPt_PRv9_FRv24_postPreapprovalF_PromptCount_V9_extScan_ttbarClosure_35p867fb",0.0,0.0);
-  f->Close();
+//   filename = "/user_data/rsyarif/kinematics_condor_ddbkgscan_PRv9_FRv24_postPreapprovalF_PromptCount_V9_extScan_ttbarClosure_2017_3_9/chiSq_lepPt_35p867fb.root";
+//   f = TFile::Open(filename);
+//   DrawChiSq(f,"chiSq_average_lepPt_PRv9_FRv24_postPreapprovalF_PromptCount_V9_extScan_ttbarClosure_35p867fb",0.0,0.0);
+//   f->Close();
 
+//   filename = "/user_data/rsyarif/kinematics_condor_ddbkgscan_ttbarClosure_fixedBug_2017_5_1/chiSq_lepPt_35p867fb.root";
+//   f = TFile::Open(filename);
+//   DrawChiSq(f,"chiSq_average_lepPt_PRv9_ttbarClosure_35p867fb",0.28,0.35);
+//   f->Close();
+
+//   filename = "/user_data/rsyarif/kinematics_condor_FULLddbkgscan_ttbarClosure_fixedBug_2017_5_1/chiSq_lepPt_35p867fb.root";
+//   f = TFile::Open(filename);
+//   DrawChiSq(f,"chiSq_average_lepPt_PRv9_ttbarClosure_fixedBug_35p867fb_2017_5_1",0.14,0.21);
+//   f->Close();
+
+//   filename = "/user_data/rsyarif/kinematics_condor_FULLddbkgscan_ttbarClosure_fixedBug_SR_2017_5_12/chiSq_lepPt_35p867fb.root";
+//   f = TFile::Open(filename);
+//   DrawChiSq(f,"chiSq_average_lepPt_PRv9_ttbarClosure_fixedBug_35p867fb_SR_2017_5_12",0.12,0.24);
+//   f->Close();
+
+//   filename = "/user_data/rsyarif/kinematics_condor_FULLddbkgscan_ttbarClosure_fixedBug_CR2_2017_5_13/chiSq_lepPt_35p867fb.root";
+//   f = TFile::Open(filename);
+//   DrawChiSq(f,"chiSq_average_lepPt_PRv9_ttbarClosure_fixedBug_35p867fb_CR2_2017_5_13",0.12,0.18);
+//   f->Close();
+
+//   filename = "/user_data/rsyarif/kinematics_condor_FULLddbkgscan_ttbarClosure_PRv9_FRv48_elMVAvalueFix_SR_2017_9_18/chiSq_lepPt_35p867fb.root";
+//   f = TFile::Open(filename);
+//   DrawChiSq(f,"chiSq_average_lepPt_PRv9_ttbarClosure_elMVAvalueFix_35p867fb_SR_2017_9_18",0.11,0.17);
+//   f->Close();
+// 
+//   filename = "/user_data/rsyarif/kinematics_condor_FULLddbkgscan_ttbarClosure_PRv9_FRv48_elMVAvalueFix_CR2_2017_9_18/chiSq_lepPt_35p867fb.root";
+//   f = TFile::Open(filename);
+//   DrawChiSq(f,"chiSq_average_lepPt_PRv9_ttbarClosure_elMVAvalueFix_35p867fb_CR2_2017_9_18",0.11,0.13);
+//   f->Close();
+// 
+//   filename = "/user_data/rsyarif/kinematics_condor_FULLddbkgscan_ttbarClosure_PRv9_FRv48_elMVAvalueFix_SRHT400_2017_9_18/chiSq_lepPt_35p867fb.root";
+//   f = TFile::Open(filename);
+//   DrawChiSq(f,"chiSq_average_lepPt_PRv9_ttbarClosure_elMVAvalueFix_35p867fb_SRHT400_2017_9_18",0.12,0.26);
+//   f->Close();
+// 
+//   filename = "/user_data/rsyarif/kinematics_condor_FULLddbkgscan_ttbarClosure_PRv9_FRv48_elMVAvalueFix_SRHT400low_2017_9_18/chiSq_lepPt_35p867fb.root";
+//   f = TFile::Open(filename);
+//   DrawChiSq(f,"chiSq_average_lepPt_PRv9_ttbarClosure_elMVAvalueFix_35p867fb_SRHT400low_2017_9_18",0.11,0.14);
+//   f->Close();
+
+  filename = "/user_data/rsyarif/kinematics_condor_FULLddbkgscan_ttbarClosure_PRv9_FRv48_elMVAvalueFix_2017_9_20/chiSq_lepPt_35p867fb.root";
+  f = TFile::Open(filename);
+  DrawChiSq(f,"chiSq_average_lepPt_PRv9_ttbarClosure_elMVAvalueFix_35p867fb_2017_9_20",0.14,0.16);
+  f->Close();
 
   gApplication->Terminate();
 

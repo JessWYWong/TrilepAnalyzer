@@ -19,8 +19,12 @@ start_time = time.time()
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv30CR2Sys2Only_correctedMuTrkSF_step1hadds_step2/nominal'
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv30CR2Sys4Only_correctedMuTrkSF_step1hadds_step2/nominal'
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv10_FRv42CR2_correctedMuTrkSF_step1hadds_step2/nominal'
-step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv45FRSRHT400low_correctedMuTrkSF_moreVars_fixlepOrder_step1hadds_step2/nominal'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv45FRSRHT400low_correctedMuTrkSF_moreVars_fixlepOrder_step1hadds_step2/nominal'
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv47FRSRHT400low2Dext_correctedMuTrkSF_moreVars_fixlepOrder_ptRel_step1hadds_step2/nominal'
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv45FRSRHT400low_fixedMinMlllBshifts_step1hadds_step2/nominal'
+
+# step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv48sys_elMVAaltFix_step1hadds_step2/nominal'
+step1Dir = '/user_data/rsyarif/LJMet80x_3lepTT_Full2016_Moriond17_reMiniAOD_nuBTVSF_modMETfilt_newRunH_2017_3_21_rizki_PRv9_FRv49sys_elMVAaltFix_step1hadds_step2/nominal'
 
 print 'grabbing files from ', step1Dir
 
@@ -75,15 +79,16 @@ for run_ in run:
 		bkgList.append('DataDrivenBkg'+dilep_+run_)
 		ddbkgList.append('DataDrivenBkg'+dilep_+run_)
 
-bkgStackList = ['VV','VVV','TTV','ddbkg']
-vvList    = ['WZ','ZZ']
-vvvList   = ['WWW','WWZ','WZZ','ZZZ']
-ttvList   = ['TTWl','TTZl']
-#ttjetList = ['TTJetsPH']
-# tList     = ['Tt','Ts','TtW','TbtW']
-
+# bkgStackList = ['VV','VVV','TTV','ddbkg']
+# vvList    = ['WZ','ZZ']
+# vvvList   = ['WWW','WWZ','WZZ','ZZZ']
+# ttvList   = ['TTWl','TTZl']
+# #ttjetList = ['TTJetsPH']
+# # tList     = ['Tt','Ts','TtW','TbtW']
+# 
 # whichSignal = 'TT' #TT, BB, or X53X53
 whichSignal = 'BB' #TT, BB, or X53X53
+print 'whichSignal = ', whichSignal
 
 signalMassRange = [800,1800]
 sigList = [whichSignal+'M'+str(mass) for mass in range(signalMassRange[0],signalMassRange[1]+100,100)]
@@ -91,22 +96,23 @@ if whichSignal=='X53X53': sigList = [whichSignal+'M'+str(mass)+chiral for mass i
 if whichSignal=='TT': decays = ['BWBW','THTH','TZTZ','TZBW','THBW','TZTH'] #T' decays
 if whichSignal=='BB': decays = ['TWTW','BHBH','BZBZ','BZTW','BHTW','BZBH'] #B' decays
 if whichSignal=='X53X53': decays = [''] #decays to tWtW 100% of the time
+# 
+# doBRScan = False
+# BRs={}
+# BRs['BW']=[0.50,0.0,0.0]#,0.0,0.0,0.0,0.0,0.2,0.2,0.2,0.2,0.2,0.4,0.4,0.4,0.4,0.6,0.6,0.6,0.8,0.8,1.0]
+# BRs['TH']=[0.25,0.0,0.2]#,0.4,0.6,0.8,1.0,0.0,0.2,0.4,0.6,0.8,0.0,0.2,0.4,0.6,0.0,0.2,0.4,0.0,0.2,0.0]
+# BRs['TZ']=[0.25,1.0,0.8]#,0.6,0.4,0.2,0.0,0.8,0.6,0.4,0.2,0.0,0.6,0.4,0.2,0.0,0.4,0.2,0.0,0.2,0.0,0.0]
+# nBRconf=len(BRs['BW'])
+# if not doBRScan: nBRconf=1
 
-doBRScan = False
-BRs={}
-BRs['BW']=[0.50,0.0,0.0]#,0.0,0.0,0.0,0.0,0.2,0.2,0.2,0.2,0.2,0.4,0.4,0.4,0.4,0.6,0.6,0.6,0.8,0.8,1.0]
-BRs['TH']=[0.25,0.0,0.2]#,0.4,0.6,0.8,1.0,0.0,0.2,0.4,0.6,0.8,0.0,0.2,0.4,0.6,0.0,0.2,0.4,0.0,0.2,0.0]
-BRs['TZ']=[0.25,1.0,0.8]#,0.6,0.4,0.2,0.0,0.8,0.6,0.4,0.2,0.0,0.6,0.4,0.2,0.0,0.4,0.2,0.0,0.2,0.0,0.0]
-nBRconf=len(BRs['BW'])
-if not doBRScan: nBRconf=1
-
-topList = ['TTWl','TTZl'] #NoTTJets, No singleT
-ewkList = ['WZ','ZZ','WWW','WWZ','WZZ','ZZZ'] #No DY, WJets, WW
-# ewkList = ['WZ','WWW']#No DY, WJets, WW
-
-scaleSignalXsecTo1pb = True # this has to be "True" if you are making templates for limit calculation!!!!!!!!
+# topList = ['TTWl','TTZl'] #NoTTJets, No singleT
+# ewkList = ['WZ','ZZ','WWW','WWZ','WZZ','ZZZ'] #No DY, WJets, WW
+# # ewkList = ['WZ','WWW']#No DY, WJets, WW
+# 
+# scaleSignalXsecTo1pb = True # this has to be "True" if you are making templates for limit calculation!!!!!!!!
 scaleLumi = False
 lumiScaleCoeff = 1.
+
 doAllSys = True
 
 
@@ -136,12 +142,12 @@ metCut=20
 njetsCut=3
 nbjetsCut=1
 htCut=0
-stCut=600
+stCut=0
 mllOSCut=20
 isPassTrig_dilep=1
 isPassTrilepton=1
-ptRelCut=10
-minDRlepJetCut=0.2
+ptRelCut=0
+minDRlepJetCut=0
 
 catList  =['EEE','EEM','EMM','MMM']
 
@@ -255,7 +261,7 @@ def readTree(file):
 	tTree = tFile.Get('ljmet')
 	return tFile, tTree
 
-displayProcess=False
+displayProcess=True
 print "READING TREES"
 shapesFiles = ['jec','jer']
 # shapesFiles = []
@@ -315,10 +321,10 @@ plotList = {#discriminantName:(discriminantLJMETName, binning, xAxisLabel)
 
 # iPlot='ST' #choose a discriminant from plotList!
 # iPlot='STrebinned' #choose a discriminant from plotList!
-# iPlot='STrebinnedv2' #choose a discriminant from plotList!
+iPlot='STrebinnedv2' #choose a discriminant from plotList!
 # iPlot='HTrebinned' #choose a discriminant from plotList!
 # iPlot='NJets' #choose a discriminant from plotList! NJets can only be used with CutNCount!! Use STrebinned for shape!
-iPlot='minMlllBv4' #choose a discriminant from plotList!
+if('FRv48sys' in step1Dir): iPlot='minMlllBv4' #choose a discriminant from plotList!
 if(displayProcess):print "PLOTTING:",iPlot
 if(displayProcess):print "         LJMET Variable:",plotList[iPlot][0]
 if(displayProcess):print "         X-AXIS TITLE  :",plotList[iPlot][2]
