@@ -8,7 +8,7 @@ cutList = {'isPassTrig': 0,
 		   'subLeadJetPtCut':0, 
 		   'thirdJetPtCut':0,
 		   'metCut': 20,
-		   'njetsCut': 1, #FRCR2:2, FRCR1:1, SR:3 
+		   'njetsCut': 2, #FRCR2:2, FRCR1:1, SR:3 
 		   'nbjetsCut':1,
 		   'drCut':0, 
 	   	   'stCut':0,

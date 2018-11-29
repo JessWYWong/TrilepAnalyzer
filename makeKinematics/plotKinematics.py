@@ -265,14 +265,14 @@ plotList = [#distribution name as defined in "doHists.py"
 # 	'JetEta',
 # # 	'Jet1Eta',
 # # 	'Jet2Eta',
-# 	'JetPt' ,
+	'JetPt' ,
 # # 	'Jet1Pt' ,
 # # 	'Jet2Pt' ,
 # 
 # 
 # 	'HT',
 # # 	'ST',
-# # 	'MET',
+# 	'MET',
 # 	'HTrebinned',
 # 	'ST',
 # # 	'STrebinned',
@@ -282,7 +282,7 @@ plotList = [#distribution name as defined in "doHists.py"
 # # 	'STrebinnedv3',
 # 	'METrebinned',
 # 
-# 	'NJets' ,
+	'NJets' ,
 # 	'NBJets',
 # 	#'NBJetsCorr',
 # # 	'mindeltaRlepJets',
