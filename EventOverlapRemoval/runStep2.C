@@ -17,26 +17,23 @@ void runStep2(){
 
   std::vector<TString> fileNames;
 
-   fileNames.push_back("DoubleEG_RRB_hadd.root");
-   fileNames.push_back("DoubleMuon_RRB_hadd.root");
-   fileNames.push_back("MuonEG_RRB_hadd.root");
-   fileNames.push_back("DoubleEG_RRC_hadd.root");
-   fileNames.push_back("DoubleMuon_RRC_hadd.root");
-   fileNames.push_back("MuonEG_RRC_hadd.root");
-   fileNames.push_back("DoubleEG_RRD_hadd.root");
-   fileNames.push_back("DoubleMuon_RRD_hadd.root");
-   fileNames.push_back("MuonEG_RRD_hadd.root");
-   fileNames.push_back("DoubleEG_RRE_hadd.root");
-   fileNames.push_back("DoubleMuon_RRE_hadd.root");
-   fileNames.push_back("MuonEG_RRE_hadd.root");
-   fileNames.push_back("DoubleEG_RRF_hadd.root");
-   fileNames.push_back("DoubleMuon_RRF_hadd.root");
-   fileNames.push_back("MuonEG_RRF_hadd.root");
-   fileNames.push_back("DoubleEG_RRF_v2_hadd.root");
-   fileNames.push_back("DoubleMuon_RRF_v2_hadd.root");
-   fileNames.push_back("MuonEG_RRF_v2_hadd.root");
+   fileNames.push_back("DoubleMuon_RunA_hadd.root");
+   fileNames.push_back("DoubleMuon_RunB_hadd.root");
+   fileNames.push_back("DoubleMuon_RunC_hadd.root");
+   fileNames.push_back("DoubleMuon_RunD_hadd.root");
+
+   fileNames.push_back("MuonEG_RunA_hadd.root");
+   fileNames.push_back("MuonEG_RunB_hadd.root");
+   fileNames.push_back("MuonEG_RunC_hadd.root");
+   fileNames.push_back("MuonEG_RunD_hadd.root");
+
+   fileNames.push_back("EGamma_RunA_hadd.root");
+   fileNames.push_back("EGamma_RunB_hadd.root");
+   fileNames.push_back("EGamma_RunC_hadd.root");
+   fileNames.push_back("EGamma_RunD_hadd.root");
+
 //    
-  inputDir="LJMet94x_3lepTT_2017datasets_2018_11_7_rizki_step1hadds";
+  inputDir="LJMet102x_3lepTT_2018datasets_2018_11_22_rizki_step1hadds";
   
   subDir="nominal";
 

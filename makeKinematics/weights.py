@@ -1,8 +1,7 @@
 #!/usr/bin/python
 
-# Json lumi with normtag: BCDEF - https://twiki.cern.ch/twiki/bin/view/CMS/PdmV2017Analysis - Nov 11, 2018.
-# 4.823 + 9.664 + 4.252 + 9.278 + 13.540
-targetlumi = 41557. # 1/pb  
+# Json lumi with normtag: ABCD - https://twiki.cern.ch/twiki/bin/view/CMS/PdmV2018Analysis - Nov 29, 2018.
+targetlumi = 58830. # 1/pb  
 
 BR={}
 BR['BW'] = 0.5
@@ -29,19 +28,19 @@ BR['BBBHBH'] = BR['BH']*BR['BH']
 # Number of processed MC events (before selections)
 nRun={}
 
-### updated Nov 13, 2018 - start
-nRun['WW'] = 7791498. 
-nRun['WZ'] = 965938. 
-nRun['ZZ'] = 103995630. 
-nRun['WWW'] = 203246.  
-nRun['WWZ'] = 219964. 	
-nRun['WZZ'] = 219660.   
-nRun['ZZZ'] = 214318. 	
-nRun['TTWl'] = 2678775.  
+### updated Nov 29, 2018 - start
+#nRun['WW'] = ??. 
+nRun['WZ'] = 1262156. 
+nRun['ZZ'] = 813812. 
+nRun['WWW'] = 404360.  
+nRun['WWZ'] = 215228. 	
+nRun['WZZ'] = 413104.   
+nRun['ZZZ'] = 407160. 	
+nRun['TTWl'] = 4718602.  
 # nRun['TTWq'] = ??  
-nRun['TTZl'] = 3570720.  
+nRun['TTZl'] = 10453148.  
 # nRun['TTZq'] = ??  
-### updated Nov 13, 2018 - end
+### updated Nov 29, 2018 - end
 
 #### As requested by Cristina Botta (ARC B2G-17-011).
 # nRun['TTGJets'] = 4870911* 0.325 #relim estimate: ran 1204482 events, adjusted count 391002. Could assume adjusted = 0.325 * total, from Julie Nov29-2017
@@ -130,7 +129,7 @@ xsec={}
 # xsec['WJetsMG800'] = 5.501*1.21 # https://twiki.cern.ch/twiki/bin/view/CMS/SummaryTable1G25ns
 # xsec['WJetsMG1200'] = 1.329*1.21 # https://twiki.cern.ch/twiki/bin/view/CMS/SummaryTable1G25ns
 # xsec['WJetsMG2500'] = 0.03216*1.21 # https://twiki.cern.ch/twiki/bin/view/CMS/SummaryTable1G25ns 
-xsec['WW'] = 118.7 # https://twiki.cern.ch/twiki/bin/viewauth/CMS/StandardModelCrossSectionsat13TeVInclusive
+# xsec['WW'] = 118.7 # https://twiki.cern.ch/twiki/bin/viewauth/CMS/StandardModelCrossSectionsat13TeVInclusive
 # xsec['WZinc'] = 47.13 # https://twiki.cern.ch/twiki/bin/viewauth/CMS/SummaryTable1G25ns#Diboson
 xsec['WZ'] = 4.4297 # WZTo3LNu_13TeV https://twiki.cern.ch/twiki/bin/viewauth/CMS/SummaryTable1G25ns#Diboson
 # xsec['ZZinc'] = 16.523 # https://twiki.cern.ch/twiki/bin/viewauth/CMS/SummaryTable1G25ns#Diboson

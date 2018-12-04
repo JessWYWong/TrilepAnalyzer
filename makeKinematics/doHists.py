@@ -15,7 +15,7 @@ doAllSys= False
 
 lumiStr = str(targetlumi/1000).replace('.','p') # 1/fb
 
-step1Dir = '/user_data/rsyarif/LJMet94x_3lepTT_2017datasets_2018_11_7_rizki_step1hadds_step2/nominal' # uses PR v9 FR v49
+step1Dir = '/user_data/rsyarif/LJMet102x_3lepTT_2018datasets_2018_11_22_rizki_step1hadds_step2/nominal' # uses PR v9 FR v49
 
 
 print 'grabbing files from ', step1Dir

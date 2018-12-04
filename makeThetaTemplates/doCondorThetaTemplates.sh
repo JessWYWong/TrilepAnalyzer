@@ -1,30 +1,23 @@
 #!/bin/bash
 
 condorDir=$PWD
-theDir=$1
+relbase=$1
 
+cd $relbase
 source /cvmfs/cms.cern.ch/cmsset_default.sh
-
-cd $theDir
 eval `scramv1 runtime -sh`
+cd -
 
-python doHists.py $condorDir \
-                  --lepPtCut=${2} \
-                  --jet1PtCut=${3} \
-                  --jet2PtCut=${4} \
-                  --metCut=${5} \
-                  --njetsCut=${6} \
-                  --nbjetsCut=${7} \
-                  --jet3PtCut=${8} \
-                  --jet4PtCut=${9} \
-                  --jet5PtCut=${10} \
-                  --drCut=${11} \
-                  --Wjet1PtCut=${12} \
-                  --bjet1PtCut=${13} \
-                  --htCut=${14} \
-                  --stCut=${15} \
-                  --minMlbCut=${16} \
-                  --isEM=${17} \
-                  --nttag=${18} \
-                  --nWtag=${19} \
-                  --nbtag=${20}
+python -u doHists.py $condorDir \
+						  --lep1PtCut=${2} \
+						  --jetPtCut=${3} \
+						  --metCut=${4} \
+						  --njetsCut=${5} \
+						  --nbjetsCut=${6} \
+						  --htCut=${7} \
+						  --stCut=${8} \
+						  --mllOSCut=${9} \
+						  --isPassTriLepton=${10} \
+						  --isPassTrig_dilep=${11} \
+						  --ptRelCut=${12}\
+						  --minDRlepJetCut=${13}\

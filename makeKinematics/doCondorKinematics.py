@@ -33,42 +33,42 @@ plotList = [#distribution name as defined in "doHists.py"
 
 # 	'AK4JetFlavor', #only for MC
 # 
-# 	'NPV',
+	'NPV',
 	'lepPt',
 	'lepPtRebinned',
-# 	'ElPt',
-# 	'MuPt',
+	'ElPt',
+	'MuPt',
 # 
-# 	'lep1Pt',
-# 	'lep2Pt',
-# 	'lep3Pt',
+	'lep1Pt',
+	'lep2Pt',
+	'lep3Pt',
 # 
-# 	'lepEta',
-# # 	'ElEta',
-# # 	'MuEta',
+	'lepEta',
+	'ElEta',
+	'MuEta',
 # 
-# 	'lep1Eta',
-# 	'lep2Eta',
-# 	'lep3Eta',
+	'lep1Eta',
+	'lep2Eta',
+	'lep3Eta',
 # 	
-# 	'Nlep',
-# 	'Nel',
-# 	'Nmu',
+	'Nlep',
+	'Nel',
+	'Nmu',
 # 
  	'JetEta',
 # 
 	'JetPt' ,
 # 
-# 	'HT',
-# 	'HTrebinned',
+	'HT',
+	'HTrebinned',
 	'ST',
 # # 	'STrebinned',
 	'STrebinnedv2',
 # # 	'STrebinnedv3',
-# # 	'MET',
-# 	'METrebinned',
+	'MET',
+	'METrebinned',
 	'NJets' ,
-# 	'NBJets',
+	'NBJets',
 # # 	'NBJetsCorr',
 # 
 # # 	'minMlB',

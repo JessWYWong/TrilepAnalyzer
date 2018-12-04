@@ -2,17 +2,6 @@ import os,sys,fnmatch
 
 templateDir = '/user_data/rsyarif/'
 
-# templateDir+='optimization_condor_80x_MultiLep_Full2016_Moriond17_PRv6_FRv18bSys_fixedLumiSYS_fixedLepIdIsoSys_ALLsys_step2_TESTING_2017_2_15/'
-# templateDir+='optimization_condor_80x_MultiLep_Full2016_Moriond17_PRv6_FRv18bSys_fixedLumi_ALLsys_step2_addbMistag_addMoreSignal_2017_2_16/'
-# templateDir+='optimization_condor_80x_MultiLep_Full2016_Moriond17_PRv6_FRv18bSys_fixedLumi_ALLsys_step2_addmistag_addMoreSignal_2017_2_17/'
-# templateDir+='optimization_condor_80x_MultiLep_Full2016_Moriond17_PRv6_FRv18bSys_fixedLumi_newMllOScut_fixedAllSYS_step2_addmistag_addMoreSignal_2017_2_23/'
-# templateDir+='optimization_condor_PRv6_FRv20b_newMllOSV2_Allsys_2017_3_1/'
-# templateDir+='optimization_reMiniAOD_PRv6_FRv24_newMuTrkSF_AllSys_2017_3_5/'
-# templateDir+='optimization_reMiniAOD_PRv9_FRv24_newFRsys_AllSys_2017_3_10/'
-# templateDir+='optimization_reMiniAOD_PRv9_FRv30CR2_newRunH_AllSys_2017_3_27/'
-# templateDir+='optimization_reMiniAOD_PRv9_FRv30CR2_newRunH_AllSys_2017_3_28/'
-# templateDir+='optimization_reMiniAOD_PRv9_FRv30CR2_newRunH_correctedMuTrkSF_AllSys_2017_4_4/'
-
 limitType = templateDir.split('/')[-2]
 
 if len(sys.argv)>1: 
@@ -20,28 +9,9 @@ if len(sys.argv)>1:
 	limitType = sys.argv[1]
 
 
-# templateDir+='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20/'
-# templateDir+='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST700_mllOS20/'
-# templateDir+='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST800_mllOS20/'
-# templateDir+='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST900_mllOS20/'
-# templateDir+='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1000_mllOS20/'
-# templateDir+='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1100_mllOS20/'
-# templateDir+='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1300_mllOS20/'
-# templateDir+='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1400_mllOS20/'
-# templateDir+='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1500_mllOS20/'
-# templateDir+='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1600_mllOS20/'
-
 if len(sys.argv)>2: 
 	templateDir+=sys.argv[2]+'/'
 
-# templateDir+='4binsCount_updatedLumi_updatedLepIdUnc_addbmistag_normRENORMPDF/'
-# templateDir+='4binsCount_updatedLumi_updatedLepIdUnc_addmistag_normRENORMPDF/'
-# templateDir+='4binsCount_newMllOScut/'
-# templateDir+='4binsCount/'
-# templateDir+='4binsCount_accurateLHEsys/'
-
-# templateDir+='4binsCount_accurateLHEsys_FRsysMar28/'
-# templateDir+='Shape_accurateLHESys_FRsysMar28/'
 
 if len(sys.argv)>3: 
 	templateDir+=sys.argv[3]+'/'
@@ -55,7 +25,7 @@ if len(sys.argv)>4:
 outputDir = '/user_data/rsyarif/limits/'
 
 
-lumiStr = '35p867'
+lumiStr = '58p83'
 
 thetaConfigTemp = os.getcwd()+'/theta_config_template.py'
 

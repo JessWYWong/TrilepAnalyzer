@@ -23,7 +23,7 @@ if(DEBUG or DEBUG_normalizeRENORM_PDF): print ''
 #################### CUTS & OUTPUT ########################
 ###########################################################
 
-lumiStr = '41p557'
+lumiStr = '58p83'
 print 'lumiStr =',lumiStr
 # doAllSys= True
 doAllSys= False

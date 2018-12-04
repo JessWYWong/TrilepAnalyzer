@@ -3,47 +3,21 @@
 
 ####REMEMBER to CHECK step1Dir in doHists before submitting!#############################
 # #######################################################################################################
-# 1st attempt dor 2017data
-# day=2018_11_12
-
-# source switchToFinal.sh  
-# 
-# #####doKinematics.py <folder> <whichPlots?>
-# python -u doKinematics.py kinematics_LJMet94x_3lepTT_2017datasets_2018_11_7_rizki_NoSYS_2016SFs_FRCR2_$day 1
-# ###plotKinematics.py <folder> <blind?> <log?>
-# python -u plotKinematics.py kinematics_LJMet94x_3lepTT_2017datasets_2018_11_7_rizki_NoSYS_2016SFs_FRCR2_$day 0 0
-# python -u plotKinematics.py kinematics_LJMet94x_3lepTT_2017datasets_2018_11_7_rizki_NoSYS_2016SFs_FRCR2_$day 0 1
-# 
-# #####doKinematics.py <folder> <whichPlots?>
-# python -u doKinematics.py kinematics_LJMet94x_3lepTT_2017datasets_2018_11_7_rizki_NoSYS_2016SFs_SR_$day 1
-# ###plotKinematics.py <folder> <blind?> <log?>
-# python -u plotKinematics.py kinematics_LJMet94x_3lepTT_2017datasets_2018_11_7_rizki_NoSYS_2016SFs_SR_$day 0 0
-# python -u plotKinematics.py kinematics_LJMet94x_3lepTT_2017datasets_2018_11_7_rizki_NoSYS_2016SFs_SR_$day 0 1
-# # 
-# # #####doKinematics.py <folder> <whichPlots?>
-# python -u doKinematics.py kinematics_LJMet94x_3lepTT_2017datasets_2018_11_7_rizki_NoSYS_2016SFs_CR2_$day 1
-# # ###plotKinematics.py <folder> <blind?> <log?>
-# python -u plotKinematics.py kinematics_LJMet94x_3lepTT_2017datasets_2018_11_7_rizki_NoSYS_2016SFs_CR2_$day 0 0
-# python -u plotKinematics.py kinematics_LJMet94x_3lepTT_2017datasets_2018_11_7_rizki_NoSYS_2016SFs_CR2_$day 0 1
-# # 
-
-
-# #######################################################################################################
-# 2nd attempt dor 2017data
-day=2018_11_13
+# 1st attempt dor 2018data
+day=2018_11_30
 
 # #####doKinematics.py <folder> <whichPlots?>
-# python -u doKinematics.py kinematics_LJMet94x_3lepTT_2017datasets_2018_11_7_rizki_NoSYS_2016SFs_SR_$day 1
+python -u doKinematics.py kinematics_LJMet102x_3lepTT_2018datasets_2018_11_22_rizki_NoSYS_2016SFs_SR_$day 1
 # ###plotKinematics.py <folder> <blind?> <log?>
-# python -u plotKinematics.py kinematics_LJMet94x_3lepTT_2017datasets_2018_11_7_rizki_NoSYS_2016SFs_SR_$day 0 0
-# python -u plotKinematics.py kinematics_LJMet94x_3lepTT_2017datasets_2018_11_7_rizki_NoSYS_2016SFs_SR_$day 0 1
+python -u plotKinematics.py kinematics_LJMet102x_3lepTT_2018datasets_2018_11_22_rizki_NoSYS_2016SFs_SR_$day 0 0
+python -u plotKinematics.py kinematics_LJMet102x_3lepTT_2018datasets_2018_11_22_rizki_NoSYS_2016SFs_SR_$day 0 1
 
 
 # #####doKinematics.py <folder> <whichPlots?>
-python -u doKinematics.py kinematics_LJMet94x_3lepTT_2017datasets_2018_11_7_rizki_NoSYS_2016SFs_CR2_$day 1
+python -u doKinematics.py kinematics_LJMet102x_3lepTT_2018datasets_2018_11_22_rizki_NoSYS_2016SFs_CR2_$day 1
 # ###plotKinematics.py <folder> <blind?> <log?>
-python -u plotKinematics.py kinematics_LJMet94x_3lepTT_2017datasets_2018_11_7_rizki_NoSYS_2016SFs_CR2_$day 0 0
-python -u plotKinematics.py kinematics_LJMet94x_3lepTT_2017datasets_2018_11_7_rizki_NoSYS_2016SFs_CR2_$day 0 1
+python -u plotKinematics.py kinematics_LJMet102x_3lepTT_2018datasets_2018_11_22_rizki_NoSYS_2016SFs_CR2_$day 0 0
+python -u plotKinematics.py kinematics_LJMet102x_3lepTT_2018datasets_2018_11_22_rizki_NoSYS_2016SFs_CR2_$day 0 1
 
 
 #######################################################################################################

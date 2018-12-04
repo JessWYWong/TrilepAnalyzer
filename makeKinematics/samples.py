@@ -126,13 +126,13 @@ samples = {
 #
 
 
-'WW':'WW_TuneCUETP8M1_13TeV-pythia8',
+#'WW':'WW_TuneCUETP8M1_13TeV-pythia8',
 
-'WZ':'WZTo3LNu_13TeV-powheg-pythia8',
-'ZZ':'ZZTo4L_13TeV_powheg_pythia8',
+'WZ':'WZTo3LNu_TuneCP5_13TeV-powheg-pythia8',
+'ZZ':'ZZTo4L_TuneCP5_13TeV_powheg_pythia8',
 
 'WWW':'WWW_4F_TuneCP5_13TeV-amcatnlo-pythia8',
-'WWZ':'WWZ_4F_TuneCP5_13TeV-amcatnlo-pythia8',
+'WWZ':'WWZ_TuneCP5_13TeV-amcatnlo-pythia8',
 'WZZ':'WZZ_TuneCP5_13TeV-amcatnlo-pythia8',
 'ZZZ':'ZZZ_TuneCP5_13TeV-amcatnlo-pythia8',
 
@@ -154,8 +154,8 @@ samples = {
 }
 
 dilep = ['EE','MM','ME']
-dict_dilep = {dilep[0]:'DoubleEG',dilep[1]:'DoubleMuon',dilep[2]:'MuonEG'}
-run = ['RRB','RRC','RRD','RRE','RRF_v2']#,'RRG','RRH']
+dict_dilep = {dilep[0]:'EGamma',dilep[1]:'DoubleMuon',dilep[2]:'MuonEG'}
+run = ['RunA','RunB','RunC','RunD']
 ddbkgCat = ['TTT','TTL','TLT','LTT','TLL','LTL','LLT','LLL']
 
 for run_ in run:

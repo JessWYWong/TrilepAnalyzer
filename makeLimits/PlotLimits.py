@@ -9,12 +9,12 @@ gROOT.SetBatch(1)
 from tdrStyle import *
 setTDRStyle()
 
-blind=False
+blind=True
 saveKey=''
 signal = 'T'
 if('_BB' in sys.argv[1]): signal = 'B'
-lumiPlot = '35.9'
-lumiStr = '35p867'
+lumiPlot = '58.8'
+lumiStr = '58p83'
 chiral=''#'right'
 # discriminant='STrebinned'
 # discriminant='ST'
@@ -26,47 +26,20 @@ histPrefix=discriminant+'_'+str(lumiStr)+'fb'+chiral
 stat=''#0.75
 isRebinned=''
 
-# cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets0_HT0_ST600_mllOS20'
-# cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets0_HT0_ST700_mllOS20'
-# cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets0_HT0_ST800_mllOS20'
-# cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets0_HT0_ST900_mllOS20'
-# cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets0_HT0_ST1000_mllOS20'
-# cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets0_HT0_ST1100_mllOS20'
 
-# cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20'
-# cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST700_mllOS20'
-# cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST800_mllOS20'
-# cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST900_mllOS20'
-# cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1000_mllOS20'
-# cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1300_mllOS20'
-# cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1400_mllOS20'
-# cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1500_mllOS20'
-# cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT0_ST1600_mllOS20'
-
-# cutString='lep1Pt30_jetPt0_MET20_NJets3_NBJets1_HT0_ST600_mllOS20'
-
-# cutString='lep1Pt0_MET20_jetPt0_NJets3_NBJets1_HT0_ST600_mllOS20'
-
-cutString='lep1Pt0_jetPt0_MET20_NJets3_NBJets1_HT400_ST1000_mllOS20'
+cutString='dummy'
 
 if len(sys.argv)>2: 
 	cutString=sys.argv[2]
 
 
-# cutString+='/4binsCount_updatedLumi_updatedLepIdUnc_addmistag_normRENORMPDF'
-# cutString+='/4binsCount_newMllOScut/'
-# cutString+='/4binsCount/'
-# cutString+='/4binsCount_accurateLHEsys/'
-# cutString+='/4binsCount_accurateLHEsys_FRsysMar28/'
-# cutString+='/Shape_accurateLHESys_FRsysMar28/'
-
 if len(sys.argv)>3: 
 	cutString+='/'+sys.argv[3]+'/'
 
 
-mass = array('d', [800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800])
-masserr = array('d', [0,0,0,0,0,0,0,0,0,0,0,0])
-mass_str = ['800','900','1000','1100','1200','1300','1400','1500','1600','1700','1800']
+mass = array('d', [1000,1100,1200,1300,1400,1500,1600,1700,1800])
+masserr = array('d', [0,0,0,0,0,0,0,0,0,0])
+mass_str = ['1000','1100','1200','1300','1400','1500','1600','1700','1800']
 
 exp   =array('d',[0 for i in range(len(mass))])
 experr=array('d',[0 for i in range(len(mass))])
@@ -87,9 +60,9 @@ else: print "Please enter left or right"
 # xsecErrUp = [19.,8.5,4.0,2.1,1.1,0.64,0.37,0.22,0.14,0.087,0.056,0.037]#fb
 # xsecErrDn = [19.,8.1,3.8,1.9,1.0,0.56,0.32,0.19,0.12,0.072,0.045,0.029]#fb
 
-theory_xsec = [0.196,0.0903,0.0440,0.0224,0.0118,0.00639,0.00354,0.00200,0.001148,0.000666,0.000391]#pb
-xsecErrUp = [8.5,4.0,2.1,1.1,0.64,0.37,0.22,0.14,0.087,0.056,0.037]#fb
-xsecErrDn = [8.1,3.8,1.9,1.0,0.56,0.32,0.19,0.12,0.072,0.045,0.029]#fb
+theory_xsec = [0.0440,0.0224,0.0118,0.00639,0.00354,0.00200,0.001148,0.000666,0.000391]#pb
+xsecErrUp = [2.1,1.1,0.64,0.37,0.22,0.14,0.087,0.056,0.037]#fb
+xsecErrDn = [1.9,1.0,0.56,0.32,0.19,0.12,0.072,0.045,0.029]#fb
 
 theory_xsec_up = [item/1000 for item in xsecErrUp]
 theory_xsec_dn = [item/1000 for item in xsecErrDn]
@@ -125,8 +98,8 @@ def PlotLimits(limitDir,limitFile,tempKey):
     print
     print 'mass'.ljust(ljust_i), 'observed'.ljust(ljust_i), 'expected'.ljust(ljust_i), '-2 Sigma'.ljust(ljust_i), '-1 Sigma'.ljust(ljust_i), '+1 Sigma'.ljust(ljust_i), '+2 Sigma'.ljust(ljust_i)
     
-    limExpected = 700
-    limObserved = 700
+    limExpected = 1000
+    limObserved = 1000
     for i in range(len(mass)):
         lims = {}
         
@@ -171,8 +144,8 @@ def PlotLimits(limitDir,limitFile,tempKey):
     print
     signExp = "="
     signObs = "="
-    if limExpected==700: signExp = "<"
-    if limObserved==700: signObs = "<"
+    if limExpected==1000: signExp = "<"
+    if limObserved==1000: signObs = "<"
     print "Expected lower limit "+signExp,int(round(limExpected)),"GeV"
     print "Observed lower limit "+signObs,int(round(limObserved)),"GeV"
     print
@@ -212,7 +185,7 @@ def PlotLimits(limitDir,limitFile,tempKey):
 #     expected95.GetYaxis().SetRangeUser(.008+.00001,10.45)
 #     expected95.GetYaxis().SetRangeUser(.004+.00001,10.45)
     expected95.GetYaxis().SetRangeUser(.0008+.00001,1.045)
-    expected95.GetXaxis().SetRangeUser(800,1800)
+    expected95.GetXaxis().SetRangeUser(1000,1800)
     if tempKey=='nB0': expected95.GetYaxis().SetRangeUser(.008+.00001,25.45)   
     expected95.GetXaxis().SetTitle(signal+" mass [GeV]")
     expected95.GetYaxis().SetTitle("#sigma ("+signal+"#bar{"+signal+"})[pb]")
@@ -299,15 +272,7 @@ BRs['BZ']=[0.25,0.5,0.0]
 nBRconf=len(BRs['BW'])
 if not doBRScan: nBRconf=1
 
-# tempKeys = ['optimization_condor_80x_MultiLep_Full2016_Moriond17_PRv6_FRv18bSys_fixedLumi_ALLsys_step2_addbMistag_addMoreSignal_2017_2_16']
-# tempKeys = ['optimization_condor_80x_MultiLep_Full2016_Moriond17_PRv6_FRv18bSys_fixedLumi_ALLsys_step2_addmistag_addMoreSignal_2017_2_17']
-# tempKeys = ['optimization_condor_80x_MultiLep_Full2016_Moriond17_PRv6_FRv18bSys_fixedLumi_newMllOScut_fixedAllSYS_step2_addmistag_addMoreSignal_2017_2_23']
-# tempKeys = ['optimization_condor_PRv6_FRv20b_newMllOSV2_Allsys_2017_3_1']
-# tempKeys = ['optimization_reMiniAOD_PRv6_FRv24_newMuTrkSF_AllSys_2017_3_5']
-# tempKeys = ['optimization_reMiniAOD_PRv9_FRv24_newFRsys_AllSys_2017_3_10']
-# tempKeys = ['optimization_reMiniAOD_PRv9_FRv30CR2_newRunH_AllSys_2017_3_27']
-# tempKeys = ['optimization_reMiniAOD_PRv9_FRv30CR2_newRunH_AllSys_2017_3_28']
-tempKeys = ['optimization_reMiniAOD_PRv9_FRv30CR2_newRunH_correctedMuTrkSF_AllSys_2017_4_4']
+tempKeys = ['dummy']
 
 if len(sys.argv)>1: 
 	tempKeys=[sys.argv[1]]

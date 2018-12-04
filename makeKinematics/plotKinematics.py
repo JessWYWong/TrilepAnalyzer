@@ -23,25 +23,25 @@ templateDir+='kinematics_80x_condor_BLA'
 if len(sys.argv)>1: templateDir = mainDir+sys.argv[1] 
 
 
-lumi=41.6 #for plots
+lumi=58.8 #for plots
 
-lumiInTemplates='41p557'
+lumiInTemplates='58p83'
 
 # sig='ttm800' # choose the 1st signal to plot
 # sigleg='TT(0.8 TeV)'
 
-sig='ttm1000' # choose the 1st signal to plot
-sigleg='T#bar{T}(1.0 TeV)'
+sig='ttm1200' # choose the 1st signal to plot
+sigleg='T#bar{T}(1.2 TeV)'
 
-sigM1200='ttm1200' 
-siglegM1200='T#bar{T}(1.2 TeV)'
+sigM1500='ttm1500' 
+siglegM1500='T#bar{T}(1.5 TeV)'
 
 scaleSignals = True
 dontShowSignalScaling = False
 
 # scaleFact1 = 300
-scaleFact1 = 2
-scaleFact2 = 10
+scaleFact1 = 10
+scaleFact2 = 50
 if 'Final' in templateDir: scaleFact1 = 40
 
 systematicList = ['pileup','btag','mistag','pdfNew','muRFcorrdNew','elPR','elFR','muPR','muFR','jec','jer']
@@ -243,47 +243,47 @@ plotList = [#distribution name as defined in "doHists.py"
 # # 	'MuDxy',
 # # 	'MuDz',
 # 	
-# 	'NPV',
-# 
+	'NPV',
+
 	'lepPt',
 	'lepPtRebinned',
-# 	'ElPt',
-# 	'MuPt',
-# 	'lep1Pt',
-# 	'lep2Pt',
-# 	'lep3Pt',
-# 	'lepEta',
-# 	'ElEta',
-# 	'MuEta',
-# 	'lep1Eta',
-# 	'lep2Eta',
-# 	'lep3Eta',
-# 	'Nlep',
-# 	'Nel',
-# 	'Nmu',
+	'ElPt',
+	'MuPt',
+	'lep1Pt',
+	'lep2Pt',
+	'lep3Pt',
+	'lepEta',
+	'ElEta',
+	'MuEta',
+	'lep1Eta',
+	'lep2Eta',
+	'lep3Eta',
+	'Nlep',
+	'Nel',
+	'Nmu',
 # 
-# 	'JetEta',
-# # 	'Jet1Eta',
-# # 	'Jet2Eta',
+	'JetEta',
+	'Jet1Eta',
+	'Jet2Eta',
 	'JetPt' ,
-# # 	'Jet1Pt' ,
-# # 	'Jet2Pt' ,
+	'Jet1Pt' ,
+	'Jet2Pt' ,
 # 
 # 
-# 	'HT',
+	'HT',
 # # 	'ST',
-# 	'MET',
-# 	'HTrebinned',
+	'MET',
+	'HTrebinned',
 # 	'ST',
 # # 	'STrebinned',
 # 
 	'STrebinnedv2',
 # 
 # # 	'STrebinnedv3',
-# 	'METrebinned',
+	'METrebinned',
 # 
 	'NJets' ,
-# 	'NBJets',
+	'NBJets',
 # 	#'NBJetsCorr',
 # # 	'mindeltaRlepJets',
 # # 	'mindeltaRlep1Jets',
@@ -391,13 +391,13 @@ for discriminant in plotList:
 		hsig3 = RFile.Get(histPrefix+'__'+sig+'thth').Clone()
 
 		hsig = RFile.Get(histPrefix+'__'+sig+'bwbw').Clone(histPrefix+'__'+sig+'nominal')
-		hsigM1200 = RFile.Get(histPrefix+'__'+sigM1200+'bwbw').Clone(histPrefix+'__'+sigM1200+'nominal')
+		hsigM1500 = RFile.Get(histPrefix+'__'+sigM1500+'bwbw').Clone(histPrefix+'__'+sigM1500+'nominal')
 		decays = ['tztz','thth','tzbw','thbw','tzth']
 		for decay in decays:
 			htemp = RFile.Get(histPrefix+'__'+sig+decay).Clone()
 			hsig.Add(htemp)
-			htemp = RFile.Get(histPrefix+'__'+sigM1200+decay).Clone()
-			hsigM1200.Add(htemp)
+			htemp = RFile.Get(histPrefix+'__'+sigM1500+decay).Clone()
+			hsigM1500.Add(htemp)
 
 		# original scale = lumi * xsec * BR(50/25/25) / N(33/33/33)
 		hsig1.Scale(1.0/BR['TTBWBW'])
@@ -555,7 +555,7 @@ for discriminant in plotList:
 		hsig2.Scale(scaleFact1)
 		hsig3.Scale(scaleFact1)
 		hsig.Scale(scaleFact1)
-		hsigM1200.Scale(scaleFact2)
+		hsigM1500.Scale(scaleFact2)
 		
 		stackbkgHT = THStack("stackbkgHT","")
 		try: stackbkgHT.Add(hTOP)
@@ -592,9 +592,9 @@ for discriminant in plotList:
 		hsig.SetLineColor(kBlack)
 		hsig.SetLineStyle(1)
 		hsig.SetLineWidth(3)
-		hsigM1200.SetLineColor(kBlack)
-		hsigM1200.SetLineStyle(2)
-		hsigM1200.SetLineWidth(3)
+		hsigM1500.SetLineColor(kBlack)
+		hsigM1500.SetLineStyle(2)
+		hsigM1500.SetLineWidth(3)
 		hsig1.SetLineColor(kRed)
 		hsig1.SetLineStyle(2)
 		hsig1.SetLineWidth(3)
@@ -679,7 +679,7 @@ for discriminant in plotList:
 
 		stackbkgHT.Draw("SAME HIST")
 		hsig.Draw("SAME HIST")
-		hsigM1200.Draw("SAME HIST")
+		hsigM1500.Draw("SAME HIST")
 # 		hsig1.Draw("SAME HIST")
 # 		hsig2.Draw("SAME HIST")
 # 		hsig3.Draw("SAME HIST")
@@ -717,7 +717,7 @@ for discriminant in plotList:
 		leg.AddEntry(hsig,sigleg+scaleFact1Str,"l")
 		try: leg.AddEntry(hEWK,"VV(V)","f")
 		except: pass
-		leg.AddEntry(hsigM1200,siglegM1200+scaleFact2Str,"l")
+		leg.AddEntry(hsigM1500,siglegM1500+scaleFact2Str,"l")
 		try: leg.AddEntry(hTOP,"t#bar{t}+V","f")
 		except: pass
 		try: 
