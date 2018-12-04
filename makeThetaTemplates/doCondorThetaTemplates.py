@@ -1,70 +1,58 @@
 import os,sys,datetime,itertools
 
-lepPtCutList  = [0]
-jet1PtCutList = [0]
-jet2PtCutList = [0]
-metCutList    = [0]
-njetsCutList  = [3]#1,2]
-nbjetsCutList = [0,1]#,2,3]
-jet3PtCutList = [0]
-jet4PtCutList = [0]
-jet5PtCutList = [0]
-drCutList     = [0]
-Wjet1PtCutList= [0]
-bjet1PtCutList= [0]
+lep1PtCutList = [0]
+jetPtCutList  = [0]
+metCutList    = [20]
+njetsCutList  = [3]
+nbjetsCutList = [1]
 htCutList     = [0]
-stCutList     = [0,500,600,800,1100]#,700,800,900,1000,1100]
-minMlbCutList = [0]
+# htCutList     = [400]
+stCutList     = [0]#600,700,800,900,1000,1100]
+mllOSCutList  = [20]
+isPassTriLeptonList= [1]
+isPassTrig_dilepList= [1]
+ptRelCutList = [0]
+minDRlepJetCutList = [0]
 
-cutConfigs = list(itertools.product(lepPtCutList,jet1PtCutList,jet2PtCutList,metCutList,njetsCutList,nbjetsCutList,jet3PtCutList,jet4PtCutList,jet5PtCutList,drCutList,Wjet1PtCutList,bjet1PtCutList,htCutList,stCutList,minMlbCutList))
-
-isEMlist =['EEE','EEM','EMM','MMM']
-nttaglist=['0p']
-nWtaglist=['0p']#,'1p']
-nbtaglist=['0p']#,'1','2','3p']
+cutConfigs = list(itertools.product(lep1PtCutList,jetPtCutList,metCutList,njetsCutList,nbjetsCutList,htCutList,stCutList,mllOSCutList,isPassTriLeptonList,isPassTrig_dilepList,ptRelCutList,minDRlepJetCutList))
 
 thisDir = os.getcwd()
-outputDir = thisDir+'/'
+relbase = '/home/rsyarif/LJMet/TprimeAnalysis/CMSSW_7_6_3/src/'
+outputDir = '/user_data/rsyarif/'
 
 cTime=datetime.datetime.now()
 date='%i_%i_%i'%(cTime.year,cTime.month,cTime.day)
 time='%i_%i_%i'%(cTime.hour,cTime.minute,cTime.second)
-pfix='templates_ST'
+
+
+pfix='LJMet94x_3lepTT_2017datasets_2018_11_7_rizki_step1hadds_step2_templates'
+
+
 pfix+='_'+date#+'_'+time
-pfix+='_no_jsf_noLumiOnDDbkg'
 
 outDir = outputDir+pfix
 if not os.path.exists(outDir): os.system('mkdir '+outDir)
 
 count=0
 for conf in cutConfigs:
-	for cat in list(itertools.product(isEMlist,nttaglist,nWtaglist,nbtaglist)):
-		lepPtCut,jet1PtCut,jet2PtCut,metCut,njetsCut,nbjetsCut,jet3PtCut,jet4PtCut,jet5PtCut,drCut,Wjet1PtCut,bjet1PtCut,htCut,stCut,minMlbCut=conf[0],conf[1],conf[2],conf[3],conf[4],conf[5],conf[6],conf[7],conf[8],conf[9],conf[10],conf[11],conf[12],conf[13],conf[14]
-# 		if jet2PtCut >= jet1PtCut or jet3PtCut >= jet1PtCut or jet4PtCut >= jet1PtCut or jet5PtCut >= jet1PtCut: continue
-# 		if jet3PtCut >= jet2PtCut or jet4PtCut >= jet2PtCut or jet5PtCut >= jet2PtCut: continue
-# 		if (jet4PtCut >= jet3PtCut or jet5PtCut >= jet3PtCut) and jet3PtCut!=0: continue
-# 		if jet5PtCut >= jet4PtCut and jet4PtCut!=0: continue
-		cutString = 'lep'+str(int(lepPtCut))+'_MET'+str(int(metCut))+'_1jet'+str(int(jet1PtCut))+'_2jet'+str(int(jet2PtCut))+'_NJets'+str(int(njetsCut))+'_NBJets'+str(int(nbjetsCut))+'_3jet'+str(int(jet3PtCut))+'_4jet'+str(int(jet4PtCut))+'_5jet'+str(int(jet5PtCut))+'_DR'+str(drCut)+'_1Wjet'+str(Wjet1PtCut)+'_1bjet'+str(bjet1PtCut)+'_HT'+str(htCut)+'_ST'+str(stCut)+'_minMlb'+str(minMlbCut)
-		os.chdir(outDir)
-		print cutString
-		if not os.path.exists(outDir+'/'+cutString): os.system('mkdir '+cutString)
-		os.chdir(cutString)
-		catDir = cat[0]+'_nT'+cat[1]+'_nW'+cat[2]+'_nB'+cat[3]
-		print catDir
-		if not os.path.exists(outDir+'/'+cutString+'/'+catDir): os.system('mkdir '+catDir)
-		os.chdir(catDir)
+	lep1PtCut,jetPtCut,metCut,njetsCut,nbjetsCut,htCut,stCut,mllOSCut,isPassTriLepton,isPassTrig_dilep,ptRelCut,minDRlepJetCut=conf[0],conf[1],conf[2],conf[3],conf[4],conf[5],conf[6],conf[7],conf[8],conf[9],conf[10],conf[11]
+	cutString = 'lep1Pt'+str(int(lep1PtCut))+'_jetPt'+str(int(jetPtCut))+'_MET'+str(int(metCut))+'_NJets'+str(int(njetsCut))+'_NBJets'+str(int(nbjetsCut))+'_HT'+str(htCut)+'_ST'+str(stCut)+'_mllOS'+str(mllOSCut)#+'_ptRel'+str(ptRelCut)+'_minDRlJ'+str(minDRlepJetCut).replace('.','p')
+	os.chdir(outDir)
+	print cutString
+	if not os.path.exists(outDir+'/'+cutString): os.system('mkdir '+cutString)
+	os.chdir(cutString)
 
-		dict={'dir':outputDir,'lepPtCut':lepPtCut,'jet1PtCut':jet1PtCut,'jet2PtCut':jet2PtCut,
-			  'metCut':metCut,'njetsCut':njetsCut,'nbjetsCut':nbjetsCut,'jet3PtCut':jet3PtCut,
-			  'jet4PtCut':jet4PtCut,'jet5PtCut':jet5PtCut,'drCut':drCut,'Wjet1PtCut':Wjet1PtCut,
-			  'bjet1PtCut':bjet1PtCut,'htCut':htCut,'stCut':stCut,'minMlbCut':minMlbCut,
-			  'isEM':cat[0],'nttag':cat[1],'nWtag':cat[2],'nbtag':cat[3]}
+	dict={'CMSSWBASE':relbase,'thisDir':thisDir,'lep1PtCut':lep1PtCut,'jetPtCut':jetPtCut,
+		  'metCut':metCut,'njetsCut':njetsCut,'nbjetsCut':nbjetsCut,
+		  'htCut':htCut,'stCut':stCut,'mllOSCut':mllOSCut,'isPassTriLepton':isPassTriLepton,'isPassTrig_dilep':isPassTrig_dilep,
+		  'ptRelCut':ptRelCut,'minDRlepJetCut':minDRlepJetCut}
 
-		jdf=open('condor.job','w')
-		jdf.write(
+	jdf=open('condor.job','w')
+	jdf.write(
 """universe = vanilla
-Executable = %(dir)s/doCondorThetaTemplates.sh
+Executable = %(thisDir)s/doCondorThetaTemplates.sh
 Should_Transfer_Files = YES
+transfer_input_files = %(thisDir)s/doHists.py,%(thisDir)s/samples.py,%(thisDir)s/weights.py,%(thisDir)s/analyze.py
 WhenToTransferOutput = ON_EXIT
 
 arguments      = ""
@@ -73,14 +61,14 @@ Output = condor.out
 Error = condor.err
 Log = condor.log
 Notification = Error
-Arguments = %(dir)s %(lepPtCut)s %(jet1PtCut)s %(jet2PtCut)s %(metCut)s %(njetsCut)s %(nbjetsCut)s %(jet3PtCut)s %(jet4PtCut)s %(jet5PtCut)s %(drCut)s %(Wjet1PtCut)s %(bjet1PtCut)s %(htCut)s %(stCut)s %(minMlbCut)s %(isEM)s %(nttag)s %(nWtag)s %(nbtag)s
+Arguments = %(CMSSWBASE)s %(lep1PtCut)s %(jetPtCut)s %(metCut)s %(njetsCut)s %(nbjetsCut)s %(htCut)s %(stCut)s %(mllOSCut)s %(isPassTriLepton)s %(isPassTrig_dilep)s %(ptRelCut)s %(minDRlepJetCut)s
 
 Queue 1"""%dict)
-		jdf.close()
+	jdf.close()
 
-		os.system('condor_submit condor.job')
-		os.chdir('..')
-		count+=1
+	os.system('condor_submit condor.job')
+	os.chdir('..')
+	count+=1
 									
 print "Total jobs submitted:", count
 

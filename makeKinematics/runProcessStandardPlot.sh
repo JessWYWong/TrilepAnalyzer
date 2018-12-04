@@ -30,13 +30,31 @@
 
 # #######################################################################################################
 # 2nd attempt dor 2017data
-day=2018_11_13
+# day=2018_11_13
 
 # #####doKinematics.py <folder> <whichPlots?>
 # python -u doKinematics.py kinematics_LJMet94x_3lepTT_2017datasets_2018_11_7_rizki_NoSYS_2016SFs_SR_$day 1
 # ###plotKinematics.py <folder> <blind?> <log?>
 # python -u plotKinematics.py kinematics_LJMet94x_3lepTT_2017datasets_2018_11_7_rizki_NoSYS_2016SFs_SR_$day 0 0
 # python -u plotKinematics.py kinematics_LJMet94x_3lepTT_2017datasets_2018_11_7_rizki_NoSYS_2016SFs_SR_$day 0 1
+
+
+# #####doKinematics.py <folder> <whichPlots?>
+# python -u doKinematics.py kinematics_LJMet94x_3lepTT_2017datasets_2018_11_7_rizki_NoSYS_2016SFs_CR2_$day 1
+# ###plotKinematics.py <folder> <blind?> <log?>
+# python -u plotKinematics.py kinematics_LJMet94x_3lepTT_2017datasets_2018_11_7_rizki_NoSYS_2016SFs_CR2_$day 0 0
+# python -u plotKinematics.py kinematics_LJMet94x_3lepTT_2017datasets_2018_11_7_rizki_NoSYS_2016SFs_CR2_$day 0 1
+
+
+# #######################################################################################################
+# 2017data - more variables
+day=2018_11_30
+
+# #####doKinematics.py <folder> <whichPlots?>
+python -u doKinematics.py kinematics_LJMet94x_3lepTT_2017datasets_2018_11_7_rizki_NoSYS_2016SFs_SR_$day 1
+# ###plotKinematics.py <folder> <blind?> <log?>
+python -u plotKinematics.py kinematics_LJMet94x_3lepTT_2017datasets_2018_11_7_rizki_NoSYS_2016SFs_SR_$day 0 0
+python -u plotKinematics.py kinematics_LJMet94x_3lepTT_2017datasets_2018_11_7_rizki_NoSYS_2016SFs_SR_$day 0 1
 
 
 # #####doKinematics.py <folder> <whichPlots?>
