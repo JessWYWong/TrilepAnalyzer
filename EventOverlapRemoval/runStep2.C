@@ -35,9 +35,12 @@ void runStep2(){
    fileNames.push_back("DoubleEG_RRF_v2_hadd.root");
    fileNames.push_back("DoubleMuon_RRF_v2_hadd.root");
    fileNames.push_back("MuonEG_RRF_v2_hadd.root");
-//    
-  inputDir="LJMet94x_3lepTT_2017datasets_2018_11_7_rizki_step1hadds";
-  
+    
+  //  inputDir="LJMet94x_3lepTT_2017datasets_2018_11_7_rizki_step1hadds";
+  //  inputDir="LJMet94x_3lepTT_2017datasets_2018_11_7_rizki_step1_FRv1hadds";  
+  //  inputDir="LJMet94x_3lepTT_2017datasets_2018_11_7_rizki_step1_FRv2hadds";  
+  inputDir="LJMet94x_3lepTT_2017datasets_2018_11_7_rizki_step1_FRv3hadds";  
+
   subDir="nominal";
 
   outputDir=inputDir+"_step2";

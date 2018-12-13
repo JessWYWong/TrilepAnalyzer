@@ -65,30 +65,17 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 	cut += ' && (NJetsBTagwithSF_singleLepCalc >= '+str(cutList['nbjetsCut'])+')'
 # 	cut += ' && (NJetsCSVwithSF_JetSubCalc_noLepCorr >= '+str(cutList['nbjetsCut'])+')'
 	if ('Data' in process and 'Bkg' not in process): 
-		if 'RRH' in process: #for runH use DZ version of HLT
-			if cutList['isPassTrig_dilep']==1:cut += ' && DataPastTrigger_dilepDZ4runH == 1'
-			if cutList['isPassTrilepton']==1 :  cut += ' && isPassTrilepton == 1'
-		else:
-			if cutList['isPassTrig']==1:        cut += ' && DataPastTrigger == 1'
-			if cutList['isPassTrig_dilep']==1:  cut += ' && DataPastTrigger_dilep == 1'
-			if cutList['isPassTrig_dilep_anth']==1:cut += ' && DataPastTrigger_dilep_anth == 1'
-			if cutList['isPassTrig_trilep']==1: cut += ' && DataPastTrigger_trilep == 1'
-			if cutList['isPassTrilepton']==1 :  cut += ' && isPassTrilepton == 1'
+		if cutList['isPassTrig']==1:        cut += ' && DataPastTrigger == 1'
+		if cutList['isPassTrig_dilep']==1:  cut += ' && DataPastTrigger_dilep == 1'
+		if cutList['isPassTrilepton']==1 :  cut += ' && isPassTrilepton == 1'
 	elif ('DataDrivenBkg' in process): 
-		if 'RRH' in process: #for runH use DZ version of HLT
-			if cutList['isPassTrig_dilep']==1:cut += ' && DataPastTrigger_dilepDZ4runH == 1'
-		else:
-			if cutList['isPassTrig']==1:        cut += ' && DataPastTrigger == 1'
-			if cutList['isPassTrig_dilep']==1:  cut += ' && DataPastTrigger_dilep == 1'
-			if cutList['isPassTrig_dilep_anth']==1:cut += ' && DataPastTrigger_dilep_anth == 1'
-			if cutList['isPassTrig_trilep']==1: cut += ' && DataPastTrigger_trilep == 1'
+		if cutList['isPassTrig']==1:        cut += ' && DataPastTrigger == 1'
+		if cutList['isPassTrig_dilep']==1:  cut += ' && DataPastTrigger_dilep == 1'
 	elif ('Data' not in process): 
 		if cutList['isPassTrig']==1:        cut += ' && MCPastTrigger == 1'
 		if cutList['isPassTrig_dilep']==1:  cut += ' && MCPastTrigger_dilep == 1'
-		if cutList['isPassTrig_dilep_anth']==1:cut += ' && MCPastTrigger_dilep_anth == 1'
-		if cutList['isPassTrig_trilep']==1: cut += ' && MCPastTrigger_trilep == 1'
 		if cutList['isPassTrilepton']==1 :  cut += ' && isPassTrilepton == 1'	
-# 	cut += ' && (deltaR_lepJets[1] >= '+str(cutList['drCut'])+')'
+ 	cut += ' && (deltaR_lepJets[1] >= '+str(cutList['drCut'])+')'
 
  	cut += ' && (AK4HTpMETpLepPt >= '+str(cutList['stCut'])+')' #remove low ST default
 #  	cut += ' && (AK4HTpMETpLepPt < '+str(cutList['stCut'])+')' #remove high ST
@@ -314,6 +301,12 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 		weightjsfDownStr  = '1'		
 	else: 
 		weightStr           = TrigEff+' * pileupWeight * 1 * isoSF * lepIdSF * EGammaGsfSF * MuTrkSF * MCWeight_singleLepCalc/abs(MCWeight_singleLepCalc) * '+str(weight[process])
+
+		# For some reason pileupWeight for ZZTo4L_13TeV_powheg_pythia8_hadd.root is giving NaN histo. Will ignore for the moment. Nov 13, 2018
+		if(process=='ZZ'): 
+			print ' -------------->> Not using pileupweight for ZZ = ZZTo4L_13TeV_powheg_pythia8_hadd.root !!!!'
+			weightStr = TrigEff+' * 1 * 1 * isoSF * lepIdSF * EGammaGsfSF * MuTrkSF * MCWeight_singleLepCalc/abs(MCWeight_singleLepCalc) * '+str(weight[process])
+
 		weightPileupUpStr   = weightStr.replace('pileupWeight','pileupWeightUp')
 		weightPileupDownStr = weightStr.replace('pileupWeight','pileupWeightDown')
 		weightmuRFcorrdUpStr   = 'renormWeights[5] * '+weightStr

@@ -18,27 +18,11 @@ start_time = time.time()
 #obtain cutList and cutString from cutList.py
 
 doAllSys= False
-printProcess=False
-
-#FRSTHT400low rebinned
-# muFRtoPrint = 18		
-# elFRtoPrint = 25
+printProcess=True
 
 #FRCR2 rebinned
-# muFRtoPrint = 14		
-# elFRtoPrint = 20
-
-#FRCR1 rebinned
 muFRtoPrint = 15		
-elFRtoPrint = 23
-
-#FRSTHT400
-# muFRtoPrint = 30		
-# elFRtoPrint = 27
-
-#FRSTHT400 rebinned
-# muFRtoPrint = 29		
-# elFRtoPrint = 26
+elFRtoPrint = 9
 
 
 if printProcess: print ''
@@ -914,27 +898,27 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 				min_process[cat] = process
 		h_chiSq[cat].Write()
 
-	#Calculate average chi_avr plot, and find global minimum.
-	min_chiSq['average'] = 100000.
-	h_chiSq['average'] = R.TH2D('chiSq_average','chiSq_average',loop,initial,end+increment,loop,initial,end+increment)
+	#Calculate sum chi_sum plot, and find global minimum. 
+	min_chiSq['sum'] = 100000.
+	h_chiSq['sum'] = R.TH2D('chiSq_sum','chiSq_sum',loop,initial,end+increment,loop,initial,end+increment)
 	for FRindex in xrange(len(ddbkgList_scan)):
-		chiSq_avr = 0.0
+		chiSq_sum = 0.0
 		ddbkgIndexing = 'MuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))
 		process ='chiSq_ddbkg'+ddbkgIndexing 
 		for cat in category: 
 			if 'All' in cat: continue
-			#chiSq_avr += round_sig(yieldTable[discriminant+'_'+lumiStr+'fb_'+cat][process] / 4. ,4)
-			chiSq_avr += round_sig(yieldTable[discriminant+'_'+lumiStr+'fb_'+cat][process] ,4) #based on recommendation by Roman, and also Meenakshi, she actually said it a while ago. Just sum al four categories and dont average, since these four categories are statistically independent.
-		if chiSq_avr < min_chiSq['average']:
-			min_chiSq['average'] = chiSq_avr
-			min_process['average'] = process
+			#chiSq_sum += round_sig(yieldTable[discriminant+'_'+lumiStr+'fb_'+cat][process] / 4. ,4)
+			chiSq_sum += round_sig(yieldTable[discriminant+'_'+lumiStr+'fb_'+cat][process] ,4) #based on recommendation by Roman, and also Meenakshi, she actually said it a while ago. Just sum al four categories and dont average, since these four categories are statistically independent.
+		if chiSq_sum < min_chiSq['sum']:
+			min_chiSq['sum'] = chiSq_sum
+			min_process['sum'] = process
 		bin_x = 1+(FRindex/loop)
 		bin_y = 1+(FRindex%loop)
-		h_chiSq['average'].SetBinContent(bin_x,bin_y,chiSq_avr)
-		#print 'average', process, 'filling TH2D(',bin_x,bin_y,chiSq_avr,')'
-	h_chiSq['average'].Write()
+		h_chiSq['sum'].SetBinContent(bin_x,bin_y,chiSq_sum)
+		#print 'sum', process, 'filling TH2D(',bin_x,bin_y,chiSq_sum,')'
+	h_chiSq['sum'].Write()
 
-	for cat in category+['average']: 
+	for cat in category+['sum']: 
 		try:
 			print 'Minimum ',cat,' chi sq = ', min_chiSq[cat], min_process[cat].replace('chiSq_ddbkg','').split('_')[0].replace('MuFR','MuFR = '),'% ',min_process[cat].replace('chiSq_ddbkg','').split('_')[1].replace('ElFR','ElFR = '),'%'
 		except:
