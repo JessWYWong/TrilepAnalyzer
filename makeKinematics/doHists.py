@@ -15,10 +15,13 @@ doAllSys= False
 
 lumiStr = str(targetlumi/1000).replace('.','p') # 1/fb
 
-step1Dir = '/user_data/rsyarif/LJMet102x_3lepTT_2018datasets_2018_11_22_rizki_step1hadds_step2/nominal' # uses PR v9 FR v49
+step1Dir_mc = '/user_data/rsyarif/LJMet102x_3lepTT_2018datasets_2018_11_22_rizki_step1hadds_step2/nominal' # uses PR v9 FR v49
+# step1Dir_data = step1Dir_mc
+step1Dir_data = '/user_data/rsyarif/LJMet102x_3lepTT_2018datasets_2018_11_22_rizki_step1_FRv3hadds_step2/nominal' # uses PR v9 FR v3 
 
 
-print 'grabbing files from ', step1Dir
+print 'grabbing data files from ', step1Dir_data
+print 'grabbing mc files from ', step1Dir_mc
 """
 Note: 
 --Each process in step1 (or step2) directories should have the root files hadded! 
@@ -388,7 +391,7 @@ tTreeData = {}
 tFileData = {}
 for data in dataList:
 	if(readDEBUG):print "READING:", data
-	tFileData[data],tTreeData[data]=readTree(step1Dir+'/'+samples[data]+'_hadd.root')
+	tFileData[data],tTreeData[data]=readTree(step1Dir_data+'/'+samples[data]+'_hadd.root')
 
 tTreeSig = {}
 tFileSig = {}
@@ -396,26 +399,29 @@ for sig in sigList:
 	for decay in decays:
 		if(readDEBUG):print "READING:", sig+decay
 		if(readDEBUG):print "        nominal"
-		tFileSig[sig+decay],tTreeSig[sig+decay]=readTree(step1Dir+'/'+samples[sig+decay]+'_hadd.root')
+		tFileSig[sig+decay],tTreeSig[sig+decay]=readTree(step1Dir_mc+'/'+samples[sig+decay]+'_hadd.root')
 		if doAllSys:
 			for syst in shapesFiles:
 				for ud in ['Up','Down']:
 					if(readDEBUG):print "        "+syst+ud
-					tFileSig[sig+decay+syst+ud],tTreeSig[sig+decay+syst+ud]=readTree(step1Dir.replace('nominal',syst.upper()+ud.lower())+'/'+samples[sig+decay]+'_hadd.root')
+					tFileSig[sig+decay+syst+ud],tTreeSig[sig+decay+syst+ud]=readTree(step1Dir_mc.replace('nominal',syst.upper()+ud.lower())+'/'+samples[sig+decay]+'_hadd.root')
 
 tTreeBkg = {}
 tFileBkg = {}
 for bkg in bkgList:
 	if(readDEBUG):print "READING:",bkg
 	if(readDEBUG):print "        nominal"
-	tFileBkg[bkg],tTreeBkg[bkg]=readTree(step1Dir+'/'+samples[bkg]+'_hadd.root')
+	if "DataDrivenBkg" in bkg:
+		tFileBkg[bkg],tTreeBkg[bkg]=readTree(step1Dir_data+'/'+samples[bkg]+'_hadd.root')
+	else:
+		tFileBkg[bkg],tTreeBkg[bkg]=readTree(step1Dir_mc+'/'+samples[bkg]+'_hadd.root')
 	if doAllSys:
 		for syst in shapesFiles:
 			for ud in ['Up','Down']:
 				if 'DataDriven' in bkg: continue
 				else:
 					if(readDEBUG):print "        "+syst+ud
-					tFileBkg[bkg+syst+ud],tTreeBkg[bkg+syst+ud]=readTree(step1Dir.replace('nominal',syst.upper()+ud.lower())+'/'+samples[bkg]+'_hadd.root')
+					tFileBkg[bkg+syst+ud],tTreeBkg[bkg+syst+ud]=readTree(step1Dir_mc.replace('nominal',syst.upper()+ud.lower())+'/'+samples[bkg]+'_hadd.root')
 print "FINISHED READING"
 
 ###########################################################

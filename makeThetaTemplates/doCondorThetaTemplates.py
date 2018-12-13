@@ -25,7 +25,8 @@ date='%i_%i_%i'%(cTime.year,cTime.month,cTime.day)
 time='%i_%i_%i'%(cTime.hour,cTime.minute,cTime.second)
 
 
-pfix='LJMet102x_3lepTT_2018datasets_2018_11_22_rizki_step1hadds_step2_templates'
+# pfix='LJMet102x_3lepTT_2018datasets_2018_11_22_rizki_step1hadds_step2_templates'
+pfix='LJMet102x_3lepTT_2018datasets_2018_11_22_rizki_step1_FRv3hadds_step2_templates'
 
 
 pfix+='_'+date#+'_'+time

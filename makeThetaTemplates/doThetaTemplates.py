@@ -211,11 +211,11 @@ def makeThetaCats(datahists,sighists,bkghists,discriminant):
 				hwjets,hzjets,httjets,ht,httw,httz,httv,hvv,hvvv={},{},{},{},{},{},{},{},{}
 				# Borrow histograms for yields to theta templates
 			
-				hewkY[signal]  = R.TH1F('triLep'+catStr+'__ewk','',1,0,1)
-				htopY[signal]  = R.TH1F('triLep'+catStr+'__top','',1,0,1)
-				hddbkgY[signal]= R.TH1F('triLep'+catStr+'__ddbkg','',1,0,1)
-				hdataY[signal] = R.TH1F('triLep'+catStr+'__DATA','',1,0,1)
-				hsigY[signal]  = R.TH1F('triLep'+catStr+'__sig','',1,0,1)
+				hewkY[signal]  = R.TH1F('triLep2018'+catStr+'__ewk','',1,0,1)
+				htopY[signal]  = R.TH1F('triLep2018'+catStr+'__top','',1,0,1)
+				hddbkgY[signal]= R.TH1F('triLep2018'+catStr+'__ddbkg','',1,0,1)
+				hdataY[signal] = R.TH1F('triLep2018'+catStr+'__DATA','',1,0,1)
+				hsigY[signal]  = R.TH1F('triLep2018'+catStr+'__sig','',1,0,1)
 
 			
 				#systematics
@@ -225,53 +225,53 @@ def makeThetaCats(datahists,sighists,bkghists,discriminant):
 							if 'muRFcorrdNew' in systematic: continue
 							if not (systematic=='toppt' or 'PR' in systematic or 'FR' in systematic or 'ddbkgSys' in systematic):
 								if(DEBUG):print 'for: ewk, top, sig, creating systematics:', systematic, ud
-								hewkY[signal+systematic+ud] = R.TH1F('triLep'+catStr+'__ewk__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'),'',1,0,1)
-								htopY[signal+systematic+ud] = R.TH1F('triLep'+catStr+'__top__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'),'',1,0,1)
-								hsigY[signal+systematic+ud] = R.TH1F('triLep'+catStr+'__sig__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'),'',1,0,1)
+								hewkY[signal+systematic+ud] = R.TH1F('triLep2018'+catStr+'__ewk__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'),'',1,0,1)
+								htopY[signal+systematic+ud] = R.TH1F('triLep2018'+catStr+'__top__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'),'',1,0,1)
+								hsigY[signal+systematic+ud] = R.TH1F('triLep2018'+catStr+'__sig__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'),'',1,0,1)
 							if systematic=='toppt': # top pt is only on the ttbar sample, so it needs special treatment!
-								htopY[signal+systematic+ud] = R.TH1F('triLep'+catStr+'__top__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'),'',1,0,1)
+								htopY[signal+systematic+ud] = R.TH1F('triLep2018'+catStr+'__top__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'),'',1,0,1)
 							if ('PR' in systematic or 'FR' in systematic or 'ddbkgSys' in systematic): # PR and FR is only on the ddbkg sample, so it needs special treatment!
 								if(DEBUG):print 'for: ddbkg, creating systematics:', systematic,ud
-								hddbkgY[signal+systematic+ud] = R.TH1F('triLep'+catStr+'__ddbkg__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'),'',1,0,1)
+								hddbkgY[signal+systematic+ud] = R.TH1F('triLep2018'+catStr+'__ddbkg__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'),'',1,0,1)
 						for ud in ['Up','Down']:
 							if 'muRFcorrdNew' in systematic:
-								hewkY[signal+systematic+ud] = R.TH1F('triLep'+catStr+'__ewk__'+systematic+'Ewk__'+ud.replace('Up','plus').replace('Down','minus'),'',1,0,1)
-								htopY[signal+systematic+ud] = R.TH1F('triLep'+catStr+'__top__'+systematic+'Top__'+ud.replace('Up','plus').replace('Down','minus'),'',1,0,1)
-								hsigY[signal+systematic+ud] = R.TH1F('triLep'+catStr+'__sig__'+systematic+'Sig__'+ud.replace('Up','plus').replace('Down','minus'),'',1,0,1)
+								hewkY[signal+systematic+ud] = R.TH1F('triLep2018'+catStr+'__ewk__'+systematic+'Ewk__'+ud.replace('Up','plus').replace('Down','minus'),'',1,0,1)
+								htopY[signal+systematic+ud] = R.TH1F('triLep2018'+catStr+'__top__'+systematic+'Top__'+ud.replace('Up','plus').replace('Down','minus'),'',1,0,1)
+								hsigY[signal+systematic+ud] = R.TH1F('triLep2018'+catStr+'__sig__'+systematic+'Sig__'+ud.replace('Up','plus').replace('Down','minus'),'',1,0,1)
 
 
 				#Group ttv processes
-				httv[i] = bkghists[histoPrefix+'_'+ttvList[0]].Clone('triLep'+catStr+'__TTV')
+				httv[i] = bkghists[histoPrefix+'_'+ttvList[0]].Clone('triLep2018'+catStr+'__TTV')
 				for bkg in ttvList:
 					if bkg!=ttvList[0]: httv[i].Add(bkghists[histoPrefix+'_'+bkg])
 
 				#Group vv processes
-				hvv[i] = bkghists[histoPrefix+'_'+vvList[0]].Clone('triLep'+catStr+'__VV')
+				hvv[i] = bkghists[histoPrefix+'_'+vvList[0]].Clone('triLep2018'+catStr+'__VV')
 				for bkg in vvList:
 					if bkg!=vvList[0]: hvv[i].Add(bkghists[histoPrefix+'_'+bkg])
 
 				#Group vvv processes
-				hvvv[i] = bkghists[histoPrefix+'_'+vvvList[0]].Clone('triLep'+catStr+'__VVV')
+				hvvv[i] = bkghists[histoPrefix+'_'+vvvList[0]].Clone('triLep2018'+catStr+'__VVV')
 				for bkg in vvvList:
 					if bkg!=vvvList[0]: hvvv[i].Add(bkghists[histoPrefix+'_'+bkg])
 
 				#Group ddbkg processes
-				hddbkg[i] = bkghists[histoPrefix+'_'+ddbkgList[0]].Clone('triLep'+catStr+'__ddbkg')
+				hddbkg[i] = bkghists[histoPrefix+'_'+ddbkgList[0]].Clone('triLep2018'+catStr+'__ddbkg')
 				for bkg in ddbkgList:
 					if bkg!=ddbkgList[0]: hddbkg[i].Add(bkghists[histoPrefix+'_'+bkg])
 							
 				#Group EWK processes
-				hewk[i] = bkghists[histoPrefix+'_'+ewkList[0]].Clone('triLep'+catStr+'__ewk')
+				hewk[i] = bkghists[histoPrefix+'_'+ewkList[0]].Clone('triLep2018'+catStr+'__ewk')
 				for bkg in ewkList:
 					if bkg!=ewkList[0]: hewk[i].Add(bkghists[histoPrefix+'_'+bkg])
 		
 				#Group TOP processes
-				htop[i] = bkghists[histoPrefix+'_'+topList[0]].Clone('triLep'+catStr+'__top')
+				htop[i] = bkghists[histoPrefix+'_'+topList[0]].Clone('triLep2018'+catStr+'__top')
 				for bkg in topList:
 					if bkg!=topList[0]: htop[i].Add(bkghists[histoPrefix+'_'+bkg])
 		
 				#get signal
-				hsig[i] = sighists[histoPrefix+'_'+signal+decays[0]].Clone('triLep'+catStr+'__sig')
+				hsig[i] = sighists[histoPrefix+'_'+signal+decays[0]].Clone('triLep2018'+catStr+'__sig')
 				if doBRScan: hsig[i].Scale(BRs[decays[0][:2]][BRind]*BRs[decays[0][2:]][BRind]/(BR[decays[0][:2]]*BR[decays[0][2:]]))
 				for decay in decays:
 					if decay!=decays[0]:
@@ -285,9 +285,9 @@ def makeThetaCats(datahists,sighists,bkghists,discriminant):
 						if systematic=='pdfNew' or systematic=='muRFcorrdNew' or systematic=='muRFdecorrdNew': continue
 						for ud in ['Up','Down']:
 							if not (systematic=='toppt' or 'PR' in systematic or 'FR' in systematic):
-								hewk[systematic+ud+str(i)] = bkghists[histoPrefix.replace(discriminant,discriminant+systematic+ud)+'_'+ewkList[0]].Clone('triLep'+catStr+'__ewk__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'))
-								htop[systematic+ud+str(i)] = bkghists[histoPrefix.replace(discriminant,discriminant+systematic+ud)+'_'+topList[0]].Clone('triLep'+catStr+'__top__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'))
-								hsig[systematic+ud+str(i)] = sighists[histoPrefix.replace(discriminant,discriminant+systematic+ud)+'_'+signal+decays[0]].Clone('triLep'+catStr+'__sig__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'))
+								hewk[systematic+ud+str(i)] = bkghists[histoPrefix.replace(discriminant,discriminant+systematic+ud)+'_'+ewkList[0]].Clone('triLep2018'+catStr+'__ewk__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'))
+								htop[systematic+ud+str(i)] = bkghists[histoPrefix.replace(discriminant,discriminant+systematic+ud)+'_'+topList[0]].Clone('triLep2018'+catStr+'__top__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'))
+								hsig[systematic+ud+str(i)] = sighists[histoPrefix.replace(discriminant,discriminant+systematic+ud)+'_'+signal+decays[0]].Clone('triLep2018'+catStr+'__sig__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'))
 								if doBRScan: hsig[systematic+ud+str(i)].Scale(BRs[decays[0][:2]][BRind]*BRs[decays[0][2:]][BRind]/(BR[decays[0][:2]]*BR[decays[0][2:]]))
 								for bkg in ewkList: 
 									if bkg!=ewkList[0]: hewk[systematic+ud+str(i)].Add(bkghists[histoPrefix.replace(discriminant,discriminant+systematic+ud)+'_'+bkg])
@@ -298,43 +298,43 @@ def makeThetaCats(datahists,sighists,bkghists,discriminant):
 									if doBRScan: htemp.Scale(BRs[decay[:2]][BRind]*BRs[decay[2:]][BRind]/(BR[decay[:2]]*BR[decay[2:]]))
 									if decay!=decays[0]: hsig[systematic+ud+str(i)].Add(htemp)
 							if systematic=='toppt': # top pt is only on the ttbar sample, so it needs special treatment!
-								htop[systematic+ud+str(i)] = bkghists[histoPrefix.replace(discriminant,discriminant+systematic+ud)+'_'+ttjetList[0]].Clone('triLep'+catStr+'__top__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'))
+								htop[systematic+ud+str(i)] = bkghists[histoPrefix.replace(discriminant,discriminant+systematic+ud)+'_'+ttjetList[0]].Clone('triLep2018'+catStr+'__top__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'))
 								for bkg in ttjetList: 
 									if bkg!=ttjetList[0]: htop[systematic+ud+str(i)].Add(bkghists[histoPrefix.replace(discriminant,discriminant+systematic+ud)+'_'+bkg])
 								for bkg in topList: 
 									if bkg not in ttjetList: htop[systematic+ud+str(i)].Add(bkghists[histoPrefix+'_'+bkg])
 							if 'PR' in systematic or 'FR' in systematic: # PR and FR is only on the ddbkg sample, so it needs special treatment!
-								hddbkg[systematic+ud+str(i)] = bkghists[histoPrefix.replace(discriminant,discriminant+systematic+ud)+'_'+ddbkgList[0]].Clone('triLep'+catStr+'__ddbkg'+'__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'))
+								hddbkg[systematic+ud+str(i)] = bkghists[histoPrefix.replace(discriminant,discriminant+systematic+ud)+'_'+ddbkgList[0]].Clone('triLep2018'+catStr+'__ddbkg'+'__'+systematic+'__'+ud.replace('Up','plus').replace('Down','minus'))
 								for bkg in ddbkgList: 
 									if bkg!=ddbkgList[0]: hddbkg[systematic+ud+str(i)].Add(bkghists[histoPrefix.replace(discriminant,discriminant+systematic+ud)+'_'+bkg])
 					for systematic in normSystematics.keys():
-						hewk[systematic+'Up'+str(i)] = hewk[i].Clone('triLep'+catStr+'__ewk__'+systematic+'__plus')
+						hewk[systematic+'Up'+str(i)] = hewk[i].Clone('triLep2018'+catStr+'__ewk__'+systematic+'__plus')
 						hewk[systematic+'Up'+str(i)].Scale(normSystematics[systematic][cat])
-						hewk[systematic+'Down'+str(i)] = hewk[i].Clone('triLep'+catStr+'__ewk__'+systematic+'__minus')
+						hewk[systematic+'Down'+str(i)] = hewk[i].Clone('triLep2018'+catStr+'__ewk__'+systematic+'__minus')
 						hewk[systematic+'Down'+str(i)].Scale(2.-normSystematics[systematic][cat])
 
-						htop[systematic+'Up'+str(i)] = htop[i].Clone('triLep'+catStr+'__top__'+systematic+'__plus')
+						htop[systematic+'Up'+str(i)] = htop[i].Clone('triLep2018'+catStr+'__top__'+systematic+'__plus')
 						htop[systematic+'Up'+str(i)].Scale(normSystematics[systematic][cat])
-						htop[systematic+'Down'+str(i)] = htop[i].Clone('triLep'+catStr+'__top__'+systematic+'__minus')
+						htop[systematic+'Down'+str(i)] = htop[i].Clone('triLep2018'+catStr+'__top__'+systematic+'__minus')
 						htop[systematic+'Down'+str(i)].Scale(2.-normSystematics[systematic][cat])
 
-						hsig[systematic+'Up'+str(i)] = hsig[i].Clone('triLep'+catStr+'__sig__'+systematic+'__plus')
+						hsig[systematic+'Up'+str(i)] = hsig[i].Clone('triLep2018'+catStr+'__sig__'+systematic+'__plus')
 						hsig[systematic+'Up'+str(i)].Scale(normSystematics[systematic][cat])
-						hsig[systematic+'Down'+str(i)] = hsig[i].Clone('triLep'+catStr+'__sig__'+systematic+'__minus')
+						hsig[systematic+'Down'+str(i)] = hsig[i].Clone('triLep2018'+catStr+'__sig__'+systematic+'__minus')
 						hsig[systematic+'Down'+str(i)].Scale(2.-normSystematics[systematic][cat])
 
 					for systematic in ddbkgSystematics.keys():
 						if(DEBUG):print 'Attempting to incorporate', signal, systematic
-						hddbkg[systematic+'Up'+str(i)] = hddbkg[i].Clone('triLep'+catStr+'__ddbkg__'+systematic+'__plus')
+						hddbkg[systematic+'Up'+str(i)] = hddbkg[i].Clone('triLep2018'+catStr+'__ddbkg__'+systematic+'__plus')
 						hddbkg[systematic+'Up'+str(i)].Scale(ddbkgSystematics[systematic][cat])
-						hddbkg[systematic+'Down'+str(i)] = hddbkg[i].Clone('triLep'+catStr+'__ddbkg__'+systematic+'__minus')
+						hddbkg[systematic+'Down'+str(i)] = hddbkg[i].Clone('triLep2018'+catStr+'__ddbkg__'+systematic+'__minus')
 						#Set as Asymetric FRsystematics, comment out below.
 						#hddbkg[systematic+'Down'+str(i)].Scale(2.-ddbkgSystematics[systematic][cat]) 
 
 					for pdfInd in range(100):
-						hewk['pdf'+str(pdfInd)+'_'+str(i)] = bkghists[histoPrefix.replace(discriminant,discriminant+'pdf'+str(pdfInd))+'_'+ewkList[0]].Clone('triLep'+catStr+'__ewk__pdf'+str(pdfInd))
-						htop['pdf'+str(pdfInd)+'_'+str(i)] = bkghists[histoPrefix.replace(discriminant,discriminant+'pdf'+str(pdfInd))+'_'+topList[0]].Clone('triLep'+catStr+'__top__pdf'+str(pdfInd))
-						hsig['pdf'+str(pdfInd)+'_'+str(i)] = sighists[histoPrefix.replace(discriminant,discriminant+'pdf'+str(pdfInd))+'_'+signal+decays[0]].Clone('triLep'+catStr+'__sig__pdf'+str(pdfInd))
+						hewk['pdf'+str(pdfInd)+'_'+str(i)] = bkghists[histoPrefix.replace(discriminant,discriminant+'pdf'+str(pdfInd))+'_'+ewkList[0]].Clone('triLep2018'+catStr+'__ewk__pdf'+str(pdfInd))
+						htop['pdf'+str(pdfInd)+'_'+str(i)] = bkghists[histoPrefix.replace(discriminant,discriminant+'pdf'+str(pdfInd))+'_'+topList[0]].Clone('triLep2018'+catStr+'__top__pdf'+str(pdfInd))
+						hsig['pdf'+str(pdfInd)+'_'+str(i)] = sighists[histoPrefix.replace(discriminant,discriminant+'pdf'+str(pdfInd))+'_'+signal+decays[0]].Clone('triLep2018'+catStr+'__sig__pdf'+str(pdfInd))
 						if doBRScan: hsig['pdf'+str(pdfInd)+'_'+str(i)].Scale(BRs[decays[0][:2]][BRind]*BRs[decays[0][2:]][BRind]/(BR[decays[0][:2]]*BR[decays[0][2:]]))
 						for bkg in ewkList: 
 							if bkg!=ewkList[0]: hewk['pdf'+str(pdfInd)+'_'+str(i)].Add(bkghists[histoPrefix.replace(discriminant,discriminant+'pdf'+str(pdfInd))+'_'+bkg])
@@ -346,7 +346,7 @@ def makeThetaCats(datahists,sighists,bkghists,discriminant):
 							if decay!=decays[0]:hsig['pdf'+str(pdfInd)+'_'+str(i)].Add(htemp)
 		
 				#Group data processes
-				hdata[i] = datahists[histoPrefix+'_'+dataList[0]].Clone('triLep'+catStr+'__DATA')
+				hdata[i] = datahists[histoPrefix+'_'+dataList[0]].Clone('triLep2018'+catStr+'__DATA')
 				for dat in dataList:
 					if dat!=dataList[0]: hdata[i].Add(datahists[histoPrefix+'_'+dat])
 
@@ -390,12 +390,12 @@ def makeThetaCats(datahists,sighists,bkghists,discriminant):
 								
 					#R/F
 #start
-					htop['muRFcorrdNewUp'+str(i)] = htop['muRFcorrdUp'+str(i)].Clone('triLep'+catStr+'__top__muRFcorrdNewTop__plus')
-					htop['muRFcorrdNewDown'+str(i)] = htop['muRFcorrdUp'+str(i)].Clone('triLep'+catStr+'__top__muRFcorrdNewTop__minus')
-					hewk['muRFcorrdNewUp'+str(i)] = hewk['muRFcorrdUp'+str(i)].Clone('triLep'+catStr+'__ewk__muRFcorrdNewEwk__plus')
-					hewk['muRFcorrdNewDown'+str(i)] = hewk['muRFcorrdUp'+str(i)].Clone('triLep'+catStr+'__ewk__muRFcorrdNewEwk__minus')
-					hsig['muRFcorrdNewUp'+str(i)] = hsig['muRFcorrdUp'+str(i)].Clone('triLep'+catStr+'__sig__muRFcorrdNewSig__plus')
-					hsig['muRFcorrdNewDown'+str(i)] = hsig['muRFcorrdUp'+str(i)].Clone('triLep'+catStr+'__sig__muRFcorrdNewSig__minus')
+					htop['muRFcorrdNewUp'+str(i)] = htop['muRFcorrdUp'+str(i)].Clone('triLep2018'+catStr+'__top__muRFcorrdNewTop__plus')
+					htop['muRFcorrdNewDown'+str(i)] = htop['muRFcorrdUp'+str(i)].Clone('triLep2018'+catStr+'__top__muRFcorrdNewTop__minus')
+					hewk['muRFcorrdNewUp'+str(i)] = hewk['muRFcorrdUp'+str(i)].Clone('triLep2018'+catStr+'__ewk__muRFcorrdNewEwk__plus')
+					hewk['muRFcorrdNewDown'+str(i)] = hewk['muRFcorrdUp'+str(i)].Clone('triLep2018'+catStr+'__ewk__muRFcorrdNewEwk__minus')
+					hsig['muRFcorrdNewUp'+str(i)] = hsig['muRFcorrdUp'+str(i)].Clone('triLep2018'+catStr+'__sig__muRFcorrdNewSig__plus')
+					hsig['muRFcorrdNewDown'+str(i)] = hsig['muRFcorrdUp'+str(i)].Clone('triLep2018'+catStr+'__sig__muRFcorrdNewSig__minus')
 
 					muRFprefixList = ['','muRUp','muRDown','muFUp','muFDown','muRFcorrdUp','muRFcorrdDown']
 					htop[''+str(i)] =  htop[i].Clone() #hack to be able to use loop over muRFprefixList as it is.
@@ -466,12 +466,12 @@ def makeThetaCats(datahists,sighists,bkghists,discriminant):
 					
 					#PDF
 #start
-					htop['pdfNewUp'+str(i)] = htop['pdf0'+'_'+str(i)].Clone('triLep'+catStr+'__top__pdfNew__plus')
-					htop['pdfNewDown'+str(i)] = htop['pdf0'+'_'+str(i)].Clone('triLep'+catStr+'__top__pdfNew__minus')
-					hewk['pdfNewUp'+str(i)] = hewk['pdf0'+'_'+str(i)].Clone('triLep'+catStr+'__ewk__pdfNew__plus')
-					hewk['pdfNewDown'+str(i)] = hewk['pdf0'+'_'+str(i)].Clone('triLep'+catStr+'__ewk__pdfNew__minus')
-					hsig['pdfNewUp'+str(i)] = hsig['pdf0'+'_'+str(i)].Clone('triLep'+catStr+'__sig__pdfNew__plus')
-					hsig['pdfNewDown'+str(i)] = hsig['pdf0'+'_'+str(i)].Clone('triLep'+catStr+'__sig__pdfNew__minus')
+					htop['pdfNewUp'+str(i)] = htop['pdf0'+'_'+str(i)].Clone('triLep2018'+catStr+'__top__pdfNew__plus')
+					htop['pdfNewDown'+str(i)] = htop['pdf0'+'_'+str(i)].Clone('triLep2018'+catStr+'__top__pdfNew__minus')
+					hewk['pdfNewUp'+str(i)] = hewk['pdf0'+'_'+str(i)].Clone('triLep2018'+catStr+'__ewk__pdfNew__plus')
+					hewk['pdfNewDown'+str(i)] = hewk['pdf0'+'_'+str(i)].Clone('triLep2018'+catStr+'__ewk__pdfNew__minus')
+					hsig['pdfNewUp'+str(i)] = hsig['pdf0'+'_'+str(i)].Clone('triLep2018'+catStr+'__sig__pdfNew__plus')
+					hsig['pdfNewDown'+str(i)] = hsig['pdf0'+'_'+str(i)].Clone('triLep2018'+catStr+'__sig__pdfNew__minus')
 
 					for ibin in range(1,htop['pdf0_'+str(i)].GetNbinsX()+1):
 						weightListTop = [htop['pdf'+str(pdfInd)+'_'+str(i)].GetBinContent(ibin) for pdfInd in range(100)]

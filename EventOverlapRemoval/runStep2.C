@@ -33,7 +33,8 @@ void runStep2(){
    fileNames.push_back("EGamma_RunD_hadd.root");
 
 //    
-  inputDir="LJMet102x_3lepTT_2018datasets_2018_11_22_rizki_step1hadds";
+   //inputDir="LJMet102x_3lepTT_2018datasets_2018_11_22_rizki_step1hadds";
+  inputDir="LJMet102x_3lepTT_2018datasets_2018_11_22_rizki_step1_FRv3hadds";
   
   subDir="nominal";
 

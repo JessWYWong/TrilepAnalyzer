@@ -10,9 +10,13 @@ import ROOT as R
 R.gROOT.SetBatch(1)
 start_time = time.time()
 
-step1Dir = '/user_data/rsyarif/LJMet102x_3lepTT_2018datasets_2018_11_22_rizki_step1hadds_step2/nominal'
+step1Dir_mc = '/user_data/rsyarif/LJMet102x_3lepTT_2018datasets_2018_11_22_rizki_step1hadds_step2/nominal' # uses PR v9 FR v49
+# step1Dir_data = step1Dir_mc
+step1Dir_data = '/user_data/rsyarif/LJMet102x_3lepTT_2018datasets_2018_11_22_rizki_step1_FRv3hadds_step2/nominal' # uses PR v9 FR v3 
 
-print 'grabbing files from ', step1Dir
+
+print 'grabbing data files from ', step1Dir_data
+print 'grabbing mc files from ', step1Dir_mc
 
 cTime=datetime.datetime.now()
 datestr='%i_%i_%i'%(cTime.year,cTime.month,cTime.day)
@@ -255,7 +259,7 @@ tTreeData = {}
 tFileData = {}
 for data in dataList:
 	if(displayProcess):print "READING:", data
-	tFileData[data],tTreeData[data]=readTree(step1Dir+'/'+samples[data]+'_hadd.root')
+	tFileData[data],tTreeData[data]=readTree(step1Dir_data+'/'+samples[data]+'_hadd.root')
 
 tTreeSig = {}
 tFileSig = {}
@@ -263,26 +267,29 @@ for sig in sigList:
 	for decay in decays:
 		if(displayProcess):print "READING:", sig+decay
 		if(displayProcess):print "        nominal"
-		tFileSig[sig+decay],tTreeSig[sig+decay]=readTree(step1Dir+'/'+samples[sig+decay]+'_hadd.root')
+		tFileSig[sig+decay],tTreeSig[sig+decay]=readTree(step1Dir_mc+'/'+samples[sig+decay]+'_hadd.root')
 		if doAllSys:
 			for syst in shapesFiles:
 				for ud in ['Up','Down']:
 					if(displayProcess):print "        "+syst+ud
-					tFileSig[sig+decay+syst+ud],tTreeSig[sig+decay+syst+ud]=readTree(step1Dir.replace('nominal',syst.upper()+ud.lower())+'/'+samples[sig+decay]+'_hadd.root')
+					tFileSig[sig+decay+syst+ud],tTreeSig[sig+decay+syst+ud]=readTree(step1Dir_mc.replace('nominal',syst.upper()+ud.lower())+'/'+samples[sig+decay]+'_hadd.root')
 
 tTreeBkg = {}
 tFileBkg = {}
 for bkg in bkgList:
 	if(displayProcess):print "READING:",bkg
 	if(displayProcess):print "        nominal"
-	tFileBkg[bkg],tTreeBkg[bkg]=readTree(step1Dir+'/'+samples[bkg]+'_hadd.root')
+	if "DataDrivenBkg" in bkg:
+		tFileBkg[bkg],tTreeBkg[bkg]=readTree(step1Dir_data+'/'+samples[bkg]+'_hadd.root')
+	else:
+		tFileBkg[bkg],tTreeBkg[bkg]=readTree(step1Dir_mc+'/'+samples[bkg]+'_hadd.root')
 	if doAllSys:
 		for syst in shapesFiles:
 			for ud in ['Up','Down']:
 				if 'DataDriven' in bkg: continue
 				else:
 					if(displayProcess):print "        "+syst+ud
-					tFileBkg[bkg+syst+ud],tTreeBkg[bkg+syst+ud]=readTree(step1Dir.replace('nominal',syst.upper()+ud.lower())+'/'+samples[bkg]+'_hadd.root')
+					tFileBkg[bkg+syst+ud],tTreeBkg[bkg+syst+ud]=readTree(step1Dir_mc.replace('nominal',syst.upper()+ud.lower())+'/'+samples[bkg]+'_hadd.root')
 print "FINISHED READING"
 
 
@@ -310,7 +317,7 @@ plotList = {#discriminantName:(discriminantLJMETName, binning, xAxisLabel)
 iPlot='STrebinnedv2' #choose a discriminant from plotList!
 # iPlot='HTrebinned' #choose a discriminant from plotList!
 # iPlot='NJets' #choose a discriminant from plotList! NJets can only be used with CutNCount!! Use STrebinned for shape!
-if('FRv48sys' in step1Dir): iPlot='minMlllBv4' #choose a discriminant from plotList!
+if('FRv48sys' in step1Dir_data): iPlot='minMlllBv4' #choose a discriminant from plotList!
 if(displayProcess):print "PLOTTING:",iPlot
 if(displayProcess):print "         LJMET Variable:",plotList[iPlot][0]
 if(displayProcess):print "         X-AXIS TITLE  :",plotList[iPlot][2]
