@@ -10,14 +10,15 @@ gROOT.SetBatch(1)
 start_time = time.time()
 
 
-templateDir='/user_data/rsyarif/kinematics_80x_condor_BLA'
+#templateDir='/user_data/rsyarif/kinematics_80x_condor_BLA'
 
 DEBUG=False
 
-mainDir='/user_data/rsyarif/'
+#mainDir='/user_data/rsyarif/'
+mainDir='/mnt/data/users/wwong/'
 templateDir=mainDir
 
-templateDir+='kinematics_80x_condor_BLA'
+templateDir+='kinematics_LJMet94x_3lepTT_2017datasets_2018_11_7_rizki_NoSYS_2016SFs_FRv3'
 
 
 if len(sys.argv)>1: templateDir = mainDir+sys.argv[1] 
@@ -30,11 +31,11 @@ lumiInTemplates='41p557'
 # sig='ttm800' # choose the 1st signal to plot
 # sigleg='TT(0.8 TeV)'
 
-sig='ttm1200' # choose the 1st signal to plot
-sigleg='T#bar{T}(1.2 TeV)'
+sig='ttm1000' # choose the 1st signal to plot
+sigleg='T#bar{T}(1 TeV)'
 
 sigM1500='ttm1500' 
-siglegM1500='T#bar{T}(1.2 TeV)'
+siglegM1500='T#bar{T}(1.5 TeV)'
 
 scaleSignals = True
 dontShowSignalScaling = False
@@ -44,16 +45,16 @@ scaleFact1 = 10
 scaleFact2 = 50
 if 'Final' in templateDir: scaleFact1 = 40
 
-systematicList = ['pileup','btag','mistag','pdfNew','muRFcorrdNew','elPR','elFR','muPR','muFR','jec','jer']
+systematicList = ['pileup','prefire','btag','mistag','pdfNew','muRFcorrdNew','elPR','elFR','muPR','muFR','jec','jer','TrigEffWeight', 'elIdSys']
 
-doAllSys = False
-# doAllSys = True
+#doAllSys = False
+doAllSys = True
 
 isRebinned=''#post fix for file names if the name changed b/c of rebinning or some other process
 doNormByBinWidth=False # not tested, may not work out of the box
 doOneBand = False
 if not doAllSys: doOneBand = True # Don't change this!
-blind = True
+blind = False
 yLog = True
 
 if len(sys.argv)>2: blind = bool( int(sys.argv[2]) )  
@@ -78,11 +79,11 @@ def formatUpperHist_v2(histogram,th1hist):
 	histogram.GetXaxis().SetRangeUser(lowside,highside)
 	print 'Name being formatted:',histogram.GetName()
 	if blind == True:
-		histogram.GetXaxis().SetLabelSize(0.08)
-		histogram.GetXaxis().SetTitleSize(0.08)
+		histogram.GetXaxis().SetLabelSize(0.05)
+		histogram.GetXaxis().SetTitleSize(0.06)
 		#histogram.GetXaxis().SetTitle(xTitle)
-		histogram.GetYaxis().SetLabelSize(0.08)
-		histogram.GetYaxis().SetTitleSize(0.08)
+		histogram.GetYaxis().SetLabelSize(0.05)
+		histogram.GetYaxis().SetTitleSize(0.06)
 		histogram.GetYaxis().SetTitleOffset(1.2)
 		histogram.GetXaxis().SetNdivisions(506)
 	else:
@@ -107,12 +108,12 @@ def formatUpperHist(histogram):
 	histogram.GetXaxis().SetLabelSize(0)
 
 	if blind == True:
-		histogram.GetXaxis().SetLabelSize(0.08)
-		histogram.GetXaxis().SetTitleSize(0.08)
+		histogram.GetXaxis().SetLabelSize(0.05)
+		histogram.GetXaxis().SetTitleSize(0.06)
 		#histogram.GetXaxis().SetTitle(xTitle)
-		histogram.GetYaxis().SetLabelSize(0.08)
-		histogram.GetYaxis().SetTitleSize(0.08)
-		histogram.GetYaxis().SetTitleOffset(1.2)
+		histogram.GetYaxis().SetLabelSize(0.05)
+		histogram.GetYaxis().SetTitleSize(0.06)
+		histogram.GetYaxis().SetTitleOffset(0.78)
 		histogram.GetXaxis().SetNdivisions(506)
 	else:
 		histogram.GetYaxis().SetLabelSize(0.05)
@@ -132,15 +133,22 @@ def formatUpperHist(histogram):
 		else: histogram.SetMaximum(50*histogram.GetMaximum())
 		
 def formatLowerHist(histogram):
-	histogram.GetXaxis().SetLabelSize(.15)
-	histogram.GetXaxis().SetTitleSize(0.18)
-	histogram.GetXaxis().SetTitleOffset(0.95)
-	histogram.GetXaxis().SetNdivisions(506)
-	#histogram.GetXaxis().SetTitle("S_{T} (GeV)")
-
-	histogram.GetYaxis().SetLabelSize(0.15)
-	histogram.GetYaxis().SetTitleSize(0.145)
-	histogram.GetYaxis().SetTitleOffset(.3)
+	if blind == True:
+		histogram.GetXaxis().SetLabelSize(.15)
+		histogram.GetXaxis().SetTitleSize(0.18)
+		histogram.GetXaxis().SetTitleOffset(0.95)
+		histogram.GetXaxis().SetNdivisions(506)
+		#histogram.GetXaxis().SetTitle("S_{T} (GeV)")
+		histogram.GetYaxis().SetLabelSize(0.15)
+		histogram.GetYaxis().SetTitleSize(0.145)
+		histogram.GetYaxis().SetTitleOffset(.3)
+	else:
+		histogram.GetXaxis().SetLabelSize(.15)
+		histogram.GetXaxis().SetTitleSize(0.18)
+		histogram.GetXaxis().SetTitleOffset(0.95)
+		histogram.GetYaxis().SetLabelSize(0.15)
+		histogram.GetYaxis().SetTitleSize(0.145)
+		histogram.GetYaxis().SetTitleOffset(.3)
 	if not doRealPull: histogram.GetYaxis().SetTitle('Data/Bkg')
 	else: histogram.GetYaxis().SetTitle('#frac{(data-bkg)}{std. dev.}')
 	histogram.GetYaxis().SetNdivisions(5)
@@ -164,39 +172,77 @@ def normByBinWidth(result):
 		result.SetBinContent(bin, content/width)
 		result.SetBinError(bin, error/width)
 
-lumiSys = 0.026 #6.2% https://hypernews.cern.ch/HyperNews/CMS/get/physics-announcements/4495.html - 11Feb2017
-trigSys = 0.03 #3% trigger uncertainty - AN 2016 229
+lumiSys = 0.023 #6.2% https://hypernews.cern.ch/HyperNews/CMS/get/physics-announcements/4495.html - 11Feb2017
+#trigSys = 0.03 #3% trigger uncertainty - AN 2016 229
 # lepIdSys = math.sqrt(3.*0.01**2) #1% lepton id uncertainty ## NEED to add in quadrature for 3 leptons! - ATTENTION! NEED UPDATING!
 # lepIsoSys = math.sqrt(3.*0.01**2) #1% lepton isolation uncertainty ## NEED to add in quadrature for 3 leptons! - ATTENTION! NEED UPDATING!
-lepIdSys = 0.03 #ATTENTION: is this right? add 1% linearly per lepton??
-lepIsoSys = 0.03 #ATTENTION: is this right? add 1% linearly per lepton??
-topXsecSys = 0.0 #55 #5.5% top x-sec uncertainty
-ewkXsecSys = 0.0 #5 #5% ewk x-sec uncertainty
-qcdXsecSys = 0.0 #50 #50% qcd x-sec uncertainty
+#lepIdSys = 0.03 #ATTENTION: is this right? add 1% linearly per lepton??
+#lepIsoSys = 0.03 #ATTENTION: is this right? add 1% linearly per lepton??
+#topXsecSys = 0.0 #55 #5.5% top x-sec uncertainty
+#ewkXsecSys = 0.0 #5 #5% ewk x-sec uncertainty
+topXsecSys = math.sqrt(0.0003**2 + 0.0008**2) #55 #5.5% top x-sec uncertainty
+ewkXsecSys = math.sqrt(0.0175**2 + 0.0012**2 + 0.0002**2 + 0.0002**2 + 0.00001**2 + 0.00006**2) #5 #5% ewk x-sec uncertainty
+#qcdXsecSys = 0.0 #50 #50% qcd x-sec uncertainty
+
 
 
 #how to incorporate these?
+#normSystematics = { #The All category was obtained by quad sum of the cats! its approximate!
+#					'elIdSys':{'EEE':0.06,'EEM':0.04,'EMM':0.02,'MMM':0.00,'All':0.075},
+#					'muIdSys':{'EEE':0.00,'EEM':0.02,'EMM':0.04,'MMM':0.06,'All':0.075},
+#					'elIsoSys':{'EEE':0.03,'EEM':0.02,'EMM':0.01,'MMM':0.00,'All':0.037},
+#					'muIsoSys':{'EEE':0.00,'EEM':0.01,'EMM':0.02,'MMM':0.03,'All':0.037},
+#					'elelelTrigSys':{'EEE':0.03,'EEM':0.00,'EMM':0.00,'MMM':0.00,'All':0.03},
+#					'elelmuTrigSys':{'EEE':0.00,'EEM':0.03,'EMM':0.00,'MMM':0.00,'All':0.03},
+#					'elmumuTrigSys':{'EEE':0.00,'EEM':0.00,'EMM':0.03,'MMM':0.00,'All':0.03},
+#					'mumumuTrigSys':{'EEE':0.00,'EEM':0.00,'EMM':0.00,'MMM':0.03,'All':0.03},
+#					}
 normSystematics = { #The All category was obtained by quad sum of the cats! its approximate!
-					'elIdSys':{'EEE':0.06,'EEM':0.04,'EMM':0.02,'MMM':0.00,'All':0.075},
-					'muIdSys':{'EEE':0.00,'EEM':0.02,'EMM':0.04,'MMM':0.06,'All':0.075},
-					'elIsoSys':{'EEE':0.03,'EEM':0.02,'EMM':0.01,'MMM':0.00,'All':0.037},
-					'muIsoSys':{'EEE':0.00,'EEM':0.01,'EMM':0.02,'MMM':0.03,'All':0.037},
-					'elelelTrigSys':{'EEE':0.03,'EEM':0.00,'EMM':0.00,'MMM':0.00,'All':0.03},
-					'elelmuTrigSys':{'EEE':0.00,'EEM':0.03,'EMM':0.00,'MMM':0.00,'All':0.03},
-					'elmumuTrigSys':{'EEE':0.00,'EEM':0.00,'EMM':0.03,'MMM':0.00,'All':0.03},
-					'mumumuTrigSys':{'EEE':0.00,'EEM':0.00,'EMM':0.00,'MMM':0.03,'All':0.03},
-					}
+#                                        'elIdSys':{'EEE':0.06,'EEM':0.04,'EMM':0.02,'MMM':0.00,'All':0.075}, #flat rate of 2% 
+#                                        'muIdSys':{'EEE':0.00,'EEM':0.02,'EMM':0.04,'MMM':0.06,'All':0.075},
+#                                        'elIsoSys':{'EEE':0.045,'EEM':0.03,'EMM':0.015,'MMM':0.00,'All':0.056}, #flat rate of 1.5% for el
+#                                        'muIsoSys':{'EEE':0.00,'EEM':0.01,'EMM':0.02,'MMM':0.03,'All':0.037}, #flat rate of 1% for mu
+#                                        'elelelTrigSys':{'EEE':0.03,'EEM':0.00,'EMM':0.00,'MMM':0.00,'All':0.03},
+#                                        'elelmuTrigSys':{'EEE':0.00,'EEM':0.03,'EMM':0.00,'MMM':0.00,'All':0.03},
+#                                        'elmumuTrigSys':{'EEE':0.00,'EEM':0.00,'EMM':0.03,'MMM':0.00,'All':0.03},
+#                                        'mumumuTrigSys':{'EEE':0.00,'EEM':0.00,'EMM':0.00,'MMM':0.03,'All':0.03},
+                                        'muIdSys':{'EEE':0.00,'EEM':0.02,'EMM':0.028,'MMM':0.035,'All':0.049}, #flat rate of 2% 
+                                        'elIsoSys':{'EEE':0.026,'EEM':0.021,'EMM':0.015,'MMM':0.00,'All':0.036}, #flat rate of 1.5% for el
+                                        'muIsoSys':{'EEE':0.00,'EEM':0.015,'EMM':0.021,'MMM':0.026,'All':0.036}, #flat rate of 1.5% for mu
 
-ddbkgSystematics = { #based on newRunH Mar28 ST700
-					'elPRsys':{'EEE':0.21,'EEM':0.12,'EMM':0.06,'MMM':0.00,'All':0.09},
-					'muPRsys':{'EEE':0.00,'EEM':0.03,'EMM':0.07,'MMM':0.15,'All':0.06},
-					'muFReta':{'EEE':0.00,'EEM':0.11,'EMM':0.10,'MMM':0.26,'All':0.12}
-					}
+                                        }
+
+#ddbkgSystematics = { #based on newRunH Mar28 ST700
+#					'elPRsys':{'EEE':0.21,'EEM':0.12,'EMM':0.06,'MMM':0.00,'All':0.09},
+#					'muPRsys':{'EEE':0.00,'EEM':0.03,'EMM':0.07,'MMM':0.15,'All':0.06},
+#					'muFReta':{'EEE':0.00,'EEM':0.11,'EMM':0.10,'MMM':0.26,'All':0.12}
+#					}
+#ddbkgSystematics = { #updated by Jess on Mar1,2020 based on yields in 2020 FRv4 files (FRv49sys for FR)
+#                                       'elPRsys':{'EEE':0.07,'EEM':0.03,'EMM':0.01,'MMM':0.00,'All':0.02},
+#                                       'muPRsys':{'EEE':0.00,'EEM':0.01,'EMM':0.01,'MMM':0.05,'All':0.02},
+#                                       'muFReta':{'EEE':0.00,'EEM':0.16,'EMM':0.22,'MMM':0.42,'All':0.21},
+#                                       'FRsys'  :{'EEE':0.34,'EEM':0.31,'EMM':0.19,'MMM':0.24,'All':0.24},
+#                                       }
+
+ddbkgSystematics = {}
+#ddbkgSystematics = { #updated by Jess on Mar1,2020 based on yields in 2020 FRv4 files (FRv49sys for FR)
+#                                       'elPRsys':{'EEE':0.07,'EEM':0.03,'EMM':0.01,'MMM':0.00,'All':0.02},
+#                                       'muPRsys':{'EEE':0.00,'EEM':0.01,'EMM':0.01,'MMM':0.05,'All':0.02},
+#                                       'muFReta':{'EEE':0.00,'EEM':0.16,'EMM':0.22,'MMM':0.42,'All':0.21},
+#                                       'FRsys'  :{'EEE':0.34,'EEM':0.31,'EMM':0.19,'MMM':0.24,'All':0.24},
+#                                       }
+ddbkgSystematics = { #updated by Jess on Oct4,2020 based on yields in 2020 FRv5 files
+                                       'elPRsys':{'EEE':0.07,'EEM':0.03,'EMM':0.01,'MMM':0.00,'All':0.02},
+                                       'muPRsys':{'EEE':0.00,'EEM':0.01,'EMM':0.02,'MMM':0.07,'All':0.02},
+                                       'muFReta':{'EEE':0.00,'EEM':0.08,'EMM':0.15,'MMM':0.33,'All':0.14},
+                                       'FRsys'  :{'EEE':0.25,'EEM':0.14,'EMM':0.03,'MMM':0.16,'All':0.04},
+                                       }
 
 
 def getNormUnc(hist,ibin,cat):
 	contentsquared = hist.GetBinContent(ibin)**2
-	corrdSysSq = lumiSys**2 + trigSys**2 + normSystematics['elIdSys'][cat]**2 + normSystematics['muIdSys'][cat]**2 + normSystematics['elIsoSys'][cat]**2 + normSystematics['muIsoSys'][cat]**2 
+	corrdSysSq = lumiSys**2+ normSystematics['muIdSys'][cat]**2 + normSystematics['elIsoSys'][cat]**2 + normSystematics['muIsoSys'][cat]**2
+	#corrdSysSq = lumiSys**2 + trigSys**2 + normSystematics['elIdSys'][cat]**2 + normSystematics['muIdSys'][cat]**2 + normSystematics['elIsoSys'][cat]**2 + normSystematics['muIsoSys'][cat]**2 
 	error = corrdSysSq * contentsquared  #correlated uncertainties
 	if 'top' in hist.GetName(): error += topXsecSys*topXsecSys*contentsquared # cross section
 	if 'ewk' in hist.GetName(): error += ewkXsecSys*ewkXsecSys*contentsquared # cross section
@@ -327,11 +373,15 @@ plotList = [#distribution name as defined in "doHists.py"
 # # 	'Mlll'
 	]
 
+# for testing
+#plotList = ['lepPt', 'STrebinnedv2', 'NJets', 'NBJets', 'JetEta','JetPt', 'lep1Eta','METrebinned','HTrebinned']
+
 fit  = False
 fit2 = False
 fit3 = False
 fit4 = False
 isEMlist=['EEE','EEM','EMM','MMM','All']
+
 for discriminant in plotList:
 
 # 	if discriminant != 'ST': continue
@@ -411,6 +461,7 @@ for discriminant in plotList:
 			normByBinWidth(hsig2)
 			normByBinWidth(hData)
 		else: poissonErrors(gaeData,discriminant)
+                systematicList = ['pileup','btag','mistag','pdfNew','muRFcorrdNew','elPR','elFR','muPR','muFR','jec','jer','TrigEffWeight', 'elIdSys']
 		
 		if doAllSys:
 			for sys in systematicList:
@@ -623,13 +674,15 @@ for discriminant in plotList:
 		if blind == True: yDiv=0.1
 		# for some reason the markers at 0 don't show with this setting:
 		uMargin = 0.00001
-		if blind == True: uMargin = 0.15
+		#if blind == True: uMargin = 0.15
 		rMargin=.04
 		# overlap the pads a little to hide the error bar gap:
 		#uPad=TPad("uPad","",0,yDiv-0.009,1,1) #for actual plots
 		uPad=TPad("uPad","",0,yDiv,1,1) #for actual plots
+		#if blind: uPad=TPad("uPad","",0,0,1,1)
 		uPad.SetTopMargin(0.08)
 		uPad.SetBottomMargin(uMargin)
+		if blind == True: uPad.SetBottomMargin(0.15)
 		uPad.SetRightMargin(rMargin)
 		uPad.SetLeftMargin(.105)
 		uPad.Draw()
@@ -662,19 +715,22 @@ for discriminant in plotList:
 		if doNormByBinWidth: gaeData.GetYaxis().SetTitle("< Events / GeV >")
 		else: gaeData.GetYaxis().SetTitle("Events / bin")
 		formatUpperHist_v2(gaeData,hData)
+		if 'CR' in templateDir and 'ST' in discriminant: 
+			gaeData.GetXaxis().SetLimits(0.,1400.)
+			gaeData.GetXaxis().SetRangeUser(0.,1400.)
 		gaeData.GetXaxis().SetTitle("TEST")
 		uPad.cd()
 		gaeData.SetTitle("")
 		gStyle.SetErrorX(0.);
-		if not blind: gaeData.Draw("ap")
+		if not blind: 
+			gaeData.Draw("ap")
 
-		if blind: 
-
+		if blind:
+			hsig1.SetMaximum(1.5*max(hsig1.GetMaximum(),stackbkgHT.GetMaximum()))
 			hsig1.SetMinimum(0.015)
 			if doNormByBinWidth: hsig1.GetYaxis().SetTitle("Events / 1 GeV")
 			else: hsig1.GetYaxis().SetTitle("Events")
 			formatUpperHist(hsig1)
-			hsig1.SetMaximum(hData.GetMaximum())
 			hsig1.Draw("HIST")
 
 		stackbkgHT.Draw("SAME HIST")
@@ -691,8 +747,10 @@ for discriminant in plotList:
 		leg = {}
 		if 'Tau21' in discriminant:
 			leg = TLegend(0.15,0.53,0.45,0.90)
-		elif 'Eta' in discriminant or 'deltaRjet2' in discriminant:
-			leg = TLegend(0.72,0.43,0.95,0.90)
+		#elif 'Eta' in discriminant or 'deltaRjet2' in discriminant:
+		#	leg = TLegend(0.72,0.43,0.95,0.90)
+		elif blind:
+			leg = TLegend(0.360,0.7,0.939,0.89)
 		else:
 			leg = TLegend(0.360,0.622,0.939,0.89)
 		leg.SetShadowColor(0)
@@ -704,6 +762,7 @@ for discriminant in plotList:
 		leg.SetNColumns(2)
 		leg.SetTextFont(62)
 		leg.SetTextSize(0.06)
+		if blind: leg.SetTextSize(0.05)
 		if not blind: leg.AddEntry(gaeData,"Data","pel")
 # 		try: leg.AddEntry(hDDBKG,"DD BKG","f")
 		try: leg.AddEntry(hDDBKG,"Nonprompt","f")
@@ -732,6 +791,7 @@ for discriminant in plotList:
 		prelimTex.SetTextAlign(31) # align right
 		prelimTex.SetTextFont(42)
 		prelimTex.SetTextSize(0.07)
+		if blind: prelimTex.SetTextSize(0.06)
 		prelimTex.SetLineWidth(2)
 		prelimTex.DrawLatex(0.95,0.94,str(lumi)+" fb^{-1} (13 TeV)")
 
@@ -740,6 +800,7 @@ for discriminant in plotList:
 		prelimTex2.SetTextFont(61)
 		prelimTex2.SetLineWidth(2)
 		prelimTex2.SetTextSize(0.10)
+		if blind: prelimTex2.SetTextSize(0.08)
 		prelimTex2.DrawLatex(0.16,0.81,"CMS")
 
 		prelimTex3=TLatex()
@@ -758,6 +819,7 @@ for discriminant in plotList:
 		chLatex = TLatex()
 		chLatex.SetNDC()
 		chLatex.SetTextSize(0.08)
+		if blind: chLatex.SetTextSize(0.06)
 		chLatex.SetTextAlign(31) # align right
 		chString = ''
 		if isEM=='All': chString+='All channels'
@@ -765,7 +827,8 @@ for discriminant in plotList:
 		if isEM=='EEM': chString+='ee#mu'
 		if isEM=='EMM': chString+='e#mu#mu'
 		if isEM=='MMM': chString+='#mu#mu#mu'
-		chLatex.DrawLatex(0.92, 0.56, chString)
+		if not blind: chLatex.DrawLatex(0.92, 0.56, chString)
+		else: chLatex.DrawLatex(0.92, 0.65, chString)
 
 		flat = TF1("flat","pol1",30,250);
 
@@ -793,7 +856,7 @@ for discriminant in plotList:
 #			pull.Divide(pullDenom)
 			try: pull.Divide(hData, bkgHT)
 			except: pass
-			
+	
 			try:
 				for binNo in range(0,hData.GetNbinsX()+2):
 					if bkgHT.GetBinContent(binNo)!=0:
@@ -811,7 +874,6 @@ for discriminant in plotList:
 			pull.SetFillColor(1)
 			pull.SetLineColor(1)
 			formatLowerHist(pull)
-
 			pull.Draw("E0")
 			pull.Draw("ap")
 
@@ -912,6 +974,9 @@ for discriminant in plotList:
 			pull.SetFillColor(kGray+2)
 			pull.SetLineColor(kGray+2)
 			formatLowerHist(pull)
+			if 'CR' in templateDir and 'ST' in discriminant:
+                                #pull.GetXaxis().SetLimits(hData.GetBinLowEdge(1),1400)
+                                pull.SetAxisRange(hData.GetBinLowEdge(1),1399.9,"X")
 			pull.Draw("HIST")
 
 		savePrefix = templateDir+'/plots/'

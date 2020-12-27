@@ -9,8 +9,9 @@ gROOT.SetBatch(1)
 from tdrStyle import *
 setTDRStyle()
 
-blind=True
+blind=True #False
 saveKey=''
+if blind: saveKey='_blinded'
 signal = 'T'
 if('_BB' in sys.argv[1]): signal = 'B'
 lumiPlot = '41.6'
@@ -34,12 +35,17 @@ if len(sys.argv)>2:
 
 
 if len(sys.argv)>3: 
-	cutString+='/'+sys.argv[3]+'/'
-
+	cutString+='/'+sys.argv[3]
+else:
+	cutString+='/thetaTemplates_rootfiles'
 
 mass = array('d', [1000,1100,1200,1300,1400,1500,1600,1700,1800])
-masserr = array('d', [0,0,0,0,0,0,0,0,0,0])
+###move definition of masserr array to line 77777777
+#masserr = array('d', [0,0,0,0,0,0,0,0,0])#,0])
 mass_str = ['1000','1100','1200','1300','1400','1500','1600','1700','1800']
+if signal == 'B' :
+	mass = array('d', [900,1000,1100,1200,1300,1400,1500,1600,1700,1800])
+	mass_str = ['900','1000','1100','1200','1300','1400','1500','1600','1700','1800']
 
 exp   =array('d',[0 for i in range(len(mass))])
 experr=array('d',[0 for i in range(len(mass))])
@@ -50,8 +56,8 @@ exp68L=array('d',[0 for i in range(len(mass))])
 exp95H=array('d',[0 for i in range(len(mass))])
 exp95L=array('d',[0 for i in range(len(mass))])
 
-xsec = array('d', [1,1,1,1,1,1,1,1,1,1,1])
-theory_br = [.1285,.1285,.1285,.1285,.1285,.1285,.1285,.1285,.1285,.1285]
+xsec = array('d', [1 for i in range(len(mass))])
+#theory_br = [.1285 for i in range(len(mass))]
 if chiral=='right':theory_xsec  = [0.442,0.190,0.0877,0.0427,0.0217,0.0114,0.00618,0.00342,0.00193,0.00111]
 elif chiral=='left':theory_xsec = [0.442,0.190,0.0877,0.0427,0.0217,0.0114,0.00618,0.00342,0.00193,0.00111]
 else: print "Please enter left or right"
@@ -63,17 +69,30 @@ else: print "Please enter left or right"
 theory_xsec = [0.0440,0.0224,0.0118,0.00639,0.00354,0.00200,0.001148,0.000666,0.000391]#pb
 xsecErrUp = [2.1,1.1,0.64,0.37,0.22,0.14,0.087,0.056,0.037]#fb
 xsecErrDn = [1.9,1.0,0.56,0.32,0.19,0.12,0.072,0.045,0.029]#fb
+if mass[0] == 900:
+        theory_xsec = [0.0903,0.0440,0.0224,0.0118,0.00639,0.00354,0.00200,0.001148,0.000666,0.000391]#pb
+        xsecErrUp   = [4.0,2.1,1.1,0.64,0.37,0.22,0.14,0.087,0.056,0.037]#fb
+        xsecErrDn   = [3.8,1.9,1.0,0.56,0.32,0.19,0.12,0.072,0.045,0.029]#fb
+
+if not len(mass)==len(theory_xsec):
+ 	print("Mismatched mass list and theory_xsec list")
+ 	exit(1)
 
 theory_xsec_up = [item/1000 for item in xsecErrUp]
 theory_xsec_dn = [item/1000 for item in xsecErrDn]
+
+if not len(mass)==len(theory_xsec):
+	print("Mismatched mass list and theory_xsec list")
+	exit(1)
+
 if signal=='X53':
 	theory_xsec_up = [0.*item/1000 for item in xsecErrUp]
 	theory_xsec_dn = [0.*item/1000 for item in xsecErrDn]
- 
 theory_xsec_v    = TVectorD(len(mass),array('d',theory_xsec))
 theory_xsec_up_v = TVectorD(len(mass),array('d',theory_xsec_up))
 theory_xsec_dn_v = TVectorD(len(mass),array('d',theory_xsec_dn))      
 
+masserr = array('d', [0,0,0,0,0,0,0,0])#,0])
 theory_xsec_gr = TGraphAsymmErrors(TVectorD(len(mass),mass),theory_xsec_v,TVectorD(len(mass),masserr),TVectorD(len(mass),masserr),theory_xsec_dn_v,theory_xsec_up_v)
 theory_xsec_gr.SetFillStyle(3001)
 theory_xsec_gr.SetFillColor(ROOT.kRed)
@@ -98,17 +117,17 @@ def PlotLimits(limitDir,limitFile,tempKey):
     print
     print 'mass'.ljust(ljust_i), 'observed'.ljust(ljust_i), 'expected'.ljust(ljust_i), '-2 Sigma'.ljust(ljust_i), '-1 Sigma'.ljust(ljust_i), '+1 Sigma'.ljust(ljust_i), '+2 Sigma'.ljust(ljust_i)
     
-    limExpected = 1000
-    limObserved = 1000
+    limExpected = mass[0]
+    limObserved = mass[0]
     for i in range(len(mass)):
         lims = {}
         
-        if blind:fobs = open(limitDir+cutString+limitFile.replace(signal+signal+'M700',signal+signal+'M'+mass_str[i]), 'rU')
-        if not blind: fobs = open(limitDir+cutString+limitFile.replace(signal+signal+'M700',signal+signal+'M'+mass_str[i]).replace('expected','observed'), 'rU')
+        if blind:fobs = open(limitDir+cutString+limitFile.replace(signal+signal+'M1000',signal+signal+'M'+mass_str[i]), 'rU')
+        if not blind: fobs = open(limitDir+cutString+limitFile.replace(signal+signal+'M1000',signal+signal+'M'+mass_str[i]).replace('expected','observed'), 'rU')
         linesObs = fobs.readlines()
         fobs.close()
         
-        fexp = open(limitDir+cutString+limitFile.replace(signal+signal+'M700',signal+signal+'M'+mass_str[i]), 'rU')
+        fexp = open(limitDir+cutString+limitFile.replace(signal+signal+'M1000',signal+signal+'M'+mass_str[i]), 'rU')
         linesExp = fexp.readlines()
         fexp.close()
         
@@ -144,8 +163,8 @@ def PlotLimits(limitDir,limitFile,tempKey):
     print
     signExp = "="
     signObs = "="
-    if limExpected==1000: signExp = "<"
-    if limObserved==1000: signObs = "<"
+    if limExpected==mass[0]: signExp = "<"
+    if limObserved==mass[0]: signObs = "<"
     print "Expected lower limit "+signExp,int(round(limExpected)),"GeV"
     print "Observed lower limit "+signObs,int(round(limObserved)),"GeV"
     print
@@ -185,7 +204,7 @@ def PlotLimits(limitDir,limitFile,tempKey):
 #     expected95.GetYaxis().SetRangeUser(.008+.00001,10.45)
 #     expected95.GetYaxis().SetRangeUser(.004+.00001,10.45)
     expected95.GetYaxis().SetRangeUser(.0008+.00001,1.045)
-    expected95.GetXaxis().SetRangeUser(1000,1800)
+    expected95.GetXaxis().SetRangeUser(mass[0],mass[-1])
     if tempKey=='nB0': expected95.GetYaxis().SetRangeUser(.008+.00001,25.45)   
     expected95.GetXaxis().SetTitle(signal+" mass [GeV]")
     expected95.GetYaxis().SetTitle("#sigma ("+signal+"#bar{"+signal+"})[pb]")
@@ -193,6 +212,7 @@ def PlotLimits(limitDir,limitFile,tempKey):
     expected68.Draw("3same")
     expected.Draw("same")
 
+    observed.GetXaxis().SetRangeUser(mass[0],mass[-1]) 
     if not blind: observed.Draw("cpsame")
     theory_xsec_gr.SetLineColor(2)
     theory_xsec_gr.SetLineStyle(1)
@@ -283,10 +303,14 @@ obsLims = []
 for tempKey in tempKeys:
 	for BRind in range(nBRconf):
 		BRconfStr=''
-		if doBRScan: BRconfStr='_bW'+str(BRs['BW'][BRind]).replace('.','p')+'_tZ'+str(BRs['TZ'][BRind]).replace('.','p')+'_tH'+str(BRs['TH'][BRind]).replace('.','p')
+		#if doBRScan: 
+		BRconfStr='_bW'+str(BRs['BW'][BRind]).replace('.','p')+'_tZ'+str(BRs['TZ'][BRind]).replace('.','p')+'_tH'+str(BRs['TH'][BRind]).replace('.','p')
 		if('_BB' in sys.argv[1]) and doBRScan: BRconfStr='_tW'+str(BRs['TW'][BRind]).replace('.','p')+'_bZ'+str(BRs['BZ'][BRind]).replace('.','p')+'_bH'+str(BRs['BH'][BRind]).replace('.','p')
-		limitDir='/user_data/rsyarif/limits/'+tempKey+BRconfStr+'/'
-		limitFile='/limits_templates_'+discriminant+'_'+signal+signal+'M700'+chiral+BRconfStr+'_'+str(lumiStr)+'fb'+isRebinned+'_expected.txt'	
+		#limitDir='/isilon/data/users/wwong/limits/'+tempKey+BRconfStr+'/'
+		limitDir='/mnt/data/users/wwong/limits/'+tempKey+BRconfStr+'/'
+		#limitFile='/limits_templates_'+discriminant+'_'+signal+signal+'M700'+chiral+BRconfStr+'_'+str(lumiStr)+'fb'+isRebinned+'_expected.txt'	
+		#limitFile='/thetaTemplates_rootfiles/limits_templates_'+discriminant+'_'+signal+signal+'M1000'+chiral+BRconfStr+'_'+str(lumiStr)+'fb'+isRebinned+'_expected.txt' 
+                limitFile='/limits_templates_'+discriminant+'_'+signal+signal+'M1000'+chiral+BRconfStr+'_'+str(lumiStr)+'fb'+isRebinned+'_expected.txt'
 		expTemp,obsTemp = PlotLimits(limitDir,limitFile,tempKey+BRconfStr)
 		expLims.append(expTemp)
 		obsLims.append(obsTemp)

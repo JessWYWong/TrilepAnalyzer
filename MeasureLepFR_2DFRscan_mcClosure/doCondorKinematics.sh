@@ -1,13 +1,13 @@
 #!/bin/bash
 
-condorDir=$PWD
+condorDir=$2
 relbase=$1
-plotIndex=$2
-category=$3
+VarName=$3
+category=$4
 
 cd $relbase
 source /cvmfs/cms.cern.ch/cmsset_default.sh
 eval `scramv1 runtime -sh`
 cd -
 
-python doHists.py $condorDir $plotIndex $category
+python doHists.py $condorDir $VarName $category

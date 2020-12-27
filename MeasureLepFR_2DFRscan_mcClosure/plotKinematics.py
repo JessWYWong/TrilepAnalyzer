@@ -36,6 +36,9 @@ start_time = time.time()
 # pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_PRv9_FRv48_elMVAvalueFix_SRHT400_2017_9_18'
 # pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_PRv9_FRv48_elMVAvalueFix_SRHT400low_2017_9_18'
 pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_PRv9_FRv48_elMVAvalueFix_2017_9_20'
+if(len(sys.argv)>1):
+  pfix = sys.argv[1]
+
 
 doDDBKGscan=True
 
@@ -70,8 +73,8 @@ doDDBKGscan=True
 # elFRtoPlot = 17
 
 #CR2 ttbar
-# muFRtoPlot = 11	
-# elFRtoPlot = 13
+muFRtoPlot = 14	
+elFRtoPlot = 8
 
 #SRHT400 ttbar
 # muFRtoPlot = 12	
@@ -82,8 +85,8 @@ doDDBKGscan=True
 # elFRtoPlot = 14
 
 #All region ttbar
-muFRtoPlot = 14	
-elFRtoPlot = 16
+#muFRtoPlot = 9
+#elFRtoPlot = 21
 
 ###################################
 
@@ -93,9 +96,9 @@ if(doDDBKGscan):print ' -- plotting: muFR = ', muFRtoPlot, ', elFR = ', elFRtoPl
 if(doDDBKGscan):print ''
 
 
-# if len(sys.argv)>2:
-# 	muFRtoPlot=[sys.argv[1]]
-# 	elFRtoPlot=[sys.argv[2]]
+#if len(sys.argv)>2:
+#	muFRtoPlot=int(sys.argv[1])
+#	elFRtoPlot=int(sys.argv[2])
 # 
 # print 'sys.argv:', sys.argv
 # print 'muFRtoPlot:', str(muFRtoPlot)
@@ -104,15 +107,17 @@ if(doDDBKGscan):print ''
 muFRindex = muFRtoPlot
 elFRindex = elFRtoPlot
 
-outDir = '/user_data/rsyarif/'
+#outDir = '/user_data/rsyarif/'
+outDir = '/mnt/data/users/wwong/'
 templateDir=outDir+pfix+'/'
 
-lumi=35.9 #for plots
+#lumi=35.9 #for plots
+lumi=41.6
+lumiInTemplates='41p557'
+#lumiInTemplates='35p867'
 
-lumiInTemplates='35p867'
-
-sig='ttm800' # choose the 1st signal to plot
-sigleg='TT(0.8 TeV)'
+sig='ttm1000' # choose the 1st signal to plot
+sigleg='TT(1 TeV)'
 scaleSignals = True
 
 scaleFact1 = 300
@@ -201,6 +206,8 @@ def normByBinWidth(result):
 		result.SetBinContent(bin, content/width)
 		result.SetBinError(bin, error/width)
 
+
+### only if doAllSys ###
 lumiSys = 0.026 #6.2% https://twiki.cern.ch/twiki/bin/view/CMS/TWikiLUM - 20Sep2016
 trigSys = 0.03 #3% trigger uncertainty - AN 2016 229
 lepIdSys = math.sqrt(3.*0.01**2) #1% lepton id uncertainty ## NEED to add in quadrature for 3 leptons! - ATTENTION! NEED UPDATING!

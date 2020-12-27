@@ -29,7 +29,11 @@ lumiStr = str(targetlumi/1000).replace('.','p') # 1/fb
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lep_Moriond17_mcFakeRate_saveLooseMC_2017_4_20_rizki_PRv9_FRv35_step1hadds/nominal/' #--> double checking but also with muFR=.14instead of .13 in FRv35
 
 # step1Dir = '/user_data/rsyarif/LJMet80x_3lep_Moriond17_ttbarFakeRate_saveLooseMC_2017_4_17_dR0p01_PRv9_FRv45_elMVAaltFix_rizki_step1hadds/nominal'
-step1Dir = '/user_data/rsyarif/LJMet80x_3lep_Moriond17_ttbarFakeRate_saveLooseMC_2017_4_17_dR0p01_PRv9_FRv48_elMVAaltFix_rizki_step1hadds/nominal'
+#step1Dir = '/user_data/rsyarif/LJMet80x_3lep_Moriond17_ttbarFakeRate_saveLooseMC_2017_4_17_dR0p01_PRv9_FRv48_elMVAaltFix_rizki_step1hadds/nominal'
+#step1Dir = '/mnt/data/users/wwong/FWLJMET102X_3lep2017_062019_wywong_step1_FRv1_hadds_step2/'
+#step1Dir = '/mnt/data/users/wwong/FWLJMET102X_3lep2017_wywong_012020_step1_flatFRv4_TrigEff_hadds_step2/'
+#step1Dir = '/mnt/data/users/wwong/FWLJMET102X_3lep2017_wywong_012020_step1_FRv4_PRv2_prefiring_hadds_step2/'
+step1Dir = '/mnt/data/users/wwong/FWLJMET102X_3lep2017_wywong_012020_step1_FRv5_PRv2_prefiring_hadds_step2/'
 
 print 'grabbing files from ', step1Dir
 """
@@ -64,6 +68,7 @@ timestr='%i_%i_%i'%(cTime.hour,cTime.minute,cTime.second)
 
 pfix='kinematics_80x_Exactly3Lep_ddbkgscan_step2_PRv6_ttbarClosure_TESTTTTING'
 # pfix=''
+pfix='FR_FWLJMET102X_3lep2017_062019_wiwong_step1hadds_step2_ttbarClosure'
 
 pfix+='_'+datestr
 
@@ -86,7 +91,7 @@ pTbins = [0,10,30,40,60,80,100,120,140,160,180,200,220,240,260,280,300,350,400,4
 Mbins = [-10.0, 0.0, 20.0, 40.0, 60.0, 80.0, 100.0, 120.0, 140.0, 160.0, 180.0, 200.0, 220.0, 240.0, 260.0, 300.0]
 # jetPtbins =  [0.0, 50.0, 100.0, 150.0, 200.0, 250.0, 300.0, 350.0, 450.0, 550.0, 650.0, 750.0]
 jetPtbins =  [0.0, 30, 60.0, 100.0, 150.0, 200.0, 250.0, 300.0, 350.0, 450.0, 550.0, 650.0, 750.0]
-etaBins= [-4.0,-3.0,-2.4,-2.1,-1.2,0,1.2,2.1,2.4,3.0,4.0]
+etaBins = [-4.0,-3.0,-2.4,-2.1,-1.2,0,1.2,2.1,2.4,3.0,4.0]
 
 plotList = {#discriminantName:(discriminantLJMETName, binning, xAxisLabel)
 
@@ -120,7 +125,7 @@ plotList = {#discriminantName:(discriminantLJMETName, binning, xAxisLabel)
 
 # 	'HTrebinned'    :('AK4HT',HTbins,';H_{T} (GeV);'),
 	'STrebinned'    :('AK4HTpMETpLepPt',STbins,';S_{T} (GeV);'),
-# 	'METrebinned'   :('corr_met_singleLepCalc',METbins,';#slash{E}_{T} (GeV);'),
+# 	'METrebinned'   :('corr_met_MultiLepCalc',METbins,';#slash{E}_{T} (GeV);'),
 
 # 	'NJets' :('NJets_JetSubCalc',linspace(0, 15, 16).tolist(),';AK4 Jet multiplicity;'),
 # 	'NBJets':('NJetsCSVwithSF_JetSubCalc',linspace(0, 10, 11).tolist(),';CSVIVFv2 Medium tag multiplicity;'),
@@ -141,7 +146,7 @@ for muFRindex in xrange(loop):
 		if(doDDBKGscan):bkgList.append('MatrixBkg_muFR'+str(muFRindex+((int)(initial*100)))+'elFR'+str(elFRindex+((int)(initial*100))))
 
 dataList=[]
-if 'TT' in useWhichSampleForMatrix:dataList.append('TTJetsPH')
+if 'TT' in useWhichSampleForMatrix:dataList.append('TTTo2L2Nu')
 if 'DY' in useWhichSampleForMatrix:dataList.append('DY50')
 bkgList.append('MatrixBkg')
 for ddbkgCat_ in ddbkgCat:
@@ -154,6 +159,7 @@ for ddbkgCat_ in ddbkgCat:
 def negBinCorrection(hist): #set negative bin contents to zero and adjust the normalization
 	norm0=hist.Integral()
 	for iBin in range(0,hist.GetNbinsX()+2):
+		#print("bin",iBin," = ", hist.GetBinContent(iBin))
 		if hist.GetBinContent(iBin)<0: hist.SetBinContent(iBin,0)
 		if hist.Integral()!=0 and norm0>0: hist.Scale(norm0/hist.Integral())
 		
@@ -210,8 +216,8 @@ print "FINISHED READING"
 
 if len(sys.argv)>2: iPlot=sys.argv[2]
 # else: iPlot='minMlb'
-else: iPlot='STrebinned'
-# else: iPlot='lepPt'
+# else: iPlot='STrebinned'
+else: iPlot='lepPt'
 # else: iPlot='Mlll'
 # else: iPlot='lepIso'
 # else: iPlot='JetPt'
@@ -227,16 +233,20 @@ for category in catList:
 	datahists = {}
 	bkghists  = {}
 	sighists  = {}
-	if len(sys.argv)>1: outDir=sys.argv[1]
-	else: 
-		outDir = '/user_data/rsyarif/'
-# 		outDir = os.getcwd()+'/'
-		outDir+=pfix
-		if not os.path.exists(outDir): os.system('mkdir '+outDir)
-		if not os.path.exists(outDir+'/'+cutString): os.system('mkdir '+outDir+'/'+cutString)
-		outDir+='/'+cutString
-		if not os.path.exists(outDir+'/'+category): os.system('mkdir '+outDir+'/'+category)
-		outDir+='/'+category
+        if len(sys.argv)>1:
+                outDir=sys.argv[1]
+                outDir+='_'+datestr #+=pfix
+                if not os.path.exists(outDir): os.system('mkdir '+outDir)
+        else:
+                #outDir = '/user_data/rsyarif/'
+                outDir = '/mnt/data/users/wwong/'
+#               outDir = os.getcwd()+'/'
+                outDir+=pfix
+                if not os.path.exists(outDir): os.system('mkdir '+outDir)
+                #if not os.path.exists(outDir+'/'+cutString): os.system('mkdir '+outDir+'/'+cutString)
+                #outDir+='/'+cutString
+        if not os.path.exists(outDir+'/'+category): os.system('mkdir '+outDir+'/'+category)
+        outDir+='/'+category
 	for data in dataList: 
 # 		print '+++++++++++++++++++++>>>>>>>>>>>>>>>>>>>>>>>>>>  data = ' , data 		
 		datahists.update(analyze(tTreeData,data,cutList,False,iPlot,plotList[iPlot],category))
@@ -251,12 +261,14 @@ for category in catList:
 			for syst in shapesFiles:
 				if 'Matrix' in bkg: continue
 				for ud in ['Up','Down']: del tFileBkg[bkg+syst+ud]
-
+	
 	#Negative Bin Correction
 	for bkg in bkghists.keys(): negBinCorrection(bkghists[bkg])
 
 	#OverFlow Correction
-	for data in datahists.keys(): overflow(datahists[data])
+	for data in datahists.keys(): 
+		#print(data)
+		overflow(datahists[data])
 	for bkg in bkghists.keys():   overflow(bkghists[bkg])
 
 	pickle.dump(datahists,open(outDir+'/datahists_'+iPlot+'.p','wb'))

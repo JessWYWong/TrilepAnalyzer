@@ -55,16 +55,18 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 # 	cut += ' && (fabs(AllLeptonEta_PtOrdered[2]) < 2.4)'
 
 
-	cut += ' && (corr_met_singleLepCalc >= '+str(cutList['metCut'])+')'
+	cut += ' && (corr_met_MultiLepCalc >= '+str(cutList['metCut'])+')'
 
-# 	cut += ' && (NJets_singleLepCalc >= '+str(cutList['njetsCut'])+')' #SR
-	cut += ' && (NJets_singleLepCalc == '+str(cutList['njetsCut'])+')' #FRCR1, FRCR2
-# 	cut += ' && (NJets_singleLepCalc == 2 || NJets_singleLepCalc == 1)' #FRCR1CR2
+ 	cut += ' && (NJets_MultiLepCalc >= '+str(cutList['njetsCut'])+')' #SR
+#	cut += ' && (NJets_MultiLepCalc == '+str(cutList['njetsCut'])+')' #FRCR1, FRCR2
+# 	cut += ' && (NJets_MultiLepCalc == 2 || NJets_MultiLepCalc == 1)' #FRCR1CR2
+	if (cutList['maxnjetsCut']>=0):		cut += ' && (NJets_MultiLepCalc <= '+str(cutList['maxnjetsCut'])+')'
 
 # 	cut += ' && (NJets_JetSubCalc >= '+str(cutList['njetsCut'])+')'
-	cut += ' && (NJetsBTagwithSF_singleLepCalc >= '+str(cutList['nbjetsCut'])+')'
+	cut += ' && (NJetsBTagwithSF_MultiLepCalc >= '+str(cutList['nbjetsCut'])+')'
 # 	cut += ' && (NJetsCSVwithSF_JetSubCalc_noLepCorr >= '+str(cutList['nbjetsCut'])+')'
-	if (('TTJetsPH' in process or 'DY50' in process) and 'Bkg' not in process): 
+#	if (('TTJetsPH' in process or 'DY50' in process) and 'Bkg' not in process): 
+	if (('TTTo2L2Nu' in process or 'DY50' in process) and 'Bkg' not in process): 
 		if cutList['isPassTrig']==1:        cut += ' && MCPastTrigger == 1'
 		if cutList['isPassTrig_dilep']==1:  cut += ' && MCPastTrigger_dilep == 1'
 		if cutList['isPassTrig_dilep_anth']==1:cut += ' && MCPastTrigger_dilep_anth == 1'
@@ -141,7 +143,7 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 
 
 #Start -- Method if isTTT doesnt exist
-# 	'''
+ 	'''
 	if 'MatrixBkgTTT' in process: 
 		cut+=' && (AllLeptonIsTight_PtOrdered[0]==1 && AllLeptonIsTight_PtOrdered[1]==1 && AllLeptonIsTight_PtOrdered[2]==1)'
 
@@ -217,11 +219,11 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 
 	if 'MatrixBkgLLL' in process: 
 		cut+=' && (AllLeptonIsTight_PtOrdered[0]==0 && AllLeptonIsTight_PtOrdered[1]==0 && AllLeptonIsTight_PtOrdered[2]==0)'
-# 	'''
+ 	'''
 #End -- Method if isTTT doesnt exist
 
 #Start -- Method if isTTT  exist
-	'''
+#	'''
 	if 'MatrixBkgTTT' in process: cut+=' && isTTT==1'
 	if 'MatrixBkgTTL' in process: cut+=' && isTTL==1'
 	if 'MatrixBkgTLT' in process: cut+=' && isTLT==1'
@@ -230,7 +232,7 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 	if 'MatrixBkgLTL' in process: cut+=' && isLTL==1'
 	if 'MatrixBkgLLT' in process: cut+=' && isLLT==1'
 	if 'MatrixBkgLLL' in process: cut+=' && isLLL==1'
-	'''
+#	'''
 #End -- Method if isTTT exist
 
 	TrigEff = 'TrigEffWeight'
@@ -332,7 +334,7 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 	weightjsfDownStr  = '1'		
 
 	#NOT APPLYING SF and THIgns!!
-# 	weightStr           = TrigEff+' * pileupWeight * 1 * isoSF * lepIdSF * EGammaGsfSF * MuTrkSF * MCWeight_singleLepCalc/abs(MCWeight_singleLepCalc) * '+str(weight[process])
+# 	weightStr           = TrigEff+' * pileupWeight * 1 * isoSF * lepIdSF * EGammaGsfSF * MuTrkSF * MCWeight_MultiLepCalc/abs(MCWeight_MultiLepCalc) * '+str(weight[process])
 # 	weightPileupUpStr   = weightStr.replace('pileupWeight','pileupWeightUp')
 # 	weightPileupDownStr = weightStr.replace('pileupWeight','pileupWeightDown')
 # 	weightmuRFcorrdUpStr   = 'renormWeights[5] * '+weightStr
@@ -369,11 +371,11 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 			tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+'muFDown_'   +lumiStr+'fb_'+category+'_'+process, weightmuFDownStr+'*('+cut+catCut+')', 'GOFF')
 			
 			# replace cuts for shifts
-			nbtagLJMETname = 'NJetsBTagwithSF_singleLepCalc'
-			cut_btagUp = cut.replace(nbtagLJMETname,'NJetsBTagwithSF_singleLepCalc_shifts[0]')#nbtagLJMETname+'_shifts[0]')
-			cut_btagDn = cut.replace(nbtagLJMETname,'NJetsBTagwithSF_singleLepCalc_shifts[1]')#nbtagLJMETname+'_shifts[1]')
-			cut_mistagUp = cut.replace(nbtagLJMETname,'NJetsBTagwithSF_singleLepCalc_shifts[2]')#nbtagLJMETname+'_shifts[2]')
-			cut_mistagDn = cut.replace(nbtagLJMETname,'NJetsBTagwithSF_singleLepCalc_shifts[3]')#nbtagLJMETname+'_shifts[3]')
+			nbtagLJMETname = 'NJetsBTagwithSF_MultiLepCalc'
+			cut_btagUp = cut.replace(nbtagLJMETname,'NJetsBTagwithSF_MultiLepCalc_shifts[0]')#nbtagLJMETname+'_shifts[0]')
+			cut_btagDn = cut.replace(nbtagLJMETname,'NJetsBTagwithSF_MultiLepCalc_shifts[1]')#nbtagLJMETname+'_shifts[1]')
+			cut_mistagUp = cut.replace(nbtagLJMETname,'NJetsBTagwithSF_MultiLepCalc_shifts[2]')#nbtagLJMETname+'_shifts[2]')
+			cut_mistagDn = cut.replace(nbtagLJMETname,'NJetsBTagwithSF_MultiLepCalc_shifts[3]')#nbtagLJMETname+'_shifts[3]')
 			
 			bTagSFshiftName = discriminantLJMETName
 			if 'NJetsBTag' in discriminantLJMETName: 

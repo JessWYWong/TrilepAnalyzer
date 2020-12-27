@@ -11,18 +11,21 @@ gROOT.SetBatch(1)
 start_time = time.time()
 
 # pfix='kinematics_80x_MultiLep_ddbkgscan_step2_exactly2Jets_2DFRscan_2016_12_8'+'/'+cutString
-pfix='kinematics_80x_condor_Exactly3Lep_ddbkgscan_step2_exactly2Jets_2DFRscan_PRv4_muMinIso0p1_Full2016_20Jan2017_updatedbtagWP_1bjet_2017_1_23/'
-
-
-outDir = '/user_data/rsyarif/'
+#pfix='kinematics_80x_condor_Exactly3Lep_ddbkgscan_step2_exactly2Jets_2DFRscan_PRv4_muMinIso0p1_Full2016_20Jan2017_updatedbtagWP_1bjet_2017_1_23/'
+pfix = 'FRv1_kinematics_FWLJMET102X_3lep2017_062019_wiwong_step1hadds_step2FR_kinematics_FWLJMET102X_3lep2017_062019_wiwong_step1hadds_step2_2019_8_16'
+if(len(sys.argv)>1):
+  pfix = sys.argv[1]
+#outDir = '/user_data/rsyarif/'
+outDir = '/mnt/data/users/wwong/'
 templateDir=outDir+pfix+'/'
 
-lumi=36.8 #for plots
+#lumi=36.8 #for plots
+lumi=41.6
+#lumiInTemplates='36p814'
+lumiInTemplates='41p557'
 
-lumiInTemplates='36p814'
-
-sig='ttm800' # choose the 1st signal to plot
-sigleg='TT(0.8 TeV)'
+sig='ttm1000' # choose the 1st signal to plot
+sigleg='TT(1 TeV)'
 scaleSignals = True
 
 scaleFact1 = 300
@@ -35,7 +38,7 @@ if 'Final' in templateDir: scaleFact1 = 40
 
 # systematicList = ['PR','FR']
 
-systematicList = ['pileup','btag','pdfNew','muRFcorrdNew','PR','FR']
+systematicList = ['pileup','prefire','btag','pdfNew','muRFcorrdNew','PR','FR']
 
 
 doAllSys = False
@@ -181,6 +184,7 @@ plotList = [#distribution name as defined in "doHists.py"
 	'MllOSallmin',
 	'Mlll'
 	]
+plotList = ['lepPt']
 
 fit  = False
 fit2 = False
@@ -232,26 +236,26 @@ for discriminant in plotList:
 			except: pass
 		
 			hData = RFile.Get(histPrefix+'__DATA').Clone()
-			hsig1 = RFile.Get(histPrefix+'__'+sig+'bwbw').Clone()
-			hsig2 = RFile.Get(histPrefix+'__'+sig+'tztz').Clone()
-			hsig3 = RFile.Get(histPrefix+'__'+sig+'thth').Clone()
-
-			hsig = RFile.Get(histPrefix+'__'+sig+'bwbw').Clone(histPrefix+'__'+sig+'nominal')
-			decays = ['tztz','thth','tzbw','thbw','tzth']
-			for decay in decays:
-				htemp = RFile.Get(histPrefix+'__'+sig+decay).Clone()
-				hsig.Add(htemp)
-
-			# original scale = lumi * xsec * BR(50/25/25) / N(33/33/33)
-			hsig1.Scale(1.0/BR['TTBWBW'])
-			hsig2.Scale(1.0/BR['TTTZTZ'])
-			hsig3.Scale(1.0/BR['TTTHTH'])
+#			hsig1 = RFile.Get(histPrefix+'__'+sig+'bwbw').Clone()
+#			hsig2 = RFile.Get(histPrefix+'__'+sig+'tztz').Clone()
+#			hsig3 = RFile.Get(histPrefix+'__'+sig+'thth').Clone()
+#
+#			hsig = RFile.Get(histPrefix+'__'+sig+'bwbw').Clone(histPrefix+'__'+sig+'nominal')
+#			decays = ['tztz','thth','tzbw','thbw','tzth']
+#			for decay in decays:
+#				htemp = RFile.Get(histPrefix+'__'+sig+decay).Clone()
+#				hsig.Add(htemp)
+#
+#			# original scale = lumi * xsec * BR(50/25/25) / N(33/33/33)
+#			hsig1.Scale(1.0/BR['TTBWBW'])
+#			hsig2.Scale(1.0/BR['TTTZTZ'])
+#			hsig3.Scale(1.0/BR['TTTHTH'])
 			if doNormByBinWidth:
 				normByBinWidth(hTOP)
 				normByBinWidth(hEWK)
 				normByBinWidth(hQCD)
-				normByBinWidth(hsig1)
-				normByBinWidth(hsig2)
+#				normByBinWidth(hsig1)
+#				normByBinWidth(hsig2)
 				normByBinWidth(hData)
 		
 			if doAllSys:
@@ -376,10 +380,10 @@ for discriminant in plotList:
 			#else:
 			#	scaleFact1=25
 					'''
-			hsig1.Scale(scaleFact1)
-			hsig2.Scale(scaleFact1)
-			hsig3.Scale(scaleFact1)
-			hsig.Scale(scaleFact1)
+#			hsig1.Scale(scaleFact1)
+#			hsig2.Scale(scaleFact1)
+#			hsig3.Scale(scaleFact1)
+#			hsig.Scale(scaleFact1)
 		
 			stackbkgHT = THStack("stackbkgHT","")
 			try: stackbkgHT.Add(hTOP)
@@ -413,17 +417,17 @@ for discriminant in plotList:
 				hDDBKG.SetLineWidth(2)
 			except: pass
 		
-			hsig.SetLineColor(kBlack)
-			hsig.SetLineWidth(3)
-			hsig1.SetLineColor(kRed)
-			hsig1.SetLineStyle(2)
-			hsig1.SetLineWidth(3)
-			hsig2.SetLineColor(kOrange-2)
-			hsig2.SetLineStyle(5)
-			hsig2.SetLineWidth(3)
-			hsig3.SetLineColor(kGreen+1)
-			hsig3.SetLineStyle(7)
-			hsig3.SetLineWidth(3)
+#			hsig.SetLineColor(kBlack)
+#			hsig.SetLineWidth(3)
+#			hsig1.SetLineColor(kRed)
+#			hsig1.SetLineStyle(2)
+#			hsig1.SetLineWidth(3)
+#			hsig2.SetLineColor(kOrange-2)
+#			hsig2.SetLineStyle(5)
+#			hsig2.SetLineWidth(3)
+#			hsig3.SetLineColor(kGreen+1)
+#			hsig3.SetLineStyle(7)
+#			hsig3.SetLineWidth(3)
 		
 			hData.SetMarkerStyle(20)
 			hData.SetMarkerSize(1.2)
@@ -466,20 +470,20 @@ for discriminant in plotList:
 			uPad.cd()
 			hData.SetTitle("")
 			if not blind: hData.Draw("E1 X0")
-			if blind: 
-
-				hsig1.SetMinimum(0.015)
-				if doNormByBinWidth: hsig1.GetYaxis().SetTitle("Events / 1 GeV")
-				else: hsig1.GetYaxis().SetTitle("Events")
-				formatUpperHist(hsig1)
-				hsig1.SetMaximum(hData.GetMaximum())
-				hsig1.Draw("HIST")
+#			if blind: 
+#
+#				hsig1.SetMinimum(0.015)
+#				if doNormByBinWidth: hsig1.GetYaxis().SetTitle("Events / 1 GeV")
+#				else: hsig1.GetYaxis().SetTitle("Events")
+#				formatUpperHist(hsig1)
+#				hsig1.SetMaximum(hData.GetMaximum())
+#				hsig1.Draw("HIST")
 
 			stackbkgHT.Draw("SAME HIST")
-			hsig.Draw("SAME HIST")
-	# 		hsig1.Draw("SAME HIST")
-			hsig2.Draw("SAME HIST")
-			hsig3.Draw("SAME HIST")
+#			hsig.Draw("SAME HIST")
+#	# 		hsig1.Draw("SAME HIST")
+#			hsig2.Draw("SAME HIST")
+#			hsig3.Draw("SAME HIST")
 			if not blind: hData.Draw("SAME E1 X0") #redraw data so its not hidden
 			uPad.RedrawAxis()
 			bkgHTgerr.Draw("SAME E2")
@@ -504,10 +508,10 @@ for discriminant in plotList:
 			if not scaleSignals:
 				scaleFact1Str = ''
 		
-			leg.AddEntry(hsig,sigleg+' nominal BRs'+scaleFact1Str,"l")
-	# 		leg.AddEntry(hsig1,sigleg+' #rightarrow bWbW'+scaleFact1Str,"l")
-			leg.AddEntry(hsig2,sigleg+' #rightarrow tZtZ'+scaleFact1Str,"l")
-			leg.AddEntry(hsig3,sigleg+' #rightarrow tHtH'+scaleFact1Str,"l")
+#			leg.AddEntry(hsig,sigleg+' nominal BRs'+scaleFact1Str,"l")
+#	 		leg.AddEntry(hsig1,sigleg+' #rightarrow bWbW'+scaleFact1Str,"l")
+#			leg.AddEntry(hsig2,sigleg+' #rightarrow tZtZ'+scaleFact1Str,"l")
+#			leg.AddEntry(hsig3,sigleg+' #rightarrow tHtH'+scaleFact1Str,"l")
 			try: 
 				if hQCD.Integral()/bkgHT.Integral()>.005: leg.AddEntry(hQCD,"QCD","f") #don't plot QCD if it is less than 0.5%
 			except: pass

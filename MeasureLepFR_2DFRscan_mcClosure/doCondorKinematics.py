@@ -2,12 +2,15 @@ import os,sys,datetime
 
 thisDir = os.getcwd()
 # outputDir = thisDir+'/'
-relbase = '/home/rsyarif/LJMet/TprimeAnalysis/CMSSW_7_6_3/src/'
-outputDir = '/user_data/rsyarif/'
+relbase = '/home/wwong/VLQ/CMSSW_10_2_10/src/'#'/home/rsyarif/LJMet/TprimeAnalysis/CMSSW_7_6_3/src/'
+outputDir = '/mnt/data/users/wwong/'#'/user_data/rsyarif/'
+if len(sys.argv)>1: outputDir=sys.argv[1]
 
 cTime=datetime.datetime.now()
 date='%i_%i_%i'%(cTime.year,cTime.month,cTime.day)
 time='%i_%i_%i'%(cTime.hour,cTime.minute,cTime.second)
+
+#outputDir+='_'+date
 
 # pfix='kinematics_condor_ddbkgscan_PRv6_FRv28ttbar_ttbarClosure_saveVeryLoose'
 # pfix='kinematics_condor_ddbkgscan_PRv9_FRv24_postPreapprovalF_PromptCount_V9_extScan_ttbarClosure'
@@ -292,7 +295,7 @@ cutList = {'isPassTrig': 0,
 	   	   'ptRelCut':0,
 		   }
 """
-pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_PRv9_FRv48_elMVAvalueFix_CR1' #remember to modify analyse.py for Njets==1 and for low hT and cutList.py  and samples.py!
+#pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_PRv9_FRv48_elMVAvalueFix_CR1' #remember to modify analyse.py for Njets==1 and for low hT and cutList.py  and samples.py!
 """
 cutList = {'isPassTrig': 0, 
 		   'isPassTrig_dilep': 1,
@@ -317,7 +320,7 @@ cutList = {'isPassTrig': 0,
 """
 
 
-pfix+='_'+date
+#pfix+='_'+date
 #pfix+='_'+date+'_'+time
 # pfix+='_no_jsf'
 
@@ -370,24 +373,27 @@ plotList = [#distribution name as defined in "doHists.py"
 # 	'MllOSallmin',
 # 	'Mlll',
 	]
+if len(sys.argv)>2: plotList = [str(sys.argv[2])]
+
 
 catList = ['EEE','EEM','EMM','MMM','All']
+if len(sys.argv)>3: catList=[str(sys.argv[3])] 
 
-outDir = outputDir+pfix
-if not os.path.exists(outDir): os.system('mkdir '+outDir)
-os.chdir(outDir)
+#outDir = outputDir+pfix
+if not os.path.exists(outputDir): os.system('mkdir '+outputDir)
+os.chdir(outputDir)
 
 count = 0
 for distribution in plotList:
 	for cat in catList:
 		print cat
-		if not os.path.exists(outDir+'/'+cat): os.system('mkdir '+cat)
+		if not os.path.exists(outputDir+'/'+cat): os.system('mkdir '+cat)
 		os.chdir(cat)
 		
 # 		dict={'dir':outputDir,'dist':distribution,'cat':cat}
 # 		dict={'dir':thisDir,'dist':distribution,'cat':cat}
 # 		dict={'CMSSWBASE':relbase,'dir':outputDir,'dist':distribution,'cat':cat}
-		dict={'CMSSWBASE':relbase,'thisDir':thisDir,'dist':distribution,'cat':cat}
+		dict={'CMSSWBASE':relbase,'thisDir':thisDir,'dist':distribution,'cat':cat,'OutDir':outputDir}
 
 
 		jdf=open('condor_'+distribution+'.job','w')
@@ -404,7 +410,7 @@ Output = condor_%(dist)s.out
 Error = condor_%(dist)s.err
 Log = condor_%(dist)s.log
 Notification = Error
-Arguments = %(CMSSWBASE)s %(dist)s %(cat)s
+Arguments = %(CMSSWBASE)s %(OutDir)s %(dist)s %(cat)s
 
 Queue 1"""%dict)
 		jdf.close()

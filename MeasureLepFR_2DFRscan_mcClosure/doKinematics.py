@@ -59,8 +59,8 @@ ptScan = False
 # elFRtoPrint = 17
 
 #CR2 ttbar
-# muFRtoPrint = 11	
-# elFRtoPrint = 13
+muFRtoPrint = 7
+elFRtoPrint = 15
 
 #SRHT400 ttbar
 # muFRtoPrint = 12	
@@ -71,12 +71,12 @@ ptScan = False
 # elFRtoPrint = 14
 
 #All region ttbar
-muFRtoPrint = 14	
-elFRtoPrint = 16
+#muFRtoPrint = 9	
+#elFRtoPrint = 21
 
 #CR1 ttbar
-# muFRtoPrint = 16	
-# elFRtoPrint = 17
+# muFRtoPrint = 9	
+# elFRtoPrint = 21
 
 ###################################
 
@@ -120,9 +120,9 @@ dataList = []
 # pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_PRv9_FRv48_elMVAvalueFix_CR2_2017_9_18'
 # pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_PRv9_FRv48_elMVAvalueFix_SRHT400_2017_9_18'
 # pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_PRv9_FRv48_elMVAvalueFix_SRHT400low_2017_9_18'
-pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_PRv9_FRv48_elMVAvalueFix_2017_9_20'
+pfix='kinematics_ttbarClosure_uFRv2_FWLJMET102X_3lep2017_062019_wywong_step1_FRv1_hadds_step2_2019_10_11'
 # pfix='kinematics_condor_FULLddbkgscan_ttbarClosure_PRv9_FRv48_elMVAvalueFix_CR1_2017_9_25'
-dataList = ['TTJetsPH']
+dataList = ['TTTo2L2Nu']
 
 
 # 
@@ -135,8 +135,10 @@ dataList = ['TTJetsPH']
 # # pfix='kinematics_condor_FULLddbkgscan_DYClosure_2017_6_22'
 # dataList = ['DY50']
 
+if len(sys.argv)>1: pfix=str(sys.argv[1])
+
 # outDir = os.getcwd()+'/'
-outDir = '/user_data/rsyarif/'
+outDir = '/mnt/data/users/wwong/'
 outDir+=pfix+'/'
 
 
@@ -183,7 +185,6 @@ for muFRindex in xrange(loop): #loop, run, dilep --> set in samples.py
 		ddbkgList_temp.append('MatrixBkg_muFR'+str(muFRindex+((int)(initial*100)))+'elFR'+str(elFRindex++((int)(initial*100))))
 		index+=1
 		ddbkgList_scan.append(ddbkgList_temp)
-		#print 'ddbkgList_scan[',FRscanIndex,'] = ',ddbkgList_scan[FRscanIndex]
 		FRscanIndex+=1
 #adding  muFR scans as ddbkgList -end
 
@@ -194,12 +195,12 @@ systematicList = ['pileup','btag','pdfNew','muR','muF','muRFcorrd','muRFcorrdNew
 #################### NORMALIZATIONS #######################
 ###########################################################
 
-lumiSys = 0.026 #6.2% https://twiki.cern.ch/twiki/bin/view/CMS/TWikiLUM - 20Sep2016 - ATTENTION!! NEEDS to be checked again!
+lumiSys = 0.023 #https://twiki.cern.ch/twiki/bin/view/CMS/TWikiLUM
 trigSys = 0.03 #3% trigger uncertainty - AN 2016 229
 # lepIdSys = math.sqrt(3.*0.02**2) #1% lepton id uncertainty ## NEED to add in quadrature for 3 leptons! - ATTENTION! NEED UPDATING!
 # lepIsoSys = math.sqrt(3.*0.01**2) #1% lepton isolation uncertainty ## NEED to add in quadrature for 3 leptons! - ATTENTION! NEED UPDATING!
-lepIdSys = 0.06 #1% lepton id uncertainty ## NEED to add in quadrature for 3 leptons! - ATTENTION! NEED UPDATING!
-lepIsoSys = 0.03 #1% lepton isolation uncertainty ## NEED to add in quadrature for 3 leptons! - ATTENTION! NEED UPDATING!
+lepIdSys = 0.02 #1.02% lepton id uncertainty ## NEED to add in quadrature for 3 leptons!
+lepIsoSys = 0.03 #2% lepton isolation uncertainty ## NEED to add in quadrature for 3 leptons!
 topXsecSys = 0.0 #55 #5.5% top x-sec uncertainty
 ewkXsecSys = 0.0 #5 #5% ewk x-sec uncertainty
 qcdXsecSys = 0.0 #50 #50% qcd x-sec uncertainty
@@ -539,8 +540,8 @@ def makeCats(datahists,sighists,bkghists,discriminant):
 		#look here
 		for FRindex in xrange(len(ddbkgList_scan)):
 			ddbkgIndexing = 'MuFR'+str(FRindex/loop+((int)(initial*100)))+'_ElFR'+str(FRindex%loop+((int)(initial*100)))
-			if hddbkg_scan[FRindex][cat].Integral() > 0: hddbkg_scan[FRindex][cat].Write()
-
+			if hddbkg_scan[FRindex][cat].Integral() >= 0: hddbkg_scan[FRindex][cat].Write()
+			else : print("FR scan with negative integral at muFR %s elFR %s" %(str(FRindex/loop+((int)(initial*100))), str(FRindex%loop+((int)(initial*100)))))
 		hddbkgTTT[cat].Write()
 		hddbkgTTL[cat].Write()
 		hddbkgTLT[cat].Write()

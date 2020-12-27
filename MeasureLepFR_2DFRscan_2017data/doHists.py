@@ -11,9 +11,15 @@ import ROOT as R
 R.gROOT.SetBatch(1)
 start_time = time.time()
 
-lumiStr = str(targetlumi/1000).replace('.','p') # 1/fb
-step1Dir = '/user_data/rsyarif/LJMet94x_3lepTT_2017datasets_2018_11_7_rizki_step1hadds_step2/nominal' #1st attempt for 2017data, uses PRv9 from 2016 from Clint 
+print(cutList)
 
+lumiStr = str(targetlumi/1000).replace('.','p') # 1/fb
+#step1Dir = '/user_data/rsyarif/LJMet94x_3lepTT_2017datasets_2018_11_7_rizki_step1hadds_step2/nominal' #1st attempt for 2017data, uses PRv9 from 2016 from Clint 
+#step1Dir = '/mnt/data/users/wwong/FWLJMET102X_3lep2017_062019_wywong_step1_FRv1_hadds_step2/'
+#step1Dir = '/mnt/data/users/wwong/FWLJMET102X_3lep2017_wywong_012020_step1_FRv4_uFR_hadds_step2/'
+#step1Dir = '/mnt/data/users/wwong/FWLJMET102X_3lep2017_wywong_012020_step1_FRv5_PRv2_prefiring_hadds_step2'
+#step1Dir = '/mnt/data/users/wwong/FWLJMET102X_3lep2017_wywong_012020_step1_FRv5_PRv2_prefire_elIdSys_TrigEffWeight_pdfNew_hadds_step2/'
+step1Dir = '/mnt/data/users/wwong/FWLJMET102X_3lep2017_wywong_012020_step1_FRv5_PRv2_prefire_elIdSys_TrigEffWeight_pdf4LHC_hadds_step2/'
 
 print 'grabbing files from ', step1Dir
 """
@@ -45,7 +51,7 @@ datestr='%i_%i_%i'%(cTime.year,cTime.month,cTime.day)
 timestr='%i_%i_%i'%(cTime.hour,cTime.minute,cTime.second)
 
 pfix='kinematics_dummy_name'
-pfix=''
+pfix='FR_FWLJMET102X_3lep2017_062019_wiwong_step1hadds_step2'
 
 pfix+='_'+datestr
 
@@ -65,6 +71,7 @@ METbins = [0,20,40,60,80,100,120,140,160,180,220,300,500]
 # pTbins = [0,20,40,60,80,100,120,140,160,180,200,220,240,260,280,300,350,400,450,500]
 # pTbins = [0,10,25,40,60,80,100,120,140,160,180,200,220,240,260,280,300,350,400,450,500]
 pTbins = [0,10,30,40,60,80,100,120,140,160,180,200,220,240,260,280,300,350,400,450,500]
+pTbinsV2 = [0,10,30,40,60,80,100,120,140,160,180,200,220,500]
 Mbins = [-10.0, 0.0, 20.0, 40.0, 60.0, 80.0, 100.0, 120.0, 140.0, 160.0, 180.0, 200.0, 220.0, 240.0, 260.0, 300.0]
 MbinsV2 = [-10.0, 0.0, 20.0, 40.0, 60.0, 80.0, 100.0, 120.0, 140.0, 160.0, 180.0, 200.0, 220.0, 240.0, 260.0, 300.0, 350.0, 400.00]
 # jetPtbins =  [0.0, 50.0, 100.0, 150.0, 200.0, 250.0, 300.0, 350.0, 450.0, 550.0, 650.0, 750.0]
@@ -72,7 +79,7 @@ jetPtbins =  [0.0, 30, 60.0, 100.0, 150.0, 200.0, 250.0, 300.0, 350.0, 450.0, 55
 etaBins= [-4.0,-3.0,-2.4,-2.1,-1.2,0,1.2,2.1,2.4,3.0,4.0]
 
 plotList = {#discriminantName:(discriminantLJMETName, binning, xAxisLabel)
-	'NPV'   :('nPV_singleLepCalc',linspace(0, 30, 31).tolist(),';PV multiplicity;'),
+	'NPV'   :('nPV_MultiLepCalc',linspace(0, 30, 31).tolist(),';PV multiplicity;'),
 
 # 	'lepPt' :('AllLeptonPt_PtOrdered',linspace(0, 500, 26).tolist(),';Leptons p_{T} (GeV);'),
 # 	'ElPt' :('AllLeptonElPt_PtOrdered',linspace(0, 500, 26).tolist(),';Electron p_{T} (GeV);'),
@@ -81,6 +88,10 @@ plotList = {#discriminantName:(discriminantLJMETName, binning, xAxisLabel)
 	'lepPt' :('AllLeptonPt_PtOrdered',pTbins,';Leptons p_{T} (GeV);'),
 	'ElPt' :('AllLeptonElPt_PtOrdered',pTbins,';Electron p_{T} (GeV);'),
 	'MuPt' :('AllLeptonMuPt_PtOrdered',pTbins,';Muon p_{T} (GeV);'),
+
+	'lepPtRebinned' :('AllLeptonPt_PtOrdered',pTbinsV2,';Leptons p_{T} (GeV);'),
+        'lepPt_Rebinnedv1' :('AllLeptonPt_PtOrdered',linspace(0, 500, 1).tolist(),';Leptons p_{T} (GeV);'),
+        'lepPt_Rebinnedv2' :('AllLeptonPt_PtOrdered',pTbinsV2,';Leptons p_{T} (GeV);'),
 
 	'lep1Pt' :('AllLeptonPt_PtOrdered[0]',linspace(0, 500, 26).tolist(),';Lepton 1 p_{T} (GeV);'),
 	'lep2Pt' :('AllLeptonPt_PtOrdered[1]',linspace(0, 300, 16).tolist(),';Lepton 2 p_{T} (GeV);'),
@@ -115,8 +126,8 @@ plotList = {#discriminantName:(discriminantLJMETName, binning, xAxisLabel)
 	'HTrebinned'    :('AK4HT',HTbins,';H_{T} (GeV);'),
 	'ST'    :('AK4HTpMETpLepPt',linspace(0, 2000, 21).tolist(),';S_{T} (GeV);'),
 	'STrebinned'    :('AK4HTpMETpLepPt',STbins,';S_{T} (GeV);'),
-	'MET'   :('corr_met_singleLepCalc',linspace(0, 500, 26).tolist(),';#slash{E}_{T} (GeV);'),
-	'METrebinned'   :('corr_met_singleLepCalc',METbins,';#slash{E}_{T} (GeV);'),
+	'MET'   :('corr_met_MultiLepCalc',linspace(0, 500, 26).tolist(),';#slash{E}_{T} (GeV);'),
+	'METrebinned'   :('corr_met_MultiLepCalc',METbins,';#slash{E}_{T} (GeV);'),
 
 	'NJets' :('NJets_JetSubCalc',linspace(0, 15, 16).tolist(),';AK4 Jet multiplicity;'),
 	'NBJets':('NJetsCSVwithSF_JetSubCalc',linspace(0, 10, 11).tolist(),';CSVIVFv2 Medium tag multiplicity;'),
@@ -210,7 +221,6 @@ for run_ in run:
 		bkgList.append('DataDrivenBkg'+dilep_+run_)
 		for ddbkgCat_ in ddbkgCat:
 			bkgList.append('DataDrivenBkg'+ddbkgCat_+dilep_+run_)
-
 ###########################################################
 #################### NORMALIZATIONS #######################
 ###########################################################
@@ -251,18 +261,18 @@ for data in dataList:
 	#print "READING:", data
 	tFileData[data],tTreeData[data]=readTree(step1Dir+'/'+samples[data]+'_hadd.root')
 
-tTreeSig = {}
-tFileSig = {}
-for sig in sigList:
-	for decay in decays:
-		#print "READING:", sig+decay
-		#print "        nominal"
-		tFileSig[sig+decay],tTreeSig[sig+decay]=readTree(step1Dir+'/'+samples[sig+decay]+'_hadd.root')
-		if doAllSys:
-			for syst in shapesFiles:
-				for ud in ['Up','Down']:
-					print "        "+syst+ud
-					tFileSig[sig+decay+syst+ud],tTreeSig[sig+decay+syst+ud]=readTree(step1Dir.replace('nominal',syst.upper()+ud.lower())+'/'+samples[sig+decay]+'_hadd.root')
+#tTreeSig = {}
+#tFileSig = {}
+#for sig in sigList:
+#	for decay in decays:
+#		#print "READING:", sig+decay
+#		#print "        nominal"
+#		tFileSig[sig+decay],tTreeSig[sig+decay]=readTree(step1Dir+'/'+samples[sig+decay]+'_hadd.root')
+#		if doAllSys:
+#			for syst in shapesFiles:
+#				for ud in ['Up','Down']:
+#					print "        "+syst+ud
+#					tFileSig[sig+decay+syst+ud],tTreeSig[sig+decay+syst+ud]=readTree(step1Dir.replace('nominal',syst.upper()+ud.lower())+'/'+samples[sig+decay]+'_hadd.root')
 
 tTreeBkg = {}
 tFileBkg = {}
@@ -286,8 +296,8 @@ print "FINISHED READING"
 
 if len(sys.argv)>2: iPlot=sys.argv[2]
 # else: iPlot='minMlb'
-else: iPlot='STrebinned'
-# else: iPlot='lepPt'
+# else: iPlot='STrebinned'
+else: iPlot='lepPt'
 # else: iPlot='Mlll'
 # else: iPlot='lepIso'
 # else: iPlot='JetPt'
@@ -303,16 +313,20 @@ for category in catList:
 	datahists = {}
 	bkghists  = {}
 	sighists  = {}
-	if len(sys.argv)>1: outDir=sys.argv[1]
+	if len(sys.argv)>1: 
+		outDir=sys.argv[1]
+		outDir+='_'+datestr #+=pfix
+		if not os.path.exists(outDir): os.system('mkdir '+outDir)
 	else: 
-		outDir = '/user_data/rsyarif/'
+		#outDir = '/user_data/rsyarif/'
+                outDir = '/mnt/data/users/wwong/'
 # 		outDir = os.getcwd()+'/'
 		outDir+=pfix
 		if not os.path.exists(outDir): os.system('mkdir '+outDir)
-		if not os.path.exists(outDir+'/'+cutString): os.system('mkdir '+outDir+'/'+cutString)
-		outDir+='/'+cutString
-		if not os.path.exists(outDir+'/'+category): os.system('mkdir '+outDir+'/'+category)
-		outDir+='/'+category
+		#if not os.path.exists(outDir+'/'+cutString): os.system('mkdir '+outDir+'/'+cutString)
+		#outDir+='/'+cutString
+	if not os.path.exists(outDir+'/'+category): os.system('mkdir '+outDir+'/'+category)
+	outDir+='/'+category
 	for data in dataList: 
 		datahists.update(analyze(tTreeData,data,cutList,False,iPlot,plotList[iPlot],category))
 		if catInd==nCats: del tFileData[data]
@@ -326,13 +340,13 @@ for category in catList:
 			for syst in shapesFiles:
 				if 'DataDriven' in bkg: continue
 				for ud in ['Up','Down']: del tFileBkg[bkg+syst+ud]
-	for sig in sigList: 
-		for decay in decays: 
-			sighists.update(analyze(tTreeSig,sig+decay,cutList,doAllSys,iPlot,plotList[iPlot],category))
-			if catInd==nCats: del tFileSig[sig+decay]
-			if doAllSys and catInd==nCats:
-				for syst in shapesFiles:
-					for ud in ['Up','Down']: del tFileSig[sig+decay+syst+ud]
+#	for sig in sigList: 
+#		for decay in decays: 
+#			sighists.update(analyze(tTreeSig,sig+decay,cutList,doAllSys,iPlot,plotList[iPlot],category))
+#			if catInd==nCats: del tFileSig[sig+decay]
+#			if doAllSys and catInd==nCats:
+#				for syst in shapesFiles:
+#					for ud in ['Up','Down']: del tFileSig[sig+decay+syst+ud]
 
 	#Negative Bin Correction
 	for bkg in bkghists.keys(): negBinCorrection(bkghists[bkg])

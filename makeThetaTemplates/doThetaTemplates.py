@@ -23,13 +23,15 @@ cTime=datetime.datetime.now()
 datestr='%i_%i_%i'%(cTime.year,cTime.month,cTime.day)
 timestr='%i_%i_%i'%(cTime.hour,cTime.minute,cTime.second)
 
-outDir='/user_data/rsyarif/'
-
-outDir+='/dummy/dummy/'
+#outDir='/user_data/rsyarif/'
+outDir='/mnt/data/users/wwong/'
+outDir+='kinematics_80x_dummy/isPassTrig_All0_dilep1_dilepAnth0_trilep0_isPassTrilepton1_lep1Pt0_NJets3_NBJets1_DR0_ST600_MllOS20/'
 if len(sys.argv)>1: outDir=sys.argv[1]
+
 
 newOutDir='/Shape_accurateLHEsys_FRsysMar28'
 if len(sys.argv)>2: newOutDir=sys.argv[2]
+
 
 lumiStr = str(targetlumi/1000).replace('.','p') # 1/fb
 
@@ -87,25 +89,33 @@ whichSignal = 'TT' #TT, BB, or X53X53
 if 'BB' in outDir: whichSignal = 'BB' #TT, BB, or X53X53
 
 signalMassRange = [1000,1800]
+if whichSignal == 'BB' : signalMassRange = [900,1800]
 sigList = [whichSignal+'M'+str(mass) for mass in range(signalMassRange[0],signalMassRange[1]+100,100)]
 if whichSignal=='X53X53': sigList = [whichSignal+'M'+str(mass)+chiral for mass in range(signalMassRange[0],signalMassRange[1]+100,100) for chiral in ['left','right']]
 if whichSignal=='TT': decays = ['BWBW','THTH','TZTZ','TZBW','THBW','TZTH'] #T' decays
 if whichSignal=='BB': decays = ['TWTW','BHBH','BZBZ','BZTW','BHTW','BZBH'] #B' decays
 if whichSignal=='X53X53': decays = [''] #decays to tWtW 100% of the time
 
+
 doBRScan = True
 if DEBUG!=False: doBRScan = False 
 BRs={}
 nBRconf=0
 if whichSignal=='TT':
-	BRs['BW']=[0.50,0.0,0.0,0.0,0.0,0.0,0.0,0.2,0.2,0.2,0.2,0.2,0.4,0.4,0.4,0.4,0.6,0.6,0.6,0.8,0.8,1.0,0.0]
-	BRs['TH']=[0.25,0.0,0.2,0.4,0.6,0.8,1.0,0.0,0.2,0.4,0.6,0.8,0.0,0.2,0.4,0.6,0.0,0.2,0.4,0.0,0.2,0.0,0.5]
-	BRs['TZ']=[0.25,1.0,0.8,0.6,0.4,0.2,0.0,0.8,0.6,0.4,0.2,0.0,0.6,0.4,0.2,0.0,0.4,0.2,0.0,0.2,0.0,0.0,0.5]
+	BRs['BW']=[0.50,0.0,0.0]
+	BRs['TH']=[0.25,0.0,0.5]
+	BRs['TZ']=[0.25,1.0,0.5]
+	#BRs['BW']=[0.50,0.0,0.0,0.0,0.0,0.0,0.0,0.2,0.2,0.2,0.2,0.2,0.4,0.4,0.4,0.4,0.6,0.6,0.6,0.8,0.8,1.0,0.0]
+	#BRs['TH']=[0.25,0.0,0.2,0.4,0.6,0.8,1.0,0.0,0.2,0.4,0.6,0.8,0.0,0.2,0.4,0.6,0.0,0.2,0.4,0.0,0.2,0.0,0.5]
+	#BRs['TZ']=[0.25,1.0,0.8,0.6,0.4,0.2,0.0,0.8,0.6,0.4,0.2,0.0,0.6,0.4,0.2,0.0,0.4,0.2,0.0,0.2,0.0,0.0,0.5]
 	nBRconf=len(BRs['BW'])
 if whichSignal=='BB':
-	BRs['TW']=[0.50,0.0,0.0,0.0,0.0,0.0,0.0,0.2,0.2,0.2,0.2,0.2,0.4,0.4,0.4,0.4,0.6,0.6,0.6,0.8,0.8,1.0,0.0]
-	BRs['BH']=[0.25,0.0,0.2,0.4,0.6,0.8,1.0,0.0,0.2,0.4,0.6,0.8,0.0,0.2,0.4,0.6,0.0,0.2,0.4,0.0,0.2,0.0,0.5]
-	BRs['BZ']=[0.25,1.0,0.8,0.6,0.4,0.2,0.0,0.8,0.6,0.4,0.2,0.0,0.6,0.4,0.2,0.0,0.4,0.2,0.0,0.2,0.0,0.0,0.5]
+	BRs['TW']=[0.50,1.0,0.0]
+	BRs['BH']=[0.25,0.0,0.5]
+	BRs['BZ']=[0.25,0.0,0.5]
+	#BRs['TW']=[0.50,0.0,0.0,0.0,0.0,0.0,0.0,0.2,0.2,0.2,0.2,0.2,0.4,0.4,0.4,0.4,0.6,0.6,0.6,0.8,0.8,1.0,0.0]
+	#BRs['BH']=[0.25,0.0,0.2,0.4,0.6,0.8,1.0,0.0,0.2,0.4,0.6,0.8,0.0,0.2,0.4,0.6,0.0,0.2,0.4,0.0,0.2,0.0,0.5]
+	#BRs['BZ']=[0.25,1.0,0.8,0.6,0.4,0.2,0.0,0.8,0.6,0.4,0.2,0.0,0.6,0.4,0.2,0.0,0.4,0.2,0.0,0.2,0.0,0.0,0.5]
 	nBRconf=len(BRs['TW'])
 if not doBRScan: nBRconf=1
 
@@ -119,29 +129,50 @@ lumiScaleCoeff = 1.
 scaleSignalXsecTo1pb = True # this has to be "True" if you are making templates for limit calculation!!!!!!!!
 normalizeRENORM_PDF = True #normalize the renormalization/pdf uncertainties to nominal templates --> normalizes signal processes !!!!
 
-doAllSys = False
-# systematicList = ['pileup','btag','mistag','pdfNew','muR','muF','muRFcorrd','muRFcorrdNew','elPR','elFR','muPR','muFR','jec','jer'] #ALL
-systematicList = ['pileup','btag','mistag','pdfNew','muR','muF','muRFcorrd','muRFcorrdNew','elPR','elFR','muPR','muFR']#,'jec','jer'] #ALL
+doAllSys = True
+#systematicList = ['pileup','btag','mistag','pdfNew','muR','muF','muRFcorrd','muRFcorrdNew','elPR','elFR','muPR','muFR','jec','jer'] #ALL
+#systematicList = ['pileup','prefire','btag','mistag','pdfNew','muR','muF','muRFcorrd','muRFcorrdNew','elPR','elFR','muPR','muFR','jec','jer',"TrigEffWeight", "elIdSys"]
+#systematicList = ['pileup','btag','mistag','pdfNew','muR','muF','muRFcorrd','muRFcorrdNew','jec','jer',"TrigEffWeight", "elIdSys"]
+systematicList = ['pileup','prefire','btag','mistag','pdfNew','muR','muF','muRFcorrd','muRFcorrdNew','jec','jer',"TrigEffWeight", "elIdSys"]
+
+#normSystematics = {
+#					'elIdSys':{'EEE':1.06,'EEM':1.04,'EMM':1.02,'MMM':1.00},
+#					'muIdSys':{'EEE':1.00,'EEM':1.02,'EMM':1.04,'MMM':1.06},
+#					'elIsoSys':{'EEE':1.03,'EEM':1.02,'EMM':1.01,'MMM':1.00},
+#					'muIsoSys':{'EEE':1.00,'EEM':1.01,'EMM':1.02,'MMM':1.03},
+#					'elelelTrigSys':{'EEE':1.03,'EEM':1.00,'EMM':1.00,'MMM':1.00},
+#					'elelmuTrigSys':{'EEE':1.00,'EEM':1.03,'EMM':1.00,'MMM':1.00},
+#					'elmumuTrigSys':{'EEE':1.00,'EEM':1.00,'EMM':1.03,'MMM':1.00},
+#					'mumumuTrigSys':{'EEE':1.00,'EEM':1.00,'EMM':1.00,'MMM':1.03},
+#					}
 
 
-normSystematics = {
-					'elIdSys':{'EEE':1.06,'EEM':1.04,'EMM':1.02,'MMM':1.00},
-					'muIdSys':{'EEE':1.00,'EEM':1.02,'EMM':1.04,'MMM':1.06},
-					'elIsoSys':{'EEE':1.03,'EEM':1.02,'EMM':1.01,'MMM':1.00},
-					'muIsoSys':{'EEE':1.00,'EEM':1.01,'EMM':1.02,'MMM':1.03},
-					'elelelTrigSys':{'EEE':1.03,'EEM':1.00,'EMM':1.00,'MMM':1.00},
-					'elelmuTrigSys':{'EEE':1.00,'EEM':1.03,'EMM':1.00,'MMM':1.00},
-					'elmumuTrigSys':{'EEE':1.00,'EEM':1.00,'EMM':1.03,'MMM':1.00},
-					'mumumuTrigSys':{'EEE':1.00,'EEM':1.00,'EMM':1.00,'MMM':1.03},
-					}
+#ddbkgSystematics = { #based on elMVAvalueFix Sep20-2017 No ST cut --> Asymmetric Unc thats why its applied here, see below codes how asymmetry is applied
+#						'elPRsys':{'EEE':1.09,'EEM':1.05,'EMM':1.02,'MMM':1.00},
+#						'muPRsys':{'EEE':1.00,'EEM':1.01,'EMM':1.02,'MMM':1.07},
+#						'muFReta':{'EEE':1.00,'EEM':1.12,'EMM':1.16,'MMM':1.33},
+#					}
 
+#normSystematics_hist = ['TrigEffWeight','elIdSys']
+normSystematics = { #updated by Jess in Mar 2020
+                                        #'muIdSys':{'EEE':0.00,'EEM':0.02,'EMM':0.028,'MMM':0.035,'All':0.049}, #flat rate of 2% 
+                                        #'elIsoSys':{'EEE':0.026,'EEM':0.021,'EMM':0.015,'MMM':0.00,'All':0.036}, #flat rate of 1.5% for el
+                                        #'muIsoSys':{'EEE':0.00,'EEM':0.015,'EMM':0.021,'MMM':0.026,'All':0.036}, #flat rate of 1.5% for mu
+                                        }
 
-ddbkgSystematics = { #based on elMVAvalueFix Sep20-2017 No ST cut --> Asymmetric Unc thats why its applied here, see below codes how asymmetry is applied
-						'elPRsys':{'EEE':1.09,'EEM':1.05,'EMM':1.02,'MMM':1.00},
-						'muPRsys':{'EEE':1.00,'EEM':1.01,'EMM':1.02,'MMM':1.07},
-						'muFReta':{'EEE':1.00,'EEM':1.12,'EMM':1.16,'MMM':1.33},
-					}
-
+#ddbkgSystematics = { #updated by Jess on Jun 17,2020 based on yields in 2020 FRv6 files + eta updated Aug 2020
+#                                       'elPRsys':{'EEE':0.07,'EEM':0.03,'EMM':0.01,'MMM':0.00,'All':0.02},
+#                                       'muPRsys':{'EEE':0.00,'EEM':0.01,'EMM':0.01,'MMM':0.05,'All':0.02},
+#                                       #'muFReta':{'EEE':0.00,'EEM':0.16,'EMM':0.22,'MMM':0.42,'All':0.21},
+#                                       'muFReta':{'EEE':0.00,'EEM':0.10,'EMM':0.18,'MMM':0.40,'All':0.17},
+#                                       'FRsys'  :{'EEE':0.28,'EEM':0.17,'EMM':0.05,'MMM':0.11,'All':0.04},
+#                                       }
+ddbkgSystematics = { #updated by Jess on Oct4,2020 based on yields in 2020 FRv5 files
+                                       #'elPRsys':{'EEE':0.07,'EEM':0.03,'EMM':0.01,'MMM':0.00,'All':0.02},
+                                       #'muPRsys':{'EEE':0.00,'EEM':0.01,'EMM':0.02,'MMM':0.07,'All':0.02},
+                                       #'muFReta':{'EEE':0.00,'EEM':0.08,'EMM':0.15,'MMM':0.33,'All':0.14},
+                                       #'FRsys'  :{'EEE':0.25,'EEM':0.14,'EMM':0.03,'MMM':0.16,'All':0.04},
+                                       }
 
 
 def round_sig(x,sig=2):
@@ -190,9 +221,9 @@ def makeThetaCats(datahists,sighists,bkghists,discriminant):
 	i=0
 	for BRind in range(nBRconf):
 		BRconfStr=''
-		if doBRScan: 
-			if whichSignal=='TT': BRconfStr='_bW'+str(BRs['BW'][BRind]).replace('.','p')+'_tZ'+str(BRs['TZ'][BRind]).replace('.','p')+'_tH'+str(BRs['TH'][BRind]).replace('.','p')
-			if whichSignal=='BB': BRconfStr='_tW'+str(BRs['TW'][BRind]).replace('.','p')+'_bZ'+str(BRs['BZ'][BRind]).replace('.','p')+'_bH'+str(BRs['BH'][BRind]).replace('.','p')
+		#if doBRScan: 
+		if whichSignal=='TT': BRconfStr='_bW'+str(BRs['BW'][BRind]).replace('.','p')+'_tZ'+str(BRs['TZ'][BRind]).replace('.','p')+'_tH'+str(BRs['TH'][BRind]).replace('.','p')
+		if whichSignal=='BB': BRconfStr='_tW'+str(BRs['TW'][BRind]).replace('.','p')+'_bZ'+str(BRs['BZ'][BRind]).replace('.','p')+'_bH'+str(BRs['BH'][BRind]).replace('.','p')
 		if(DEBUG):print ''
 		print "--- BR Configuration: "+BRconfStr, "----"
 		for signal in sigList:
@@ -323,6 +354,7 @@ def makeThetaCats(datahists,sighists,bkghists,discriminant):
 						hsig[systematic+'Down'+str(i)] = hsig[i].Clone('triLep2017'+catStr+'__sig__'+systematic+'__minus')
 						hsig[systematic+'Down'+str(i)].Scale(2.-normSystematics[systematic][cat])
 
+ 
 					for systematic in ddbkgSystematics.keys():
 						if(DEBUG):print 'Attempting to incorporate', signal, systematic
 						hddbkg[systematic+'Up'+str(i)] = hddbkg[i].Clone('triLep2017'+catStr+'__ddbkg__'+systematic+'__plus')
@@ -333,18 +365,21 @@ def makeThetaCats(datahists,sighists,bkghists,discriminant):
 
 					for pdfInd in range(100):
 						hewk['pdf'+str(pdfInd)+'_'+str(i)] = bkghists[histoPrefix.replace(discriminant,discriminant+'pdf'+str(pdfInd))+'_'+ewkList[0]].Clone('triLep2017'+catStr+'__ewk__pdf'+str(pdfInd))
+						for bkg in ewkList:
+                                                        if bkg!=ewkList[0]: hewk['pdf'+str(pdfInd)+'_'+str(i)].Add(bkghists[histoPrefix.replace(discriminant,discriminant+'pdf'+str(pdfInd))+'_'+bkg])
+
 						htop['pdf'+str(pdfInd)+'_'+str(i)] = bkghists[histoPrefix.replace(discriminant,discriminant+'pdf'+str(pdfInd))+'_'+topList[0]].Clone('triLep2017'+catStr+'__top__pdf'+str(pdfInd))
+						for bkg in topList:
+                                                        if bkg!=topList[0]: htop['pdf'+str(pdfInd)+'_'+str(i)].Add(bkghists[histoPrefix.replace(discriminant,discriminant+'pdf'+str(pdfInd))+'_'+bkg])
+
+						if not (pdfInd < 30) : continue
 						hsig['pdf'+str(pdfInd)+'_'+str(i)] = sighists[histoPrefix.replace(discriminant,discriminant+'pdf'+str(pdfInd))+'_'+signal+decays[0]].Clone('triLep2017'+catStr+'__sig__pdf'+str(pdfInd))
 						if doBRScan: hsig['pdf'+str(pdfInd)+'_'+str(i)].Scale(BRs[decays[0][:2]][BRind]*BRs[decays[0][2:]][BRind]/(BR[decays[0][:2]]*BR[decays[0][2:]]))
-						for bkg in ewkList: 
-							if bkg!=ewkList[0]: hewk['pdf'+str(pdfInd)+'_'+str(i)].Add(bkghists[histoPrefix.replace(discriminant,discriminant+'pdf'+str(pdfInd))+'_'+bkg])
-						for bkg in topList: 
-							if bkg!=topList[0]: htop['pdf'+str(pdfInd)+'_'+str(i)].Add(bkghists[histoPrefix.replace(discriminant,discriminant+'pdf'+str(pdfInd))+'_'+bkg])
 						for decay in decays:
 							htemp = sighists[histoPrefix.replace(discriminant,discriminant+'pdf'+str(pdfInd))+'_'+signal+decay].Clone()
 							if doBRScan: htemp.Scale(BRs[decay[:2]][BRind]*BRs[decay[2:]][BRind]/(BR[decay[:2]]*BR[decay[2:]]))
 							if decay!=decays[0]:hsig['pdf'+str(pdfInd)+'_'+str(i)].Add(htemp)
-		
+					if(DEBUG):print(htop['pdf0'+'_'+str(i)], htop['pdf0'+'_'+str(i)].GetNbinsX())	
 				#Group data processes
 				hdata[i] = datahists[histoPrefix+'_'+dataList[0]].Clone('triLep2017'+catStr+'__DATA')
 				for dat in dataList:
@@ -390,6 +425,7 @@ def makeThetaCats(datahists,sighists,bkghists,discriminant):
 								
 					#R/F
 #start
+					#print(htop.keys())
 					htop['muRFcorrdNewUp'+str(i)] = htop['muRFcorrdUp'+str(i)].Clone('triLep2017'+catStr+'__top__muRFcorrdNewTop__plus')
 					htop['muRFcorrdNewDown'+str(i)] = htop['muRFcorrdUp'+str(i)].Clone('triLep2017'+catStr+'__top__muRFcorrdNewTop__minus')
 					hewk['muRFcorrdNewUp'+str(i)] = hewk['muRFcorrdUp'+str(i)].Clone('triLep2017'+catStr+'__ewk__muRFcorrdNewEwk__plus')
@@ -408,6 +444,7 @@ def makeThetaCats(datahists,sighists,bkghists,discriminant):
 							for muRFprefix in ['muRUp','muRDown','muFUp','muFDown','muRFcorrdUp','muRFcorrdDown']: print 'htop[',muRFprefix,str(i),'].GetBinContent(',ibin,') =', htop[muRFprefix+str(i)].GetBinContent(ibin) 
 						weightRFcoordListEwk = [hewk[muRFprefix+str(i)].GetBinContent(ibin) for muRFprefix in muRFprefixList]
 						weightRFcoordListSig = [hsig[muRFprefix+str(i)].GetBinContent(ibin) for muRFprefix in muRFprefixList]
+						if DEBUG : print weightRFcoordListSig
 
 						indTopRFcoordUp = weightRFcoordListTop.index(max(weightRFcoordListTop))
 						if DEBUG and signal=='TTM800': print '----->',
@@ -417,6 +454,8 @@ def makeThetaCats(datahists,sighists,bkghists,discriminant):
 						indEwkRFcoordDn = weightRFcoordListEwk.index(min(weightRFcoordListEwk))
 						indSigRFcoordUp = weightRFcoordListSig.index(max(weightRFcoordListSig))
 						indSigRFcoordDn = weightRFcoordListSig.index(min(weightRFcoordListSig))
+
+						if DEBUG : print("indSigRFcoord ", indSigRFcoordUp, indSigRFcoordDn)
 
 						htop['muRFcorrdNewUp'+str(i)].SetBinContent(ibin,htop[muRFprefixList[indTopRFcoordUp]+str(i)].GetBinContent(ibin))
 						htop['muRFcorrdNewDown'+str(i)].SetBinContent(ibin,htop[muRFprefixList[indTopRFcoordDn]+str(i)].GetBinContent(ibin))
@@ -432,12 +471,26 @@ def makeThetaCats(datahists,sighists,bkghists,discriminant):
 						hsig['muRFcorrdNewUp'+str(i)].SetBinError(ibin,hsig[muRFprefixList[indSigRFcoordUp]+str(i)].GetBinError(ibin))
 						hsig['muRFcorrdNewDown'+str(i)].SetBinError(ibin,hsig[muRFprefixList[indSigRFcoordDn]+str(i)].GetBinError(ibin))
 
-					#SF from Julie /user_data/jhogan/CMSSW_7_4_14/src/tptp_2016/makeTemplates/modifyBinning.py (April 7, 2017)
-					muSFsUp = {'TTM800':0.750,'TTM900':0.750,'TTM1000':0.749,'TTM1100':0.749,'TTM1200':0.748,'TTM1300':0.747,'TTM1400':0.746,'TTM1500':0.745,'TTM1600':0.744,'TTM1700':0.743,'TTM1800':0.741}
-					muSFsDn = {'TTM800':1.303,'TTM900':1.303,'TTM1000':1.304,'TTM1100':1.305,'TTM1200':1.307,'TTM1300':1.309,'TTM1400':1.311,'TTM1500':1.313,'TTM1600':1.315,'TTM1700':1.317,'TTM1800':1.319}
+#					#SF from Julie /user_data/jhogan/CMSSW_7_4_14/src/tptp_2016/makeTemplates/modifyBinning.py (April 7, 2017)
+#					muSFsUp = {'TTM800':0.750,'TTM900':0.750,'TTM1000':0.749,'TTM1100':0.749,'TTM1200':0.748,'TTM1300':0.747,'TTM1400':0.746,'TTM1500':0.745,'TTM1600':0.744,'TTM1700':0.743,'TTM1800':0.741}
+#					muSFsDn = {'TTM800':1.303,'TTM900':1.303,'TTM1000':1.304,'TTM1100':1.305,'TTM1200':1.307,'TTM1300':1.309,'TTM1400':1.311,'TTM1500':1.313,'TTM1600':1.315,'TTM1700':1.317,'TTM1800':1.319}					
+#					if whichSignal == 'BB':
+#						muSFsUp = {'BBM800':0.750,'BBM900':0.750,'BBM1000':0.749,'BBM1100':0.749,'BBM1200':0.748,'BBM1300':0.747,'BBM1400':0.746,'BBM1500':0.745,'BBM1600':0.744,'BBM1700':0.743,'BBM1800':0.741}
+#						muSFsDn = {'BBM800':1.303,'BBM900':1.303,'BBM1000':1.304,'BBM1100':1.305,'BBM1200':1.307,'BBM1300':1.309,'BBM1400':1.310,'BBM1500':1.313,'BBM1600':1.315,'BBM1700':1.317,'BBM1800':1.319}					
+
+					#SF from Julie (updated by Jess 20 Oct 2020) https://github.com/jmhogan/singleLepAnalyzer/blob/tptp_2017/makeTemplates/modifyBinning_byyear.py
+					muSFsUp = {'TTM1000':0.744,'TTM1100':0.747,'TTM1200':0.742,'TTM1300':0.741,'TTM1400':0.738,'TTM1500':0.740,'TTM1600':0.735,'TTM1700':0.721,'TTM1800':0.746}
+					muSFsDn = {'TTM1000':1.312,'TTM1100':1.306,'TTM1200':1.315,'TTM1300':1.316,'TTM1400':1.322,'TTM1500':1.319,'TTM1600':1.329,'TTM1700':1.354,'TTM1800':1.311}
+					pdfSFsUp = {'TTM1000':0.945,'TTM1100':0.908,'TTM1200':0.894,'TTM1300':0.856,'TTM1400':0.811,'TTM1500':0.732,'TTM1600':0.660,'TTM1700':0.590,'TTM1800':0.383}
+					pdfSFsDn = {'TTM1000':1.055,'TTM1100':1.092,'TTM1200':1.106,'TTM1300':1.144,'TTM1400':1.189,'TTM1500':1.268,'TTM1600':1.340,'TTM1700':1.410,'TTM1800':1.617}
+					pdfSFsSym = {'TTM1000':0.055,'TTM1100':0.092,'TTM1200':0.106,'TTM1300':0.144,'TTM1400':0.189,'TTM1500':0.268,'TTM1600':0.340,'TTM1700':0.410,'TTM1800':0.617}
 					if whichSignal == 'BB':
-						muSFsUp = {'BBM800':0.750,'BBM900':0.750,'BBM1000':0.749,'BBM1100':0.749,'BBM1200':0.748,'BBM1300':0.747,'BBM1400':0.746,'BBM1500':0.745,'BBM1600':0.744,'BBM1700':0.743,'BBM1800':0.741}
-						muSFsDn = {'BBM800':1.303,'BBM900':1.303,'BBM1000':1.304,'BBM1100':1.305,'BBM1200':1.307,'BBM1300':1.309,'BBM1400':1.310,'BBM1500':1.313,'BBM1600':1.315,'BBM1700':1.317,'BBM1800':1.319}					
+						muSFsUp = {'BBM900':0.742,'BBM1000':0.742,'BBM1100':0.743,'BBM1200':0.742,'BBM1300':0.741,'BBM1400':0.739,'BBM1500':0.735,'BBM1600':0.735,'BBM1700':0.733,'BBM1800':0.731}
+						muSFsDn = {'BBM900':1.315,'BBM1000':1.315,'BBM1100':1.314,'BBM1200':1.316,'BBM1300':1.318,'BBM1400':1.321,'BBM1500':1.329,'BBM1600':1.329,'BBM1700':1.331,'BBM1800':1.337}
+						pdfSFsUp = {'BBM900':0.950,'BBM1000':0.950,'BBM1100':0.925,'BBM1200':0.897,'BBM1300':0.857,'BBM1400':0.808,'BBM1500':0.748,'BBM1600':0.658,'BBM1700':0.551,'BBM1800':0.419}
+						pdfSFsDn = {'BBM900':1.050,'BBM1000':1.050,'BBM1100':1.075,'BBM1200':1.103,'BBM1300':1.143,'BBM1400':1.192,'BBM1500':1.252,'BBM1600':1.342,'BBM1700':1.449,'BBM1800':1.581}
+						pdfSFsSym = {'BBM900':0.050,'BBM1000':0.050,'BBM1100':0.075,'BBM1200':0.103,'BBM1300':0.143,'BBM1400':0.192,'BBM1500':0.252,'BBM1600':0.342,'BBM1700':0.449,'BBM1800':0.581}
+
 					if(DEBUG): print 'before extra SF hsig[\'muRFcorrdNewUp\'',i,')]\']',hsig['muRFcorrdNewUp'+str(i)].Integral()					
 					if(DEBUG): print 'before extra SF hsig[\'muRFcorrdNewDown\'',i,')]\']',hsig['muRFcorrdNewDown'+str(i)].Integral()					
 					scalefactorUp = muSFsUp[signal]
@@ -473,45 +526,79 @@ def makeThetaCats(datahists,sighists,bkghists,discriminant):
 					hsig['pdfNewUp'+str(i)] = hsig['pdf0'+'_'+str(i)].Clone('triLep2017'+catStr+'__sig__pdfNew__plus')
 					hsig['pdfNewDown'+str(i)] = hsig['pdf0'+'_'+str(i)].Clone('triLep2017'+catStr+'__sig__pdfNew__minus')
 
+					#print(hsig.keys())
 					for ibin in range(1,htop['pdf0_'+str(i)].GetNbinsX()+1):
 						weightListTop = [htop['pdf'+str(pdfInd)+'_'+str(i)].GetBinContent(ibin) for pdfInd in range(100)]
 						weightListEwk = [hewk['pdf'+str(pdfInd)+'_'+str(i)].GetBinContent(ibin) for pdfInd in range(100)]
-						weightListSig = [hsig['pdf'+str(pdfInd)+'_'+str(i)].GetBinContent(ibin) for pdfInd in range(100)]
+						weightListSig = [hsig['pdf'+str(pdfInd)+'_'+str(i)].GetBinContent(ibin) for pdfInd in range(30)]
+						#print('pdf'+str(pdfInd)+'_'+str(i), weightListSig)
+						#indTopPDFUp = sorted(range(len(weightListTop)), key=lambda k: weightListTop[k])[83]
+						#indTopPDFDn = sorted(range(len(weightListTop)), key=lambda k: weightListTop[k])[15]
+						#indEwkPDFUp = sorted(range(len(weightListEwk)), key=lambda k: weightListEwk[k])[83]
+						#indEwkPDFDn = sorted(range(len(weightListEwk)), key=lambda k: weightListEwk[k])[15]
+						#indSigPDFUp = sorted(range(len(weightListSig)), key=lambda k: weightListSig[k])[83]
+						#indSigPDFDn = sorted(range(len(weightListSig)), key=lambda k: weightListSig[k])[15]
 
-						indTopPDFUp = sorted(range(len(weightListTop)), key=lambda k: weightListTop[k])[83]
-						indTopPDFDn = sorted(range(len(weightListTop)), key=lambda k: weightListTop[k])[15]
-						indEwkPDFUp = sorted(range(len(weightListEwk)), key=lambda k: weightListEwk[k])[83]
-						indEwkPDFDn = sorted(range(len(weightListEwk)), key=lambda k: weightListEwk[k])[15]
-						indSigPDFUp = sorted(range(len(weightListSig)), key=lambda k: weightListSig[k])[83]
-						indSigPDFDn = sorted(range(len(weightListSig)), key=lambda k: weightListSig[k])[15]
+						## New syst by % of the quad. sum of error (from central value
+						errsqTop = 0
+						shiftpctTop = 0
+						for weight in weightListTop:
+							errsqTop += (weight - htop[i].GetBinContent(ibin))**2
+						if htop[i].GetBinContent(ibin) != 0: shiftpctTop = math.sqrt(errsqTop)/htop[i].GetBinContent(ibin)
+						elif math.sqrt(errsqTop) != 0: print 'Weird: (Top) central is 0 but not PDF unc'
+						
+						errsqEwk = 0
+                                                shiftpctEwk = 0
+                                                for weight in weightListEwk:
+                                                        errsqEwk += (weight - hewk[i].GetBinContent(ibin))**2
+                                                if hewk[i].GetBinContent(ibin) != 0: shiftpctEwk = math.sqrt(errsqEwk)/hewk[i].GetBinContent(ibin)
+                                                elif math.sqrt(errsqEwk) != 0: print 'Weird: (Ewk) central is 0 but not PDF unc'
 
-						htop['pdfNewUp'+str(i)].SetBinContent(ibin,htop['pdf'+str(indTopPDFUp)+'_'+str(i)].GetBinContent(ibin))
-						htop['pdfNewDown'+str(i)].SetBinContent(ibin,htop['pdf'+str(indTopPDFDn)+'_'+str(i)].GetBinContent(ibin))
-						hewk['pdfNewUp'+str(i)].SetBinContent(ibin,hewk['pdf'+str(indEwkPDFUp)+'_'+str(i)].GetBinContent(ibin))
-						hewk['pdfNewDown'+str(i)].SetBinContent(ibin,hewk['pdf'+str(indEwkPDFDn)+'_'+str(i)].GetBinContent(ibin))
-						hsig['pdfNewUp'+str(i)].SetBinContent(ibin,hsig['pdf'+str(indSigPDFUp)+'_'+str(i)].GetBinContent(ibin))
-						hsig['pdfNewDown'+str(i)].SetBinContent(ibin,hsig['pdf'+str(indSigPDFDn)+'_'+str(i)].GetBinContent(ibin))
+						errsqSig = 0
+                                                shiftpctSig = 0
+						for weight in weightListSig:
+							errsqSig += (weight - hsig[i].GetBinContent(ibin))**2
+						if hsig[i].GetBinContent(ibin) != 0: shiftpctSig = math.sqrt(errsqSig)/hsig[i].GetBinContent(ibin)
+						elif math.sqrt(errsqSig) != 0: print 'Weird: (Sig) central is 0 but not PDF unc'
+						### FOR SIGNAL ONLY --- reduce shift by the no-selection value
+						if shiftpctSig != 0:
+							shiftpctSig = shiftpctSig - pdfSFsSym[signal]
+						if abs(shiftpctSig) > 1: print 'WARNING: pdf shift is',shiftpctSig,', flooring down at 0 in bin',ibin,'of hist Sig', i
 
-						htop['pdfNewUp'+str(i)].SetBinError(ibin,htop['pdf'+str(indTopPDFUp)+'_'+str(i)].GetBinError(ibin))
-						htop['pdfNewDown'+str(i)].SetBinError(ibin,htop['pdf'+str(indTopPDFDn)+'_'+str(i)].GetBinError(ibin))
-						hewk['pdfNewUp'+str(i)].SetBinError(ibin,hewk['pdf'+str(indEwkPDFUp)+'_'+str(i)].GetBinError(ibin))
-						hewk['pdfNewDown'+str(i)].SetBinError(ibin,hewk['pdf'+str(indEwkPDFDn)+'_'+str(i)].GetBinError(ibin))
-						hsig['pdfNewUp'+str(i)].SetBinError(ibin,hsig['pdf'+str(indSigPDFUp)+'_'+str(i)].GetBinError(ibin))
-						hsig['pdfNewDown'+str(i)].SetBinError(ibin,hsig['pdf'+str(indSigPDFDn)+'_'+str(i)].GetBinError(ibin))
+						#htop['pdfNewUp'+str(i)].SetBinContent(ibin,htop['pdf'+str(indTopPDFUp)+'_'+str(i)].GetBinContent(ibin))
+						#htop['pdfNewDown'+str(i)].SetBinContent(ibin,htop['pdf'+str(indTopPDFDn)+'_'+str(i)].GetBinContent(ibin))
+						#hewk['pdfNewUp'+str(i)].SetBinContent(ibin,hewk['pdf'+str(indEwkPDFUp)+'_'+str(i)].GetBinContent(ibin))
+						#hewk['pdfNewDown'+str(i)].SetBinContent(ibin,hewk['pdf'+str(indEwkPDFDn)+'_'+str(i)].GetBinContent(ibin))
+						#hsig['pdfNewUp'+str(i)].SetBinContent(ibin,hsig['pdf'+str(indSigPDFUp)+'_'+str(i)].GetBinContent(ibin))
+						#hsig['pdfNewDown'+str(i)].SetBinContent(ibin,hsig['pdf'+str(indSigPDFDn)+'_'+str(i)].GetBinContent(ibin))
 
-					#SF from Julie /user_data/jhogan/CMSSW_7_4_14/src/tptp_2016/makeTemplates/modifyBinning.py (April 7, 2017)
-					pdfSFsUp = {'TTM800':0.908,'TTM900':0.902,'TTM1000':0.890,'TTM1100':0.889,'TTM1200':0.895,'TTM1300':0.895,'TTM1400':0.888,'TTM1500':0.897,'TTM1600':0.905,'TTM1700':0.885,'TTM1800':0.872}
-					pdfSFsDn = {'TTM800':1.106,'TTM900':1.104,'TTM1000':1.099,'TTM1100':1.099,'TTM1200':1.093,'TTM1300':1.098,'TTM1400':1.102,'TTM1500':1.099,'TTM1600':1.122,'TTM1700':1.121,'TTM1800':1.133}
-					if whichSignal == 'BB':
-							pdfSFsUp = {'BBM800':0.909,'BBM900':0.903,'BBM1000':0.889,'BBM1100':0.889,'BBM1200':0.895,'BBM1300':0.895,'BBM1400':0.889,'BBM1500':0.897,'BBM1600':0.904,'BBM1700':0.884,'BBM1800':0.872}
-							pdfSFsDn = {'BBM800':1.106,'BBM900':1.104,'BBM1000':1.100,'BBM1100':1.099,'BBM1200':1.093,'BBM1300':1.097,'BBM1400':1.102,'BBM1500':1.099,'BBM1600':1.121,'BBM1700':1.122,'BBM1800':1.132}
+						htop['pdfNewUp'+str(i)].SetBinContent(ibin, max(0,htop[i].GetBinContent(ibin)*(1 + shiftpctTop)))
+						htop['pdfNewDown'+str(i)].SetBinContent(ibin, max(0,htop[i].GetBinContent(ibin)*(1 - shiftpctTop)))
+						hewk['pdfNewUp'+str(i)].SetBinContent(ibin, max(0,hewk[i].GetBinContent(ibin)*(1 + shiftpctEwk)))
+						hewk['pdfNewDown'+str(i)].SetBinContent(ibin, max(0,hewk[i].GetBinContent(ibin)*(1 - shiftpctEwk)))
+						hsig['pdfNewUp'+str(i)].SetBinContent(ibin, max(0,hsig[i].GetBinContent(ibin)*(1 + shiftpctSig)))
+						hsig['pdfNewDown'+str(i)].SetBinContent(ibin, max(0,hsig[i].GetBinContent(ibin)*(1 - shiftpctSig)))
+
+						#htop['pdfNewUp'+str(i)].SetBinError(ibin,htop['pdf'+str(indTopPDFUp)+'_'+str(i)].GetBinError(ibin))
+						#htop['pdfNewDown'+str(i)].SetBinError(ibin,htop['pdf'+str(indTopPDFDn)+'_'+str(i)].GetBinError(ibin))
+						#hewk['pdfNewUp'+str(i)].SetBinError(ibin,hewk['pdf'+str(indEwkPDFUp)+'_'+str(i)].GetBinError(ibin))
+						#hewk['pdfNewDown'+str(i)].SetBinError(ibin,hewk['pdf'+str(indEwkPDFDn)+'_'+str(i)].GetBinError(ibin))
+						#hsig['pdfNewUp'+str(i)].SetBinError(ibin,hsig['pdf'+str(indSigPDFUp)+'_'+str(i)].GetBinError(ibin))
+						#hsig['pdfNewDown'+str(i)].SetBinError(ibin,hsig['pdf'+str(indSigPDFDn)+'_'+str(i)].GetBinError(ibin))
+
+#					#SF from Julie /user_data/jhogan/CMSSW_7_4_14/src/tptp_2016/makeTemplates/modifyBinning.py (April 7, 2017)
+#					pdfSFsUp = {'TTM800':0.908,'TTM900':0.902,'TTM1000':0.890,'TTM1100':0.889,'TTM1200':0.895,'TTM1300':0.895,'TTM1400':0.888,'TTM1500':0.897,'TTM1600':0.905,'TTM1700':0.885,'TTM1800':0.872}
+#					pdfSFsDn = {'TTM800':1.106,'TTM900':1.104,'TTM1000':1.099,'TTM1100':1.099,'TTM1200':1.093,'TTM1300':1.098,'TTM1400':1.102,'TTM1500':1.099,'TTM1600':1.122,'TTM1700':1.121,'TTM1800':1.133}
+#					if whichSignal == 'BB':
+#							pdfSFsUp = {'BBM800':0.909,'BBM900':0.903,'BBM1000':0.889,'BBM1100':0.889,'BBM1200':0.895,'BBM1300':0.895,'BBM1400':0.889,'BBM1500':0.897,'BBM1600':0.904,'BBM1700':0.884,'BBM1800':0.872}
+#							pdfSFsDn = {'BBM800':1.106,'BBM900':1.104,'BBM1000':1.100,'BBM1100':1.099,'BBM1200':1.093,'BBM1300':1.097,'BBM1400':1.102,'BBM1500':1.099,'BBM1600':1.121,'BBM1700':1.122,'BBM1800':1.132}
 					if(DEBUG): print 'before extra SF hsig[\'pdfNewUp\'',i,')]\']',hsig['pdfNewUp'+str(i)].Integral()					
 					if(DEBUG): print 'before extra SF hsig[\'pdfNewDown\'',i,')]\']',hsig['pdfNewDown'+str(i)].Integral()					
-					scalefactorUp = pdfSFsUp[signal]
-					scalefactorDn = pdfSFsDn[signal]
+					#scalefactorUp = pdfSFsUp[signal]
+					#scalefactorDn = pdfSFsDn[signal]
 					if(DEBUG): print 'Mass',signal,': assigning pdfNew SFup =',scalefactorUp,', SFdn =',scalefactorDn                                                                                                                          
-					hsig['pdfNewUp'+str(i)].Scale(scalefactorUp)
-					hsig['pdfNewDown'+str(i)].Scale(scalefactorDn)
+					#hsig['pdfNewUp'+str(i)].Scale(scalefactorUp)
+					#hsig['pdfNewDown'+str(i)].Scale(scalefactorDn)
 					if(DEBUG): print 'after extra SF hsig[\'pdfNewUp\'',i,')]\']',hsig['pdfNewUp'+str(i)].Integral()					
 					if(DEBUG): print 'after extra SF hsig[\'pdfNewDown\'',i,')]\']',hsig['pdfNewDown'+str(i)].Integral()					
 
@@ -663,30 +750,35 @@ def makeThetaCats(datahists,sighists,bkghists,discriminant):
 					if(DEBUG):print 'hsig[',i,'] (pre 1pb xsec norm)  :',hsig[i].Integral()
 				hsig[i].Write()
 
-				if htop[i].Integral() > 0: htop[i].Write()
-				if hewk[i].Integral() > 0: hewk[i].Write()
-				if hddbkg[i].Integral() > 0: hddbkg[i].Write()
+				if htop[i].Integral() >= 0: htop[i].Write()
+				if hewk[i].Integral() >= 0: hewk[i].Write()
+				if hddbkg[i].Integral() >= 0: hddbkg[i].Write()
+
 				#systematics
 				if doAllSys:
 					for systematic in systematicList+normSystematics.keys()+ddbkgSystematics.keys():
 						#print 'Writing systematics for ewk, top, sig:',systematic 
 						for ud in ['Up','Down']:
 							if not (systematic=='toppt' or 'PR' in systematic or 'FR' in systematic or 'ddbkgSys' in systematic):
-								if hewk[systematic+ud+str(i)].Integral() > 0: hewk[systematic+ud+str(i)].Write()
-								if htop[systematic+ud+str(i)].Integral() > 0: htop[systematic+ud+str(i)].Write()
+								if not hewk[systematic+ud+str(i)].Integral() < 0: hewk[systematic+ud+str(i)].Write()
+								if not htop[systematic+ud+str(i)].Integral() < 0: htop[systematic+ud+str(i)].Write()
+								if ('pdfNew' in systematic and ud == 'Down') : print(htop[systematic+ud+str(i)].Integral())
 								if hsig[systematic+ud+str(i)].Integral() > 0:
 									if scaleSignalXsecTo1pb: 
 										hsig[systematic+ud+str(i)].Scale(1./xsec[signal])
-									if normalizeRENORM_PDF and ( systematic=='muRFcorrdNew' or systematic=='pdfNew' ):
+									if normalizeRENORM_PDF and systematic=='muRFcorrdNew':
 										#print 'normalize signal systematic:', systematic
 										hsig[systematic+ud+str(i)].Scale(hsig[i].Integral()/hsig[systematic+ud+str(i)].Integral())
-									hsig[systematic+ud+str(i)].Write()
+								if not hsig[systematic+ud+str(i)].Integral() < 0: hsig[systematic+ud+str(i)].Write()
 							if systematic=='toppt': # top pt is only on the ttbar sample, so it needs special treatment!
-								if htop[systematic+ud+str(i)].Integral() > 0: htop[systematic+ud].Write()
+								if not htop[systematic+ud+str(i)].Integral() < 0: htop[systematic+ud].Write()
+
 							if 'PR' in systematic or 'FR' in systematic or 'ddbkgSys' in systematic: # PR and FR is only on the ddbkg sample, so it needs special treatment!
 								#print 'Writing systematics for ddbkg:', systematic 
-								if hddbkg[systematic+ud+str(i)].Integral() > 0: hddbkg[systematic+ud+str(i)].Write()
+								if not hddbkg[systematic+ud+str(i)].Integral() < 0: hddbkg[systematic+ud+str(i)].Write()
 				i+=1
+			for key in hsig.keys():
+				print(key, ' Intergral : ', hsig[key].Integral())
 			outputRfile.Close()
 
 		stdout_old = sys.stdout
@@ -787,7 +879,7 @@ def makeThetaCats(datahists,sighists,bkghists,discriminant):
 				print
 				for ud in ['Up','Down']:
 # 					for systematic in systematicList+['pdfNew','muRFcorrdNew']:
-					for systematic in systematicList+normSystematics.keys()+ddbkgSystematics.keys():
+					for systematic in systematicList: #+normSystematics.keys()+ddbkgSystematics.keys():
 						if systematic=='toppt' and process!='top': continue
 						if not (process=='ddbkg' or 'PR' in systematic or 'FR' in systematic or systematic=='ddbkgSys'):
 							print (systematic+ud).ljust(ljust_i),

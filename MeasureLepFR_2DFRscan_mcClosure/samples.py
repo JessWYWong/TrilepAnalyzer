@@ -1,5 +1,5 @@
 #!/usr/bin/python
-
+print('Samples defined in MeasureFR_MC')
 samples = {
 
 # 'DY10to50': 'DYJetsToLL_M-10to50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8',
@@ -25,11 +25,13 @@ samples = {
 # samples['DY50']='DYJetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8_combined'
 # useWhichSampleForMatrix=samples['DY50']
 
-samples['TTJetsPH']='TT_TuneCUETP8M2T4_13TeV-powheg-pythia8'
-useWhichSampleForMatrix=samples['TTJetsPH']
+#samples['TTJetsPH']='TT_TuneCUETP8M2T4_13TeV-powheg-pythia8'
+samples['TTTo2L2Nu']='TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8'
+#samples['TTToSemiLep']='TTToSemiLeptonic_TuneCP5_PSweights_13TeV-powheg-pythia8'
+useWhichSampleForMatrix=samples['TTTo2L2Nu']
 
 # samples['TTJetsPH']='TTTo2L2Nu_TuneCUETP8M2_ttHtranche3_13TeV-powheg-pythia8'
-# useWhichSampleForMatrix=samples['TTJetsPH']
+#useWhichSampleForMatrix=samples['TTJetsPH']
 
 # samples['TTJetsPH0to700inc']='TT_TuneCUETP8M2T4_13TeV-powheg-pythia8_Mtt0to700'
 # samples['TTJetsPH700to1000inc']='TT_TuneCUETP8M2T4_13TeV-powheg-pythia8_Mtt700to1000'
@@ -51,7 +53,7 @@ for ddbkgCat_ in ddbkgCat:
 #adding scans of ddbkg
 increment = 0.01;
 initial = 0.0;
-end = 1.0;
+end = 0.5;#1.0;
 loop = (int) ( ( end - initial ) / increment ) + 1;
 muFR=0.;
 elFR=0.;

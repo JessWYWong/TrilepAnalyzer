@@ -1,0 +1,9 @@
+# get by running xrdfs root://cmseos.fnal.gov ls /store/user/wywong/FWLJMET102X_3lep2017_062019_wywong_step1_FRv1_hadds on lpc
+/TTWJetsToLNu_TuneCP5_13TeV-amcatnloFXFX-madspin-pythia8_hadd.root
+/TTZToLLNuNu_M-10_TuneCP5_13TeV-amcatnlo-pythia8_hadd.root
+/WWW_4F_TuneCP5_13TeV-amcatnlo-pythia8_hadd.root
+/WWZ_4F_TuneCP5_13TeV-amcatnlo-pythia8_hadd.root
+/WZTo3LNu_TuneCP5_13TeV-amcatnloFXFX-pythia8_hadd.root
+/WZZ_TuneCP5_13TeV-amcatnlo-pythia8_hadd.root
+/ZZTo4L_13TeV_powheg_pythia8_hadd.root
+/ZZZ_TuneCP5_13TeV-amcatnlo-pythia8_hadd.root

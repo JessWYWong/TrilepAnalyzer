@@ -1,42 +1,51 @@
 import os,sys,fnmatch
 
-templateDir = '/user_data/rsyarif/'
+templateDir = '/mnt/data/users/wwong/'
 
 limitType = templateDir.split('/')[-2]
 
 if len(sys.argv)>1: 
 	templateDir+=sys.argv[1]+'/'
-	limitType = sys.argv[1]
+	limitType = sys.argv[1].split('/')[0]
 
 
 if len(sys.argv)>2: 
 	templateDir+=sys.argv[2]+'/'
 
 
-if len(sys.argv)>3: 
-	templateDir+=sys.argv[3]+'/'
+#if len(sys.argv)>3: 
+#	templateDir+=sys.argv[3]+'/'
 
 print "Checking:", templateDir
 
-if len(sys.argv)>4: 
-	outSubDir=sys.argv[4]+'/'
 
+outSubDir=''
+if len(sys.argv)>3: 
+	outSubDir=sys.argv[3]
 
-outputDir = '/user_data/rsyarif/limits/'
-
+outputDir = '/mnt/data/users/wwong/limits/'
 
 lumiStr = '41p557'
 
 thetaConfigTemp = os.getcwd()+'/theta_config_template.py'
 
-toFilter = ['muR__','muF__','muRFcorrd__','elelelTrigSys','elelmuTrigSys','elmumuTrigSys','mumumuTrigSys','elIsoSys','elIdSys','muIsoSys','muIdSys','PR__']
-# toFilter = ['pdf','muR','muF','muRFcorrd','muRFdecorrdNew','muRFenv','tau21','jmr','jms']
-# toFilter = ['pdf','muR','muF','muRFcorrd','muRFdecorrdNew','muRFenv','tau21','jmr','jms','btag'] #filter btag!
-# toFilter = []
-# toFilter+= ['jec','jer']
-# toFilter = ['__'+item+'__' for item in toFilter]
+########## unused syst ##########
+toFilter = ['muR__','muF__','muRFcorrd__','elPR__','muPR__','elFR__','muFR__']
+################################
+########## filter rate ##########
+toFilter += ['elIsoSys__','muIsoSys__','muIdSys__','FRSys__','elPRsys__','muFReta__','muPRsys__']
+################################
+########## filter shape ##########
+#toFilter += ['pileup','prefire','btag','mistag','pdfNew','muR','muF','muRFcorrd','muRFcorrdNew','jec','jer',"TrigEffWeight", "elIdSys"]
+################################
+
+testFilter = []
+#testFilter = ['FRSys__']
+#testFilter = ['muFReta__']
+#testFilter = ['muRFcorrdNew']
+toFilter += testFilter
 toFilter = [item for item in toFilter]
-# toFilter += ['sig__pdfNew','sig__muRFcorrdNew']
+
 print 'Filtering the following : ',toFilter
 
 
@@ -54,6 +63,7 @@ for rootfile in findfiles(templateDir, '*.root'):
     #if 'TTM1600' in rootfile: continue
     #if 'TTM1500' in rootfile: continue
     #if 'TTM1400' in rootfile: continue
+    #if len(sys.argv)>4 and not sys.argv[4] in rootfile: continue
     rootfilelist.append(rootfile)
     i+=1
 
@@ -63,7 +73,7 @@ f.close()
 
 def makeThetaConfig(rFile,outDir):
 # 	rFileDir = rFile.split('/')[-2]
-	rFileDir = outSubDir
+	rFileDir = outSubDir+"/"
 	with open(outDir+'/'+rFileDir+'/'+rFile.split('/')[-1][:-5]+'.py','w') as fout:
 		for line in thetaConfigLines:
 			if line.startswith('outDir ='): fout.write('outDir = \''+outDir+'/'+rFileDir+'\'')
@@ -79,12 +89,18 @@ def makeThetaConfig(rFile,outDir):
 			else: fout.write(line)
 	with open(outDir+'/'+rFileDir+'/'+rFile.split('/')[-1][:-5]+'.sh','w') as fout:
 		fout.write('#!/bin/sh \n')
-		fout.write('cd /home/rsyarif/LJMet/TprimeAnalysis/CMSSW_7_6_3/src/\n')
+		fout.write('cd /home/wwong/VLQ/THETA/CMSSW_7_6_3/src/\n')
+#                fout.write('cd /home/wwong/VLQ/THETA/CMSSW_8_0_24/src/\n')
 		fout.write('source /cvmfs/cms.cern.ch/cmsset_default.sh\n')
 		fout.write('cmsenv\n')
 		fout.write('cd '+outDir+'/'+rFileDir+'\n')
-		fout.write('/home/rsyarif/LJMet/TprimeAnalysis/CMSSW_7_6_3/src/theta/utils2/theta-auto.py ' + outDir+'/'+rFileDir+'/'+rFile.split('/')[-1][:-5]+'.py')
+#                fout.write('/home/wwong/VLQ/THETA/CMSSW_8_0_24/src/theta/utils2/theta-auto.py ' + outDir+'/'+rFileDir+'/'+rFile.split('/')[-1][:-5]+'.py')
+		fout.write('/home/wwong/VLQ/THETA/CMSSW_7_6_3/src/theta/utils2/theta-auto.py ' + outDir+'/'+rFileDir+'/'+rFile.split('/')[-1][:-5]+'.py')
 
+if len(testFilter)> 0:
+    for filtered in testFilter:
+        outSubDir+="_"+filtered
+outSubDir += "/"
 count=0
 for file in rootfilelist:
 	print ''
@@ -99,13 +115,16 @@ for file in rootfilelist:
 		if not('_tW0p5_bZ0p25_bH0p25' in BRStr or '_tW0p0_bZ0p5_bH0p5' in BRStr or '_tW1p0_bZ0p0_bH0p0' in BRStr): 
 			print '--> Skipping'
 			continue
-	outDir = outputDir+limitType+BRStr+'/'
+        outDir = outputDir
+        if not os.path.exists(outDir): os.system('mkdir -v -p '+outDir)
+	#outDir = outputDir+limitType+BRStr+'/'
+        outDir +=limitType+BRStr+'/'
 	print 'signal : ',signal,BRStr
 # 	if not ('M800' in signal or 'M1000' in signal): continue
-# 	print 'outDir : ',outDir
-	if not os.path.exists(outDir): os.system('mkdir -v '+outDir)
+ 	print 'outDir : ',outDir
+	if not os.path.exists(outDir): os.system('mkdir -v -p '+outDir)
 	outDir+='/'+templateDir.split('/')[-3]
-	if not os.path.exists(outDir): os.system('mkdir -v '+outDir)
+	if not os.path.exists(outDir): os.system('mkdir -v -p '+outDir)
 # 	print 'outDir : ',outDir
 # 	print 'pwd:',os.getcwd()
 	os.chdir(outDir)
@@ -131,7 +150,6 @@ Executable = %(configfile)s.sh
 Should_Transfer_Files = YES
 WhenToTransferOutput = ON_EXIT
 Notification = Error
-notify_user = rizki_syarif@brown.edu
 
 arguments      = ""
 

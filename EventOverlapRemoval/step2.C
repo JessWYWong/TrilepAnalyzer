@@ -94,6 +94,9 @@ void step2::Loop()
       for(unsigned int i=0; i < CheckOverlap_run.size(); i++){
         if(CheckOverlap_run[i]==run_CommonCalc && CheckOverlap_ls[i]==lumi_CommonCalc && CheckOverlap_event[i]==event_CommonCalc) filterEvent = true;
       }
+
+      if((run_CommonCalc==299480 && lumi_CommonCalc==7)||(run_CommonCalc==301397 && lumi_CommonCalc==518)||(run_CommonCalc==305366 && lumi_CommonCalc==395)) filterEvent = true;
+
       if(filterEvent){
 		  std::cout << " ----> Skipping overlap" << std:: endl;
 		  duplicates++;

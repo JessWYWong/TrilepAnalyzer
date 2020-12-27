@@ -36,13 +36,13 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 	cut += ' && (AllLeptonPt_PtOrdered[1] >= '+str(cutList['lep1PtCut'])+')'
 	cut += ' && (AllLeptonPt_PtOrdered[2] >= '+str(cutList['lep1PtCut'])+')'
 
-	cut += ' && (corr_met_singleLepCalc >= '+str(cutList['metCut'])+')'
+	cut += ' && (corr_met_MultiLepCalc >= '+str(cutList['metCut'])+')'
 
-	if ('CR' in cutType and cutType!='CR1CR2'): cut += ' && (NJets_singleLepCalc == '+str(cutList['njetsCut'])+')'
-	elif(cutType=='CR1CR2'): cut += ' && (NJets_singleLepCalc <= '+str(cutList['njetsCut'])+' && NJets_singleLepCalc >= 1 )'
-	else : cut += ' && (NJets_singleLepCalc >= '+str(cutList['njetsCut'])+')'
+	if ('CR' in cutType and cutType!='CR1CR2'): cut += ' && (NJets_MultiLepCalc == '+str(cutList['njetsCut'])+')'
+	elif(cutType=='CR1CR2'): cut += ' && (NJets_MultiLepCalc <= '+str(cutList['njetsCut'])+' && NJets_MultiLepCalc >= 1 )'
+	else : cut += ' && (NJets_MultiLepCalc >= '+str(cutList['njetsCut'])+')'
 
-	cut += ' && (NJetsBTagwithSF_singleLepCalc >= '+str(cutList['nbjetsCut'])+')'
+	cut += ' && (NJetsBTagwithSF_MultiLepCalc >= '+str(cutList['nbjetsCut'])+')'
 
 	if ('Data' in process and 'Bkg' not in process): 
 		if cutList['isPassTrig']==1:        cut += ' && DataPastTrigger == 1'
@@ -63,6 +63,7 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
  	else:					cut += ' && (AK4HT >= '+str(cutList['htCut'])+')'
 
 	if ('FR' in cutType): cut += ' && AllLeptonCount_PtOrdered == 3' #require exactly 3 leptons
+	if ('FR' in cutType): print('requiring exactly 3 leptons for FR measurement')
 #  	cut += ' && AllLeptonCount_PtOrdered > 3' #require more than 3 leptons
 
 	if ('mlllb' in cutType and 'low' in cutType): cut += ' && (minMlllBjet < '+str(cutList['mlllbCut'])+' )' #chop off high mlllb
@@ -130,7 +131,7 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 
 
 #Start -- Method if isTTT doesnt exist
-# 	'''
+ 	'''
 	if 'DataDrivenBkgTTT' in process: 
 		cut+=' && (AllLeptonIsTight_PtOrdered[0]==1 && AllLeptonIsTight_PtOrdered[1]==1 && AllLeptonIsTight_PtOrdered[2]==1)'
 
@@ -206,11 +207,11 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 
 	if 'DataDrivenBkgLLL' in process: 
 		cut+=' && (AllLeptonIsTight_PtOrdered[0]==0 && AllLeptonIsTight_PtOrdered[1]==0 && AllLeptonIsTight_PtOrdered[2]==0)'
-# 	'''
+ 	'''
 #End -- Method if isTTT doesnt exist
 
 #Start -- Method if isTTT  exist
-	'''
+#	'''
 	if 'DataDrivenBkgTTT' in process: cut+=' && isTTT==1'
 	if 'DataDrivenBkgTTL' in process: cut+=' && isTTL==1'
 	if 'DataDrivenBkgTLT' in process: cut+=' && isTLT==1'
@@ -219,7 +220,7 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 	if 'DataDrivenBkgLTL' in process: cut+=' && isLTL==1'
 	if 'DataDrivenBkgLLT' in process: cut+=' && isLLT==1'
 	if 'DataDrivenBkgLLL' in process: cut+=' && isLLL==1'
-	'''
+#	'''
 #End -- Method if isTTT exist
 
 
@@ -239,12 +240,12 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 		
 	if(debugANALYZE):print "Applying Cuts: ", cut
 	
-	doDDBKGsys = True
+	#doDDBKGsys = True
 
 	hists = {}
 	hists[discriminantName+'_'+lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'_'+lumiStr+'fb_'+category+'_' +process,xAxisLabel,len(xbins)-1,xbins)
-	if doAllSys or doDDBKGsys:
-		if doDDBKGsys and 'DataDrivenBkg' in process: 	
+	if doAllSys: #or doDDBKGsys:
+		if 'DataDrivenBkg' in process: #doDDBKGsys and 'DataDrivenBkg' in process: 	
 			hists[discriminantName+'elPRUp_'     +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'elPRUp_'     +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
 			hists[discriminantName+'elPRDown_'   +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'elPRDown_'   +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
 			hists[discriminantName+'elFRUp_'     +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'elFRUp_'     +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
@@ -253,9 +254,11 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 			hists[discriminantName+'muPRDown_'   +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'muPRDown_'   +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
 			hists[discriminantName+'muFRUp_'     +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'muFRUp_'     +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
 			hists[discriminantName+'muFRDown_'   +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'muFRDown_'   +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
-		elif doAllSys:			
+		else: #if doAllSys:			
 			hists[discriminantName+'pileupUp_'  +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'pileupUp_'  +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
 			hists[discriminantName+'pileupDown_'+lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'pileupDown_'+lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
+			hists[discriminantName+'prefireUp_'  +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'prefireUp_'  +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
+			hists[discriminantName+'prefireDown_'+lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'prefireDown_'+lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins) 
 			hists[discriminantName+'muRFcorrdUp_'  +lumiStr+'fb_'+category+'_'+process]=R.TH1D(discriminantName+'muRFcorrdUp_'  +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
 			hists[discriminantName+'muRFcorrdDown_'+lumiStr+'fb_'+category+'_'+process]=R.TH1D(discriminantName+'muRFcorrdDown_'+lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
 			hists[discriminantName+'muRUp_'     +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'muRUp_'     +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
@@ -268,6 +271,10 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 			hists[discriminantName+'mistagUp_'    +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'mistagUp_'    +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
 			hists[discriminantName+'mistagDown_'  +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'mistagDown_'  +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
 
+			hists[discriminantName+'TrigEffWeightUp_'    +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'TrigEffWeightUp_'    +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
+                        hists[discriminantName+'TrigEffWeightDown_'  +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'TrigEffWeightDown_'  +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
+			hists[discriminantName+'elIdSysUp_'    +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'elIdSysUp_'    +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
+                        hists[discriminantName+'elIdSysDown_'  +lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'elIdSysDown_'  +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
 
 			if tTree[process+'jecUp']:		
 				hists[discriminantName+'jecUp_'   +lumiStr+'fb_'+category+'_'+process]  = R.TH1D(discriminantName+'jecUp_'   +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
@@ -276,7 +283,10 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 				hists[discriminantName+'jerUp_'   +lumiStr+'fb_'+category+'_'+process]  = R.TH1D(discriminantName+'jerUp_'   +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
 				hists[discriminantName+'jerDown_' +lumiStr+'fb_'+category+'_'+process]  = R.TH1D(discriminantName+'jerDown_' +lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
 
-			for i in range(100): hists[discriminantName+'pdf'+str(i)+'_'+lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'pdf'+str(i)+'_'+lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
+                        if 'TTM' in process or 'BBM' in process:
+                                for i in range(30): hists[discriminantName+'pdf'+str(i)+'_'+lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'pdf'+str(i)+'_'+lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
+                        else :
+                                for i in range(100): hists[discriminantName+'pdf'+str(i)+'_'+lumiStr+'fb_'+category+'_'+process] = R.TH1D(discriminantName+'pdf'+str(i)+'_'+lumiStr+'fb_'+category+'_'+process,xAxisLabel,len(xbins)-1,xbins)
 	for key in hists.keys(): hists[key].Sumw2()
 		
 	if 'Data' in process: 
@@ -316,33 +326,50 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 
 		weightPileupUpStr   = '1'
 		weightPileupDownStr = '1'
+		weightPrefireUpStr   = '1'
+		weightPrefireDownStr = '1'
 		weightmuRFcorrdUpStr   = '1'
 		weightmuRFcorrdDownStr = '1'
 		weightmuRUpStr   = '1'
 		weightmuRDownStr = '1'
 		weightmuFUpStr   = '1'
 		weightmuFDownStr = '1'
+
+		weightTrigEffWeightUpStr = '1'
+		weightTrigEffWeightDownStr = '1'
+                weightelIdSysUpStr      = '1'
+                weightelIdSysDownStr    = '1'
+
 		weighttopptUpStr    = '1'
 		weighttopptDownStr  = '1'
 		weightjsfUpStr    = '1'
 		weightjsfDownStr  = '1'		
 
 	else: 
-		weightStr           = TrigEff+' * pileupWeight * 1 * isoSF * lepIdSF * EGammaGsfSF * MuTrkSF * MCWeight_singleLepCalc/abs(MCWeight_singleLepCalc) * '+str(weight[process])
+		weightStr           = TrigEff+' * pileupWeight * L1NonPrefiringProb_CommonCalc * 1 * isoSF * lepIdSF * EGammaGsfSF * MuTrkSF * MCWeight_MultiLepCalc/abs(MCWeight_MultiLepCalc) * '+str(weight[process])
+		if 'TTM' in process or 'BBM' in process: weightStr += ' * pdfWeights4LHC[0]'
 
 		# For some reason pileupWeight for ZZTo4L_13TeV_powheg_pythia8_hadd.root is giving NaN histo. Will ignore for the moment. Nov 13, 2018
-		if(process=='ZZ'): 
-			print ' -------------->> Not using pileupweight for ZZ = ZZTo4L_13TeV_powheg_pythia8_hadd.root !!!!'
-			weightStr = TrigEff+' * 1 * 1 * isoSF * lepIdSF * EGammaGsfSF * MuTrkSF * MCWeight_singleLepCalc/abs(MCWeight_singleLepCalc) * '+str(weight[process])
+		#if(process=='ZZ'): 
+		#	print ' -------------->> Not using pileupweight for ZZ = ZZTo4L_13TeV_powheg_pythia8_hadd.root !!!!'
+		#	weightStr = TrigEff+' * 1 * 1 * isoSF * lepIdSF * EGammaGsfSF * MuTrkSF * MCWeight_MultiLepCalc/abs(MCWeight_MultiLepCalc) * '+str(weight[process])
 
 		weightPileupUpStr   = weightStr.replace('pileupWeight','pileupWeightUp')
 		weightPileupDownStr = weightStr.replace('pileupWeight','pileupWeightDown')
+		weightPrefireUpStr   = weightStr.replace('L1NonPrefiringProb_CommonCalc','L1NonPrefiringProbUp_CommonCalc')
+		weightPrefireDownStr = weightStr.replace('L1NonPrefiringProb_CommonCalc','L1NonPrefiringProbDown_CommonCalc')
 		weightmuRFcorrdUpStr   = 'renormWeights[5] * '+weightStr
 		weightmuRFcorrdDownStr = 'renormWeights[3] * '+weightStr
 		weightmuRUpStr      = 'renormWeights[4] * '+weightStr
 		weightmuRDownStr    = 'renormWeights[2] * '+weightStr
 		weightmuFUpStr      = 'renormWeights[1] * '+weightStr
 		weightmuFDownStr    = 'renormWeights[0] * '+weightStr
+
+                weightTrigEffWeightUpStr = weightStr.replace('TrigEffWeight', 'TrigEffWeightUp')
+                weightTrigEffWeightDownStr = weightStr.replace('TrigEffWeight', 'TrigEffWeightDn')
+                weightelIdSysUpStr      = weightStr.replace('lepIdSF', '(lepIdSF+elIdSys)')
+                weightelIdSysDownStr    = weightStr.replace('lepIdSF', '(lepIdSF-elIdSys)')
+
 		weighttopptUpStr    = weightStr
 		weighttopptDownStr  = 'topPtWeight * '+weightStr
 		weightjsfUpStr      = weightStr.replace('JetSF','JetSFupwide')
@@ -378,8 +405,8 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 	except:
 		print '--------------------------------------------------------------------------------------------------------------------------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>Skip DRAW'
 
-	if doAllSys or doDDBKGsys:
-		if doDDBKGsys and 'DataDrivenBkg' in process: 
+	if doAllSys: # or doDDBKGsys:
+		if 'DataDrivenBkg' in process:  #doDDBKGsys and 'DataDrivenBkg' in process: 
 			print 'Processing ddbkg sys !'
 			tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+'elPRUp_'     +lumiStr+'fb_'+category+'_'+process, weightelPRUpStr+'*('+cut+isLepCut+')', 'GOFF')
 			tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+'elPRDown_'   +lumiStr+'fb_'+category+'_'+process, weightelPRDownStr+'*('+cut+isLepCut+')', 'GOFF')
@@ -389,10 +416,12 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 			tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+'muPRDown_'   +lumiStr+'fb_'+category+'_'+process, weightmuPRDownStr+'*('+cut+isLepCut+')', 'GOFF')
 			tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+'muFRUp_'     +lumiStr+'fb_'+category+'_'+process, weightmuFRUpStr+'*('+cut+isLepCut+')', 'GOFF')
 			tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+'muFRDown_'   +lumiStr+'fb_'+category+'_'+process, weightmuFRDownStr+'*('+cut+isLepCut+')', 'GOFF')
-		if doAllSys:
+		else:# doAllSys:
 			print 'Processing ALL other sys !'
-			tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+'pileupUp_'  +lumiStr+'fb_'+category+'_'+process, weightPileupUpStr+'*('+cut+isLepCut+')', 'GOFF')
+			tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+'pileupUp_'  +lumiStr+'fb_'+category+'_'+process, weightPileupUpStr  +'*('+cut+isLepCut+')', 'GOFF')
 			tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+'pileupDown_'+lumiStr+'fb_'+category+'_'+process, weightPileupDownStr+'*('+cut+isLepCut+')', 'GOFF')
+			tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+'prefireUp_'  +lumiStr+'fb_'+category+'_'+process, weightPrefireUpStr  +'*('+cut+isLepCut+')', 'GOFF')
+			tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+'prefireDown_'+lumiStr+'fb_'+category+'_'+process, weightPrefireDownStr+'*('+cut+isLepCut+')', 'GOFF')
 			tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+'muRFcorrdUp_'  +lumiStr+'fb_'+category+'_'+process, weightmuRFcorrdUpStr  +'*('+cut+isLepCut+')', 'GOFF')
 			tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+'muRFcorrdDown_'+lumiStr+'fb_'+category+'_'+process, weightmuRFcorrdDownStr+'*('+cut+isLepCut+')', 'GOFF')
 			tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+'muRUp_'     +lumiStr+'fb_'+category+'_'+process, weightmuRUpStr+'*('+cut+isLepCut+')', 'GOFF')
@@ -400,12 +429,17 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 			tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+'muFUp_'     +lumiStr+'fb_'+category+'_'+process, weightmuFUpStr+'*('+cut+isLepCut+')', 'GOFF')
 			tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+'muFDown_'   +lumiStr+'fb_'+category+'_'+process, weightmuFDownStr+'*('+cut+isLepCut+')', 'GOFF')
 
+			tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+'TrigEffWeightUp_'     +lumiStr+'fb_'+category+'_'+process, weightTrigEffWeightUpStr+'*('+cut+isLepCut+')', 'GOFF')
+                        tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+'TrigEffWeightDown_'   +lumiStr+'fb_'+category+'_'+process, weightTrigEffWeightDownStr+'*('+cut+isLepCut+')', 'GOFF')
+			tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+'elIdSysUp_'     +lumiStr+'fb_'+category+'_'+process, weightelIdSysUpStr+'*('+cut+isLepCut+')', 'GOFF')
+                        tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+'elIdSysDown_'   +lumiStr+'fb_'+category+'_'+process, weightelIdSysDownStr+'*('+cut+isLepCut+')', 'GOFF')
+
 			# replace cuts for shifts
-			nbtagLJMETname = 'NJetsBTagwithSF_singleLepCalc'
-			cut_btagUp = cut.replace(nbtagLJMETname,'NJetsBTagwithSF_singleLepCalc_shifts[0]')#nbtagLJMETname+'_shifts[0]')
-			cut_btagDn = cut.replace(nbtagLJMETname,'NJetsBTagwithSF_singleLepCalc_shifts[1]')#nbtagLJMETname+'_shifts[1]')
-			cut_mistagUp = cut.replace(nbtagLJMETname,'NJetsBTagwithSF_singleLepCalc_shifts[2]')#nbtagLJMETname+'_shifts[2]')
-			cut_mistagDn = cut.replace(nbtagLJMETname,'NJetsBTagwithSF_singleLepCalc_shifts[3]')#nbtagLJMETname+'_shifts[3]')
+			nbtagLJMETname = 'NJetsBTagwithSF_MultiLepCalc'
+			cut_btagUp = cut.replace(nbtagLJMETname,'NJetsBTagwithSF_MultiLepCalc_shifts[0]')#nbtagLJMETname+'_shifts[0]')
+			cut_btagDn = cut.replace(nbtagLJMETname,'NJetsBTagwithSF_MultiLepCalc_shifts[1]')#nbtagLJMETname+'_shifts[1]')
+			cut_mistagUp = cut.replace(nbtagLJMETname,'NJetsBTagwithSF_MultiLepCalc_shifts[2]')#nbtagLJMETname+'_shifts[2]')
+			cut_mistagDn = cut.replace(nbtagLJMETname,'NJetsBTagwithSF_MultiLepCalc_shifts[3]')#nbtagLJMETname+'_shifts[3]')
 			
 			bTagSFshiftName = discriminantLJMETName
 # 			if 'NJetsBTag' in discriminantLJMETName:
@@ -422,16 +456,21 @@ def analyze(tTree,process,cutList,doAllSys,discriminantName,discriminantDetails,
 			tTree[process].Draw(bTagSFshiftName.replace('_shifts[0]','_shifts[3]')+' >> '+discriminantName+'mistagDown'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut_mistagDn+isLepCut+')', 'GOFF')
 
 
-			if 'DataDriven' not in process:
-				if tTree[process+'jecUp']:
-					tTree[process+'jecUp'].Draw(discriminantLJMETName   +' >> '+discriminantName+'jecUp'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut+isLepCut+')', 'GOFF')
-					tTree[process+'jecDown'].Draw(discriminantLJMETName +' >> '+discriminantName+'jecDown'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut+isLepCut+')', 'GOFF')
-				if tTree[process+'jerUp']:
-					tTree[process+'jerUp'].Draw(discriminantLJMETName   +' >> '+discriminantName+'jerUp'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut+isLepCut+')', 'GOFF')
-					tTree[process+'jerDown'].Draw(discriminantLJMETName +' >> '+discriminantName+'jerDown'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut+isLepCut+')', 'GOFF')
+			#if 'DataDriven' not in process:
+			if tTree[process+'jecUp']:
+				tTree[process+'jecUp'].Draw(discriminantLJMETName   +' >> '+discriminantName+'jecUp'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut+isLepCut+')', 'GOFF')
+				tTree[process+'jecDown'].Draw(discriminantLJMETName +' >> '+discriminantName+'jecDown'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut+isLepCut+')', 'GOFF')
+			if tTree[process+'jerUp']:
+				tTree[process+'jerUp'].Draw(discriminantLJMETName   +' >> '+discriminantName+'jerUp'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut+isLepCut+')', 'GOFF')
+				tTree[process+'jerDown'].Draw(discriminantLJMETName +' >> '+discriminantName+'jerDown'+'_'+lumiStr+'fb_'+category+'_' +process, weightStr+'*('+cut+isLepCut+')', 'GOFF')
 
-			for i in range(100): tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+'pdf'+str(i)+'_'+lumiStr+'fb_'+category+'_'+process, 'pdfWeights['+str(i)+'] * '+weightStr+'*('+cut+isLepCut+')', 'GOFF')
-	
+			if "TTM" in process or "BBM" in process:
+                                for i in range(30):
+                                        tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+'pdf'+str(i)+'_'+lumiStr+'fb_'+category+'_'+process, '(pdfWeights4LHC['+str(i+1)+']/pdfWeights4LHC[0]) * '+weightStr+'*('+cut+isLepCut+')', 'GOFF')
+                        else:
+                                for i in range(100):
+                                        tTree[process].Draw(discriminantLJMETName+' >> '+discriminantName+'pdf'+str(i)+'_'+lumiStr+'fb_'+category+'_'+process, 'pdfWeights['+str(i)+'] * '+weightStr+'*('+cut+isLepCut+')', 'GOFF')
+
 	for key in hists.keys(): 
 		#print key
 		hists[key].SetDirectory(0)	
