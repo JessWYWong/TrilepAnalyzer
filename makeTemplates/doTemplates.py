@@ -480,18 +480,18 @@ def makeThetaCats(datahists,sighists,bkghists,discriminant):
 					#	pdfSFsUp = {'BBM900':0.997,'BBM1000':0.997,'BBM1100':0.997,'BBM1200':0.996,'BBM1300':0.994,'BBM1400':0.991,'BBM1500':0.987,'BBM1600':0.984,'BBM1700':0.979,'BBM1800':0.970}
 					#	pdfSFsDn = {'BBM900':1.005,'BBM1000':1.005,'BBM1100':1.006,'BBM1200':1.008,'BBM1300':1.011,'BBM1400':1.015,'BBM1500':1.019,'BBM1600':1.027,'BBM1700':1.037,'BBM1800':1.049}
 
-					#SF from Julie (updated by Jess 20 Oct 2020) https://github.com/jmhogan/singleLepAnalyzer/blob/tptp_2017/makeTemplates/modifyBinning_byyear.py
+					#SF from Julie (updated by Jess 28 Dec 2020) https://github.com/jmhogan/singleLepAnalyzer/blob/tptp_2017/makeTemplates/modifyBinning_byyear.py
 					muSFsUp = {'TTM1000':0.744,'TTM1100':0.747,'TTM1200':0.742,'TTM1300':0.741,'TTM1400':0.738,'TTM1500':0.740,'TTM1600':0.735,'TTM1700':0.721,'TTM1800':0.746}
-                                        muSFsDn = {'TTM1000':1.312,'TTM1100':1.306,'TTM1200':1.315,'TTM1300':1.316,'TTM1400':1.322,'TTM1500':1.319,'TTM1600':1.329,'TTM1700':1.354,'TTM1800':1.311}
-                                        pdfSFsUp = {'TTM1000':0.945,'TTM1100':0.908,'TTM1200':0.894,'TTM1300':0.856,'TTM1400':0.811,'TTM1500':0.732,'TTM1600':0.660,'TTM1700':0.590,'TTM1800':0.383}
-                                        pdfSFsDn = {'TTM1000':1.055,'TTM1100':1.092,'TTM1200':1.106,'TTM1300':1.144,'TTM1400':1.189,'TTM1500':1.268,'TTM1600':1.340,'TTM1700':1.410,'TTM1800':1.617}
-                                        pdfSFsSym = {'TTM1000':0.055,'TTM1100':0.092,'TTM1200':0.106,'TTM1300':0.144,'TTM1400':0.189,'TTM1500':0.268,'TTM1600':0.340,'TTM1700':0.410,'TTM1800':0.617}
-                                        if whichSignal == 'BB':
-                                                muSFsUp = {'BBM900':0.742,'BBM1000':0.742,'BBM1100':0.743,'BBM1200':0.742,'BBM1300':0.741,'BBM1400':0.739,'BBM1500':0.735,'BBM1600':0.735,'BBM1700':0.733,'BBM1800':0.731}
-                                                muSFsDn = {'BBM900':1.315,'BBM1000':1.315,'BBM1100':1.314,'BBM1200':1.316,'BBM1300':1.318,'BBM1400':1.321,'BBM1500':1.329,'BBM1600':1.329,'BBM1700':1.331,'BBM1800':1.337}
-                                                pdfSFsUp = {'BBM900':0.950,'BBM1000':0.950,'BBM1100':0.925,'BBM1200':0.897,'BBM1300':0.857,'BBM1400':0.808,'BBM1500':0.748,'BBM1600':0.658,'BBM1700':0.551,'BBM1800':0.419}
-                                                pdfSFsDn = {'BBM900':1.050,'BBM1000':1.050,'BBM1100':1.075,'BBM1200':1.103,'BBM1300':1.143,'BBM1400':1.192,'BBM1500':1.252,'BBM1600':1.342,'BBM1700':1.449,'BBM1800':1.581}
-                                                pdfSFsSym = {'BBM900':0.050,'BBM1000':0.050,'BBM1100':0.075,'BBM1200':0.103,'BBM1300':0.143,'BBM1400':0.192,'BBM1500':0.252,'BBM1600':0.342,'BBM1700':0.449,'BBM1800':0.581}
+					muSFsDn = {'TTM1000':1.312,'TTM1100':1.306,'TTM1200':1.315,'TTM1300':1.316,'TTM1400':1.322,'TTM1500':1.319,'TTM1600':1.329,'TTM1700':1.354,'TTM1800':1.311}
+					pdfSFsUp = {'TTM1000':0.954,'TTM1100':0.951,'TTM1200':0.947,'TTM1300':0.942,'TTM1400':0.936,'TTM1500':0.929,'TTM1600':0.921,'TTM1700':0.911,'TTM1800':0.898}
+					pdfSFsDn = {'TTM1000':1.050,'TTM1100':1.054,'TTM1200':1.060,'TTM1300':1.066,'TTM1400':1.073,'TTM1500':1.082,'TTM1600':1.094,'TTM1700':1.109,'TTM1800':1.128}
+					pdfSFsSym = {'TTM1000':0.048,'TTM1100':0.051,'TTM1200':0.056,'TTM1300':0.062,'TTM1400':0.068,'TTM1500':0.076,'TTM1600':0.086,'TTM1700':0.098,'TTM1800':0.113}
+					if whichSignal == 'BB':
+						muSFsUp = {'BBM900':0.742,'BBM1000':0.742,'BBM1100':0.743,'BBM1200':0.742,'BBM1300':0.741,'BBM1400':0.739,'BBM1500':0.735,'BBM1600':0.735,'BBM1700':0.733,'BBM1800':0.731}
+						muSFsDn = {'BBM900':1.315,'BBM1000':1.315,'BBM1100':1.314,'BBM1200':1.316,'BBM1300':1.318,'BBM1400':1.321,'BBM1500':1.329,'BBM1600':1.329,'BBM1700':1.331,'BBM1800':1.337}
+						pdfSFsUp = {'BBM900':0.954,'BBM1000':0.954,'BBM1100':0.951,'BBM1200':0.947,'BBM1300':0.942,'BBM1400':0.936,'BBM1500':0.929,'BBM1600':0.921,'BBM1700':0.911,'BBM1800':0.897}
+						pdfSFsDn = {'BBM900':1.050,'BBM1000':1.050,'BBM1100':1.055,'BBM1200':1.059,'BBM1300':1.066,'BBM1400':1.073,'BBM1500':1.082,'BBM1600':1.094,'BBM1700':1.108,'BBM1800':1.130}
+						pdfSFsSym = {'BBM900':0.048,'BBM1000':0.048,'BBM1100':0.052,'BBM1200':0.056,'BBM1300':0.061,'BBM1400':0.068,'BBM1500':0.076,'BBM1600':0.086,'BBM1700':0.098,'BBM1800':0.115}
 
 					if(DEBUG): print 'before extra SF hsig[\'muRFcorrdNewUp\'',i,')]\']',hsig['muRFcorrdNewUp'+str(i)].Integral()					
 					if(DEBUG): print 'before extra SF hsig[\'muRFcorrdNewDown\'',i,')]\']',hsig['muRFcorrdNewDown'+str(i)].Integral()					
@@ -668,7 +668,7 @@ def makeThetaCats(datahists,sighists,bkghists,discriminant):
 				#systematics
 				if doAllSys:
 					for systematic in systematicList:
-						#if systematic=='pdfNew' or systematic=='muRFcorrdNew' or systematic=='muRFdecorrdNew': continue
+						if systematic=='pdfNew' or systematic=='muRFcorrdNew' or systematic=='muRFdecorrdNew': continue
 						for ud in ['Up','Down']:
 							if not (systematic=='toppt' or 'PR' in systematic or 'FR' in systematic) :
 								hewkY[signal+systematic+ud].SetBinContent(1,yieldTable[histoPrefix+systematic+ud]['ewk'])
