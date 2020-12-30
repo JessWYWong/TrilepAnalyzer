@@ -87,7 +87,7 @@ whichSignal = 'TT' #TT, BB, or X53X53
 if 'BB' in outDir: whichSignal = 'BB' #TT, BB, or X53X53
 
 signalMassRange = [1000,1800]
-if whichSignal == 'BB' : signalMassRange = [900,1800]
+if whichSignal == 'BB': signalMassRange = [900,1800]
 sigList = [whichSignal+'M'+str(mass) for mass in range(signalMassRange[0],signalMassRange[1]+100,100)]
 if whichSignal=='X53X53': sigList = [whichSignal+'M'+str(mass)+chiral for mass in range(signalMassRange[0],signalMassRange[1]+100,100) for chiral in ['left','right']]
 if whichSignal=='TT': decays = ['BWBW','THTH','TZTZ','TZBW','THBW','TZTH'] #T' decays
@@ -150,12 +150,12 @@ systematicList = ['pileup','btag','mistag','pdfNew','muR','muF','muRFcorrd','muR
 
 #normSystematics_hist = ['TrigEffWeight','elIdSys']
 normSystematics = { #updated by Jess in Mar 2020
-                                        'muIdSys':{'EEE':0.00,'EEM':0.02,'EMM':0.028,'MMM':0.035,'All':0.049}, #flat rate of 2% 
-                                        'elIsoSys':{'EEE':0.026,'EEM':0.021,'EMM':0.015,'MMM':0.00,'All':0.036}, #flat rate of 1.5% for el
-                                        'muIsoSys':{'EEE':0.00,'EEM':0.015,'EMM':0.021,'MMM':0.026,'All':0.036}, #flat rate of 1.5% for mu
+                                        #'muIdSys':{'EEE':0.00,'EEM':0.02,'EMM':0.04,'MMM':0.06,'All':0.049}, #flat rate of 2% 
+                                        #'elIsoSys':{'EEE':0.026,'EEM':0.021,'EMM':0.015,'MMM':0.00,'All':0.036}, #flat rate of 1.5% for el
+                                        #'muIsoSys':{'EEE':0.00,'EEM':0.015,'EMM':0.021,'MMM':0.026,'All':0.036}, #flat rate of 1.5% for mu
                                         }
 
-#ddbkgSystematics = { #updated by Jess on Jun 17,2020 based on yields in 2020 FRv2 file
+#ddbkgSystematics = { #updated by Jess on Jun 17,2020 based on yields in 2020 FRv2 file + eta updated Aug 2020
 #                                       'elPRsys':{'EEE':0.07,'EEM':0.03,'EMM':0.01,'MMM':0.00,'All':0.02},
 #                                       'muPRsys':{'EEE':0.00,'EEM':0.01,'EMM':0.01,'MMM':0.05,'All':0.02},
 #                                       #'muFReta':{'EEE':0.00,'EEM':0.20,'EMM':0.24,'MMM':0.39,'All':0.23},
@@ -163,12 +163,11 @@ normSystematics = { #updated by Jess in Mar 2020
 #                                       'FRsys'  :{'EEE':0.21,'EEM':0.08,'EMM':0.02,'MMM':0.06,'All':0.02},
 #                                       }
 ddbkgSystematics = { #updated by Jess on Oct4,2020 based on yields in 2020 FRv2 files
-                                       'elPRsys':{'EEE':0.07,'EEM':0.03,'EMM':0.01,'MMM':0.00,'All':0.02},
-                                       'muPRsys':{'EEE':0.00,'EEM':0.01,'EMM':0.02,'MMM':0.05,'All':0.02},
-                                       'muFReta':{'EEE':0.00,'EEM':0.02,'EMM':0.03,'MMM':0.05,'All':0.03},
-                                       'FRsys'  :{'EEE':0.21,'EEM':0.07,'EMM':0.01,'MMM':0.07,'All':0.02},
+                                       #'elPRsys':{'EEE':0.07,'EEM':0.03,'EMM':0.01,'MMM':0.00,'All':0.02},
+                                       #'muPRsys':{'EEE':0.00,'EEM':0.01,'EMM':0.02,'MMM':0.05,'All':0.02},
+                                       #'muFReta':{'EEE':0.00,'EEM':0.02,'EMM':0.03,'MMM':0.05,'All':0.03},
+                                       #'FRsys'  :{'EEE':0.21,'EEM':0.07,'EMM':0.01,'MMM':0.07,'All':0.02},
                                        }
-
 
 
 def round_sig(x,sig=2):
@@ -368,14 +367,14 @@ def makeThetaCats(datahists,sighists,bkghists,discriminant):
 						for bkg in topList:
                                                         if bkg!=topList[0]: htop['pdf'+str(pdfInd)+'_'+str(i)].Add(bkghists[histoPrefix.replace(discriminant,discriminant+'pdf'+str(pdfInd))+'_'+bkg])
 
-						if not (pdfInd < 30): continue
+						if not (pdfInd < 30) : continue
 						hsig['pdf'+str(pdfInd)+'_'+str(i)] = sighists[histoPrefix.replace(discriminant,discriminant+'pdf'+str(pdfInd))+'_'+signal+decays[0]].Clone('triLep2018'+catStr+'__sig__pdf'+str(pdfInd))
 						if doBRScan: hsig['pdf'+str(pdfInd)+'_'+str(i)].Scale(BRs[decays[0][:2]][BRind]*BRs[decays[0][2:]][BRind]/(BR[decays[0][:2]]*BR[decays[0][2:]]))
 						for decay in decays:
 							htemp = sighists[histoPrefix.replace(discriminant,discriminant+'pdf'+str(pdfInd))+'_'+signal+decay].Clone()
 							if doBRScan: htemp.Scale(BRs[decay[:2]][BRind]*BRs[decay[2:]][BRind]/(BR[decay[:2]]*BR[decay[2:]]))
 							if decay!=decays[0]:hsig['pdf'+str(pdfInd)+'_'+str(i)].Add(htemp)
-					print(htop['pdf0'+'_'+str(i)], htop['pdf0'+'_'+str(i)].GetNbinsX())	
+					if(DEBUG):print(htop['pdf0'+'_'+str(i)], htop['pdf0'+'_'+str(i)].GetNbinsX())	
 				#Group data processes
 				hdata[i] = datahists[histoPrefix+'_'+dataList[0]].Clone('triLep2018'+catStr+'__DATA')
 				for dat in dataList:
@@ -439,6 +438,7 @@ def makeThetaCats(datahists,sighists,bkghists,discriminant):
 							for muRFprefix in ['muRUp','muRDown','muFUp','muFDown','muRFcorrdUp','muRFcorrdDown']: print 'htop[',muRFprefix,str(i),'].GetBinContent(',ibin,') =', htop[muRFprefix+str(i)].GetBinContent(ibin) 
 						weightRFcoordListEwk = [hewk[muRFprefix+str(i)].GetBinContent(ibin) for muRFprefix in muRFprefixList]
 						weightRFcoordListSig = [hsig[muRFprefix+str(i)].GetBinContent(ibin) for muRFprefix in muRFprefixList]
+						if DEBUG : print weightRFcoordListSig
 
 						indTopRFcoordUp = weightRFcoordListTop.index(max(weightRFcoordListTop))
 						if DEBUG and signal=='TTM800': print '----->',
@@ -448,6 +448,8 @@ def makeThetaCats(datahists,sighists,bkghists,discriminant):
 						indEwkRFcoordDn = weightRFcoordListEwk.index(min(weightRFcoordListEwk))
 						indSigRFcoordUp = weightRFcoordListSig.index(max(weightRFcoordListSig))
 						indSigRFcoordDn = weightRFcoordListSig.index(min(weightRFcoordListSig))
+
+						if DEBUG : print("indSigRFcoord ", indSigRFcoordUp, indSigRFcoordDn)
 
 						htop['muRFcorrdNewUp'+str(i)].SetBinContent(ibin,htop[muRFprefixList[indTopRFcoordUp]+str(i)].GetBinContent(ibin))
 						htop['muRFcorrdNewDown'+str(i)].SetBinContent(ibin,htop[muRFprefixList[indTopRFcoordDn]+str(i)].GetBinContent(ibin))
@@ -469,19 +471,18 @@ def makeThetaCats(datahists,sighists,bkghists,discriminant):
 #					if whichSignal == 'BB':
 #						muSFsUp = {'BBM800':0.750,'BBM900':0.750,'BBM1000':0.749,'BBM1100':0.749,'BBM1200':0.748,'BBM1300':0.747,'BBM1400':0.746,'BBM1500':0.745,'BBM1600':0.744,'BBM1700':0.743,'BBM1800':0.741}
 #						muSFsDn = {'BBM800':1.303,'BBM900':1.303,'BBM1000':1.304,'BBM1100':1.305,'BBM1200':1.307,'BBM1300':1.309,'BBM1400':1.310,'BBM1500':1.313,'BBM1600':1.315,'BBM1700':1.317,'BBM1800':1.319}					
-
-                                        #SF from Julie (updated by Jess 20 Oct 2020) https://github.com/jmhogan/singleLepAnalyzer/blob/tptp_2017/makeTemplates/modifyBinning_byyear.py (year == 2018)
-                                        muSFsUp = {'TTM1000':0.744,'TTM1100':0.747,'TTM1200':0.742,'TTM1300':0.741,'TTM1400':0.738,'TTM1500':0.740,'TTM1600':0.735,'TTM1700':0.721,'TTM1800':0.746}
-                                        muSFsDn = {'TTM1000':1.312,'TTM1100':1.306,'TTM1200':1.315,'TTM1300':1.316,'TTM1400':1.322,'TTM1500':1.319,'TTM1600':1.329,'TTM1700':1.354,'TTM1800':1.311}
-                                        pdfSFsUp = {'TTM900':0.877,'TTM1000':0.876,'TTM1100':0.874,'TTM1200':0.871,'TTM1300':0.867,'TTM1400':0.861,'TTM1500':0.852,'TTM1600':0.841,'TTM1700':0.829,'TTM1800':0.817}
-                                        pdfSFsDn = {'TTM900':1.163,'TTM1000':1.165,'TTM1100':1.168,'TTM1200':1.174,'TTM1300':1.181,'TTM1400':1.192,'TTM1500':1.211,'TTM1600':1.233,'TTM1700':1.259,'TTM1800':1.290}
-                                        pdfSFsSym = {'TTM900':0.140,'TTM1000':0.142,'TTM1100':0.144,'TTM1200':0.149,'TTM1300':0.153,'TTM1400':0.161,'TTM1500':0.174,'TTM1600':0.189,'TTM1700':0.206,'TTM1800':0.225}
+                                        #SF from Julie (updated by Jess 28 Dec 2020) https://github.com/jmhogan/singleLepAnalyzer/blob/tptp_2018/makeTemplates/modifyBinning_byyear.py
+                                        muSFsUp = {'TTM900':0.744,'TTM1000':0.743,'TTM1100':0.737,'TTM1200':0.740,'TTM1300':0.741,'TTM1400':0.737,'TTM1500':0.737,'TTM1600':0.734,'TTM1700':0.735,'TTM1800':0.740}
+                                        muSFsDn = {'TTM900':1.312,'TTM1000':1.314,'TTM1100':1.323,'TTM1200':1.318,'TTM1300':1.318,'TTM1400':1.324,'TTM1500':1.324,'TTM1600':1.328,'TTM1700':1.330,'TTM1800':1.321}
+                                        pdfSFsUp = {'TTM900':0.957,'TTM1000':0.954,'TTM1100':0.951,'TTM1200':0.947,'TTM1300':0.942,'TTM1400':0.936,'TTM1500':0.929,'TTM1600':0.921,'TTM1700':0.911,'TTM1800':0.898}
+                                        pdfSFsDn = {'TTM900':1.047,'TTM1000':1.050,'TTM1100':1.055,'TTM1200':1.060,'TTM1300':1.065,'TTM1400':1.073,'TTM1500':1.082,'TTM1600':1.094,'TTM1700':1.109,'TTM1800':1.128}
+                                        pdfSFsSym = {'TTM900':0.045,'TTM1000':0.048,'TTM1100':0.052,'TTM1200':0.056,'TTM1300':0.061,'TTM1400':0.068,'TTM1500':0.076,'TTM1600':0.086,'TTM1700':0.098,'TTM1800':0.113}
                                         if whichSignal == 'BB':
-                                                muSFsUp = {'BBM900':0.742,'BBM1000':0.742,'BBM1100':0.743,'BBM1200':0.742,'BBM1300':0.741,'BBM1400':0.739,'BBM1500':0.735,'BBM1600':0.735,'BBM1700':0.733,'BBM1800':0.731}
-                                                muSFsDn = {'BBM900':1.315,'BBM1000':1.315,'BBM1100':1.314,'BBM1200':1.316,'BBM1300':1.318,'BBM1400':1.321,'BBM1500':1.329,'BBM1600':1.329,'BBM1700':1.331,'BBM1800':1.337}
-                                                pdfSFsUp = {'BBM900':0.877,'BBM1000':0.875,'BBM1100':0.874,'BBM1200':0.871,'BBM1300':0.867,'BBM1400':0.862,'BBM1500':0.852,'BBM1600':0.841,'BBM1700':0.830,'BBM1800':0.817}
-                                                pdfSFsDn = {'BBM900':1.163,'BBM1000':1.167,'BBM1100':1.168,'BBM1200':1.174,'BBM1300':1.182,'BBM1400':1.191,'BBM1500':1.210,'BBM1600':1.233,'BBM1700':1.259,'BBM1800':1.289}
-                                                pdfSFsSym = {'BBM900':0.140,'BBM1000':0.143,'BBM1100':0.144,'BBM1200':0.148,'BBM1300':0.154,'BBM1400':0.161,'BBM1500':0.174,'BBM1600':0.189,'BBM1700':0.206,'BBM1800':0.224}
+                                                muSFsUp = {'BBM900':0.744,'BBM1000':0.742,'BBM1100':0.742,'BBM1200':0.741,'BBM1300':0.741,'BBM1400':0.739,'BBM1500':0.735,'BBM1600':0.735,'BBM1700':0.720,'BBM1800':0.855}
+                                                muSFsDn = {'BBM900':1.312,'BBM1000':1.315,'BBM1100':1.316,'BBM1200':1.318,'BBM1300':1.317,'BBM1400':1.321,'BBM1500':1.328,'BBM1600':1.329,'BBM1700':1.356,'BBM1800':1.272}
+                                                pdfSFsUp = {'BBM900':0.957,'BBM1000':0.954,'BBM1100':0.951,'BBM1200':0.947,'BBM1300':0.942,'BBM1400':0.937,'BBM1500':0.929,'BBM1600':0.921,'BBM1700':0.911,'BBM1800':0.898}
+                                                pdfSFsDn = {'BBM900':1.047,'BBM1000':1.050,'BBM1100':1.055,'BBM1200':1.060,'BBM1300':1.066,'BBM1400':1.073,'BBM1500':1.082,'BBM1600':1.094,'BBM1700':1.109,'BBM1800':1.128}
+                                                pdfSFsSym = {'BBM900':0.052,'BBM1000':0.048,'BBM1100':0.052,'BBM1200':0.056,'BBM1300':0.062,'BBM1400':0.068,'BBM1500':0.076,'BBM1600':0.086,'BBM1700':0.098,'BBM1800':0.113}
 
 					if(DEBUG): print 'before extra SF hsig[\'muRFcorrdNewUp\'',i,')]\']',hsig['muRFcorrdNewUp'+str(i)].Integral()					
 					if(DEBUG): print 'before extra SF hsig[\'muRFcorrdNewDown\'',i,')]\']',hsig['muRFcorrdNewDown'+str(i)].Integral()					
@@ -531,8 +532,8 @@ def makeThetaCats(datahists,sighists,bkghists,discriminant):
 						#indSigPDFDn = sorted(range(len(weightListSig)), key=lambda k: weightListSig[k])[15]
 
 						## New syst by % of the quad. sum of error (from central value
-                                                errsqTop = 0
-                                                shiftpctTop = 0
+						errsqTop = 0
+						shiftpctTop = 0
                                                 for weight in weightListTop:
                                                         errsqTop += (weight - htop[i].GetBinContent(ibin))**2
                                                 if htop[i].GetBinContent(ibin) != 0: shiftpctTop = math.sqrt(errsqTop)/htop[i].GetBinContent(ibin)
@@ -552,9 +553,9 @@ def makeThetaCats(datahists,sighists,bkghists,discriminant):
                                                 if hsig[i].GetBinContent(ibin) != 0: shiftpctSig = math.sqrt(errsqSig)/hsig[i].GetBinContent(ibin)
                                                 elif math.sqrt(errsqSig) != 0: print 'Weird: (Sig) central is 0 but not PDF unc'
                                                 ### FOR SIGNAL ONLY --- reduce shift by the no-selection value
-                                                if shiftpctSig != 0:
-                                                        shiftpctSig = shiftpctSig - pdfSFsSym[signal]
-                                                if abs(shiftpctSig) > 1: print 'WARNING: pdf shift is',shiftpctSig,', flooring down at 0 in bin',ibin,'of hist Sig', i
+                                                #if shiftpctSig != 0:
+                                                #        shiftpctSig = shiftpctSig - pdfSFsSym[signal]
+                                                #if abs(shiftpctSig) > 1: print 'WARNING: pdf shift is',shiftpctSig,', flooring down at 0 in bin',ibin,'of hist Sig', i
 
 						#htop['pdfNewUp'+str(i)].SetBinContent(ibin,htop['pdf'+str(indTopPDFUp)+'_'+str(i)].GetBinContent(ibin))
 						#htop['pdfNewDown'+str(i)].SetBinContent(ibin,htop['pdf'+str(indTopPDFDn)+'_'+str(i)].GetBinContent(ibin))
@@ -585,11 +586,11 @@ def makeThetaCats(datahists,sighists,bkghists,discriminant):
 #							pdfSFsDn = {'BBM800':1.106,'BBM900':1.104,'BBM1000':1.100,'BBM1100':1.099,'BBM1200':1.093,'BBM1300':1.097,'BBM1400':1.102,'BBM1500':1.099,'BBM1600':1.121,'BBM1700':1.122,'BBM1800':1.132}
 					if(DEBUG): print 'before extra SF hsig[\'pdfNewUp\'',i,')]\']',hsig['pdfNewUp'+str(i)].Integral()					
 					if(DEBUG): print 'before extra SF hsig[\'pdfNewDown\'',i,')]\']',hsig['pdfNewDown'+str(i)].Integral()					
-					#scalefactorUp = pdfSFsUp[signal]
-					#scalefactorDn = pdfSFsDn[signal]
+					scalefactorUp = pdfSFsUp[signal]
+					scalefactorDn = pdfSFsDn[signal]
 					if(DEBUG): print 'Mass',signal,': assigning pdfNew SFup =',scalefactorUp,', SFdn =',scalefactorDn                                                                                                                          
-					#hsig['pdfNewUp'+str(i)].Scale(scalefactorUp)
-					#hsig['pdfNewDown'+str(i)].Scale(scalefactorDn)
+					hsig['pdfNewUp'+str(i)].Scale(scalefactorUp)
+					hsig['pdfNewDown'+str(i)].Scale(scalefactorDn)
 					if(DEBUG): print 'after extra SF hsig[\'pdfNewUp\'',i,')]\']',hsig['pdfNewUp'+str(i)].Integral()					
 					if(DEBUG): print 'after extra SF hsig[\'pdfNewDown\'',i,')]\']',hsig['pdfNewDown'+str(i)].Integral()					
 
@@ -655,6 +656,7 @@ def makeThetaCats(datahists,sighists,bkghists,discriminant):
 				#systematics
 				if doAllSys:
 					for systematic in systematicList:
+                                                if systematic=='pdfNew' or systematic=='muRFcorrdNew' or systematic=='muRFdecorrdNew': continue
 						for ud in ['Up','Down']:
 							if not (systematic=='toppt' or 'PR' in systematic or 'FR' in systematic) :
 								hewkY[signal+systematic+ud].SetBinContent(1,yieldTable[histoPrefix+systematic+ud]['ewk'])
@@ -756,7 +758,7 @@ def makeThetaCats(datahists,sighists,bkghists,discriminant):
 								if hsig[systematic+ud+str(i)].Integral() > 0:
 									if scaleSignalXsecTo1pb: 
 										hsig[systematic+ud+str(i)].Scale(1./xsec[signal])
-									if normalizeRENORM_PDF and ( systematic=='muRFcorrdNew' ):
+									if normalizeRENORM_PDF and ('muRF' in systematic or 'pdf' in systematic) :
 										#print 'normalize signal systematic:', systematic
 										hsig[systematic+ud+str(i)].Scale(hsig[i].Integral()/hsig[systematic+ud+str(i)].Integral())
 								if not hsig[systematic+ud+str(i)].Integral() < 0: hsig[systematic+ud+str(i)].Write()
