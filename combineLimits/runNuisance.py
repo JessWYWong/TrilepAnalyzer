@@ -16,12 +16,12 @@ path = limitdir+'/'+BR+'/cmb/'+mass
 
 os.chdir(path)
 
-#print "Running Fit Diagnostics for background-only Asimov toy and fits it"
-#print 'Command = combine -M FitDiagnostics workspace.root -t -1 --expectSignal 0'
-#os.system('combine -M FitDiagnostics workspace.root -t -1 --expectSignal 0')
+print "Running Fit Diagnostics for background-only Asimov toy and fits it"
+print 'Command = combine -M FitDiagnostics workspace.root --bypassFrequentistFit -t -1 --expectSignal 1'
+os.system('combine -M FitDiagnostics workspace.root --bypassFrequentistFit -t -1 --expectSignal 1')
 
-print "Running Fit Diagnostics for Nuisance Pulls"
-print 'Command = combine -M FitDiagnostics -d workspace.root -t -1 --expectSignal 0 --saveWorkspace --saveShapes --plots'
-os.system('combine -M FitDiagnostics -d workspace.root -t -1 --expectSignal 0 --saveWorkspace --saveShapes --plots')
+#print "Running Fit Diagnostics for Nuisance Pulls"
+#print 'Command = combine -M FitDiagnostics -d workspace.root --bypassFrequentistFit -t -1 --expectSignal 1 --saveWorkspace --saveShapes --plots'
+#os.system('combine -M FitDiagnostics -d workspace.root --bypassFrequentistFit -t -1 --expectSignal 1 --saveWorkspace --saveShapes --plots')
 
 print "Done!"

@@ -34,7 +34,7 @@ if 'tW' in BR: masks = masks.replace('TT','BB')
     #filename = 'morphedWorkspace.root'
     #options = ' --snapshotName initialFit --bypassFrequentistFit -t -1 --expectSignal 0 --setParameters '+masks
 '''
-options = ' --bypassFrequentistFit -t -1 --expectSignal 0 --setParameters '+masks
+options = ' --bypassFrequentistFit -t -1 --expectSignal 1 --setParameters '+masks
 
 os.chdir(path)
 
