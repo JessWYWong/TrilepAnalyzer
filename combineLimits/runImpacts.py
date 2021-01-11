@@ -17,20 +17,24 @@ if len(sys.argv) >3 : BR = sys.argv[3]
 #name = limitdir.replace('limits_templatesCR_June2020','').replace('limits_templatesSRCR_June2020','')
 path = limitdir+'/'+BR+'/cmb/'+mass
 
-isSR = True
-if 'CR' in limitdir: isSR = False
+#isSR = True
+#if 'CR' in limitdir: isSR = False
 
 filename = 'workspace.root'
+
 options = ''
-if isSR: 
-    masks = 'mask_TT_triLep2017EEE_0_2017=0,mask_TT_triLep2017EEM_0_2017=0,mask_TT_triLep2017EMM_0_2017=0,mask_TT_triLep2017MMM_0_2017=0'
-    if 'tW' in BR: masks = masks.replace('TT','BB') 
+
+#if isSR: 
+masks = 'mask_TT_triLep2017EEE_0_2017=0,mask_TT_triLep2017EEM_0_2017=0,mask_TT_triLep2017EMM_0_2017=0,mask_TT_triLep2017MMM_0_2017=0'
+if 'tW' in BR: masks = masks.replace('TT','BB') 
+'''
     #masks = 'mask_TT_isSR_isE_notV01T1H_DeepAK8_0_2018=0,mask_TT_isSR_isE_notV01T2pH_DeepAK8_0_2018=0,mask_TT_isSR_isE_notV0T0H0Z01W_DeepAK8_0_2018=0,mask_TT_isSR_isE_notV0T0H0Z2pW_DeepAK8_0_2018=0,mask_TT_isSR_isE_notV0T0H1pZ_DeepAK8_0_2018=0,mask_TT_isSR_isE_notV1T0H_DeepAK8_0_2018=0,mask_TT_isSR_isE_notV2pT_DeepAK8_0_2018=0,mask_TT_isSR_isE_notVbW_DeepAK8_0_2018=0,mask_TT_isSR_isE_notVtH_DeepAK8_0_2018=0,mask_TT_isSR_isE_notVtZ_DeepAK8_0_2018=0,mask_TT_isSR_isE_taggedbWbW_DeepAK8_0_2018=0,mask_TT_isSR_isE_taggedtHbW_DeepAK8_0_2018=0,mask_TT_isSR_isE_taggedtZHtZH_DeepAK8_0_2018=0,mask_TT_isSR_isE_taggedtZbW_DeepAK8_0_2018=0,mask_TT_isSR_isM_notV01T1H_DeepAK8_0_2018=0,mask_TT_isSR_isM_notV01T2pH_DeepAK8_0_2018=0,mask_TT_isSR_isM_notV0T0H0Z01W_DeepAK8_0_2018=0,mask_TT_isSR_isM_notV0T0H0Z2pW_DeepAK8_0_2018=0,mask_TT_isSR_isM_notV0T0H1pZ_DeepAK8_0_2018=0,mask_TT_isSR_isM_notV1T0H_DeepAK8_0_2018=0,mask_TT_isSR_isM_notV2pT_DeepAK8_0_2018=0,mask_TT_isSR_isM_notVbW_DeepAK8_0_2018=0,mask_TT_isSR_isM_notVtH_DeepAK8_0_2018=0,mask_TT_isSR_isM_notVtZ_DeepAK8_0_2018=0,mask_TT_isSR_isM_taggedbWbW_DeepAK8_0_2018=0,mask_TT_isSR_isM_taggedtHbW_DeepAK8_0_2018=0,mask_TT_isSR_isM_taggedtZHtZH_DeepAK8_0_2018=0,mask_TT_isSR_isM_taggedtZbW_DeepAK8_0_2018=0'
     #if 'tW' in BR: masks = masks.replace(',mask_TT_isSR_isE_taggedtZHtZH_DeepAK8_0_2018=0','').replace(',mask_TT_isSR_isM_taggedtZHtZH_DeepAK8_0_2018=0','').replace('bW','tW').replace('tZ','bZ').replace('tH','bH').replace('TT','BB')
 
-    filename = 'morphedWorkspace.root'
-    options = ' --snapshotName initialFit --bypassFrequentistFit -t -1 --expectSignal 0 --setParameters '+masks
-
+    #filename = 'morphedWorkspace.root'
+    #options = ' --snapshotName initialFit --bypassFrequentistFit -t -1 --expectSignal 0 --setParameters '+masks
+'''
+options = ' --bypassFrequentistFit -t -1 --expectSignal 0 --setParameters '+masks
 
 os.chdir(path)
 

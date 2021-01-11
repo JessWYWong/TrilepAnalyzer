@@ -10,6 +10,7 @@ BR = sys.argv[2]
 path = limitdir+'/'+BR+'/'
 os.chdir(path)
 
+'''
 if 'bW' in BR:
     sigMass = [1000,1100,1200,1300,1400,1500,1600,1700,1800]
 else:
@@ -41,14 +42,17 @@ for mass in sigMass:
 
         os.chdir('../../')
 
+'''
 
 masks = 'mask_TT_triLep2017EEE_0_2017=0,mask_TT_triLep2017EEM_0_2017=0,mask_TT_triLep2017EMM_0_2017=0,mask_TT_triLep2017MMM_0_2017=0'
 if 'tW' in BR: masks = masks.replace('TT','BB')
 
 
 print 'Running Asymptotic CLs limits for all masses'
-print 'Command = combineTool.py -M AsymptoticLimits -d cmb/*/morphedWorkspace.root --snapshotName initialFit --there -n .limit --run=blind --setParameters '+masks
-os.system('combineTool.py -M AsymptoticLimits -d cmb/*/morphedWorkspace.root --snapshotName initialFit --there -n .limit --run=blind --setParameters '+masks)
+#print 'Command = combineTool.py -M AsymptoticLimits -d cmb/*/morphedWorkspace.root --snapshotName initialFit --there -n .limit --run=blind --setParameters '+masks
+#os.system('combineTool.py -M AsymptoticLimits -d cmb/*/morphedWorkspace.root --snapshotName initialFit --there -n .limit --run=blind --setParameters '+masks)
+print 'Command = combineTool.py -M AsymptoticLimits -d cmb/*/workspace.root --there -n .limit --run=blind --setParameters '+masks
+os.system('combineTool.py -M AsymptoticLimits -d cmb/*/workspace.root --there -n .limit --run=blind --setParameters '+masks)
 
 print 'Making a JSON file'
 print 'Command = combineTool.py -M CollectLimits cmb/*/*.limit.* --use-dirs -o limits.json'
